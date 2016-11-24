@@ -1,0 +1,38 @@
+{
+    "name": "peakphp/framework",
+    "description": "The POeak Framework.",
+    "keywords": ["framework", "peak"],
+    "license": "MIT",
+    "homepage": "https://peakframework.com",
+    "support": {
+        "issues": "https://github.com/peakphp/framework/issues",
+        "source": "https://github.com/peakphp/framework"
+    },
+    "authors": [
+        {
+            "name": "Francois Lajoie",
+            "email": "francois@peakframework.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.6.4",
+        "illuminate/database": "5.2.*@dev",
+        "illuminate/container": "5.2.*@dev",
+        "illuminate/contracts": "5.2.*@dev",
+        "illuminate/support": "5.2.*@dev",
+        "illuminate/events": "5.2.*@dev"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~5.4",
+    },
+    "autoload": {
+        "files": [
+            "src/Illuminate/Foundation/helpers.php",
+            "src/Illuminate/Support/helpers.php"
+        ],
+        "psr-4": {
+            "Peak\\": "src/"
+        }
+    },
+    "minimum-stability": "dev"
+}
