@@ -1,4 +1,8 @@
 <?php
+namespace Peak\Config;
+
+use Peak\Config;
+
 /**
  * Peak_Config_Ini
  * 
@@ -10,9 +14,8 @@
  * 
  * @author  Original author: Andris at http://codeaid.net
  *          Thanks to him for letting me use and modify his class for the needs of the framework
- * @version $Id$
  */
-class Peak_Config_Ini extends Peak_Config
+class Ini extends Config
 {
 
 	/**

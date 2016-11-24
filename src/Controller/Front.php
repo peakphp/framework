@@ -1,11 +1,14 @@
 <?php
+namespace Peak\Controller;
+
+use Peak\Core;
+use Peak\Registry;
+use Peak\Controller\Exception;
+
 /**
- * Peak_Controller_Front
- * 
- * @author  Francois Lajoie
- * @version $Id$
+ * Front controller
  */
-class Peak_Controller_Front
+class Front
 {
 	/**
 	 * Router object
@@ -55,7 +58,7 @@ class Peak_Controller_Front
 	 */
 	public function __construct()
 	{
-		$this->router = Peak_Registry::o()->router;
+		$this->router = Registry::o()->router;
 		$this->_registryConfig();
 	}
 	
@@ -64,8 +67,8 @@ class Peak_Controller_Front
      */
     private function _registryConfig()
     {
-    	if(isset(Peak_Registry::o()->config->front)) {
-    		foreach(Peak_Registry::o()->config->front as $k => $v) {
+    	if(isset(Registry::o()->config->front)) {
+    		foreach(Registry::o()->config->front as $k => $v) {
     			if($k === 'allow_internal_controllers') $v = (bool)$v;
     			$this->$k = $v;
     		}
@@ -93,11 +96,11 @@ class Peak_Controller_Front
 	{
 	    $this->_dispatchController();
 	    
-	    if($this->controller instanceof Peak_Application_Modules) {
+	    if($this->controller instanceof Peak\Application\Modules) {
         	$this->_dispatchModule();
         }               
         // execute a normal controller action
-        elseif($this->controller instanceof Peak_Controller_Action) {
+        elseif($this->controller instanceof Peak\Controller\Action) {
         	$this->_dispatchControllerAction(); 
         }
 	}
@@ -113,17 +116,21 @@ class Peak_Controller_Front
 		}
 		
 		//set controller class name
-		$ctrl_name = $this->router->controller.'Controller';
+		$ctrl_name = 'App\Controllers\\'.$this->router->controller;
+
+        echo $this->router->controller;
+        echo '<pre>';
+        print_r($this->router);
 
 		//check if it's valid application controller
 		if(!$this->isController($ctrl_name))
 		{
 			//check for peak internal controller
 			if(($this->allow_internal_controllers === true) && ($this->isInternalController($this->router->controller))) {
-				$ctrl_name = 'Peak_Controller_Internal_'.$this->router->controller;
+				$ctrl_name = 'Peak\Controller\Internal\\'.$this->router->controller;
 				$this->controller = new $ctrl_name();
 			}
-			else throw new Peak_Controller_Exception('ERR_CTRL_NOT_FOUND', $ctrl_name);
+			else throw new Exception('ERR_CTRL_NOT_FOUND');
 		}
 		else $this->controller = new $ctrl_name();
 		
@@ -143,7 +150,7 @@ class Peak_Controller_Front
 	 */
 	protected function _dispatchModule()
 	{
-	    Peak_Registry::o()->app->module = $this->controller;
+	    Registry::o()->app->module = $this->controller;
         $this->controller->run();
 	}
 	
@@ -173,13 +180,13 @@ class Peak_Controller_Front
 		
 		$this->_dispatchController();
 
-        if(($this->controller instanceof Peak_Controller_Action) && (isset($exception))) {
+        if(($this->controller instanceof Peak\Controller\Action) && (isset($exception))) {
             $this->controller->exception = $exception;
         }
         
         $this->_dispatchControllerAction();
         
-        return Peak_Registry::o()->app;
+        return Registry::o()->app;
 	}
 
     /**
@@ -236,7 +243,8 @@ class Peak_Controller_Front
      */
     public function isController($name)
     {
-    	return (file_exists(Peak_Core::getPath('controllers').'/'.$name.'.php')); 
+        return true;
+    	return (file_exists(Core::getPath('controllers').'/'.str_replace('App\\','',$name).'.php')); 
     }
 
     /**
@@ -258,6 +266,6 @@ class Peak_Controller_Front
      */
     public function isModule($name)
     {
-    	return (file_exists(Peak_Core::getPath('modules').'/'.$name)) ? true : false;
+    	return (file_exists(Core::getPath('modules').'/'.$name)) ? true : false;
     }
 }

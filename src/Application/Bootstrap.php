@@ -1,11 +1,15 @@
 <?php
+namespace Peak\Application;
+
+use Peak\Registry;
+
 /**
  * Application Bootstrapper base
  *   
  * @author   Francois Lajoie
  * @version  $Id$
  */
-abstract class Peak_Application_Bootstrap
+abstract class Bootstrap
 {
 
     /**
@@ -40,11 +44,11 @@ abstract class Peak_Application_Bootstrap
      */
     protected function _configView()
     {
-        if(!isset(Peak_Registry::o()->config->view) || 
-            !Peak_Registry::isRegistered('view')) return;
+        if(!isset(Registry::o()->config->view) || 
+            !Registry::isRegistered('view')) return;
 
-        $view  = Peak_Registry::o()->view;
-        $cview = Peak_Registry::o()->config->view;
+        $view  = Registry::o()->view;
+        $cview = Registry::o()->config->view;
 
         if(!empty($cview)) {
             foreach($cview as $k => $v) {
@@ -62,11 +66,11 @@ abstract class Peak_Application_Bootstrap
      */
     protected function _configRouter()
     {
-        if(!isset(Peak_Registry::o()->config->router['addregex']) || 
-            !Peak_Registry::isRegistered('router')) return;
+        if(!isset(Registry::o()->config->router['addregex']) || 
+            !Registry::isRegistered('router')) return;
 
-        $r      = Peak_Registry::o()->router;
-        $routes = Peak_Registry::o()->config->router['addregex'];
+        $r      = Registry::o()->router;
+        $routes = Registry::o()->config->router['addregex'];
 
         if(!empty($routes)) {
             foreach($routes as $i => $exp) {
@@ -84,10 +88,10 @@ abstract class Peak_Application_Bootstrap
      */
     protected function _autoZendDbConnect()
     {
-        if(!isset(Peak_Registry::o()->config->db['autoconnect']) ||
-             Peak_Registry::o()->config->db['autoconnect'] != 1) return;
+        if(!isset(Registry::o()->config->db['autoconnect']) ||
+             Registry::o()->config->db['autoconnect'] != 1) return;
 
-        $dbc = Peak_Registry::o()->config->db;
+        $dbc = Registry::o()->config->db;
         $db = Zend_Db::factory($dbc['adapter'], $dbc['params']);
         Zend_Db_Table::setDefaultAdapter($db);
     }

@@ -1,11 +1,15 @@
 <?php
+namespace Peak;
+
+use Exception;
+
 /**
  * Peak exception
  * 
  * @author   Francois Lajoie
  * @version  $Id$
  */
-class Peak_Exception extends Exception
+class Exception extends Exception
 {
 
     /**

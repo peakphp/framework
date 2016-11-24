@@ -1,12 +1,10 @@
 <?php
+namespace Peak;
 /**
  * Router URL parser. Supporting $_GET url, standard rewrited url and regex url
- * For standard rewrited url and regex url, apache mod_rewrite is required          
- * 
- * @author   Francois Lajoie
- * @version  $Id$     
+ * For standard rewrited url and regex url, apache mod_rewrite is required           
  */
-class Peak_Router
+class Router
 {
 
     /**

@@ -1,11 +1,10 @@
 <?php
+namespace Peak\View;
+
 /**
  * Peak_View_Render Engine base
- * 
- * @author   Francois Lajoie
- * @version  $Id$
  */
-abstract class Peak_View_Render
+abstract class Render
 {
 
     public $scripts_file;          //controller action script view path used 

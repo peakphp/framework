@@ -1,12 +1,10 @@
 <?php
+namespace Peak;
+
 /**
  * Load the framework objects, application bootstrap and front controller.
- *   
- * @author    Francois Lajoie
- * @version   $Id$
- * @exception Peak_Exception
  */
-class Peak_Application
+class Application
 {
 	/**
 	 * app bootstrap object if exists
@@ -32,9 +30,9 @@ class Peak_Application
     public function __construct()
     {                
         // register application/view/router instance
-        Peak_Registry::set('app', $this);
-        Peak_Registry::set('view', new Peak_View());
-        Peak_Registry::set('router', $router = new Peak_Router(PUBLIC_ROOT));
+        Registry::set('app', $this);
+        Registry::set('view', new View());
+        Registry::set('router', $router = new Router(PUBLIC_ROOT));
 		
         // load app bootstrap
 		$this->loadBootstrap();
@@ -63,7 +61,7 @@ class Peak_Application
 	public function loadFront($prefix = '')
 	{
 		$cname = $prefix.'Front';
-		$this->front = (class_exists($cname,false)) ? new $cname() : new Peak_Controller_Front();
+		$this->front = (class_exists($cname,false)) ? new $cname() : new Controller\Front();
 	}
 
     /**

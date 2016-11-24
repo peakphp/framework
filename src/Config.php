@@ -1,12 +1,13 @@
 <?php
+namespace Peak;
+
+use IteratorAggregate;
+use Countable;
+
 /**
  * Variables registry for configs stuff
- * 
- * @author  Francois Lajoie
- * @version $Id$
- * @uses    IteratorAggregate, Countable
  */
-class Peak_Config implements IteratorAggregate, Countable
+class Config implements IteratorAggregate, Countable
 {
     /**
      * Contains all variables

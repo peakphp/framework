@@ -1,12 +1,10 @@
 <?php
+namespace Peak;
+
 /**
  * Template variables registry with objects httpheader, helpers, theme, rendering
- * 
- * @author   Francois Lajoie
- * @version  $Id$  
- * @uses     Peak_View_Header, Peak_View_Theme, Peak_View_Helpers, Peak_View_Render, Peak_View_Render_*
  */
-class Peak_View
+class View
 {
 	/**
 	 * view vars
@@ -199,9 +197,9 @@ class Peak_View
     {
         if(isset($engine_name)) {
             $engine_name = strip_tags(ucfirst($engine_name));
-            $engine_class = 'Peak_View_Render_'.$engine_name;
+            $engine_class = 'Peak\View\Render\\'.$engine_name;
             if(!class_exists($engine_class)) {
-                throw new Peak_View_Exception('ERR_VIEW_ENGINE_NOT_FOUND', $engine_name);
+                throw new View\Exception('ERR_VIEW_ENGINE_NOT_FOUND', $engine_name);
             }
             $this->_engine = new $engine_class();
         }
@@ -217,7 +215,7 @@ class Peak_View
     public function getEngineName()
     {
         if(is_object($this->_engine)) {
-            return strtolower(str_replace('Peak_View_Render_', '', get_class($this->_engine)));
+            return strtolower(str_replace('Peak\View\Render\\', '', get_class($this->_engine)));
         }
         else return null;
     }
@@ -272,7 +270,7 @@ class Peak_View
 
             $this->engine()->render($file,$path);
         }
-        else throw new Peak_View_Exception('ERR_VIEW_ENGINE_NOT_SET');
+        else throw new \Exception('ERR_VIEW_ENGINE_NOT_SET');
     }
 
     /**

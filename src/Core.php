@@ -1,9 +1,8 @@
 <?php
+namespace Peak;
+
 /**
  * Peak Core
- *
- * @author   Francois Lajoie
- * @version  $Id$ 
  */
 
 define('PK_VERSION', '0.9.9');
@@ -11,13 +10,11 @@ define('PK_NAME'   , 'PEAK');
 define('PK_DESCR'  , 'Php wEb Application Kernel');
 
 //handle all uncaught exceptions (try/catch block missing)
-set_exception_handler('pkexception');
-function pkexception($e) { die('<b>Uncaught Exception</b>: '. $e->getMessage()); }
 
 //php >= 5.3
-if(function_exists('class_alias')) class_alias('Peak_Core', 'Peak', false);
+//if(function_exists('class_alias')) class_alias('Peak_Core', 'Peak', false);
 
-class Peak_Core
+class Core
 {
 
     /**
@@ -99,10 +96,10 @@ class Peak_Core
 			case 'ini' :
 				if($env === 'development') {
 					//if it fail, we will use genericapp.ini in dev mode only
-					try { $conf = new Peak_Config_Ini($filepath, true);	}
-					catch(Exception $e) { $conf = new Peak_Config_Ini($generic_filepath, true);	}
+					try { $conf = new Config\Ini($filepath, true);	}
+					catch(Exception $e) { $conf = new Config\Ini($generic_filepath, true);	}
 				}
-				else $conf = new Peak_Config_Ini($filepath, true);
+				else $conf = new Config\Ini($filepath, true);
 				break;
 
             case 'json' :
@@ -111,7 +108,7 @@ class Peak_Core
 
 			case 'genericapp' :
 				if($env === 'development') {
-					$conf = new Peak_Config_Ini($filepath, true);
+					$conf = new Config\Ini($filepath, true);
 					break;
 				} //we don't break here if we are not in dev mode				
 			
@@ -165,7 +162,7 @@ class Peak_Core
     	else $conf->setVars($conf->all);
 
     	//save transformed config to registry
-    	Peak_Registry::set('config', $conf);  	   	
+    	Registry::set('config', $conf);  	   	
 
     	//set some php ini settings
     	if(isset($conf->php)) {
@@ -225,16 +222,16 @@ class Peak_Core
     }
 
     /**
-     * Get application path vars from Peak_Registry::o()->core_config
+     * Get application path vars from Registry::o()->core_config
      *
      * @param   string $path
      * @return  string|null
      * 
-     * @example Peak_Core::getPath('application') = Peak_Registry::o()->config->path['application']
+     * @example Peak_Core::getPath('application') = Registry::o()->config->path['application']
      */
     public static function getPath($path = 'application') 
     {
-    	$c = Peak_Registry::o()->config;
+    	$c = Registry::o()->config;
     	
     	if(isset($c->path[$path])) return $c->path[$path];
     	else return null;
@@ -266,7 +263,7 @@ class Peak_Core
         }
   
         //LEVEL 2 - load peak core autoloader
-        if($level >= 2) include LIBRARY_ABSPATH.'/Peak/autoload.php';
+        //if($level >= 2) include LIBRARY_ABSPATH.'/Peak/autoload.php';
         
         //LEVEL 3 - peak basic config with app config
 		//need constant PUBLIC_ROOT and APPICATION_ROOT to work properly
@@ -312,7 +309,7 @@ class Peak_Core
             //include application front extension if exists
             if(file_exists(APPLICATION_ABSPATH.'/front.php')) include APPLICATION_ABSPATH.'/front.php';
             
-            return new Peak_Application();
+            return new Application();
         }
     }
 }

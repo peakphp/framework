@@ -1,11 +1,10 @@
 <?php
+namespace Peak;
+
 /**
- * Peak Objects Registry
- * 
- * @author   Francois Lajoie
- * @version  $Id$
+ * Peak Data container
  */
-class Peak_Registry
+class Registry
 {
 
 	/**

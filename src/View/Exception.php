@@ -1,11 +1,14 @@
 <?php
+namespace Peak\View;
+
+
 /**
  * Controller Exception
  * 
  * @author   Francois Lajoie
  * @version  $Id$
  */
-class Peak_View_Exception extends Peak_Exception
+class Exception extends \Exception
 {
     const ERR_VIEW_ENGINE_NOT_SET   = 'View rendering engine not set. Use engine() from Peak_View before trying to render application controller.';
     const ERR_VIEW_ENGINE_NOT_FOUND = 'View rendering engine \'%1$s\' not found.';

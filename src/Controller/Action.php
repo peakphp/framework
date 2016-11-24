@@ -1,11 +1,14 @@
 <?php
+namespace Peak\Controller;
+
+use Peak\Core;
+use Peak\Config;
+use Peak\Registry;
+
 /**
  * Peak abstract action controller
- * 
- * @author   Francois Lajoie
- * @version  $Id$
  */
-abstract class Peak_Controller_Action
+abstract class Action
 {
     /**
      * view script file to render
@@ -93,9 +96,9 @@ abstract class Peak_Controller_Action
      */
     final private function initController()
     {       
-        $this->view = Peak_Registry::o()->view; 
+        $this->view = Registry::o()->view; 
   
-        $this->path = Peak_Core::getPath('theme_scripts').'/'.$this->getTitle();
+        $this->path = Core::getPath('theme_scripts').'/'.$this->getTitle();
     }
     
     /**
@@ -127,7 +130,7 @@ abstract class Peak_Controller_Action
      */
     public function getScriptsPath()
     {
-        return Peak_Core::getPath('theme_scripts').'/'.$this->getTitle();
+        return Core::getPath('theme_scripts').'/'.$this->getTitle();
     }
         
     /**
@@ -169,9 +172,9 @@ abstract class Peak_Controller_Action
      */
     public function getRoute()
     {
-        $this->params       = Peak_Registry::o()->router->params;        
-        $this->params_assoc = new Peak_Config(Peak_Registry::o()->router->params_assoc);
-        $this->action       = $this->action_prefix . Peak_Registry::o()->router->action;
+        $this->params       = Registry::o()->router->params;        
+        $this->params_assoc = new Config(Registry::o()->router->params_assoc);
+        $this->action       = $this->action_prefix . Registry::o()->router->action;
         //set default ctrl action if none present
         if($this->action === $this->action_prefix) $this->action  = $this->action_prefix.'index';
     }    

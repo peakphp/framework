@@ -1,4 +1,8 @@
 <?php
+namespace Peak\View\Render;
+
+use Peak\Core;
+use Peak\View\Render;
 
 /**
  * Peak View Render Engine: Layouts
@@ -6,7 +10,7 @@
  * @author   Francois Lajoie
  * @version  $Id$
  */
-class Peak_View_Render_Layouts extends Peak_View_Render
+class Layouts extends Render
 {
         
     protected $_layout_file;   //current layout filename       
@@ -30,7 +34,7 @@ class Peak_View_Render_Layouts extends Peak_View_Render
      */
     public function isLayout($name)
     {
-    	return (file_exists(Peak_Core::getPath('theme_layouts').'/'.$name)) ? true : false;
+    	return (file_exists(Core::getPath('theme_layouts').'/'.$name)) ? true : false;
     }
 
     /**

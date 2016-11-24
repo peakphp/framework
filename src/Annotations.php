@@ -1,13 +1,11 @@
 <?php
+namespace Peak;
+
 /**
  * Peak Annotations
- *
  * Parse DocBlock tags of classes and methods
- * 
- * @author  Francois Lajoie
- * @version $Id$
  */
-class Peak_Annotations
+class Annotations
 {
     /**
      * Class reflection object
