@@ -1,6 +1,8 @@
 <?php
 namespace Peak\View;
 
+use Peak\View\Cache;
+
 /**
  * Peak_View_Render Engine base
  */
@@ -122,7 +124,7 @@ abstract class Render
      */
     public function cache()
     {
-    	if(!is_object($this->_cache)) $this->_cache = new Peak_View_Cache();
+    	if(!is_object($this->_cache)) $this->_cache = new Cache();
     	return $this->_cache;
     }
 

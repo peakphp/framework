@@ -1,13 +1,18 @@
 <?php
+namespace Peak\View;
+
+use Peak\Core;
+use Peak\Registry;
+
 /**
- * Peak_View_Cache
+ * View_Cache
  * 
  * This object manage view cache and it is encapsuled inside Peak_View_Render
  * 
  * @author  Francois Lajoie
  * @version $Id$
  */
-class Peak_View_Cache
+class Cache
 {
 	protected $_use_cache = false;     //use scripts view cache, false by default
 	protected $_cache_expire;          //script cache expiration time
@@ -21,27 +26,27 @@ class Peak_View_Cache
      */
 	public function __construct()
 	{
-		$this->_cache_path = Peak_Core::getPath('theme_cache');
+		$this->_cache_path = Core::getPath('theme_cache');
 	}
 	
 	/**
-	 * Get script file in Peak_View_Render
+	 * Get script file in View_Render
 	 *
 	 * @return string
 	 */
 	protected function getScriptFile()
 	{
-		return Peak_Registry::o()->view->engine()->_scripts_file;
+		return Registry::o()->view->engine()->_scripts_file;
 	}
 	
 	/**
-	 * Get script path in Peak_View_Render
+	 * Get script path in View_Render
 	 *
 	 * @return string
 	 */
 	protected function getScriptPath()
 	{
-		return Peak_Registry::o()->view->engine()->_scripts_path;
+		return Registry::o()->view->engine()->_scripts_path;
 	}
 
 	/**
@@ -92,8 +97,8 @@ class Peak_View_Cache
 		//on controller name and action name. If id is null but, cache id is already generated, we use it.
 		if(is_null($id)) {
 			if(is_null($this->_cache_id)) {
-				$this->genCacheId(Peak_Registry::o()->app->front->controller->getName(),
-								  Peak_Registry::o()->app->front->controller->action);
+				$this->genCacheId(Registry::o()->app->front->controller->getName(),
+								  Registry::o()->app->front->controller->action);
 			}
 		}
 		else $this->genCacheId(null, $id);

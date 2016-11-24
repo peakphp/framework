@@ -2,6 +2,7 @@
 namespace Peak\View\Render;
 
 use Peak\Core;
+use Peak\Registry;
 use Peak\View\Render;
 
 /**
@@ -57,7 +58,7 @@ class Layouts extends Render
     {
         // default path, no path submitted
         if(!isset($path)) {
-            $path = Peak_Core::getPath('theme');
+            $path = Core::getPath('theme');
             $no_cache = true;
         }
         else $is_scripts_path = true;
@@ -68,12 +69,12 @@ class Layouts extends Render
         // throw the most reliable exception depending on submitted arguments to this method
         if(!file_exists($filepath)) {         
             if(isset($is_scripts_path)) {
-                $filepath = Peak_Registry::o()->app->front->controller->getTitle() .'/'. basename($filepath);
-                throw new Peak_View_Exception('ERR_VIEW_SCRIPT_NOT_FOUND', $filepath);
+                $filepath = Registry::o()->app->front->controller->getTitle() .'/'. basename($filepath);
+                throw new \Exception('ERR_VIEW_SCRIPT_NOT_FOUND');
             }
             else {
                 $filepath = str_replace($path, '', $filepath);
-                throw new Peak_View_Exception('ERR_VIEW_FILE_NOT_FOUND', $filepath);
+                throw new \Exception('ERR_VIEW_FILE_NOT_FOUND');
             }
         }
                      

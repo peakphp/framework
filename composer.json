@@ -23,15 +23,12 @@
         "illuminate/events": "5.2.*@dev"
     },
     "require-dev": {
-        "phpunit/phpunit": "~5.4",
+        "phpunit/phpunit": "~5.4"
     },
     "autoload": {
-        "files": [
-            "src/Illuminate/Foundation/helpers.php",
-            "src/Illuminate/Support/helpers.php"
-        ],
         "psr-4": {
-            "Peak\\": "src/"
+            "Peak\\": "src/",
+            "App\\": "_test/app/"
         }
     },
     "minimum-stability": "dev"

@@ -108,7 +108,8 @@ abstract class Action
      */
     public function getName()
     {
-        return get_class($this);
+        if ($pos = strrpos(get_class($this), '\\')) return substr(get_class($this), $pos + 1);
+        return strtolower($pos);
     }
     
     /**
@@ -177,6 +178,8 @@ abstract class Action
         $this->action       = $this->action_prefix . Registry::o()->router->action;
         //set default ctrl action if none present
         if($this->action === $this->action_prefix) $this->action  = $this->action_prefix.'index';
+
+        //echo '>>>'.$this->file;
     }    
     
     /**
@@ -184,7 +187,7 @@ abstract class Action
      */
     public function dispatch()
     {
-        $this->preAction();
+        $this->preAction(); 
         $this->dispatchAction();
         $this->postAction();
     }
@@ -197,6 +200,7 @@ abstract class Action
         if($this->isAction($this->action) === false) {
             throw new Peak_Controller_Exception('ERR_CTRL_ACTION_NOT_FOUND', array($this->action, $this->getName()));
         }
+
 
         //set action filename
         if($this->action_prefix === '_') $this->file = substr($this->action,1).'.php';

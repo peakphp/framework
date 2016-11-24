@@ -118,13 +118,13 @@ class Front
 		//set controller class name
 		$ctrl_name = 'App\Controllers\\'.$this->router->controller;
 
-        echo $this->router->controller;
-        echo '<pre>';
-        print_r($this->router);
+        // echo $this->router->controller;
+        // echo '<pre>';
+        // print_r($this->router);
 
-		//check if it's valid application controller
-		if(!$this->isController($ctrl_name))
-		{
+        //check if it's valid application controller
+        if(!$this->isController($ctrl_name))
+        {
 			//check for peak internal controller
 			if(($this->allow_internal_controllers === true) && ($this->isInternalController($this->router->controller))) {
 				$ctrl_name = 'Peak\Controller\Internal\\'.$this->router->controller;
