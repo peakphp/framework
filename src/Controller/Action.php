@@ -227,7 +227,7 @@ abstract class Action
         // return;
 		//get action params
 		$zf = new Zreflection();
-		$zf->loadClass("App\Controller\\".$this->getName());
+		$zf->loadClass("App\Controllers\\".$this->getName());
 		$params = $zf->class->getMethod($action_name)->getParameters();
 		
 		//fetch request params with action params
@@ -244,7 +244,7 @@ abstract class Action
 		
 		//if we got errors(param missing), we throw an exception
 		if(!empty($errors)) {
-			throw new Peak_Controller_Exception('ERR_CTRL_ACTION_PARAMS_MISSING', array(count($errors), $this->getName().'::'.$action_name.'()'));
+			throw new \Exception('ERR_CTRL_ACTION_PARAMS_MISSING');
 		}
 		
 		//call action with args
