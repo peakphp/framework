@@ -1,12 +1,13 @@
 <?php
+namespace Peak\Filters;
+
+use Peak\Filters\Advanced;
+
 /**
  * Data validation/sanitize class
  * This class help to validate/sanitize array of data
- * 
- * @author  Francois Lajoie
- * @version $Id$
  */
-class Peak_Filters_Data extends Peak_Filters_Advanced  
+class Data extends Advanced  
 {
 
 

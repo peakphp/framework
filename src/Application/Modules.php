@@ -1,11 +1,13 @@
 <?php
+namespace Peak\Application;
+
+use Peak\Core;
+use Peak\Registry;
+
 /**
  * Peak Modules Application Abstract Launcher 
- * 
- * @author   Francois Lajoie
- * @version  $Id$
  */
-abstract class Peak_Application_Modules
+abstract class Modules
 {
 
 	/**
@@ -35,17 +37,17 @@ abstract class Peak_Application_Modules
     	$this->prepare();
 		
 		//delete previously added router regex for the module
-        Peak_Registry::o()->router->deleteRegex();
+        Registry::o()->router->deleteRegex();
         
-		$app_path = Peak_Core::getPath('application');		
+		$app_path = Core::getPath('application');		
 		      
         //load initialize module bootstrap if exists
         if(file_exists($app_path.'/bootstrap.php')) include $app_path.'/bootstrap.php';
-		Peak_Registry::o()->app->loadBootstrap($this->_name.'_');
+		Registry::o()->app->loadBootstrap($this->_name.'_');
 		
 		//initialize module front if exists, otherwise load peak default front
         if(file_exists($app_path.'/front.php')) include $app_path.'/front.php';
-		Peak_Registry::o()->app->loadFront($this->_name.'_');
+		Registry::o()->app->loadFront($this->_name.'_');
     }
     
     /**
@@ -79,10 +81,10 @@ abstract class Peak_Application_Modules
 	protected function definePath()
 	{
 		if(!($this->_internal))	{
-    		$this->_path = Peak_Core::getPath('modules').'/'.$this->_name;
+    		$this->_path = Core::getPath('modules').'/'.$this->_name;
     	}
     	else {
-    		$this->_path = LIBRARY_ABSPATH.'/Peak/Application/Modules/'.$this->_name;
+    		$this->_path = LIBRARY_ABSPATH.'/Application/Modules/'.$this->_name;
     	}
 	}
 
@@ -94,19 +96,19 @@ abstract class Peak_Application_Modules
      */
     public function init($module, $path = null)
     {
-        $config = Peak_Registry::o()->config;
+        $config = Registry::o()->config;
     
         $module_path = (isset($path)) ? $path : $config->modules_path.'/'.$module;
         
         if(is_dir($module_path)) {
                         
             //backup previous application configs before overloading core configurations
-            Peak_Registry::set('app_config', clone $config);
+            Registry::set('app_config', clone $config);
             
             $config->module_name = $module;
             
             //get default path structure for module path application
-            $config->path = Peak_Core::getDefaultAppPaths($module_path);
+            $config->path = Core::getDefaultAppPaths($module_path);
         }  
     }
 
@@ -116,10 +118,10 @@ abstract class Peak_Application_Modules
     public function run()
     {
         //add module name to the end Peak_Router $base_uri      
-        Peak_Registry::o()->router->base_uri .= $this->_name.'/';
+        Registry::o()->router->base_uri .= $this->_name.'/';
  
         //re-call Peak_Application run() for handling the new routing
-        Peak_Registry::o()->app->run();
+        Registry::o()->app->run();
     }
 
     /**

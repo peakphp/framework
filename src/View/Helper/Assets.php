@@ -1,11 +1,12 @@
 <?php
+namespace Peak\View\Helper;
+
+use Peak\View\Helper;
+
 /**
  * Assets url helpers for files like css/js/img
- *
- * @author  Francois Lajoie
- * @version $Id: assets.php 597 2013-03-04 18:16:01Z snake386@hotmail.com $
  */
-class Peak_View_Helper_Assets
+class Assets extends Helper
 {
 
     /**
@@ -27,11 +28,12 @@ class Peak_View_Helper_Assets
      */
     public function __construct($path = null, $url = null)
     {
+        parent::__construct();
         if(isset($path)) $this->setPath($path);
         else $this->setPath('assets');
 
         if(isset($url)) $this->setUrl($url);
-        else $this->setUrl(Peak_Registry::o()->view->baseUrl('', true));
+        else $this->setUrl($this->view->baseUrl('', true));
     }
 
     /**

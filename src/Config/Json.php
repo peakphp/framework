@@ -1,13 +1,14 @@
 <?php
+namespace Peak\Config;
+
+use Peak\Config;
+
 /**
  * Peak_Config_Json
  *
  * Takes a JSON encoded file/string and converts it into a PHP variable.
- * 
- * @author  Francois Lajoie
- * @version $Id$
  */
-class Peak_Config_Json extends Peak_Config
+class Json extends Config
 {
 	
 	/**

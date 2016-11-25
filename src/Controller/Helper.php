@@ -1,12 +1,10 @@
 <?php
+namespace Peak\Controller;
 
 /**
  * Abstract base class for controllers helpers
- * 
- * @author   Francois Lajoie 
- * @version  $Id$ 
  */
-abstract class Peak_Controller_Helper
+abstract class Helper
 {
     /**
      * Unkown method in Controller Helper will try to call current controller __call() method.

@@ -1,12 +1,12 @@
 <?php
+namespace Peak\Controller\Helper;
+
+use Peak\Config;
+
 /**
  * Facilitate access/sanitazation of $_POST in your controller
- *
- * @uses    Peak_Config
- * @author  Francois Lajoie
- * @version $Id: post.php 366 2011-05-29 04:15:16Z snake386@hotmail.com $
  */
-class Peak_Controller_Helper_Post extends Peak_Config
+class Post extends Config
 {
 
     /**

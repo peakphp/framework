@@ -1,10 +1,11 @@
 <?php
+namespace Peak\Filters;
+
+use Peak\Filters;
+
 /**
  * Filters advanced class wrapper
  * This class help to validate data with multiple filters
- * 
- * @author  Francois Lajoie
- * @version $Id$
  * 
  * FILTERS LIST FOR VALIDATION. 
  * if you want more info on what a filter do, checkout the filter method docblock 
@@ -18,7 +19,7 @@
  * Note that you can also define your own filters in your extended class
  * by adding methods _filter_[youfiltername]
  */
-abstract class Peak_Filters_Advanced extends Peak_Filters 
+abstract class Advanced extends Filters 
 {
 	/**
 	 * Keep unknow key in $_data when using sanitize()

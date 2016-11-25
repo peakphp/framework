@@ -1,14 +1,12 @@
 <?php
+namespace Peak\Filters;
+
+use Peak\Filters;
+
 /**
  * Filter Basic extension wrapper for sanitization and/or validation of array
- * 
- * @uses    PHP Filter extensions for sanitazation and validation
- * @author  Francois Lajoie
- * @version $Id$
- * 
- * @dependencies Peak_Filters
  */
-abstract class Peak_Filters_Basic extends Peak_Filters
+abstract class Basic extends Filters
 {
 	/**
 	 * Errors msg gather from $_validate

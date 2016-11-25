@@ -1,11 +1,12 @@
 <?php
+namespace Peak\View\Helper;
+
+use Peak\View\Helper;
+
 /**
  * Misc usefull view helper functions for text
- * 
- * @author  Francois Lajoie
- * @version $Id: text.php 453 2011-10-03 00:22:42Z snake386@hotmail.com $
  */
-class Peak_View_Helper_Text
+class Text extends Helper
 {
     
     

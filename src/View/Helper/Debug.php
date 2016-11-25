@@ -1,11 +1,13 @@
 <?php
+namespace Peak\View\Helper;
+
+use Peak\Registry;
+use Peak\View\Helper;
+
 /**
  * Debug array display
- *
- * @author  Francois Lajoie
- * @version $Id: debug.php 319 2011-03-12 17:57:48Z snake386@hotmail.com $
  */
-class Peak_View_Helper_Debug
+class Debug extends Helper
 {   
    
     /**
@@ -13,11 +15,11 @@ class Peak_View_Helper_Debug
      */
     public function registry()
     {
-    	$object_list = Peak_Registry::getObjectList();
+    	$object_list = Registry::getObjectList();
     	echo '<pre class="peak_debug_tree">';
     	foreach($object_list as $obj) {
     		
-    		print_r(Peak_Registry::o()->$obj);
+    		print_r(Registry::o()->$obj);
     	}
     	echo '</pre>';
     }
@@ -29,7 +31,7 @@ class Peak_View_Helper_Debug
      */
     public function getControllerSource()
 	{
-		$app = Peak_Registry::o()->app;
+		$app = Registry::o()->app;
 		$cfile_name = $app->front->controller->name;
 		$cfile = Peak_Core::getPath('controllers').'/'.$cfile_name.'.php';
 		if(file_exists($cfile)) {
@@ -46,7 +48,7 @@ class Peak_View_Helper_Debug
 	 */
 	public function getScriptSource()
 	{
-		$app = Peak_Registry::o()->app;
+		$app = Registry::o()->app;
 		$sfile_name = $app->front->controller->file;
 		$sfile = $app->front->controller->path.'/'.$sfile_name;
 		

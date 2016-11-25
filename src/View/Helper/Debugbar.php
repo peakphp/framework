@@ -1,6 +1,7 @@
 <?php
 namespace Peak\View\Helper;
 
+use Peak\Registry;
 use Peak\View\Helper\Debug;
 
 /**
@@ -161,14 +162,14 @@ class Debugbar extends Debug
         
         //registry
         echo '<div class="window resizable" id="pkdb_registry_window">';
-        echo '<h2>'.count(Peak_Registry::getObjectsList()).' registered objects</h2>';
-        foreach(Peak_Registry::getObjectsList() as $name) {
-            $type = is_object(Peak_Registry::o()->$name) ? Peak_Registry::getClassName($name) : '';
+        echo '<h2>'.count(Registry::getObjectsList()).' registered objects</h2>';
+        foreach(Registry::getObjectsList() as $name) {
+            $type = is_object(Registry::o()->$name) ? Registry::getClassName($name) : '';
             echo '<strong><a href="#'.$name.'">'.$name.'</a></strong> ['.$type.']<br />';
         }
         
-        foreach(Peak_Registry::getObjectsList() as $name) {
-            $object_data = htmlentities(print_r(Peak_Registry::get($name),true));
+        foreach(Registry::getObjectsList() as $name) {
+            $object_data = htmlentities(print_r(Registry::get($name),true));
             echo '<h2 id="'.$name.'">'.$name.'</h2><pre>'.$object_data.'</pre>';
         }
         echo '</div>';

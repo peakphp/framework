@@ -1,12 +1,13 @@
 <?php
+namespace Peak\Filters;
+
+use Peak\Filters\Advanced;
+
 /**
  * Form validation/sanitize class
  * This class help to validate/sanitize forms from $_POST or $_GET
- * 
- * @author  Francois Lajoie
- * @version $Id$
  */
-abstract class Peak_Filters_Form extends Peak_Filters_Advanced  
+abstract class Form extends Advanced  
 {
 
 	/**

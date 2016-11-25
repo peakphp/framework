@@ -1,11 +1,12 @@
 <?php
+namespace Peak\View\Helper;
+
+use Peak\View\Helper;
+
 /**
  * Manage html tag attributes
- * 
- * @author  Francois Lajoie
- * @version $Id: tagattrs.php 494 2012-02-25 04:28:35Z snake386@hotmail.com $
  */
-class Peak_View_Helper_Tagattrs
+class Tagattrs extends Helper
 {
     /**
      * Attributes

@@ -1,11 +1,10 @@
 <?php
+namespace Peak\Controller\Helper;
+
 /**
  * Get misc infos about current request
- *
- * @author  Francois Lajoie
- * @version $Id: request.php 598 2013-03-05 04:16:05Z snake386@hotmail.com $
  */
-class Peak_Controller_Helper_Request
+class Request
 {
     /**
      * Check if request is ajax

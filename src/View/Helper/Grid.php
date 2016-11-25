@@ -1,13 +1,14 @@
 <?php
+namespace Peak\View\Helper;
+
+use Peak\View\Helper;
+
 /**
  * Table Grid Helper
  *
  * Create table easily
- *
- * @author  Francois Lajoie
- * @version $Id$
  */  
-class Peak_View_Helper_Grid
+class Grid extends Helper
 {
     /**
      * The grid data

@@ -1,12 +1,12 @@
 <?php
+namespace Peak\Controller\Helper;
+
+use Peak\Filters\Advanced;
+
 /**
  * Validate Filters extension wrapper
- * @see Peak_Filters_Advanced
- *
- * @author  Francois Lajoie
- * @version $Id: validate.php 545 2012-11-07 04:21:27Z snake386@hotmail.com $
  */
-class Peak_Controller_Helper_Validate extends Peak_Filters_Advanced
+class Validate extends Advanced
 {
 
     public function __call($method, $args = null)
