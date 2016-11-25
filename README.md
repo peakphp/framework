@@ -1,6 +1,4 @@
 # Peak
-### Lightweight PHP framework
-
 
 > **Note:** This repository contains the core code of the Peak framework. If you want to build an application using Peak, visit the main [Peak repository](https://github.com/peakphp/peak).
 
