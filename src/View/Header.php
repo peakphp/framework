@@ -1,11 +1,10 @@
 <?php
+namespace Peak\View;
+
 /**
  * View helper - Http header
- *
- * @author   Francois Lajoie
- * @version  $Id$
  */
-class Peak_View_Header 
+class Header 
 {
 
     /**

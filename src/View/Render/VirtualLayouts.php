@@ -1,13 +1,13 @@
 <?php
+namespace Peak\View\Render;
+
+use Peak\View\Render;
+
 /**
  * Peak View Render Engine: Virtual Layout
- * 
- * @desc     Work like Layout but without files
- * 
- * @author   Francois Lajoie
- * @version  $Id$
+ * Work like Layout but without files
  */
-class Peak_View_Render_VirtualLayouts extends Peak_View_Render
+class VirtualLayouts extends Render
 {
 
     /**

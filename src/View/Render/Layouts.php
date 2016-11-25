@@ -7,9 +7,6 @@ use Peak\View\Render;
 
 /**
  * Peak View Render Engine: Layouts
- * 
- * @author   Francois Lajoie
- * @version  $Id$
  */
 class Layouts extends Render
 {

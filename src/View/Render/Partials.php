@@ -1,15 +1,16 @@
 <?php
+namespace Peak\View\Render;
+
+use Peak\View\Render;
+
 /**
  * Peak View Render Engine: Partials
- * 
- * @author   Francois Lajoie
- * @version  $Id$
  * 
  * support groups alias from theme.ini
  * if no groups, only the controller action view file will be render
  * 
  */
-class Peak_View_Render_Partials extends Peak_View_Render
+class Partials extends Render
 {   
     
     protected $_groups;      //available partials groups   

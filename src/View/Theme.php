@@ -1,16 +1,14 @@
 <?php
+namespace Peak\View;
 
 /**
  * Manage Application Views Themes folder(s)
  * 
- * @desc     Themes folder are /layout, /partials, /scripts, /cache
- *           By default they are in your application /views folder.
- *           If you set a theme name, then application folder /views/themes/[name] will be used
- * 
- * @author   Francois Lajoie
- * @version  $Id$
+ * Themes folder are /layout, /partials, /scripts, /cache
+ * By default they are in your application /views folder.
+ * If you set a theme name, then application folder /views/themes/[name] will be used
  */
-class Peak_View_Theme
+class Theme
 {
 	
     /**

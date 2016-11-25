@@ -1,13 +1,14 @@
 <?php
+namespace Peak\View\Render;
+
+use Peak\View\Render;
+
 /**
  * Peak View Render Engine: Json
  * 
- * @desc     Output view vars as json 
- * 
- * @author   Francois Lajoie
- * @version  $Id$ 
+ * Output view vars as json 
  */
-class Peak_View_Render_Json extends Peak_View_Render
+class Json extends Render
 {
                      
     /**

@@ -1,11 +1,10 @@
 <?php
+namespace Peak;
+
 /**
  * Filter base wrapper
- * 
- * @author  Francois Lajoie
- * @version $Id$
  */
-abstract class Peak_Filters 
+abstract class Filters 
 {
 	/**
 	 * Data on which we work 

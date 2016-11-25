@@ -253,8 +253,11 @@ class Core
             if(substr($svr_path, -1, 1) !== '/') $svr_path .= '/';
             define('SVR_ABSPATH', $svr_path); unset($svr_path);
             
+            // $lib_path = str_ireplace('\\','/', substr(__DIR__, 0, strlen(__DIR__) - (strlen(basename(__DIR__)) + 1)));
+            // echo $lib_path;
             //define libray path
-            define('LIBRARY_ABSPATH', str_ireplace(array(substr(__FILE__, -14),'\\'), array('','/'), __FILE__));
+            define('LIBRARY_ABSPATH', __DIR__);
+
             
             //add LIBRARY_ABSPATH to include path
             set_include_path(implode(PATH_SEPARATOR, array(LIBRARY_ABSPATH,
@@ -263,7 +266,7 @@ class Core
         }
   
         //LEVEL 2 - load peak core autoloader
-        //if($level >= 2) include LIBRARY_ABSPATH.'/Peak/autoload.php';
+        if($level >= 2) include LIBRARY_ABSPATH.'/autoload.php';
         
         //LEVEL 3 - peak basic config with app config
 		//need constant PUBLIC_ROOT and APPICATION_ROOT to work properly

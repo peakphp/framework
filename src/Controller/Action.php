@@ -224,7 +224,7 @@ abstract class Action
 	 */
 	private function dispatchActionParams($action_name)
 	{
-        return;
+        // return;
 		//get action params
 		$zf = new Zreflection();
 		$zf->loadClass("App\Controller\\".$this->getName());

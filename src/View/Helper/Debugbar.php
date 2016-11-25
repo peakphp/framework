@@ -1,12 +1,13 @@
 <?php
+namespace Peak\View\Helper;
+
+use Peak\View\Helper\Debug;
+
 /**
  * Graphic version of Peak_View_Helper_debug
- *
- * @author  Francois Lajoie
- * @version $Id: debugbar.php 591 2013-02-19 15:48:31Z snake386@hotmail.com $
  * @uses    jQuery, Fugue icons, Peak_View_Helper_Debug, Peak_Chrono  
  */
-class Peak_View_Helper_Debugbar extends Peak_View_Helper_Debug 
+class Debugbar extends Debug 
 {
     
     private $_console_log = array();

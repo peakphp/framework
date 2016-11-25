@@ -1,11 +1,10 @@
 <?php
+namespace Peak;
+
 /**
  * Simple lang translator based on php array
- * 
- * @author   Francois Lajoie
- * @version  $Id$
  */
-class Peak_Lang
+class Lang
 {     
     /**
      * Language abbreviation

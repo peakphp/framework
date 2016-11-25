@@ -1,13 +1,14 @@
 <?php
+namespace Peak\View\Render;
+
+use Peak\View\Render;
+
 /**
  * Peak View Render Engine: Virtual
  * 
- * @desc     Output virtual groups view vars
- * 
- * @author   Francois Lajoie
- * @version  $Id$
+ * Output virtual groups view vars
  */
-class Peak_View_Render_Virtual extends Peak_View_Render
+class Virtual extends Render
 {
 
     private $_virtual = array();

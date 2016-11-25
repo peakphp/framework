@@ -1,11 +1,10 @@
 <?php
+namespace Peak;
+
 /** 
  * Manage a global timer and/or multiple timers
- * 
- * @author   Francois Lajoie
- * @version  $Id$
  */
-class Peak_Chrono
+class Chrono
 {
 
     /**

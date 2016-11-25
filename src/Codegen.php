@@ -1,11 +1,10 @@
 <?php
+namespace Peak;
+
 /**
  * Abstract class for code generation
- * 
- * @author  Francois Lajoie
- * @version $Id$
  */
-abstract class Peak_Codegen
+abstract class Codegen
 {
 	/**
 	 * Indentation space
