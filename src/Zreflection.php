@@ -26,7 +26,7 @@ class Zreflection
     public function loadClass($class, $autoload = true)
     {
         if(class_exists($class, $autoload)) {
-            $this->class = new Zend_Reflection_Class($class);
+            $this->class = new \Zend_Reflection_Class($class);
         }
     }
 
