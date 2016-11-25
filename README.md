@@ -6,7 +6,7 @@ This version is essentially a migration from class name convention like Zend Fra
 
 This version version work with PHP 5.4 or greater. The [older version](https://github.com/1Franck/Peak) require PHP 5.2 or greater. Both version are compatible with PHP 7 but i strongly recommand to use this version. Older version is no more supported.
 
-Old Zend database compoment have been dropped in favor of [Laravel/Database](https://github.com/illuminate/database) component.
+Old Zend database component have been dropped in favor of [Laravel/Database](https://github.com/illuminate/database) component.
 
 
 
