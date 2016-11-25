@@ -2,7 +2,7 @@
     "name": "peakphp/framework",
     "description": "The Peak Framework.",
     "keywords": ["framework", "peak"],
-    "license": "MIT",
+    "license": "BSD-3-Clause",
     "homepage": "https://peakframework.com",
     "support": {
         "issues": "https://github.com/peakphp/framework/issues",

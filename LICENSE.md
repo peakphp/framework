@@ -1,3 +1,9 @@
+New BSD License
+
+This license is a legal agreement between you and PeakPHP for 
+the use of Peak Framework (the "Software"). By obtaining the Software you 
+agree to comply with the terms and conditions of this license.
+
 Copyright (c) François Lajoie
 All rights reserved.
 
