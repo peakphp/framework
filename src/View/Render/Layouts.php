@@ -80,7 +80,7 @@ class Layouts extends Render
                      
         // render the layout if is set
         if((isset($this->_layout_file)) && ($this->isLayout($this->_layout_file))) {
-            $filepath = Peak_Core::getPath('theme_layouts').'/'.$this->_layout_file;
+            $filepath = Core::getPath('theme_layouts').'/'.$this->_layout_file;
             $this->scripts_file = $file;
             $this->scripts_path = $path;
         }

@@ -1,12 +1,15 @@
 <?php
+namespace Peak\View;
+
+use Peak\Registry;
+use Peak\Config;
+use Peak\Core;
+use Peak\Helpers as BaseHelpers;
 
 /**
  * Peak View Helpers Object containers
- *  
- * @author   Francois Lajoie 
- * @version  $Id$
  */
-class Peak_View_Helpers extends Peak_Helpers
+class Helpers extends BaseHelpers
 {
     
 	/**
@@ -16,7 +19,7 @@ class Peak_View_Helpers extends Peak_Helpers
     {
     	$this->_prefix    = array('View_Helper_','Peak_View_Helper_');
     	
-    	$this->_paths     = array(Peak_Core::getPath('views_helpers'),
+    	$this->_paths     = array(Core::getPath('views_helpers'),
     			                  LIBRARY_ABSPATH.'/Peak/View/Helper');
     			                  
     	$this->_exception = 'ERR_VIEW_HELPER_NOT_FOUND';
@@ -33,8 +36,8 @@ class Peak_View_Helpers extends Peak_Helpers
     public function __get($name)
     {
         $helper = parent::__get($name);
-        if(!isset($helper->view) && !($helper instanceof Peak_Config)) {
-            $helper->view = Peak_Registry::o()->view;
+        if(!isset($helper->view) && !($helper instanceof Peak\Config)) {
+            $helper->view = Registry::o()->view;
         }
         return $helper;
     }    

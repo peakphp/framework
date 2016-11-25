@@ -1,11 +1,10 @@
 <?php
+namespace Peak;
+
 /**
  * Peak Abstract Helpers Object Containers
- *  
- * @author   Francois Lajoie 
- * @version  $Id$ 
  */
-abstract class Peak_Helpers
+abstract class Helpers
 {
 
 	/**

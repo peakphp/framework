@@ -2,6 +2,7 @@ VERSION 1.0.0
 -------------
 Release Date: ?
 
+ - namespace migration
  - added the good http header for Json Render Engine
  - fixed a bug in Peak_Controller_Action when disabling prop $actions_with_params
  - fixed debugbar notice in db section

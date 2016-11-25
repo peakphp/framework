@@ -1,14 +1,12 @@
 <?php
+namespace Peak;
+
 /**
  * Zend reflection wrapper specialized for Class Reflection
  * 
- * @descr    This will help you to resolve some complex treatments needed to gather informations about php classes from Zend_Reflection components.
- * 
- * @uses     Zend_Reflection classes + Zend_Loader !important
- * @author   Francois Lajoie
- * @version  $Id$
+ * This will help you to resolve some complex treatments needed to gather informations about php classes from Zend_Reflection components.
  */
-class Peak_Zreflection
+class Zreflection
 {
 
     /**

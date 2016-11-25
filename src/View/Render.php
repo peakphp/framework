@@ -2,6 +2,7 @@
 namespace Peak\View;
 
 use Peak\View\Cache;
+use Peak\Registry;
 
 /**
  * Peak_View_Render Engine base
@@ -41,18 +42,18 @@ abstract class Render
      */
     public function __get($name)
     {
-        return Peak_Registry::o()->view->$name;
+        return Registry::o()->view->$name;
     }
 
     /**
-     * Point to Peak_View __isset method
+     * Point to View __isset method
      *
      * @param  string $name represent view var name
      * @return bool
      */
     public function __isset($name)
     {
-        return isset(Peak_Registry::o()->view->$name);
+        return isset(Registry::o()->view->$name);
     }
 
     /**

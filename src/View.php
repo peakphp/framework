@@ -1,6 +1,8 @@
 <?php
 namespace Peak;
 
+use Peak\View\Helpers;
+
 /**
  * Template variables registry with objects httpheader, helpers, theme, rendering
  */
@@ -306,7 +308,7 @@ class View
      */
     public function helper($name = null, $method = null, $params = array())
     {
-    	if(!is_object($this->_helpers)) $this->_helpers = new Peak_View_Helpers();
+    	if(!is_object($this->_helpers)) $this->_helpers = new Helpers();
     	
     	if(isset($name)) {
     	    if((isset($this->helper()->$name)) || $this->helper()->exists($name)) {      

@@ -1,6 +1,8 @@
 <?php
 namespace Peak;
 
+use Peak\Application\Bootstrap;
+
 /**
  * Load the framework objects, application bootstrap and front controller.
  */
@@ -46,11 +48,13 @@ class Application
 	 *
 	 * @param string $prefix Bootstrap class prefix name if exists
 	 */
-	public function loadBootstrap($prefix = '')
+	public function loadBootstrap($prefix = 'App\\')
 	{
 		$cname = $prefix.'Bootstrap';
 		if(class_exists($cname,false)) $this->bootstrap = new $cname();
-		else $this->bootstrap = null;
+		else $this->bootstrap = new Bootstrap();
+
+        //print_r($this->bootstrap); die('YE');
 	}
 
 	/**
@@ -58,7 +62,7 @@ class Application
 	 *
 	 * @param string $prefix Front class prefix name if exists
 	 */
-	public function loadFront($prefix = '')
+	public function loadFront($prefix = 'App\\')
 	{
 		$cname = $prefix.'Front';
 		$this->front = (class_exists($cname,false)) ? new $cname() : new Controller\Front();
@@ -70,12 +74,12 @@ class Application
      */
     public function run()
     {
-    	$this->front->getRoute();
-    	$this->front->preDispatch();
-    	$this->front->dispatch();
+        $this->front->getRoute();
+        $this->front->preDispatch();
+        $this->front->dispatch();
         $this->front->postDispatch();
-    	
-    	return $this;
+
+        return $this;
     }
 
     /**
@@ -83,7 +87,7 @@ class Application
      */
     public function render()
     {
-    	$this->front->controller->render();
-    	$this->front->postRender();
+        $this->front->controller->render();
+        $this->front->postRender();
     }
 }

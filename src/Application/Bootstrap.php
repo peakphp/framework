@@ -9,7 +9,7 @@ use Peak\Registry;
  * @author   Francois Lajoie
  * @version  $Id$
  */
-abstract class Bootstrap
+class Bootstrap
 {
 
     /**

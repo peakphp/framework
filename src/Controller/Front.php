@@ -100,8 +100,8 @@ class Front
         	$this->_dispatchModule();
         }               
         // execute a normal controller action
-        elseif($this->controller instanceof Peak\Controller\Action) {
-        	$this->_dispatchControllerAction(); 
+        elseif($this->controller instanceof Action) {
+            $this->_dispatchControllerAction(); 
         }
 	}
 	
@@ -110,13 +110,13 @@ class Front
 	 */
 	protected function _dispatchController()
 	{
-		//set default controller if router doesn't have one
-		if(!isset($this->router->controller)) {
-			$this->router->controller = $this->default_controller;
-		}
-		
-		//set controller class name
-		$ctrl_name = 'App\Controllers\\'.$this->router->controller;
+        //set default controller if router doesn't have one
+        if(!isset($this->router->controller)) {
+            $this->router->controller = $this->default_controller;
+        }
+        
+        //set controller class name
+        $ctrl_name = 'App\Controllers\\'.$this->router->controller;
 
         // echo $this->router->controller;
         // echo '<pre>';
@@ -125,15 +125,15 @@ class Front
         //check if it's valid application controller
         if(!$this->isController($ctrl_name))
         {
-			//check for peak internal controller
-			if(($this->allow_internal_controllers === true) && ($this->isInternalController($this->router->controller))) {
-				$ctrl_name = 'Peak\Controller\Internal\\'.$this->router->controller;
-				$this->controller = new $ctrl_name();
-			}
-			else throw new Exception('ERR_CTRL_NOT_FOUND');
-		}
-		else $this->controller = new $ctrl_name();
-		
+            //check for peak internal controller
+            if(($this->allow_internal_controllers === true) && ($this->isInternalController($this->router->controller))) {
+                $ctrl_name = 'Peak\Controller\Internal\\'.$this->router->controller;
+                $this->controller = new $ctrl_name();
+            }
+            else throw new Exception('ERR_CTRL_NOT_FOUND');
+        }
+        else $this->controller = new $ctrl_name();
+
 		$this->postDispatchController();
 	}
 	
