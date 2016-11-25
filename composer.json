@@ -28,7 +28,6 @@
     "autoload": {
         "psr-4": {
             "Peak\\": "src/",
-            "App\\": "_test/app/"
         }
     },
     "minimum-stability": "dev"
