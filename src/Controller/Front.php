@@ -123,12 +123,13 @@ class Front
         // print_r($this->router);
 
         //check if it's valid application controller
-        if(!$this->isController($ctrl_name))
+        if(!class_exists($ctrl_name))
         {
+            $internal_ctrl_name = 'Peak\Controller\Internal\\'.$this->router->controller;
+
             //check for peak internal controller
-            if(($this->allow_internal_controllers === true) && ($this->isInternalController($this->router->controller))) {
-                $ctrl_name = 'Peak\Controller\Internal\\'.$this->router->controller;
-                $this->controller = new $ctrl_name();
+            if(($this->allow_internal_controllers === true) && (class_exists($internal_ctrl_name))) {
+                $this->controller = new $internal_ctrl_name();
             }
             else throw new Exception('ERR_CTRL_NOT_FOUND');
         }
@@ -234,29 +235,6 @@ class Front
      * Empty by default
      */
     public function postRender() { }   
-    
-    /**
-     * Check if controller filename exists
-     *
-     * @param  string $name
-     * @return bool
-     */
-    public function isController($name)
-    {
-        return true;
-    	return (file_exists(Core::getPath('controllers').'/'.str_replace('App\\','',$name).'.php')); 
-    }
-
-    /**
-     * Check if internal Peak Controller filename exists
-     *
-     * @param  string $name
-     * @return bool
-     */
-    public function isInternalController($name)
-    {
-    	return (file_exists(LIBRARY_ABSPATH.'/Peak/Controller/Internal/'.$name.'.php')) ? true : false;
-    }
 
     /**
      * Check if modules dirname exists
