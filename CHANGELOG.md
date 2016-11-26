@@ -1,7 +1,11 @@
 VERSION 1.0.0
 -------------
 Release Date: ?
-
+ 
+ - multiples fix due to namespace migration
+ - removed zend db vendor (we use laravel database now)
+ - added view helper class to inject view object into view helper
+ - removed unused spl autoload functions
  - deleted deprecated class Xml and Dispatcher
  - namespace migration
  - added the good http header for Json Render Engine
