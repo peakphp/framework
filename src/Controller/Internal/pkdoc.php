@@ -1,12 +1,12 @@
 <?php
+namespace Peak\Controller\Internal;
+
+use Peak\Controller\Action;
+
 /**
  * Peak Autodoc controller for the framework using Reflection
- * 
- * @uses    Peak_Zreflection_Class and Zend_Reflection components
- * @author  Francois Lajoie
- * @version $Id$
  */
-class Peak_Controller_Internal_Pkdoc extends Peak_Controller_Action
+class Pkdoc extends Action
 {
     /**
 	 * Peak_Zreflection instance

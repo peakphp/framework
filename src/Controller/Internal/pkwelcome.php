@@ -1,12 +1,12 @@
 <?php
+namespace Peak\Controller\Internal;
+
+use Peak\Controller\Action;
 /**
  * Peak welcome controller. This is the default controller for Peak/Application/genericapp.ini
  * Its just a welcome (hello words) page... :P
- * 
- * @author  Francois Lajoie
- * @version $Id$
  */
-class Peak_Controller_Internal_Pkwelcome extends Peak_Controller_Action
+class Pkwelcome extends Action
 {
 
 	/**
