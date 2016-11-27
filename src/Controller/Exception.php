@@ -1,13 +1,12 @@
 <?php
 namespace Peak\Controller;
 
+use Peak\Exception as PeakException;
+
 /**
  * Controller Exception
- * 
- * @author   Francois Lajoie
- * @version  $Id$
  */
-class Exception extends \Exception
+class Exception extends PeakException
 {
     
     const ERR_CTRL_NOT_FOUND                = 'Application controller %1$s not found.';
