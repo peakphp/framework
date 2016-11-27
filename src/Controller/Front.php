@@ -3,7 +3,7 @@ namespace Peak\Controller;
 
 use Peak\Core;
 use Peak\Registry;
-use Peak\Controller\Exception;
+use Peak\Exception;
 
 /**
  * Front controller

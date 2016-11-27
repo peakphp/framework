@@ -5,7 +5,7 @@ use Peak\Core;
 use Peak\Config;
 use Peak\Registry;
 use Peak\Zreflection;
-use Peak\Controller\Exception;
+use Peak\Exception;
 
 /**
  * Peak abstract action controller
@@ -246,7 +246,7 @@ abstract class Action
 		
 		//if we got errors(param missing), we throw an exception
 		if(!empty($errors)) {
-			throw new \Exception('ERR_CTRL_ACTION_PARAMS_MISSING');
+			throw new Exception('ERR_CTRL_ACTION_PARAMS_MISSING',);
 		}
 		
 		//call action with args
