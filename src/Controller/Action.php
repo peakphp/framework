@@ -5,6 +5,7 @@ use Peak\Core;
 use Peak\Config;
 use Peak\Registry;
 use Peak\Zreflection;
+use Peak\Controller\Exception;
 
 /**
  * Peak abstract action controller
@@ -109,7 +110,7 @@ abstract class Action
      */
     public function getName()
     {
-        if ($pos = strrpos(get_class($this), '\\')) return substr(get_class($this), $pos + 1);
+        if ($pos = strrpos(get_class($this), '\\')) return strtolower(substr(get_class($this), $pos + 1));
         return strtolower($pos);
     }
     
@@ -200,7 +201,7 @@ abstract class Action
     { 
 
         if($this->isAction($this->action) === false) {
-            throw new Peak_Controller_Exception('ERR_CTRL_ACTION_NOT_FOUND', array($this->action, $this->getName()));
+            throw new Exception('ERR_CTRL_ACTION_NOT_FOUND', [$this->action, $this->getName()]);
         }
 
         //set action filename
@@ -224,10 +225,11 @@ abstract class Action
 	 */
 	private function dispatchActionParams($action_name)
 	{
+        echo get_class($this).'<br>';
         // return;
 		//get action params
 		$zf = new Zreflection();
-		$zf->loadClass("App\Controllers\\".$this->getName());
+		$zf->loadClass('App\Controllers\\'.$this->getName());
 		$params = $zf->class->getMethod($action_name)->getParameters();
 		
 		//fetch request params with action params
