@@ -65,7 +65,7 @@ abstract class Render
      */
     public function  __call($method, $args)
     {
-    	$view =& Peak_Registry::o()->view;
+    	$view =& Registry::o()->view;
     	return call_user_func_array(array($view, $method), $args);
     }
 
