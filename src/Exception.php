@@ -1,7 +1,7 @@
 <?php
 namespace Peak;
 
-use Exception;
+
 
 /**
  * Peak exception
@@ -9,7 +9,7 @@ use Exception;
  * @author   Francois Lajoie
  * @version  $Id$
  */
-class Exception extends Exception
+class Exception extends \Exception
 {
 
     /**
