@@ -225,7 +225,7 @@ abstract class Action
 	 */
 	private function dispatchActionParams($action_name)
 	{
-        echo get_class($this).'<br>';
+        //echo get_class($this).'<br>';
         // return;
 		//get action params
 		$zf = new Zreflection();
@@ -246,7 +246,7 @@ abstract class Action
 		
 		//if we got errors(param missing), we throw an exception
 		if(!empty($errors)) {
-			throw new Exception('ERR_CTRL_ACTION_PARAMS_MISSING',);
+			throw new Exception('ERR_CTRL_ACTION_PARAMS_MISSING', [$action_name, $this->getName()]);
 		}
 		
 		//call action with args
