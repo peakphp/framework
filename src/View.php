@@ -9,17 +9,17 @@ use Peak\View\Helpers;
  */
 class View
 {
-	/**
-	 * view vars
-	 * @var array
-	 */
-    protected $_vars = array();
+    /**
+     * view vars
+     * @var array
+     */
+    protected $_vars = [];
 
     /**
-     * view helpers object
-     * @var object
+     * view helpers objects
+     * @var array
      */
-    private $_helpers;
+    private $_helpers = [];
 
     /**
      * view header object
@@ -38,12 +38,12 @@ class View
      * @var object
      */
     private $_engine;
-	
-	/**
-	 * Determine if view will be rendered(view engine executed)
-	 * @var bool
-	 */
-	private $_render = true;
+    
+    /**
+     * Determine if view will be rendered(view engine executed)
+     * @var bool
+     */
+    private $_render = true;
 
 
     /**
@@ -79,7 +79,7 @@ class View
     public function &__get($name)
     {        
         if(isset($this->_vars[$name])) return $this->_vars[$name];
-    	else return ${null};
+        else return ${null};
     }
 
     /**
@@ -90,7 +90,7 @@ class View
      */
     public function __isset($name)
     {
-    	return array_key_exists($name,$this->_vars) ? true : false;
+        return array_key_exists($name,$this->_vars) ? true : false;
     }
 
     /**
@@ -100,7 +100,7 @@ class View
      */
     public function __unset($name)
     {
-    	if(array_key_exists($name,$this->_vars)) unset($this->_vars[$name]);
+        if(array_key_exists($name,$this->_vars)) unset($this->_vars[$name]);
     }
 
     /**
@@ -115,9 +115,11 @@ class View
     public function  __call($method, $args = null)
     {
         if(method_exists($this->engine(),$method)) {
-        	return call_user_func_array(array($this->engine(), $method), $args);        
+            return call_user_func_array(array($this->engine(), $method), $args);        
         }
-        elseif((isset($this->helper()->$method)) || ($this->helper()->exists($method))) {
+        else return $this->helper($method);
+        /*
+        elseif((isset($this->helper($method)) || ($this->helper()->exists($method))) {
             if(!empty($args)) {
                 $helper = $method;
                 $method = $args[0]; 
@@ -128,7 +130,7 @@ class View
         }
         elseif(defined('APPLICATION_ENV') && in_array(APPLICATION_ENV, array('development', 'testing'))) {
             trigger_error('View method/helper '.$method.'() doesn\'t exists');
-        }
+        }*/
     }
 
     /**
@@ -139,8 +141,8 @@ class View
      */
     public function set($name, $value = null)
     {
-    	$this->__set($name,$value);
-    	return $this;    	
+        $this->__set($name,$value);
+        return $this;       
     }
 
     /**
@@ -222,34 +224,34 @@ class View
         }
         else return null;
     }
-	
-	/**
-	 * Return render option
-	 *
-	 * @return bool
-	 */
-	public function canRender()
-	{
-		return $this->_render;
-	}
+    
+    /**
+     * Return render option
+     *
+     * @return bool
+     */
+    public function canRender()
+    {
+        return $this->_render;
+    }
 
-	/**
-	 * Disable rendering
-	 */
-	public function disableRender()
-	{
-		$this->_render = false;
-		return $this;
-	}
-	
-	/**
-	 * Enabled rendering
-	 */
-	public function enableRender()
-	{
-		$this->_render = true;
-		return $this;
-	}
+    /**
+     * Disable rendering
+     */
+    public function disableRender()
+    {
+        $this->_render = false;
+        return $this;
+    }
+    
+    /**
+     * Enabled rendering
+     */
+    public function enableRender()
+    {
+        $this->_render = true;
+        return $this;
+    }
 
     /**
      * Render Controller Action View file with the current rendering engine
@@ -260,8 +262,8 @@ class View
      */
     public function render($file,$path)
     {
-		//skip render part(see $_render)
-		if($this->_render === false) return;
+        //skip render part(see $_render)
+        if($this->_render === false) return;
 
 
         if(is_object($this->_engine)) {
@@ -309,22 +311,24 @@ class View
      */
     public function helper($name = null, $method = null, $params = array())
     {
-    	if(!is_object($this->_helpers)) $this->_helpers = new Helpers();
-    	
-    	if(isset($name)) {
-    	    if((isset($this->helper()->$name)) || $this->helper()->exists($name)) {      
-    	        if(!isset($method)) return $this->helper()->$name;
-    	        else {
-    	            if(!isset($params)) return $this->helper()->$name->$method();
-    	            else return call_user_func_array(array($this->helper()->$name, $method), $params);
-    	        }
-    	    }
-    	    elseif(defined('APPLICATION_ENV') && in_array(APPLICATION_ENV, array('development', 'testing'))) {
-    	            trigger_error('[ERR] View helper '.$name.'() doesn\'t exists');
-    	    }
-    	}
-    	
-    	return $this->_helpers;
+        if(array_key_exists($name, $this->_helpers)) {
+            return $this->_helpers[$name];
+        }
+        else {
+            $peak_helper = 'Peak\View\Helper\\'.$name;
+            $app_helper  = 'App\Views\Helpers\\'.$name;
+            if(class_exists($peak_helper)) {
+                $this->_helpers[$name] = new $peak_helper();
+                return $this->_helpers[$name];
+            }
+            elseif(class_exists($app_helper)) {
+                $this->_helpers[$name] = new $app_helper();
+                return $this->_helpers[$name];
+            }
+            else {
+                trigger_error('[ERR] View helper '.$name.' doesn\'t exists');
+            }
+        }
     }
 
     /**
@@ -346,13 +350,13 @@ class View
      */
     public function iniVar($file, $path = null)
     {
-    	if(!isset($path)) $filepath = Peak_Core::getPath('views_ini').'/'.$file;
-    	else $filepath = $path.'/'.$file;
+        if(!isset($path)) $filepath = Peak_Core::getPath('views_ini').'/'.$file;
+        else $filepath = $path.'/'.$file;
 
-    	if(file_exists($filepath)) {
-    	    $ini = new Peak_Config_Ini($filepath);
-    	    $merge_vars = $ini->arrayMergeRecursive($ini->getVars(), $this->_vars);
-    	    $this->_vars = $merge_vars;
-    	}
+        if(file_exists($filepath)) {
+            $ini = new Peak_Config_Ini($filepath);
+            $merge_vars = $ini->arrayMergeRecursive($ini->getVars(), $this->_vars);
+            $this->_vars = $merge_vars;
+        }
     }    
 }
