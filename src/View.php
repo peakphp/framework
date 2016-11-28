@@ -2,7 +2,10 @@
 namespace Peak;
 
 use Peak\Expcetion;
+use Peak\Core;
+use Peak\Config\Ini;
 use Peak\View\Helpers;
+use Peak\View\Header;
 
 /**
  * Template variables registry with objects httpheader, helpers, theme, rendering
@@ -26,12 +29,6 @@ class View
      * @var object
      */
     private $_header;
-
-    /**
-     * view theme object
-     * @var object
-     */
-    private $_theme;
 
     /**
      * view rendering object
@@ -286,22 +283,10 @@ class View
     public function header()
     {
         if(!is_object($this->_header)) {
-            $this->_header = new Peak_View_Header();
+            $this->_header = new Header();
         }
 
         return $this->_header;
-    }
-
-    /**
-     * Create/return view object
-     *
-     * @return object
-     */
-    public function theme($folder = null)
-    {
-        if(!($this->_theme instanceof Peak_View_Theme)) $this->_theme = new Peak_View_Theme($folder);
-        elseif(isset($folder)) $this->_theme->setFolder($folder); 
-        return $this->_theme;
     }
 
     /**
@@ -332,29 +317,20 @@ class View
     }
 
     /**
-     * Create/Retreive helpers container object
-     * 
-     * @return object
-     */
-    public function helperObject()
-    {
-        if(!is_object($this->_helpers)) $this->_helpers = new Peak_View_Helpers();
-        return $this->_helpers;
-    }
-
-    /**
      * Load ini file into view vars
+     *
+     * @deprecated
      *
      * @param string $file
      * @param string $path leave empty if ini file is under yourapp/views/ini
      */
     public function iniVar($file, $path = null)
     {
-        if(!isset($path)) $filepath = Peak_Core::getPath('views_ini').'/'.$file;
+        if(!isset($path)) $filepath = Core::getPath('views_ini').'/'.$file;
         else $filepath = $path.'/'.$file;
 
         if(file_exists($filepath)) {
-            $ini = new Peak_Config_Ini($filepath);
+            $ini = new Ini($filepath);
             $merge_vars = $ini->arrayMergeRecursive($ini->getVars(), $this->_vars);
             $this->_vars = $merge_vars;
         }
