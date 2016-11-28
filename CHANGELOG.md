@@ -1,13 +1,19 @@
 VERSION 1.0.0
 -------------
 Release Date: ?
+
+Warning! Breaking change in 1.0 :
+If you want want to support an old application, please use 0.9.9.
+Otherwise, you will need to use composer and upgrade your app in order to use
+namespaces witch can be painfull for large apps.
+-------------
  
  - multiples fix due to namespace migration
  - removed zend db vendor (we use laravel database now)
  - added view helper class to inject view object into view helper
  - removed unused spl autoload functions
  - deleted deprecated class Xml and Dispatcher
- - namespace migration
+ - namespace migration ()
  - added the good http header for Json Render Engine
  - fixed a bug in Peak_Controller_Action when disabling prop $actions_with_params
  - fixed debugbar notice in db section
