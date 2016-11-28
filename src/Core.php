@@ -92,7 +92,7 @@ class Core
 	   	switch($filetype) {
 
     		case 'php' :
-    			$conf = new \Config($filepath);
+    			$conf = new Config($filepath);
     			break;
 			
 			case 'ini' :
