@@ -1,6 +1,8 @@
 <?php
 namespace Peak;
 
+use Peak\Exception;
+
 /**
  * Peak Core
  */
@@ -90,7 +92,7 @@ class Core
 	   	switch($filetype) {
 
     		case 'php' :
-    			$conf = new Peak_Config($filepath);
+    			$conf = new \Config($filepath);
     			break;
 			
 			case 'ini' :
@@ -103,7 +105,7 @@ class Core
 				break;
 
             case 'json' :
-                $conf = new Peak_Config_Json($filepath, true);
+                $conf = new Config\Json($filepath, true);
                 break;
 
 			case 'genericapp' :
@@ -113,7 +115,7 @@ class Core
 				} //we don't break here if we are not in dev mode				
 			
 			default :
-				throw new Peak_Exception('ERR_CONFIG_FILE');
+				throw new Exception('ERR_CONFIG_FILE');
 				break;
     	}
     	
@@ -121,11 +123,11 @@ class Core
 		//check if we got the configuration for current environment mode or at least section 'all'
 		if((!isset($conf->$env)) && (!isset($conf->all))) {
 			if($env !== 'development') {
-				throw new Peak_Exception('ERR_CUSTOM', 'no general configurations and/or '.$env.' configurations');
+				throw new Exception('ERR_CUSTOM', 'no general configurations and/or '.$env.' configurations');
 			}
 			//here we will use Peak/Application/genericapp.ini as temporary config for the lazy user when in DEVELOPMENT ENV
 			//This allow to boot an app with an empty config file
-			else $conf = new Peak_Config_Ini($generic_filepath, true);			
+			else $conf = new Config\Ini($generic_filepath, true);			
     	}
     	
     	//add APPLICATION_ABSPATH to path config array if exists
@@ -258,10 +260,10 @@ class Core
             //define libray path
             define('LIBRARY_ABSPATH', __DIR__);
 
-            
+        
             //add LIBRARY_ABSPATH to include path
             set_include_path(implode(PATH_SEPARATOR, array(LIBRARY_ABSPATH,
-														   LIBRARY_ABSPATH.'/Peak/Vendors',
+														   LIBRARY_ABSPATH.'/Vendors',
 														   get_include_path())));
         }
   
@@ -273,9 +275,9 @@ class Core
         if($level >= 3) {
 
             if(!defined('PUBLIC_ROOT'))
-				throw new Peak_Exception('ERR_CORE_INIT_CONST_MISSING', array('Public root','PUBLIC_ROOT'));
+				throw new Exception('ERR_CORE_INIT_CONST_MISSING', array('Public root','PUBLIC_ROOT'));
 			if(!defined('APPLICATION_ROOT'))
-			    throw new Peak_Exception('ERR_CORE_INIT_CONST_MISSING', array('Application root','APPLICATION_ROOT'));
+			    throw new Exception('ERR_CORE_INIT_CONST_MISSING', array('Application root','APPLICATION_ROOT'));
 				
             define('PUBLIC_ABSPATH', SVR_ABSPATH . PUBLIC_ROOT);
             define('APPLICATION_ABSPATH', realpath(SVR_ABSPATH . APPLICATION_ROOT));
@@ -293,7 +295,7 @@ class Core
             //init app&core configurations
             if(!defined('APPLICATION_CONFIG')) {
 				if(self::getEnv() !== 'development') {
-					throw new Peak_Exception('ERR_CORE_INIT_CONST_MISSING', array('Configuration filename','APPLICATION_CONFIG'));
+					throw new Exception('ERR_CORE_INIT_CONST_MISSING', array('Configuration filename','APPLICATION_CONFIG'));
 				}
 				else {
 					define('APPLICATION_CONFIG', 'genericapp.ini');
