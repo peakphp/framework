@@ -131,7 +131,7 @@ class Front
             if(($this->allow_internal_controllers === true) && (class_exists($internal_ctrl_name))) {
                 $this->controller = new $internal_ctrl_name();
             }
-            else throw new Exception('ERR_CTRL_NOT_FOUND');
+            else throw new Exception('ERR_CTRL_NOT_FOUND', $this->router->controller);
         }
         else $this->controller = new $ctrl_name();
 
