@@ -1,6 +1,7 @@
 <?php
 namespace Peak\View\Render;
 
+use Peak\Registry;
 use Peak\View\Render;
 
 /**
@@ -24,7 +25,7 @@ class Json extends Render
         $this->scripts_file = $file;
         $this->scripts_path = $path;
 
-        $viewvars = Peak_Registry::o()->view->getVars();
+        $viewvars = Registry::o()->view->getVars();
 
         header('Content-Type: application/json');
         
