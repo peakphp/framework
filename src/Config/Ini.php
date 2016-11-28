@@ -2,9 +2,10 @@
 namespace Peak\Config;
 
 use Peak\Config;
+use Peak\Exception;
 
 /**
- * Peak_Config_Ini
+ * Ini
  * 
  * This class allows you to:
  * - define multi-dimensional structures
@@ -35,7 +36,7 @@ class Ini extends Config
 	 */
 	public function loadFile($file, $process_sections = false, $section_name = null)
 	{
-		if(!file_exists($file)) throw new Peak_Exception('ERR_CUSTOM', __CLASS__.' has tried to load non-existent ini file');
+		if(!file_exists($file)) throw new Exception('ERR_CUSTOM', __CLASS__.' has tried to load non-existent ini file');
 		else {
 			$ini = @parse_ini_file($file, $process_sections);
 			
@@ -45,7 +46,7 @@ class Ini extends Config
 			if((version_compare(PHP_VERSION, '5.2.7') >= 0) && ($ini == false)) {
 				//check if the file just empty
 				if(trim(file_get_contents($file)) !== '') {
-					throw new Peak_Exception('ERR_CUSTOM', __CLASS__.': syntax error(s) in your configuration file');
+					throw new Exception('ERR_CUSTOM', __CLASS__.': syntax error(s) in your configuration file');
 				}
 			}
 			
@@ -78,7 +79,7 @@ class Ini extends Config
 	 *                                   names and settings included. The default for
 	 *                                   process_sections is FALSE
 	 * @param  string $section_name      Specific section name to extract upon processing
-	 * @throws Peak_Exception
+	 * @throws Exception
 	 * @return array|boolean
 	 */
 	public function _load($ini, $process_sections = false, $section_name = null)
@@ -106,7 +107,7 @@ class Ini extends Config
 				// return the specified section contents if it exists
 				if (isset($this->_vars[$section_name])) $this->_vars = $this->_vars[$section_name];
 				else {
-					throw new Peak_Exception('ERR_CUSTOM', __CLASS__.': Section ' . $section_name . ' not found in the ini file');
+					throw new Exception('ERR_CUSTOM', __CLASS__.': Section ' . $section_name . ' not found in the ini file');
 				}
 			}
 		}
@@ -121,7 +122,7 @@ class Ini extends Config
 	 *
 	 * @param  string $section Section name
 	 * @param  array $contents Section contents
-	 * @throws Peak_Exception
+	 * @throws Exception
 	 */
 	private function _processSection($section, array $contents)
 	{
@@ -138,7 +139,7 @@ class Ini extends Config
 
 			// check if the extended section exists
 			if (!isset($this->_vars[$ext_source])) {
-				throw new Peak_Exception('ERR_CUSTOM', __CLASS__.': Unable to extend section ' . $ext_source . ', section not found');
+				throw new Exception('ERR_CUSTOM', __CLASS__.': Unable to extend section ' . $ext_source . ', section not found');
 			}
 
 			// process section contents
