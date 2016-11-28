@@ -333,7 +333,7 @@ abstract class Action
      */
     public function redirect($ctrl, $action = 'index', $params = null)
     {
-        Peak_Registry::o()->app->front->redirect($ctrl, $action, $params);
+        Registry::o()->app->front->redirect($ctrl, $action, $params);
     }
     
     /**
