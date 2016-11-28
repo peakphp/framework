@@ -1,6 +1,7 @@
 <?php
 namespace Peak;
 
+use Peak\Expcetion;
 use Peak\View\Helpers;
 
 /**
@@ -201,7 +202,7 @@ class View
             $engine_name = strip_tags(ucfirst($engine_name));
             $engine_class = 'Peak\View\Render\\'.$engine_name;
             if(!class_exists($engine_class)) {
-                throw new View\Exception('ERR_VIEW_ENGINE_NOT_FOUND', $engine_name);
+                throw new Exception('ERR_VIEW_ENGINE_NOT_FOUND', $engine_name);
             }
             $this->_engine = new $engine_class();
         }
@@ -272,7 +273,7 @@ class View
 
             $this->engine()->render($file,$path);
         }
-        else throw new \Exception('ERR_VIEW_ENGINE_NOT_SET');
+        else throw new Exception('ERR_VIEW_ENGINE_NOT_SET');
     }
 
     /**
