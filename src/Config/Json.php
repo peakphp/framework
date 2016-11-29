@@ -2,6 +2,7 @@
 namespace Peak\Config;
 
 use Peak\Config;
+use Peak\Exception;
 
 /**
  * Peak_Config_Json
@@ -42,7 +43,7 @@ class Json extends Config
 	 */
 	public function loadFile($file)
 	{
-		if(!file_exists($file)) throw new Peak_Exception('ERR_CUSTOM', __CLASS__.' has tried to load non-existent json file');
+		if(!file_exists($file)) throw new Exception('ERR_CUSTOM', __CLASS__.' has tried to load non-existent json file');
 		else {
 			$this->_loaded_file = $file;
 			$content = file_get_contents($file);
@@ -78,7 +79,7 @@ class Json extends Config
 	public function loadUrl($url, $post_data = null)
 	{
 		if(!function_exists('curl_init')) {
-			throw new Peak_Exception('ERR_CUSTOM', __CLASS__.'::loadUrl() need CURL php extension');
+			throw new Exception('ERR_CUSTOM', __CLASS__.'::loadUrl() need CURL php extension');
 		}
 
 		$ch = curl_init();
@@ -133,7 +134,7 @@ class Json extends Config
 					break;
 			}
 			
-			if(isset($e)) throw new Peak_Exception('ERR_CUSTOM', __CLASS__.': '.$e);
+			if(isset($e)) throw new Exception('ERR_CUSTOM', __CLASS__.': '.$e);
 		}
 	}
 
@@ -162,7 +163,7 @@ class Json extends Config
 				$filepath = $this->_loaded_file;
 			}
 			else {
-				throw new Peak_Exception('ERR_CUSTOM', __CLASS__.': No file specified for export');
+				throw new Exception('ERR_CUSTOM', __CLASS__.': No file specified for export');
 			}
 		}
 
@@ -170,7 +171,7 @@ class Json extends Config
 
 		$result = file_put_contents($filepath, json_encode($data));
 		if($result === false) {
-			throw new Peak_Exception('ERR_CUSTOM', __CLASS__.': Fail to write file: '.$filepath);
+			throw new Exception('ERR_CUSTOM', __CLASS__.': Fail to write file: '.$filepath);
 		}
 
 	}

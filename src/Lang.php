@@ -1,6 +1,9 @@
 <?php
 namespace Peak;
 
+use Peak\Registry;
+use Peak\Expcetion;
+
 /**
  * Simple lang translator based on php array
  */
@@ -163,8 +166,8 @@ class Lang
  */
 function __($text, $replaces = null, $func = null)
 {
-    if(Peak_Registry::o()->lang instanceof Peak_Lang)   {       
-        return Peak_Registry::o()->lang->translate((string)$text, $replaces, $func);
+    if(Registry::o()->lang instanceof Lang)   {       
+        return Registry::o()->lang->translate((string)$text, $replaces, $func);
     }
     else return $text;
 }

@@ -1,6 +1,7 @@
 <?php
 namespace Peak\Filters;
 
+use Peak\Exception;
 use Peak\Filters;
 
 /**
@@ -129,7 +130,7 @@ abstract class Advanced extends Filters
 					}
 				}
 				else {
-					throw new Peak_Exception('ERR_CUSTOM', get_class($this).': unknow filter name '.$filter_name);
+					throw new Exception('ERR_CUSTOM', get_class($this).': unknow filter name '.$filter_name);
 				}
 				
 				unset($filter_result, $filter_param, $filter_method, $filter_name);
