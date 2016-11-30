@@ -4,7 +4,6 @@ namespace Peak\Controller;
 use Peak\Core;
 use Peak\Config;
 use Peak\Registry;
-use Peak\Zreflection;
 use Peak\Exception;
 
 /**
@@ -29,8 +28,8 @@ abstract class Action
      * @var string
      */
     public $action;
-	
-	/**
+    
+    /**
      * instance of view
      * @var object
      */
@@ -59,12 +58,12 @@ abstract class Action
      * @var array
      */
     protected $params_assoc;
-	
-	/**
-	 * dispatch action with argument
-	 * @var bool
-	 */
-	protected $actions_with_params = true;
+    
+    /**
+     * dispatch action with argument
+     * @var bool
+     */
+    protected $actions_with_params = true;
 
 
     public function __construct()
@@ -84,8 +83,8 @@ abstract class Action
      */
     public function __call($helper, $args = null)
     {
-    	if((isset($this->helper()->$helper)) || ($this->helper()->exists($helper))) {
-        	return $this->helper()->$helper;
+        if((isset($this->helper()->$helper)) || ($this->helper()->exists($helper))) {
+            return $this->helper()->$helper;
         }
         elseif(defined('APPLICATION_ENV') && in_array(APPLICATION_ENV, array('development', 'testing'))) {
             trigger_error('Controller method/helper '.$helper.'() doesn\'t exists');
@@ -157,8 +156,8 @@ abstract class Action
      */
     public function getActions()
     {
-    	$actions = array();
-    	
+        $actions = array();
+        
         $c_methods = get_class_methods($this);
 
         $regexp = '/^(['.$this->action_prefix.']{'.strlen($this->action_prefix).'}[a-zA-Z]{1})/';
@@ -209,49 +208,46 @@ abstract class Action
         else $this->file = str_replace($this->action_prefix, '',$this->action).'.php';
 
         //call requested action
-		if($this->actions_with_params) {
-			$this->dispatchActionParams($this->action);
-		}
-		else{
+        if($this->actions_with_params) {
+            $this->dispatchActionParams($this->action);
+        }
+        else{
             $method = $this->action;
             $this->$method(); 
         } 
     }
-	
-	/**
-	 * Check action methods agrs needed and call it properly
-	 *
-	 * @param string $action_name
-	 */
-	private function dispatchActionParams($action_name)
-	{
-        //echo get_class($this).'<br>';
-        // return;
-		//get action params
-		$zf = new Zreflection();
-		$zf->loadClass('App\Controllers\\'.$this->getName());
-		$params = $zf->class->getMethod($action_name)->getParameters();
-		
-		//fetch request params with action params
-		$args = array();
-		$errors = array();
-		if(!empty($params)) {
-			foreach($params as $p) {
-				$pname = $p->name;
-				if(isset($this->params()->$pname)) $args[] = $this->params()->$pname;
-				elseif($p->isOptional()) $args[] = $p->getDefaultValue();
-				else $errors[] = '$'.$pname;
-			}
-		}
-		
-		//if we got errors(param missing), we throw an exception
-		if(!empty($errors)) {
-			throw new Exception('ERR_CTRL_ACTION_PARAMS_MISSING', [$action_name, $this->getName()]);
-		}
-		
-		//call action with args
-		return call_user_func_array(array($this, $action_name), $args);
-	}
+    
+    /**
+     * Check action methods agrs needed and call it properly
+     *
+     * @param string $action_name
+     */
+    private function dispatchActionParams($action_name)
+    {
+        $r = new \ReflectionMethod($this, $action_name);
+        $params = $r->getParameters();
+ 
+        //fetch request params with action params
+        $args = array();
+        $errors = array();
+        if(!empty($params)) {
+            foreach($params as $p) {
+                print_r($p);
+                $pname = $p->getName();
+                if(isset($this->params()->$pname)) $args[] = $this->params()->$pname;
+                elseif($p->isOptional()) $args[] = $p->getDefaultValue();
+                else $errors[] = '$'.$pname;
+            }
+        }
+
+        //if we got errors(param missing), we throw an exception
+        if(!empty($errors)) {
+            throw new Exception('ERR_CTRL_ACTION_PARAMS_MISSING', [$action_name, $this->getName()]);
+        }
+        
+        //call action with args
+        return call_user_func_array(array($this, $action_name), $args);
+    }
 
     /**
      * Check if action method name exists
@@ -261,7 +257,7 @@ abstract class Action
      */
     public function isAction($name)
     {
-    	return (method_exists($this, $name)) ? true : false;
+        return (method_exists($this, $name)) ? true : false;
     }
 
     /**
@@ -272,7 +268,7 @@ abstract class Action
     public function helper()
     {
         if(!is_object($this->helpers)) $this->helpers = new Peak_Controller_Helpers();
-    	return $this->helpers;
+        return $this->helpers;
     }
     
 
@@ -295,12 +291,12 @@ abstract class Action
         $model = str_replace('/','_',$model_path);
         $class = 'App_Models_'.$model;
         if(isset($class_varname)) {
-			$this->$class_varname = (!is_null($params)) ? new $class($params): new $class();
+            $this->$class_varname = (!is_null($params)) ? new $class($params): new $class();
             return $this;
         }
         else {
-			return (!is_null($params)) ? new $class($params): new $class();
-		}
+            return (!is_null($params)) ? new $class($params): new $class();
+        }
     }
 
     /**
@@ -347,19 +343,19 @@ abstract class Action
     {
         $this->redirect($this->getTitle(), $action, $params);
     }
-	
-	/**
-	 * Use View helper "redirect" to make a HTTP header redirection
-	 *
-	 * @param string  $url
-	 * @param bool    $base_url
-	 * @param integer $http_code
-	 */
-	public function redirectUrl($url, $http_code = 302, $base_url = true)
-	{
-		if($base_url) $url = $this->view->baseUrl($url,true);
-		$this->view->header()->redirect($url, $http_code);
-	}
+    
+    /**
+     * Use View helper "redirect" to make a HTTP header redirection
+     *
+     * @param string  $url
+     * @param bool    $base_url
+     * @param integer $http_code
+     */
+    public function redirectUrl($url, $http_code = 302, $base_url = true)
+    {
+        if($base_url) $url = $this->view->baseUrl($url,true);
+        $this->view->header()->redirect($url, $http_code);
+    }
 
     /**
      * Action before controller requested action
