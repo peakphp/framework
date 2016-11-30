@@ -181,7 +181,7 @@ class Front
 		
 		$this->_dispatchController();
 
-        if(($this->controller instanceof Peak\Controller\Action) && (isset($exception))) {
+        if(isset($exception)) {
             $this->controller->exception = $exception;
         }
         
