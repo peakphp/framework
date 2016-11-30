@@ -1,6 +1,7 @@
 <?php
 namespace Peak\View\Helper;
 
+use Peak\Core;
 use Peak\Registry;
 use Peak\View\Helper\Debug;
 
@@ -76,7 +77,7 @@ class Debugbar extends Debug
         echo '<div id="pkdebugbar" class="'.$theme.'">
               <div class="pkdbpanel">
                <ul>
-                <li><a class="thebar">&nbsp;&nbsp;&nbsp;Peak v'.PK_VERSION.'/PHP '.phpversion().'</a></li>
+                <li><a class="thebar">&nbsp;&nbsp;&nbsp;Peak v'.Core::VERSION.'/PHP '.phpversion().'</a></li>
                 <li><a class="clock pkdb_tab" id="pkdb_chrono" onclick="pkdebugShow(\'pkdb_chrono\');">'.$chrono.' ms</a></li>';
         if($zdb_profiler !== false) {
             $nb_query = $zdb_profiler->getTotalNumQueries();
