@@ -5,16 +5,17 @@ Release Date: ?
 Warning! Breaking change in 2.0.0 :
 If you want want to support an old application, please use version 1.*
 Otherwise, you will need to use composer and upgrade your app in order to use
-namespaces witch can be painfull for large apps.
-
+namespaces which can be painfull for large apps.
  
  - namespace migration
  - multiples fix due to namespace migration
  - removed zend db vendor (we use laravel database now)
  - added view helper class to inject view object into view helper
  - removed unused spl autoload functions
- - deleted deprecated class Xml and Dispatcher
- - deleted deprecated class Codegen
+ - removed deprecated class Xml and Dispatcher
+ - removed deprecated class Codegen
+ - removed deprecated zreflection class
+ - removed zend reflection vendor
 
 
 VERSION 1.0.0
