@@ -17,7 +17,7 @@ namespaces witch can be painfull for large apps.
  - deleted deprecated class Codegen
 
 
- VERSION 1.0.0
+VERSION 1.0.0
 -------------
 Release Date: 2016-11-19
 
