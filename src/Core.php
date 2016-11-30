@@ -1,23 +1,22 @@
 <?php
 namespace Peak;
 
+use Peak\Config;
 use Peak\Exception;
 
 /**
  * Peak Core
  */
 
-define('PK_VERSION', '0.9.9');
-define('PK_NAME'   , 'PEAK');
-define('PK_DESCR'  , 'Php wEb Application Kernel');
-
-//handle all uncaught exceptions (try/catch block missing)
-
-//php >= 5.3
-//if(function_exists('class_alias')) class_alias('Peak_Core', 'Peak', false);
-
 class Core
 {
+
+    /**
+     * Constants
+     */
+    const VERSION  = '2.0.0';
+    const NAME     = 'PEAK';
+    const DESCR    = 'PHP Elegant Application Kernel';
 
     /**
      * Current Environment
