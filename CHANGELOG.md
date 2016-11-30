@@ -6,7 +6,7 @@ Warning! Breaking change in 2.0.0 :
 If you want want to support an old application, please use version 1.*
 Otherwise, you will need to use composer and upgrade your app in order to use
 namespaces witch can be painfull for large apps.
--------------
+
  
  - namespace migration
  - multiples fix due to namespace migration
