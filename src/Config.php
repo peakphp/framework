@@ -89,7 +89,7 @@ class Config implements IteratorAggregate, Countable
      */
     public function getIterator()
     {
-        return new ArrayIterator($this->_vars);
+        return new \ArrayIterator($this->_vars);
     }
 
     /**
