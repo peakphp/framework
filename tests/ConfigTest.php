@@ -88,7 +88,7 @@ class ConfigTest extends TestCase
 	function testLoadFile()
 	{
 		$cf = new Peak\Config();		
-		$cf->loadFile(dirname(__FILE__).'/ConfigTest/appconf_example.php');
+		$cf->loadFile(__DIR__.'/fixtures/config/appconf_example.php');
 		
 		$this->assertTrue(is_array($cf->getVars()));
 		
@@ -113,7 +113,7 @@ class ConfigTest extends TestCase
 	 */
 	function testCreateInstanceWithArrayFile()
 	{
-		$vars = include dirname(__FILE__).'/ConfigTest/appconf_example.php';
+		$vars = include __DIR__.'/fixtures/config/appconf_example.php';
 		$cf = new Peak\Config($vars);		
 		
 		$this->assertTrue(is_array($cf->getVars()));
