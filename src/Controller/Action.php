@@ -232,7 +232,6 @@ abstract class Action
         $errors = array();
         if(!empty($params)) {
             foreach($params as $p) {
-                print_r($p);
                 $pname = $p->getName();
                 if(isset($this->params()->$pname)) $args[] = $this->params()->$pname;
                 elseif($p->isOptional()) $args[] = $p->getDefaultValue();
