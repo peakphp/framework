@@ -2,6 +2,7 @@
 namespace Peak\Application;
 
 use Peak\Registry;
+use Peak\Application;
 use Peak\Application\Config;
 use Peak\Exception;
 
@@ -24,7 +25,7 @@ class ConfigEnv
 
     private function _processEnv()
     {
-        $env      = $this->app_config->env;
+        $env = $this->app_config->env;
 
         //echo $this->app_config->conf;
         //$filepath = $this->app_config->filepath;
