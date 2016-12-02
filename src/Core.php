@@ -181,25 +181,25 @@ class Core
      *
      * @param string $app_path Current application absolute path
      */
-    public static function getDefaultAppPaths($app_path)
-    {  	
-    	return array('application'         => $app_path,
-    	             'cache'               => $app_path.'/cache',
-    	             'controllers'         => $app_path.'/controllers',
-    	             'controllers_helpers' => $app_path.'/controllers/helpers',
-    	             'models'              => $app_path.'/models',
-    	             'modules'             => $app_path.'/modules',
-    	             'lang'                => $app_path.'/lang',
-    	             'views'               => $app_path.'/views',
-    	             'views_ini'           => $app_path.'/views/ini',
-    	             'views_helpers'       => $app_path.'/views/helpers',
-    	             'views_themes'        => $app_path.'/views',
-    	             'theme'               => $app_path.'/views',
-    	             'theme_scripts'       => $app_path.'/views/scripts',
-    	             'theme_partials'      => $app_path.'/views/partials',
-                     'theme_layouts'       => $app_path.'/views/layouts',
-                     'theme_cache'         => $app_path.'/views/cache');
-    }
+    // public static function getDefaultAppPaths($app_path)
+    // {  	
+    // 	return array('application'         => $app_path,
+    // 	             'cache'               => $app_path.'/cache',
+    // 	             'controllers'         => $app_path.'/controllers',
+    // 	             'controllers_helpers' => $app_path.'/controllers/helpers',
+    // 	             'models'              => $app_path.'/models',
+    // 	             'modules'             => $app_path.'/modules',
+    // 	             'lang'                => $app_path.'/lang',
+    // 	             'views'               => $app_path.'/views',
+    // 	             'views_ini'           => $app_path.'/views/ini',
+    // 	             'views_helpers'       => $app_path.'/views/helpers',
+    // 	             'views_themes'        => $app_path.'/views',
+    // 	             'theme'               => $app_path.'/views',
+    // 	             'theme_scripts'       => $app_path.'/views/scripts',
+    // 	             'theme_partials'      => $app_path.'/views/partials',
+    //                  'theme_layouts'       => $app_path.'/views/layouts',
+    //                  'theme_cache'         => $app_path.'/views/cache');
+    // }
 
     /**
      * Get environment in .htaccess or from constant APPLICATION_DEV and store it to $_env
@@ -232,7 +232,7 @@ class Core
      */
     public static function getPath($path = 'application') 
     {
-    	$c = Registry::o()->app->config;
+    	$c = Registry::o()->app->config();
     	
     	if(isset($c->path[$path])) return $c->path[$path];
     	else return null;
