@@ -23,13 +23,10 @@ class Application
     public $front;
     
     /**
-     * Module app controller
-     * @var object|null
+     * application config
+     * @var object
      */
-    public $module = null;
-
-
-    public $config = null;
+    protected $_config = null;
 
 	/**
 	 * Start framework
@@ -37,40 +34,59 @@ class Application
     private function __construct(Config $conf)
     {   
         // application config             
-        $this->config = $conf;
-
-        //print_r($this->config);
-
+        $this->_config = $conf;
 
         // register application/view/router instance
         Registry::set('app', $this);
         Registry::set('view', new View());
-        Registry::set('router', $router = new Router($this->config->path['public']));
-
+        Registry::set('router', $router = new Router($this->config('path.public')));
 		
-        // load app bootstrap
-		$this->loadBootstrap();
-        
-        // load front controller
-		$this->loadFront();
+		$this->_loadBootstrap();
+		$this->_loadFront();
     }
 
-    static function create($config) 
+    /**
+     * Create a instance of application
+     * 
+     * @param  array $config
+     * @return object
+     */
+    static function create(Array $config) 
     {
         return new self(new Config($config));
     }
+
+    /**
+     * Access to application config object
+     * 
+     * @param  string|null $path 
+     * @param  mixed|null  $value
+     * @return mixed
+     */
+    public function config($path = null, $value = null)
+    {
+        if(!isset($path)) {
+            return $this->_config;
+        }
+        elseif(!isset($value)) {
+            return $this->_config->get($path);
+        }
+        else {
+            $this->_config->set($path, $value);
+            return $this;
+        }
+    }
+
 	/**
 	 * Load and store application Bootstrapper
 	 *
 	 * @param string $prefix Bootstrap class prefix name if exists
 	 */
-	public function loadBootstrap($prefix = 'App\\')
+	private function _loadBootstrap()
 	{
-		$cname = $prefix.'Bootstrap';
+		$cname = $this->config('ns').'\Bootstrap';
 		if(class_exists($cname)) $this->bootstrap = new $cname();
 		else $this->bootstrap = new Bootstrap();
-
-        //print_r($this->bootstrap); die('YE');
 	}
 
 	/**
@@ -78,9 +94,9 @@ class Application
 	 *
 	 * @param string $prefix Front class prefix name if exists
 	 */
-	public function loadFront($prefix = 'App\\')
+	private function _loadFront()
 	{
-		$cname = $prefix.'Front';
+		$cname = $this->config('ns').'\Front';
 		$this->front = (class_exists($cname)) ? new $cname() : new Controller\Front();
 	}
 

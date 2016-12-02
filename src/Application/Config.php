@@ -2,18 +2,17 @@
 namespace Peak\Application;
 
 use Peak\Exception;
-use Peak\Core;
-use Peak\Config as BaseConfig;
+use Peak\Config\DotNotation;
 use Peak\Application\ConfigEnv;
 
 /**
  */
-class Config extends BaseConfig
+class Config extends DotNotation
 {
 
     private $_default = [
+        'ns'   => 'App', //namespace
         'env'  => 'prod',
-        'ns'   => 'App\\',
         'conf' => '',
         'path' => [
             'public' => '',
@@ -22,8 +21,33 @@ class Config extends BaseConfig
         ],
     ];
 
+
+    /**
+     * Construct
+     * 
+     * @param array $config user config
+     */
+    public function __construct($config = null) 
+    {
+        $this->setVars($this->_default);
+
+        if(isset($config)) {
+            $this->merge($config);
+        }
+
+        $this->_validate();
+        $this->_defineConstants();
+
+        $confEnv = new ConfigEnv($this);
+ 
+        $this->merge($confEnv->getEnvConfig());
+    }
+
     /**
      * Generate default application tree
+     *
+     * @param   string $root
+     * @return  array
      */
     public function defaultAppTree($root)
     {
@@ -48,62 +72,28 @@ class Config extends BaseConfig
     }
 
     /**
-     * Construct
-     * 
-     * @param array $config user config
+     * Validate require config values
      */
-    public function __construct($config = null) 
+    private function _validate() 
     {
-        if(isset($config)) {
-            $this->setVars(
-                $this->_validate($config)
-            );
-        }
-
-        $this->_defineConstants();
-
-        $confEnv = new ConfigEnv($this);
-
-        
-        $this->merge($confEnv->getEnvConfig());
-        //print_r($this->_vars);
-        
-
-    }
-
-    /**
-     * Validate current config
-     * 
-     * @param  [type] $config [description]
-     * @return [type]         [description]
-     */
-    private function _validate($config) 
-    {
-        $config = BaseConfig::arrayMergeRecursive($this->_default, $config);
-        
-
-        if(!isset($config['path']['public'])) {
+        if(!$this->have('path.public')) {
             throw new Exception('ERR_CORE_INIT_CONST_MISSING', array('Public root','PUBLIC_ROOT'));
         }
 
-        if(!isset($config['path']['app']))
+        if(!$this->have('path.app'))
             throw new Exception('ERR_CORE_INIT_CONST_MISSING', array('Application root','APPLICATION_ROOT'));
 
-        if(!isset($config['env'])) {
+        if(!$this->have('env')) {
             throw new Exception('ERR_APP_ENV_MISSING');
         }
 
-        if(!isset($config['conf'])) {
+        if(!$this->have('conf')) {
             throw new Exception('ERR_APP_CONF_MISSING');
         }
-        
-        //Core::initConfig($config['conf'], $config['path']['app']);
-        return $config;
     }
 
     /**
-     * [_defineConstants description]
-     * @return [type] [description]
+     * Define important constants
      */
     private function _defineConstants()
     {
@@ -111,9 +101,10 @@ class Config extends BaseConfig
         $svr_path = str_replace('\\','/',realpath($_SERVER['DOCUMENT_ROOT']));
         if(substr($svr_path, -1, 1) !== '/') $svr_path .= '/';
 
-        define('SVR_ABSPATH', $svr_path); 
-        define('LIBRARY_ABSPATH', realpath(__DIR__.'/../'));
-        define('PUBLIC_ABSPATH', realpath(SVR_ABSPATH . $this->path['public']));
-        define('APPLICATION_ABSPATH', realpath(SVR_ABSPATH . $this->path['app']));
+        define('SVR_ABSPATH',         $svr_path); 
+        define('LIBRARY_ABSPATH',     realpath(__DIR__.'/../'));
+        define('PUBLIC_ABSPATH',      realpath(SVR_ABSPATH . $this->get('path.public')));
+        define('APPLICATION_ABSPATH', realpath(SVR_ABSPATH . $this->get('path.app')));
+        define('APPLICATION_ENV',     $this->get('env'));
     }
 }
