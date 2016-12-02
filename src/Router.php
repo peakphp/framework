@@ -26,7 +26,7 @@ class Router
      * Original unparsed request array
      * @var array
      */
-    public $request;
+    public $request = [];
 
     /**
      * Controller name
@@ -44,19 +44,19 @@ class Router
      * action param(s) array
      * @var array
      */
-    public $params = array();
+    public $params = [];
 
     /**
      * Actions param(s) associative array
      * @var array
      */
-    public $params_assoc = array();
+    public $params_assoc = [];
 
     /**
      * Regex route
      * @var array
      */
-    protected $_regex = array();
+    protected $_regex = [];
 
 
     /**
@@ -142,6 +142,10 @@ class Router
      */
     protected function resolveRequest()
     {
+        if(is_string($this->request)) {
+            $this->request = explode('/', $this->request);
+        }
+
         // extract data from request
         if (!empty($this->request)) 
         {           
