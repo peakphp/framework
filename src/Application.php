@@ -77,6 +77,23 @@ class Application
         }
     }
 
+    /**
+     * Static version of config() use current Application instance in Registry
+     */
+    static function conf($path = null, $value = null)
+    {
+        if(!isset($path)) {
+            return Registry::o()->app->config();
+        }
+        elseif(!isset($value)) {
+            return Registry::o()->app->config($path);
+        }
+        else {
+            Registry::o()->app->config($path, $value);
+            return $this;
+        }
+    }
+
 	/**
 	 * Load and store application Bootstrapper
 	 *
