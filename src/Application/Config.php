@@ -15,9 +15,9 @@ class Config extends DotNotation
      * @var array
      */
     private $_default = [
-        'ns'   => 'App', //namespace
-        'env'  => 'prod',
-        'conf' => '',
+        'ns'   => 'App',  //namespace
+        'env'  => 'prod', 
+        'conf' => 'config.php',
         'path' => [
             'public' => '',
             'app'    => '',
