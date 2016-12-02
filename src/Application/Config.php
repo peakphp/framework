@@ -39,11 +39,11 @@ class Config extends DotNotation
             $this->merge($config); // merge default with user conf
         }
 
-        $this->_validate();
-        $this->_defineConstants();
+        $this->_validate(); // validate user conf
+        $this->_defineConstants(); // define default app constants
 
-        $conf_env = new ConfigEnv($this); // check app conf file and merge also
- 
+        // load and merge app config env with current user app conf
+        $conf_env = new ConfigEnv($this);
         $this->merge($conf_env->getEnvConfig());
     }
 
@@ -81,11 +81,11 @@ class Config extends DotNotation
     private function _validate() 
     {
         if(!$this->have('path.public')) {
-            throw new Exception('ERR_CORE_INIT_CONST_MISSING', array('Public root','PUBLIC_ROOT'));
+            throw new Exception('ERR_CORE_INIT_CONST_MISSING', ['Public root','PUBLIC_ROOT']);
         }
 
         if(!$this->have('path.app'))
-            throw new Exception('ERR_CORE_INIT_CONST_MISSING', array('Application root','APPLICATION_ROOT'));
+            throw new Exception('ERR_CORE_INIT_CONST_MISSING', ['Application root','APPLICATION_ROOT']);
 
         if(!$this->have('env')) {
             throw new Exception('ERR_APP_ENV_MISSING');
