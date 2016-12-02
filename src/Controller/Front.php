@@ -77,10 +77,13 @@ class Front
 
 	/**
 	 * Initialize router uri request
+     *
+     * @param mixed $request
 	 */
-	public function getRoute()
+	public function getRoute($request = null)
 	{
-		$this->router->getRequestURI();
+        if(!isset($request)) $this->router->getRequestURI();
+        else $this->router->setRequest($request);
 	}
 
 	/**

@@ -118,12 +118,15 @@ class Application
 	}
 
     /**
-     * Start front dispatching
-     * @see Peak\Controller\Front::dispatch() for param
+     * Start front dispatching of a request
+     *
+     * @param  mixed $request if specified, force the request, 
+     *         otherwise, it will use server request uri
+     * @return $this
      */
-    public function run()
+    public function run($request = null)
     {
-        $this->front->getRoute();
+        $this->front->getRoute($request);
         $this->front->preDispatch();
         $this->front->dispatch();
         $this->front->postDispatch();
