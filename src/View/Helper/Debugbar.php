@@ -1,6 +1,7 @@
 <?php
 namespace Peak\View\Helper;
 
+use Peak\Application;
 use Peak\Core;
 use Peak\Registry;
 use Peak\View\Helper\Debug;
@@ -119,7 +120,7 @@ class Debugbar extends Debug
             foreach($_SESSION['pkdebugbar']['pages_chrono'] as $page => $chronos) {
                 $chronos = json_decode($chronos, true);
                 $count = count($chronos);
-                if(!in_array(PUBLIC_ROOT, array('','/'))) $page = str_replace(PUBLIC_ROOT, '', $page);
+                if(!in_array(Application::conf('path.public'), array('','/'))) $page = str_replace(Application::conf('path.public'), '', $page);
                 $page = str_replace('//', '/', $page);
                 echo '<tr><td>'.$page.'</td><td>'.round(array_sum($chronos) / $count,2).'ms</td><td>'.$count.'</td></tr>';
             }
