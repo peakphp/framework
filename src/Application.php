@@ -2,12 +2,14 @@
 namespace Peak;
 
 use Peak\Application\Bootstrap;
+use Peak\Application\Config;
 
 /**
  * Load the framework objects, application bootstrap and front controller.
  */
 class Application
 {
+
 	/**
 	 * app bootstrap object if exists
 	 * @var object
@@ -26,15 +28,25 @@ class Application
      */
     public $module = null;
 
+
+    public $config = null;
+
 	/**
 	 * Start framework
-	 */
-    public function __construct()
-    {                
+     */
+    private function __construct(Config $conf)
+    {   
+        // application config             
+        $this->config = $conf;
+
+        //print_r($this->config);
+
+
         // register application/view/router instance
         Registry::set('app', $this);
         Registry::set('view', new View());
-        Registry::set('router', $router = new Router(PUBLIC_ROOT));
+        Registry::set('router', $router = new Router($this->config->path['public']));
+
 		
         // load app bootstrap
 		$this->loadBootstrap();
@@ -43,6 +55,10 @@ class Application
 		$this->loadFront();
     }
 
+    static function create($config) 
+    {
+        return new self(new Config($config));
+    }
 	/**
 	 * Load and store application Bootstrapper
 	 *
@@ -51,7 +67,7 @@ class Application
 	public function loadBootstrap($prefix = 'App\\')
 	{
 		$cname = $prefix.'Bootstrap';
-		if(class_exists($cname,false)) $this->bootstrap = new $cname();
+		if(class_exists($cname)) $this->bootstrap = new $cname();
 		else $this->bootstrap = new Bootstrap();
 
         //print_r($this->bootstrap); die('YE');
@@ -65,12 +81,12 @@ class Application
 	public function loadFront($prefix = 'App\\')
 	{
 		$cname = $prefix.'Front';
-		$this->front = (class_exists($cname,false)) ? new $cname() : new Controller\Front();
+		$this->front = (class_exists($cname)) ? new $cname() : new Controller\Front();
 	}
 
     /**
      * Start front dispatching
-     * @see Peak_Controller_Front::dispatch() for param
+     * @see Peak\Controller\Front::dispatch() for param
      */
     public function run()
     {

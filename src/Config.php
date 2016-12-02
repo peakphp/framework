@@ -130,6 +130,13 @@ class Config implements IteratorAggregate, Countable
         $this->_vars = array();
     }
 
+    public function merge($data)
+    {
+        $this->setVars(
+            self::arrayMergeRecursive($this->_vars, $data)
+        );
+    }
+
     /**
      * Merge two arrays recursively overwriting the keys in the first array
      * if such key already exists

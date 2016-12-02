@@ -26,6 +26,8 @@ class Exception extends \Exception
     const ERR_DEFAULT                       = 'Request failed';
     const ERR_CUSTOM                        = '%1$s';
     const ERR_CONFIG_FILE                   = 'Application configuration file format invalid';
+
+    const ERR_APP_ENV_MISSING               = 'Application configuration \'env\' is missing';
     
     const ERR_VIEW_ENGINE_NOT_SET           = 'View rendering engine not set. Use engine() from Peak_View before trying to render application controller.';
     const ERR_VIEW_ENGINE_NOT_FOUND         = 'View rendering engine \'%1$s\' not found.';

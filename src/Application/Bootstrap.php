@@ -43,11 +43,11 @@ class Bootstrap
      */
     protected function _configView()
     {
-        if(!isset(Registry::o()->config->view) || 
+        if(!isset(Registry::o()->app->config->view) || 
             !Registry::isRegistered('view')) return;
 
         $view  = Registry::o()->view;
-        $cview = Registry::o()->config->view;
+        $cview = Registry::o()->app->config->view;
 
         if(!empty($cview)) {
             foreach($cview as $k => $v) {
@@ -65,11 +65,11 @@ class Bootstrap
      */
     protected function _configRouter()
     {
-        if(!isset(Registry::o()->config->router['addregex']) || 
+        if(!isset(Registry::o()->app->config->router['addregex']) || 
             !Registry::isRegistered('router')) return;
 
         $r      = Registry::o()->router;
-        $routes = Registry::o()->config->router['addregex'];
+        $routes = Registry::o()->app->config->router['addregex'];
 
         if(!empty($routes)) {
             foreach($routes as $i => $exp) {

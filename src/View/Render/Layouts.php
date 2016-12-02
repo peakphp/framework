@@ -59,9 +59,11 @@ class Layouts extends Render
             $no_cache = true;
         }
         else $is_scripts_path = true;
+
         
         // absolute file path to render     
         $filepath = $path.'/'.$file;
+        $filepath = SVR_ABSPATH.$path.'/'.$file;
 
         // throw the most reliable exception depending on submitted arguments to this method
         if(!file_exists($filepath)) {         

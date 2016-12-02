@@ -232,7 +232,7 @@ class Core
      */
     public static function getPath($path = 'application') 
     {
-    	$c = Registry::o()->config;
+    	$c = Registry::o()->app->config;
     	
     	if(isset($c->path[$path])) return $c->path[$path];
     	else return null;
@@ -250,70 +250,72 @@ class Core
         if($level >= 1) {
             
             //define server document root absolute path
-            $svr_path = str_replace('\\','/',realpath($_SERVER['DOCUMENT_ROOT']));
-            if(substr($svr_path, -1, 1) !== '/') $svr_path .= '/';
-            define('SVR_ABSPATH', $svr_path); unset($svr_path);
+            // $svr_path = str_replace('\\','/',realpath($_SERVER['DOCUMENT_ROOT']));
+            // if(substr($svr_path, -1, 1) !== '/') $svr_path .= '/';
+            // define('SVR_ABSPATH', $svr_path); unset($svr_path);
+
+
             
-            // $lib_path = str_ireplace('\\','/', substr(__DIR__, 0, strlen(__DIR__) - (strlen(basename(__DIR__)) + 1)));
-            // echo $lib_path;
-            //define libray path
-            define('LIBRARY_ABSPATH', __DIR__);
+            // // $lib_path = str_ireplace('\\','/', substr(__DIR__, 0, strlen(__DIR__) - (strlen(basename(__DIR__)) + 1)));
+            // // echo $lib_path;
+            // //define libray path
+            // define('LIBRARY_ABSPATH', __DIR__);
 
         
             //add LIBRARY_ABSPATH to include path
-            set_include_path(implode(PATH_SEPARATOR, array(LIBRARY_ABSPATH,
-														   LIBRARY_ABSPATH.'/Vendors',
-														   get_include_path())));
+            // set_include_path(implode(PATH_SEPARATOR, array(LIBRARY_ABSPATH,
+												// 		   LIBRARY_ABSPATH.'/Vendors',
+												// 		   get_include_path())));
         }
   
         //LEVEL 2 - load peak core autoloader
-        if($level >= 2) include LIBRARY_ABSPATH.'/autoload.php';
+        //if($level >= 2) include LIBRARY_ABSPATH.'/autoload.php';
         
         //LEVEL 3 - peak basic config with app config
 		//need constant PUBLIC_ROOT and APPICATION_ROOT to work properly
         if($level >= 3) {
 
-            if(!defined('PUBLIC_ROOT'))
-				throw new Exception('ERR_CORE_INIT_CONST_MISSING', array('Public root','PUBLIC_ROOT'));
-			if(!defined('APPLICATION_ROOT'))
-			    throw new Exception('ERR_CORE_INIT_CONST_MISSING', array('Application root','APPLICATION_ROOT'));
+   //          if(!defined('PUBLIC_ROOT'))
+			// 	throw new Exception('ERR_CORE_INIT_CONST_MISSING', array('Public root','PUBLIC_ROOT'));
+			// if(!defined('APPLICATION_ROOT'))
+			//     throw new Exception('ERR_CORE_INIT_CONST_MISSING', array('Application root','APPLICATION_ROOT'));
 				
-            define('PUBLIC_ABSPATH', SVR_ABSPATH . PUBLIC_ROOT);
-            define('APPLICATION_ABSPATH', realpath(SVR_ABSPATH . APPLICATION_ROOT));
+            //define('PUBLIC_ABSPATH', SVR_ABSPATH . PUBLIC_ROOT);
+            //define('APPLICATION_ABSPATH', realpath(SVR_ABSPATH . APPLICATION_ROOT));
 			
 			//if ZEND_LIB_ABSPATH is specified, we add it to include path
-            if(defined('ZEND_LIB_ROOT')) {
-				define('ZEND_LIB_ABSPATH',SVR_ABSPATH.ZEND_LIB_ROOT);
-				set_include_path(implode(PATH_SEPARATOR, array(get_include_path(), ZEND_LIB_ABSPATH)));
-			}
+   //          if(defined('ZEND_LIB_ROOT')) {
+			// 	define('ZEND_LIB_ABSPATH',SVR_ABSPATH.ZEND_LIB_ROOT);
+			// 	set_include_path(implode(PATH_SEPARATOR, array(get_include_path(), ZEND_LIB_ABSPATH)));
+			// }
         }
       
         //LEVEL 4 - peak app config init
         if($level >= 4) {
             
             //init app&core configurations
-            if(!defined('APPLICATION_CONFIG')) {
-				if(self::getEnv() !== 'development') {
-					throw new Exception('ERR_CORE_INIT_CONST_MISSING', array('Configuration filename','APPLICATION_CONFIG'));
-				}
-				else {
-					define('APPLICATION_CONFIG', 'genericapp.ini');
-					self::initConfig('a.genericapp', APPLICATION_ABSPATH);
-				}
-            }
-			else self::initConfig(APPLICATION_CONFIG, APPLICATION_ABSPATH);
+   //          if(!defined('APPLICATION_CONFIG')) {
+			// 	if(self::getEnv() !== 'development') {
+			// 		throw new Exception('ERR_CORE_INIT_CONST_MISSING', array('Configuration filename','APPLICATION_CONFIG'));
+			// 	}
+			// 	else {
+			// 		define('APPLICATION_CONFIG', 'genericapp.ini');
+			// 		self::initConfig('a.genericapp', APPLICATION_ABSPATH);
+			// 	}
+   //          }
+			// else self::initConfig(APPLICATION_CONFIG, APPLICATION_ABSPATH);
         }
         
         //LEVEL 5 - peak app object init
         if($level >= 5) {
-            
+            //
             //include application bootstrap if exists
-            if(file_exists(APPLICATION_ABSPATH.'/bootstrap.php')) include APPLICATION_ABSPATH.'/bootstrap.php';
+            //if(file_exists(APPLICATION_ABSPATH.'/bootstrap.php')) include APPLICATION_ABSPATH.'/bootstrap.php';
 
             //include application front extension if exists
-            if(file_exists(APPLICATION_ABSPATH.'/front.php')) include APPLICATION_ABSPATH.'/front.php';
+            //if(file_exists(APPLICATION_ABSPATH.'/front.php')) include APPLICATION_ABSPATH.'/front.php';
             
-            return new Application();
+            //return new Application();
         }
     }
 }
