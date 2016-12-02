@@ -10,6 +10,10 @@ use Peak\Application\ConfigEnv;
 class Config extends DotNotation
 {
 
+    /**
+     * Default config
+     * @var array
+     */
     private $_default = [
         'ns'   => 'App', //namespace
         'env'  => 'prod',
@@ -32,15 +36,15 @@ class Config extends DotNotation
         $this->setVars($this->_default);
 
         if(isset($config)) {
-            $this->merge($config);
+            $this->merge($config); // merge default with user conf
         }
 
         $this->_validate();
         $this->_defineConstants();
 
-        $confEnv = new ConfigEnv($this);
+        $conf_env = new ConfigEnv($this); // check app conf file and merge also
  
-        $this->merge($confEnv->getEnvConfig());
+        $this->merge($conf_env->getEnvConfig());
     }
 
     /**

@@ -32,8 +32,8 @@ class ConfigEnv
 
         $conf = $this->_loadConfigFile();
 
+        // validate application config
         $this->_validate($conf);
-
 
         $conf->set(
             'path.apptree', 
