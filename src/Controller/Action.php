@@ -1,6 +1,7 @@
 <?php
 namespace Peak\Controller;
 
+use Peak\Application;
 use Peak\Core;
 use Peak\Config;
 use Peak\Registry;
@@ -99,7 +100,7 @@ abstract class Action
     {       
         $this->view = Registry::o()->view; 
   
-        $this->path = Core::getPath('theme_scripts').'/'.$this->getTitle();
+        $this->path = $this->getScriptsPath();
     }
     
     /**
@@ -132,7 +133,8 @@ abstract class Action
      */
     public function getScriptsPath()
     {
-        return Core::getPath('theme_scripts').'/'.$this->getTitle();
+        // return Core::getPath('theme_scripts').'/'.$this->getTitle();
+        return Application::conf('path.theme_scripts').'/'.$this->getTitle();
     }
         
     /**

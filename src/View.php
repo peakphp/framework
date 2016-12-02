@@ -1,8 +1,8 @@
 <?php
 namespace Peak;
 
+use Peak\Application;
 use Peak\Expcetion;
-use Peak\Core;
 use Peak\Config\Ini;
 use Peak\View\Helpers;
 use Peak\View\Header;
@@ -326,7 +326,7 @@ class View
      */
     public function iniVar($file, $path = null)
     {
-        if(!isset($path)) $filepath = Core::getPath('views_ini').'/'.$file;
+        if(!isset($path)) $filepath = Application::conf('path.views_ini').'/'.$file;
         else $filepath = $path.'/'.$file;
 
         if(file_exists($filepath)) {
