@@ -1,5 +1,8 @@
 <?php
 namespace Peak;
+
+use Peak\Exception;
+
 /**
  * Router URL parser. Supporting $_GET url, standard rewrited url and regex url
  * For standard rewrited url and regex url, apache mod_rewrite is required           
@@ -112,7 +115,7 @@ class Router
             // with fake path and url ending by .php extension witch is not good.
             $request_uri = explode('?',$this->request_uri);
             $request_uri = $request_uri[0];
-            if(strpos($request_uri, '/') !== false) throw new Peak_Exception('ERR_ROUTER_URI_NOT_FOUND');
+            if(strpos($request_uri, '/') !== false) throw new Exception('ERR_ROUTER_URI_NOT_FOUND');
             else {
                 foreach($_GET as $k => $v) {
                     $this->request[] = $k;
