@@ -20,7 +20,7 @@ class Debugbar extends Debug
     public function show($start_minimized = false, $theme = 'default')
     {
         //skip if env is not dev
-        if(APPLICATION_ENV !== 'development') return;
+        if(APPLICATION_ENV !== 'dev') return;
 
         //skip if view rendering is disabled
         if($this->view->canRender() === false) return;
