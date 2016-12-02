@@ -5,6 +5,7 @@ use IteratorAggregate;
 use Countable;
 
 /**
+ * @deprecated
  * Variables registry for configs stuff
  */
 class Config implements IteratorAggregate, Countable
