@@ -9,7 +9,6 @@ use Peak\Registry;
  */
 class Router
 {
-
     /**
      * Configurate Router based on Application config
      */

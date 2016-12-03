@@ -9,7 +9,6 @@ use Peak\Registry;
  */
 class View
 {
-
     /**
      * Configurate View based on Application config
      */
@@ -17,7 +16,6 @@ class View
     {
         if(!Application::conf()->have('view') || 
             !Registry::isRegistered('view')) return;
-
 
         $view  = Registry::o()->view;
         $cview = Application::conf('view');
@@ -32,5 +30,4 @@ class View
             }
         }   
     }
-
 }
