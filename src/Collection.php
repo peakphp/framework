@@ -3,7 +3,6 @@ namespace Peak;
 
 use Countable;
 use ArrayAccess;
-use ArrayObject;
 use ArrayIterator;
 use JsonSerializable;
 use IteratorAggregate;
@@ -25,6 +24,24 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
     public function __construct($items = null)
     {
         $this->_items = $items;
+    }
+
+    /**
+     * Use most of php built in array_ functions with items
+     * Don't work with passed by reference array like array_push
+     *
+     * ex: $obj->array_keys()
+     * 
+     * @param  string $func array_ func
+     * @param  mixed  $argv 
+     * @return mixed
+     */
+    public function __call($func, $argv)
+    {
+        if (!is_callable($func) || substr($func, 0, 6) !== 'array_') {
+            throw new Exception('ERR_CUSTOM', __CLASS__.': method '.$func.' is unknown');
+        }
+        return call_user_func($func, $this->_items, ...$argv);
     }
 
     /**
