@@ -4,6 +4,7 @@ use PHPUnit\Framework\TestCase;
 use Peak\Routing\Request;
 use Peak\Routing\RequestResolve;
 use Peak\Routing\Route;
+use Peak\Routing\Regex;
 
 /**
  * @package    Peak\Resolve
@@ -25,6 +26,25 @@ class RequestResolveTest extends TestCase
     {
         unset($this->peakview);
     }
+
+    function testEmptyRequest()
+    {
+        $base_uri = '';
+        $request_uri = '';
+        $request = new Request($request_uri, $base_uri);
+
+        $this->assertEmpty($request->raw_uri);  
+        $this->assertTrue($request->request_uri === '/');  
+        $this->assertTrue($request->base_uri === '/'); 
+
+        $base_uri = 'base';
+        $request_uri = '';
+        $request = new Request($request_uri, $base_uri);
+
+        $this->assertEmpty($request->raw_uri);  
+        $this->assertTrue($request->request_uri === '/');  
+        $this->assertTrue($request->base_uri === '/base/'); 
+    }
     
     /**
      * Create instance test
@@ -35,7 +55,7 @@ class RequestResolveTest extends TestCase
         Request::$separator = '/';
 
         $base = 'peak/framework';
-        $request = 'peak/framework/index/index/test/';
+        $request = 'peak/framework/asdasd';
         $request = new Request($request, $base);
 
         echo "\n";
@@ -48,7 +68,33 @@ class RequestResolveTest extends TestCase
 
         $resolver = new RequestResolve($request);
 
+        $reg = new Regex('{id}:num', 'index', 'action');
+        //print_r($reg);
+        print_r($reg->match($request));
 
-        print_r($resolver->getRoute());
+        $reg2 = new Regex(':alpha', 'module', 'action');
+        print_r($reg2->match($request));
+
+
+        //print_r($resolver->getRoute());
+    }
+
+    function testEmptyRequest()
+    {
+        $base_uri = '';
+        $request_uri = '';
+        $request = new Request($request_uri, $base_uri);
+
+        $this->assertEmpty($request->raw_uri);  
+        $this->assertTrue($request->request_uri === '/');  
+        $this->assertTrue($request->base_uri === '/'); 
+
+        $base_uri = 'base';
+        $request_uri = '';
+        $request = new Request($request_uri, $base_uri);
+
+        $this->assertEmpty($request->raw_uri);  
+        $this->assertTrue($request->request_uri === '/');  
+        $this->assertTrue($request->base_uri === '/base/'); 
     }
 }
