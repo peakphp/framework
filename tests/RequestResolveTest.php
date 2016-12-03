@@ -78,23 +78,4 @@ class RequestResolveTest extends TestCase
 
         //print_r($resolver->getRoute());
     }
-
-    function testEmptyRequest()
-    {
-        $base_uri = '';
-        $request_uri = '';
-        $request = new Request($request_uri, $base_uri);
-
-        $this->assertEmpty($request->raw_uri);  
-        $this->assertTrue($request->request_uri === '/');  
-        $this->assertTrue($request->base_uri === '/'); 
-
-        $base_uri = 'base';
-        $request_uri = '';
-        $request = new Request($request_uri, $base_uri);
-
-        $this->assertEmpty($request->raw_uri);  
-        $this->assertTrue($request->request_uri === '/');  
-        $this->assertTrue($request->base_uri === '/base/'); 
-    }
 }
