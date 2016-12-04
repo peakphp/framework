@@ -12,6 +12,7 @@ use IteratorAggregate;
  */
 class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSerializable
 {
+
     /**
      * Collection items
      * @var array
@@ -27,6 +28,16 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
     }
 
     /**
+     * Create a new instance of collection
+     * 
+     * @param array $items 
+     */
+    public static function make($items)
+    {
+        return new static($items);
+    }
+
+    /**
      * Use most of php built in array_ functions with items
      * Don't work with passed by reference array like array_push
      *
@@ -38,6 +49,9 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
      */
     public function __call($func, $argv)
     {
+        if(is_callable('array_'.$func)) {
+            return call_user_func('array_'.$func, $this->_items, ...$argv);
+        }
         if (!is_callable($func) || substr($func, 0, 6) !== 'array_') {
             throw new Exception('ERR_CUSTOM', __CLASS__.': method '.$func.' is unknown');
         }
@@ -145,6 +159,16 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
     public function getIterator()
     {
         return new \ArrayIterator($this->_items);
+    }
+
+    /**
+     * Determine if the collection is empty.
+     *
+     * @return bool
+     */
+    public function isEmpty()
+    {
+        return empty($this->items);
     }
 
 
