@@ -148,7 +148,7 @@ class Router
 
         // extract data from request
         if (!empty($this->request)) 
-        {           
+        {
             //preserve unparsed request
             $request = $this->request;
             
@@ -214,8 +214,8 @@ class Router
             if($allow_quick_patterns === true) {
 
                 // look for {param_name}:validator
-                // so if i got an url like http:://mysite.com/editor/{id}:num
-                // valid url would be ex:  http:://mysite.com/editor/id/128
+                // so if i got an url like http://mysite.com/editor/{id}:num
+                // valid url would be ex:  http://mysite.com/editor/id/128
                 $regex = preg_replace('#\{([a-zA-Z0-9_-]+)\}:([a-z]+)#', '$1/(?<$1>:$2)', $regex);
 
                 // quick regex pattern
