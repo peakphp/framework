@@ -3,6 +3,7 @@ namespace Peak\Routing;
 
 use Peak\Routing\Request;
 use Peak\Routing\Route;
+use Peak\Collection;
 
 class RequestResolve
 {
@@ -28,7 +29,22 @@ class RequestResolve
      * 
      * @return Route
      */
-    public function getRoute()
+    public function getRoute(Collection $regex_routes = null) 
+    {
+        $route = $this->lookForRegexMatch($regex_routes);
+        if($route !== false) {
+            return $route;
+        }
+
+        return $this->resolve();        
+    }
+
+    /**
+     * Resolve normal request
+     * 
+     * @return Route
+     */
+    protected function resolve()
     {
         $request_block = explode(Request::$separator, $this->request->request_uri);
 
@@ -49,6 +65,25 @@ class RequestResolve
         $route->params_assoc = $this->paramsToAssoc($route->params);
 
         return $route;
+    }
+
+    /**
+     * Try to match the current request with a custom regex route
+     * 
+     * @param  Collection|null $regex_routes 
+     * @return mixed                     
+     */
+    protected function lookForRegexMatch(Collection $regex_routes = null)
+    {
+        if(isset($regex_routes)) {
+            foreach($regex_routes as $r) {
+                $route = $r->match($this->request);
+                if($route instanceof Route) {
+                    return $route;
+                }
+            }
+        }
+        return false;
     }
 
     /**
