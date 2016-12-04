@@ -40,7 +40,7 @@ class Routing
      */
     public function __construct($request = null)
     {
-        $this->_loadAppRegexRouting();
+        $this->loadAppRegexRouting();
 
         $public_root = Application::conf('path.public');
 
@@ -69,7 +69,7 @@ class Routing
     /**
      * Check app config for custom regex route
      */
-    private function _loadAppRegexRouting()
+    protected function loadAppRegexRouting()
     {
         $regex = Application::conf('routing');
 
