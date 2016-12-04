@@ -6,6 +6,7 @@ use Peak\Core;
 use Peak\Config;
 use Peak\Registry;
 use Peak\Exception;
+use Peak\Routing\Route;
 
 /**
  * Peak abstract action controller
@@ -72,7 +73,7 @@ abstract class Action
         //initialize ctrl
         $this->initController();
         //get route to dispatch
-        $this->getRoute();
+        //$this->getRoute();
     }
     
     /**
@@ -174,16 +175,32 @@ abstract class Action
     /**
      * Get data from router needed for dispatch
      */
-    public function getRoute()
+    // public function getRoute()
+    // {
+    //     $this->params       = Registry::o()->router->params;        
+    //     $this->params_assoc = new Config(Registry::o()->router->params_assoc);
+    //     $this->action       = $this->action_prefix . Registry::o()->router->action;
+    //     //set default ctrl action if none present
+    //     if($this->action === $this->action_prefix) $this->action  = $this->action_prefix.'index';
+
+    //     //echo '>>>'.$this->file;
+    // }
+
+    /**
+     * Get data from router needed for dispatch
+     */
+    public function setRoute(Route $route)
     {
-        $this->params       = Registry::o()->router->params;        
-        $this->params_assoc = new Config(Registry::o()->router->params_assoc);
-        $this->action       = $this->action_prefix . Registry::o()->router->action;
+        $this->params       = $route->params;        
+        $this->params_assoc = new Config($route->params_assoc);
+        $this->action       = $this->action_prefix . $route->action;
         //set default ctrl action if none present
-        if($this->action === $this->action_prefix) $this->action  = $this->action_prefix.'index';
+        if($this->action === $this->action_prefix) {
+            $this->action  = $this->action_prefix.'index';
+        }
 
         //echo '>>>'.$this->file;
-    }    
+    }        
     
     /**
      * Dispatch controller action and other stuff around it

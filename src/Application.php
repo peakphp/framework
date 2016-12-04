@@ -39,7 +39,7 @@ class Application
         // register application/view/router instance
         Registry::set('app', $this);
         Registry::set('view', new View());
-        Registry::set('router', $router = new Router($this->config('path.public')));
+        //Registry::set('router', $router = new Router($this->config('path.public')));
 		
 		$this->_loadBootstrap();
 		$this->_loadFront();
@@ -130,6 +130,7 @@ class Application
         $this->front->preDispatch();
         $this->front->dispatch();
         $this->front->postDispatch();
+
 
         return $this;
     }

@@ -1,9 +1,16 @@
 <?php
 namespace Peak\Controller;
 
+use Peak\Application;
 use Peak\Core;
 use Peak\Registry;
 use Peak\Exception;
+
+use Peak\Routing\Request;
+use Peak\Routing\RequestServerURI;
+use Peak\Routing\RequestResolve;
+use Peak\Routing\Route;
+
 
 /**
  * Front controller
@@ -15,6 +22,8 @@ class Front
 	 * @var object
 	 */
 	public $router;
+
+    public $route;
 	
 	/**
 	 * Controller object
@@ -75,16 +84,33 @@ class Front
     	}
     }
 
-	/**
-	 * Initialize router uri request
+	// /**
+	//  * Initialize router uri request
+ //     *
+ //     * @param mixed $request
+	//  */
+	// public function getRoute($request = null)
+	// {
+ //        if(!isset($request)) $this->router->getRequestURI();
+ //        else $this->router->setRequest($request);
+	// }
+    // 
+    /**
+     * Get route with routing system resolver
      *
-     * @param mixed $request
-	 */
-	public function getRoute($request = null)
-	{
-        if(!isset($request)) $this->router->getRequestURI();
-        else $this->router->setRequest($request);
-	}
+     * @param string $request if specied, force a specific request
+     */
+    public function getRoute($request = null)
+    {
+        if(isset($request)) {
+            $request = new Request($request, Application::conf('path.public'));
+        }
+        else {
+            $request = new RequestServerURI(Application::conf('path.public'));
+        }
+        $resolver = new RequestResolve($request);
+        $this->route = $resolver->getRoute();
+    } 
 
 	/**
 	 * Called before routing dispatching
@@ -111,15 +137,45 @@ class Front
 	/**
 	 * Dispatch appropriate controller according to the router
 	 */
-	protected function _dispatchController()
-	{
+	// protected function _dispatchController()
+	// {
+ //        //set default controller if router doesn't have one
+ //        if(!isset($this->router->controller)) {
+ //            $this->router->controller = $this->default_controller;
+ //        }
+        
+ //        //set controller class name
+ //        $ctrl_name = 'App\Controllers\\'.$this->router->controller;
+
+ //        // echo $this->router->controller;
+ //        // echo '<pre>';
+ //        // print_r($this->router);
+
+ //        //check if it's valid application controller
+ //        if(!class_exists($ctrl_name))
+ //        {
+ //            $internal_ctrl_name = 'Peak\Controller\Internal\\'.$this->router->controller;
+
+ //            //check for peak internal controller
+ //            if(($this->allow_internal_controllers === true) && (class_exists($internal_ctrl_name))) {
+ //                $this->controller = new $internal_ctrl_name();
+ //            }
+ //            else throw new Exception('ERR_CTRL_NOT_FOUND', $this->router->controller);
+ //        }
+ //        else $this->controller = new $ctrl_name();
+
+	// 	$this->postDispatchController();
+	// }
+
+    protected function _dispatchController()
+    {
         //set default controller if router doesn't have one
-        if(!isset($this->router->controller)) {
-            $this->router->controller = $this->default_controller;
+        if(!isset($this->route->controller)) {
+            $this->route->controller = $this->default_controller;
         }
         
         //set controller class name
-        $ctrl_name = 'App\Controllers\\'.$this->router->controller;
+        $ctrl_name = 'App\Controllers\\'.$this->route->controller;
 
         // echo $this->router->controller;
         // echo '<pre>';
@@ -128,18 +184,20 @@ class Front
         //check if it's valid application controller
         if(!class_exists($ctrl_name))
         {
-            $internal_ctrl_name = 'Peak\Controller\Internal\\'.$this->router->controller;
+            $internal_ctrl_name = 'Peak\Controller\Internal\\'.$this->route->controller;
 
             //check for peak internal controller
             if(($this->allow_internal_controllers === true) && (class_exists($internal_ctrl_name))) {
                 $this->controller = new $internal_ctrl_name();
             }
-            else throw new Exception('ERR_CTRL_NOT_FOUND', $this->router->controller);
+            else throw new Exception('ERR_CTRL_NOT_FOUND', $this->route->controller);
         }
         else $this->controller = new $ctrl_name();
 
-		$this->postDispatchController();
-	}
+        $this->controller->setRoute($this->route);
+
+        $this->postDispatchController();
+    }
 	
 	/**
 	 * Dispatch action of controller
@@ -215,7 +273,8 @@ class Front
         //and call twice preAction and postAction methods
     	if((is_object($this->controller)) && (strtolower($ctrl) === strtolower($this->controller->getTitle()))) {
 
-            $this->controller->getRoute();
+            //$this->controller->getRoute();
+            $this->controller->setRoute($this->route);
             $this->controller->dispatchAction();
         }
     	else $this->dispatch();
