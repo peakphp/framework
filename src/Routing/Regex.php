@@ -1,22 +1,30 @@
 <?php
 namespace Peak\Routing;
 
-use Peak\Routing\Request;
-use Peak\Routing\Route;
-
 class Regex
 {
-
     /**
-     * Request object
-     * @var Request
+     * Controller name
+     * @var string
      */
-    public $regex;
-
     public $controller;
 
+    /**
+     * Controller action name
+     * @var string
+     */
     public $action;
 
+    /**
+     * Regex object
+     * @var Request
+     */
+    protected $regex;
+
+    /**
+     * Quick regex shortcut
+     * @var array
+     */
     private $_quick_reg = [
         ':any'       => '[^\/]+',
 
@@ -53,7 +61,6 @@ class Regex
         $this->action     = $action;
     }
 
-
     /**
      * Set a regex
      * 
@@ -82,7 +89,6 @@ class Regex
      */
     public function match(Request $request)
     {
-
         $result = preg_match(
             '#^/'.$this->regex.'/$#', 
             $request->request_uri, 
@@ -91,18 +97,6 @@ class Regex
 
         //we got a positive preg_match
         if(!empty($matches)) {
-
-
-            // $arr_assoc = (array_keys($matches) !== range(0, count($matches) - 1));
-                        
-            // if($arr_assoc === true) {
-            //     $rex_params = array_slice($matches,1);
-            //     $params = array();
-            //     foreach($rex_params as $i => $p) {
-            //         $params[] = (is_string($i)) ? $i : $p;
-            //     }
-            //     //print_r($params);
-            // }
 
             $request->request_uri = $this->controller.Request::$separator.$this->action.$request->request_uri;
 
