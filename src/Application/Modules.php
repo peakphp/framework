@@ -10,18 +10,6 @@ use Peak\Registry;
 abstract class Modules
 {
 
-	/**
-	 * Module name
-	 * @var string
-	 */
-    protected $_name = '';
-    
-    /**
-     * Module path
-     * @var string
-     */
-    protected $_path = '';
-    
     /**
      * Module type
      * @var bool
@@ -34,20 +22,20 @@ abstract class Modules
     public function __construct()
     {      	
     	//prepare module
-    	$this->prepare();
+  //   	$this->prepare();
 		
-		//delete previously added router regex for the module
-        Registry::o()->router->deleteRegex();
+		// //delete previously added router regex for the module
+  //       Registry::o()->router->deleteRegex();
         
-		$app_path = Core::getPath('application');		
+		// $app_path = Core::getPath('application');		
 		      
         //load initialize module bootstrap if exists
-        if(file_exists($app_path.'/bootstrap.php')) include $app_path.'/bootstrap.php';
-		Registry::o()->app->loadBootstrap($this->_name.'_');
+  //       if(file_exists($app_path.'/bootstrap.php')) include $app_path.'/bootstrap.php';
+		// Registry::o()->app->loadBootstrap($this->_name.'_');
 		
-		//initialize module front if exists, otherwise load peak default front
-        if(file_exists($app_path.'/front.php')) include $app_path.'/front.php';
-		Registry::o()->app->loadFront($this->_name.'_');
+		// //initialize module front if exists, otherwise load peak default front
+  //       if(file_exists($app_path.'/front.php')) include $app_path.'/front.php';
+		// Registry::o()->app->loadFront($this->_name.'_');
     }
     
     /**
