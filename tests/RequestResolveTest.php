@@ -58,22 +58,22 @@ class RequestResolveTest extends TestCase
         $request = 'peak/framework/asdasd';
         $request = new Request($request, $base);
 
-        echo "\n";
-        echo $request->base_uri;
-        echo "\n";
-        echo $request->raw_uri;
-        echo "\n";
-        echo $request->request_uri;
-        echo "\n";
+        // echo "\n";
+        // echo $request->base_uri;
+        // echo "\n";
+        // echo $request->raw_uri;
+        // echo "\n";
+        // echo $request->request_uri;
+        // echo "\n";
 
         $resolver = new RequestResolve($request);
 
         $reg = new Regex('{id}:num', 'index', 'action');
         //print_r($reg);
-        print_r($reg->match($request));
+        //print_r($reg->match($request));
 
         $reg2 = new Regex(':alpha', 'module', 'action');
-        print_r($reg2->match($request));
+        //print_r($reg2->match($request));
 
 
         //print_r($resolver->getRoute());

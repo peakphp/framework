@@ -1,8 +1,10 @@
 <?php
 use PHPUnit\Framework\TestCase;
 
+use Peak\Collection;
+
 /**
- * @package    Peak\Config
+ * @package    Peak\Collection
  */
 class CollectionTest extends TestCase
 {
@@ -20,7 +22,7 @@ class CollectionTest extends TestCase
 	 */  
 	function testCreateInstance()
 	{
-		$collection = new Peak\Collection([
+		$collection = new Collection([
 			'name'    => 'Bob Ball',
 			'nick'    => 'SuperBob',
 			'age'     => '75',
@@ -68,7 +70,46 @@ class CollectionTest extends TestCase
 		//isset with object syntax
 		$this->assertFalse(isset($collection->name));
 		$this->assertTrue(isset($collection->nick));
+
 	}
 	
-	
+	/**
+	 * Test array_ built in
+	 */
+	function testArrayBuiltInFuncs()
+	{
+		$collection = Collection::make([
+		    [
+		        'id' => 2135,
+		        'first_name' => 'John',
+		        'last_name' => 'Doe',
+		    ],
+		    [
+		        'id' => 3245,
+		        'first_name' => 'Sally',
+		        'last_name' => 'Smith',
+		    ],
+		    [
+		        'id' => 5342,
+		        'first_name' => 'Jane',
+		        'last_name' => 'Jones',
+		    ],
+		    [
+		        'id' => 5623,
+		        'first_name' => 'Peter',
+		        'last_name' => 'Doe',
+		    ]
+		]);
+
+		$chunk = Collection::make(
+			$collection->chunk(2)
+		);
+		$this->assertTrue(count($chunk) == 2);
+
+		$columns = Collection::make(
+			$collection->column('first_name')
+		);
+		$this->assertTrue(count($columns) == 4);
+		$this->assertTrue($columns[1] === 'Sally');
+	}
 }
