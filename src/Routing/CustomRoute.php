@@ -1,7 +1,7 @@
 <?php
 namespace Peak\Routing;
 
-class Regex
+class CustomRoute
 {
     /**
      * Controller name
@@ -87,7 +87,7 @@ class Regex
      * @param  Request $req  
      * @return mixed        Return a route if valid, otherwise false
      */
-    public function match(Request $request)
+    public function matchRequest(Request $request)
     {
         $result = preg_match(
             '#^/'.$this->regex.'/$#', 
