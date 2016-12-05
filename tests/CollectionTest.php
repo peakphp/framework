@@ -2,6 +2,7 @@
 use PHPUnit\Framework\TestCase;
 
 use Peak\Collection;
+use Peak\Exception;
 
 /**
  * @package    Peak\Collection
@@ -9,14 +10,12 @@ use Peak\Collection;
 class CollectionTest extends TestCase
 {
 	
+
 	/**
-	 * instanciate class for tests
 	 */
-	function setUp()
-	{		
-		
-	}
-		 
+	//@expectedException Exception
+	 
+
 	/**
 	 * test new instance
 	 */  
@@ -39,6 +38,23 @@ class CollectionTest extends TestCase
 		$this->assertTrue(isset($collection['passions']));
 		$this->assertFalse(isset($collection['sport']));
 		$this->assertTrue(isset($collection['active']));
+	}
+
+
+	function testInterfaceImplementation()
+	{
+
+		$collection = new Collection([
+			'name'    => 'Bob Ball',
+			'nick'    => 'SuperBob',
+			'age'     => '75',
+			'passions' => [
+				'petanque',
+				'bowling',
+				'curling',
+			],
+			'active'  => 0,
+		]);	
 
 		//offset set
 		$collection['age'] = 87;
@@ -70,7 +86,24 @@ class CollectionTest extends TestCase
 		//isset with object syntax
 		$this->assertFalse(isset($collection->name));
 		$this->assertTrue(isset($collection->nick));
+	}
 
+	/**
+	 * New instance with mixed value
+	 */
+	function testCreateInstanceWithMixedValue()
+	{
+		$collection = new Collection("random");
+		$this->assertTrue($collection->isEmpty());
+
+		$collection = Collection::make(234);
+		$this->assertTrue($collection->isEmpty());
+
+		$collection = Collection::make(["test"]);
+		$this->assertFalse($collection->isEmpty());
+
+		$collection = new Collection(["test2"]);
+		$this->assertFalse($collection->isEmpty());
 	}
 	
 	/**
