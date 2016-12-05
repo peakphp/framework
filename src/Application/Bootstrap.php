@@ -18,7 +18,6 @@ class Bootstrap
     public function __construct()
     {
         new Bootstrap\View();
-        new Bootstrap\Router();
         $this->_boot();
     }
 
