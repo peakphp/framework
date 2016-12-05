@@ -37,7 +37,7 @@ class Request
     {
         if(!isset($base_uri)) $base_uri = self::$separator;
         $this->setBaseUri($base_uri);
-        $this->setRequestUir($request_uri);
+        $this->setRequestUri($request_uri);
     }
 
     /**
@@ -57,19 +57,23 @@ class Request
     /**
      * Set request uri
      * 
-     * @param string $request_uri
+     * @param string|array $request_uri
      */
-    public function setRequestUir($request)
+    public function setRequestUri($request)
     {
+        if(is_array($request)) {
+            $request = $this->requestArrayToString($request);
+        }
+
         $this->raw_uri = $request;
 
-        $request = $this->_standardize($request);
+        $request = $this->standardize($request);
 
         if($this->base_uri !== self::$separator) {
             $request = str_ireplace($this->base_uri, '', $request);
         }
 
-        $this->request_uri = $this->_standardize($request);
+        $this->request_uri = $this->standardize($request);
     }
 
     /**
@@ -78,7 +82,7 @@ class Request
      * @param  string $request 
      * @return string         
      */
-    private function _standardize($request)
+    protected function standardize($request)
     {
         $request = trim($request);
         
@@ -89,17 +93,34 @@ class Request
             $request = $request.self::$separator;
         }
 
-        $request = $this->_removeDoubleSeparator($request);
+        $request = $this->removeDoubleSeparator($request);
 
         return $request;
     }
 
-    private function _removeDoubleSeparator($request)
+    /**
+     * Remove double separator ex: double //
+     * 
+     * @param  string $request
+     * @return string         
+     */
+    protected function removeDoubleSeparator($request)
     {
         return str_ireplace(
             self::$separator.''.self::$separator, 
             self::$separator, 
             $request
         );
+    }
+
+    /**
+     * Transform an array to a string
+     * 
+     * @param  array  $request
+     * @return string
+     */
+    protected function requestArrayToString($request)
+    {
+        return implode(self::$separator, $request);
     }
 }
