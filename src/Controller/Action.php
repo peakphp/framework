@@ -3,7 +3,7 @@ namespace Peak\Controller;
 
 use Peak\Application;
 use Peak\Core;
-use Peak\Config;
+use Peak\Collection;
 use Peak\Registry;
 use Peak\Exception;
 use Peak\Routing\Route;
@@ -192,7 +192,7 @@ abstract class Action
     public function setRoute(Route $route)
     {
         $this->params       = $route->params;        
-        $this->params_assoc = new Config($route->params_assoc);
+        $this->params_assoc = new Collection($route->params_assoc);
         $this->action       = $this->action_prefix . $route->action;
         //set default ctrl action if none present
         if($this->action === $this->action_prefix) {
