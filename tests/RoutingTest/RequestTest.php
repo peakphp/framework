@@ -8,19 +8,7 @@ use Peak\Routing\Request;
  */
 class RequestTest extends TestCase
 {
-    /**
-     * init
-     */ 
-    function setUp()
-    {
-    }
-    
-    /**
-     * unset
-     */
-    function tearDown()
-    {
-    }
+
 
     function testRequest()
     {
