@@ -17,14 +17,14 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
      * Collection items
      * @var array
      */
-    protected $_items = [];
+    protected $items = [];
 
     /**
      * Create a new collection
      */
     public function __construct($items = null)
     {
-        if(is_array($items)) $this->_items = $items;
+        if(is_array($items)) $this->items = $items;
     }
 
     /**
@@ -50,12 +50,12 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
     public function __call($func, $argv)
     {
         if(is_callable('array_'.$func)) {
-            return call_user_func('array_'.$func, $this->_items, ...$argv);
+            return call_user_func('array_'.$func, $this->items, ...$argv);
         }
         if (!is_callable($func) || substr($func, 0, 6) !== 'array_') {
             throw new Exception('ERR_CUSTOM', __CLASS__.': method '.$func.' is unknown');
         }
-        return call_user_func($func, $this->_items, ...$argv);
+        return call_user_func($func, $this->items, ...$argv);
     }
 
     /**
@@ -65,7 +65,7 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
      */
     public function &__get ($key) 
     {
-        return $this->_items[$key];
+        return $this->items[$key];
     }
 
     /**
@@ -76,7 +76,7 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
      */
     public function __set($key,$value) 
     {
-        $this->_items[$key] = $value;
+        $this->items[$key] = $value;
     }
 
     /**
@@ -87,7 +87,7 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
      */
     public function __isset ($key) 
     {
-        return isset($this->_items[$key]);
+        return isset($this->items[$key]);
     }
 
     /**
@@ -97,7 +97,7 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
      */
     public function __unset($key) 
     {
-        unset($this->_items[$key]);
+        unset($this->items[$key]);
     }
 
     /**
@@ -106,10 +106,10 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
     public function offsetSet($offset, $value) 
     {
         if (is_null($offset)) {
-            $this->_items[] = $value;
+            $this->items[] = $value;
         } 
         else {
-            $this->_items[$offset] = $value;
+            $this->items[$offset] = $value;
         }
     }
 
@@ -120,7 +120,7 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
      */
     public function offsetExists($offset) 
     {
-        return isset($this->_items[$offset]);
+        return isset($this->items[$offset]);
     }
 
     /**
@@ -128,7 +128,7 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
      */
     public function offsetUnset($offset) 
     {
-        unset($this->_items[$offset]);
+        unset($this->items[$offset]);
     }
 
     /**
@@ -138,7 +138,7 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
      */
     public function offsetGet($offset) 
     {
-        return isset($this->_items[$offset]) ? $this->_items[$offset] : null;
+        return isset($this->items[$offset]) ? $this->items[$offset] : null;
     }
 
     /**
@@ -148,7 +148,7 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
      */
     public function count()
     {
-        return count($this->_items);
+        return count($this->items);
     }
 
     /**
@@ -158,7 +158,7 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
      */
     public function getIterator()
     {
-        return new \ArrayIterator($this->_items);
+        return new \ArrayIterator($this->items);
     }
 
     /**
@@ -174,6 +174,6 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
 
     public function jsonSerialize()
     {
-        return $this->_items;
+        return $this->items;
     }
 }
