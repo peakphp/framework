@@ -24,7 +24,7 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
      */
     public function __construct($items = null)
     {
-        $this->_items = $items;
+        if(is_array($items)) $this->_items = $items;
     }
 
     /**
