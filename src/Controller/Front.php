@@ -2,11 +2,10 @@
 namespace Peak\Controller;
 
 use Peak\Application;
-use Peak\Core;
 use Peak\Registry;
 use Peak\Exception;
 
-use Peak\Routing\Route;
+use Peak\Routing\RouteBuilder;
 
 
 /**
@@ -144,28 +143,14 @@ class Front
 	}
 		
 	/**
-	 * Force dispatching to a specific controller/action
-	 * @deprecated
-	 *
-	 * @param string $ctrl
-	 * @param string $action
-	 */
-	// public function forceDispatch($controller, $action = 'index')
-	// {
-	// 	$this->router->controller = $controller;
-	// 	$this->router->action = $action;
-	// 	$this->dispatch();
-	// }
-	
-	/**
 	 * Force dispatch of $error_controller
      *
      * @param object $exception
 	 */
 	public function errorDispatch($exception = null)
 	{
-		$this->router->controller = $this->error_controller;
-		$this->router->action     = 'index';
+		$this->route->controller = $this->error_controller;
+		$this->route->action     = 'index';
 		
 		$this->_dispatchController();
 
@@ -187,24 +172,17 @@ class Front
      */
     public function redirect($ctrl, $action = 'index', $params = null)
     {
-	    $request = array($ctrl, $action);
-		
-		if(isset($params)) {
-		    if(is_array($params)) $request = array_merge($request, $params);
-		    else $request[] = $params;
-		}
-		
-    	$this->router->setRequest($request);
-    	
-    	//if redirection is in the same controller, we don't want to reload controller
-        //and call twice preAction and postAction methods
-    	if((is_object($this->controller)) && (strtolower($ctrl) === strtolower($this->controller->getTitle()))) {
+
+        $route_builder = new RouteBuilder();
+        $this->route = $route_builder->get($ctrl, $action,$params);
+
+        if((is_object($this->controller)) && (strtolower($ctrl) === strtolower($this->controller->getTitle()))) {
 
             //$this->controller->getRoute();
             $this->controller->setRoute($this->route);
             $this->controller->dispatchAction();
         }
-    	else $this->dispatch();
+        else $this->dispatch();
     }
 
     /**
