@@ -5,7 +5,7 @@ use Peak\Routing\Request;
 use Peak\Routing\Route;
 use Peak\Collection;
 
-class RequestResolve
+class RequestResolver
 {
 
     /**
@@ -77,7 +77,7 @@ class RequestResolve
     {
         if(isset($regex_routes)) {
             foreach($regex_routes as $r) {
-                $route = $r->match($this->request);
+                $route = $r->matchRequest($this->request);
                 if($route instanceof Route) {
                     return $route;
                 }
