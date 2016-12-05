@@ -21,6 +21,12 @@ class Application
      * @var object
      */
     public $front;
+
+    /**
+     * Application routing object
+     * @var Application\Routing
+     */
+    public $routing;
     
     /**
      * application config
@@ -39,8 +45,7 @@ class Application
         // register application/view/router instance
         Registry::set('app', $this);
         Registry::set('view', new View());
-        //Registry::set('router', $router = new Router($this->config('path.public')));
-		
+
 		$this->_loadBootstrap();
 		$this->_loadFront();
     }
@@ -53,7 +58,7 @@ class Application
      */
     static function create(Array $config) 
     {
-        return new self(new Config($config));
+        return new static(new Config($config));
     }
 
     /**
@@ -126,7 +131,10 @@ class Application
      */
     public function run($request = null)
     {
-        $this->front->getRoute($request);
+
+        $app_routing = new Application\Routing($request);
+        $this->front->route = $app_routing->getRoute();
+
         $this->front->preDispatch();
         $this->front->dispatch();
         $this->front->postDispatch();
