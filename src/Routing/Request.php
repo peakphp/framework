@@ -47,11 +47,7 @@ class Request
      */
     public function setBaseUri($base_uri)
     {               
-        //fix self::$separator missing at left and right of $base_uri
-        $base_uri = trim($base_uri);
-        if(substr($base_uri, 0, 1) !== self::$separator) $base_uri = self::$separator.$base_uri;
-        if(substr($base_uri, -1, 1) !== self::$separator) $base_uri = $base_uri.self::$separator;
-        $this->base_uri = $base_uri;
+        $this->base_uri = $this->standardize($base_uri);
     }
 
     /**
@@ -61,11 +57,11 @@ class Request
      */
     public function setRequestUri($request)
     {
+        $this->raw_uri = $request;
+
         if(is_array($request)) {
             $request = $this->requestArrayToString($request);
         }
-
-        $this->raw_uri = $request;
 
         $request = $this->standardize($request);
 
@@ -84,7 +80,7 @@ class Request
      */
     protected function standardize($request)
     {
-        $request = trim($request);
+        $request = trim($this->removeDoubleSeparator($request));
         
         if(substr($request, 0, 1) !== self::$separator) {
             $request = self::$separator.$request;
