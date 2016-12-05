@@ -173,8 +173,7 @@ class Front
     public function redirect($ctrl, $action = 'index', $params = null)
     {
 
-        $route_builder = new RouteBuilder();
-        $this->route = $route_builder->get($ctrl, $action,$params);
+        $this->route = RouteBuilder::get($ctrl, $action,$params);
 
         if((is_object($this->controller)) && (strtolower($ctrl) === strtolower($this->controller->getTitle()))) {
 
