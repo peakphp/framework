@@ -4,6 +4,7 @@ namespace Peak\Application;
 use Peak\Application;
 use Peak\Collection;
 
+use Peak\Exception;
 use Peak\Routing\Request;
 use Peak\Routing\RequestServerURI;
 use Peak\Routing\RequestResolver;
