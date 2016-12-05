@@ -8,32 +8,15 @@ use Peak\Routing\Route;
 class RouteBuilder
 {
 
-    protected $route;
-
-    /**
-     * Contructor
-     *
-     * @param  Request $request
-     */
-    public function __construct(...$segment)
-    {
-        $this->get(...$segment);
-    }
-
-
 
     /**
      * Resolve a request
      * 
      * @return Route
      */
-    public function get(...$segment) 
+    public static function get(...$segment) 
     {
-        $this->route = new Route();
-
         $route_arr = [];
-
-        //print_r($segment);
 
         foreach($segment as $e) {
             if(is_string($e) || is_numeric($e)) {
@@ -48,8 +31,6 @@ class RouteBuilder
         }
 
         $resolve = new RequestResolver(new Request($route_arr));
-        $this->route = $resolve->getRoute();
-
-        return $this->route;
+        return $resolve->getRoute();
     }
 }
