@@ -6,9 +6,9 @@ use Peak\Collection;
 
 use Peak\Routing\Request;
 use Peak\Routing\RequestServerURI;
-use Peak\Routing\RequestResolve;
+use Peak\Routing\RequestResolver;
 use Peak\Routing\Route;
-use Peak\Routing\Regex;
+use Peak\Routing\CustomRoute;
 
 /**
  * Application Routing
@@ -40,15 +40,22 @@ class Routing
      */
     public function __construct($request = null)
     {
-        $this->loadAppRegexRouting();
+        $this->loadAppCustomRoutes();
+        $this->loadRequest($request);
+    }
 
-        $public_root = Application::conf('path.public');
-
+    /**
+     * Load a request or use server request uri
+     * 
+     * @param  string|null $request       
+     */
+    public function loadRequest($request = null)
+    {
         if(isset($request)) {
-            $this->request = new Request($request, $public_root);
+            $this->request = new Request($request, Application::conf('path.public'));
         }
         else {
-            $this->request = new RequestServerURI($public_root);
+            $this->request = new RequestServerURI(Application::conf('path.public'));
         }
     }
 
@@ -59,7 +66,7 @@ class Routing
      */
     public function getRoute()
     {
-        $resolver = new RequestResolve($this->request);
+        $resolver = new RequestResolver($this->request);
 
         $this->route = $resolver->getRoute($this->regex_collection);
 
@@ -69,7 +76,7 @@ class Routing
     /**
      * Check app config for custom regex route
      */
-    protected function loadAppRegexRouting()
+    protected function loadAppCustomRoutes()
     {
         $regex = Application::conf('routing');
 
@@ -81,7 +88,7 @@ class Routing
                     throw new Exception('ERR_CUSTOM', 'Invalid routing in your application config');
                 }
                 else {
-                    $collection[] = new Regex(
+                    $collection[] = new CustomRoute(
                         $r['route'],
                         $r['controller'],
                         $r['action']
