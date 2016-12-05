@@ -1,7 +1,7 @@
 <?php
 namespace Peak\View\Render;
 
-use Peak\Core;
+use Peak\Application;
 use Peak\Registry;
 use Peak\View\Render;
 
@@ -32,7 +32,7 @@ class Layouts extends Render
      */
     public function isLayout($name)
     {
-    	return (file_exists(Core::getPath('theme_layouts').'/'.$name)) ? true : false;
+    	return (file_exists(Application::conf('path.theme_layouts').'/'.$name)) ? true : false;
     }
 
     /**
@@ -63,7 +63,6 @@ class Layouts extends Render
         
         // absolute file path to render     
         $filepath = $path.'/'.$file;
-        $filepath = SVR_ABSPATH.$path.'/'.$file;
 
         // throw the most reliable exception depending on submitted arguments to this method
         if(!file_exists($filepath)) {         
@@ -79,7 +78,7 @@ class Layouts extends Render
                      
         // render the layout if is set
         if((isset($this->_layout_file)) && ($this->isLayout($this->_layout_file))) {
-            $filepath = Core::getPath('theme_layouts').'/'.$this->_layout_file;
+            $filepath = Application::conf('path.theme_layouts').'/'.$this->_layout_file;
             $this->scripts_file = $file;
             $this->scripts_path = $path;
         }

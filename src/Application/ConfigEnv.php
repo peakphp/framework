@@ -38,7 +38,7 @@ class ConfigEnv
 
         $conf->set(
             'path.apptree', 
-            $this->app_config->defaultAppTree($this->app_config->get('path.app'))
+            $this->app_config->defaultAppTree(APPLICATION_ABSPATH)
         );
  
         
@@ -65,7 +65,7 @@ class ConfigEnv
         else {
             //fix a notice in case [all] section doesn't exists, we create it
             if(!isset($conf->all)) $conf->all = array();
-            $conf->all['path'] = $this->app_config->defaultAppTree($apppath);
+            $conf->all['path'] = $this->app_config->defaultAppTree(APPLICATION_ABSPATH);
         }
 
         //try to merge array section 'all' with current environment section if exists
