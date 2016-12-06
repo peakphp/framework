@@ -16,6 +16,8 @@ namespaces which can be painfull for large apps.
  - removed deprecated class Codegen
  - removed deprecated zreflection class
  - removed zend reflection vendor
+ - removed class router
+ - added a new routing system
 
 
 VERSION 1.0.0
