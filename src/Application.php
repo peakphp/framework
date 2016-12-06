@@ -42,13 +42,16 @@ class Application
         // application config             
         $this->_config = $conf;
 
-        // register application/view/router instance
+        // register application/view instance
         Registry::set('app', $this);
         Registry::set('view', new View());
 
-		$this->_loadBootstrap();
-		$this->_loadFront();
+        $this->routing = new Application\Routing();
+
+        $this->_loadBootstrap();
+        $this->_loadFront();
     }
+
 
     /**
      * Create a instance of application
@@ -97,6 +100,7 @@ class Application
             Registry::o()->app->config($path, $value);
             return $this;
         }
+
     }
 
 	/**
@@ -132,8 +136,8 @@ class Application
     public function run($request = null)
     {
 
-        $app_routing = new Application\Routing($request);
-        $this->front->route = $app_routing->getRoute();
+        $this->routing->loadRequest($request);
+        $this->front->route = $this->routing->getRoute();
 
         $this->front->preDispatch();
         $this->front->dispatch();
@@ -148,6 +152,7 @@ class Application
      */
     public function render()
     {
+        $this->front->preRender();
         $this->front->controller->render();
         $this->front->postRender();
     }
