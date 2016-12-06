@@ -32,7 +32,7 @@ class Routing
      * Application regex routes collection from app config
      * @var Peak\Collection
      */
-    public $regex_collection;
+    public $custom_routes;
 
     /**
      * Constructor
@@ -69,7 +69,7 @@ class Routing
     {
         $resolver = new RequestResolver($this->request);
 
-        $this->route = $resolver->getRoute($this->regex_collection);
+        $this->route = $resolver->getRoute($this->custom_routes);
 
         return $this->route;
     }
@@ -98,6 +98,6 @@ class Routing
             }
         }
 
-        $this->regex_collection = $collection;
+        $this->custom_routes = $collection;
     }
 }
