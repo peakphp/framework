@@ -1,6 +1,8 @@
 <?php
 namespace Peak\Routing;
 
+use Peak\Routing\RequestResolver;
+
 class CustomRoute
 {
     /**
@@ -100,7 +102,7 @@ class CustomRoute
 
             $request->request_uri = $this->controller.Request::$separator.$this->action.$request->request_uri;
 
-            $request_resolve = new RequestResolve($request);
+            $request_resolve = new RequestResolver($request);
             $route = $request_resolve->getRoute();
 
             return $route;
