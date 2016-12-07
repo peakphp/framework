@@ -27,6 +27,28 @@ class Lang
      */
     public $translations = array();
 
+
+    /**
+     * Echo an translation
+     *
+     * @param see method translate() of Peak_Lang for info on params
+     */
+    public static function __($text, $replaces = null, $func = null)
+    {
+        if(Registry::o()->lang instanceof Lang)   {       
+            return Registry::o()->lang->translate((string)$text, $replaces, $func);
+        }
+        else return $text;
+    }
+
+    /**
+     * Echo the result of __() function
+     */
+    public static function _e($text,$replaces = null,$func = null) 
+    { 
+        echo self::__($text,$replaces,$func); 
+    }
+
     /**
      * Set lang abbr if specified
      *
@@ -158,21 +180,3 @@ class Lang
     }
 
 }
-
-/**
- * Echo an translation
- *
- * @param see method translate() of Peak_Lang for info on params
- */
-function __($text, $replaces = null, $func = null)
-{
-    if(Registry::o()->lang instanceof Lang)   {       
-        return Registry::o()->lang->translate((string)$text, $replaces, $func);
-    }
-    else return $text;
-}
-
-/**
- * Echo the result of __() function
- */
-function _e($text,$replaces = null,$func = null) { echo __($text,$replaces,$func); }
