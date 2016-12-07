@@ -1,6 +1,7 @@
 <?php
 namespace Peak\View\Render;
 
+use Peak\Application;
 use Peak\View\Render;
 
 /**
@@ -73,8 +74,8 @@ class Partials extends Render
         $this->_scripts_path = $path;
         
         if(!isset($path)) {
-        	$this->scripts_path = Peak_Core::getPath('theme_partials');
-        	$path = Peak_Core::getPath('theme_partials');
+        	$this->scripts_path = Application::conf('path.theme_partials');
+        	$path = Application::conf('path.theme_partials');
         	$no_cache = true;
         }
         
@@ -93,8 +94,8 @@ class Partials extends Render
             foreach($this->_group as $theme_partial) {
                 if($theme_partial !== '[CONTENT]') {
                     if(basename($theme_partial) === $theme_partial) {
-                        if(file_exists(Peak_Core::getPath('theme_partials').'/'.$theme_partial)) {
-                        	$group_filespath[] = Peak_Core::getPath('theme_partials').'/'.$theme_partial;
+                        if(file_exists(Application::conf('path.theme_partials').'/'.$theme_partial)) {
+                        	$group_filespath[] = Application::conf('path.theme_partials').'/'.$theme_partial;
                         }
                     }
                     elseif(file_exists($theme_partial)) $group_filespath[] = $theme_partial;

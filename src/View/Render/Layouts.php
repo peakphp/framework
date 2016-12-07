@@ -55,7 +55,7 @@ class Layouts extends Render
     {
         // default path, no path submitted
         if(!isset($path)) {
-            $path = Core::getPath('theme');
+            $path = Application::conf('path.theme');
             $no_cache = true;
         }
         else $is_scripts_path = true;

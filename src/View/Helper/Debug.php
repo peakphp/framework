@@ -1,6 +1,7 @@
 <?php
 namespace Peak\View\Helper;
 
+use Peak\Application;
 use Peak\Registry;
 use Peak\View\Helper;
 
@@ -33,7 +34,7 @@ class Debug extends Helper
 	{
 		$app = Registry::o()->app;
 		$cfile_name = $app->front->controller->name;
-		$cfile = Peak_Core::getPath('controllers').'/'.$cfile_name.'.php';
+		$cfile = Application::conf('path.controllers').'/'.$cfile_name.'.php';
 		if(file_exists($cfile)) {
 			$cfile_content = file_get_contents($cfile);
 			return $cfile_content;
