@@ -196,6 +196,13 @@ class Front
 	 */
 	public function postDispatchController() { }
     
+
+    /**
+     * Called after rendering controller view
+     * Empty by default
+     */
+    public function preRender() { }  
+
     /**
      * Called after rendering controller view
      * Empty by default
