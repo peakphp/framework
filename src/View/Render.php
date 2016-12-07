@@ -1,8 +1,9 @@
 <?php
 namespace Peak\View;
 
-use Peak\View\Cache;
+use Peak\Application;
 use Peak\Registry;
+use Peak\View\Cache;
 
 /**
  * Peak_View_Render Engine base
@@ -81,7 +82,7 @@ abstract class Render
         
         if(defined('PUBLIC_URL')) $url = PUBLIC_URL.'/'.$path;
         elseif(isset($_SERVER['SERVER_NAME'])) {
-            $url = $schema_name.$_SERVER['SERVER_NAME'].'/'.PUBLIC_ROOT.'/'.$path;
+            $url = $schema_name.$_SERVER['SERVER_NAME'].'/'.Application::conf('path.public').'/'.$path;
         }
 
         //remove double slash(//) inside url
