@@ -1,7 +1,7 @@
 <?php
 namespace Peak\View;
 
-use Peak\Core;
+use Peak\Application;
 use Peak\Registry;
 
 /**
@@ -26,7 +26,7 @@ class Cache
      */
 	public function __construct()
 	{
-		$this->_cache_path = Core::getPath('theme_cache');
+		$this->_cache_path = Application::conf('path.theme_cache');
 	}
 	
 	/**
