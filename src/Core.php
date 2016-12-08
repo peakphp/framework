@@ -1,55 +1,35 @@
 <?php
-namespace Peak;
 
-use Peak\Config;
-use Peak\Exception;
+use Peak\Application;
+use Peak\Registry;
 
 /**
- * Peak Core
+ * CONSTANT(S)
  */
+if(!defined('PEAK_VERSION'))
+    define('PEAK_VERSION', '2.0.0');
 
-class Core
-{
+/**
+ * relative_basepath()
+ */
+if(!function_exists('relative_basepath')) {
     /**
-     * Constants
+     * Get relativepath of specified dir from the server document root
+     * 
+     * @param  string $dir
+     * @return string     
      */
-    const VERSION  = '2.0.0';
-    const NAME     = 'PEAK';
-    const DESCR    = 'PHP Elegant Application Kernel';
+    function relative_basepath($dir) {
+        $sdr = (!isset($_SERVER['DOCUMENT_ROOT'])) ? '' : $_SERVER['DOCUMENT_ROOT'];
+        return substr(str_replace([$sdr,basename($dir)],'',str_replace('\\','/',$dir)), 0, -1);
+    }
+}
 
-    /**
-     * Current Environment
-     * @final
-     * @var string
-     */
-    private static $_env;
-
-    /**
-     * object itself
-     * @var object
-     */
-    private static $_instance = null; 
-    
-    /**
-     * Singleton peak core
-     *
-     * @return  object instance
-     */
-    public static function getInstance()
-  	{
-  		if (is_null(self::$_instance)) self::$_instance = new self();
-  		return self::$_instance;
-  	}
-
-	/**
-	 * Activate error_reporting based on app env
-	 */
-    private function __construct()
-    {
-        if(self::getEnv() === 'dev') {
-        	//ini_set('error_reporting', (version_compare(PHP_VERSION, '5.3.0', '<') ? E_ALL|E_STRICT : E_ALL|E_DEPRECATED));
-        	//faster...?
-        	ini_set('error_reporting', (!function_exists('class_alias')) ? E_ALL|E_STRICT : E_ALL|E_DEPRECATED);
+if(!function_exists('app')) {
+    function app() {
+        if(Registry::isRegistered('app'))   {       
+            return Registry::o()->app;
         }
+        else return null;
     }
 }
