@@ -63,13 +63,16 @@ abstract class Filters
 	/**
 	 * Get Escaped data
 	 *
+	 * @param  closure|null $func 
 	 * @return array
 	 */
 	public function getEscData($func = null)
 	{
 		if(!is_callable($func)) {
 			$func = function($n) {
-				return htmlspecialchars($n);
+				$n = htmlspecialchars($n);
+				if(empty($n)) $n = null;
+				return $n;
 			};
 		}
 		
