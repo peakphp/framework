@@ -325,6 +325,9 @@ class Grid extends Helper
         //body
         if(!empty($this->_data)) {
             foreach($this->_data as $index => $row) {
+
+                // try to explicitly convert object to array
+                if(is_object($row)) $row = (array)$row;
                 
                 //new row
                 echo '<tr data-index="'.$index.'"'.$this->_rowDataAttr($row).'>';
