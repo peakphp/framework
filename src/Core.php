@@ -24,3 +24,38 @@ if(!function_exists('relative_basepath')) {
         return substr(str_replace([$sdr,basename($dir)],'',str_replace('\\','/',$dir)), 0, -1);
     }
 }
+
+/**
+ * __()
+ */
+if(!function_exists('__')) {
+    /**
+     * Shortcut of Peak\Lang::__()
+     * 
+     * @param  string         $text     
+     * @param  array|string   $replaces 
+     * @param  closure        $func     
+     * @return string          
+     */
+    function __($text, $replaces = null, $func = null) {
+        return \Peak\Lang::__($text, $replaces, $func);
+    }
+}
+
+
+/**
+ * _e()
+ */
+if(!function_exists('_e')) {
+    /**
+     * Shortcut of Peak\Lang::__()
+     * 
+     * @param  string         $text     
+     * @param  array|string   $replaces 
+     * @param  closure        $func     
+     * @return string          
+     */
+    function _e($text, $replaces = null, $func = null) { 
+        \Peak\Lang::_e($text, $replaces, $func); 
+    }
+}
