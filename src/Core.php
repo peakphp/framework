@@ -24,12 +24,3 @@ if(!function_exists('relative_basepath')) {
         return substr(str_replace([$sdr,basename($dir)],'',str_replace('\\','/',$dir)), 0, -1);
     }
 }
-
-if(!function_exists('app')) {
-    function app() {
-        if(Registry::isRegistered('app'))   {       
-            return Registry::o()->app;
-        }
-        else return null;
-    }
-}
