@@ -9,15 +9,15 @@ namespaces which can be painfull for large apps.
  
  - namespace migration
  - multiples fix due to namespace migration
- - removed zend db vendor (we use laravel database now)
+ - removed zend db vendor, we use laravel database instead
+ - removed zend reflection vendor
  - added view helper class to inject view object into view helper
  - removed unused spl autoload functions
  - removed deprecated class Xml and Dispatcher
  - removed deprecated class Codegen
  - removed deprecated zreflection class
- - removed zend reflection vendor
- - removed class router
- - added a new routing system
+ - removed class router in favor of new routing components
+ - most code inside core have been moved to new application components 
 
 
 VERSION 1.0.0
