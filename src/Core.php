@@ -48,7 +48,7 @@ if(!function_exists('__')) {
  */
 if(!function_exists('_e')) {
     /**
-     * Shortcut of Peak\Lang::__()
+     * Shortcut of Peak\Lang::_e()
      * 
      * @param  string         $text     
      * @param  array|string   $replaces 
