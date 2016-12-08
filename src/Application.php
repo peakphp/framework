@@ -135,14 +135,12 @@ class Application
      */
     public function run($request = null)
     {
-
         $this->routing->loadRequest($request);
         $this->front->route = $this->routing->getRoute();
 
         $this->front->preDispatch();
         $this->front->dispatch();
         $this->front->postDispatch();
-
 
         return $this;
     }
