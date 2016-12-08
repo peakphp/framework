@@ -2,7 +2,6 @@
 namespace Peak\Controller;
 
 use Peak\Application;
-use Peak\Core;
 use Peak\Collection;
 use Peak\Registry;
 use Peak\Exception;
@@ -191,6 +190,7 @@ abstract class Action
      */
     public function setRoute(Route $route)
     {
+        //print_r($route);
         $this->params       = $route->params;        
         $this->params_assoc = new Collection($route->params_assoc);
         $this->action       = $this->action_prefix . $route->action;
