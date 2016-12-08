@@ -14,38 +14,38 @@ class Grid extends Helper
      * The grid data
      * @var array
      */
-    private $_data = array();
+    private $_data = [];
     
     /**
      * The columns
      * @var array
      */
-    private $_columns = array();
+    private $_columns = [];
     
     /**
      * The columns url pattern with binds
      * @var array
      */
-    private $_columns_url = array('url' => '', 'binds' => '', 'result' => '');
+    private $_columns_url = ['url' => '', 'binds' => '', 'result' => ''];
     
     
     /**
      * Set which column defines the table sorting
      * @var array
      */
-    private $_column_sorting = array('name' => '', 'direction' => '');
+    private $_column_sorting = ['name' => '', 'direction' => ''];
     
     /**
      * Excluded columns
      * @var array
      */
-    private $_exclude_colums = array();
+    private $_exclude_colums = [];
     
     /**
      * Hook for the data
      * @var array
      */
-    private $_hooks = array();
+    private $_hooks = [];
     
     /**
      * Breakline for html output
@@ -302,7 +302,7 @@ class Grid extends Helper
                 
                 // add data attr for sorting
                 if($this->_column_sorting['name'] === $colname) {
-                    echo ' data-active="yes"';
+                    echo ' data-sorted="yes"';
                     if(!empty($this->_column_sorting['direction'])) echo ' data-direction="'.$this->_column_sorting['direction'].'"';
                 }
                 
@@ -346,7 +346,7 @@ class Grid extends Helper
                     $row_data = $this->_processHook($colname, $row_data, $row);
                     
                     //print the data
-                    echo '<td>'.$row_data.'</td>'.$this->_line_break;
+                    echo '<td data-column="'.$colname.'">'.$row_data.'</td>'.$this->_line_break;
                     
                 }
                 //close row
