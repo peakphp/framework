@@ -61,6 +61,23 @@ abstract class Filters
 	}
 
 	/**
+	 * Get Escaped data
+	 *
+	 * @return array
+	 */
+	public function getEscData($func = null)
+	{
+		if(!is_callable($func)) {
+			$func = function($n) {
+				return htmlspecialchars($n);
+			};
+		}
+		
+		$data = array_map($func, $this->_data);
+		return $data;
+	}
+
+	/**
 	 * Get sanitize filters var
 	 *
 	 * @return array
