@@ -59,3 +59,24 @@ if(!function_exists('_e')) {
         \Peak\Lang::_e($text, $replaces, $func); 
     }
 }
+
+/**
+ * phpinput()
+ */
+if(!function_exists('phpinput')) {
+    /**
+     * Retreive a collection object from php://input 
+     */
+    function phpinput() { 
+
+        $raw  = file_get_contents("php://input");
+        $post = json_decode($raw , true); // for json input
+
+        // incase json post is empty but $_POST is not we will use it
+        if(!empty($raw) && empty($post) && isset($_POST)) {
+            $post = $_POST;
+        }
+
+        return \Peak\Collection::make($post);
+    }
+}
