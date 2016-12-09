@@ -1,8 +1,5 @@
 <?php
 
-use Peak\Application;
-use Peak\Registry;
-
 /**
  * CONSTANT(S)
  */
