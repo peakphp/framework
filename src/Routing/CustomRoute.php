@@ -19,8 +19,8 @@ class CustomRoute
     public $action;
 
     /**
-     * Regex object
-     * @var Request
+     * Regex string
+     * @var string
      */
     protected $regex;
 
@@ -33,8 +33,8 @@ class CustomRoute
     {
         $this->setRegex($regex);
 
-        $this->controller = $controller;
-        $this->action     = $action;
+        $this->controller = trim($controller);
+        $this->action     = trim($action);
     }
 
     /**
@@ -45,6 +45,16 @@ class CustomRoute
     public function setRegex($regex)
     {
         $this->regex = Regex::build($regex);
+    }
+
+    /**
+     * Get the curretn regex
+     * 
+     * @return string
+     */
+    public function getRegex()
+    {
+        return $this->regex;
     }
 
     /**
