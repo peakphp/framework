@@ -1,7 +1,6 @@
 <?php
 namespace Peak;
 
-use Peak\Application\Bootstrap;
 use Peak\Application\Config;
 
 /**
