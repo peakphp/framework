@@ -1,12 +1,14 @@
 <?php
+namespace Peak\Spl;
+
+use DirectoryIterator;
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
+
 /**
  * Retreive directory sizes and number of files
- * 
- * @uses    DirectoryIterator or RecursiveDirectoryIterator
- * @author  Francois Lajoie
- * @version $Id$
  */
-class Peak_Spl_Dirinfo
+class Dirinfo
 {
 	/**
 	 * Size
@@ -31,6 +33,7 @@ class Peak_Spl_Dirinfo
 			$it = new RecursiveDirectoryIterator($path);
 
 			foreach (new RecursiveIteratorIterator($it) as $f => $c) {
+				if($c->isDir() || $c->isDot()) continue;
 				$size = $c->getSize();
 				$this->_size += $size;
 				++$this->_nbfiles;
@@ -56,7 +59,7 @@ class Peak_Spl_Dirinfo
 	{
 		if(!$format) return $this->_size;
 		else {
-            $unit = array('B','kB','MB','GB','TB','PB');
+            $unit = array('b','kb','mb','gb','tb','pb');
             return @round($this->_size/pow(1024,($i=floor(log($this->_size,1024)))),2).' '.$unit[$i];
 		}
 	}

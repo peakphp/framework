@@ -1,13 +1,12 @@
 <?php
+namespace Peak\Spl;
+
 /**
  * Peak_Spl_Fileinfo
  * 
  * @desc    Extension of class SplFileInfo. Add auto/custom formatting options.
- *
- * @author  Francois Lajoie
- * @version $Id$
  */
-class Peak_Spl_Fileinfo extends SplFileInfo 
+class Fileinfo extends SplFileInfo 
 {
 	/**
 	 * Change these setting to create custom formatting
