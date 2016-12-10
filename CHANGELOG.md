@@ -12,12 +12,15 @@ namespaces which can be painfull for large apps.
  - removed zend db vendor, we use laravel database instead
  - removed zend reflection vendor
  - added view helper class to inject view object into view helper
+ - added per environment functionality to application bootstrap
+ - added new routing components
+ - most code inside Core have been moved to new application components.
+ - Core regroup global functions now
  - removed unused spl autoload functions
- - removed deprecated class Xml and Dispatcher
- - removed deprecated class Codegen
- - removed deprecated zreflection class
- - removed class router in favor of new routing components
- - most code inside core have been moved to new application components 
+ - removed deprecated Xml and Dispatcher class
+ - removed deprecated Codegen class
+ - removed deprecated Zreflection class
+ - removed deprecated Router class
 
 
 VERSION 1.0.0
