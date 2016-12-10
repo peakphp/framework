@@ -41,7 +41,7 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
      * Use most of php built in array_ functions with items
      * Don't work with passed by reference array like array_push
      *
-     * ex: $obj->array_keys()
+     * ex: $obj->array_keys() or $obj->keys()
      * 
      * @param  string $func array_ func
      * @param  mixed  $argv 
