@@ -94,6 +94,31 @@ abstract class Render
     }
 
     /**
+     * Generate application url 
+     * 
+     * @param  string  $path               
+     * @param  boolean $return             
+     * @param  boolean $use_forwarded_host 
+     * @return string
+     */
+    public function url($path = null, $use_forwarded_host = true)
+    {
+        $s = $_SERVER;
+
+        $ssl      = ( ! empty( $s['HTTPS'] ) && $s['HTTPS'] == 'on' );
+        $sp       = strtolower( $s['SERVER_PROTOCOL'] );
+        $protocol = substr( $sp, 0, strpos( $sp, '/' ) ) . ( ( $ssl ) ? 's' : '' );
+        $port     = $s['SERVER_PORT'];
+        $port     = ( ( ! $ssl && $port=='80' ) || ( $ssl && $port=='443' ) ) ? '' : ':'.$port;
+        $host     = ( $use_forwarded_host && isset( $s['HTTP_X_FORWARDED_HOST'] ) ) ? $s['HTTP_X_FORWARDED_HOST'] : ( isset( $s['HTTP_HOST'] ) ? $s['HTTP_HOST'] : null );
+        $host     = isset( $host ) ? $host : $s['SERVER_NAME'] . $port;
+
+        $final    = '//' . $host.Application::conf('path.public').'/'.$path;
+
+        return $final;
+    }
+
+    /**
      * Call child output method and cache it if cache activated;
      * Can be overloaded by engines to customize how the cache data
      *
