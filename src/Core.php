@@ -66,7 +66,7 @@ if(!function_exists('phpinput')) {
      */
     function phpinput() { 
 
-        $raw  = file_get_contents("php://input");
+        $raw  = file_get_contents('php://input');
         $post = json_decode($raw , true); // for json input
 
         // incase json post is empty but $_POST is not we will use it
