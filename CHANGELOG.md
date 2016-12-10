@@ -22,6 +22,7 @@ been rewritten, splitted and/or reorganised.
  - removed deprecated Codegen class
  - removed deprecated Zreflection class
  - removed deprecated Router class
+ - removed all models classes and use laravel eloquent ORM instead
 
 
 VERSION 1.0.0
