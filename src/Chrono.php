@@ -11,13 +11,16 @@ class Chrono
      * Global timer, used by default if not timer name is specified
      * @var array
      */
-    private static $_global = array('start' => false, 'end' => false);
+    private static $_global = [
+        'start' => false, 
+        'end' => false
+    ];
 
     /**
      * Timers list
      * @var array
      */
-    private static $_timers = array();
+    private static $_timers = [];
 
     /**
      * Start global timer of a specific timer name if set
@@ -27,9 +30,15 @@ class Chrono
     public static function start($timer_name = null)
     {
         if(!isset($timer_name)) {
-            self::$_global = array('start' => self::getMicrotime(), 'end' => false);      
+            self::$_global = [
+                'start' => self::getMicrotime(), 
+                'end' => false
+            ];      
         }
-        else self::$_timers[$timer_name] = array('start' => self::getMicrotime(), 'end' => false);
+        else self::$_timers[$timer_name] = [
+            'start' => self::getMicrotime(), 
+            'end' => false
+        ];
     }
 
     /**
@@ -110,11 +119,11 @@ class Chrono
     /**
      * Stop chrono if not ended and return the time elapsed in seconds
      *
-     * @param  string|null   $timer_name
      * @param  integer       $decimal_precision
+     * @param  string|null   $timer_name
      * @return integer|false return false if timer do not exists or it is not valid
      */
-    public static function get($timer_name = null, $decimal_precision = 2)
+    public static function get($decimal_precision = 2, $timer_name = null)
     {
         if(self::isOn($timer_name)) self::stop($timer_name);
 
@@ -135,9 +144,9 @@ class Chrono
      *
      * @see get()
      */
-    public static function getMS($timer_name = null, $decimal_precision = 4)
+    public static function getMS($decimal_precision = 4, $timer_name = null)
     {
-        $sec = self::get($timer_name, $decimal_precision);
+        $sec = self::get($decimal_precision, $timer_name);
         if($sec === false) return false;
         
         return $sec * 1000;      
@@ -153,7 +162,7 @@ class Chrono
         if(isset($timer_name)) {
             if(self::timerExists($timer_name)) unset(self::$_timers[$timer_name]);
         }
-        else self::$_global = array('start' => false, 'end' => false);  
+        else self::$_global = ['start' => false, 'end' => false];  
     }
 
     /**

@@ -65,7 +65,7 @@ class ChronoTest extends TestCase
         Peak\Chrono::start('timer1');
         usleep(100000);
         Peak\Chrono::stop('timer1');
-        $this->assertTrue(Peak\Chrono::get('timer1') >= 0.10);
+        $this->assertTrue(Peak\Chrono::get(2,'timer1') >= 0.10);
         $this->assertTrue(Peak\Chrono::isCompleted('timer1'));     
     }
     
@@ -76,7 +76,7 @@ class ChronoTest extends TestCase
     {
         Peak\Chrono::start('timer1');
         usleep(100000);
-        $this->assertTrue(Peak\Chrono::get('timer1') >= 0.10);
+        $this->assertTrue(Peak\Chrono::get(2,'timer1') >= 0.10);
         $this->assertTrue(Peak\Chrono::isCompleted('timer1'));    
     }
     
