@@ -1,6 +1,8 @@
 <?php
 namespace Peak\View;
 
+//deprecated
+
 /**
  * Manage Application Views Themes folder(s)
  * 
