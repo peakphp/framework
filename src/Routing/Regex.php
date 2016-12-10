@@ -59,7 +59,7 @@ class Regex
      */
     public static function addQuickRegex($shortcut, $regex) 
     {   
-        self::$_quick_reg[$shortcut] = $regex;
+        self::$_quick_reg[':'.$shortcut] = $regex;
     }
 
 
