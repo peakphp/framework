@@ -3,7 +3,6 @@ use PHPUnit\Framework\TestCase;
 
 use Peak\Routing\CustomRoute;
 use Peak\Routing\Request;
-use Peak\Routing\Regex;
 
 class CustomRouteTest extends TestCase
 {
@@ -40,6 +39,12 @@ class CustomRouteTest extends TestCase
     {   
         $custom = new CustomRoute(':any', 'admin', 'index');
         $this->assertTrue($custom->getRegex() === '[^\/]+');
+    }
 
+    public function testChangeRegex()
+    {   
+        $custom = new CustomRoute(':any', 'admin', 'index');
+        $custom->setRegex(':alpha');
+        $this->assertTrue($custom->getRegex() === '[a-zA-Z]+');
     }
 }
