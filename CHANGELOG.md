@@ -2,14 +2,15 @@ VERSION 2.0.0
 -------------
 Release Date: ?
 
-Warning! Breaking change in 2.0.0 :
+Warning! Breaking changes in 2.0.0 :
 If you want want to support an old application, please use version 1.*
-Otherwise, you will need to use composer and upgrade your app in order to use
-namespaces which can be painfull for large apps.
+This version is incompatible with 1.0.0 because most componments have  
+been rewritten, splitted and/or reorganised.
  
  - namespace migration
  - multiples fix due to namespace migration
- - removed zend db vendor, we use laravel database instead
+ - switched to laravel database powerfull components
+ - removed zend db vendor
  - removed zend reflection vendor
  - added view helper class to inject view object into view helper
  - added per environment functionality to application bootstrap
