@@ -95,7 +95,7 @@ class Exception extends \Exception
 		$debug = 'Files:<br />';
 		foreach($err_propagation as $line => $file) $debug .= '- '.$file.' (Line: '.$line.')<br />';
 
-		if((defined('APPLICATION_ENV')) && (APPLICATION_ENV === 'development')) {
+		if((defined('APPLICATION_ENV')) && (APPLICATION_ENV === 'dev')) {
 			$debug .= '<br />Trace dump ['.$this->getTime().']:<pre>';
 			$debug .= print_r($trace,true);
 			$debug .= '</pre>';
