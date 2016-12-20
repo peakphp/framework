@@ -1,6 +1,7 @@
 <?php
 namespace Peak;
 
+use Peak\Application\Bootstrapper;
 use Peak\Application\Config;
 
 /**
@@ -111,7 +112,7 @@ class Application
 	{
 		$cname = $this->config('ns').'\Bootstrap';
 		if(class_exists($cname)) $this->bootstrap = new $cname();
-		else $this->bootstrap = new Bootstrap();
+		else $this->bootstrap = new Bootstrapper();
 	}
 
 	/**
