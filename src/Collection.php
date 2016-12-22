@@ -171,6 +171,14 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
         return empty($this->items);
     }
 
+    /**
+     * To array
+     */
+    public function toArray()
+    {
+        return $this->items;
+    }
+
 
     public function jsonSerialize()
     {
