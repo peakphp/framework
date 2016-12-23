@@ -59,7 +59,7 @@ class Database
      */
     static function schema()
     {
-        return self::db()->schema()
+        return self::db()->schema();
     }
 
     /**
