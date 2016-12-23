@@ -10,6 +10,7 @@ been rewritten, splitted and/or reorganised.
  - namespace migration
  - multiples fix due to namespace migration
  - switched to laravel database powerfull components
+ - added database wrapper around capsule manager
  - removed zend db vendor
  - removed zend reflection vendor
  - added view helper class to inject view object into view helper
