@@ -225,7 +225,7 @@ class Header
      *
      * @return object  $this
      */
-    public function setCode($code = 202, $die = false, $http = 'HTTP/1.1')
+    public function setCode($code = 200, $die = false, $http = 'HTTP/1.1')
     {
         if(array_key_exists($code,$this->_http_status_codes)) {
             $this->set($http.' '.$code.' '.$this->_http_status_codes[$code]);
