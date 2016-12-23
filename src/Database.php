@@ -11,7 +11,7 @@ class Database
      * The current database connection
      * @var Capsule
      */
-    private static $_db;
+    protected static $_db;
 
     /**
      * Return current database connection
@@ -21,14 +21,6 @@ class Database
     static function db()
     {
         return self::$_db;
-    }
-
-    /**
-     * Return table (shortcut of self::db()->table('table'))
-     */
-    static function table($table_name)
-    {
-        return self::db()->table($table_name);
     }
 
     /**
@@ -54,6 +46,23 @@ class Database
     }
 
     /**
+     * Return table (shortcut of self::db()->table('table'))
+     */
+    static function table($table_name)
+    {
+        return self::db()->table($table_name);
+    }
+
+    /**
+     * Schema
+     * @return  Return schema (shortcut of self::db()->schema())
+     */
+    static function schema()
+    {
+        return self::db()->schema()
+    }
+
+    /**
      * Set PDO fetch mode to array assoc
      */
     static function setFetchModeToAssoc()
@@ -68,7 +77,6 @@ class Database
     {
         self::db()->setFetchMode(\PDO::FETCH_CLASS);
     }
-
 
     /**
      * Return true or false
