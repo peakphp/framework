@@ -54,6 +54,26 @@ class Database
     }
 
     /**
+     * Shortcode for Capsule::select
+     * 
+     * @see select() method in Illuminate\Database\Connection
+     * 
+     * @return  array of objects
+     */
+    static function select($query, $bindings = [])
+    {
+        return Capsule::select($query, $bindings);
+    }
+
+    /**
+     * Shortcode for Capsule::statement
+     */
+    static function statement($query, $bindings = [])
+    {
+        Capsule::statement($query, $bindings);
+    }
+
+    /**
      * Schema
      * @return  Return schema (shortcut of self::db()->schema())
      */
