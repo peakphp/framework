@@ -11,7 +11,7 @@ class Header
      * Header fields
      * @var array
      */
-    protected $_header = array();
+    protected $_header = [];
 
     /**
      * Additonnal content after
@@ -35,7 +35,7 @@ class Header
      * List of http status codes
      * @var array
      */
-    protected $_http_status_codes = array(
+    protected $_http_status_codes = [
 
         100 => 'Continue',
         101 => 'Switching Protocols',
@@ -109,7 +109,8 @@ class Header
         510 => 'Not Extended',
         511 => 'Network Authentication Required',
         598 => 'Network read timeout error',
-        599 => 'Network connect timeout error');
+        599 => 'Network connect timeout error'
+    ];
 
 
     /**
@@ -196,7 +197,7 @@ class Header
     public function reset()
     {
         $this->_content  = '';
-        $this->_header[] = array();
+        $this->_header[] = [];
         $this->_released = false;
         return $this;
     }
@@ -224,7 +225,7 @@ class Header
      *
      * @return object  $this
      */
-    public function setRCode($code = 202, $die = false, $http = 'HTTP/1.1')
+    public function setCode($code = 202, $die = false, $http = 'HTTP/1.1')
     {
         if(array_key_exists($code,$this->_http_status_codes)) {
             $this->set($http.' '.$code.' '.$this->_http_status_codes[$code]);
@@ -246,10 +247,10 @@ class Header
      */
     public function noCache()
     {
-        $h = array(
+        $h = [
             'Cache-Control: no-cache, must-revalidate',
             'Expires: Thu, 01 Jan 1970 00:00:00 GMT'
-        );
+        ];
         return $this->set($h);
     }
 
@@ -261,7 +262,7 @@ class Header
      */
     public function redirect($url, $code = 302)
     {
-        $this->setRCode($code);
+        $this->setCode($code);
         $this->set('Location: '.$url);
         $this->release(true);
     }
@@ -279,14 +280,14 @@ class Header
         if(file_exists($filepath)) {
 
             // dowwload header
-            $h = array(
+            $h = [
                 'Cache-Control: public, must-revalidate',
                 'Pragma: hack',
                 'Content-Type: '.$mmtype,
                 'Content-Length: ' .filesize($filepath),
                 'Content-Disposition: attachment; filename="'.basename($filepath).'"',
                 'Content-Transfer-Encoding: binary'."\n"
-            );
+            ];
 
             // set headers
             $this->set($h);
@@ -326,7 +327,7 @@ class Header
             file_put_contents($tmpfile, $content);
 
             // download header
-            $h = array(
+            $h = [
                 'Cache-Control: public, must-revalidate',
                 'Pragma: hack',
                 'Content-Type: application/octet-stream',
@@ -334,7 +335,7 @@ class Header
                 'Content-Length: ' .filesize($tmpfile),
                 'Content-Disposition: attachment; filename="'.$archive_name.'"',
                 'Content-Transfer-Encoding: binary'."\n"
-            );
+            ];
 
             // set headers
             $this->set($h);
