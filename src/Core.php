@@ -16,9 +16,11 @@ if(!function_exists('relative_basepath')) {
      * @param  string $dir
      * @return string     
      */
-    function relative_basepath($dir) {
-        $sdr = (!isset($_SERVER['DOCUMENT_ROOT'])) ? '' : $_SERVER['DOCUMENT_ROOT'];
-        return substr(str_replace([$sdr,basename($dir)],'',str_replace('\\','/',$dir)), 0, -1);
+    function relative_basepath($dir, $doc_root = null) {
+        if(!isset($doc_root)) {
+            $doc_root = (!isset($_SERVER['DOCUMENT_ROOT'])) ? '' : $_SERVER['DOCUMENT_ROOT'];
+        }
+        return substr(str_replace([$doc_root,basename($dir)],'',str_replace('\\','/',$dir)), 0, -1);
     }
 }
 
@@ -75,5 +77,21 @@ if(!function_exists('phpinput')) {
         }
 
         return \Peak\Collection::make($post);
+    }
+}
+
+/**
+ * is_env()
+ */
+if(!function_exists('is_env')) {
+    /**
+     * shorcut for APPLICATION_ENV === $env verification
+     */
+    function is_env($env) { 
+
+        if(defined('APPLICATION_ENV')) {
+            return (APPLICATION_ENV === $env);
+        }
+        return false;
     }
 }
