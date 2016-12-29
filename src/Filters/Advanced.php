@@ -272,7 +272,7 @@ abstract class Advanced extends Filters
 	 */
 	protected function _filter_enum($v, $opt)
 	{
-	    return (in_array($v,$opt));
+	    return (in_array($v, $opt, true));
 	}
 	
 	/**
