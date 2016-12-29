@@ -10,7 +10,7 @@ abstract class Filters
 	 * Data on which we work 
 	 * @var array
 	 */
-	protected $_data = array();
+	protected $_data = [];
 
 	/**
 	 * Sanitize filters
@@ -34,7 +34,7 @@ abstract class Filters
 	 * Errors found when validating
 	 * @var array
 	 */
-	protected $_errors = array();
+	protected $_errors = [];
 
 	/**
 	 * 
@@ -75,7 +75,11 @@ abstract class Filters
 				return $n;
 			};
 		}
-		
+
+		if($this->_data instanceof \Peak\Collection) {
+			$this->_data = $this->_data->toArray();
+		}
+
 		$data = array_map($func, $this->_data);
 		return $data;
 	}
