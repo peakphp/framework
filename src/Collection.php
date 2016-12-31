@@ -20,11 +20,35 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
     protected $items = [];
 
     /**
+     * Lock write
+     * @var boolean
+     */
+    protected $read_only = false;
+
+    /**
      * Create a new collection
      */
     public function __construct($items = null)
     {
         if(is_array($items)) $this->items = $items;
+    }
+
+    /**
+     * Set read only on
+     */
+    public function readOnly()
+    {
+        $this->read_only = true;
+    }
+
+    /**
+     * Check if its read only
+     * 
+     * @return boolean
+     */
+    public function isReadOnly()
+    {
+        return $this->read_only;
     }
 
     /**
@@ -76,6 +100,7 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
      */
     public function __set($key,$value) 
     {
+        if($this->isReadOnly()) return;
         $this->items[$key] = $value;
     }
 
@@ -97,6 +122,7 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
      */
     public function __unset($key) 
     {
+        if($this->isReadOnly()) return;
         unset($this->items[$key]);
     }
 
@@ -105,6 +131,8 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
      */
     public function offsetSet($offset, $value) 
     {
+        if($this->isReadOnly()) return;
+
         if (is_null($offset)) {
             $this->items[] = $value;
         } 
@@ -128,6 +156,7 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
      */
     public function offsetUnset($offset) 
     {
+        if($this->isReadOnly()) return;
         unset($this->items[$offset]);
     }
 
