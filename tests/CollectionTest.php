@@ -145,4 +145,36 @@ class CollectionTest extends TestCase
 		$this->assertTrue(count($columns) == 4);
 		$this->assertTrue($columns[1] === 'Sally');
 	}
+
+	/**
+	 * Test read only
+	 */
+	function testReadOnly()
+	{
+		$collection = Collection::make([
+	        'id' => 2135,
+	        'first_name' => 'John',
+	        'last_name' => 'Doe', 
+		]);
+
+		$collection->readOnly();
+
+		$this->assertTrue($collection->isReadOnly());
+
+		$collection->id = 2138;
+
+		$this->assertFalse($collection->id == 2138);
+		$this->assertTrue($collection->id == 2135);
+
+		$collection['id'] = 2138;
+
+		$this->assertFalse($collection->id == 2138);
+		$this->assertTrue($collection->id == 2135);
+
+		unset($collection->id);
+		$this->assertTrue($collection->id == 2135);
+
+		unset($collection['id']);
+		$this->assertTrue($collection->id == 2135);
+	}
 }
