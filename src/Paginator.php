@@ -2,6 +2,7 @@
 namespace Peak;
 
 use IteratorAggregate;
+use ArrayIterator;
 
 /**
  * Paginator model
@@ -49,7 +50,7 @@ class Paginator implements IteratorAggregate
      */
     public function getIterator()
     {
-        return new \ArrayIterator($this->pages);
+        return new ArrayIterator($this->pages);
     }
 
     /**
