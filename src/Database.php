@@ -9,112 +9,97 @@ class Database
 {
     /**
      * The current database connection
-     * @var Capsule
+     * @var Illuminate\Database\*
      */
-    protected static $_db;
+    protected $db;
 
     /**
-     * Return current database connection
-     * 
-     * @return object
+     * The current database schema
+     * @var Illuminate\Database\Schema\*
      */
-    static function db()
-    {
-        return self::$_db;
-    }
+    protected $schema;
 
+    /**
+     * Capsule manager
+     * @var Illuminate\Database\Schema\Manager
+     */
+    protected static $capsule;
+
+
+    /**
+     * Constructor
+     * @param array
+     */
+    public function __construct($conf, $name = 'default')
+    {
+        $this->connect($conf, $name);
+    }
+    
     /**
      * Connect to database
      * 
      * @param  array $conf   
      */
-    static function connect($conf)
+    protected function connect($conf, $name = 'default')
     {
-        try {
-            $db = new Capsule;
-            $db->addConnection($conf);
-            $db->setEventDispatcher(new Dispatcher(new Container));
-            $db->bootEloquent();
-            $db->setAsGlobal();
+        // prepare capsule only once
+        if(!isset(self::$capsule)) {
+            self::$capsule = new Capsule;
+        }
 
-            self::$_db = $db;
+        try {
+            self::$capsule->addConnection($conf, $name);
+            self::$capsule->setEventDispatcher(new Dispatcher(new Container));
+            self::$capsule->bootEloquent();
+            self::$capsule->setAsGlobal();
+
+            // store the connection
+            $this->db = self::$capsule->getConnection($name);
+
+            // store the schema
+            $this->schema = self::$capsule->schema($name);
         }
         catch(PDOException $e) {
-
             throw new \Exception('Can\'t connect to database');
         }
     }
 
     /**
-     * Return table (shortcut of self::db()->table('table'))
+     * Call unknow method directly on $db object
+     * 
+     * @param  string $method 
+     * @param  mixed $args   
+     * @return mixed         
      */
-    static function table($table_name)
+    public function  __call($method, $args = null)
     {
-        return self::db()->table($table_name);
+        return call_user_func_array([$this->db, $method], $args);
     }
 
-    /**
-     * Shortcode for Capsule::select
-     * 
-     * @see select() method in Illuminate\Database\Connection
-     * 
-     * @return  array of objects
-     */
-    static function select($query, $bindings = [])
-    {
-        return Capsule::select($query, $bindings);
-    }
-
-    /**
-     * Shortcode for Capsule::statement
-     */
-    static function statement($query, $bindings = [])
-    {
-        Capsule::statement($query, $bindings);
-    }
 
     /**
      * Schema
      * @return  Return schema (shortcut of self::db()->schema())
      */
-    static function schema()
+    public function schema()
     {
-        return self::db()->schema();
+        return $this->schema;
     }
 
     /**
      * Set PDO fetch mode to array assoc
      */
-    static function setFetchModeToAssoc()
+    public function setFetchModeToAssoc()
     {
-        self::db()->setFetchMode(\PDO::FETCH_ASSOC);
+        $this->db->setFetchMode(\PDO::FETCH_ASSOC);
     }
 
     /**
-     * Set PDO fetch mode to class objet
+     * Set PDO fetch mode to object class
      */
-    static function setFetchModeToClass()
+    public function setFetchModeToClass()
     {
-        self::db()->setFetchMode(\PDO::FETCH_CLASS);
+        $this->db->setFetchMode(\PDO::FETCH_CLASS);
     }
 
-    /**
-     * Return true or false
-     * 
-     * @return boolean
-     */
-    static function dbCheck($table = null)
-    {
-        try {
-            if(!is_object(self::db())) return false;
-            self::db()->schema();
-            if(isset($table)) {
-                return self::db()->schema()->hasTable($table);
-            }
-            return true;
-        }
-        catch(PDOException $e) {
-            return false;
-        }
-    }
 }
