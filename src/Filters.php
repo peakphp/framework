@@ -70,6 +70,7 @@ abstract class Filters
 	{
 		if(!is_callable($func)) {
 			$func = function($n) {
+				if(!is_string($n)) return $n;
 				$n = htmlspecialchars($n);
 				if(empty($n) && strlen(trim($n)) == 0) $n = null;
 				return $n;
