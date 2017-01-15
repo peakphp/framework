@@ -95,7 +95,7 @@ class PaginatorTest extends TestCase
 
 		$pagin->setPagesRange(3);
 
-		print_r($pagin);
+		// print_r($pagin);
 
 	}
 
