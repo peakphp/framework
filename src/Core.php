@@ -109,3 +109,16 @@ if(!function_exists('config')) {
     }
 }
 
+
+/**
+ * collection()
+ */
+if(!function_exists('collection')) {
+    /**
+     * shorcut for \Peak\Collection::make([$items])
+     */
+    function collection($items = null) { 
+
+        return \Peak\Collection::make($items);
+    }
+}
