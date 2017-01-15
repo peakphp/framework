@@ -19,6 +19,8 @@ class Paginator implements IteratorAggregate
     public $current_page   = 1;
     public $next_page      = null;
     public $prev_page      = null;
+    public $first_page     = null;
+    public $last_page      = null;
     public $pages          = [];
     public $pages_range    = null;
   
@@ -84,6 +86,9 @@ class Paginator implements IteratorAggregate
             $this->pages = range(1, $this->pages_count);
         }
 
+        $this->first_page = empty($this->pages) ? null : 1;
+        $this->last_page = ($this->pages_count < 1) ? null : $this->pages_count;
+
         // check current page
         if(!$this->isPage($this->current_page)) {
             trigger_error(__CLASS__.': page '.$this->current_page.' doesn\'t exists', E_USER_NOTICE);
@@ -103,6 +108,7 @@ class Paginator implements IteratorAggregate
         if(($this->items_count != 0)) ++$this->item_start;
         if($this->item_end > $this->items_count) $this->item_end = $this->items_count;
 
+        // item start offset
         $this->offset = $this->item_start - 1;
 
         return $this;
