@@ -95,3 +95,17 @@ if(!function_exists('is_env')) {
         return false;
     }
 }
+
+/**
+ * config()
+ */
+if(!function_exists('config')) {
+    /**
+     * shorcut for \Peak\Application::conf([$path, $value])
+     */
+    function config($path = null, $value = null) { 
+
+        return \Peak\Application::conf($path, $value);
+    }
+}
+
