@@ -3,6 +3,7 @@ namespace Peak;
 
 use Peak\Application\Bootstrapper;
 use Peak\Application\Config;
+use Peak\Application\Routing;
 
 /**
  * Load the framework objects, application bootstrap and front controller.
@@ -46,7 +47,7 @@ class Application
         Registry::set('app', $this);
         Registry::set('view', new View());
 
-        $this->routing = new Application\Routing();
+        $this->routing = new Routing();
 
         $this->_loadBootstrap();
         $this->_loadFront();
