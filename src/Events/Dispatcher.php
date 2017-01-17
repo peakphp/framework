@@ -14,7 +14,7 @@ class Dispatcher
      * @param  closure $callback 
      * @return $this           
      */
-    public function attach($name, closure $callback) 
+    public function attach($name, $callback) 
     {
         if (!isset($this->events[$name])) {
             $this->events[$name] = array();
@@ -79,11 +79,36 @@ class Dispatcher
 
         foreach($events as $event) {
             if(array_key_exists($event, $this->events)) {
-                foreach ($this->events[$event] as $callback) {
-                    $callback($argv);
+                foreach ($this->events[$event] as $i => $callback) {
+
+                    if(is_callable($callback)) {
+                        $callback($argv);
+                    }
+                    else if(is_string($callback) && class_exists($callback)) {
+                        $e = new $callback();
+                        if($e instanceof EventInterface) $e->fire($argv);
+                        else $this->eventTriggerFail($event, $i);
+                    }
+                    else if(is_object($callback) && $callback instanceof EventInterface) {
+                        $callback->fire($argv);
+                    }
+                    else {
+                        $this->eventTriggerFail($event, $i);
+                    }
+                    
                 }
             }
         }
- 
+    }
+
+    /**
+     * Fail to call an event callback
+     * 
+     * @param  string  $name  
+     * @param  integer $index      
+     */
+    protected function eventFail($name, $index)
+    {
+        throw new \Exception('Event '.$event.' #'.$i.' is invalid. Only Closure, Classname or Object instance implementing EventInterface are allowed.');
     }
 }
