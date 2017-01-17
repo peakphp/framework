@@ -10,7 +10,7 @@ class Dispatcher
     /**
      * Attach an event.
      * 
-     * @param  string $name     
+     * @param  string  $name     
      * @param  closure $callback 
      * @return $this           
      */
@@ -22,6 +22,17 @@ class Dispatcher
         $this->events[$name][] = $callback;
 
         return $this;
+    }
+
+    /**
+     * Has event
+     * 
+     * @param  string  $name
+     * @return boolean      
+     */
+    public function hasEvent($name)
+    {
+        return array_key_exists($name, $this->events);
     }
 
     /**
@@ -59,7 +70,7 @@ class Dispatcher
      * @param  mixed $argv 
      * @param  array $data
      */
-    public function fire($ev, $argv, ...$data) 
+    public function fire($ev, $argv = null) 
     {
         $events = [];
 
@@ -69,7 +80,7 @@ class Dispatcher
         foreach($events as $event) {
             if(array_key_exists($event, $this->events)) {
                 foreach ($this->events[$event] as $callback) {
-                    $callback($argv, $data);
+                    $callback($argv);
                 }
             }
         }
