@@ -2,6 +2,8 @@
 use PHPUnit\Framework\TestCase;
 
 use Peak\Events\Dispatcher;
+use Peak\Events\EventInterface;
+
 
 class DispatcherTest extends TestCase
 {
@@ -18,7 +20,7 @@ class DispatcherTest extends TestCase
         $this->assertFalse($d->hasEvent('mysecondevent'));
     }
 
-    public function testFire()
+    public function testEventClosure()
     {   
         $d = new Dispatcher();  
 
@@ -56,4 +58,63 @@ class DispatcherTest extends TestCase
 
         $this->assertTrue($int == 3);
     }
+
+    public function testEventsObject()
+    {   
+        $d = new Dispatcher();  
+
+        /**
+         * Event instance are permanent
+         * @var Event1
+         */
+        $event1 = new Event1();
+
+        $d->attach('myevent', $event1);
+
+        $this->assertTrue($event1->i == 0);
+        
+        $d->fire('myevent');
+        $d->fire('myevent');
+        $d->fire('myevent');
+        $d->fire('myevent');
+
+        $this->assertTrue($event1->i == 4);
+    }
+
+    public function testClassNameObject()
+    {   
+        $d = new Dispatcher();  
+
+        /**
+         * Event classname have no memory
+         */
+        $d->attach('myevent', 'Event2');
+        
+        $d->fire('myevent');
+        $d->fire('myevent');
+        $d->fire('myevent');
+        $d->fire('myevent');
+    }
 }
+
+
+class Event1 implements EventInterface
+{
+    public $i = 0;
+    public function fire($argv)
+    {
+        ++$this->i;
+        //echo 'bob is '.$this->i.' years old';
+    }
+}
+
+class Event2 implements EventInterface
+{
+    public $i = 0;
+    public function fire($argv)
+    {
+        ++$this->i;
+        //echo 'bob is '.$this->i.' years old';
+    }
+}
+
