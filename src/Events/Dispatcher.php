@@ -8,7 +8,7 @@ class Dispatcher
     protected $events = [];
 
     /**
-     * Attach an event.
+     * Attach an event callback. An event name can have multiple callback
      * 
      * @param  string  $name     
      * @param  closure $callback 
@@ -25,7 +25,7 @@ class Dispatcher
     }
 
     /**
-     * Has event
+     * Has an event
      * 
      * @param  string  $name
      * @return boolean      
@@ -36,7 +36,7 @@ class Dispatcher
     }
 
     /**
-     * Detach an event. 
+     * Detach an event name and all is callbacks. 
      * 
      * @param  string|array $ev event(s) name(s)
      * @return $this
@@ -87,13 +87,13 @@ class Dispatcher
                     else if(is_string($callback) && class_exists($callback)) {
                         $e = new $callback();
                         if($e instanceof EventInterface) $e->fire($argv);
-                        else $this->eventTriggerFail($event, $i);
+                        else $this->eventCallbackFail($event, $i);
                     }
                     else if(is_object($callback) && $callback instanceof EventInterface) {
                         $callback->fire($argv);
                     }
                     else {
-                        $this->eventTriggerFail($event, $i);
+                        $this->eventCallbackFail($event, $i);
                     }
                     
                 }
@@ -107,8 +107,8 @@ class Dispatcher
      * @param  string  $name  
      * @param  integer $index      
      */
-    protected function eventFail($name, $index)
+    protected function eventCallbackFail($name, $index)
     {
-        throw new \Exception('Event '.$event.' #'.$i.' is invalid. Only Closure, Classname or Object instance implementing EventInterface are allowed.');
+        throw new \Exception('Event "'.$name.'" #'.$index.' is invalid. Only Closure, Classname or Object instance implementing EventInterface are allowed.');
     }
 }
