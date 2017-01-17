@@ -72,6 +72,7 @@ class Dispatcher
      */
     public function fire($ev, $argv = null) 
     {
+        if(empty($this->events)) return;
         $events = [];
 
         if(is_string($ev)) $events[] = $ev;
@@ -80,24 +81,34 @@ class Dispatcher
         foreach($events as $event) {
             if(array_key_exists($event, $this->events)) {
                 foreach ($this->events[$event] as $i => $callback) {
-
-                    if(is_callable($callback)) {
-                        $callback($argv);
-                    }
-                    else if(is_string($callback) && class_exists($callback)) {
-                        $e = new $callback();
-                        if($e instanceof EventInterface) $e->fire($argv);
-                        else $this->eventCallbackFail($event, $i);
-                    }
-                    else if(is_object($callback) && $callback instanceof EventInterface) {
-                        $callback->fire($argv);
-                    }
-                    else {
-                        $this->eventCallbackFail($event, $i);
-                    }
-                    
+                    $this->handleCallback($event, $callback, $argv);
                 }
             }
+        }
+    }
+
+    /**
+     * Handle an event callback
+     * 
+     * @param  string $event    
+     * @param  mixed  $callback 
+     * @param  mixed  $argv               
+     */
+    protected function handleCallback($event, $callback, $argv = null)
+    {
+        if(is_callable($callback)) {
+            $callback($argv);
+        }
+        else if(is_string($callback) && class_exists($callback)) {
+            $e = new $callback();
+            if($e instanceof EventInterface) $e->fire($argv);
+            else $this->eventCallbackFail($event, $i);
+        }
+        else if(is_object($callback) && $callback instanceof EventInterface) {
+            $callback->fire($argv);
+        }
+        else {
+            $this->eventCallbackFail($event, $i);
         }
     }
 
