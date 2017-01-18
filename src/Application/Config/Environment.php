@@ -58,9 +58,7 @@ class Environment
             );
         }
         else {
-            //fix a notice in case [all] section doesn't exists, we create it
-            if(!isset($this->file_config->all)) $this->file_config->all = [];
-            $this->file_config->all['path'] = $apptree->tree;
+            $this->file_config->set('all.path.apptree', $apptree->tree);
         }
 
     //      echo '<pre>';
