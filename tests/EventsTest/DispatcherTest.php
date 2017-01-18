@@ -75,10 +75,17 @@ class DispatcherTest extends TestCase
         
         $d->fire('myevent');
         $d->fire('myevent');
+
+        $event1->fire(null);
+
         $d->fire('myevent');
         $d->fire('myevent');
 
-        $this->assertTrue($event1->i == 4);
+        $this->assertTrue($event1->i == 5);
+
+        $event1->fire(null);
+
+        $this->assertTrue($event1->i == 6);
     }
 
     public function testClassNameObject()
