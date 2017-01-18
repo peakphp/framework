@@ -3,11 +3,10 @@ namespace Peak\Application;
 
 use Peak\Exception;
 use Peak\Config\DotNotation;
-use Peak\Application\ConfigEnv;
+use Peak\Application\Config\Loader;
+use Peak\Application\Config\Environment;
 
-/**
- */
-class Config extends DotNotation
+class Config
 {
 
     /**
@@ -25,81 +24,63 @@ class Config extends DotNotation
         ],
     ];
 
+    /**
+     * The final app config collection
+     * @var object
+     */
+    protected $app_config;
 
     /**
      * Construct
      * 
      * @param array $config user config
      */
-    public function __construct($config = null) 
+    public function __construct($config = []) 
     {
-        $this->setVars($this->_default);
+        $this->app_config = new DotNotation($this->_default);
+        $this->app_config->mergeRecursiveDistinct($config);
 
-        if(isset($config)) {
-            $this->merge($config); // merge default with user conf
-        }
+        $this->validate(); // validate user conf
+        $this->defineConstants(); // define default app constants
 
-        $this->_validate(); // validate user conf
-        $this->_defineConstants(); // define default app constants
+        //print_r($this->app_config);
 
-        // load and merge app config env with current user app conf
-        $conf_env = new ConfigEnv($this);
-        $this->merge($conf_env->getEnvConfig());
+        $config_loader = new Loader($this->getConfigFilepath());
+
+        $config_env = new Environment(
+            $config_loader->getConfig(), 
+            $this->app_config
+        );
+
+        $this->app_config->mergeRecursiveDistinct($config_env->getEnvConfig());
     }
 
     /**
-     * Generate default application tree
-     *
-     * @param   string $root
-     * @return  array
+     * Get app config
+     * 
+     * @return object
      */
-    public function defaultAppTree($root)
+    public function getMountedConfig()
     {
-        return [
-            'application'         => $root,
-            'cache'               => $root.'/cache',
-            'controllers'         => $root.'/controllers',
-            'controllers_helpers' => $root.'/controllers/helpers',
-            'models'              => $root.'/models',
-            'modules'             => $root.'/modules',
-            'lang'                => $root.'/lang',
-            'views'               => $root.'/views',
-            'views_ini'           => $root.'/views/ini',
-            'views_helpers'       => $root.'/views/helpers',
-            'views_themes'        => $root.'/views',
-            'theme'               => $root.'/views',
-            'theme_scripts'       => $root.'/views/scripts',
-            'theme_partials'      => $root.'/views/partials',
-            'theme_layouts'       => $root.'/views/layouts',
-            'theme_cache'         => $root.'/views/cache'
-        ];
+        return $this->app_config;
     }
 
     /**
-     * Validate require config values
+     * Get application config filepath
+     * 
+     * @return string
      */
-    private function _validate() 
+    private function getConfigFilepath()
     {
-        if(!$this->have('path.public')) {
-            throw new Exception('ERR_CORE_INIT_CONST_MISSING', ['Public root','PUBLIC_ROOT']);
-        }
-
-        if(!$this->have('path.app'))
-            throw new Exception('ERR_CORE_INIT_CONST_MISSING', ['Application root','APPLICATION_ROOT']);
-
-        if(!$this->have('env')) {
-            throw new Exception('ERR_APP_ENV_MISSING');
-        }
-
-        if(!$this->have('conf')) {
-            throw new Exception('ERR_APP_CONF_MISSING');
-        }
+        return str_replace('\\', '/', 
+            realpath(SVR_ABSPATH.'/'.$this->app_config->get('path.app').'/'.$this->app_config->get('conf'))
+        );
     }
 
     /**
      * Define important constants
      */
-    private function _defineConstants()
+    private function defineConstants()
     {
         //define server document root absolute path
         $svr_path = str_replace('\\','/',realpath($_SERVER['DOCUMENT_ROOT']));
@@ -107,8 +88,32 @@ class Config extends DotNotation
 
         define('SVR_ABSPATH',         $svr_path); 
         define('LIBRARY_ABSPATH',     realpath(__DIR__.'/../'));
-        define('PUBLIC_ABSPATH',      realpath(SVR_ABSPATH . $this->get('path.public')));
-        define('APPLICATION_ABSPATH', realpath(SVR_ABSPATH . $this->get('path.app')));
-        define('APPLICATION_ENV',     $this->get('env'));
+        define('PUBLIC_ABSPATH',      realpath(SVR_ABSPATH . $this->app_config->get('path.public')));
+        define('APPLICATION_ABSPATH', realpath(SVR_ABSPATH . $this->app_config->get('path.app')));
+        define('APPLICATION_ENV',     $this->app_config->get('env'));
     }
+
+
+    /**
+     * Validate require config values
+     */
+    private function validate() 
+    {
+        if(!$this->app_config->have('path.public')) {
+            throw new Exception('ERR_CORE_INIT_CONST_MISSING', ['Public root','PUBLIC_ROOT']);
+        }
+
+        if(!$this->app_config->have('path.app'))
+            throw new Exception('ERR_CORE_INIT_CONST_MISSING', ['Application root','APPLICATION_ROOT']);
+
+        if(!$this->app_config->have('env')) {
+            throw new Exception('ERR_APP_ENV_MISSING');
+        }
+
+        if(!$this->app_config->have('conf')) {
+            throw new Exception('ERR_APP_CONF_MISSING');
+        }
+    }
+
+    
 }

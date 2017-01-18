@@ -1,6 +1,7 @@
 <?php
 namespace Peak;
 
+use Peak\Collection;
 use Peak\Application\Bootstrapper;
 use Peak\Application\Config;
 use Peak\Application\Routing;
@@ -38,7 +39,7 @@ class Application
 	/**
 	 * Start framework
      */
-    private function __construct(Config $conf)
+    private function __construct(Collection $conf)
     {   
         // application config             
         $this->_config = $conf;
@@ -62,7 +63,8 @@ class Application
      */
     static function create(Array $config) 
     {
-        return new static(new Config($config));
+        $config = new Config($config);
+        return new static($config->getMountedConfig());
     }
 
     /**
