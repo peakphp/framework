@@ -10,7 +10,6 @@ class Environment
 
     protected $file_config;
     protected $app_config;
-    protected $env_config;
 
     /**
      * Constructor
@@ -32,7 +31,7 @@ class Environment
      */
     public function getEnvConfig()
     {
-        return $this->env_config;
+        return $this->file_config->toArray();
     }
 
     /**
@@ -79,9 +78,6 @@ class Environment
         if(isset($this->file_config->php)) {
             $this->_processPHPconfig($this->file_config->php);
         }
-
-        // final environement settings
-        $this->env_config = $this->file_config->toArray();
     }
 
 
