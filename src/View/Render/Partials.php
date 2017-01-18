@@ -74,8 +74,8 @@ class Partials extends Render
         $this->_scripts_path = $path;
         
         if(!isset($path)) {
-        	$this->scripts_path = Application::conf('path.theme_partials');
-        	$path = Application::conf('path.theme_partials');
+        	$this->scripts_path = Application::conf('path.apptree.theme_partials');
+        	$path = Application::conf('path.apptree.theme_partials');
         	$no_cache = true;
         }
         
@@ -94,7 +94,7 @@ class Partials extends Render
             foreach($this->_group as $theme_partial) {
                 if($theme_partial !== '[CONTENT]') {
                     if(basename($theme_partial) === $theme_partial) {
-                        if(file_exists(Application::conf('path.theme_partials').'/'.$theme_partial)) {
+                        if(file_exists(Application::conf('path.apptree.theme_partials').'/'.$theme_partial)) {
                         	$group_filespath[] = Application::conf('path.theme_partials').'/'.$theme_partial;
                         }
                     }

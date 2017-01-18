@@ -26,7 +26,7 @@ class Cache
      */
 	public function __construct()
 	{
-		$this->_cache_path = Application::conf('path.theme_cache');
+		$this->_cache_path = Application::conf('path.apptree.theme_cache');
 	}
 	
 	/**
