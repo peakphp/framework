@@ -69,10 +69,8 @@ abstract class Action
 
     public function __construct()
     {   
-        //initialize ctrl
-        $this->initController();
-        //get route to dispatch
-        //$this->getRoute();
+        $this->view = Registry::o()->view; 
+        $this->path = $this->getScriptsPath();
     }
     
     /**
@@ -92,17 +90,6 @@ abstract class Action
         }
     }
 
-    /**
-     * Initialize controller $name, $title, $path, $url_path and $type
-     * @final
-     */
-    final private function initController()
-    {       
-        $this->view = Registry::o()->view; 
-  
-        $this->path = $this->getScriptsPath();
-    }
-    
     /**
      * Get controller class name
      *
@@ -134,7 +121,7 @@ abstract class Action
     public function getScriptsPath()
     {
         // return Core::getPath('theme_scripts').'/'.$this->getTitle();
-        return Application::conf('path.theme_scripts').'/'.$this->getTitle();
+        return Application::conf('path.apptree.theme_scripts').'/'.$this->getTitle();
     }
         
     /**
@@ -170,20 +157,7 @@ abstract class Action
 
         return $actions;
     }
-    
-    /**
-     * Get data from router needed for dispatch
-     */
-    // public function getRoute()
-    // {
-    //     $this->params       = Registry::o()->router->params;        
-    //     $this->params_assoc = new Config(Registry::o()->router->params_assoc);
-    //     $this->action       = $this->action_prefix . Registry::o()->router->action;
-    //     //set default ctrl action if none present
-    //     if($this->action === $this->action_prefix) $this->action  = $this->action_prefix.'index';
 
-    //     //echo '>>>'.$this->file;
-    // }
 
     /**
      * Get data from router needed for dispatch
