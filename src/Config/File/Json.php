@@ -64,9 +64,9 @@ class Json extends File
 			$data = preg_replace("#(/\*([^*]|[\r\n]|(\*+([^*/]|[\r\n])))*\*+/)|([\s\t](//).*)#", '', $data);
 		}
 
-		$this->_vars = json_decode($data, true);
+		$this->items = json_decode($data, true);
 		$this->_jsonError();
-		return $this->_vars;
+		return $this->items;
 	}
 
 	/**
@@ -167,7 +167,7 @@ class Json extends File
 			}
 		}
 
-		$data = $this->getVars();
+		$data = $this->items;
 
 		$result = file_put_contents($filepath, json_encode($data));
 		if($result === false) {

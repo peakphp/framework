@@ -1,7 +1,7 @@
 <?php
 namespace Peak\Config;
 
-use Peak\Config\Base;
+use Peak\Collection;
 
 /**
  * Dot notation for access multidimensional arrays.
@@ -21,7 +21,7 @@ use Peak\Config\Base;
  * Adapted by Francois Lajoie for Peak
  */
 
-class DotNotation extends Base
+class DotNotation extends Collection
 {
     const SEPARATOR = '/[:\.]/';
 
@@ -32,7 +32,7 @@ class DotNotation extends Base
      */
     public function get($path, $default = null)
     {
-        $array = $this->_vars;
+        $array = $this->items;
 
         if (!empty($path)) {
             $keys = $this->explode($path);
@@ -55,7 +55,7 @@ class DotNotation extends Base
     public function set($path, $value)
     {
         if (!empty($path)) {
-            $at = & $this->_vars;
+            $at = & $this->items;
             $keys = $this->explode($path);
 
             while (count($keys) > 0) {
@@ -76,7 +76,7 @@ class DotNotation extends Base
                 }
             }
         } else {
-            $this->_vars = $value;
+            $this->items = $value;
         }
     }
 
@@ -87,7 +87,7 @@ class DotNotation extends Base
     public function add($path, array $values)
     {
         $get = (array)$this->get($path);
-        $this->set($path, $this->arrayMergeRecursiveDistinct($get, $values));
+        $this->set($path, $this->_mergeRecursiveDistinct($get, $values));
     }
 
     /**
@@ -97,7 +97,7 @@ class DotNotation extends Base
     public function have($path)
     {
         $keys = $this->explode($path);
-        $array = $this->_vars;
+        $array = $this->items;
         foreach ($keys as $key) {
             if (isset($array[$key])) {
                 $array = $array[$key];

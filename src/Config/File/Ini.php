@@ -91,21 +91,21 @@ class Ini extends File
 		if ($ini === false)	return false;
 
 		// reset the result array
-		$this->_vars = array();
+		$this->items = array();
 
 		if ($process_sections === true) {
 			// loop through each section
 			foreach ($ini as $section => $contents)	$this->_processSection($section, $contents);
 		} else {
 			// treat the whole ini file as a single section
-			$this->_vars = $this->_processSectionContents($ini);
+			$this->items = $this->_processSectionContents($ini);
 		}
 
 		//  extract the required section if required
 		if ($process_sections === true) {
 			if ($section_name !== null) {
 				// return the specified section contents if it exists
-				if (isset($this->_vars[$section_name])) $this->_vars = $this->_vars[$section_name];
+				if (isset($this->items[$section_name])) $this->items = $this->items[$section_name];
 				else {
 					throw new Exception('ERR_CUSTOM', __CLASS__.': Section ' . $section_name . ' not found in the ini file');
 				}
@@ -113,7 +113,7 @@ class Ini extends File
 		}
 
 		// if no specific section is required, just return the whole result
-		return $this->_vars;
+		return $this->items;
 	}
 
 
@@ -128,7 +128,7 @@ class Ini extends File
 	{
 		// the section does not extend another section
 		if (stripos($section, ':') === false) {
-			$this->_vars[$section] = $this->_processSectionContents($contents);
+			$this->items[$section] = $this->_processSectionContents($contents);
 
 		// section extends another section
 		} else {
@@ -138,15 +138,15 @@ class Ini extends File
 			$ext_source = trim($ext_source);
 
 			// check if the extended section exists
-			if (!isset($this->_vars[$ext_source])) {
+			if (!isset($this->items[$ext_source])) {
 				throw new Exception('ERR_CUSTOM', __CLASS__.': Unable to extend section ' . $ext_source . ', section not found');
 			}
 
 			// process section contents
-			$this->_vars[$ext_target] = $this->_processSectionContents($contents);
+			$this->items[$ext_target] = $this->_processSectionContents($contents);
 
 			// merge the new section with the existing section values
-			$this->_vars[$ext_target] = $this->arrayMergeRecursive($this->_vars[$ext_source], $this->_vars[$ext_target]);
+			$this->items[$ext_target] = $this->_mergeRecursiveDistinct($this->items[$ext_source], $this->items[$ext_target]);
 		}
 	}
 
@@ -166,7 +166,7 @@ class Ini extends File
 			// convert all a.b.c.d to multi-dimensional arrays
 			$process = $this->_processContentEntry($path, $value);
 			// merge the current line with all previous ones
-			$result = $this->arrayMergeRecursive($result, $process);
+			$result = $this->_mergeRecursiveDistinct($result, $process);
 		}
 		
 		return $result;

@@ -13,7 +13,7 @@ class File extends DotNotation
      */
     public function __construct($vars = null)
     {
-        if(is_array($vars)) $this->setVars($vars);
+        if(is_array($vars)) $this->items = $vars;
         elseif(is_string($vars)) $this->loadFile($vars);
     }
 
@@ -26,7 +26,7 @@ class File extends DotNotation
     {
         if(pathinfo($file, PATHINFO_EXTENSION) === 'php' && file_exists($file)) {
             $vars = include $file;
-            $this->setVars($vars);
+            $this->items = $vars;
         }
     }
 }
