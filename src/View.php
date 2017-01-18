@@ -3,7 +3,7 @@ namespace Peak;
 
 use Peak\Application;
 use Peak\Expcetion;
-use Peak\Config\Ini;
+use Peak\Config\File\Ini;
 use Peak\View\Helpers;
 use Peak\View\Header;
 
@@ -326,12 +326,12 @@ class View
      */
     public function iniVar($file, $path = null)
     {
-        if(!isset($path)) $filepath = Application::conf('path.views_ini').'/'.$file;
+        if(!isset($path)) $filepath = Application::conf('path.apptree.views_ini').'/'.$file;
         else $filepath = $path.'/'.$file;
 
         if(file_exists($filepath)) {
             $ini = new Ini($filepath);
-            $merge_vars = $ini->arrayMergeRecursive($ini->getVars(), $this->_vars);
+            $merge_vars = array_merge($ini->toArray(), $this->_vars);
             $this->_vars = $merge_vars;
         }
     }    
