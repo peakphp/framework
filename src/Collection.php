@@ -208,9 +208,56 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
         return $this->items;
     }
 
-
+    /**
+     * Json serialize
+     * @return [type] [description]
+     */
     public function jsonSerialize()
     {
         return $this->items;
+    }
+
+    /**
+     * Merge two arrays recursively overwriting the keys in the first array
+     * if such key already exists
+     *
+     * @param  array $a      Array to merge to the current collection
+     * @param  array|null $b If specified, $b will be merge into $a and replace current collection
+     */
+    public function mergeRecursiveDistinct($a, $b = null, $get_result = false)
+    {
+        if(!isset($b)){
+            $this->items = $this->_mergeRecursiveDistinct($this->items, $a);
+        }
+        else {
+            if(!$get_result) $this->items = $this->_mergeRecursiveDistinct($a, $b);
+            else return $this->_mergeRecursiveDistinct($a, $b);
+        }
+    }
+
+    /**
+     * Internal process for mergeRecursiveDistinct()
+     * 
+     * @param  array $a 
+     * @param  array $b 
+     * @return array    
+     */
+    protected function _mergeRecursiveDistinct($a, $b)
+    {
+        // merge arrays if both variables are arrays
+        if (is_array($a) && is_array($b)) {
+            // loop through each right array's entry and merge it into $a
+            foreach ($b as $key => $value) {
+                if (isset($a[$key])) {
+                    $a[$key] = $this->_mergeRecursiveDistinct($a[$key], $value);
+                } else {
+                    if($key === 0) $a= array(0 => $this->_mergeRecursiveDistinct($a, $value));
+                    else $a[$key] = $value;
+                }
+            }
+        } 
+        else $a = $b; // one of values is not an array
+
+        return $a;
     }
 }
