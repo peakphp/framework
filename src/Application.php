@@ -106,6 +106,18 @@ class Application
 
     }
 
+    /**
+     * Reload application bootstrapper and front for a module
+     * 
+     * @return $this
+     */
+    public function reload()
+    {
+        $this->_loadBootstrap();
+        $this->_loadFront();
+        return $this;
+    }
+
 	/**
 	 * Load and store application Bootstrapper
 	 *
