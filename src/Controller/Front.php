@@ -4,7 +4,8 @@ namespace Peak\Controller;
 use Peak\Application;
 use Peak\Registry;
 use Peak\Exception;
-
+use Peak\Application\Module;
+use Peak\Controller\Action;
 use Peak\Routing\RouteBuilder;
 
 
@@ -54,7 +55,7 @@ class Front
 	 * @var bool
 	 */
 	public $allow_internal_modules = true;
-	
+
 	
 	/**
 	 * class construct
@@ -90,11 +91,12 @@ class Front
 	{
 	    $this->_dispatchController();
 	    
-	    if($this->controller instanceof Peak\Application\Modules) {
-        	$this->_dispatchModule();
-        }               
+	    // if($this->controller instanceof Module) {
+     //        $this->controller->run();
+     //    	//$this->_dispatchModule();
+     //    }               
         // execute a normal controller action
-        elseif($this->controller instanceof Action) {
+        if($this->controller instanceof Action) {
             $this->_dispatchControllerAction(); 
         }
 	}
@@ -110,11 +112,7 @@ class Front
         }
         
         //set controller class name
-        $ctrl_name = 'App\Controllers\\'.$this->route->controller;
-
-        // echo $this->router->controller;
-        // echo '<pre>';
-        // print_r($this->router);
+        $ctrl_name = Application::conf('ns').'\Controllers\\'.$this->route->controller;
 
         //check if it's valid application controller
         if(!class_exists($ctrl_name))
@@ -129,9 +127,10 @@ class Front
         }
         else $this->controller = new $ctrl_name();
 
-        $this->controller->setRoute($this->route);
-
-        $this->postDispatchController();
+        if($this->controller instanceof Action) {
+            $this->controller->setRoute($this->route);
+            $this->postDispatchController();
+        }
     }
 	
 	/**
@@ -139,7 +138,9 @@ class Front
 	 */
 	protected function _dispatchControllerAction()
 	{
-	    $this->controller->dispatch(); 
+        if($this->controller instanceof Action) {
+    	    $this->controller->dispatch(); 
+        }
 	}
 		
 	/**
