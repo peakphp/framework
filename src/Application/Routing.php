@@ -35,14 +35,22 @@ class Routing
     public $custom_routes;
 
     /**
+     * Application base uri. 
+     * By default, it is set to application public path config
+     * @var string
+     */
+    public $base_uri;
+
+    /**
      * Constructor
      *
      * @param mixed $request
      */
-    public function __construct($request = null)
+    public function __construct($request = null, $base_uri = null)
     {
         $this->loadAppCustomRoutes();
         $this->loadRequest($request);
+        $this->base_uri = (isset($base_uri)) ? $base_uri : Application::conf('path.public');
     }
 
     /**
@@ -53,10 +61,10 @@ class Routing
     public function loadRequest($request = null)
     {
         if(isset($request)) {
-            $this->request = new Request($request, Application::conf('path.public'));
+            $this->request = new Request($request, $this->base_uri);
         }
         else {
-            $this->request = new RequestServerURI(Application::conf('path.public'));
+            $this->request = new RequestServerURI($this->base_uri);
         }
     }
 
