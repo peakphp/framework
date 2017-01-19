@@ -21,6 +21,7 @@ class Debugbar extends Debug
     {
         //skip if env is not dev
         if(APPLICATION_ENV !== 'dev') return;
+        if(!$this->view->engine() instanceof \Peak\View\Render\Layouts) return;
 
         //skip if view rendering is disabled
         if($this->view->canRender() === false) return;
