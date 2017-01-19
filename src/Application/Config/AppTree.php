@@ -25,13 +25,12 @@ class AppTree
     public function defaultAppTree($root)
     {
         $this->tree = [
-            'application'         => $root,
+            'root'         => $root,
             'cache'               => $root.'/cache',
             'controllers'         => $root.'/controllers',
-            'controllers_helpers' => $root.'/controllers/helpers',
             'models'              => $root.'/models',
             'modules'             => $root.'/modules',
-            'lang'                => $root.'/lang',
+            'langs'               => $root.'/langs',
             'views'               => $root.'/views',
             'views_ini'           => $root.'/views/ini',
             'views_helpers'       => $root.'/views/helpers',
