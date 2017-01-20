@@ -5,6 +5,7 @@ use Peak\Collection;
 use Peak\Application\Bootstrapper;
 use Peak\Application\Config;
 use Peak\Application\Routing;
+use Peak\Controller\Front;
 
 /**
  * Load the framework objects, application bootstrap and front controller.
@@ -138,7 +139,7 @@ class Application
 	private function _loadFront()
 	{
 		$cname = $this->config('ns').'\Front';
-		$this->front = (class_exists($cname)) ? new $cname() : new Controller\Front();
+		$this->front = (class_exists($cname)) ? new $cname() : new Front();
 	}
 
     /**
