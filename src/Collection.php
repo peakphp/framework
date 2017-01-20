@@ -203,7 +203,7 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
     /**
      * Empty the collection
      */
-    public function empty()
+    public function strip()
     {
         $this->items = [];
     }
