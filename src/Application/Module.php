@@ -1,10 +1,10 @@
 <?php
 namespace Peak\Application;
 
+use Peak\Registry;
 use Peak\Application;
 use Peak\Application\Routing;
 use Peak\Application\Config\AppTree;
-use Peak\Registry;
 
 /**
  * Module Application Loader
@@ -24,9 +24,8 @@ class Module
         $app          = Registry::o()->app;
         $this->name   = $app->front->route->controller;
         $app->routing = new Routing(null, Application::conf('path.public').'/'.$this->name);
-
+        
         $this->updateConfig();
-
         $this->init();
 
         $app->reload()->run();
