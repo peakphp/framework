@@ -6,13 +6,27 @@ namespace Peak\Application;
  */
 class Bootstrapper
 {
+    /**
+     * Class process before booting
+     * @var array
+     */
+    public $process = [
+        \Peak\Application\Bootstrap\View::class,
+        \Peak\Application\Bootstrap\CustomRoutes::class
+    ];
 
     /**
      * init app bootstrap
      */
     public function __construct()
     {
-        new Bootstrap\View();
+        /**
+         * Execute process
+         */
+        foreach($this->process as $process) {
+            new $process();
+        }
+
         $this->_boot();
     }
 
