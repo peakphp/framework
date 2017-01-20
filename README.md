@@ -17,11 +17,11 @@ Requirements:
     - Tokenizer PHP Extension
 
 ###Lavarel components included:
-[illuminate/database](https://github.com/illuminate/database)
-[illuminate/container](https://github.com/illuminate/container)
-[illuminate/contracts](https://github.com/illuminate/contracts)
-[illuminate/support](https://github.com/illuminate/support)
-[illuminate/events](https://github.com/illuminate/events)
+- [illuminate/database](https://github.com/illuminate/database)
+- [illuminate/container](https://github.com/illuminate/container)
+- [illuminate/contracts](https://github.com/illuminate/contracts)
+- [illuminate/support](https://github.com/illuminate/support)
+- [illuminate/events](https://github.com/illuminate/events)
 
 ###Version 1
 [Older version](https://github.com/1Franck/Peak) require PHP 5.2 or greater but is no more supported. 
