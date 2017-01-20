@@ -1,16 +1,32 @@
-# Peak 
+<p align="center"># Peak 
 
 [![Build Status](https://travis-ci.org/peakphp/framework.svg?branch=master)](https://travis-ci.org/peakphp/framework)
 [![Total Downloads](https://poser.pugx.org/peakphp/framework/downloads)](https://packagist.org/packages/peakphp/framework)
 [![License](https://poser.pugx.org/peakphp/framework/license)](https://packagist.org/packages/peakphp/framework)
+</p>
 
 > **Note:** This repository contains the core code of the Peak framework. If you want to build an application using Peak, visit the main [Peak repository](https://github.com/peakphp/peak).
 
-This version is essentially a migration from class name convention like Zend Framework (ex: Library_Module_Class_Name) to PHP namespace.
+###About Peak Framework v2.x
 
-This version version work with PHP 5.6.4 or greater. The [older version](https://github.com/1Franck/Peak) require PHP 5.2 or greater. Both version are compatible with PHP 7 but i strongly recommand to use this version. Older version is no more supported.
+Requirements:
 
-Old Zend database component have been dropped in favor of [Laravel/Database](https://github.com/illuminate/database) component.
+    - PHP >= 5.6.4
+    - PDO PHP Extension
+    - Mbstring PHP Extension
+    - Tokenizer PHP Extension
+
+###Lavarel components included:
+[illuminate/database](https://github.com/illuminate/database)
+[illuminate/container](https://github.com/illuminate/container)
+[illuminate/contracts](https://github.com/illuminate/contracts)
+[illuminate/support](https://github.com/illuminate/support)
+[illuminate/events](https://github.com/illuminate/events)
+
+###Version 1
+[Older version](https://github.com/1Franck/Peak) require PHP 5.2 or greater but is no more supported. 
+Both version 1 & 2 are compatible with PHP 7 but we strongly recommand to use version 2.x.
+
 
 
 
