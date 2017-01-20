@@ -48,15 +48,17 @@ class Routing
      */
     public function __construct($request = null, $base_uri = null)
     {
-        $this->loadAppCustomRoutes();
         $this->loadRequest($request);
         $this->base_uri = (isset($base_uri)) ? $base_uri : Application::conf('path.public');
+        $this->custom_routes = new Collection();
     }
 
     /**
      * Load a request or use server request uri
      * 
-     * @param  string|null $request       
+     * @param  string|null $request
+     * 
+     * @return \Peak\Routing\Route       
      */
     public function loadRequest($request = null)
     {
@@ -66,6 +68,7 @@ class Routing
         else {
             $this->request = new RequestServerURI($this->base_uri);
         }
+        return $this;
     }
 
     /**
@@ -80,32 +83,5 @@ class Routing
         $this->route = $resolver->getRoute($this->custom_routes);
 
         return $this->route;
-    }
-
-    /**
-     * Check app config for custom regex route
-     */
-    protected function loadAppCustomRoutes()
-    {
-        $regex = Application::conf('routing');
-
-        $collection = new Collection();
-
-        if(!empty($regex)) {
-            foreach($regex as $r) {
-                if(!isset($r['route']) || !isset($r['controller']) || !isset($r['action'])) {
-                    throw new Exception('ERR_CUSTOM', 'Invalid routing in your application config');
-                }
-                else {
-                    $collection[] = new CustomRoute(
-                        $r['route'],
-                        $r['controller'],
-                        $r['action']
-                    );
-                }
-            }
-        }
-
-        $this->custom_routes = $collection;
     }
 }
