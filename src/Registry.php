@@ -11,7 +11,7 @@ class Registry
 	 * Array of registered objects
 	 * @var array
 	 */
-    protected static $_objects = array();
+    protected static $_objects = [];
 
     /**
      * Instance of registry
@@ -76,6 +76,16 @@ class Registry
 	public static function get($name)
 	{
 	    if(self::isRegistered($name)) return self::$_objects[$name];
+	}
+
+	/**
+	 * Get all registered object
+	 * 
+	 * @return array
+	 */
+	public static function getAll()
+	{
+	    return self::$_objects;
 	}
 
 	/**
