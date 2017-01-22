@@ -11,8 +11,9 @@ class Bootstrapper
      * @var array
      */
     public $process = [
-        \Peak\Application\Bootstrap\View::class,
-        \Peak\Application\Bootstrap\CustomRoutes::class
+        \Peak\Application\Bootstrap\ConfigPHP::class,
+        \Peak\Application\Bootstrap\ConfigView::class,
+        \Peak\Application\Bootstrap\ConfigCustomRoutes::class
     ];
 
     /**
