@@ -11,7 +11,7 @@ use Peak\Routing\CustomRoute;
 /**
  * Application Bootstrap Customer routes
  */
-class CustomRoutes
+class ConfigCustomRoutes
 {
     /**
      * Configurate View based on Application config

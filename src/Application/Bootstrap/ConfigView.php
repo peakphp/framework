@@ -7,7 +7,7 @@ use Peak\Registry;
 /**
  * Application Bootstrap View
  */
-class View
+class ConfigView
 {
     /**
      * Configurate View based on Application config
