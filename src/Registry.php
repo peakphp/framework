@@ -64,7 +64,7 @@ class Registry
 	public static function set($name,$obj)
 	{
 	    self::$_objects[$name] = $obj;
-	    return self::$_objects[$name];
+	    return $obj;
 	}
 
 	/**
