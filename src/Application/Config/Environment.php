@@ -70,12 +70,6 @@ class Environment
 
         // merge array section 'all' with current environment section if exists
         $this->file_config->mergeRecursiveDistinct($this->file_config->all, $this->file_config->$env);
-
- 
-        //set some php ini settings
-        if(isset($this->file_config->php)) {
-            $this->_processPHPconfig($this->file_config->php);
-        }
     }
 
 
@@ -103,16 +97,4 @@ class Environment
         }
     }
 
-    /**
-     * Process php config
-     */
-    private function _processPHPconfig($php)
-    {
-        foreach($php as $setting => $val) {
-            if(!is_array($val)) ini_set($setting, $val);
-            else {
-                foreach($val as $k => $v) ini_set($setting.'.'.$k, $v);
-            }               
-        }
-    }
 }
