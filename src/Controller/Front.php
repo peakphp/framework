@@ -112,7 +112,7 @@ class Front
         }
         
         //set controller class name
-        $ctrl_name = Application::conf('ns').'\Controllers\\'.$this->route->controller;
+        $ctrl_name = Application::conf('ns').'\Controllers\\'.ucfirst($this->route->controller);
 
         //check if it's valid application controller
         if(!class_exists($ctrl_name))
