@@ -1,13 +1,8 @@
 <?php
 namespace Peak;
 
-
-
 /**
  * Peak exception
- * 
- * @author   Francois Lajoie
- * @version  $Id$
  */
 class Exception extends \Exception
 {
@@ -85,23 +80,14 @@ class Exception extends \Exception
 	 */
 	public function getDebugTrace()
 	{
-		$trace = debug_backtrace();
-
-		$err_propagation = array();
-		foreach($trace as $i => $v) {
-			if(isset($v['file']) && isset($v['line'])) $err_propagation[$v['line']] = $v['file'];
-		}
-
-		$debug = 'Files:<br />';
-		foreach($err_propagation as $line => $file) $debug .= '- '.$file.' (Line: '.$line.')<br />';
-
-		if((defined('APPLICATION_ENV')) && (APPLICATION_ENV === 'dev')) {
-			$debug .= '<br />Trace dump ['.$this->getTime().']:<pre>';
-			$debug .= print_r($trace,true);
-			$debug .= '</pre>';
-		}
-		
-		return $debug;
+        $trace = debug_backtrace();
+        //print_r($trace);
+        $content = '';
+        $content .= $this->getMessage();
+        $content .= '['.$this->getErrkey().' / '.$this->getTime()."]\n";
+        $content .= str_replace('/path/to/code/', '', $this->getTraceAsString());
+        if(!isCli()) $content = '<pre>'.$content.'</pre>';
+        return $content;
 	}
 
 	/**
@@ -141,8 +127,6 @@ class Exception extends \Exception
 	}
 	
 	public function getErrkey() { return $this->_errkey; }
-
-	public function getLevel() { return $this->_level; }
 
 	public function getTime() { return date('Y-m-d H:i:s'); }
 }
