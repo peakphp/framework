@@ -174,7 +174,7 @@ abstract class Action
             throw new Exception('ERR_CTRL_ACTION_NOT_FOUND', [$this->action, $this->getName()]);
         }
 
-        $this->file = $this->getTitle().'.'.substr($this->action, strlen($this->action_prefix)).'.php';
+        $this->file = strtolower($this->getTitle().'.'.substr($this->action, strlen($this->action_prefix)).'.php');
 
         //call requested action
         if($this->actions_with_params) {
