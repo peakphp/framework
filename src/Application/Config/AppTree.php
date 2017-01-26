@@ -32,14 +32,10 @@ class AppTree
             'modules'        => $root.'/Modules',
             'langs'          => $root.'/Langs',
             'views'          => $root.'/Views',
-            'views_ini'      => $root.'/Views/Ini',
             'views_helpers'  => $root.'/Views/Helpers',
-            'views_themes'   => $root.'/Views',
-            'theme'          => $root.'/Views',
-            'theme_scripts'  => $root.'/Views/Scripts',
-            'theme_partials' => $root.'/Views/Partials',
-            'theme_layouts'  => $root.'/Views/Layouts',
-            'theme_cache'    => $root.'/Views/Cache'
+            'views_scripts'  => $root.'/Views/Scripts',
+            'views_layouts'  => $root.'/Views/Layouts',
+            'views_cache'    => $root.'/Views/Cache'
         ];
     }
 }
