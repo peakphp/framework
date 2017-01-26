@@ -98,8 +98,8 @@ class Config
 
         define('SVR_ABSPATH',         $svr_path); 
         define('LIBRARY_ABSPATH',     realpath(__DIR__.'/../'));
-        define('PUBLIC_ABSPATH',      realpath(SVR_ABSPATH . $this->app_config->get('path.public')));
-        define('APPLICATION_ABSPATH', realpath(SVR_ABSPATH . $this->app_config->get('path.app')));
+        define('PUBLIC_ABSPATH',      realpath($this->app_config->get('path.public')));
+        define('APPLICATION_ABSPATH', realpath($this->app_config->get('path.app')));
         define('APPLICATION_ENV',     $this->app_config->get('env'));
     }
 
