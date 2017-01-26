@@ -82,7 +82,32 @@ class Front
 	 * Called before routing dispatching
 	 * Empty by default
 	 */
-	public function preDispatch() {	}
+	public function preDispatch() {}
+
+    /**
+     * Called after controller action dispatching
+     * Empty by default
+     */
+    public function postDispatch() {}
+    
+    /**
+     * Called after controller loading
+     * Empty by default
+     */
+    public function postDispatchController() {}
+    
+
+    /**
+     * Called after rendering controller view
+     * Empty by default
+     */
+    public function preRender() {}  
+
+    /**
+     * Called after rendering controller view
+     * Empty by default
+     */
+    public function postRender() {}       
 
 	/**
 	 * Call appropriate dispatching methods
@@ -185,28 +210,5 @@ class Front
         else $this->dispatch();
     }
 
-    /**
-	 * Called after controller action dispatching
-	 * Empty by default
-	 */
-    public function postDispatch() { }
-	
-	/**
-	 * Called after controller loading
-	 * Empty by default
-	 */
-	public function postDispatchController() { }
-    
 
-    /**
-     * Called after rendering controller view
-     * Empty by default
-     */
-    public function preRender() { }  
-
-    /**
-     * Called after rendering controller view
-     * Empty by default
-     */
-    public function postRender() { }   
 }
