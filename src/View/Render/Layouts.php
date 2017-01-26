@@ -3,6 +3,7 @@ namespace Peak\View\Render;
 
 use Peak\Application;
 use Peak\Registry;
+use Peak\Exception;
 use Peak\View\Render;
 
 /**
@@ -68,11 +69,11 @@ class Layouts extends Render
         if(!file_exists($filepath)) {         
             if(isset($is_scripts_path)) {
                 $filepath = Registry::o()->app->front->controller->getTitle() .'/'. basename($filepath);
-                throw new \Exception('ERR_VIEW_SCRIPT_NOT_FOUND');
+                throw new Exception('ERR_VIEW_SCRIPT_NOT_FOUND', basename($filepath));
             }
             else {
                 $filepath = str_replace($path, '', $filepath);
-                throw new \Exception('ERR_VIEW_FILE_NOT_FOUND');
+                throw new Exception('ERR_VIEW_FILE_NOT_FOUND', basename($filepath));
             }
         }
                      
