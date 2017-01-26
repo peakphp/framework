@@ -90,8 +90,7 @@ abstract class Action
      */
     public function getName()
     {
-        if ($pos = strrpos(get_class($this), '\\')) return strtolower(substr(get_class($this), $pos + 1));
-        return strtolower($pos);
+        return str_ireplace(Application::conf('ns').'\Controllers\\', '', get_class($this));
     }
     
     /**
@@ -175,7 +174,7 @@ abstract class Action
             throw new Exception('ERR_CTRL_ACTION_NOT_FOUND', [$this->action, $this->getName()]);
         }
 
-        $this->file = $this->getName().'.'.substr($this->action, strlen($this->action_prefix)).'.php';
+        $this->file = $this->getTitle().'.'.substr($this->action, strlen($this->action_prefix)).'.php';
 
         //call requested action
         if($this->actions_with_params) {
@@ -257,7 +256,7 @@ abstract class Action
      */    
     public function render()
     {                
-        $this->view->render($this->file);     
+        $this->view->render($this->file, Application::conf('path.apptree.views_scripts'));     
         $this->postRender();
     }
 
