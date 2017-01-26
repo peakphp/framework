@@ -90,6 +90,14 @@ class Exception extends \Exception
         return $content;
 	}
 
+    /**
+     * Print the debug trace
+     */
+    public function printDebugTrace()
+    {
+        print_r($this->getDebugTrace());
+    }
+
 	/**
 	 * Get exception element trigger trace 
 	 * 
