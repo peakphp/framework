@@ -56,7 +56,7 @@ class Layouts extends Render
     {
         // default path, no path submitted
         if(!isset($path)) {
-            $path = Application::conf('path.apptree.views_scripts');
+            $path = Application::conf('path.apptree.views');
             $no_cache = true;
         }
         else $is_scripts_path = true;
