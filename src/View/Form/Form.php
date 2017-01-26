@@ -73,7 +73,7 @@ class Form extends Helper
      */
     public function control($type, $name, $options = [])
     {
-        $cname = 'Peak\View\Form\Control\\'.$type;
+        $cname = 'Peak\View\Form\Control\\'.ucfirst($type);
 
         $data = $this->get($name);
         $error = $this->getError($name);
