@@ -19,12 +19,6 @@ abstract class Action
     public $file;
 
     /**
-     * view scripts controller absolute path
-     * @var string
-     */
-    public $path;
-
-    /**
      * action called by dispatchAction()
      * @var string
      */
@@ -70,7 +64,6 @@ abstract class Action
     public function __construct()
     {   
         $this->view = Registry::o()->view; 
-        $this->path = $this->getScriptsPath();
     }
     
     /**
@@ -108,20 +101,7 @@ abstract class Action
      */
     public function getTitle()
     {
-        if(preg_match('#^Peak_Controller_Internal_[a-zA-Z_-]*$#', $this->getName())) {
-            return str_replace('Peak_Controller_Internal_','',$this->getName());
-        }
-        else return str_ireplace('controller', '', $this->getName());  
-    }
-
-    /**
-     * Get view scripts absolute path
-     * @return string
-     */
-    public function getScriptsPath()
-    {
-        // return Core::getPath('theme_scripts').'/'.$this->getTitle();
-        return Application::conf('path.apptree.theme_scripts').'/'.$this->getTitle();
+        return str_ireplace('controller', '', $this->getName());  
     }
         
     /**
@@ -191,14 +171,11 @@ abstract class Action
      */
     public function dispatchAction()
     { 
-
         if($this->isAction($this->action) === false) {
             throw new Exception('ERR_CTRL_ACTION_NOT_FOUND', [$this->action, $this->getName()]);
         }
 
-        //set action filename
-        if($this->action_prefix === '_') $this->file = substr($this->action,1).'.php';
-        else $this->file = str_replace($this->action_prefix, '',$this->action).'.php';
+        $this->file = $this->getName().'.'.substr($this->action, strlen($this->action_prefix)).'.php';
 
         //call requested action
         if($this->actions_with_params) {
@@ -280,7 +257,7 @@ abstract class Action
      */    
     public function render()
     {                
-        $this->view->render($this->file, $this->path);     
+        $this->view->render($this->file);     
         $this->postRender();
     }
 
