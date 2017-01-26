@@ -257,7 +257,7 @@ class View
      * @param  string $path
      * @return string or array   return array of view files when layout is used
      */
-    public function render($file,$path)
+    public function render($file, $path = null)
     {
         //skip render part(see $_render)
         if($this->_render === false) return;
@@ -270,7 +270,7 @@ class View
                 $this->_header->release();
             }
 
-            $this->engine()->render($file,$path);
+            $this->engine()->render($file, $path);
         }
         else throw new Exception('ERR_VIEW_ENGINE_NOT_SET');
     }
