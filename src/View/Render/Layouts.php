@@ -32,7 +32,7 @@ class Layouts extends Render
      */
     public function isLayout($name)
     {
-    	return (file_exists(Application::conf('path.apptree.theme_layouts').'/'.$name)) ? true : false;
+    	return (file_exists(Application::conf('path.apptree.views_layouts').'/'.$name)) ? true : false;
     }
 
     /**
@@ -55,7 +55,7 @@ class Layouts extends Render
     {
         // default path, no path submitted
         if(!isset($path)) {
-            $path = Application::conf('path.apptree.theme');
+            $path = Application::conf('path.apptree.views_scripts');
             $no_cache = true;
         }
         else $is_scripts_path = true;
@@ -78,7 +78,7 @@ class Layouts extends Render
                      
         // render the layout if is set
         if((isset($this->_layout_file)) && ($this->isLayout($this->_layout_file))) {
-            $filepath = Application::conf('path.apptree.theme_layouts').'/'.$this->_layout_file;
+            $filepath = Application::conf('path.apptree.views_layouts').'/'.$this->_layout_file;
             $this->scripts_file = $file;
             $this->scripts_path = $path;
         }
