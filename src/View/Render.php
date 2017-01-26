@@ -82,7 +82,7 @@ abstract class Render
         
         if(defined('PUBLIC_URL')) $url = PUBLIC_URL.'/'.$path;
         elseif(isset($_SERVER['SERVER_NAME'])) {
-            $url = $schema_name.$_SERVER['SERVER_NAME'].'/'.Application::conf('path.public').'/'.$path;
+            $url = $schema_name.$_SERVER['SERVER_NAME'].'/'.relativePath(Application::conf('path.public')).'/'.$path;
         }
 
         //remove double slash(//) inside url
