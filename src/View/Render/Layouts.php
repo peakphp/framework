@@ -3,6 +3,7 @@ namespace Peak\View\Render;
 
 use Peak\Application;
 use Peak\Registry;
+use Peak\Exception;
 use Peak\View\Render;
 
 /**
@@ -32,7 +33,7 @@ class Layouts extends Render
      */
     public function isLayout($name)
     {
-    	return (file_exists(Application::conf('path.apptree.theme_layouts').'/'.$name)) ? true : false;
+    	return (file_exists(Application::conf('path.apptree.views_layouts').'/'.$name)) ? true : false;
     }
 
     /**
@@ -55,7 +56,7 @@ class Layouts extends Render
     {
         // default path, no path submitted
         if(!isset($path)) {
-            $path = Application::conf('path.apptree.theme');
+            $path = Application::conf('path.apptree.views');
             $no_cache = true;
         }
         else $is_scripts_path = true;
@@ -68,17 +69,17 @@ class Layouts extends Render
         if(!file_exists($filepath)) {         
             if(isset($is_scripts_path)) {
                 $filepath = Registry::o()->app->front->controller->getTitle() .'/'. basename($filepath);
-                throw new \Exception('ERR_VIEW_SCRIPT_NOT_FOUND');
+                throw new Exception('ERR_VIEW_SCRIPT_NOT_FOUND', basename($filepath));
             }
             else {
                 $filepath = str_replace($path, '', $filepath);
-                throw new \Exception('ERR_VIEW_FILE_NOT_FOUND');
+                throw new Exception('ERR_VIEW_FILE_NOT_FOUND', basename($filepath));
             }
         }
                      
         // render the layout if is set
         if((isset($this->_layout_file)) && ($this->isLayout($this->_layout_file))) {
-            $filepath = Application::conf('path.apptree.theme_layouts').'/'.$this->_layout_file;
+            $filepath = Application::conf('path.apptree.views_layouts').'/'.$this->_layout_file;
             $this->scripts_file = $file;
             $this->scripts_path = $path;
         }

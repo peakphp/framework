@@ -83,16 +83,28 @@ if(!function_exists('phpinput')) {
 /**
  * is_env()
  */
-if(!function_exists('is_env')) {
+if(!function_exists('isEnv')) {
     /**
      * shorcut for APPLICATION_ENV === $env verification
      */
-    function is_env($env) { 
+    function isEnv($env) { 
 
         if(defined('APPLICATION_ENV')) {
             return (APPLICATION_ENV === $env);
         }
         return false;
+    }
+}
+
+/**
+ * is_env()
+ */
+if(!function_exists('isCli')) {
+    /**
+     * Detect if command line internface
+     */
+    function isCli() { 
+        return (php_sapi_name() === 'cli' OR defined('STDIN'));
     }
 }
 

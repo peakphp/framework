@@ -82,7 +82,32 @@ class Front
 	 * Called before routing dispatching
 	 * Empty by default
 	 */
-	public function preDispatch() {	}
+	public function preDispatch() {}
+
+    /**
+     * Called after controller action dispatching
+     * Empty by default
+     */
+    public function postDispatch() {}
+    
+    /**
+     * Called after controller loading
+     * Empty by default
+     */
+    public function postDispatchController() {}
+    
+
+    /**
+     * Called after rendering controller view
+     * Empty by default
+     */
+    public function preRender() {}  
+
+    /**
+     * Called after rendering controller view
+     * Empty by default
+     */
+    public function postRender() {}       
 
 	/**
 	 * Call appropriate dispatching methods
@@ -112,7 +137,7 @@ class Front
         }
         
         //set controller class name
-        $ctrl_name = Application::conf('ns').'\Controllers\\'.ucfirst($this->route->controller);
+        $ctrl_name = Application::conf('ns').'\Controllers\\'.ucfirst($this->route->controller).'Controller';
 
         //check if it's valid application controller
         if(!class_exists($ctrl_name))
@@ -185,28 +210,5 @@ class Front
         else $this->dispatch();
     }
 
-    /**
-	 * Called after controller action dispatching
-	 * Empty by default
-	 */
-    public function postDispatch() { }
-	
-	/**
-	 * Called after controller loading
-	 * Empty by default
-	 */
-	public function postDispatchController() { }
-    
 
-    /**
-     * Called after rendering controller view
-     * Empty by default
-     */
-    public function preRender() { }  
-
-    /**
-     * Called after rendering controller view
-     * Empty by default
-     */
-    public function postRender() { }   
 }
