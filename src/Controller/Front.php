@@ -62,16 +62,17 @@ class Front
 	 */
 	public function __construct()
 	{
-		$this->_registryConfig();
+		$this->_appConfig();
 	}
 	
 	/**
      * Get array 'front' from registered object 'config' if exists
      */
-    private function _registryConfig()
+    private function _appConfig()
     {
-    	if(isset(Registry::o()->config->front)) {
-    		foreach(Registry::o()->config->front as $k => $v) {
+        $config = Application::conf('front');
+    	if(!empty($config)) {
+    		foreach(Application::conf('front') as $k => $v) {
     			if($k === 'allow_internal_controllers') $v = (bool)$v;
     			$this->$k = $v;
     		}
@@ -137,12 +138,12 @@ class Front
         }
         
         //set controller class name
-        $ctrl_name = Application::conf('ns').'\Controllers\\'.ucfirst($this->route->controller).'Controller';
+        $ctrl_name = $this->_getCtrlName(Application::conf('ns').'\Controllers\\', $this->route->controller);
 
         //check if it's valid application controller
         if(!class_exists($ctrl_name))
         {
-            $internal_ctrl_name = 'Peak\Controller\Internal\\'.$this->route->controller;
+            $internal_ctrl_name = $this->_getCtrlName('Peak\Controller\Internal\\', $this->route->controller);
 
             //check for peak internal controller
             if(($this->allow_internal_controllers === true) && (class_exists($internal_ctrl_name))) {
@@ -167,6 +168,18 @@ class Front
     	    $this->controller->dispatch(); 
         }
 	}
+
+    /**
+     * Get controller name
+     * 
+     * @param  string $ns   namespace prefix
+     * @param  string $name controller prefix name
+     * @return string       
+     */
+    protected function _getCtrlName($ns, $name)
+    {
+        return $ns.ucfirst($name).'Controller';
+    }
 		
 	/**
 	 * Force dispatch of $error_controller
