@@ -72,17 +72,11 @@ class Config
      */
     private function getConfigFilepath()
     {
-        $path = str_replace('\\', '/', 
-            realpath(SVR_ABSPATH.'/'.$this->app_config->get('path.app').'/'.$this->app_config->get('conf'))
-        );
 
-        // in case the current app is outside the server document root, which it is 
-        // highly recommended, config path will omit SVR_ABSPATH
-        if(empty($path)) {
-            $path = str_replace('\\', '/', 
-                realpath($this->app_config->get('path.app').'/'.$this->app_config->get('conf'))
-            );
-        }
+        $path = str_replace('\\', '/', 
+            realpath($this->app_config->get('path.app').'/'.$this->app_config->get('conf'))
+        );
+        
 
         return $path;
     }
