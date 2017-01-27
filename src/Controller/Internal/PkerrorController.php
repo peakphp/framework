@@ -7,7 +7,7 @@ use Peak\Exception;
  * Internal controller for error, to use it you need to set Peak_Controller_Front::$allow_internal_controllers to true and
  * Peak_Controller_Front::$error_controller to 'pkerror'
  */
-class PkError extends Action
+class PkerrorController extends Action
 {
     
     /**

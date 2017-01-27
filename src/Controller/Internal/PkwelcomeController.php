@@ -6,7 +6,7 @@ use Peak\Controller\Action;
  * Peak welcome controller. This is the default controller for Peak/Application/genericapp.ini
  * Its just a welcome (hello words) page... :P
  */
-class Pkwelcome extends Action
+class PkwelcomeController extends Action
 {
 
 	/**

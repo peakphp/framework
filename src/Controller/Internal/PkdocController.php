@@ -6,7 +6,7 @@ use Peak\Controller\Action;
 /**
  * Peak Autodoc controller for the framework using Reflection
  */
-class Pkdoc extends Action
+class PkdocController extends Action
 {
     /**
 	 * Peak_Zreflection instance
