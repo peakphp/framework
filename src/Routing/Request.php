@@ -81,7 +81,7 @@ class Request
     protected function standardize($request)
     {
         $request = trim($this->removeDoubleSeparator($request));
-        
+
         if(substr($request, 0, 1) !== self::$separator) {
             $request = self::$separator.$request;
         }
@@ -103,7 +103,7 @@ class Request
     protected function removeDoubleSeparator($request)
     {
         return str_ireplace(
-            self::$separator.''.self::$separator, 
+            self::$separator.self::$separator, 
             self::$separator, 
             $request
         );
