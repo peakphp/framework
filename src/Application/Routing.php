@@ -48,7 +48,7 @@ class Routing
      */
     public function __construct($request = null, $base_uri = null)
     {
-        $this->loadRequest($request);
+        if(isset($request)) $this->loadRequest($request);
         $this->base_uri = (isset($base_uri)) ? $base_uri : relativePath(Application::conf('path.public'));
         $this->custom_routes = new Collection();
     }
@@ -62,6 +62,7 @@ class Routing
      */
     public function loadRequest($request = null)
     {
+
         if(isset($request)) {
             $this->request = new Request($request, $this->base_uri);
         }
