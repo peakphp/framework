@@ -15,13 +15,13 @@ class Application
 
 	/**
 	 * app bootstrap object if exists
-	 * @var object
+	 * @var Application\Bootstrap
 	 */
     public $bootstrap;
 
     /**
      * app object front controller
-     * @var object
+     * @var Controller\Front
      */
     public $front;
 
@@ -33,7 +33,7 @@ class Application
     
     /**
      * application config
-     * @var object
+     * @var Application\Config
      */
     protected $_config = null;
 
@@ -60,7 +60,7 @@ class Application
      * Create a instance of application
      * 
      * @param  array $config
-     * @return object
+     * @return Application
      */
     static function create(Array $config) 
     {
@@ -104,7 +104,6 @@ class Application
             Registry::o()->app->config($path, $value);
             return $this;
         }
-
     }
 
     /**
