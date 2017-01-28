@@ -14,6 +14,12 @@ class Database
     protected $db;
 
     /**
+     * The current database connection name
+     * @var string
+     */
+    protected $connection_name;
+
+    /**
      * The current database schema
      * @var Illuminate\Database\Schema\*
      */
@@ -56,6 +62,9 @@ class Database
             // store the connection
             $this->db = self::$capsule->getConnection($name);
 
+            // store the connection name
+            $this->connection_name = $name;
+
             // store the schema
             $this->schema = self::$capsule->schema($name);
         }
@@ -87,19 +96,12 @@ class Database
     }
 
     /**
-     * Set PDO fetch mode to array assoc
+     * Get current connection name
+     * 
+     * @return string
      */
-    public function setFetchModeToAssoc()
+    public function getConnectionName()
     {
-        $this->db->setFetchMode(\PDO::FETCH_ASSOC);
+        return $this->connection_name;
     }
-
-    /**
-     * Set PDO fetch mode to object class
-     */
-    public function setFetchModeToClass()
-    {
-        $this->db->setFetchMode(\PDO::FETCH_CLASS);
-    }
-
 }
