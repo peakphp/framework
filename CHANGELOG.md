@@ -16,16 +16,18 @@ been rewritten, splitted and/or reorganised.
  - added view helper class to inject view object into view helper
  - added per environment functionality to application bootstrap
  - added new routing components
+ - added new paginator component
  - added events dispatcher
  - added collection and paginator support object
  - most code inside Core have been moved to new application components.
  - Core regroup global functions now
- - config now herit from collection
+ - Config now herit from collection
  - removed unused spl autoload functions
  - removed deprecated Xml and Dispatcher class
  - removed deprecated Codegen class
  - removed deprecated Zreflection class
  - removed deprecated Router class
+ - removed deprecated View\Theme
  - removed all models classes and use laravel eloquent ORM instead
 
 
