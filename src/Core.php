@@ -1,11 +1,19 @@
 <?php
 
-/**
- * CONSTANT(S)
- */
+/*
+|--------------------------------------------------------------------------
+| Peak constant(s)
+|--------------------------------------------------------------------------
+*/
 if(!defined('PEAK_VERSION'))
     define('PEAK_VERSION', '2.0.0');
 
+/*
+|--------------------------------------------------------------------------
+| General related functions
+|--------------------------------------------------------------------------
+*/
+   
 /**
  * relativeBasepath()
  */
@@ -43,6 +51,24 @@ if(!function_exists('relativePath')) {
 }
 
 /**
+ * is_env()
+ */
+if(!function_exists('isCli')) {
+    /**
+     * Detect if command line internface
+     */
+    function isCli() { 
+        return (php_sapi_name() === 'cli' OR defined('STDIN'));
+    }
+}
+
+/*
+|--------------------------------------------------------------------------
+| Peak application related functions 
+|--------------------------------------------------------------------------
+*/
+
+/**
  * __()
  */
 if(!function_exists('__')) {
@@ -58,7 +84,6 @@ if(!function_exists('__')) {
         return \Peak\Lang::__($text, $replaces, $func);
     }
 }
-
 
 /**
  * _e()
@@ -99,11 +124,14 @@ if(!function_exists('phpinput')) {
 }
 
 /**
- * is_env()
+ * isEnv()
  */
 if(!function_exists('isEnv')) {
     /**
-     * shorcut for APPLICATION_ENV === $env verification
+     * Check is env match curretn application env
+     * 
+     * @param  string  $env
+     * @return boolean     
      */
     function isEnv($env) { 
 
@@ -115,23 +143,15 @@ if(!function_exists('isEnv')) {
 }
 
 /**
- * is_env()
- */
-if(!function_exists('isCli')) {
-    /**
-     * Detect if command line internface
-     */
-    function isCli() { 
-        return (php_sapi_name() === 'cli' OR defined('STDIN'));
-    }
-}
-
-/**
  * config()
  */
 if(!function_exists('config')) {
     /**
-     * shorcut for \Peak\Application::conf([$path, $value])
+     * App configuration
+     * 
+     * @param  string|null $path
+     * @param  mixed|null  $value
+     * @return mixed    
      */
     function config($path = null, $value = null) { 
 
@@ -139,16 +159,43 @@ if(!function_exists('config')) {
     }
 }
 
-
 /**
  * collection()
  */
 if(!function_exists('collection')) {
     /**
-     * shorcut for \Peak\Collection::make([$items])
+     * Create a new Collection
+     * 
+     * @param  array|null $items 
+     * @return \Peak\Collection     
      */
     function collection($items = null) { 
 
         return \Peak\Collection::make($items);
+    }
+}
+
+/**
+ * url()
+ */
+if(!function_exists('url')) {
+    /**
+     * Generate application url
+     */
+    function url($path = null, $use_forwarded_host = true) { 
+
+        $s = $_SERVER;
+
+        $ssl      = ( ! empty( $s['HTTPS'] ) && $s['HTTPS'] == 'on' );
+        $sp       = strtolower( $s['SERVER_PROTOCOL'] );
+        $protocol = substr( $sp, 0, strpos( $sp, '/' ) ) . ( ( $ssl ) ? 's' : '' );
+        $port     = $s['SERVER_PORT'];
+        $port     = ( ( ! $ssl && $port=='80' ) || ( $ssl && $port=='443' ) ) ? '' : ':'.$port;
+        $host     = ( $use_forwarded_host && isset( $s['HTTP_X_FORWARDED_HOST'] ) ) ? $s['HTTP_X_FORWARDED_HOST'] : ( isset( $s['HTTP_HOST'] ) ? $s['HTTP_HOST'] : null );
+        $host     = isset( $host ) ? $host : $s['SERVER_NAME'] . $port;
+
+        $final    = '//' . $host.relativePath(config('path.public')).'/'.$path;
+
+        return $final;
     }
 }
