@@ -18,9 +18,6 @@ Requirements:
 
 ###Lavarel components included:
 - [illuminate/database](https://github.com/illuminate/database)
-- [illuminate/container](https://github.com/illuminate/container)
-- [illuminate/contracts](https://github.com/illuminate/contracts)
-- [illuminate/support](https://github.com/illuminate/support)
 - [illuminate/events](https://github.com/illuminate/events)
 
 ###Version 1
