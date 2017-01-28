@@ -16,14 +16,11 @@
     ],
     "require": {
         "php": ">=5.6.4",
-        "illuminate/database": "5.2.*@dev",
-        "illuminate/container": "5.2.*@dev",
-        "illuminate/contracts": "5.2.*@dev",
-        "illuminate/support": "5.2.*@dev",
-        "illuminate/events": "5.2.*@dev"
+        "illuminate/database": "5.4.*@dev",
+        "illuminate/events": "5.4.*@dev"
     },
     "require-dev": {
-        "phpunit/phpunit": "~5.4"
+        "phpunit/phpunit": "~5.7"
     },
     "autoload": {
         "files": [
@@ -33,5 +30,6 @@
             "Peak\\": "src/"
         }
     },
-    "minimum-stability": "dev"
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
