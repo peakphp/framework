@@ -4,6 +4,7 @@ Release Date: ?
 
  - fix path in View\Cache
  - added function showAllErrors() in Core
+ - updated composer.json to use the latest 5.4.x version of laravel database
 
 VERSION 2.0.1
 -------------
