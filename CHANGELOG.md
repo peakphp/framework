@@ -2,7 +2,7 @@ VERSION 2.0.2
 -------------
 Release Date: ?
 
- - fix path in View\Cache
+ - fixed path in View\Cache
  - added function showAllErrors() in Core
  - updated composer.json to use the latest 5.4.x version of laravel database
 
@@ -34,17 +34,17 @@ been rewritten, splitted and/or reorganised.
  - added new routing components
  - added new paginator component
  - added events dispatcher
- - added collection and paginator support object
+ - added new collection component
  - most code inside Core have been moved to new application components.
  - Core regroup global and app functions now
- - Config now herit from collection
+ - Config now herit from Collection
  - removed unused spl autoload functions
  - removed deprecated Xml and Dispatcher class
  - removed deprecated Codegen class
  - removed deprecated Zreflection class
  - removed deprecated Router class
  - removed deprecated View\Theme
- - removed all models classes and use laravel eloquent ORM instead
+ - removed all models classes (replaced by laravel eloquent)
 
 
 VERSION 1.0.0
