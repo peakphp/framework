@@ -51,16 +51,30 @@ if(!function_exists('relativePath')) {
 }
 
 /**
- * is_env()
+ * isCli()
  */
 if(!function_exists('isCli')) {
     /**
-     * Detect if command line internface
+     * Detect if we are in command line interface mode
      */
     function isCli() { 
         return (php_sapi_name() === 'cli' OR defined('STDIN'));
     }
 }
+
+/**
+ * showAllErrors()
+ */
+if(!function_exists('showAllErrors')) {
+    /**
+     * Try to force the display of all errors
+     */
+    function showAllErrors() { 
+        error_reporting(E_ALL);
+        ini_set('display_errors', 1);
+    }
+}
+
 
 /*
 |--------------------------------------------------------------------------
