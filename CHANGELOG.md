@@ -20,7 +20,7 @@ been rewritten, splitted and/or reorganised.
  - added events dispatcher
  - added collection and paginator support object
  - most code inside Core have been moved to new application components.
- - Core regroup global functions now
+ - Core regroup global and app functions now
  - Config now herit from collection
  - removed unused spl autoload functions
  - removed deprecated Xml and Dispatcher class
