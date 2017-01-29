@@ -1,6 +1,21 @@
-VERSION 2.0.0
+VERSION 2.0.2
 -------------
 Release Date: ?
+
+ - fix path in View\Cache
+ - added function showAllErrors() in Core
+
+VERSION 2.0.1
+-------------
+Release Date: 2017-01-28
+
+ - update to laravel 5.4.*
+ - removed duplicated dependencies with laravel in composer.json
+
+
+VERSION 2.0.0
+-------------
+Release Date: 2017-01-27
 
 Warning! Breaking changes in 2.0.0 :
 If you want want to support an old application, please use version 1.*
