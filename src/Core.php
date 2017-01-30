@@ -190,6 +190,34 @@ if(!function_exists('collection')) {
 }
 
 /**
+ * session()
+ */
+if(!function_exists('session')) {
+    /**
+     * Create/Access to session collection
+     * 
+     * @param  array|null $items 
+     * @return \Peak\session     
+     */
+    function session($path = null, $value = null) { 
+
+        $s = \Peak\Registry::o()->session;
+        if(!isset($s)) {
+            $s = \Peak\Registry::set('session', new \Peak\Config\Session());
+        }
+        if(!isset($path) && !isset($value)) {
+            return $s;
+        }
+        elseif(isset($path) && !isset($value)) {
+            return $s->get($path);
+        }
+        else {
+            return $s->set($path, $value);
+        }
+    }
+}
+
+/**
  * url()
  */
 if(!function_exists('url')) {
