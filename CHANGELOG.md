@@ -1,10 +1,12 @@
 VERSION 2.0.2
 -------------
-Release Date: ?
+Release Date: 2017-01-29
 
  - fixed path in View\Cache
  - added function showAllErrors() in Core
  - updated composer.json to use the latest 5.4.x version of laravel database
+ - added Config\Session class
+ - added function session() to Core
 
 VERSION 2.0.1
 -------------
