@@ -33,7 +33,6 @@ class ClassResolver
     public function resolve($class, Container $container, array $args = [])
     {
         $dependencies = $this->inspector->inspect($class);
-        print_r($dependencies);
         $class_args   = [];
         $class_count  = 0;
         $i            = 0;
