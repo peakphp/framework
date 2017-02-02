@@ -5,9 +5,9 @@ namespace Peak\Di;
 use \ReflectionClass;
 
 /**
- * Dependency Class Instanciator
+ * Dependency Class Instantiator
  */
-class ClassInstanciator
+class ClassInstantiator
 {
     /**
      * Instanciate a class
@@ -15,7 +15,7 @@ class ClassInstanciator
      * @param  string $class
      * @return object
      */
-    public function instanciate($class, array $args = [])
+    public function instantiate($class, array $args = [])
     {
         $reflection = new ReflectionClass($class);
         return $reflection->newInstanceArgs($args);

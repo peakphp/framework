@@ -14,7 +14,7 @@ class ContainerTest extends TestCase
     {
 
         $container = new \Peak\Di\Container();
-        $testdi = $container->instanciate('TestDi1', [
+        $testdi = $container->instantiate('TestDi1', [
             'value',
             [12],
             999
@@ -34,7 +34,7 @@ class ContainerTest extends TestCase
     {
 
         $container = new \Peak\Di\Container();
-        $testdi = $container->instanciate('TestDi4', [
+        $testdi = $container->instantiate('TestDi4', [
             'TestDi1' => [
                 'value',
                 [12],
@@ -52,7 +52,7 @@ class ContainerTest extends TestCase
 
 
         $container = new \Peak\Di\Container();
-        $testdi = $container->instanciate('TestDi5', [
+        $testdi = $container->instantiate('TestDi5', [
             'TestDi4' => [
                 'TestDi1' => [
                     'value',
@@ -78,7 +78,7 @@ class ContainerTest extends TestCase
         $container = new \Peak\Di\Container();
         try {
             //$this->expectException(Exception::class);
-            $testdi = $container->instanciate('iDontExists', [
+            $testdi = $container->instantiate('iDontExists', [
                 'value',
                 [12],
                 999
@@ -97,7 +97,7 @@ class ContainerTest extends TestCase
         $container = new \Peak\Di\Container();
         try {
             //$this->expectException(Exception::class);
-            $testdi = $container->instanciate('TestDi2');
+            $testdi = $container->instantiate('TestDi2');
         }
         catch(Exception $e) {}
 

@@ -52,7 +52,12 @@ class ClassResolver
                     $class_args[] = $container->getInstance($name);
                 }
                 else {
-                    $class_args[] = new $name();
+                    $child_args = [];
+                    if(array_key_exists($name, $args)) {
+                        $child_args = $args[$name];
+                    }
+
+                    $class_args[] = $container->instantiate($name, $child_args);
                 }
             }
             else if(array_key_exists($i - ($class_count), $args)) {
