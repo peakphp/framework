@@ -30,14 +30,19 @@ class ClassResolver
      * @param  string $class
      * @return object
      */
-    public function resolve(string $class, Container $container, array $args = [])
+    public function resolve($class, Container $container, array $args = [])
     {
         $dependencies = $this->inspector->inspect($class);
+        print_r($dependencies);
         $class_args   = [];
         $class_count  = 0;
         $i            = 0;
 
         foreach($dependencies as $key => $d) {
+
+            if(isset($d['error'])) {
+                throw new \Exception($d['error']);
+            }
 
             if(isset($d['class'])) {
 
