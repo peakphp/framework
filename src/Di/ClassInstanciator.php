@@ -15,7 +15,7 @@ class ClassInstanciator
      * @param  string $class
      * @return object
      */
-    public function instanciate(String $class, array $args = [])
+    public function instanciate($class, array $args = [])
     {
         $reflection = new ReflectionClass($class);
         return $reflection->newInstanceArgs($args);
