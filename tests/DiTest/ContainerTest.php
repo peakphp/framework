@@ -28,6 +28,49 @@ class ContainerTest extends TestCase
     }
 
     /**
+     * test new instance
+     */  
+    function testCreateInstanceRecursive()
+    {
+
+        $container = new \Peak\Di\Container();
+        $testdi = $container->instanciate('TestDi4', [
+            'TestDi1' => [
+                'value',
+                [12],
+                999,
+            ]
+        ]);
+
+        $this->assertTrue($testdi instanceof TestDi4);
+        $this->assertTrue($testdi->testdi1 instanceof TestDi1);
+        $this->assertTrue($testdi->testdi1->col instanceof \Peak\Collection);
+        $this->assertTrue(isset($testdi->testdi1->arg1));
+        $this->assertTrue(isset($testdi->testdi1->arg2));
+        $this->assertTrue(isset($testdi->testdi1->arg3));
+
+
+
+        $container = new \Peak\Di\Container();
+        $testdi = $container->instanciate('TestDi5', [
+            'TestDi4' => [
+                'TestDi1' => [
+                    'value',
+                    [12],
+                    999,
+                ],
+            ],
+        ]);
+
+        $this->assertTrue($testdi instanceof TestDi5);
+        $this->assertTrue($testdi->testdi4 instanceof TestDi4);
+        $this->assertTrue($testdi->testdi4->testdi1->col instanceof \Peak\Collection);
+        $this->assertTrue(isset($testdi->testdi4->testdi1->arg1));
+        $this->assertTrue(isset($testdi->testdi4->testdi1->arg2));
+        $this->assertTrue(isset($testdi->testdi4->testdi1->arg3));
+    }
+
+    /**
      * test exception with unknow class
      */  
     function testException()
@@ -106,4 +149,24 @@ class TestDi2
 class TestDi3
 {    
     function __construct() {}
+}
+
+class TestDi4
+{
+    public $testdi1;
+
+    function __construct(TestDi1 $di1) 
+    {
+        $this->testdi1 = $di1;
+    }
+}
+
+class TestDi5
+{
+    public $testdi4;
+
+    function __construct(TestDi4 $di4) 
+    {
+        $this->testdi4 = $di4;
+    }
 }
