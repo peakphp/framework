@@ -1,3 +1,9 @@
+VERSION 2.0.3
+-------------
+Release Date: ?
+
+ - added Dependency Injection Component
+
 VERSION 2.0.2
 -------------
 Release Date: 2017-01-29
@@ -14,6 +20,7 @@ Release Date: 2017-01-28
 
  - update to laravel 5.4.*
  - removed duplicated dependencies with laravel in composer.json
+ - added function url() to Core
 
 
 VERSION 2.0.0
