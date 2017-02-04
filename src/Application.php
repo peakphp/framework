@@ -13,10 +13,10 @@ use Peak\Controller\Front;
 class Application
 {
 
-	/**
-	 * app bootstrap object if exists
-	 * @var Application\Bootstrap
-	 */
+    /**
+     * app bootstrap object if exists
+     * @var Application\Bootstrap
+     */
     public $bootstrap;
 
     /**
@@ -37,8 +37,8 @@ class Application
      */
     protected $_config = null;
 
-	/**
-	 * Start framework
+    /**
+     * Start framework
      */
     private function __construct(Collection $conf)
     {   
@@ -118,28 +118,28 @@ class Application
         return $this;
     }
 
-	/**
-	 * Load and store application Bootstrapper
-	 *
-	 * @param string $prefix Bootstrap class prefix name if exists
-	 */
-	private function _loadBootstrap()
-	{
-		$cname = $this->config('ns').'\Bootstrap';
-		if(class_exists($cname)) $this->bootstrap = new $cname();
-		else $this->bootstrap = new Bootstrapper();
-	}
+    /**
+     * Load and store application Bootstrapper
+     *
+     * @param string $prefix Bootstrap class prefix name if exists
+     */
+    private function _loadBootstrap()
+    {
+        $cname = $this->config('ns').'\Bootstrap';
+        if(class_exists($cname)) $this->bootstrap = new $cname();
+        else $this->bootstrap = new Bootstrapper();
+    }
 
-	/**
-	 * Load and store application Front Controller
-	 *
-	 * @param string $prefix Front class prefix name if exists
-	 */
-	private function _loadFront()
-	{
-		$cname = $this->config('ns').'\Front';
-		$this->front = (class_exists($cname)) ? new $cname() : new Front();
-	}
+    /**
+     * Load and store application Front Controller
+     *
+     * @param string $prefix Front class prefix name if exists
+     */
+    private function _loadFront()
+    {
+        $cname = $this->config('ns').'\Front';
+        $this->front = (class_exists($cname)) ? new $cname() : new Front();
+    }
 
     /**
      * Start front dispatching of a request
