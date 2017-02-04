@@ -68,6 +68,30 @@ class ContainerTest extends TestCase
         $this->assertTrue(isset($testdi->testdi4->testdi1->arg1));
         $this->assertTrue(isset($testdi->testdi4->testdi1->arg2));
         $this->assertTrue(isset($testdi->testdi4->testdi1->arg3));
+
+
+        // --- restart container ---
+        $container = new \Peak\Di\Container();
+
+        $testdi = $container->instantiate(
+            'TestDi10', //classname
+            [
+                'foobar10', //arguments....
+                'TestDi9' => [
+                    ['myarray'],
+                    'TestDi1' => [
+                        'value',
+                        [12],
+                        999,
+                    ],
+                ]
+            ]
+        ); 
+
+        $this->assertTrue($testdi->say === 'foobar10');
+        $this->assertTrue($testdi->testdi9->say === 'hello');
+        $this->assertTrue($testdi->testdi9->testdi->col instanceof \Peak\Collection);
+        $this->assertTrue($testdi->testdi9->testdi->arg1 === 'value');
     }
 
     /**
@@ -95,13 +119,45 @@ class ContainerTest extends TestCase
 
         $testdi = $container->instantiate(
             'TestDi6', //classname
-            [], //arguments.... here none
+            [''], //arguments.... here none
             ['TestDiInterface' => 'TestDi7'] //explicit relationship for an interface
         ); 
 
         $this->assertTrue(isset($testdi->testdi->foobar));
     }
 
+    /**
+     * test new instance
+     */  
+    function testCreateInstanceWithInterface2()
+    {
+        // --- restart container ---
+        $container = new \Peak\Di\Container();
+
+        //both implement the same interface
+        $container->addInstance(new TestDi7()); 
+        $container->addInstance(new TestDi8());
+
+        $testdi = $container->instantiate(
+            'TestDi11', //classname
+            [
+                'foobar10', //arguments....
+                'TestDi9' => [
+                    ['myarray'],
+                    'TestDi1' => [
+                        'value',
+                        [12],
+                        999,
+                    ],
+                ]
+            ],
+            ['TestDiInterface' => 'TestDi8']
+        ); 
+
+        $this->assertTrue($testdi->say === 'foobar10');
+    }
+
+ 
     /**
      * test exception with unknow class
      */  
@@ -265,6 +321,24 @@ class TestDi9 implements TestDiInterface2
     function __construct(TestDi1 $testdi, array $args = [])
     {
         $this->say = 'hello';
+        $this->testdi = $testdi;
     }
 }
 
+class TestDi10
+{
+    function __construct(TestDi9 $testdi9, $string)
+    {
+        $this->say = $string;
+        $this->testdi9 = $testdi9;
+    }
+}
+
+
+class TestDi11
+{
+    function __construct(TestDi6 $testdi6, $string)
+    {
+        $this->say = $string;
+    }
+}
