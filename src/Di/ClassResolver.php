@@ -71,7 +71,7 @@ class ClassResolver
                         if(array_key_exists($name, $args)) {
                             $child_args = $args[$name];
                         }
-                        $class_args[] = $container->instantiate($name, $child_args);
+                        $class_args[] = $container->instantiate($name, $child_args, $explicit);
                     }
                 }
             }
