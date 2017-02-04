@@ -39,8 +39,10 @@ class Container
      * instance(s) as dependency when needed
      * 
      * @param  string $class     The class name to instanciate
-     * @param  array  $args      Constructor argument(s) if any
-     * @param  array  $explicit  Define class(es) relationship with interface(s)
+     * @param  array  $args      Constructor argument(s) for parent and child if any
+     * @param  array  $explicit  Determine which instance should be use for an interface name.
+     *                           Required when you have multiple instances using the same interface name.
+     *                           ex: ['myinterface' => 'myinstance3']
      * @return object
      */
     public function instantiate($class, $args = [], $explict = [])
