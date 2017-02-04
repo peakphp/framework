@@ -54,6 +54,8 @@ class ClassInspector
             throw new \Exception('Can\'t resolve classname '.$class);
         }
 
+        //print_r($dependencies);
+
         return $dependencies;
     }
     
