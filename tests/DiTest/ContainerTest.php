@@ -71,6 +71,62 @@ class ContainerTest extends TestCase
     }
 
     /**
+     * test new instance
+     */  
+    function testCreateInstanceWithInterface()
+    {
+
+        $container = new \Peak\Di\Container();
+
+        $container->addInstance(new TestDi7());
+        
+        $testdi = $container->instantiate('TestDi6');
+
+        $interfaces = class_implements($testdi->testdi);
+        $this->assertTrue(count($interfaces) == 1);
+
+
+        // --- restart container ---
+        $container = new \Peak\Di\Container();
+
+        //both implement the same interface
+        $container->addInstance(new TestDi7()); 
+        $container->addInstance(new TestDi8());
+
+        $testdi = $container->instantiate(
+            'TestDi6', //classname
+            [], //arguments.... here none
+            ['TestDiInterface' => 'TestDi7'] //explicit relationship for an interface
+        ); 
+
+        $this->assertTrue(isset($testdi->testdi->foobar));
+    }
+
+    /**
+     * test exception with unknow class
+     */  
+    function testCreateInstanceWithInterfaceException()
+    {
+        $container = new \Peak\Di\Container();
+        try {
+
+            //both implement the same interface
+            $container->addInstance(new TestDi7()); 
+            $container->addInstance(new TestDi8());
+            
+            //TestDi6 has an interface as dependency, both TestDi7 and TestDi8 qualify
+            //but container doesn't know which one to use so it throw an LogicException 
+            $testdi = $container->instantiate('TestDi6'); 
+        }
+        catch(Exception $e) {
+            $ename = get_class($e);
+        }
+
+        $this->assertTrue(isset($ename));
+        $this->assertTrue($ename === 'LogicException');
+    }
+
+    /**
      * test exception with unknow class
      */  
     function testException()
@@ -125,6 +181,12 @@ class ContainerTest extends TestCase
 
 }
 
+interface TestDiInterface {}
+
+interface TestDiInterface2 {
+    public function __construct(TestDi1 $testdi, array $args = []);
+}
+
 class TestDi1
 {
     public $col;
@@ -170,3 +232,39 @@ class TestDi5
         $this->testdi4 = $di4;
     }
 }
+
+
+class TestDi6
+{
+    public $testdi;
+
+    function __construct(TestDiInterface $di) 
+    {
+        $this->testdi = $di;
+    }
+}
+
+
+class TestDi7 implements TestDiInterface
+{
+    public $foobar = 'foobar';
+
+    function __construct() {}
+}
+
+
+class TestDi8 implements TestDiInterface
+{
+    public $barfoo = 'foobar';
+
+    function __construct() {}
+}
+
+class TestDi9 implements TestDiInterface2
+{
+    function __construct(TestDi1 $testdi, array $args = [])
+    {
+        $this->say = 'hello';
+    }
+}
+
