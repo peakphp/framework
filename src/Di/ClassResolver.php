@@ -4,6 +4,7 @@ namespace Peak\Di;
 
 use Peak\Di\Container;
 use Peak\Di\ClassInspector;
+use Peak\Di\InterfaceResolver;
 
 /**
  * Dependency Class Resolver
@@ -17,11 +18,18 @@ class ClassResolver
     protected $inspector;
 
     /**
+     * InterfaceResolver
+     * @var object
+     */
+    protected $iresolver;
+
+    /**
      * Constructor
      */
     public function __construct()
     {
         $this->inspector = new ClassInspector();
+        $this->iresolver = new InterfaceResolver();
     }
 
     /**
@@ -30,7 +38,7 @@ class ClassResolver
      * @param  string $class
      * @return object
      */
-    public function resolve($class, Container $container, array $args = [])
+    public function resolve($class, Container $container, array $args = [], $explicit = [])
     {
         $dependencies = $this->inspector->inspect($class);
         $class_args   = [];
@@ -52,12 +60,19 @@ class ClassResolver
                     $class_args[] = $container->getInstance($name);
                 }
                 else {
-                    $child_args = [];
-                    if(array_key_exists($name, $args)) {
-                        $child_args = $args[$name];
-                    }
 
-                    $class_args[] = $container->instantiate($name, $child_args);
+                    // dealing with an interface dependency
+                    if(interface_exists($name)) {
+                        $class_args[] = $this->iresolver->resolve($name, $container, $explicit);
+                    }
+                    // or resolve dependency by instanciate object classname
+                    else {
+                        $child_args = [];
+                        if(array_key_exists($name, $args)) {
+                            $child_args = $args[$name];
+                        }
+                        $class_args[] = $container->instantiate($name, $child_args);
+                    }
                 }
             }
             else if(array_key_exists($i - ($class_count), $args)) {
