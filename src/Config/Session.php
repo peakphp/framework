@@ -2,6 +2,7 @@
 
 namespace Peak\Config;
 
+use Peak\Exception;
 use Peak\Config\DotNotation;
 
 /**
@@ -15,6 +16,8 @@ class Session extends DotNotation
      */
     public function __construct()
     {
-        $this->items =& $_SESSION;
+        if(isset($_SESSION)) {
+            $this->items =& $_SESSION;
+        }
     }
 }
