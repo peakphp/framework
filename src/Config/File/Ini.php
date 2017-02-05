@@ -1,8 +1,8 @@
 <?php
 namespace Peak\Config\File;
 
-use Peak\Config\File;
 use Peak\Exception;
+use Peak\Config\DotNotation;
 
 /**
  * Ini
@@ -16,7 +16,7 @@ use Peak\Exception;
  * @author  Original author: Andris at http://codeaid.net
  *          Thanks to him for letting me use and modify his class for the needs of the framework
  */
-class Ini extends File
+class Ini extends DotNotation
 {
 
 	/**

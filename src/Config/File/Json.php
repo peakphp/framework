@@ -1,15 +1,15 @@
 <?php
 namespace Peak\Config\File;
 
-use Peak\Config\File;
 use Peak\Exception;
+use Peak\Config\DotNotation;
 
 /**
  * Peak_Config_Json
  *
  * Takes a JSON encoded file/string and converts it into a PHP variable.
  */
-class Json extends File
+class Json extends DotNotation
 {
 	
 	/**
