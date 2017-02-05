@@ -102,9 +102,13 @@ class ContainerTest extends TestCase
 
         $container = new \Peak\Di\Container();
 
-        $container->addInstance(new TestDi7());
+        $testdi7 = new TestDi7();
+        $testdi7->foobar = 'foobar7';
+        $container->addInstance($testdi7);
         
         $testdi = $container->instantiate('TestDi6');
+
+        $this->assertTrue($testdi->testdi->foobar === 'foobar7');
 
         $interfaces = class_implements($testdi->testdi);
         $this->assertTrue(count($interfaces) == 1);
@@ -151,7 +155,7 @@ class ContainerTest extends TestCase
                     ],
                 ]
             ],
-            ['TestDiInterface' => 'TestDi8']
+            ['TestDiInterface' => 'TestDi8'] //explicit declaration for interface
         ); 
 
         $this->assertTrue($testdi->say === 'foobar10');
