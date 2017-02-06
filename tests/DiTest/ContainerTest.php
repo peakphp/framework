@@ -3,7 +3,6 @@ use PHPUnit\Framework\TestCase;
 
 use Peak\Di\Container;
 
-
 class ContainerTest extends TestCase
 {
     
@@ -237,6 +236,36 @@ class ContainerTest extends TestCase
 
         $testdi9999 = $container->getInstance('TestDi9999');
         $this->assertTrue(is_null($testdi9999));
+    }
+
+    function testDeleteInstance()
+    {
+        $container = new \Peak\Di\Container();
+
+        //both implement the same interface
+        $container->addInstance(new TestDi7()); 
+        $container->addInstance(new TestDi8());
+
+        $this->assertTrue($container->getInstance('TestDi7') !== null);
+
+        $container->deleteInstance('TestDi8');
+        $this->assertTrue($container->getInstance('TestDi8') === null);
+        $this->assertTrue($container->getInstance('TestDi7') !== null);
+    }
+
+    function testGetInts()
+    {
+        $container = new \Peak\Di\Container();
+
+        //both implement the same interface
+        $container->addInstance(new TestDi7()); 
+        $container->addInstance(new TestDi8());
+
+        $interfaces = $container->getInstances();
+        $this->assertTrue(count($interfaces) == 1);
+
+        $instances = $container->getInterfaces();
+        $this->assertTrue(count($instances) == 2);
     }
 
 }
