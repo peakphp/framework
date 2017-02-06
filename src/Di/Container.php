@@ -79,6 +79,15 @@ class Container
     }
 
     /**
+     * Get all stored instances
+     * @return object
+     */
+    public function getInstances()
+    {
+        return $this->instances;
+    }
+
+    /**
      * Has an interface
      */
     public function hasInterface($name)
@@ -101,6 +110,15 @@ class Container
     }
 
     /**
+     * Get all stored interfaces
+     * @return object
+     */
+    public function getInterfaces()
+    {
+        return $this->interfaces;
+    }
+
+    /**
      * Add an object instance. Chainable
      * 
      * @param  string      $object
@@ -119,6 +137,32 @@ class Container
             }
         }
 
+        return $this;
+    }
+
+    /**
+     * Delete an instance if exists. Chainable
+     * 
+     * @param  $name 
+     * @return       
+     */
+    public function deleteInstance($name)
+    {
+        if($this->hasInstance($name)) {
+
+            //remove instance
+            unset($this->instances[$name]);
+
+            //remove interface reference if exists
+            foreach($this->interfaces as $int => $classes) {
+
+                $key = array_search($name, $classes);
+                if($key !== false) {
+                    unset($classes[$key]);
+                    $this->interfaces->$int = $classes;
+                }
+            }
+        }
         return $this;
     }
 
