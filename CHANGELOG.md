@@ -1,6 +1,6 @@
 VERSION 2.0.3
 -------------
-Release Date: ?
+Release Date: 2017-02-06
 
  - added Dependency Injection Component
 
