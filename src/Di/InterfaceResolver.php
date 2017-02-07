@@ -4,6 +4,8 @@ namespace Peak\Di;
 
 use Peak\Di\Container;
 
+use Closure;
+
 /**
  * Dependency Interface Resolver
  */
@@ -17,8 +19,12 @@ class InterfaceResolver
      */
     public function resolve($interface, Container $container, $explicit = [])
     {
+        // Check for explicit dependency declaration closure
+        if(array_key_exists($interface, $explicit) && $explicit[$interface] instanceof Closure) {
+            return $explicit[$interface]();
+        }
         // Try to find a match in the container for an interface
-        if($container->hasInterface($interface)) {
+        else if($container->hasInterface($interface)) {
             $instance = $container->getInterface($interface);
             if(is_array($instance)) {
                 if(empty($explicit) || !array_key_exists($interface, $explicit)) {
