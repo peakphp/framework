@@ -3,6 +3,8 @@ use PHPUnit\Framework\TestCase;
 
 use Peak\Di\Container;
 
+require __DIR__.'/../fixtures/di/test.php';
+
 class ContainerTest extends TestCase
 {
     
@@ -160,6 +162,74 @@ class ContainerTest extends TestCase
         $this->assertTrue($testdi->say === 'foobar10');
     }
 
+    function testCreateInstanceWithInterface3()
+    {
+        $container = new \Peak\Di\Container();
+
+        // $container->addInstance(new \Peak\Collection(['foo' => 'bar']));
+        $testdi1 = $container->instantiate('TestDi1', [
+            'test',
+            []
+        ]);
+
+        $container->addInstance($testdi1);
+
+        //both implement the same interface (TestDiInterface)
+        $container->addInstance(new TestDi7()); 
+        $container->addInstance(new TestDi8()); 
+        
+        //TestDiInterface2
+        $testdi9 = $container->instantiate('TestDi9', [['FOOBAR!']]);
+        $container->addInstance($testdi9); 
+
+        $testdi13 = $container->instantiate(
+            'TestDi13', 
+            [],
+            ['TestDiInterface' => 'TestDi8'] 
+        );
+
+        $this->assertTrue($testdi13->testdi12->testdi->barfoo === 'foobar8');
+
+
+        $testdi13 = $container->instantiate(
+            'TestDi13', 
+            [],
+            ['TestDiInterface' => 'TestDi7'] 
+        );
+
+        $this->assertTrue($testdi13->testdi12->testdi->foobar === 'foobar7');
+    }
+
+    function testCreateInstanceWithClosure()
+    {
+        $container = new \Peak\Di\Container();
+
+        $container->addInstance(new TestDi7()); 
+
+        $testdi13 = $container->instantiate(
+            'TestDi13', 
+            [],
+            [
+                'TestDiInterface' => function() {
+                    return new TestDi7();
+                },
+                'TestDiInterface2' => function() {
+                    return new TestDi9(
+                        new TestDi1(
+                            new Peak\Collection(),
+                            'Test',
+                            ['a', 'b']
+                        )
+                    );
+                },
+            ] 
+        );
+
+        print_r($testdi13);
+
+        $this->assertTrue($testdi13->testdi12->testdi->foobar === 'foobar7');
+    }
+
  
     /**
      * test exception with unknow class
@@ -261,117 +331,10 @@ class ContainerTest extends TestCase
         $container->addInstance(new TestDi7()); 
         $container->addInstance(new TestDi8());
 
-        $interfaces = $container->getInstances();
+        $interfaces = $container->getInterfaces();
         $this->assertTrue(count($interfaces) == 1);
 
-        $instances = $container->getInterfaces();
+        $instances = $container->getInstances();
         $this->assertTrue(count($instances) == 2);
-    }
-
-}
-
-interface TestDiInterface {}
-
-interface TestDiInterface2 {
-    public function __construct(TestDi1 $testdi, array $args = []);
-}
-
-class TestDi1
-{
-    public $col;
-    public $arg1;
-    public $arg2;
-    public $arg3;
-    
-    function __construct(\Peak\Collection $col, $arg1, array $arg2, $arg3 = [])
-    {
-        $this->col = $col;
-        $this->arg1 = $arg1;
-        $this->arg2 = $arg2;
-        $this->arg3 = $arg3;
-    }
-}
-
-class TestDi2
-{    
-    function __construct(\I\Dont\Exists\Collection $col) {}
-}
-
-class TestDi3
-{    
-    function __construct() {}
-}
-
-class TestDi4
-{
-    public $testdi1;
-
-    function __construct(TestDi1 $di1) 
-    {
-        $this->testdi1 = $di1;
-    }
-}
-
-class TestDi5
-{
-    public $testdi4;
-
-    function __construct(TestDi4 $di4) 
-    {
-        $this->testdi4 = $di4;
-    }
-}
-
-
-class TestDi6
-{
-    public $testdi;
-
-    function __construct(TestDiInterface $di) 
-    {
-        $this->testdi = $di;
-    }
-}
-
-
-class TestDi7 implements TestDiInterface
-{
-    public $foobar = 'foobar';
-
-    function __construct() {}
-}
-
-
-class TestDi8 implements TestDiInterface
-{
-    public $barfoo = 'foobar';
-
-    function __construct() {}
-}
-
-class TestDi9 implements TestDiInterface2
-{
-    function __construct(TestDi1 $testdi, array $args = [])
-    {
-        $this->say = 'hello';
-        $this->testdi = $testdi;
-    }
-}
-
-class TestDi10
-{
-    function __construct(TestDi9 $testdi9, $string)
-    {
-        $this->say = $string;
-        $this->testdi9 = $testdi9;
-    }
-}
-
-
-class TestDi11
-{
-    function __construct(TestDi6 $testdi6, $string)
-    {
-        $this->say = $string;
     }
 }
