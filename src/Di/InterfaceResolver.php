@@ -2,9 +2,8 @@
 
 namespace Peak\Di;
 
+use Peak\Exception;
 use Peak\Di\Container;
-
-use Closure;
 
 /**
  * Dependency Interface Resolver
@@ -19,16 +18,15 @@ class InterfaceResolver
      */
     public function resolve($interface, Container $container, $explicit = [])
     {
-        // Check for explicit dependency declaration closure
-        if(array_key_exists($interface, $explicit) && $explicit[$interface] instanceof Closure) {
-            return $explicit[$interface]();
-        }
-        // Try to find a match in the container for an interface
-        else if($container->hasInterface($interface)) {
+        // Try to find a match in the container for a class or an interface
+        if($container->hasInterface($interface)) {
+
             $instance = $container->getInterface($interface);
+
             if(is_array($instance)) {
+
                 if(empty($explicit) || !array_key_exists($interface, $explicit)) {
-                    throw new \LogicException ('Dependecies for interface '.$interface.' is ambiguous. There is '.count($instance).' differents instances for this interface.');
+                    throw new Exception ('Dependecies for interface '.$interface.' is ambiguous. There is '.count($instance).' differents instances for this interface.');
                 }
                 return $container->getInstance($explicit[$interface]);
             }
@@ -37,7 +35,7 @@ class InterfaceResolver
             }
         }
         else {
-            throw new \Exception('Could not find an instance that implement interface '.$interface);
+            throw new Exception('Could not find an instance that implement interface '.$interface);
         }
-    } 
+    }
 }
