@@ -197,6 +197,8 @@ class ContainerTest extends TestCase
             ['TestDiInterface' => 'TestDi7'] 
         );
 
+        //die();
+
         $this->assertTrue($testdi13->testdi12->testdi->foobar === 'foobar7');
     }
 
@@ -225,10 +227,39 @@ class ContainerTest extends TestCase
             ] 
         );
 
-        print_r($testdi13);
+        //print_r($testdi13);
 
         $this->assertTrue($testdi13->testdi12->testdi->foobar === 'foobar7');
     }
+
+    function testCreateInstanceWithClosure2()
+    {
+        $container = new \Peak\Di\Container();
+
+        $container->addInstance(new Peak\Collection(['foo' => 'barNOTexplicit']));
+
+        $testdi1 = $container->instantiate(
+            'TestDi1', //class
+            [
+                'value', // arguments
+                [12],
+                999
+            ],
+            [
+                //explicit
+                'Peak\Collection' => function() {
+                    return new Peak\Collection(['foo' => 'barexplicit']);
+                }
+            ]
+        );
+
+        //print_r($testdi1);
+
+        $this->assertTrue($testdi1->col->foo === 'barexplicit');
+        $this->assertFalse($testdi1->col->foo === 'barNOTexplicit');
+
+    }
+
 
  
     /**
@@ -252,7 +283,7 @@ class ContainerTest extends TestCase
         }
 
         $this->assertTrue(isset($ename));
-        $this->assertTrue($ename === 'LogicException');
+        $this->assertTrue($ename === 'Peak\Exception');
     }
 
     /**
