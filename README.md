@@ -21,6 +21,18 @@ Requirements:
 - [illuminate/database](https://github.com/illuminate/database)
 - [illuminate/events](https://github.com/illuminate/events)
 
+###Peak components
+    - DependencyInjection 
+    - EventDispatcher
+    - App Kernel
+    - App Modules Kernel
+    - Templating
+    - Form
+    - Validator
+    - Translation
+    - Config
+
+
 ###Version 1
 [Older version](https://github.com/1Franck/Peak) require PHP 5.2 or greater but is no more supported. 
 Both version 1 & 2 are compatible with PHP 7 but we strongly recommand to use version 2.x.
