@@ -41,8 +41,12 @@ class Container
      * @param  string $class     The class name to instanciate
      * @param  array  $args      Constructor argument(s) for parent and child if any
      * @param  array  $explicit  Determine which instance should be use for an interface name.
-     *                           Required when you have multiple instances using the same interface name.
+     *                           Required when you have multiple stored instances using the same interface name.
      *                           ex: ['myinterface' => 'myinstance3']
+     *                           This support also custom closure
+     *                           ex: ['myinterface' => function() { 
+     *                                   return new MyClass(); // myclass implement myinterface
+     *                               }]
      * @return object
      */
     public function instantiate($class, $args = [], $explict = [])
