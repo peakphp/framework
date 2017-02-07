@@ -22,8 +22,8 @@ Requirements:
 - [illuminate/events](https://github.com/illuminate/events)
 
 ###Peak components
-    - DependencyInjection 
-    - EventDispatcher
+    - Dependency Injection 
+    - Event Dispatcher
     - App Kernel
     - App Modules Kernel
     - Templating
