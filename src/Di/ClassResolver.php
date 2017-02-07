@@ -11,7 +11,7 @@ use Peak\Di\ExplicitResolver;
 use Closure;
 
 /**
- * Dependency Class Resolver
+ * Class Dependencies Resolver
  */
 class ClassResolver
 {

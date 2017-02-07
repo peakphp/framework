@@ -7,7 +7,7 @@ use Peak\Di\ClassResolver;
 use Peak\Di\ClassInstantiator;
 
 /**
- * Dependecies Container
+ * Dependencies Container
  */
 class Container
 {
@@ -22,7 +22,7 @@ class Container
     protected $iresolver;
 
     /**
-     * [__construct description]
+     * Constructor
      */
     public function __construct()
     {

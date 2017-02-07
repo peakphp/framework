@@ -20,7 +20,7 @@ class ExplicitResolver
      */
     public function resolve($needle, $explicit = [])
     {
-        // Check for explicit dependency declaration closure or object
+        // Check for explicit dependency closure or object instance
         if(array_key_exists($needle, $explicit)) {
             if($explicit[$needle] instanceof Closure) {
                 return $explicit[$needle]();
