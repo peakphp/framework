@@ -31,24 +31,18 @@ class ConfigCustomRoutes
                         $r['controller'],
                         $r['action']
                     );
-
-
                 }
-                else if(isset($r[0]) && is_string($r[0])) {
+                else if(is_string($r)) {
 
-                    $parts = explode(' | ', $r[0]);
+                    $parts = explode(' | ', $r);
                     if(count($parts) == 2) {
 
                         $ctrl_part = explode(Request::$separator, $parts[1]);
 
-                        $r['route']      = trim($parts[0]);
-                        $r['controller'] = $ctrl_part[0];
-                        $r['action']     = (isset($ctrl_part[1])) ? $ctrl_part[1] : '';
-
                         $collection[] = new CustomRoute(
-                            $r['route'],
-                            $r['controller'],
-                            $r['action']
+                            trim($parts[0]),  // route
+                            $ctrl_part[0],    // controller
+                            (isset($ctrl_part[1]) ? $ctrl_part[1] : '') // action
                         );
 
                     }
