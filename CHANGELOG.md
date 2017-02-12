@@ -2,10 +2,10 @@ VERSION 2.0.4
 -------------
 Release Date: 2017-02-12
 
-   - simplified config custom routes definition syntax
-   - fixed duplication of html id with element label Peak\View\Form component
-   - Peak\Controller\Action property $params become $params_raw and $params_assoc become $params
-   - removed method params() in Peak\Controller\Action. Use $params_raw or $params instead
+ - simplified config custom routes definition syntax
+ - fixed duplication of html id with element label Peak\View\Form component
+ - Peak\Controller\Action property $params become $params_raw and $params_assoc become $params
+ - removed method params() in Peak\Controller\Action. Use $params_raw or $params instead
 
 VERSION 2.0.3
 -------------
