@@ -200,7 +200,7 @@ abstract class Action
         if(!empty($params)) {
             foreach($params as $p) {
                 $pname = $p->getName();
-                if(isset($this->params()->$pname)) $args[] = $this->params()->$pname;
+                if(isset($this->params->$pname)) $args[] = $this->params->$pname;
                 elseif($p->isOptional()) $args[] = $p->getDefaultValue();
                 else $errors[] = '$'.$pname;
             }
