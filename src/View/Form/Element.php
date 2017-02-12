@@ -75,10 +75,10 @@ abstract class Element implements ElementInterface
      */
     protected function attributes($data_as_attrs = true) 
     {
-        $attrs_array = array(
+        $attrs_array = [
             'id'    => 'field-'.$this->name,
             'name'  => $this->name,
-        );
+        ];
 
         if($data_as_attrs) {
             $attrs_array['value'] = $this->data;
@@ -93,7 +93,7 @@ abstract class Element implements ElementInterface
             }
         }
 
-        if(is_null($this->options['attrs'])) $this->options['attrs'] = array();
+        if(is_null($this->options['attrs'])) $this->options['attrs'] = [];
         $attrs_array = array_merge($attrs_array, $this->options['attrs']);
 
         //create a copy before transforming it
@@ -109,6 +109,8 @@ abstract class Element implements ElementInterface
         $attrs_string = array();
         //transform to html attribute string ( key="value" )
         foreach($attrs_array as $k => $v) {
+
+            if($v === null) continue;
 
             if(in_array($k, $this->attrs_to_translate)) {
                 $v = __($v);

@@ -37,7 +37,18 @@ abstract class FormControl extends Element
     public function error()
     {
         if(empty($this->error)) return;
-        $element = new \Peak\View\Form\Element\Error($this->name, $this->error, $this->options);
+
+        $element = new \Peak\View\Form\Element\Error(
+            $this->name, 
+            $this->error, 
+            [   
+                'attrs' => [
+                    'id'   => null,
+                    'name' => null
+                ]
+            ]
+        );
+
         return $element->generate();
     }
 
@@ -59,10 +70,18 @@ abstract class FormControl extends Element
     public function label()
     {
         if(empty($this->options['label'])) return;
-        $element = new \Peak\View\Form\Element\Label($this->name, $this->options['label'], $this->options);
+
+        $element = new \Peak\View\Form\Element\Label(
+            $this->name, 
+            $this->options['label'],
+            [   
+                'attrs' => [
+                    'id'   => null,
+                    'name' => null
+                ]
+            ]
+        );
+
         return $element->generate();
     }
-
-    
-
 }
