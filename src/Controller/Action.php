@@ -46,13 +46,13 @@ abstract class Action
      * request params array
      * @var array
      */
-    protected $params;
+    protected $params_raw;
 
     /**
-     * request params associative array
-     * @var array
+     * request params associative collection
+     * @var Collection
      */
-    protected $params_assoc;
+    protected $params;
     
     /**
      * dispatch action with argument
@@ -143,16 +143,14 @@ abstract class Action
      */
     public function setRoute(Route $route)
     {
-        //print_r($route);
-        $this->params       = $route->params;        
-        $this->params_assoc = new Collection($route->params_assoc);
+        $this->params_raw   = $route->params;        
+        $this->params       = new Collection($route->params_assoc);
         $this->action       = $this->action_prefix . $route->action;
+
         //set default ctrl action if none present
         if($this->action === $this->action_prefix) {
             $this->action  = $this->action_prefix.'index';
         }
-
-        //echo '>>>'.$this->file;
     }        
     
     /**
@@ -238,16 +236,6 @@ abstract class Action
         if(!is_object($this->helpers)) $this->helpers = new Peak_Controller_Helpers();
         return $this->helpers;
     }
-
-    /**
-     * Access to params_assoc object
-     *
-     * @return object
-     */
-    public function params()
-    {
-        return $this->params_assoc;
-    }    
 
     /**
      * Call view render with controller $file and $path
