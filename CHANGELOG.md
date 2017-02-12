@@ -1,3 +1,9 @@
+VERSION 2.0.5
+-------------
+Release Date: 2017-02-12
+
+ - fixed params typo error in Peak\Controller\Action
+
 VERSION 2.0.4
 -------------
 Release Date: 2017-02-12
