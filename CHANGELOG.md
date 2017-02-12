@@ -1,8 +1,11 @@
 VERSION 2.0.4
 -------------
-Release Date: ?
+Release Date: 2017-02-12
 
    - simplified config custom routes definition syntax
+   - fixed duplication of html id with element label Peak\View\Form component
+   - Peak\Controller\Action property $params become $params_raw and $params_assoc become $params
+   - removed method params() in Peak\Controller\Action. Use $params_raw or $params instead
 
 VERSION 2.0.3
 -------------
@@ -28,12 +31,11 @@ Release Date: 2017-01-28
  - removed duplicated dependencies with laravel in composer.json
  - added function url() to Core
 
-
 VERSION 2.0.0
 -------------
 Release Date: 2017-01-27
 
-Warning! Breaking changes in 2.0.0 :
+Warning! Breaking changes in 2.0.* :
 If you want want to support an old application, please use version 1.*
 This version is incompatible with 1.0.0 because most componments have  
 been rewritten, splitted and/or reorganised.
