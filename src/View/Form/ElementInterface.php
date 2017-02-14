@@ -1,4 +1,5 @@
 <?php
+
 namespace Peak\View\Form;
 
 interface ElementInterface
@@ -14,3 +15,4 @@ interface ElementInterface
      */
     public function generate();
 }
+

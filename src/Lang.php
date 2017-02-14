@@ -1,4 +1,5 @@
 <?php
+
 namespace Peak;
 
 use Peak\Registry;
@@ -19,13 +20,13 @@ class Lang
      * List of language file loaded
      * @var array
      */
-    protected $_loaded_files = array();
+    protected $_loaded_files = [];
 
     /**
      * Array of translation
      * @var array
      */
-    public $translations = array();
+    public $translations = [];
 
 
     /**
@@ -178,5 +179,4 @@ class Lang
         
         return $tr;
     }
-
 }

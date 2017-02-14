@@ -1,4 +1,5 @@
 <?php
+
 namespace Peak\Controller;
 
 use Peak\Application;
@@ -56,7 +57,6 @@ class Front
 	 */
 	public $allow_internal_modules = true;
 
-	
 	/**
 	 * class construct
 	 */
@@ -116,11 +116,7 @@ class Front
 	public function dispatch()
 	{
 	    $this->_dispatchController();
-	    
-	    // if($this->controller instanceof Module) {
-     //        $this->controller->run();
-     //    	//$this->_dispatchModule();
-     //    }               
+          
         // execute a normal controller action
         if($this->controller instanceof Action) {
             $this->_dispatchControllerAction(); 
@@ -216,12 +212,9 @@ class Front
 
         if((is_object($this->controller)) && (strtolower($ctrl) === strtolower($this->controller->getTitle()))) {
 
-            //$this->controller->getRoute();
             $this->controller->setRoute($this->route);
             $this->controller->dispatchAction();
         }
         else $this->dispatch();
     }
-
-
 }

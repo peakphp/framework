@@ -1,4 +1,5 @@
 <?php
+
 namespace Peak\Filters;
 
 use Peak\Filters;
@@ -130,5 +131,4 @@ abstract class Basic extends Filters
 		}
 		return $this->_data;
 	}
-	
 }

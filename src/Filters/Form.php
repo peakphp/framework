@@ -1,4 +1,5 @@
 <?php
+
 namespace Peak\Filters;
 
 use Peak\Filters\Advanced;
@@ -28,5 +29,4 @@ abstract class Form extends Advanced
 		if($this->_method === 'post') $this->_data = $_POST;
 		else $this->_data = $_GET;
 	}
-		
 }

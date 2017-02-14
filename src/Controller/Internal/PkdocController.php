@@ -3,6 +3,9 @@ namespace Peak\Controller\Internal;
 
 use Peak\Controller\Action;
 
+use \RecursiveIteratorIterator;
+use \RecursiveDirectoryIterator;
+
 /**
  * Peak Autodoc controller for the framework using Reflection
  */
@@ -69,7 +72,7 @@ class PkdocController extends Action
 	{
 		$result = array();
 		
-		$peak_path = str_replace('\\','/',LIBRARY_ABSPATH.DIRECTORY_SEPARATOR.'Peak');
+		$peak_path = LIBRARY_ABSPATH;
 		
 		$ignored_paths = array($peak_path.'/vendors');
 		$ignored_files = array($peak_path.'/autoload.php');
@@ -112,7 +115,7 @@ class PkdocController extends Action
 	 */
 	private function layout()
 	{
-		$twitter_bs = file_get_contents(LIBRARY_ABSPATH.'/Peak/Vendors/TwitterBootstrap/css/bootstrap.min.css');
+		$twitter_bs = '';//file_get_contents(LIBRARY_ABSPATH.'/Peak/Vendors/TwitterBootstrap/css/bootstrap.min.css');
 		$layout = '<!DOCTYPE html>
 <html lang="en">
   <head>
@@ -236,7 +239,7 @@ class PkdocController extends Action
         
 				<div class="clear"></div>
 				<footer>
-					<p>Peak Framework '.PK_VERSION.'</p>
+					<p>Peak Framework '.PEAK_VERSION.'</p>
 				</footer>
 			</div>
 		</div>

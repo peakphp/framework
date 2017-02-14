@@ -1,4 +1,5 @@
 <?php
+
 namespace Peak\Filters;
 
 use Peak\Filters\Advanced;
@@ -30,6 +31,5 @@ class Data extends Advanced
 	public function setData($data)
 	{
 	    $this->_data = $data;
-	}
-		
+	}	
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace Peak\View\Form;
 
 use Peak\Exception;

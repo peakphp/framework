@@ -1,4 +1,5 @@
 <?php
+
 namespace Peak\Application\Bootstrap;
 
 use Peak\Application;
@@ -57,5 +58,4 @@ class ConfigCustomRoutes
 
         Registry::o()->app->routing->custom_routes = $collection;
     }
-
 }

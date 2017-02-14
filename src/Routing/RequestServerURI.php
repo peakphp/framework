@@ -1,4 +1,5 @@
 <?php
+
 namespace Peak\Routing;
 
 use Peak\Routing\Request;

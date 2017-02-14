@@ -1,4 +1,5 @@
 <?php
+
 namespace Peak;
 
 use Illuminate\Database\Capsule\Manager as Capsule;

@@ -1,4 +1,5 @@
 <?php
+
 namespace Peak\View\Render;
 
 use Peak\Registry;

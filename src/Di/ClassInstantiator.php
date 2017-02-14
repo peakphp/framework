@@ -20,5 +20,4 @@ class ClassInstantiator
         $reflection = new ReflectionClass($class);
         return $reflection->newInstanceArgs($args);
     }
-    
 }

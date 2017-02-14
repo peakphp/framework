@@ -1,4 +1,5 @@
 <?php
+
 namespace Peak\View\Form\Control;
 
 use Peak\View\Form\FormControl;

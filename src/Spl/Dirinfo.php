@@ -1,4 +1,5 @@
 <?php
+
 namespace Peak\Spl;
 
 use DirectoryIterator;
@@ -73,5 +74,4 @@ class Dirinfo
 	{
 		return $this->_nbfiles;
 	}
-
 }

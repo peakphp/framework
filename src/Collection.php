@@ -1,4 +1,5 @@
 <?php
+
 namespace Peak;
 
 use Countable;

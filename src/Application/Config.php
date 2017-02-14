@@ -1,4 +1,5 @@
 <?php
+
 namespace Peak\Application;
 
 use Peak\Exception;
@@ -117,7 +118,5 @@ class Config
         if(!$this->app_config->have('conf')) {
             throw new Exception('ERR_APP_CONF_MISSING');
         }
-    }
-
-    
+    }    
 }

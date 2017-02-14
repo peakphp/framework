@@ -1,4 +1,5 @@
 <?php
+
 namespace Peak\Controller;
 
 use Peak\Application;
@@ -195,8 +196,9 @@ abstract class Action
         $params = $r->getParameters();
  
         //fetch request params with action params
-        $args = array();
-        $errors = array();
+        $args   = [];
+        $errors = [];
+        
         if(!empty($params)) {
             foreach($params as $p) {
                 $pname = $p->getName();
@@ -288,15 +290,15 @@ abstract class Action
     /**
      * Action before controller requested action
      */
-    public function preAction() { }
+    public function preAction() {}
 
     /**
      * Action after controller requested action
      */
-    public function postAction() { }
+    public function postAction() {}
 
     /**
      * Action after view rendering
      */
-    public function postRender() { }
+    public function postRender() {}
 }

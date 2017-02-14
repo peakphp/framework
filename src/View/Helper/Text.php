@@ -1,4 +1,5 @@
 <?php
+
 namespace Peak\View\Helper;
 
 use Peak\View\Helper;

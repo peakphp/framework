@@ -1,4 +1,5 @@
 <?php
+
 namespace Peak;
 
 use Peak\Application;
@@ -41,7 +42,6 @@ class View
      * @var bool
      */
     private $_render = true;
-
 
     /**
      * Load view - set an array|ini file as template variable(s) (optionnal)

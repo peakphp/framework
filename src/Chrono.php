@@ -1,4 +1,5 @@
 <?php
+
 namespace Peak;
 
 /** 
@@ -171,7 +172,7 @@ class Chrono
     public static function resetAll()
     {
         self::reset();
-        self::$_timers = array();
+        self::$_timers = [];
     }
 
     /**

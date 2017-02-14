@@ -1,4 +1,5 @@
 <?php
+
 namespace Peak\Application\Config;
 
 use Peak\Exception;

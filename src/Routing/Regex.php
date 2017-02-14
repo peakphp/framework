@@ -1,4 +1,5 @@
 <?php
+
 namespace Peak\Routing;
 
 class Regex
@@ -61,7 +62,4 @@ class Regex
     {   
         self::$_quick_reg[':'.$shortcut] = $regex;
     }
-
-
-
 }

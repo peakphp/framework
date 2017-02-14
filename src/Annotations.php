@@ -1,4 +1,5 @@
 <?php
+
 namespace Peak;
 
 /**
@@ -78,7 +79,7 @@ class Annotations
             $method = new ReflectionMethod($this->_class_name, $method_name);
         }
         catch(ReflectionException $e) {
-            return array();
+            return [];
         }
 
         return $this->parse($method->getDocComment());
@@ -95,7 +96,7 @@ class Annotations
         
         foreach($this->_class->getMethods() as $m) {
             $comment = $m->getDocComment();
-            $a = array_merge($a, array($m->name => $this->parse($comment)));
+            $a = array_merge($a, [$m->name => $this->parse($comment)]);
         }
         return $a;
     }
@@ -120,7 +121,7 @@ class Annotations
     public function parse($string)
     {
         //in case we don't have any tag to detect or an empty doc comment, we skip this method
-        if(empty($this->_tags) || empty($string)) return array();
+        if(empty($this->_tags) || empty($string)) return [];
    
         //check what is the type of $_tags (array|string|wildcard)
         if(is_array($this->_tags)) $tags = '('.implode('|', $this->_tags).')';
@@ -131,14 +132,14 @@ class Annotations
         $regex = '#\* @(?P<tag>'.$tags.'+)\s+((?P<params>[\s"a-zA-Z0-9\-$\\._/-^]+)){1,}#si';
         preg_match_all($regex, $string, $matches, PREG_SET_ORDER);
         
-        $final = array();
+        $final = [];
         
         if(isset($matches)) {
             
             $i = 0;
             foreach($matches as $v) {
 
-                $final[$i] = array('tag' => $v['tag'], 'params' => array());
+                $final[$i] = array('tag' => $v['tag'], 'params' => []);
 
                 //detect here if we got a param with quote or not
                 //since space is the separator between params, if a param need space(s),

@@ -1,4 +1,5 @@
 <?php
+
 namespace Peak\Routing;
 
 class Route

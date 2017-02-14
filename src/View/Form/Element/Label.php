@@ -1,4 +1,5 @@
 <?php
+
 namespace Peak\View\Form\Element;
 
 use Peak\View\Form\Element;

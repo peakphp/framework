@@ -1,4 +1,5 @@
 <?php
+
 namespace Peak;
 
 /**
@@ -19,8 +20,13 @@ class Registry
      */
     protected static $_instance = null;                               
 
-    private final function __clone() { trigger_error('Can\'t clone registry', E_USER_ERROR); }
-    private final function __construct() { }
+
+    private final function __clone() 
+    { 
+    	trigger_error('Can\'t clone registry', E_USER_ERROR); 
+    }
+
+    private final function __construct() {}
 
     /**
 	 * Return an registered object or null

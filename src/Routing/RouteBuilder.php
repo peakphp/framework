@@ -1,4 +1,5 @@
 <?php
+
 namespace Peak\Routing;
 
 use Peak\Routing\Request;
@@ -7,8 +8,6 @@ use Peak\Routing\Route;
 
 class RouteBuilder
 {
-
-
     /**
      * Resolve a request
      * 

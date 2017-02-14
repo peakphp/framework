@@ -1,4 +1,5 @@
 <?php
+
 namespace Peak\Application\Config;
 
 use Peak\Exception;
@@ -61,11 +62,6 @@ class Environment
             $this->file_config->set('all.path.apptree', $apptree->tree);
         }
 
-    //      echo '<pre>';
-    // print_r($this->file_config);
-    // echo '</pre>';
-        
-
         $this->validate($this->file_config);
 
         // merge array section 'all' with current environment section if exists
@@ -96,5 +92,4 @@ class Environment
             );
         }
     }
-
 }

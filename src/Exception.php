@@ -1,4 +1,5 @@
 <?php
+
 namespace Peak;
 
 /**
@@ -81,11 +82,11 @@ class Exception extends \Exception
 	public function getDebugTrace()
 	{
         $trace = debug_backtrace();
-        //print_r($trace);
-        $content = '';
-        $content .= $this->getMessage();
+
+        $content = $this->getMessage();
         $content .= '['.$this->getErrkey().' / '.$this->getTime()."]\n";
         $content .= str_replace('/path/to/code/', '', $this->getTraceAsString());
+
         if(!isCli()) $content = '<pre>'.$content.'</pre>';
         return $content;
 	}
@@ -134,7 +135,13 @@ class Exception extends \Exception
         return $frame;
 	}
 	
-	public function getErrkey() { return $this->_errkey; }
+	public function getErrkey() 
+    {
+        return $this->_errkey; 
+    }
 
-	public function getTime() { return date('Y-m-d H:i:s'); }
+	public function getTime() 
+    { 
+        return date('Y-m-d H:i:s'); 
+    }
 }

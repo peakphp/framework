@@ -1,4 +1,5 @@
 <?php
+
 namespace Peak\Config;
 
 use Peak\Collection;
