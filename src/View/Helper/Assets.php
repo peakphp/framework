@@ -34,7 +34,7 @@ class Assets extends Helper
         else $this->setPath('assets');
 
         if(isset($url)) $this->setUrl($url);
-        else $this->setUrl($this->view->baseUrl('', true));
+        else $this->setUrl(url());
     }
 
     /**
@@ -134,7 +134,7 @@ class Assets extends Helper
     }
 
     /**
-     * The url for the assets. If no assets url specified, we use baseUrl()
+     * The url for the assets.
      *
      * @param  string $filepath
      *

@@ -249,7 +249,7 @@ abstract class Action
      */
     public function redirectUrl($url, $http_code = 302, $base_url = true)
     {
-        if($base_url) $url = $this->view->baseUrl($url,true);
+        if($base_url) $url = url($url);
         $this->view->header()->redirect($url, $http_code);
     }
 

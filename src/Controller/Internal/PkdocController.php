@@ -207,7 +207,7 @@ class PkdocController extends Action
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container-fluid">
-          <a class="brand" href="'.$this->view->baseUrl('pkdoc',true).'">Peak Framework AutoDoc</a>
+          <a class="brand" href="'.url('pkdoc').'">Peak Framework AutoDoc</a>
 		  <span style="color:#888;margin-left:-12px;padding-top:16px !important;">beta</span>
         </div>
       </div>
@@ -222,7 +222,7 @@ class PkdocController extends Action
 					<ul class="unstyled">';
 					
 					foreach($this->view->classes as $c) {
-						$layout .= '<li><a href="'.$this->view->baseUrl('pkdoc/c/'.$c,true).'">'.str_replace('Peak_','',$c).'</a></li>';
+						$layout .= '<li><a href="'.url('pkdoc/c/'.$c).'">'.str_replace('Peak_','',$c).'</a></li>';
 					}
 					
 					$layout .= '
@@ -285,7 +285,7 @@ class PkdocController extends Action
 		if(isset($this->ref->class_declaration['parent'])) {
 			$parent = $this->ref->class_declaration['parent'];
 			if(stristr($parent,'Peak_')) {
-				$content .= '<a class="nounder" href="'.$this->view->baseUrl('pkdoc/c/'.$parent,true).'">';
+				$content .= '<a class="nounder" href="'.url('pkdoc/c/'.$parent).'">';
 			}
 			$content .= '<span class="label label-success"><span class="label parent">Parent</span> '.$parent.'</span>';
 			if(stristr($parent,'Peak_')) {

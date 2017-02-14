@@ -68,10 +68,8 @@ class FormBuilder extends Collection
      */
     public function buttons($cancel_url, $mode = 'new')
     {
-        $html = '';
-        $v    = \Peak\Registry::o()->view;
 
-        $html .= '<a class="btn btn-default" href="'.$v->baseUrl($cancel_url, true).'">'.__('Cancel').'</a>';
+        $html = '<a class="btn btn-default" href="'.url($cancel_url).'">'.__('Cancel').'</a>';
 
         $submit_button_text = ($mode === 'edit') ? __('Update') : __('Save');
         
