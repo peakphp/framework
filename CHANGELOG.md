@@ -1,6 +1,6 @@
 VERSION 2.0.7
 -------------
-Release Date: ?
+Release Date: 2017-02-14
 
  - updated reference of baseUrl to url()
  - deleted deprecated method baseUrl() in Peak\View\Render
