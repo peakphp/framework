@@ -3,6 +3,7 @@ VERSION 2.0.8
 Release Date: ?
 
  - added support of custom form controls in Peak\View\Form\Form
+ - fixed double slashes in url()
 
 VERSION 2.0.7
 -------------
