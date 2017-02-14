@@ -2,6 +2,8 @@ VERSION 2.0.8
 -------------
 Release Date: ?
 
+ - added support of custom form controls in Peak\View\Form\Form
+
 VERSION 2.0.7
 -------------
 Release Date: 2017-02-14
