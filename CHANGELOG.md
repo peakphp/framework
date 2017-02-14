@@ -5,6 +5,8 @@ Release Date: ?
  - removed deprecated Peak\Controller\Helper
  - removed deprecated helper notion in Peak\Controller\Action
  - cleaning code for PSR-1 and PSR-2
+ - deleted method url() in Peak\View\Render
+ - marked baseUrl() in Peak\View\Render as deprecated.
 
 VERSION 2.0.5
 -------------
