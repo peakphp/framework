@@ -2,8 +2,8 @@ VERSION 2.0.6
 -------------
 Release Date: ?
 
- - removed depcrecated Peak\Controller\Helper
- - removed depcrecated helper notion in Peak\Controller\Action
+ - removed deprecated Peak\Controller\Helper
+ - removed deprecated helper notion in Peak\Controller\Action
  - cleaning code for PSR-1 and PSR-2
 
 VERSION 2.0.5
