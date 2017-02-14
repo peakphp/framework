@@ -38,12 +38,6 @@ abstract class Action
     protected $action_prefix = '_';
 
     /**
-     * controller helpers objects
-     * @var object
-     */
-    protected $helpers;
-
-    /**
      * request params array
      * @var array
      */
@@ -67,23 +61,6 @@ abstract class Action
         $this->view = Registry::o()->view; 
     }
     
-    /**
-     * Try to return a helper object based the method name.
-     *
-     * @param  string $helper
-     * @param  null   $args not used
-     * @return object
-     */
-    public function __call($helper, $args = null)
-    {
-        if((isset($this->helper()->$helper)) || ($this->helper()->exists($helper))) {
-            return $this->helper()->$helper;
-        }
-        elseif(defined('APPLICATION_ENV') && in_array(APPLICATION_ENV, array('development', 'testing'))) {
-            trigger_error('Controller method/helper '.$helper.'() doesn\'t exists');
-        }
-    }
-
     /**
      * Get controller class name
      *
@@ -226,17 +203,6 @@ abstract class Action
     public function isAction($name)
     {
         return (method_exists($this, $name)) ? true : false;
-    }
-
-    /**
-     * Load/access to controllers helpers objects
-     * 
-     * @return object Peak_Controller_Helpers
-     */
-    public function helper()
-    {
-        if(!is_object($this->helpers)) $this->helpers = new Peak_Controller_Helpers();
-        return $this->helpers;
     }
 
     /**
