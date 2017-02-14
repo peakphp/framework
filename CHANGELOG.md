@@ -1,6 +1,6 @@
 VERSION 2.0.6
 -------------
-Release Date: ?
+Release Date: 2017-02-14
 
  - removed deprecated Peak\Controller\Helper
  - removed deprecated helper notion in Peak\Controller\Action
