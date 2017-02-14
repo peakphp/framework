@@ -72,25 +72,6 @@ abstract class Render
     }
 
     /**
-     * @deprecated
-     * 
-     * Return public root url of your application
-     *
-     * @param  string $path Add custom paths/files to the end
-     * @return string
-     */
-    public function baseUrl($path = null, $return = false)
-    {
-        if(isEnv('dev')) {
-            trigger_error(__CLASS__.': baseUrl() is deprecated. Use url() function instead.', E_USER_NOTICE);
-        }
-
-        if(!$return) echo $url;  
-        else return $url;
-    }
-
-
-    /**
      * Call child output method and cache it if cache activated;
      * Can be overloaded by engines to customize how the cache data
      *
