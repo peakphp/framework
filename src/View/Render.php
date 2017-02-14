@@ -72,6 +72,8 @@ abstract class Render
     }
 
     /**
+     * @deprecated
+     * 
      * Return public root url of your application
      *
      * @param  string $path Add custom paths/files to the end
@@ -79,45 +81,14 @@ abstract class Render
      */
     public function baseUrl($path = null, $return = false)
     {
-    	$schema_name = (isset($_SERVER['HTTPS']) && (strtolower($_SERVER['HTTPS']) === 'on')) ? 'https://': 'http://';
-        
-        if(defined('PUBLIC_URL')) $url = PUBLIC_URL.'/'.$path;
-        elseif(isset($_SERVER['SERVER_NAME'])) {
-            $url = $schema_name.$_SERVER['SERVER_NAME'].'/'.relativePath(Application::conf('path.public')).'/'.$path;
+        if(isEnv('dev')) {
+            trigger_error(__CLASS__.': baseUrl() is deprecated. Use url() function instead.', E_USER_NOTICE);
         }
 
-        //remove double slash(//) inside url
-        $url_part    = explode($schema_name, $url);
-        $url         = $schema_name.str_replace(array('///','//'),'/',$url_part[1]);
-        
         if(!$return) echo $url;  
         else return $url;
     }
 
-    /**
-     * Generate application url 
-     * 
-     * @param  string  $path               
-     * @param  boolean $return             
-     * @param  boolean $use_forwarded_host 
-     * @return string
-     */
-    public function url($path = null, $use_forwarded_host = true)
-    {
-        $s = $_SERVER;
-
-        $ssl      = ( ! empty( $s['HTTPS'] ) && $s['HTTPS'] == 'on' );
-        $sp       = strtolower( $s['SERVER_PROTOCOL'] );
-        $protocol = substr( $sp, 0, strpos( $sp, '/' ) ) . ( ( $ssl ) ? 's' : '' );
-        $port     = $s['SERVER_PORT'];
-        $port     = ( ( ! $ssl && $port=='80' ) || ( $ssl && $port=='443' ) ) ? '' : ':'.$port;
-        $host     = ( $use_forwarded_host && isset( $s['HTTP_X_FORWARDED_HOST'] ) ) ? $s['HTTP_X_FORWARDED_HOST'] : ( isset( $s['HTTP_HOST'] ) ? $s['HTTP_HOST'] : null );
-        $host     = isset( $host ) ? $host : $s['SERVER_NAME'] . $port;
-
-        $final    = '//' . $host.Application::conf('path.public').'/'.$path;
-
-        return $final;
-    }
 
     /**
      * Call child output method and cache it if cache activated;
