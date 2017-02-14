@@ -1,5 +1,11 @@
 VERSION 2.0.6
 -------------
+Release Date: ?
+
+ - deleted deprecated method baseUrl() in Peak\View\Render
+
+VERSION 2.0.6
+-------------
 Release Date: 2017-02-14
 
  - removed deprecated Peak\Controller\Helper
