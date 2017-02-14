@@ -1,3 +1,9 @@
+VERSION 2.0.6
+-------------
+Release Date: ?
+
+ - cleaning code for PSR-1 and PSR-2
+
 VERSION 2.0.5
 -------------
 Release Date: 2017-02-12
