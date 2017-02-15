@@ -134,7 +134,7 @@ class View
      * Set/overwrite view variable
      * 
      * @see    __set()
-     * @return Peak_View
+     * @return $this
      */
     public function set($name, $value = null)
     {
@@ -314,25 +314,5 @@ class View
                 trigger_error('[ERR] View helper '.$name.' doesn\'t exists');
             }
         }
-    }
-
-    /**
-     * Load ini file into view vars
-     *
-     * @deprecated
-     *
-     * @param string $file
-     * @param string $path leave empty if ini file is under yourapp/views/ini
-     */
-    public function iniVar($file, $path = null)
-    {
-        if(!isset($path)) $filepath = Application::conf('path.apptree.views_ini').'/'.$file;
-        else $filepath = $path.'/'.$file;
-
-        if(file_exists($filepath)) {
-            $ini = new Ini($filepath);
-            $merge_vars = array_merge($ini->toArray(), $this->_vars);
-            $this->_vars = $merge_vars;
-        }
-    }    
+    }  
 }
