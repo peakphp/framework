@@ -6,12 +6,9 @@ use Peak\Application;
 use Peak\Registry;
 
 /**
- * View_Cache
+ * View Cache
  * 
- * This object manage view cache and it is encapsuled inside Peak_View_Render
- * 
- * @author  Francois Lajoie
- * @version $Id$
+ * This object manage view cache and it is encapsuled inside Peak\View\Render
  */
 class Cache
 {
