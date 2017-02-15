@@ -4,6 +4,7 @@ Release Date: ?
 
  - added support of custom form controls in Peak\View\Form\Form
  - fixed double slashes in url()
+ - removed deprecated method iniVar() in Peak\View
 
 VERSION 2.0.7
 -------------
