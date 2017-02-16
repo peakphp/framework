@@ -172,20 +172,6 @@ class ViewTest extends TestCase
 	}
 	
 	/**
-	 * Test set var from ini file
-	 */
-	function testIniVar()
-	{
-		$this->peakview->iniVar('viewvars.ini', __DIR__.'/fixtures/view/');
-				
-		$this->assertTrue(isset($this->peakview->name));
-		
-		$this->assertTrue(isset($this->peakview->hobby));
-				
-		$this->assertTrue(isset($this->peakview->city));
-	}
-	
-	/**
 	 * Test methods enableRender(), disableRender() and canRender()
 	 */
 	function testOnOffRender()
