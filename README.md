@@ -34,7 +34,7 @@ Requirements:
 
 ###Api
 
-Api documentation [here][http://api.peakframework.com]
+Api documentation [here](http://api.peakframework.com)
 
 ###Version 1
 
