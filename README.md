@@ -32,8 +32,12 @@ Requirements:
     - Translation
     - Config
 
+###Api
+
+Api documentation [here][http://api.peakframework.com]
 
 ###Version 1
+
 [Older version](https://github.com/1Franck/Peak) require PHP 5.2 or greater but is no more supported. 
 Both version 1 & 2 are compatible with PHP 7 but we strongly recommand to use version 2.x.
 
