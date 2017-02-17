@@ -28,6 +28,8 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
 
     /**
      * Create a new collection
+     *
+     * @param  array $items
      */
     public function __construct($items = null)
     {
@@ -55,7 +57,8 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
     /**
      * Create a new instance of collection
      * 
-     * @param array $items 
+     * @param  array $items 
+     * @return Collection
      */
     public static function make($items = null)
     {
@@ -86,7 +89,8 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
     /**
      * Get an item by key
      *
-     * @param string $key
+     * @param  string $key
+     * @return mixed
      */
     public function &__get ($key) 
     {
@@ -111,7 +115,7 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
      * @param   string $key
      * @return  bool
      */
-    public function __isset ($key) 
+    public function __isset($key) 
     {
         return isset($this->items[$key]);
     }
@@ -129,6 +133,9 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
 
     /**
      * Assign a value to the specified offset
+     *
+     * @param  string $offset
+     * @param  mixed  $value
      */
     public function offsetSet($offset, $value) 
     {
@@ -145,6 +152,7 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
     /**
      * Whether an item exists
      *
+     * @param  string $offset
      * @return bool
      */
     public function offsetExists($offset) 
@@ -154,6 +162,8 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
 
     /**
      * Item to delete
+     *
+     * @param  string $offset
      */
     public function offsetUnset($offset) 
     {
@@ -163,7 +173,8 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
 
     /**
      * Offset to retrieve
-     * 
+     *
+     * @param  string $offset
      * @return mixed
      */
     public function offsetGet($offset) 
@@ -184,11 +195,11 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
     /**
      * Create iterator for $config
      *
-     * @return iterator
+     * @return ArrayIterator
      */
     public function getIterator()
     {
-        return new \ArrayIterator($this->items);
+        return new ArrayIterator($this->items);
     }
 
     /**
@@ -219,7 +230,8 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
 
     /**
      * Json serialize
-     * @return [type] [description]
+     * 
+     * @return string
      */
     public function jsonSerialize()
     {
