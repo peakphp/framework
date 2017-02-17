@@ -31,9 +31,10 @@ class Permissions
         elseif(count($perms) == 1) {
             // support decimal (ex: 777)
             if(strlen($perms[0]) == 3) {
-                $user = ((string)$perms[0])[0];
-                $group = ((string)$perms[0])[1];
-                $others = ((string)$perms[0])[2];
+                $permstr = (string)$perms[0];
+                $user = $permstr[0];
+                $group = $permstr[1];
+                $others = $permstr[2];
             }
         }
 
