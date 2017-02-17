@@ -1,3 +1,9 @@
+VERSION 2.0.9
+-------------
+Release Date: ?
+
+ - added Doorman component for mananing users/groups permission(s) like linux file permissions
+
 VERSION 2.0.8
 -------------
 Release Date: 2017-02-17
