@@ -21,12 +21,15 @@ class Permissions
      */
     public static function create(...$perms)
     {
+        // user, group and other separated $var
         if(count($perms) == 3) {
             $user = $perms[0];
             $group = $perms[1];
             $others = $perms[2];
         }
+        // user, group and other in one $var
         elseif(count($perms) == 1) {
+            // support decimal (ex: 777)
             if(strlen($perms[0]) == 3) {
                 $user = ((string)$perms[0])[0];
                 $group = ((string)$perms[0])[1];
