@@ -56,76 +56,37 @@ class DoormanTest extends TestCase
      */  
     function testCreateUser()
     {
-        $root_user  = new User('jane');
-        $root_group = new Group('root');
+        $root_user = new SuperUser();
+        $root_group = new SuperGroup();
 
-        $root_user->addToGroup($root_group);
+        $user  = new User('jane');
+        $group = new Group('groupA');
+
+        $user->addToGroup($group);
 
         $ability1 = new Ability(
             'danceonthefloor', //object unique name
-            $root_user,  //object owner
-            $root_group, //object group
-            Permissions::create(777) //object rights (chmod style) by default
+            $user,  //object owner
+            $group, //object group
+            Permissions::create(0,0,0) //object rights (chmod style) by default
         );
 
-        $root_user->addCustomAbility(
+        $this->assertFalse($user->can($ability1, Permission::READ));
+        $this->assertFalse($user->can($ability1, Permission::WRITE));
+        $this->assertFalse($user->can($ability1, Permission::EXECUTE));
+
+        // overload permissions
+        $user->addCustomAbility(
             new CustomUserAbility(
                 $ability1, 
                 Permissions::create(7,7,7)
             )
         );
 
-        // $perm1 = (new PermissionResolver('---'))->get();
+        $this->assertTrue($user->can($ability1, Permission::READ));
+        $this->assertTrue($user->can($ability1, Permission::WRITE));
+        $this->assertTrue($user->can($ability1, Permission::EXECUTE));
 
-        // $this->assertTrue($perm1 == 0);
-
-        // $root_user->addCustomAbility(
-        //     new CustomUserAbility(
-        //         $ability1, 
-        //         Permissions::create('000')
-        //     )
-        // );
-
-        $this->assertTrue($root_user->can($ability1, Permission::READ));
-
-        // //$user1 = new User('andrew');
-        // //$user1->addRight($userRight1);
-
-        // //$resolver = new ObjectRightsResolver($root_user, $object_rights_1);
-
-        // if($root_user->can($object_rights_1, Permission::READ)) {
-        //     echo '&ROOT CAN READ OBJECT '.$object_rights_1->getName();
-        // }
-        // else {
-        //     echo '$ROOT CANNOT READ OBJECT '.$object_rights_1->getName();
-        // }
-
-        // //print_r((int)$rootUser->can($userRight, Permission::READ));
-        // echo "\n";
-
-
-
-
-        // // $user2 = new User('bob');
-        // // $user3 = new User('jane');
-
-        // // $group1 = new Group('admin');
-        // // $group2 = new Group('visitor');
-        // // $group3 = new Group('member');
-
-        // // $groups
-        // //     ->add(new Group('admin'))
-        // //     ->add(new Group('visitor'))
-        // //     ->add(new Group('visitor'));
-
-        // $awareness = new Awareness($groups);
-
-        // $awareness->addGroup(new Group('admin'));
-
-        // echo (int)$awareness->hasGroup('admin').' _++++++_ ';
-        // echo (int)$awareness->hasGroup('test');
-
-        // //print_r($awareness);
 
     }
 
