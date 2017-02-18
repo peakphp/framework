@@ -40,6 +40,7 @@ class Permissions
 
         if(!isset($user)) {
             //error
+            throw new \Exception('Permissions creation fail, invalid permission format.');
         }
 
         return new self(
