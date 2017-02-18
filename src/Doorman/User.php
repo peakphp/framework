@@ -9,7 +9,7 @@ use Peak\Doorman\AbilityResolver;
 use Peak\Doorman\Group;
 
 /**
- * Group entity
+ * User entity
  */
 class User
 {
