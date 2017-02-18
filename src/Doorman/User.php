@@ -57,21 +57,37 @@ class User
     /**
      * Add a user to a group
      * 
-     * @param Group $group
+     * @param  Group $group
+     * @return $this
      */
     public function addToGroup(Group $group)
     {
         $this->groups[$group->getName()] = $group;
+        return $this;
+    }
+
+    /**
+     * Remove user from a group
+     * 
+     * @param  Group  $group
+     * @return $this
+     */
+    public function removeFromGroup(Group $group)
+    {
+        unset($this->groups[$group->getName()]);
+        return $this;
     }
 
     /**
      * Add custom ability
      * 
-     * @param CustomUserAbility $custom
+     * @param   CustomUserAbility $custom
+     * @return  $this
      */
     public function addCustomAbility(CustomUserAbility $custom)
     {
         $this->custom_abilities[$custom->getName()] = $custom;
+        return $this;
     }
 
     /**
