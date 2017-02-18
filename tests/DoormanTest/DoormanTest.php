@@ -3,6 +3,7 @@ use PHPUnit\Framework\TestCase;
 
 use Peak\Doorman\Awareness;
 use Peak\Doorman\User;
+use Peak\Doorman\SuperUser;
 use Peak\Doorman\Ability;
 use Peak\Doorman\AbilityResolver;
 use Peak\Doorman\CustomUserAbility;
@@ -10,16 +11,36 @@ use Peak\Doorman\Permission;
 use Peak\Doorman\PermissionResolver;
 use Peak\Doorman\Permissions;
 use Peak\Doorman\Group;
+use Peak\Doorman\SuperGroup;
 
 class DoormanTest extends TestCase
 {
     
+    function testCreateSuperUser()
+    {
+        $root_user  = new SuperUser();
+        $root_group = new SuperGroup();
+
+        $ability1 = new Ability(
+            'dosomething', //object unique name
+            $root_user,  //object owner
+            $root_group, //object group
+            Permissions::create(0,0,0) //object rights (chmod style) by default
+        );
+
+        $this->assertTrue($root_user->can($ability1, Permission::READ));
+        $this->assertTrue($root_user->can($ability1, Permission::WRITE));
+        $this->assertTrue($root_user->can($ability1, Permission::EXECUTE));
+
+    }
+
+
     /**
      * test new instance
      */  
     function testCreateUser()
     {
-        $root_user  = new User('root');
+        $root_user  = new User('jane');
         $root_group = new Group('root');
 
         $root_user->addToGroup($root_group);
