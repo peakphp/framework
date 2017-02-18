@@ -2,8 +2,9 @@
 
 namespace Peak\Doorman;
 
-use Peak\Doorman\User;
 use Peak\Doorman\Ability;
+use Peak\Doorman\User;
+use Peak\Doorman\SuperUser;
 
 class AbilityResolver
 {
@@ -50,6 +51,11 @@ class AbilityResolver
      */
     protected function _can($permissions)
     {
+        // bypass
+        if($this->user instanceof SuperUser) {
+            return true;
+        }
+
         $perms = $this->user->getCustomAbility(
             $this->ability->getName()
         );
