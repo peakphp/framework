@@ -31,7 +31,23 @@ class DoormanTest extends TestCase
         $this->assertTrue($root_user->can($ability1, Permission::READ));
         $this->assertTrue($root_user->can($ability1, Permission::WRITE));
         $this->assertTrue($root_user->can($ability1, Permission::EXECUTE));
+    }
 
+    function testCreateFakeSuperUser()
+    {
+        $root_user  = new User('root');
+        $root_group = new SuperGroup();
+
+        $ability1 = new Ability(
+            'dosomething', //object unique name
+            $root_user,  //object owner
+            $root_group, //object group
+            Permissions::create(0,0,0) //object rights (chmod style) by default
+        );
+
+        $this->assertFalse($root_user->can($ability1, Permission::READ));
+        $this->assertFalse($root_user->can($ability1, Permission::WRITE));
+        $this->assertFalse($root_user->can($ability1, Permission::EXECUTE));
     }
 
 
