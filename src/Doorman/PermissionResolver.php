@@ -6,6 +6,7 @@ use Peak\Doorman\PermissionFormats\FormatAlphaNum;
 use Peak\Doorman\PermissionFormats\FormatBinary;
 use Peak\Doorman\PermissionFormats\FormatText;
 use Peak\Doorman\PermissionFormats\FormatDecimalString;
+use Peak\Doorman\PermissionFormats\FormatChar;
 
 /**
  * Permissions resolver (support decimal, binary, text and alphanum representation)
@@ -41,31 +42,29 @@ class PermissionResolver
     {
         $this->permission = null;
 
-        if(is_string($this->raw)) {
-            // decimal inside a string
-            if(array_key_exists($this->raw, FormatDecimalString::$values)) {
-                $this->permission = FormatDecimalString::$values[$this->raw];
-            }
-            // alphanum
-            elseif(array_key_exists($this->raw, FormatAlphaNum::$values)) {
-                $this->permission = FormatAlphaNum::$values[$this->raw];
-            }
-            // binary
-            else if(array_key_exists($this->raw, FormatBinary::$values)) {
-                $this->permission = FormatBinary::$values[$this->raw];
-            }
-            // textual format
-            else if(array_key_exists($this->raw, FormatText::$values)) {
-                $this->permission = FormatText::$values[$this->raw];
-            }
+        // decimal inside a string
+        if(array_key_exists($this->raw, FormatDecimalString::$values)) {
+            $this->permission = FormatDecimalString::$values[$this->raw];
         }
-        else {
-            // decimal format
-            if(is_numeric($this->raw) && $this->raw >= 0 && $this->raw <= 7) {
-                $this->permission = $this->raw;
-            }
+        // alphanum
+        elseif(array_key_exists($this->raw, FormatAlphaNum::$values)) {
+            $this->permission = FormatAlphaNum::$values[$this->raw];
         }
-
+        // binary
+        else if(array_key_exists($this->raw, FormatBinary::$values)) {
+            $this->permission = FormatBinary::$values[$this->raw];
+        }
+        // textual format
+        else if(array_key_exists($this->raw, FormatText::$values)) {
+            $this->permission = FormatText::$values[$this->raw];
+        }
+        // textual format
+        else if(array_key_exists($this->raw, FormatChar::$values)) {
+            $this->permission = FormatChar::$values[$this->raw];
+        }
+        elseif(is_numeric($this->raw) && $this->raw >= 0 && $this->raw <= 7) {
+            $this->permission = $this->raw;
+        }     
 
         // Can't resolve permission format
         if($this->permission === null) {
