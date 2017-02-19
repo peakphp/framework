@@ -49,8 +49,10 @@ class AbilityResolver
      * @param  integer $permissions
      * @return boolean
      */
-    protected function _can($permissions)
+    protected function _can($perm)
     {
+        $perm = new Permission($perm);
+
         // bypass
         if($this->user instanceof SuperUser) {
             return true;
@@ -59,6 +61,7 @@ class AbilityResolver
         $perms = $this->user->getCustomAbility(
             $this->ability->getName()
         );
+
 
         if($perms === null) {
             $perms = $this->ability->permissions;
@@ -77,6 +80,6 @@ class AbilityResolver
             $iperm = $perms->getOthersPerm();
         }
 
-        return ($iperm >= $permissions);
+        return ($iperm >= $perm->get());
     }
 }
