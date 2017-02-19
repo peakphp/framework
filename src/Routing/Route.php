@@ -23,6 +23,7 @@ class Route
     public $request_uri;
 
     /**
+     * @deprecated
      * Original unparsed request array
      * @var array
      */
