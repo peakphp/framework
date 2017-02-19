@@ -13,8 +13,11 @@ abstract class AbstractPermission implements PermissionInterface
      * Decimal permission constants
      */
     const READ    = 4;
+    const R       = 4;
     const WRITE   = 2;
+    const W       = 2;
     const EXECUTE = 1;
+    const E       = 1;
     
     /**
      * Permission value
