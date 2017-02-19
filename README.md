@@ -22,10 +22,11 @@ Requirements:
 - [illuminate/events](https://github.com/illuminate/events)
 
 ###Peak components
-    - Dependency Injection 
+    - Dependency Injection
     - Event Dispatcher
     - App Kernel
     - App Modules Kernel
+    - Ownership and Permissions
     - Templating
     - Form
     - Validator
