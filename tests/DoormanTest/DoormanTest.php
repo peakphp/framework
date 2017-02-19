@@ -90,4 +90,30 @@ class DoormanTest extends TestCase
 
     }
 
+    function testCreateAbility()
+    {
+        $root_user = new SuperUser();
+        $root_group = new SuperGroup();
+
+        $user  = new User('jane');
+        $group = new Group('groupA');
+
+        $user->addToGroup($group);
+
+        $ability1 = new Ability(
+            'danceonthefloor', //object unique name
+            $user,  //object owner
+            $group, //object group
+            Permissions::create(0,0,0) //object rights (chmod style) by default
+        );
+
+        $this->assertFalse($user->can($ability1, Permission::READ));
+        $this->assertFalse($user->can($ability1, Permission::WRITE));
+        $this->assertFalse($user->can($ability1, Permission::EXECUTE));
+
+        
+
+
+    }
+
 }
