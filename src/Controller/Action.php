@@ -102,7 +102,7 @@ abstract class Action
      */
     public function getActions()
     {
-        $actions = array();
+        $actions = [];
         
         $c_methods = get_class_methods($this);
 
@@ -191,7 +191,7 @@ abstract class Action
         }
         
         //call action with args
-        return call_user_func_array(array($this, $action_name), $args);
+        return call_user_func_array([$this, $action_name], $args);
     }
 
     /**
