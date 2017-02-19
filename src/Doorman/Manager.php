@@ -46,6 +46,7 @@ class Manager
         
         $this->users['root']  = new SuperUser();
         $this->groups['root'] = new SuperGroup();
+        $this->users['root']->addToGroup($this->groups['root']);
     }
 
     /**
