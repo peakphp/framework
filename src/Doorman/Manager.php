@@ -7,6 +7,7 @@ use Exception;
 use Peak\Collection;
 use Peak\Doorman\Ability;
 use Peak\Doorman\User;
+use Peak\Doorman\UserPolicy;
 use Peak\Doorman\SuperUser;
 use Peak\Doorman\Group;
 use Peak\Doorman\SuperGroup;
@@ -36,17 +37,47 @@ class Manager
     protected $abilities;
 
     /**
+     * User policy
+     * @var UserPolicy
+     */
+    protected $user_policy = null;
+
+    /**
      * Prepare mananger
      */
-    public function __construct()
+    public function __construct(UserPolicy $up = null)
     {
         $this->users     = new Collection();
         $this->groups    = new Collection();
         $this->abilities = new Collection();
-        
+
+        $this->createRoot();
+
+        if(isset($up)) {
+            $this->user_policy = $up;
+        }
+    }
+
+    /**
+     * Create root user
+     */
+    protected function createRoot()
+    {
         $this->users['root']  = new SuperUser();
         $this->groups['root'] = new SuperGroup();
         $this->users['root']->addToGroup($this->groups['root']);
+    }
+
+    /**
+     * Add a user policy
+     * 
+     * @param  UserPolicy $up
+     * @return $this
+     */
+    public function setUserPolicy(UserPolicy $up)
+    {
+        $this->user_policy = $up;
+        return $this;
     }
 
     /**
@@ -61,6 +92,12 @@ class Manager
             throw new Exception(__CLASS__.': User '.htmlspecialchars($name).' already exists');
         } else {
             $this->users[$name] = new User($name);
+
+            if(isset($this->user_policy)) {
+                echo '';
+                $this->user_policy->create($this->users[$name]);
+            }
+
             return $this->users[$name];
         }
     }
