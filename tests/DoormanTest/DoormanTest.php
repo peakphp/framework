@@ -54,7 +54,27 @@ class DoormanTest extends TestCase
     /**
      * test new instance
      */  
-    function testCreateUser()
+    function testCreateUserWithGroups()
+    {
+        $root_user = new SuperUser();
+        $root_group = new SuperGroup();
+
+        $user  = new User('jane');
+        $groupA = new Group('groupA');
+        $groupB = new Group('groupB');
+        $groupC = new Group('groupC');
+
+        $user->addToGroup($groupA, $groupB, $groupC);
+       
+        $this->assertTrue($user->isInGroup('groupA'));
+        $this->assertTrue($user->isInGroup('groupB'));
+        $this->assertTrue($user->isInGroup('groupC'));
+
+        $this->assertFalse($user->isInGroup('groupD'));
+
+    }
+
+    function testUserCan()
     {
         $root_user = new SuperUser();
         $root_group = new SuperGroup();
@@ -75,6 +95,8 @@ class DoormanTest extends TestCase
         $this->assertFalse($user->can($ability1, Permission::WRITE));
         $this->assertFalse($user->can($ability1, Permission::EXECUTE));
 
+        $this->assertTrue($user->abilityPermission($ability1) == 0);
+
         // overload permissions
         $user->addCustomAbility(
             new CustomUserAbility(
@@ -86,8 +108,6 @@ class DoormanTest extends TestCase
         $this->assertTrue($user->can($ability1, Permission::READ));
         $this->assertTrue($user->can($ability1, Permission::WRITE));
         $this->assertTrue($user->can($ability1, Permission::EXECUTE));
-
-
     }
 
     function testCreateAbility()
@@ -111,9 +131,8 @@ class DoormanTest extends TestCase
         $this->assertFalse($user->can($ability1, Permission::WRITE));
         $this->assertFalse($user->can($ability1, Permission::EXECUTE));
 
-        
 
-
+        $this->assertTrue($user->abilityPermission($ability1) == 0);
     }
 
 }

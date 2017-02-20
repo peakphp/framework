@@ -105,10 +105,6 @@ class ManagerTest extends TestCase
         $this->assertFalse(
             $manager->user('bob')->can($ability, Permission::E)
         );
-
-
-
-
         
     }
 }
