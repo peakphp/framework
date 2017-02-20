@@ -65,6 +65,17 @@ class DoormanTest extends TestCase
         $groupC = new Group('groupC');
 
         $user->addToGroup($groupA, $groupB, $groupC);
+
+        $this->assertTrue($user->isInGroup('groupA'));
+        $this->assertTrue($user->isInGroup('groupB'));
+        $this->assertTrue($user->isInGroup('groupC'));
+        
+        // overide user
+        $user  = new User('jane');
+        $user->addToGroup([
+            $groupA, $groupB, $groupC
+        ]);
+
        
         $this->assertTrue($user->isInGroup('groupA'));
         $this->assertTrue($user->isInGroup('groupB'));
