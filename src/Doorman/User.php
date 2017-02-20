@@ -3,10 +3,10 @@
 namespace Peak\Doorman;
 
 use Peak\Collection;
-use Peak\Doorman\CustomObjectRights;
 use Peak\Doorman\Ability;
 use Peak\Doorman\AbilityResolver;
 use Peak\Doorman\Group;
+use Peak\Doorman\Permission;
 
 /**
  * User entity
@@ -60,9 +60,11 @@ class User
      * @param  Group $group
      * @return $this
      */
-    public function addToGroup(Group $group)
+    public function addToGroup(Group ...$groups)
     {
-        $this->groups[$group->getName()] = $group;
+        foreach($groups as $g) {
+            $this->groups[$g->getName()] = $g;
+        }
         return $this;
     }
 
@@ -127,7 +129,7 @@ class User
     }
 
     /**
-     * Check user permission over an ability
+     * Check user permission for an ability
      * 
      * @param  Ability $ability    
      * @param  mixed   $permission 
@@ -138,4 +140,50 @@ class User
         $resolver = new AbilityResolver($this, $ability);
         return $resolver->can($permission);
     }
+
+    /**
+     * Get current user permission for an ability
+     * 
+     * @param  Ability $ability    
+     * @param  mixed   $permission 
+     * @return boolean
+     */
+    public function abilityPermission(Ability $ability)
+    {
+        $resolver = new AbilityResolver($this, $ability);
+        return $resolver->abilityPermission();
+    }
+
+    /**
+     * Can read the ability
+     * 
+     * @param  Ability $ability 
+     * @return boolean
+     */
+    public function canRead(Ability $ability)
+    {
+        return $this->can($ability, Permission::READ);
+    }
+    /**
+     * Can write the ability
+     * 
+     * @param  Ability $ability 
+     * @return boolean
+     */
+    public function canWrite(Ability $ability)
+    {
+        return $this->can($ability, Permission::WRITE);
+    }
+    /**
+     * Can execute the ability
+     * 
+     * @param  Ability $ability 
+     * @return boolean
+     */
+    public function canExecute(Ability $ability)
+    {
+        return $this->can($ability, Permission::EXECUTE);
+    }
+
+    
 }
