@@ -116,9 +116,9 @@ class DoormanTest extends TestCase
             )
         );
 
-        $this->assertTrue($user->can($ability1, Permission::READ));
-        $this->assertTrue($user->can($ability1, Permission::WRITE));
-        $this->assertTrue($user->can($ability1, Permission::EXECUTE));
+        $this->assertTrue($user->canRead($ability1));
+        $this->assertTrue($user->canWrite($ability1));
+        $this->assertTrue($user->canExecute($ability1));
     }
 
     function testCreateAbility()
