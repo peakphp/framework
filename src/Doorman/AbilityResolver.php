@@ -44,9 +44,40 @@ class AbilityResolver
     }
 
     /**
+     * Get current ability for the user
+     * @return int
+     */
+    public function abilityPermission()
+    {
+        // check for custom user ability overrride
+        $perms = $this->user->getCustomAbility(
+            $this->ability->getName()
+        );
+
+        // if no custom user ability, use default ability perms
+        if($perms === null) {
+            $perms = $this->ability->permissions;
+        }
+        else {
+            $perms = $perms->permissions;
+        }
+
+        // resolver user, group and other in this order
+        if($this->user->is($this->ability->owner->getName())) {
+            $iperm = $perms->getUserPerm();
+        }
+        elseif($this->user->isInGroup($this->ability->group->getName())) {
+            $iperm = $perms->getGroupPerm();
+        }
+        else $iperm = $perms->getOthersPerm();
+
+        return $iperm;
+    }
+
+    /**
      * Internal method of can()
      * 
-     * @param  integer $permissions
+     * @param  integer $permission
      * @return boolean
      */
     protected function _can($perm)
@@ -58,28 +89,8 @@ class AbilityResolver
             return true;
         }
 
-        $perms = $this->user->getCustomAbility(
-            $this->ability->getName()
-        );
+        $ability_perm = $this->abilityPermission();
 
-
-        if($perms === null) {
-            $perms = $this->ability->permissions;
-        }
-        else {
-            $perms = $perms->permissions;
-        }
-
-        if($this->user->is($this->ability->owner->getName())) {
-            $iperm = $perms->getUserPerm();
-        }
-        elseif($this->user->isInGroup($this->ability->group->getName())) {
-            $iperm = $perms->getGroupPerm();
-        }
-        else {
-            $iperm = $perms->getOthersPerm();
-        }
-
-        return ($iperm >= $perm->get());
+        return ($ability_perm >= $perm->get());
     }
 }
