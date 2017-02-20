@@ -55,15 +55,21 @@ class User
     }
 
     /**
-     * Add a user to a group
+     * Add a user to group(s)
      * 
-     * @param  Group $group
+     * @param  Group $groups
      * @return $this
      */
-    public function addToGroup(Group ...$groups)
+    public function addToGroup(...$groups)
     {
-        foreach($groups as $g) {
-            $this->groups[$g->getName()] = $g;
+        foreach($groups as $group) {
+            if(is_array($group)) {
+                foreach($group as $g) {
+                    $this->groups[$g->getName()] = $g;
+                }
+                return $this;
+            }
+            $this->groups[$group->getName()] = $group;
         }
         return $this;
     }
