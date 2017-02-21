@@ -12,11 +12,12 @@ use Peak\Doorman\SuperUser;
 use Peak\Doorman\Group;
 use Peak\Doorman\SuperGroup;
 use Peak\Doorman\Permissions;
+use Peak\Doorman\PolicySubjectInterface;
 
 /**
  * Wrap and simplify usage of doorman ability permissions component
  */
-class Manager
+class Manager implements PolicySubjectInterface
 {
     /**
      * Users
@@ -44,14 +45,21 @@ class Manager
 
     /**
      * Prepare mananger
+     *
+     * @param  Peak\Doorman\UserPolicy $up
+     * @param  Peak\Doorman\ManagerPolicy $mp
      */
-    public function __construct(UserPolicy $up = null)
+    public function __construct(UserPolicy $up = null, ManagerPolicy $mp = null)
     {
         $this->users     = new Collection();
         $this->groups    = new Collection();
         $this->abilities = new Collection();
 
-        $this->createRoot();
+        
+        if(!isset($mp)) {
+            $mp = new ManagerPolicy();
+            $mp->create($this);
+        }
 
         if(isset($up)) {
             $this->user_policy = $up;
@@ -59,19 +67,9 @@ class Manager
     }
 
     /**
-     * Create root user
-     */
-    protected function createRoot()
-    {
-        $this->users['root']  = new SuperUser();
-        $this->groups['root'] = new SuperGroup();
-        $this->users['root']->addToGroup($this->groups['root']);
-    }
-
-    /**
      * Add a user policy
      * 
-     * @param  UserPolicy $up
+     * @param  Peak\Doorman\UserPolicy $up
      * @return $this
      */
     public function setUserPolicy(UserPolicy $up)
@@ -90,7 +88,8 @@ class Manager
     {
         if(isset($this->users->$name)) {
             throw new Exception(__CLASS__.': User '.htmlspecialchars($name).' already exists');
-        } else {
+        } 
+        else {
             $this->users[$name] = new User($name);
 
             if(isset($this->user_policy)) {
@@ -98,6 +97,30 @@ class Manager
             }
 
             return $this->users[$name];
+        }
+    }
+
+    /**
+     * Add a user object instance
+     * 
+     * @param  Peak\Doorman\User $user
+     * @return Peak\Doorman\User 
+     */
+    public function addUser(User $user)
+    {
+        $name = $user->getName();
+
+        if(isset($this->users->$name)) {
+            throw new Exception(__CLASS__.': User '.htmlspecialchars($name).' already exists');
+        } 
+        else {
+            $this->users[$name] = $user;
+
+            if(isset($this->user_policy)) {
+                $this->user_policy->create($user);
+            }
+
+            return $user;
         }
     }
 
@@ -136,6 +159,24 @@ class Manager
         } else {
             $this->groups[$name] = new Group($name);
             return $this->groups[$name];
+        }
+    }
+
+    /**
+     * Add a group object instance
+     * 
+     * @param  Peak\Doorman\Group $group 
+     * @return Peak\Doorman\Group      
+     */
+    public function addGroup(Group $group)
+    {
+        $name = $name = $group->getName();
+
+        if(isset($this->groups->$name)) {
+            throw new Exception(__CLASS__.': Group '.htmlspecialchars($name).' already exists');
+        } else {
+            $this->groups[$name] = $group;
+            return $group;
         }
     }
 
