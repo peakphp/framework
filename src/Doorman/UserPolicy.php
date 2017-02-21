@@ -3,6 +3,7 @@
 namespace Peak\Doorman;
 
 use Peak\Doorman\PolicyInterface;
+use Peak\Doorman\PolicySubjectInterface;
 
 class UserPolicy implements PolicyInterface
 {
@@ -25,15 +26,15 @@ class UserPolicy implements PolicyInterface
     }
 
     /**
-     * Create user
+     * Create a user
      * 
-     * @param User $user      
+     * @param PolicySubjectInterface $subject
      */
-    public function create(User $user)
+    public function create(PolicySubjectInterface $subject)
     {
         if(!empty($this->default_groups)) {
             foreach($this->default_groups as $group) {
-                $user->addToGroup($group);
+                $subject->addToGroup($group);
             }
         }
     }

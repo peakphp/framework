@@ -35,3 +35,5 @@ class UserPolicyTest extends TestCase
         $this->assertFalse($userA->isInGroup('groupE'));
     }
 }
+
+class test extends UserPolicy {}

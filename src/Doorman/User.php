@@ -7,11 +7,12 @@ use Peak\Doorman\Ability;
 use Peak\Doorman\AbilityResolver;
 use Peak\Doorman\Group;
 use Peak\Doorman\Permission;
+use Peak\Doorman\PolicySubjectInterface;
 
 /**
  * User entity
  */
-class User
+class User implements PolicySubjectInterface
 {
 
     /**
