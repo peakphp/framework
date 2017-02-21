@@ -8,14 +8,26 @@ namespace Peak\Application;
 class Bootstrapper
 {
     /**
-     * Class process before booting
+     * Prefix of methods to call on boot
+     * @var string
+     */
+    protected $boot_methods_prefix = 'init';
+
+    /**
+     * Default app processes before booting
      * @var array
      */
-    public $process = [
+    public $default_processes = [
         \Peak\Application\Bootstrap\ConfigPHP::class,
         \Peak\Application\Bootstrap\ConfigView::class,
         \Peak\Application\Bootstrap\ConfigCustomRoutes::class
     ];
+
+    /**
+     * Custom app processes before booting
+     * @var array
+     */
+    public $processes = [];
 
     /**
      * init app bootstrap
@@ -23,9 +35,12 @@ class Bootstrapper
     public function __construct()
     {
         /**
-         * Execute process
+         * Execute processes
          */
-        foreach($this->process as $process) {
+        foreach($this->default_processes as $process) {
+            new $process();
+        }
+        foreach($this->processes as $process) {
             new $process();
         }
 
@@ -33,19 +48,17 @@ class Bootstrapper
     }
 
     /**
-     * Call all bootstrap methods prefixed by "init"
-     *
-     * @param string $prefix
+     * Call all bootstrap methods prefixed by $boot_methods_prefix
      */
-    private function _boot($prefix = 'init')
+    private function _boot()
     {
         $this->_env();
 
         $c_methods = get_class_methods(get_class($this));
-        $l = strlen($prefix);
+        $l = strlen($this->boot_methods_prefix);
         if(!empty($c_methods)) {
             foreach($c_methods as $m) {            
-                if(substr($m, 0, $l) === $prefix) $this->$m();
+                if(substr($m, 0, $l) === $this->boot_methods_prefix) $this->$m();
             }
         }
     }
