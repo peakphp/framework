@@ -3,6 +3,8 @@ VERSION 2.0.9
 Release Date: ?
 
  - added Doorman component for mananing users/groups permission(s) like linux file permissions
+ - separated default processes from app processes in Peak\Application\Bootstrapper
+ - added property $boot_methods_prefix in Peak\Application\Bootstrapper
 
 VERSION 2.0.8
 -------------
