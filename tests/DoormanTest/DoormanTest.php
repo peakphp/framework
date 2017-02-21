@@ -83,6 +83,12 @@ class DoormanTest extends TestCase
 
         $this->assertFalse($user->isInGroup('groupD'));
 
+        $user->removeFromAllGroups();
+
+        $this->assertFalse($user->isInGroup('groupA'));
+        $this->assertFalse($user->isInGroup('groupB'));
+        $this->assertFalse($user->isInGroup('groupC'));
+
     }
 
     function testUserCan()
