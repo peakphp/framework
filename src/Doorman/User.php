@@ -87,6 +87,14 @@ class User
     }
 
     /**
+     * Remove user from all groups
+     */
+    public function removeFromAllGroups()
+    {
+        $this->groups->strip();
+    }
+
+    /**
      * Add custom ability
      * 
      * @param   CustomUserAbility $custom
