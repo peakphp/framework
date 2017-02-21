@@ -94,7 +94,6 @@ class Manager
             $this->users[$name] = new User($name);
 
             if(isset($this->user_policy)) {
-                echo '';
                 $this->user_policy->create($this->users[$name]);
             }
 
