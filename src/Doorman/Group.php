@@ -2,10 +2,12 @@
 
 namespace Peak\Doorman;
 
+use Peak\Doorman\PolicySubjectInterface;
+
 /**
  * Group entity
  */
-class Group
+class Group implements PolicySubjectInterface
 {
     /**
      * Group name
