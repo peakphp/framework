@@ -31,7 +31,7 @@ class PkerrorController extends Action
      * Default action handler, support exception object
      */
     public function _index()
-    {       
+    {
         if(isset($this->exception)) {
             if($this->exception instanceof Exception) {
             	switch($this->exception->getErrkey()) {
@@ -109,7 +109,7 @@ class PkerrorController extends Action
      */
     public function devmode()
     {
-         if((APPLICATION_ENV === 'development') && (isset($this->exception))) {                            
+         if((isEnv('dev')) && (isset($this->exception))) {                            
             $this->view->setContent('<div class="block"><p>');
             $this->view->setContent($this->_exception2table());
             $this->view->setContent('</p></div>');
