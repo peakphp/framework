@@ -12,15 +12,6 @@ engines:
     enabled: true
   phpmd:
     enabled: true
-ratings:
-  paths:
-  - "**.css"
-  - "**.inc"
-  - "**.js"
-  - "**.jsx"
-  - "**.module"
-  - "**.php"
-  - "**.py"
-  - "**.rb"
-exclude_paths:
-- tests/
+    checks:
+      Controversial/CamelCasePropertyName:
+        enabled: false
