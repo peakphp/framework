@@ -24,7 +24,7 @@ class Module
     {
         $app          = Registry::o()->app;
         $this->name   = $app->front->route->controller;
-        $app->routing = new Routing(null, Application::conf('path.public').'/'.$this->name);
+        $app->routing = new Routing(null, relativePath(Application::conf('path.public').'/'.$this->name));
         
         $this->backupConfig()->updateConfig()->init();
 
