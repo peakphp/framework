@@ -15,3 +15,8 @@ engines:
     checks:
       Controversial/CamelCasePropertyName:
         enabled: false
+ratings:
+  paths:
+  - "**.php"
+exclude_paths:
+- tests/
