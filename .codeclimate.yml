@@ -1,0 +1,9 @@
+engines:
+  # ... CONFIG CONTENT ...
+  phpmd:
+    enabled: true
+    # ... CONFIG CONTENT ...
+    checks:
+      Controversial/CamelCasePropertyName:
+        enabled: false
+# ... CONFIG CONTENT ...
