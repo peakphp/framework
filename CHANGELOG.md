@@ -1,6 +1,6 @@
 VERSION 2.0.9
 -------------
-Release Date: ?
+Release Date: 2017-02-21
 
  - added Doorman component for mananing users/groups permission(s) like linux file permissions
  - separated default processes from app processes in Peak\Application\Bootstrapper
