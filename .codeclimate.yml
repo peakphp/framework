@@ -1,9 +1,29 @@
 engines:
-  # ... CONFIG CONTENT ...
+  csslint:
+    enabled: true
+  duplication:
+    enabled: true
+    config:
+      languages:
+      - ruby
+      - javascript
+      - python
+      - php
+  eslint:
+    enabled: true
+  fixme:
+    enabled: true
   phpmd:
     enabled: true
-    # ... CONFIG CONTENT ...
-    checks:
-      Controversial/CamelCasePropertyName:
-        enabled: false
-# ... CONFIG CONTENT ...
+ratings:
+  paths:
+  - "**.css"
+  - "**.inc"
+  - "**.js"
+  - "**.jsx"
+  - "**.module"
+  - "**.php"
+  - "**.py"
+  - "**.rb"
+exclude_paths:
+- tests/
