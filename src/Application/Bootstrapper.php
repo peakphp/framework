@@ -17,7 +17,7 @@ class Bootstrapper
      * Default app processes before booting
      * @var array
      */
-    public $default_processes = [
+    protected $default_processes = [
         \Peak\Application\Bootstrap\ConfigPHP::class,
         \Peak\Application\Bootstrap\ConfigView::class,
         \Peak\Application\Bootstrap\ConfigCustomRoutes::class
@@ -27,7 +27,7 @@ class Bootstrapper
      * Custom app processes before booting
      * @var array
      */
-    public $processes = [];
+    protected $processes = [];
 
     /**
      * init app bootstrap
