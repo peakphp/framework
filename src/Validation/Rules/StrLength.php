@@ -7,7 +7,7 @@ use Peak\Validation\AbstractRule;
 /**
  * Value min and max length
  */
-class Length extends AbstractRule
+class StrLength extends AbstractRule
 {
     /**
      * Default options
@@ -26,21 +26,23 @@ class Length extends AbstractRule
      */
     public function validate($value)
     {
-        if(!is_null($this->options['min'])) {
+        $length = mb_strlen($value);
+
+        if($this->options['min'] !== null) {
             $min = $this->options['min'];
         }
-        if(!is_null($this->options['min'])) {
+        if($this->options['max'] !== null) {
             $max = $this->options['max'];
         }
 
         if(isset($min) && !isset($max)) {
-            return (strlen($value) >= $min) ? true : false;
+            return ($length >= $min);
         }
         elseif(isset($max) && !isset($min)) {
-            return (strlen($value) <= $max) ? true : false;
+            return ($length <= $max);
         }
         else {
-            return ((strlen($value) >= $min) && (strlen($value) <= $max)) ? true : false;
+            return (($length >= $min) && ($length <= $max));
         }
     }
 }
