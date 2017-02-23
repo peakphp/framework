@@ -50,16 +50,63 @@ class RulesTest extends TestCase
     }
 
     /**
-     * test is not empty
+     * test string length
      */
-    function testLength()
+    function testStrLength()
     {       
-        $rule = new Peak\Validation\Rules\Length();
+        $rule = new Peak\Validation\Rules\StrLength();
 
         $this->assertTrue($rule->validate(''));
         $this->assertTrue($rule->validate(0));
         $this->assertTrue($rule->validate(1));
         $this->assertTrue($rule->validate('random string'));
+
+        $rule = new Peak\Validation\Rules\StrLength([
+            'min' => 3,
+        ]);
+
+        $this->assertFalse($rule->validate(''));
+        $this->assertFalse($rule->validate(0));
+        $this->assertFalse($rule->validate(1));
+        $this->assertTrue($rule->validate('random string'));
+
+
+        $rule = new Peak\Validation\Rules\StrLength([
+            'max' => 10
+        ]);
+
+        $this->assertTrue($rule->validate(''));
+        $this->assertTrue($rule->validate(0));
+        $this->assertTrue($rule->validate(1));
+        $this->assertFalse($rule->validate('random string'));
+
+        $rule = new Peak\Validation\Rules\StrLength([
+            'min' => 2,
+            'max' => 10
+        ]);
+
+        $this->assertFalse($rule->validate(''));
+        $this->assertFalse($rule->validate(0));
+        $this->assertTrue($rule->validate('22'));
+        $this->assertTrue($rule->validate('0123456789'));
+        $this->assertFalse($rule->validate('random string'));
+    }
+
+
+    /**
+     * test enum
+     */
+    function testEnum()
+    {       
+        $rule = new Peak\Validation\Rules\Enum([
+            'foo', 'bar', 'barfoo'
+        ]);
+
+        $this->assertFalse($rule->validate(''));
+        $this->assertTrue($rule->validate('bar'));
+        $this->assertFalse($rule->validate('foobar'));
+        $this->assertTrue($rule->validate('barfoo'));
+
     }
 
 
