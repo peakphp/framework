@@ -47,12 +47,10 @@ class ConfigCustomRoutes
                         );
 
                     }
-                    else throw new Exception('ERR_CUSTOM', 'Invalid routing expression');
+                    throw new Exception('ERR_CUSTOM', 'Invalid routing expression');
                 }
 
-                else {
-                    throw new Exception('ERR_CUSTOM', 'Invalid routing in your application config');
-                }
+                throw new Exception('ERR_CUSTOM', 'Invalid routing in your application config');
             }
         }
 
