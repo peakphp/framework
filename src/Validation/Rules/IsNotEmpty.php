@@ -5,7 +5,7 @@ namespace Peak\Validation\Rules;
 use Peak\Validation\AbstractRule;
 
 /**
- * Value is not empty
+ * Is not empty rule
  */
 class IsNotEmpty extends AbstractRule
 {

@@ -5,7 +5,7 @@ namespace Peak\Validation\Rules;
 use Peak\Validation\AbstractRule;
 
 /**
- * Value Emum
+ * Enum match rule
  */
 class Enum extends AbstractRule
 {
