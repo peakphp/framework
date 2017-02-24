@@ -5,7 +5,7 @@ namespace Peak\Validation\Rules;
 use Peak\Validation\AbstractRule;
 
 /**
- * Value min and max length
+ * String length rule
  */
 class StrLength extends AbstractRule
 {
@@ -28,10 +28,10 @@ class StrLength extends AbstractRule
     {
         $length = mb_strlen($value);
 
-        if($this->options['min'] !== null) {
+        if(isset($this->options['min'])) {
             $min = $this->options['min'];
         }
-        if($this->options['max'] !== null) {
+        if(isset($this->options['max'])) {
             $max = $this->options['max'];
         }
 
