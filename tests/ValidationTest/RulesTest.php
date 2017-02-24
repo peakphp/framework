@@ -106,7 +106,22 @@ class RulesTest extends TestCase
         $this->assertTrue($rule->validate('bar'));
         $this->assertFalse($rule->validate('foobar'));
         $this->assertTrue($rule->validate('barfoo'));
+    }
 
+    /**
+     * test int
+     */
+    function testInt()
+    {       
+        $rule = new Peak\Validation\Rules\Int();
+
+        $this->assertTrue($rule->validate(-1554));
+        $this->assertTrue($rule->validate(8880));
+        $this->assertTrue($rule->validate(6458));
+
+        $this->assertFalse($rule->validate(''));
+        $this->assertFalse($rule->validate('a6458'));
+        $this->assertFalse($rule->validate('asdasdasd'));
     }
 
 
