@@ -122,6 +122,52 @@ class RulesTest extends TestCase
         $this->assertFalse($rule->validate(''));
         $this->assertFalse($rule->validate('a6458'));
         $this->assertFalse($rule->validate('asdasdasd'));
+
+
+        $rule = new Peak\Validation\Rules\Int([
+            'min_range' => 10,
+            'max_range' => 20,
+        ]);
+
+        $this->assertTrue($rule->validate(15));
+        $this->assertFalse($rule->validate(25));
+
+        $rule = new Peak\Validation\Rules\Int([
+            'min_range' => 10,
+        ], FILTER_FLAG_ALLOW_HEX);
+
+        $this->assertTrue($rule->validate(15));
+        $this->assertTrue($rule->validate("0x0000FF"));
+
+        $rule = new Peak\Validation\Rules\Int([
+            'min_range' => 10,
+        ]);
+
+        $this->assertTrue($rule->validate(15));
+        $this->assertTrue($rule->validate(0x0000FF));
+        $this->assertFalse($rule->validate("0x0000FF"));
+    }
+
+    /**
+     * test float
+     */
+    function testFloat()
+    {       
+        $rule = new Peak\Validation\Rules\Float();
+
+        $this->assertTrue($rule->validate(-1554.55));
+        $this->assertTrue($rule->validate(8880.97475));
+        $this->assertTrue($rule->validate("6458.3564"));
+
+        $this->assertFalse($rule->validate('0.0.0'));
+        $this->assertFalse($rule->validate('a6458'));
+        $this->assertFalse($rule->validate('asdasdasd'));
+
+
+        $rule = new Peak\Validation\Rules\Float(['decimal' => ',']);
+        $this->assertTrue($rule->validate('2,59'));
+        $this->assertFalse($rule->validate(1.58));
+
     }
 
 
