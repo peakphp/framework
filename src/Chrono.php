@@ -75,12 +75,14 @@ class Chrono
     {
         if(!isset($timer_name)) {
             if((self::$_global['start'] === false) || (self::$_global['end'] !== false)) return false;
-            else return true;
+            return true;
         }
         else {
             if(self::timerExists($timer_name)) {
-                if((self::$_timers[$timer_name]['start'] === false) || (self::$_timers[$timer_name]['end'] !== false)) return false;
-                else return true;
+                if((self::$_timers[$timer_name]['start'] === false) || (self::$_timers[$timer_name]['end'] !== false)) {
+                    return false;
+                }
+                return true;
             }
             return false;
         }   
@@ -100,10 +102,12 @@ class Chrono
         }
         else {
            if(self::timerExists($timer_name)) {
-               if((self::$_timers[$timer_name]['start'] !== false) && (self::$_timers[$timer_name]['end'] !== false)) return true;
-               else return false;
+               if((self::$_timers[$timer_name]['start'] !== false) && (self::$_timers[$timer_name]['end'] !== false)) {
+                return true;
+            }
+               return false;
            }
-           else return false;
+           return false;
         } 
     }
 
@@ -137,7 +141,7 @@ class Chrono
             }
             return round(($time_elapsed), $decimal_precision);
         }        
-        else return false;
+        return false;
     }
 
     /**
