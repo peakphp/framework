@@ -210,5 +210,37 @@ class RulesTest extends TestCase
 
     }
 
+    /**
+     * test Alpha
+     */
+    function testAlpha()
+    {       
+        $rule = new Peak\Validation\Rules\Alpha();
+
+        $this->assertTrue($rule->validate("A"));
+        $this->assertTrue($rule->validate("B"));
+        $this->assertTrue($rule->validate("BB"));
+        $this->assertTrue($rule->validate("s"));
+
+        $this->assertFalse($rule->validate("0A"));
+
+    }
+
+    /**
+     * test AlphaNum
+     */
+    function testAlphaNum()
+    {       
+        $rule = new Peak\Validation\Rules\AlphaNum();
+
+        $this->assertTrue($rule->validate("A3"));
+        $this->assertTrue($rule->validate("B4"));
+        $this->assertTrue($rule->validate("BB0"));
+        $this->assertTrue($rule->validate("012"));
+
+        $this->assertFalse($rule->validate("123a 2a"));
+
+    }
+
 
 }
