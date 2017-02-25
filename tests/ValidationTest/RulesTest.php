@@ -242,5 +242,25 @@ class RulesTest extends TestCase
 
     }
 
+    /**
+     * test DateTime
+     */
+    function testDateTime()
+    {       
+        $rule = new Peak\Validation\Rules\DateTime();
+
+        $this->assertTrue($rule->validate("2012-02-28 12:11:20"));
+        $this->assertFalse($rule->validate("2012-02-30 11:00:02"));
+
+        $this->assertFalse($rule->validate("2012-02-30"));
+
+        $rule = new Peak\Validation\Rules\DateTime([
+            'format' => 'd/m/Y'
+        ]);
+
+        $this->assertTrue($rule->validate("28/02/2017"));
+        $this->assertFalse($rule->validate("28/02/2017 15:32:11"));
+    }
+
 
 }
