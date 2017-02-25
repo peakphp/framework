@@ -170,5 +170,45 @@ class RulesTest extends TestCase
 
     }
 
+    /**
+     * test Email
+     */
+    function testEmail()
+    {       
+        $rule = new Peak\Validation\Rules\Email();
+
+        $this->assertTrue($rule->validate("a@a.a"));
+        $this->assertFalse($rule->validate("bob@aa"));
+        $this->assertFalse($rule->validate("b b@a.a"));
+        $this->assertFalse($rule->validate("a@ a.a"));
+    }
+
+    /**
+     * test Url
+     */
+    function testUrl()
+    {       
+        $rule = new Peak\Validation\Rules\Url();
+
+        $this->assertTrue($rule->validate("http://test.com"));
+        $this->assertTrue($rule->validate("http://test"));
+        $this->assertFalse($rule->validate("test.com"));
+
+    }
+
+    /**
+     * test Regex
+     */
+    function testRegex()
+    {       
+        $rule = new Peak\Validation\Rules\Regex(['regexp' => '#^[A-Z]$#']);
+
+        $this->assertTrue($rule->validate("A"));
+        $this->assertTrue($rule->validate("B"));
+        $this->assertFalse($rule->validate("BB"));
+        $this->assertFalse($rule->validate("a"));
+
+    }
+
 
 }
