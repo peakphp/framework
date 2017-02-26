@@ -7,7 +7,7 @@ use Peak\Validation\AbstractRule;
 /**
  * Integer rule using FILTER_VALIDATE_INT
  */
-class Int extends AbstractRule
+class Integer extends AbstractRule
 {
     /**
      * Default options
