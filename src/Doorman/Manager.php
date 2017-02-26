@@ -89,15 +89,15 @@ class Manager implements PolicySubjectInterface
         if(isset($this->users->$name)) {
             throw new Exception(__CLASS__.': User '.htmlspecialchars($name).' already exists');
         } 
-        else {
-            $this->users[$name] = new User($name);
+        
+        $this->users[$name] = new User($name);
 
-            if(isset($this->user_policy)) {
-                $this->user_policy->create($this->users[$name]);
-            }
-
-            return $this->users[$name];
+        if(isset($this->user_policy)) {
+            $this->user_policy->create($this->users[$name]);
         }
+
+        return $this->users[$name];
+        
     }
 
     /**
@@ -113,15 +113,14 @@ class Manager implements PolicySubjectInterface
         if(isset($this->users->$name)) {
             throw new Exception(__CLASS__.': User '.htmlspecialchars($name).' already exists');
         } 
-        else {
-            $this->users[$name] = $user;
 
-            if(isset($this->user_policy)) {
-                $this->user_policy->create($user);
-            }
+        $this->users[$name] = $user;
 
-            return $user;
+        if(isset($this->user_policy)) {
+            $this->user_policy->create($user);
         }
+
+        return $user;
     }
 
     /**
@@ -156,10 +155,10 @@ class Manager implements PolicySubjectInterface
     {
         if(isset($this->groups->$name)) {
             throw new Exception(__CLASS__.': Group '.htmlspecialchars($name).' already exists');
-        } else {
-            $this->groups[$name] = new Group($name);
-            return $this->groups[$name];
-        }
+        } 
+
+        $this->groups[$name] = new Group($name);
+        return $this->groups[$name];
     }
 
     /**
@@ -174,10 +173,10 @@ class Manager implements PolicySubjectInterface
 
         if(isset($this->groups->$name)) {
             throw new Exception(__CLASS__.': Group '.htmlspecialchars($name).' already exists');
-        } else {
-            $this->groups[$name] = $group;
-            return $group;
         }
+
+        $this->groups[$name] = $group;
+        return $group; 
     }
 
     /**
