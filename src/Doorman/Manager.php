@@ -257,10 +257,9 @@ class Manager implements PolicySubjectInterface
                 Permissions::create($ability_parts[2])
             );
         }
-        else {
-            //exception
-            throw new Exception(__CLASS__.': Invalid ability string format');
-        }
+        
+        //else throw exception
+        throw new Exception(__CLASS__.': Invalid ability string format');
     }
 
     /**
