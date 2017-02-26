@@ -7,7 +7,7 @@ use Peak\Validation\AbstractRule;
 /**
  * Float rule using FILTER_VALIDATE_FLOAT
  */
-class Float extends AbstractRule
+class FloatNumber extends AbstractRule
 {
     /**
      * Default options
