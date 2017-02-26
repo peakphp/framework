@@ -111,9 +111,9 @@ class RulesTest extends TestCase
     /**
      * test integer
      */
-    function testInteger()
+    function testIntegerNumber()
     {       
-        $rule = new Peak\Validation\Rules\Integer();
+        $rule = new Peak\Validation\Rules\IntegerNumber();
 
         $this->assertTrue($rule->validate(-1554));
         $this->assertTrue($rule->validate(8880));
@@ -124,7 +124,7 @@ class RulesTest extends TestCase
         $this->assertFalse($rule->validate('asdasdasd'));
 
 
-        $rule = new Peak\Validation\Rules\Integer([
+        $rule = new Peak\Validation\Rules\IntegerNumber([
             'min_range' => 10,
             'max_range' => 20,
         ]);
@@ -132,14 +132,14 @@ class RulesTest extends TestCase
         $this->assertTrue($rule->validate(15));
         $this->assertFalse($rule->validate(25));
 
-        $rule = new Peak\Validation\Rules\Integer([
+        $rule = new Peak\Validation\Rules\IntegerNumber([
             'min_range' => 10,
         ], FILTER_FLAG_ALLOW_HEX);
 
         $this->assertTrue($rule->validate(15));
         $this->assertTrue($rule->validate("0x0000FF"));
 
-        $rule = new Peak\Validation\Rules\Integer([
+        $rule = new Peak\Validation\Rules\IntegerNumber([
             'min_range' => 10,
         ]);
 
@@ -151,9 +151,9 @@ class RulesTest extends TestCase
     /**
      * test float
      */
-    function testFloat()
+    function testFloatNumber()
     {       
-        $rule = new Peak\Validation\Rules\Float();
+        $rule = new Peak\Validation\Rules\FloatNumber();
 
         $this->assertTrue($rule->validate(-1554.55));
         $this->assertTrue($rule->validate(8880.97475));
@@ -164,7 +164,7 @@ class RulesTest extends TestCase
         $this->assertFalse($rule->validate('asdasdasd'));
 
 
-        $rule = new Peak\Validation\Rules\Float(['decimal' => ',']);
+        $rule = new Peak\Validation\Rules\FloatNumber(['decimal' => ',']);
         $this->assertTrue($rule->validate('2,59'));
         $this->assertFalse($rule->validate(1.58));
 
