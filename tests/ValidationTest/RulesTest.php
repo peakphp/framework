@@ -109,11 +109,11 @@ class RulesTest extends TestCase
     }
 
     /**
-     * test int
+     * test integer
      */
-    function testInt()
+    function testInteger()
     {       
-        $rule = new Peak\Validation\Rules\Int();
+        $rule = new Peak\Validation\Rules\Integer();
 
         $this->assertTrue($rule->validate(-1554));
         $this->assertTrue($rule->validate(8880));
@@ -124,7 +124,7 @@ class RulesTest extends TestCase
         $this->assertFalse($rule->validate('asdasdasd'));
 
 
-        $rule = new Peak\Validation\Rules\Int([
+        $rule = new Peak\Validation\Rules\Integer([
             'min_range' => 10,
             'max_range' => 20,
         ]);
@@ -132,14 +132,14 @@ class RulesTest extends TestCase
         $this->assertTrue($rule->validate(15));
         $this->assertFalse($rule->validate(25));
 
-        $rule = new Peak\Validation\Rules\Int([
+        $rule = new Peak\Validation\Rules\Integer([
             'min_range' => 10,
         ], FILTER_FLAG_ALLOW_HEX);
 
         $this->assertTrue($rule->validate(15));
         $this->assertTrue($rule->validate("0x0000FF"));
 
-        $rule = new Peak\Validation\Rules\Int([
+        $rule = new Peak\Validation\Rules\Integer([
             'min_range' => 10,
         ]);
 
