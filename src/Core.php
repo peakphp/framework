@@ -205,15 +205,15 @@ if(!function_exists('session')) {
         if(!isset($s)) {
             $s = \Peak\Registry::set('session', new \Peak\Config\Session());
         }
+
         if(!isset($path) && !isset($value)) {
             return $s;
         }
         elseif(isset($path) && !isset($value)) {
             return $s->get($path);
         }
-        else {
-            return $s->set($path, $value);
-        }
+        
+        return $s->set($path, $value);
     }
 }
 
