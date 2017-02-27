@@ -22,3 +22,4 @@ ratings:
   - "**.php"
 exclude_paths:
   - tests/
+- "src/Filters/Advanced.php"
