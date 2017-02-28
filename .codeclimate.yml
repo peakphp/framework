@@ -17,8 +17,6 @@ engines:
         enabled: false
       Controversial/CamelCaseVariableName:
         enabled: false
-      Controversial/CamelCaseParameterName:
-        enabled: false
   phpcodesniffer:
     enabled: true
     config:
