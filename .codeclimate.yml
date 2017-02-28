@@ -17,6 +17,10 @@ engines:
         enabled: false
       Controversial/CamelCaseVariableName:
         enabled: false
+  phpcodesniffer:
+    enabled: true
+    config:
+      standard: "PSR1,PSR2,PSR4"
 ratings:
   paths:
   - "**.php"
