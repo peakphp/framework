@@ -116,6 +116,10 @@ class RuleBuilder
     {
         $rulename = '\Peak\Validation\Rules\\'.$this->name;
 
+        if(class_exists($this->name)) {
+            $rulename = $this->name;
+        }
+
         return new $rulename($this->options, $this->flags);
     }
 
