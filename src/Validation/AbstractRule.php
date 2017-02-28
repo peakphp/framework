@@ -29,9 +29,14 @@ abstract class AbstractRule implements RuleInterface
      * 
      * @param array  $options 
      */
-    public function __construct($options = [], $flags = null)
+    public function __construct($options = null, $flags = null)
     {
-        $this->options = array_merge($this->default_options, $options);
+        $this->options = $this->default_options;
+
+        if(is_array($options)) {
+            $this->options = array_merge($this->default_options, $options);
+        }
+        
         $this->flags = $flags;
         $this->removeNullOptions();
         $this->init();
