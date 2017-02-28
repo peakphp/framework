@@ -50,8 +50,6 @@ abstract class DataSet
             array_push($this->rules[$name], $def);
         }
 
-        // print_r($this->rules);
-
         return $this;
     }
 
@@ -76,22 +74,32 @@ abstract class DataSet
         $this->errors = [];
 
         if(empty($this->rules)) {
-            return false;
+            return true;
         }
 
         foreach($this->rules as $key => $val) {
 
+            // look for special condition
             if(!array_key_exists($key, $data)) {
                 if(in_array('required', $val)) {
                     $this->errors[$key] = 'Required';
                 }
                 continue;
             }
+            elseif(empty($data[$key])) {
+                if(in_array('if_not_empty', $val)) {
+                    continue;
+                }
+            }
 
-            // check one field
+            // process rule(s) validation on data key value
             foreach($val as $def) {
 
                 if(!is_array($def)) continue;
+
+                if(in_array('empty', $val)) {
+                    $this->errors[$key] = 'Required';
+                }
 
                 $rule_def = new RuleDefinition($def);
 
