@@ -62,7 +62,7 @@ class Environment
             $this->file_config->set('all.path.apptree', $apptree->tree);
         }
 
-        $this->validate($this->file_config);
+        $this->validate();
 
         // merge array section 'all' with current environment section if exists
         $this->file_config->mergeRecursiveDistinct($this->file_config->all, $this->file_config->$env);
@@ -71,10 +71,8 @@ class Environment
 
     /**
      * Validation application config
-     * 
-     * @param  object $conf
      */
-    private function validate($conf)
+    private function validate()
     {
         // default env aka all
         if(!$this->file_config->have('all')) {
