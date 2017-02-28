@@ -4,67 +4,67 @@ use PHPUnit\Framework\TestCase;
 
 use Peak\Validation\Rule;
 
+require __DIR__.'/../fixtures/validation/datasets.php';
+
 class DataSetTest extends TestCase
 {
 
     function testCreate()
     {
-        $dataset = new DataSetExample();
+        $dataset = new DataSetExample1();
 
-        $errors = $dataset->getErrors();
-
-        $this->assertTrue(empty($errors));
+        $this->assertTrue(empty($dataset->getErrors()));
     }  
 
     function testValidate()
     {
-        $dataset = new DataSetExample();
+        $dataset = new DataSetExample1();
 
         $pass = $dataset->validate([
-            'login' => 'custom'
+            'login' => 'bob'
         ]);
 
-        $errors = $dataset->getErrors();
+        $this->assertTrue($pass);
+        $this->assertTrue(empty($dataset->getErrors()));
+
+        $pass = $dataset->validate([]);
 
         $this->assertTrue($pass);
-        $this->assertTrue(empty($errors));
+        $this->assertTrue(empty($dataset->getErrors()));
+
+
     }    
 
-}
-
-class DataSetExample extends \Peak\Validation\DataSet
-{
-    // public function __construct()
-    // {
-    //     echo 'test';
-    // }
-
-    public function setUp()
+    function testValidateRequired()
     {
+        $dataset = new DataSetExample2();
 
-        $this->add('login',
-            [
-                'rule'  => 'IsNotEmpty',
-                'error' => 'Name is empty',
-            ],
-            [
-                'rule'  => 'AlphaNum',
-                'error' => 'Only characters and numbers',
-            ],
-            [
-                'rule'    => 'StrLength',
-                'options' => [
-                    'min' => 4,
-                    'max' => 10
-                ],
-                'error' => 'Name must be between 4 and 10 chars',
-            ],
-            [
-                'rule'  => 'CustomRule',
-                'error' => 'Invalid Data',
-            ]);
-    }
+        $pass = $dataset->validate([]);
+
+        $this->assertFalse($pass);
+        $this->assertFalse(empty($dataset->getErrors()));
+    }  
+
+    function testValidateIfNotEmpty()
+    {
+        $dataset = new DataSetExample3();
+
+        $pass = $dataset->validate([]);
+        $this->assertTrue($pass);
+        $this->assertTrue(empty($dataset->getErrors()));
+
+
+        $pass = $dataset->validate(['login' => '']);
+        $this->assertTrue($pass);
+        $this->assertTrue(empty($dataset->getErrors()));
+
+        $pass = $dataset->validate(['login' => 'invalid name']);
+        $this->assertFalse($pass);
+        $this->assertFalse(empty($dataset->getErrors()));
+    }  
+
 }
+
 
 class CustomRule extends \Peak\Validation\AbstractRule
 {
