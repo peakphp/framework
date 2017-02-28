@@ -45,6 +45,6 @@ class RuleBuilderTest extends TestCase
         $rule = Rule::create('StrLength')->setError($error);
 
         $this->assertTrue($rule->validate(58));
-        $this->assertTrue($rule->getError() === $error );
+        $this->assertTrue($rule->getError() === $error);
     }
 }
