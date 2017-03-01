@@ -11,15 +11,29 @@ use Peak\Di\ClassInstantiator;
  */
 class Container
 {
+    /**
+     * Container object instances collection
+     * @var Peak\Collection
+     */
     protected $instances;
 
+    /**
+     * Container object interfaces collection
+     * @var Peak\Collection
+     */
     protected $interfaces;
 
+    /**
+     * Class instantiator
+     * @var Peak\Di\ClassInstantiator
+     */
     protected $instantiator;
 
+    /**
+     * Container object instances collection
+     * @var Peak\Di\ClassResolver
+     */
     protected $resolver;
-
-    protected $iresolver;
 
     /**
      * Constructor
