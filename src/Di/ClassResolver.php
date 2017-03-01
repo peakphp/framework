@@ -17,15 +17,21 @@ class ClassResolver
 {
     /**
      * ClassInspector
-     * @var object
+     * @var Peak\Di\ClassInspector
      */
     protected $inspector;
 
     /**
-     * InterfaceResolver
-     * @var object
+     * Interface resolver
+     * @var Peak\Di\InterfaceResolver
      */
     protected $iresolver;
+
+    /**
+     * Explicit resolver
+     * @var Peak\Di\ExplicitResolver
+     */
+    protected $explicit;
 
     /**
      * Constructor
@@ -33,7 +39,7 @@ class ClassResolver
     public function __construct()
     {
         $this->inspector = new ClassInspector();
-        $this->explicit = new ExplicitResolver();
+        $this->explicit  = new ExplicitResolver();
         $this->iresolver = new InterfaceResolver();
     }
 
