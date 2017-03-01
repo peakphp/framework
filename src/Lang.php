@@ -14,13 +14,13 @@ class Lang
      * Language abbreviation
      * @var string
      */
-    protected $_lang;
+    protected $lang;
 
     /**
      * List of language file loaded
      * @var array
      */
-    protected $_loaded_files = [];
+    protected $loaded_files = [];
 
     /**
      * Array of translation
@@ -39,7 +39,7 @@ class Lang
         if(Registry::o()->lang instanceof Lang)   {       
             return Registry::o()->lang->translate((string)$text, $replaces, $func);
         }
-        else return $text;
+        return $text;
     }
 
     /**
@@ -67,7 +67,7 @@ class Lang
      */
     public function setLang($lang_abbr)
     {
-        $this->_lang = trim(strtolower($lang_abbr));
+        $this->lang = trim(strtolower($lang_abbr));
         return $this;
     }
 
@@ -78,7 +78,7 @@ class Lang
      */
     public function getLang()
     {
-        return $this->_lang;
+        return $this->lang;
     }
     
     /**
@@ -89,7 +89,7 @@ class Lang
      */
     public function loadFile($filepath, $return = false)
     {       
-        if(empty($this->_lang)) {
+        if(empty($this->lang)) {
             throw new Exception(__CLASS__.': You must set the language abbreviation before loading a translation file.');
         }
 
@@ -101,12 +101,12 @@ class Lang
             $tmp = include $filepath;
             if(!is_array($tmp)) $tmp = array();
 
-            $this->_loaded_files[] = $filepath;
+            $this->loaded_files[] = $filepath;
 
             if($return) return $tmp;
             else $this->translations = $tmp;
         }
-        elseif($return) return array();
+        elseif($return) return [];
     }
 
     /**
@@ -135,7 +135,7 @@ class Lang
      */
     public function getLoadedFiles()
     {
-        return $this->_loaded_files;
+        return $this->loaded_files;
     }
 
     /**
