@@ -37,22 +37,24 @@ class Ini extends DotNotation
 	 */
 	public function loadFile($file, $process_sections = false, $section_name = null)
 	{
-		if(!file_exists($file)) throw new Exception('ERR_CUSTOM', __CLASS__.' has tried to load non-existent ini file');
-		else {
-			$ini = @parse_ini_file($file, $process_sections);
-			
-			//(php 5.2.7+) since parse_ini_file() can return false in case of error
-			//but this can mean also that the file is only empty, so we don't want to throw a exception in this case
-			
-			if((version_compare(PHP_VERSION, '5.2.7') >= 0) && ($ini == false)) {
-				//check if the file just empty
-				if(trim(file_get_contents($file)) !== '') {
-					throw new Exception('ERR_CUSTOM', __CLASS__.': syntax error(s) in your configuration file');
-				}
-			}
-			
-			return $this->_load($ini, $process_sections, $section_name);
+		if(!file_exists($file)) {
+			throw new Exception('ERR_CUSTOM', __CLASS__.' has tried to load non-existent ini file');
 		}
+
+		$ini = @parse_ini_file($file, $process_sections);
+		
+		//(php 5.2.7+) since parse_ini_file() can return false in case of error
+		//but this can mean also that the file is only empty, so we don't want to throw a exception in this case
+		
+		if((version_compare(PHP_VERSION, '5.2.7') >= 0) && ($ini == false)) {
+			//check if the file just empty
+			if(trim(file_get_contents($file)) !== '') {
+				throw new Exception('ERR_CUSTOM', __CLASS__.': syntax error(s) in your configuration file');
+			}
+		}
+		
+		return $this->_load($ini, $process_sections, $section_name);
+		
 	}
 	
 	/**
