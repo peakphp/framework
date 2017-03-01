@@ -77,15 +77,14 @@ class Chrono
             if((self::$_global['start'] === false) || (self::$_global['end'] !== false)) return false;
             return true;
         }
-        else {
-            if(self::timerExists($timer_name)) {
-                if((self::$_timers[$timer_name]['start'] === false) || (self::$_timers[$timer_name]['end'] !== false)) {
-                    return false;
-                }
-                return true;
+        elseif(self::timerExists($timer_name)) {
+            if((self::$_timers[$timer_name]['start'] === false) || (self::$_timers[$timer_name]['end'] !== false)) {
+                return false;
             }
-            return false;
-        }   
+            return true;
+        }
+        return false;
+  
     }
 
     /**
@@ -100,15 +99,13 @@ class Chrono
             if((self::$_global['start'] !== false) && (self::$_global['end'] !== false)) return true;
             else return false;
         }
-        else {
-           if(self::timerExists($timer_name)) {
-               if((self::$_timers[$timer_name]['start'] !== false) && (self::$_timers[$timer_name]['end'] !== false)) {
+        elseif(self::timerExists($timer_name)) {
+            if((self::$_timers[$timer_name]['start'] !== false) && (self::$_timers[$timer_name]['end'] !== false)) {
                 return true;
             }
-               return false;
-           }
-           return false;
-        } 
+            return false;
+        }
+        return false;
     }
 
     /**
