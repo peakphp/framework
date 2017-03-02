@@ -75,9 +75,9 @@ class Partials extends Render
         $this->_scripts_path = $path;
         
         if(!isset($path)) {
-        	$this->scripts_path = Application::conf('path.apptree.theme_partials');
-        	$path = Application::conf('path.apptree.theme_partials');
-        	$no_cache = true;
+            $this->scripts_path = Application::conf('path.apptree.theme_partials');
+            $path = Application::conf('path.apptree.theme_partials');
+            $no_cache = true;
         }
         
         $filepath = $path.'/'.$file;
@@ -96,7 +96,7 @@ class Partials extends Render
                 if($theme_partial !== '[CONTENT]') {
                     if(basename($theme_partial) === $theme_partial) {
                         if(file_exists(Application::conf('path.apptree.theme_partials').'/'.$theme_partial)) {
-                        	$group_filespath[] = Application::conf('path.theme_partials').'/'.$theme_partial;
+                            $group_filespath[] = Application::conf('path.theme_partials').'/'.$theme_partial;
                         }
                     }
                     elseif(file_exists($theme_partial)) $group_filespath[] = $theme_partial;
@@ -108,7 +108,7 @@ class Partials extends Render
             
         }
         else {
-        	if(isset($no_cache)) $this->output($filepath);
+            if(isset($no_cache)) $this->output($filepath);
             else $this->preOutput($filepath);
         }
     }

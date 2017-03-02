@@ -17,9 +17,9 @@ abstract class Render
 
     protected $_cache;             //view cache object
 
-	//force child to implement those functions
+    //force child to implement those functions
     abstract public function render($file, $path = null);
-	abstract protected function output($data);
+    abstract protected function output($data);
 
     /**
      * Same as render() but handle an array of file instead
@@ -67,8 +67,8 @@ abstract class Render
      */
     public function  __call($method, $args)
     {
-    	$view =& Registry::o()->view;
-    	return call_user_func_array(array($view, $method), $args);
+        $view =& Registry::o()->view;
+        return call_user_func_array(array($view, $method), $args);
     }
 
     /**
@@ -104,8 +104,8 @@ abstract class Render
      */
     public function cache()
     {
-    	if(!is_object($this->_cache)) $this->_cache = new Cache();
-    	return $this->_cache;
+        if(!is_object($this->_cache)) $this->_cache = new Cache();
+        return $this->_cache;
     }
 
 }

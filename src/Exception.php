@@ -12,11 +12,11 @@ class Exception extends \Exception
      * Error constant name
      * @var string
      */
-	private $_errkey;
+    private $_errkey;
 
-	/**
-	 * Errors messages
-	 */
+    /**
+     * Errors messages
+     */
     const ERR_ROUTER_URI_NOT_FOUND          = 'Request uri not found.';
     const ERR_CORE_INIT_CONST_MISSING       = '%1$s is not specified (const %2$s)';
     const ERR_DEFAULT                       = 'Request failed';
@@ -46,41 +46,41 @@ class Exception extends \Exception
      * @param string $infos
      */
     public function __construct($errkey = null, $infos = null)
-	{		    	    
-	    $this->_errkey = $errkey;    
-	    
-	    $message = $this->handleErrConstToText($errkey,$infos);	    
+    {                   
+        $this->_errkey = $errkey;    
+        
+        $message = $this->handleErrConstToText($errkey,$infos);     
    
-		parent::__construct($message);
-	}
+        parent::__construct($message);
+    }
 
-	/**
-	 * Handle error key constants
-	 *
-	 * @param  integer $errkey
-	 * @return string  $info
-	 */
-	public function handleErrConstToText($errkey = null,$infos = null)
-	{ 
-	    if(defined(sprintf('%s::%s', get_class($this), $errkey))) {
-	        $r = constant(sprintf('%s::%s', get_class($this), $errkey));
-	    }
-	    else $r = self::ERR_DEFAULT;
-	    
-	    if(isset($infos)) {
-			$r = (is_array($infos)) ? vsprintf($r,$infos) : sprintf($r,trim($infos));
-	    }
+    /**
+     * Handle error key constants
+     *
+     * @param  integer $errkey
+     * @return string  $info
+     */
+    public function handleErrConstToText($errkey = null,$infos = null)
+    { 
+        if(defined(sprintf('%s::%s', get_class($this), $errkey))) {
+            $r = constant(sprintf('%s::%s', get_class($this), $errkey));
+        }
+        else $r = self::ERR_DEFAULT;
+        
+        if(isset($infos)) {
+            $r = (is_array($infos)) ? vsprintf($r,$infos) : sprintf($r,trim($infos));
+        }
 
-		return htmlentities(strip_tags($r))."\n";
-	}
+        return htmlentities(strip_tags($r))."\n";
+    }
 
-	/**
-	 * Get debug trace of current exception @deprecated
-	 *
-	 * @return string
-	 */
-	public function getDebugTrace()
-	{
+    /**
+     * Get debug trace of current exception @deprecated
+     *
+     * @return string
+     */
+    public function getDebugTrace()
+    {
         $trace = debug_backtrace();
 
         $content = $this->getMessage();
@@ -89,7 +89,7 @@ class Exception extends \Exception
 
         if(!isCli()) $content = '<pre>'.$content.'</pre>';
         return $content;
-	}
+    }
 
     /**
      * Print the debug trace
@@ -99,13 +99,13 @@ class Exception extends \Exception
         print_r($this->getDebugTrace());
     }
 
-	/**
-	 * Get exception element trigger trace 
-	 * 
-	 * @return array
-	 */
-	public function getTriggerTrace()
-	{
+    /**
+     * Get exception element trigger trace 
+     * 
+     * @return array
+     */
+    public function getTriggerTrace()
+    {
         foreach ($this->getTrace() as $frame) {
             $args = '';
             if (isset($frame['args'])) {
@@ -133,14 +133,14 @@ class Exception extends \Exception
             break;
         }
         return $frame;
-	}
-	
-	public function getErrkey() 
+    }
+    
+    public function getErrkey() 
     {
         return $this->_errkey; 
     }
 
-	public function getTime() 
+    public function getTime() 
     { 
         return date('Y-m-d H:i:s'); 
     }

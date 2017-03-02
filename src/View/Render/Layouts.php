@@ -34,7 +34,7 @@ class Layouts extends Render
      */
     public function isLayout($name)
     {
-    	return (file_exists(Application::conf('path.apptree.views_layouts').'/'.$name)) ? true : false;
+        return (file_exists(Application::conf('path.apptree.views_layouts').'/'.$name)) ? true : false;
     }
 
     /**
