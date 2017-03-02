@@ -34,17 +34,17 @@ class PkerrorController extends Action
     {
         if(isset($this->exception)) {
             if($this->exception instanceof Exception) {
-            	switch($this->exception->getErrkey()) {
-            	    
-            	    case 'ERR_CTRL_NOT_FOUND' : 
-            	    case 'ERR_ROUTER_URI_NOT_FOUND' :
-            	        $this->_404();
-            	        break;
-            	        
-            	    default: 
-            	        $this->_500();
-            	        break;    
-            	}
+                switch($this->exception->getErrkey()) {
+                    
+                    case 'ERR_CTRL_NOT_FOUND' : 
+                    case 'ERR_ROUTER_URI_NOT_FOUND' :
+                        $this->_404();
+                        break;
+                        
+                    default: 
+                        $this->_500();
+                        break;    
+                }
             }
             elseif($this->exception instanceof Exception) {
                 $this->_error();
