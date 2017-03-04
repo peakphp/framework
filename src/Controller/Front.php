@@ -15,75 +15,75 @@ use Peak\Routing\RouteBuilder;
  */
 class Front
 {
-	/**
-	 * Route object
-	 * @var Peak\Routing\Route
-	 */
+    /**
+     * Route object
+     * @var Peak\Routing\Route
+     */
     public $route;
-	
-	/**
-	 * Controller object
-	 * @var object
-	 */
-	public $controller;
+    
+    /**
+     * Controller object
+     * @var object
+     */
+    public $controller;
 
-	/**
-	 * Default controller name
-	 * @var string
-	 */
-	public $default_controller = 'index';
-	
-	/**
-	 * Exception|error controller (used by errorDispatch())
-	 * @var string
-	 */
-	public $error_controller = 'error';
-	
-	/**
-	 * Allow/Disallow the use of Peak library internal controllers
-	 * @var bool
-	 */
-	public $allow_internal_controllers = false;
-	
-	/**
-	 * Allow/Disallow application modules
-	 * @var bool
-	 */
-	public $allow_app_modules = true;
-	
-	/**
-	 * Allow/Disallow Peak library internal modules
-	 * @var bool
-	 */
-	public $allow_internal_modules = true;
+    /**
+     * Default controller name
+     * @var string
+     */
+    public $default_controller = 'index';
+    
+    /**
+     * Exception|error controller (used by errorDispatch())
+     * @var string
+     */
+    public $error_controller = 'error';
+    
+    /**
+     * Allow/Disallow the use of Peak library internal controllers
+     * @var bool
+     */
+    public $allow_internal_controllers = false;
+    
+    /**
+     * Allow/Disallow application modules
+     * @var bool
+     */
+    public $allow_app_modules = true;
+    
+    /**
+     * Allow/Disallow Peak library internal modules
+     * @var bool
+     */
+    public $allow_internal_modules = true;
 
-	/**
-	 * class construct
-	 */
-	public function __construct()
-	{
-		$this->_appConfig();
-	}
-	
-	/**
+    /**
+     * class construct
+     */
+    public function __construct()
+    {
+        $this->_appConfig();
+    }
+    
+    /**
      * Get array 'front' from registered object 'config' if exists
      */
     private function _appConfig()
     {
         $config = Application::conf('front');
-    	if(!empty($config)) {
-    		foreach(Application::conf('front') as $k => $v) {
-    			if($k === 'allow_internal_controllers') $v = (bool)$v;
-    			$this->$k = $v;
-    		}
-    	}
+        if(!empty($config)) {
+            foreach(Application::conf('front') as $k => $v) {
+                if($k === 'allow_internal_controllers') $v = (bool)$v;
+                $this->$k = $v;
+            }
+        }
     }
 
-	/**
-	 * Called before routing dispatching
-	 * Empty by default
-	 */
-	public function preDispatch() {}
+    /**
+     * Called before routing dispatching
+     * Empty by default
+     */
+    public function preDispatch() {}
 
     /**
      * Called after controller action dispatching
@@ -110,23 +110,23 @@ class Front
      */
     public function postRender() {}       
 
-	/**
-	 * Call appropriate dispatching methods
-	 */
-	public function dispatch()
-	{
-	    $this->_dispatchController();
+    /**
+     * Call appropriate dispatching methods
+     */
+    public function dispatch()
+    {
+        $this->_dispatchController();
           
         // execute a normal controller action
         if($this->controller instanceof Action) {
             $this->_dispatchControllerAction(); 
         }
-	}
-	
-	/**
-	 * Dispatch appropriate controller according to the router
-	 */
-	protected function _dispatchController()
+    }
+    
+    /**
+     * Dispatch appropriate controller according to the router
+     */
+    protected function _dispatchController()
     {
         //set default controller if router doesn't have one
         if(!isset($this->route->controller)) {
@@ -154,16 +154,16 @@ class Front
             $this->postDispatchController();
         }
     }
-	
-	/**
-	 * Dispatch action of controller
-	 */
-	protected function _dispatchControllerAction()
-	{
+    
+    /**
+     * Dispatch action of controller
+     */
+    protected function _dispatchControllerAction()
+    {
         if($this->controller instanceof Action) {
-    	    $this->controller->dispatch(); 
+            $this->controller->dispatch(); 
         }
-	}
+    }
 
     /**
      * Get controller name
@@ -176,18 +176,18 @@ class Front
     {
         return $ns.ucfirst($name).'Controller';
     }
-		
-	/**
-	 * Force dispatch of $error_controller
+        
+    /**
+     * Force dispatch of $error_controller
      *
      * @param object $exception
-	 */
-	public function errorDispatch($exception = null)
-	{
-		$this->route->controller = $this->error_controller;
-		$this->route->action     = 'index';
-		
-		$this->_dispatchController();
+     */
+    public function errorDispatch($exception = null)
+    {
+        $this->route->controller = $this->error_controller;
+        $this->route->action     = 'index';
+        
+        $this->_dispatchController();
 
         if(isset($exception)) {
             $this->controller->exception = $exception;
@@ -196,7 +196,7 @@ class Front
         $this->_dispatchControllerAction();
         
         return Registry::o()->app;
-	}
+    }
 
     /**
      * Set a new request and redispatch the controller
