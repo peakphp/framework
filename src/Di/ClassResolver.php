@@ -45,7 +45,7 @@ class ClassResolver
 
     /**
      * Resolve class arguments dependencies
-     * 
+     *
      * @param  string $class
      * @return object
      */

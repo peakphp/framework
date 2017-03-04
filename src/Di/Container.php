@@ -48,10 +48,10 @@ class Container
 
     /**
      * Instantiate a class
-     * 
+     *
      * The generated instance is not stored, but may use stored 
      * instance(s) as dependency when needed
-     * 
+     *
      * @param  string $class     The class name to instanciate
      * @param  array  $args      Constructor argument(s) for parent and child if any
      * @param  array  $explicit  Determine which instance should be use for an interface name.
@@ -74,7 +74,7 @@ class Container
 
     /**
      * Has object instance
-     * 
+     *
      * @param  string $name
      */
     public function hasInstance($name)
@@ -84,7 +84,7 @@ class Container
 
     /**
      * Get an instance if exists, otherwise return null
-     * 
+     *
      * @param  string       $name
      * @return object|null
      */
@@ -98,6 +98,7 @@ class Container
 
     /**
      * Get all stored instances
+     *
      * @return object
      */
     public function getInstances()
@@ -107,6 +108,8 @@ class Container
 
     /**
      * Has an interface
+     *
+     * @return bool
      */
     public function hasInterface($name)
     {
@@ -115,7 +118,7 @@ class Container
 
     /**
      * Get an interface
-     * 
+     *
      * @param   $name
      * @return  array|string instance(s) matching interface name
      */
@@ -129,6 +132,7 @@ class Container
 
     /**
      * Get all stored interfaces
+     *
      * @return object
      */
     public function getInterfaces()
@@ -138,13 +142,12 @@ class Container
 
     /**
      * Add an object instance. Chainable
-     * 
+     *
      * @param  string      $object
      * @param  string|null $alias if set, instance will be stored under an alias
      */
     public function addInstance($object) 
     {
-
         $class = get_class($object);
         $this->instances[$class] = $object;
 
@@ -159,10 +162,10 @@ class Container
     }
 
     /**
-     * Delete an instance if exists. Chainable
-     * 
+     * Delete an instance if exists. Chainable.
+     *
      * @param  $name 
-     * @return       
+     * @return $this      
      */
     public function deleteInstance($name)
     {
