@@ -62,7 +62,7 @@ class View
      * @param string $name
      * @param anything $value
      */
-    public function __set($name,$value = null)
+    public function __set($name, $value = null)
     {
         $this->_vars[$name] = $value;
     }
@@ -76,7 +76,7 @@ class View
     public function &__get($name)
     {        
         if(isset($this->_vars[$name])) return $this->_vars[$name];
-        else return ${null};
+        return ${null};
     }
 
     /**
@@ -109,7 +109,7 @@ class View
      * @param string $method
      * @param array  $args
      */
-    public function  __call($method, $args = null)
+    public function __call($method, $args = null)
     {
         if(method_exists($this->engine(),$method)) {
             return call_user_func_array(array($this->engine(), $method), $args);        
@@ -132,7 +132,7 @@ class View
 
     /**
      * Set/overwrite view variable
-     * 
+     *
      * @see    __set()
      * @return $this
      */
@@ -219,7 +219,7 @@ class View
         if(is_object($this->_engine)) {
             return strtolower(str_replace('Peak\View\Render\\', '', get_class($this->_engine)));
         }
-        else return null;
+        return null;
     }
     
     /**
@@ -234,6 +234,8 @@ class View
 
     /**
      * Disable rendering
+     *
+     * @return $this
      */
     public function disableRender()
     {
@@ -243,6 +245,8 @@ class View
     
     /**
      * Enabled rendering
+     *
+     * @return $this
      */
     public function enableRender()
     {
@@ -252,7 +256,7 @@ class View
 
     /**
      * Render Controller Action View file with the current rendering engine
-     * 
+     *
      * @param  string $file
      * @param  string $path
      * @return string or array   return array of view files when layout is used
@@ -261,7 +265,6 @@ class View
     {
         //skip render part(see $_render)
         if($this->_render === false) return;
-
 
         if(is_object($this->_engine)) {
 
@@ -278,7 +281,7 @@ class View
     /**
      * Load/get HTTP header object
      *
-     * @return object Peak_View_Header
+     * @return object \Peak\View\Header
      */
     public function header()
     {
@@ -292,7 +295,7 @@ class View
     /**
      * Load helpers objects method and return helper obj
      *
-     * @return object Peak_View_Helpers
+     * @return object Peak\View\Helpers
      */
     public function helper($name = null, $method = null, $params = array())
     {
