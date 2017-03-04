@@ -5,7 +5,7 @@
 | Peak constant(s)
 |--------------------------------------------------------------------------
 */
-if(!defined('PEAK_VERSION'))
+if (!defined('PEAK_VERSION'))
     define('PEAK_VERSION', '2.0.10');
 
 /*
@@ -17,7 +17,7 @@ if(!defined('PEAK_VERSION'))
 /**
  * relativeBasepath()
  */
-if(!function_exists('relativeBasepath')) {
+if (!function_exists('relativeBasepath')) {
     /**
      * Get relativepath of specified dir from the server document root
      * 
@@ -25,7 +25,7 @@ if(!function_exists('relativeBasepath')) {
      * @return string     
      */
     function relativeBasepath($dir, $doc_root = null) {
-        if(!isset($doc_root)) {
+        if (!isset($doc_root)) {
             $doc_root = (!isset($_SERVER['DOCUMENT_ROOT'])) ? '' : $_SERVER['DOCUMENT_ROOT'];
         }
         return substr(str_replace([$doc_root,basename($dir)],'',str_replace('\\','/',$dir)), 0, -1);
@@ -35,15 +35,15 @@ if(!function_exists('relativeBasepath')) {
 /**
  * relativePath()
  */
-if(!function_exists('relativePath')) {
+if (!function_exists('relativePath')) {
     /**
      * Get relative path of specified dir from the server document root
-     * 
+     *
      * @param  string $dir
      * @return string     
      */
     function relativePath($dir, $doc_root = null) {
-        if(!isset($doc_root)) {
+        if (!isset($doc_root)) {
             $doc_root = (!isset($_SERVER['DOCUMENT_ROOT'])) ? '' : $_SERVER['DOCUMENT_ROOT'];
         }
         return str_replace([$doc_root,$dir],'',str_replace('\\','/',$dir));
@@ -53,7 +53,7 @@ if(!function_exists('relativePath')) {
 /**
  * isCli()
  */
-if(!function_exists('isCli')) {
+if (!function_exists('isCli')) {
     /**
      * Detect if we are in command line interface mode
      */
@@ -65,7 +65,7 @@ if(!function_exists('isCli')) {
 /**
  * showAllErrors()
  */
-if(!function_exists('showAllErrors')) {
+if (!function_exists('showAllErrors')) {
     /**
      * Try to force the display of all errors
      */
@@ -85,10 +85,10 @@ if(!function_exists('showAllErrors')) {
 /**
  * __()
  */
-if(!function_exists('__')) {
+if (!function_exists('__')) {
     /**
      * Shortcut of Peak\Lang::__()
-     * 
+     *
      * @param  string         $text     
      * @param  array|string   $replaces 
      * @param  closure        $func     
@@ -102,10 +102,10 @@ if(!function_exists('__')) {
 /**
  * _e()
  */
-if(!function_exists('_e')) {
+if (!function_exists('_e')) {
     /**
      * Shortcut of Peak\Lang::_e()
-     * 
+     *
      * @param  string         $text     
      * @param  array|string   $replaces 
      * @param  closure        $func     
@@ -119,9 +119,11 @@ if(!function_exists('_e')) {
 /**
  * phpinput()
  */
-if(!function_exists('phpinput')) {
+if (!function_exists('phpinput')) {
     /**
      * Retreive a collection object from php://input 
+     *
+     * @return Peak\Collection
      */
     function phpinput() { 
 
@@ -129,7 +131,7 @@ if(!function_exists('phpinput')) {
         $post = json_decode($raw, true); // for json input
 
         // incase json post is empty but $_POST is not we will use it
-        if(!empty($raw) && empty($post) && isset($_POST)) {
+        if (!empty($raw) && empty($post) && isset($_POST)) {
             $post = $_POST;
         }
 
@@ -140,7 +142,7 @@ if(!function_exists('phpinput')) {
 /**
  * isEnv()
  */
-if(!function_exists('isEnv')) {
+if (!function_exists('isEnv')) {
     /**
      * Check is env match curretn application env
      * 
@@ -149,7 +151,7 @@ if(!function_exists('isEnv')) {
      */
     function isEnv($env) { 
 
-        if(defined('APPLICATION_ENV')) {
+        if (defined('APPLICATION_ENV')) {
             return (APPLICATION_ENV === $env);
         }
         return false;
@@ -159,16 +161,15 @@ if(!function_exists('isEnv')) {
 /**
  * config()
  */
-if(!function_exists('config')) {
+if (!function_exists('config')) {
     /**
      * App configuration
-     * 
+     *
      * @param  string|null $path
      * @param  mixed|null  $value
      * @return mixed    
      */
     function config($path = null, $value = null) { 
-
         return \Peak\Application::conf($path, $value);
     }
 }
@@ -176,15 +177,14 @@ if(!function_exists('config')) {
 /**
  * collection()
  */
-if(!function_exists('collection')) {
+if (!function_exists('collection')) {
     /**
      * Create a new Collection
-     * 
+     *
      * @param  array|null $items 
      * @return \Peak\Collection     
      */
     function collection($items = null) { 
-
         return \Peak\Collection::make($items);
     }
 }
@@ -192,7 +192,7 @@ if(!function_exists('collection')) {
 /**
  * session()
  */
-if(!function_exists('session')) {
+if (!function_exists('session')) {
     /**
      * Create/Access to session collection
      * 
@@ -202,14 +202,14 @@ if(!function_exists('session')) {
     function session($path = null, $value = null) { 
 
         $s = \Peak\Registry::o()->session;
-        if(!isset($s)) {
+        if (!isset($s)) {
             $s = \Peak\Registry::set('session', new \Peak\Config\Session());
         }
 
-        if(!isset($path) && !isset($value)) {
+        if (!isset($path) && !isset($value)) {
             return $s;
         }
-        elseif(isset($path) && !isset($value)) {
+        elseif (isset($path) && !isset($value)) {
             return $s->get($path);
         }
         
@@ -220,9 +220,11 @@ if(!function_exists('session')) {
 /**
  * url()
  */
-if(!function_exists('url')) {
+if (!function_exists('url')) {
     /**
      * Generate application url
+     *
+     * @return string
      */
     function url($path = null, $use_forwarded_host = true) { 
 
