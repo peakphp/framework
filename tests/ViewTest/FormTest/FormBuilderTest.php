@@ -10,13 +10,28 @@ class FormBuilderTest extends TestCase
 {
      
     /**
-     * Create object
+     * Validate a form builder
      */
-    function testCreateObject()
+    function testValidateForm()
     {
         $form_validation = new FormValidation(new FormBuilderExample());
 
         $pass = $form_validation->validate([
+            'id' => '',
+            'user' => 'bob',
+        ]);
+
+        $this->assertTrue($pass);
+    }
+
+    /**
+     * Validate a form builder directly with FormBuilder
+     */
+    function testValidateFormQuick()
+    {
+        $form = new FormBuilderExample();
+
+        $pass = $form->validate([
             'id' => '',
             'user' => 'bob',
         ]);
