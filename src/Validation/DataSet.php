@@ -66,7 +66,7 @@ abstract class DataSet
     /**
      * Validate data with current rules
      * 
-     * @param  array $data 
+     * @param  array $data
      * @return bool
      */
     public function validate($data)
@@ -115,6 +115,6 @@ abstract class DataSet
             }
         }
 
-        return (empty($this->errors));   
+        return (empty($this->errors));
     }    
 }

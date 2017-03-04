@@ -33,7 +33,9 @@ abstract class AbstractRule implements RuleInterface
     /**
      * Construct
      * 
-     * @param array  $options 
+     * @param array   $options rules options array
+     * @param integer $flags   rules flags
+     * @param array   $context rules context data
      */
     public function __construct($options = null, $flags = null, $context = null)
     {
