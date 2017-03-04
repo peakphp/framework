@@ -9,7 +9,7 @@ use Peak\Validation\RuleBuilder;
  */
 class Rule
 {
-    static function create($name)
+    public static function create($name)
     {
         return new RuleBuilder($name);
     }
