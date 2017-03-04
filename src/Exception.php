@@ -12,7 +12,7 @@ class Exception extends \Exception
      * Error constant name
      * @var string
      */
-    private $_errkey;
+    private $errkey;
 
     /**
      * Errors messages
@@ -47,7 +47,7 @@ class Exception extends \Exception
      */
     public function __construct($errkey = null, $infos = null)
     {                   
-        $this->_errkey = $errkey;    
+        $this->errkey = $errkey;    
         
         $message = $this->handleErrConstToText($errkey,$infos);     
    
@@ -137,7 +137,7 @@ class Exception extends \Exception
     
     public function getErrkey() 
     {
-        return $this->_errkey; 
+        return $this->errkey; 
     }
 
     public function getTime() 

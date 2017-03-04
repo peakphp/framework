@@ -12,13 +12,13 @@ class Registry
      * Array of registered objects
      * @var array
      */
-    protected static $_objects = [];
+    protected static $objects = [];
 
     /**
      * Instance of registry
      * @var object
      */
-    protected static $_instance = null;                               
+    protected static $instance = null;                               
 
 
     private final function __clone() 
@@ -36,24 +36,24 @@ class Registry
      */
     public function __get($name) 
     {
-        return isset(self::$_objects[$name]) ? self::$_objects[$name] : null;
+        return isset(self::$objects[$name]) ? self::$objects[$name] : null;
     }
 
     /**
      * set/get registry instance
      *
-     * @return object $_instance
+     * @return object $instance
      */
     public static function getInstance()
     {
-        if(is_null(self::$_instance)) self::$_instance = new self();
-        return self::$_instance;
+        if(is_null(self::$instance)) self::$instance = new self();
+        return self::$instance;
     }
 
     /**
      * Shortcut of method getInstance()
      *
-     * @return object $_instance
+     * @return object $instance
      */
     public static function o()
     {
@@ -69,7 +69,7 @@ class Registry
      */
     public static function set($name,$obj)
     {
-        self::$_objects[$name] = $obj;
+        self::$objects[$name] = $obj;
         return $obj;
     }
 
@@ -81,7 +81,7 @@ class Registry
      */
     public static function get($name)
     {
-        if(self::isRegistered($name)) return self::$_objects[$name];
+        if(self::isRegistered($name)) return self::$objects[$name];
     }
 
     /**
@@ -91,7 +91,7 @@ class Registry
      */
     public static function getAll()
     {
-        return self::$_objects;
+        return self::$objects;
     }
 
     /**
@@ -102,7 +102,7 @@ class Registry
      */
     public static function getClassName($name) 
     {
-        if(self::isRegistered($name)) return get_class(self::$_objects[$name]);
+        if(self::isRegistered($name)) return get_class(self::$objects[$name]);
         else return false;
     }
 
@@ -113,7 +113,7 @@ class Registry
      */
     public static function getObjectsList()
     {
-        return array_keys(self::$_objects);
+        return array_keys(self::$objects);
     }
 
     /**
@@ -123,7 +123,7 @@ class Registry
      */
     public static function unregister($name)
     {
-        if(self::isRegistered($name)) unset(self::$_objects[$name]);
+        if(self::isRegistered($name)) unset(self::$objects[$name]);
     }
 
     /**
@@ -134,7 +134,7 @@ class Registry
      */
     public static function isRegistered($name)
     {
-        return isset(self::$_objects[$name]) ? true : false;
+        return isset(self::$objects[$name]) ? true : false;
     }
 
     /**
@@ -146,7 +146,7 @@ class Registry
     public static function isInstanceOf($name, $class_name)
     {
         if(self::isRegistered($name)) {
-            return (self::$_objects[$name] instanceof $class_name) ? true : false;
+            return (self::$objects[$name] instanceof $class_name) ? true : false;
         }
         return false;
     }
