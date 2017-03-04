@@ -4,8 +4,12 @@ namespace Peak\Events;
 
 use closure;
 
-class Dispatcher 
+class Dispatcher
 {
+    /**
+     * Events
+     * @var array
+     */
     protected $events = [];
 
     /**
@@ -27,7 +31,7 @@ class Dispatcher
 
     /**
      * Has an event
-     * 
+     *
      * @param  string  $name
      * @return boolean      
      */
@@ -38,7 +42,7 @@ class Dispatcher
 
     /**
      * Detach an event name and all is callbacks. 
-     * 
+     *
      * @param  string|array $ev event(s) name(s)
      * @return $this
      */
@@ -57,6 +61,8 @@ class Dispatcher
 
     /**
      * Detach all events
+     *
+     * @return  $this
      */
     public function detachAll()
     {
@@ -66,7 +72,7 @@ class Dispatcher
 
     /**
      * Trigger one or many events
-     * 
+     *
      * @param  string|array $ev
      * @param  mixed $argv 
      * @param  array $data
@@ -90,7 +96,7 @@ class Dispatcher
 
     /**
      * Handle an event callback
-     * 
+     *
      * @param  string $event    
      * @param  mixed  $callback 
      * @param  mixed  $argv               
@@ -100,12 +106,12 @@ class Dispatcher
         if(is_callable($callback)) {
             $callback($argv);
         }
-        else if(is_string($callback) && class_exists($callback)) {
+        elseif(is_string($callback) && class_exists($callback)) {
             $e = new $callback();
             if($e instanceof EventInterface) $e->fire($argv);
             else $this->eventCallbackFail($event, $i);
         }
-        else if(is_object($callback) && $callback instanceof EventInterface) {
+        elseif(is_object($callback) && $callback instanceof EventInterface) {
             $callback->fire($argv);
         }
         else {
@@ -115,7 +121,7 @@ class Dispatcher
 
     /**
      * Fail to call an event callback
-     * 
+     *
      * @param  string  $name  
      * @param  integer $index      
      */
