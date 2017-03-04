@@ -37,28 +37,28 @@ class Bootstrapper
         /**
          * Execute processes
          */
-        foreach($this->default_processes as $process) {
+        foreach ($this->default_processes as $process) {
             new $process();
         }
-        foreach($this->processes as $process) {
+        foreach ($this->processes as $process) {
             new $process();
         }
 
-        $this->_boot();
+        $this->boot();
     }
 
     /**
      * Call all bootstrap methods prefixed by $boot_methods_prefix
      */
-    private function _boot()
+    private function boot()
     {
-        $this->_env();
+        $this->env();
 
         $c_methods = get_class_methods(get_class($this));
         $l = strlen($this->boot_methods_prefix);
-        if(!empty($c_methods)) {
-            foreach($c_methods as $m) {            
-                if(substr($m, 0, $l) === $this->boot_methods_prefix) $this->$m();
+        if (!empty($c_methods)) {
+            foreach ($c_methods as $m) {            
+                if (substr($m, 0, $l) === $this->boot_methods_prefix) $this->$m();
             }
         }
     }
@@ -67,11 +67,11 @@ class Bootstrapper
      * Call environment method if exists
      * e.g. envDev() envProd() envStating() envTesting()
      */
-    private function _env()
+    private function env()
     {
-        if(defined("APPLICATION_ENV")) {
+        if (defined('APPLICATION_ENV')) {
             $env_method = 'env'.APPLICATION_ENV;
-            if(method_exists($this, $env_method)) {
+            if (method_exists($this, $env_method)) {
                 $this->$env_method();
             }
         }
