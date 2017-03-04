@@ -19,7 +19,7 @@ class Routing
 {
     /**
      * Current application request
-     * @var  Peak\Routing\Request
+     * @var Peak\Routing\Request
      */
     public $request;
 
@@ -49,7 +49,7 @@ class Routing
      */
     public function __construct($request = null, $base_uri = null)
     {
-        if(isset($request)) $this->loadRequest($request);
+        if (isset($request)) $this->loadRequest($request);
         $this->base_uri = (isset($base_uri)) ? $base_uri : relativePath(Application::conf('path.public'));
         $this->custom_routes = new Collection();
     }
@@ -58,11 +58,11 @@ class Routing
      * Load a request or use server request uri
      *
      * @param  string|null $request
-     * @return \Peak\Routing\Route       
+     * @return Peak\Routing\Route       
      */
     public function loadRequest($request = null)
     {
-        if(isset($request)) {
+        if (isset($request)) {
             $this->request = new Request($request, $this->base_uri);
         }
         else {
