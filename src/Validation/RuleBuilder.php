@@ -160,9 +160,9 @@ class RuleBuilder
 
     /**
      * Validate a value
-     * 
-     * @param  mixed $value 
-     * @return bool       
+     *
+     * @param  mixed $value
+     * @return bool
      */
     public function validate($value)
     {
