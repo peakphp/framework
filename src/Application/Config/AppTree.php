@@ -4,11 +4,15 @@ namespace Peak\Application\Config;
 
 class AppTree
 {
+    /**
+     * App paths tree
+     * @var array
+     */
     public $tree;
 
     /**
      * Constructor
-     * 
+     *
      * @param
      */
     public function __construct($root)
@@ -16,7 +20,7 @@ class AppTree
         $this->defaultAppTree($root);
     }
 
-     /**
+    /**
      * Generate default application tree
      *
      * @param   string $root
