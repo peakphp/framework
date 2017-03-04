@@ -32,10 +32,11 @@ class Database
      */
     protected static $capsule;
 
-
     /**
      * Constructor
-     * @param array
+     * 
+     * @param array  $conf Database configuration
+     * @param string $name Connection name
      */
     public function __construct($conf, $name = 'default')
     {
@@ -45,7 +46,7 @@ class Database
     /**
      * Connect to database
      * 
-     * @param  array $conf   
+     * @param  array $conf
      */
     protected function connect($conf, $name = 'default')
     {
@@ -77,9 +78,9 @@ class Database
     /**
      * Call unknow method directly on $db object
      * 
-     * @param  string $method 
-     * @param  mixed $args   
-     * @return mixed         
+     * @param  string $method
+     * @param  mixed  $args
+     * @return mixed
      */
     public function __call($method, $args = null)
     {
