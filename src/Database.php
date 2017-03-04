@@ -87,9 +87,9 @@ class Database
         return call_user_func_array([$this->db, $method], $args);
     }
 
-
     /**
      * Schema
+     * 
      * @return  Return schema (shortcut of self::db()->schema())
      */
     public function schema()

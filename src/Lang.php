@@ -28,7 +28,6 @@ class Lang
      */
     public $translations = [];
 
-
     /**
      * Echo an translation
      *
@@ -36,7 +35,7 @@ class Lang
      */
     public static function __($text, $replaces = null, $func = null)
     {
-        if(Registry::o()->lang instanceof Lang)   {       
+        if(Registry::o()->lang instanceof Lang) {       
             return Registry::o()->lang->translate((string)$text, $replaces, $func);
         }
         return $text;
@@ -45,7 +44,7 @@ class Lang
     /**
      * Echo the result of __() function
      */
-    public static function _e($text,$replaces = null,$func = null) 
+    public static function _e($text, $replaces = null, $func = null)
     { 
         echo self::__($text,$replaces,$func); 
     }
@@ -104,7 +103,7 @@ class Lang
             $this->loaded_files[] = $filepath;
 
             if($return) return $tmp;
-            else $this->translations = $tmp;
+            $this->translations = $tmp;
         }
         elseif($return) return [];
     }
@@ -119,7 +118,6 @@ class Lang
         if(is_array($files)) {
             if(!empty($files)) {
                 foreach($files as $f) {
-                    
                     $tmp = $this->loadFile($f, true);
                     $this->translations = array_merge($this->translations, $tmp);
 
