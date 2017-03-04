@@ -37,8 +37,12 @@ class Annotations
      */
     public function __construct($class_name = null, $tags = null)
     {
-        if(isset($class_name)) $this->setClass($class_name);
-        if(isset($tags)) $this->setTags($tags);
+        if (isset($class_name)) {
+            $this->setClass($class_name);
+        }
+        if (isset($tags)) {
+            $this->setTags($tags);
+        }
     }
     
     /**
@@ -59,7 +63,7 @@ class Annotations
      *
      * @param  array|string $tagname Accept a string or an array of tags 
      *                               string '*' act as a wildcard so all tags will be detected
-     * @return $this
+     * @return object       $this
      */
     public function setTags($tags)
     {
@@ -94,7 +98,7 @@ class Annotations
     {
         $a = array();
         
-        foreach($this->_class->getMethods() as $m) {
+        foreach ($this->_class->getMethods() as $m) {
             $comment = $m->getDocComment();
             $a = array_merge($a, [$m->name => $this->parse($comment)]);
         }
@@ -121,11 +125,11 @@ class Annotations
     public function parse($string)
     {
         //in case we don't have any tag to detect or an empty doc comment, we skip this method
-        if(empty($this->_tags) || empty($string)) return [];
+        if (empty($this->_tags) || empty($string)) return [];
    
         //check what is the type of $_tags (array|string|wildcard)
-        if(is_array($this->_tags)) $tags = '('.implode('|', $this->_tags).')';
-        elseif($this->_tags === '*') $tags = '[a-zA-Z0-9]';
+        if (is_array($this->_tags)) $tags = '('.implode('|', $this->_tags).')';
+        elseif ($this->_tags === '*') $tags = '[a-zA-Z0-9]';
         else $tags = '('.$this->_tags.')';
         
         //find @[tag] [params...]
@@ -134,10 +138,10 @@ class Annotations
         
         $final = [];
         
-        if(isset($matches)) {
+        if (isset($matches)) {
             
             $i = 0;
-            foreach($matches as $v) {
+            foreach ($matches as $v) {
 
                 $final[$i] = array('tag' => $v['tag'], 'params' => []);
 
@@ -147,12 +151,12 @@ class Annotations
                 $regex = '#(("(?<param>([^"]{1,}))")|(?<param2>([^"\s]{1,})))#i';
                 preg_match_all($regex, trim($v['params']), $matches_params, PREG_SET_ORDER);
 
-                if(!empty($matches_params)) {
-                    foreach($matches_params as $v) {
-                        if(!empty($v['param']) && !isset($v['param2'])) {
+                if (!empty($matches_params)) {
+                    foreach ($matches_params as $v) {
+                        if (!empty($v['param']) && !isset($v['param2'])) {
                             $final[$i]['params'][] = $v['param'];
                         }
-                        elseif(isset($v['param2']) && !empty($v['param2'])) {
+                        elseif (isset($v['param2']) && !empty($v['param2'])) {
                             $final[$i]['params'][] = $v['param2'];
                         }
                     }
