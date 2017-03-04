@@ -23,14 +23,13 @@ use Peak\Collection;
  *
  * Adapted by Francois Lajoie for Peak
  */
-
 class DotNotation extends Collection
 {
     const SEPARATOR = '/[:\.]/';
 
     /**
      * Return a path value
-     * 
+     *
      * @param string $path
      * @param string $default
      * @return mixed
@@ -55,7 +54,7 @@ class DotNotation extends Collection
 
     /**
      * Add a path
-     * 
+     *
      * @param string $path
      * @param mixed $value
      */
@@ -89,7 +88,7 @@ class DotNotation extends Collection
 
     /**
      * Merge a path with an array
-     * 
+     *
      * @param string $path
      * @param array $values
      */
@@ -101,8 +100,8 @@ class DotNotation extends Collection
 
     /**
      * Check if we have path
-     * 
-     * @param string $path
+     *
+     * @param  string $path
      * @return bool
      */
     public function have($path)
@@ -121,8 +120,9 @@ class DotNotation extends Collection
 
     /**
      * Explode path string
-     * 
-     * @param  string $path    
+     *
+     * @param  string $path 
+     * @return array
      */
     protected function explode($path)
     {
