@@ -56,37 +56,37 @@ class ClassResolver
         $class_count  = 0;
         $i            = 0;
 
-        foreach($dependencies as $key => $d) {
+        foreach ($dependencies as $key => $d) {
 
-            if(isset($d['error'])) {
+            if (isset($d['error'])) {
                 throw new \Exception($d['error']);
             }
 
             // its a class or an interface
-            if(isset($d['class'])) {
+            if (isset($d['class'])) {
 
                 $name = $d['class'];
                 ++$class_count;
 
                 // look for object in explicit dependency declaration
                 $result = $this->explicit->resolve($name, $explicit);
-                if($result !== null) {
+                if ($result !== null) {
                     $class_args[] = $result;
                 }
                 // check if container has a stored instance
-                elseif($container->hasInstance($name)) {
+                elseif ($container->hasInstance($name)) {
                     $class_args[] = $container->getInstance($name);
                 }
                 else {
                     // otherwise check if we are
                     // dealing with an interface dependency
-                    if(interface_exists($name)) {
+                    if (interface_exists($name)) {
                         $class_args[] = $this->iresolver->resolve($name, $container, $explicit);
                     }
                     // or resolve dependency by trying to instanciate object classname string
                     else {
                         $child_args = [];
-                        if(array_key_exists($name, $args)) {
+                        if (array_key_exists($name, $args)) {
                             $child_args = $args[$name];
                         }
                         $class_args[] = $container->instantiate($name, $child_args, $explicit);
@@ -94,7 +94,7 @@ class ClassResolver
                 }
             }
             // everything else that is not a type of class or interface
-            elseif(array_key_exists($i - ($class_count), $args)) {
+            elseif (array_key_exists($i - ($class_count), $args)) {
                 $class_args[] = $args[$i - $class_count];
             }
 
