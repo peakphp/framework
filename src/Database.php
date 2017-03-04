@@ -51,7 +51,7 @@ class Database
     protected function connect($conf, $name = 'default')
     {
         // prepare capsule only once
-        if(!isset(self::$capsule)) {
+        if (!isset(self::$capsule)) {
             self::$capsule = new Capsule;
         }
 
