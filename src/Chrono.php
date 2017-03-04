@@ -7,7 +7,6 @@ namespace Peak;
  */
 class Chrono
 {
-
     /**
      * Global timer, used by default if not timer name is specified
      * @var array
@@ -25,12 +24,12 @@ class Chrono
 
     /**
      * Start global timer of a specific timer name if set
-     * 
+     *
      * @param string|null timer name
      */
     public static function start($timer_name = null)
     {
-        if(!isset($timer_name)) {
+        if (!isset($timer_name)) {
             self::$global = [
                 'start' => self::getMicrotime(), 
                 'end' => false
@@ -44,12 +43,12 @@ class Chrono
 
     /**
      * Stop global timer or a specific timer name if set
-     * 
+     *
      * @param string|null timer name
      */
     public static function stop($timer_name = null)
     {       
-        if(self::timerExists($timer_name)) {
+        if (self::timerExists($timer_name)) {
             self::$timers[$timer_name]['end'] = self::getMicrotime();
         }
         else self::$global['end'] = self::getMicrotime();     
@@ -73,12 +72,12 @@ class Chrono
      */
     public static function isOn($timer_name = null)
     {
-        if(!isset($timer_name)) {
-            if((self::$global['start'] === false) || (self::$global['end'] !== false)) return false;
+        if (!isset($timer_name)) {
+            if ((self::$global['start'] === false) || (self::$global['end'] !== false)) return false;
             return true;
         }
-        elseif(self::timerExists($timer_name)) {
-            if((self::$timers[$timer_name]['start'] === false) || (self::$timers[$timer_name]['end'] !== false)) {
+        elseif (self::timerExists($timer_name)) {
+            if ((self::$timers[$timer_name]['start'] === false) || (self::$timers[$timer_name]['end'] !== false)) {
                 return false;
             }
             return true;
@@ -95,12 +94,12 @@ class Chrono
      */
     public static function isCompleted($timer_name = null)
     {
-        if(!isset($timer_name)) {
-            if((self::$global['start'] !== false) && (self::$global['end'] !== false)) return true;
+        if (!isset($timer_name)) {
+            if ((self::$global['start'] !== false) && (self::$global['end'] !== false)) return true;
             else return false;
         }
-        elseif(self::timerExists($timer_name)) {
-            if((self::$timers[$timer_name]['start'] !== false) && (self::$timers[$timer_name]['end'] !== false)) {
+        elseif (self::timerExists($timer_name)) {
+            if ((self::$timers[$timer_name]['start'] !== false) && (self::$timers[$timer_name]['end'] !== false)) {
                 return true;
             }
             return false;
@@ -127,10 +126,10 @@ class Chrono
      */
     public static function get($decimal_precision = 2, $timer_name = null)
     {
-        if(self::isOn($timer_name)) self::stop($timer_name);
+        if (self::isOn($timer_name)) self::stop($timer_name);
 
-        if(self::isCompleted($timer_name)) {
-            if(self::timerExists($timer_name)) {
+        if (self::isCompleted($timer_name)) {
+            if (self::timerExists($timer_name)) {
                 $time_elapsed = self::_elapsed(self::$timers[$timer_name]);
             }
             else {
@@ -149,7 +148,7 @@ class Chrono
     public static function getMS($decimal_precision = 4, $timer_name = null)
     {
         $sec = self::get($decimal_precision, $timer_name);
-        if($sec === false) return false;
+        if ($sec === false) return false;
         
         return $sec * 1000;      
     }
@@ -161,8 +160,8 @@ class Chrono
      */
     public static function reset($timer_name = null)
     {
-        if(isset($timer_name)) {
-            if(self::timerExists($timer_name)) unset(self::$timers[$timer_name]);
+        if (isset($timer_name)) {
+            if (self::timerExists($timer_name)) unset(self::$timers[$timer_name]);
         }
         else self::$global = ['start' => false, 'end' => false];  
     }
