@@ -50,8 +50,8 @@ class View
      */
     public function __construct($vars = null)
     {
-        if(isset($vars)) {
-            if(is_array($vars)) $this->_vars = $vars;
+        if (isset($vars)) {
+            if (is_array($vars)) $this->_vars = $vars;
             else $this->iniVar($vars);
         }
     }   
@@ -75,7 +75,7 @@ class View
      */
     public function &__get($name)
     {        
-        if(isset($this->_vars[$name])) return $this->_vars[$name];
+        if (isset($this->_vars[$name])) return $this->_vars[$name];
         return ${null};
     }
 
@@ -97,7 +97,7 @@ class View
      */
     public function __unset($name)
     {
-        if(array_key_exists($name,$this->_vars)) unset($this->_vars[$name]);
+        if (array_key_exists($name,$this->_vars)) unset($this->_vars[$name]);
     }
 
     /**
@@ -111,7 +111,7 @@ class View
      */
     public function __call($method, $args = null)
     {
-        if(method_exists($this->engine(),$method)) {
+        if (method_exists($this->engine(),$method)) {
             return call_user_func_array(array($this->engine(), $method), $args);        
         }
         else return $this->helper($method);
@@ -176,7 +176,7 @@ class View
      */
     public function addVars($vars)
     {
-        foreach($vars as $k => $v) {
+        foreach ($vars as $k => $v) {
             $this->set($k,$v);
         }
     }
@@ -197,10 +197,10 @@ class View
      */
     public function engine($engine_name = null)
     {
-        if(isset($engine_name)) {
+        if (isset($engine_name)) {
             $engine_name = strip_tags(ucfirst($engine_name));
             $engine_class = 'Peak\View\Render\\'.$engine_name;
-            if(!class_exists($engine_class)) {
+            if (!class_exists($engine_class)) {
                 throw new Exception('ERR_VIEW_ENGINE_NOT_FOUND', $engine_name);
             }
             $this->_engine = new $engine_class();
@@ -216,7 +216,7 @@ class View
      */
     public function getEngineName()
     {
-        if(is_object($this->_engine)) {
+        if (is_object($this->_engine)) {
             return strtolower(str_replace('Peak\View\Render\\', '', get_class($this->_engine)));
         }
         return null;
@@ -264,12 +264,12 @@ class View
     public function render($file, $path = null)
     {
         //skip render part(see $_render)
-        if($this->_render === false) return;
+        if ($this->_render === false) return;
 
-        if(is_object($this->_engine)) {
+        if (is_object($this->_engine)) {
 
             // check if we got http header
-            if(is_object($this->_header)) {
+            if (is_object($this->_header)) {
                 $this->_header->release();
             }
 
@@ -285,7 +285,7 @@ class View
      */
     public function header()
     {
-        if(!is_object($this->_header)) {
+        if (!is_object($this->_header)) {
             $this->_header = new Header();
         }
 
@@ -299,17 +299,17 @@ class View
      */
     public function helper($name = null, $method = null, $params = array())
     {
-        if(array_key_exists($name, $this->_helpers)) {
+        if (array_key_exists($name, $this->_helpers)) {
             return $this->_helpers[$name];
         }
         else {
             $peak_helper = 'Peak\View\Helper\\'.ucfirst($name);
             $app_helper  = 'App\Views\Helpers\\'.ucfirst($name);
-            if(class_exists($peak_helper)) {
+            if (class_exists($peak_helper)) {
                 $this->_helpers[$name] = new $peak_helper();
                 return $this->_helpers[$name];
             }
-            elseif(class_exists($app_helper)) {
+            elseif (class_exists($app_helper)) {
                 $this->_helpers[$name] = new $app_helper();
                 return $this->_helpers[$name];
             }
