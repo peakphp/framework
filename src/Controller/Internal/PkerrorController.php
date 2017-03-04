@@ -32,9 +32,9 @@ class PkerrorController extends Action
      */
     public function _index()
     {
-        if(isset($this->exception)) {
-            if($this->exception instanceof Exception) {
-                switch($this->exception->getErrkey()) {
+        if (isset($this->exception)) {
+            if ($this->exception instanceof Exception) {
+                switch ($this->exception->getErrkey()) {
                     
                     case 'ERR_CTRL_NOT_FOUND' : 
                     case 'ERR_ROUTER_URI_NOT_FOUND' :
@@ -46,7 +46,7 @@ class PkerrorController extends Action
                         break;    
                 }
             }
-            elseif($this->exception instanceof Exception) {
+            elseif ($this->exception instanceof Exception) {
                 $this->_error();
             }
             else $this->_unknow();
@@ -109,7 +109,7 @@ class PkerrorController extends Action
      */
     public function devmode()
     {
-         if((isEnv('dev')) && (isset($this->exception))) {                            
+         if ((isEnv('dev')) && (isset($this->exception))) {                            
             $this->view->setContent('<div class="block"><p>');
             $this->view->setContent($this->_exception2table());
             $this->view->setContent('</p></div>');
@@ -133,8 +133,8 @@ class PkerrorController extends Action
                                   
         $exception['Time'] = (!method_exists($this->exception,'getTime')) ? date('Y-m-d H:i:s') : $this->exception->getTime();       
                            
-        foreach($exception as $k => $v) {
-            if($k === 'Message') $v = '<strong>'.$v.'</strong>';
+        foreach ($exception as $k => $v) {
+            if ($k === 'Message') $v = '<strong>'.$v.'</strong>';
             $content .= '<tr><td><strong>'.$k.'</strong>:&nbsp;</td><td>'.$v.'</td></tr>';
         }
         $content .= '</table>';
@@ -154,8 +154,6 @@ class PkerrorController extends Action
                     '.$trace['result'].'
                     </tbody>
                     </table>';
-
-
 
         return $content;
     }
@@ -197,12 +195,12 @@ class PkerrorController extends Action
             }
 
             // skip php internal php class error.
-            if(!array_key_exists('file', $frame) || !array_key_exists('line', $frame)) {
+            if (!array_key_exists('file', $frame) || !array_key_exists('line', $frame)) {
                 continue;
             }           
 
             // add class prefix if any
-            if(!array_key_exists('class', $frame)) $frame['class'] = '';
+            if (!array_key_exists('class', $frame)) $frame['class'] = '';
             else $frame['class'] .= '::';
 
             // format paths
@@ -221,7 +219,7 @@ class PkerrorController extends Action
                                      $frame['line']
                                       );
 
-            if($count == 0) {
+            if ($count == 0) {
                 $suspect = sprintf('<code>%s<strong>%s(%s)</strong></code><br /><small><i>&nbsp;%s</i> line %s</small>',
                                      $frame['class'],
                                      $frame['function'],
