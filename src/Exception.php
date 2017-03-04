@@ -60,14 +60,14 @@ class Exception extends \Exception
      * @param  integer $errkey
      * @return string  $info
      */
-    public function handleErrConstToText($errkey = null,$infos = null)
+    public function handleErrConstToText($errkey = null, $infos = null)
     { 
-        if(defined(sprintf('%s::%s', get_class($this), $errkey))) {
+        if (defined(sprintf('%s::%s', get_class($this), $errkey))) {
             $r = constant(sprintf('%s::%s', get_class($this), $errkey));
         }
         else $r = self::ERR_DEFAULT;
         
-        if(isset($infos)) {
+        if (isset($infos)) {
             $r = (is_array($infos)) ? vsprintf($r,$infos) : sprintf($r,trim($infos));
         }
 
@@ -87,7 +87,7 @@ class Exception extends \Exception
         $content .= '['.$this->getErrkey().' / '.$this->getTime()."]\n";
         $content .= str_replace('/path/to/code/', '', $this->getTraceAsString());
 
-        if(!isCli()) $content = '<pre>'.$content.'</pre>';
+        if (!isCli()) $content = '<pre>'.$content.'</pre>';
         return $content;
     }
 
@@ -101,7 +101,7 @@ class Exception extends \Exception
 
     /**
      * Get exception element trigger trace 
-     * 
+     *
      * @return array
      */
     public function getTriggerTrace()
