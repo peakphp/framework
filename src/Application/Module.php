@@ -20,6 +20,9 @@ class Module
      */
     public $name;
 
+    /**
+     * Construtor
+     */
     public function __construct()
     {
         $app          = Registry::o()->app;
@@ -35,7 +38,7 @@ class Module
 
     /**
      * Update app view path for this controllers scripts
-     * 
+     *
      * @return $this
      */
     public function updateConfig()
@@ -54,7 +57,7 @@ class Module
     /**
      * Backup and register the current app config 
      * before overwritng it with a new app tree
-     * 
+     *
      * @return $this
      */
     private function backupConfig()
