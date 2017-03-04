@@ -3,6 +3,7 @@
 namespace Peak\View\Form;
 
 use Peak\Collection;
+use Peak\View\Form\FormValidation;
 
 class FormBuilder extends Collection
 {
@@ -61,20 +62,15 @@ class FormBuilder extends Collection
     }
 
     /**
-     * Add form buttons
+     * Shortcut for new FormValidation(new FormBuilder())
      * 
-     * @param  string $cancel_url url base used for cancel button
-     * @param  string $mode       edit or new
+     * @param  array $data
+     * @return bool   
      */
-    public function buttons($cancel_url, $mode = 'new')
+    public function validate($data)
     {
-
-        $html = '<a class="btn btn-default" href="'.url($cancel_url).'">'.__('Cancel').'</a>';
-
-        $submit_button_text = ($mode === 'edit') ? __('Update') : __('Save');
-        
-        $html .= '<button class="btn btn-primary">'.$submit_button_text.'</button>';
-
-        echo $html;
+        $form = new FormValidation($this);
+        return $form->validate($data);
     }
+
 }
