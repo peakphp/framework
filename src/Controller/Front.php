@@ -9,7 +9,6 @@ use Peak\Application\Module;
 use Peak\Controller\Action;
 use Peak\Routing\RouteBuilder;
 
-
 /**
  * Front controller
  */
@@ -71,9 +70,9 @@ class Front
     private function _appConfig()
     {
         $config = Application::conf('front');
-        if(!empty($config)) {
-            foreach(Application::conf('front') as $k => $v) {
-                if($k === 'allow_internal_controllers') $v = (bool)$v;
+        if (!empty($config)) {
+            foreach (Application::conf('front') as $k => $v) {
+                if ($k === 'allow_internal_controllers') $v = (bool)$v;
                 $this->$k = $v;
             }
         }
@@ -118,7 +117,7 @@ class Front
         $this->_dispatchController();
           
         // execute a normal controller action
-        if($this->controller instanceof Action) {
+        if ($this->controller instanceof Action) {
             $this->_dispatchControllerAction(); 
         }
     }
@@ -129,7 +128,7 @@ class Front
     protected function _dispatchController()
     {
         //set default controller if router doesn't have one
-        if(!isset($this->route->controller)) {
+        if (!isset($this->route->controller)) {
             $this->route->controller = $this->default_controller;
         }
         
@@ -137,19 +136,19 @@ class Front
         $ctrl_name = $this->_getCtrlName(Application::conf('ns').'\Controllers\\', $this->route->controller);
 
         //check if it's valid application controller
-        if(!class_exists($ctrl_name))
-        {
+        if (!class_exists($ctrl_name)) {
+
             $internal_ctrl_name = $this->_getCtrlName('Peak\Controller\Internal\\', $this->route->controller);
 
             //check for peak internal controller
-            if(($this->allow_internal_controllers === true) && (class_exists($internal_ctrl_name))) {
+            if (($this->allow_internal_controllers === true) && (class_exists($internal_ctrl_name))) {
                 $this->controller = new $internal_ctrl_name();
             }
             else throw new Exception('ERR_CTRL_NOT_FOUND', $this->route->controller);
         }
         else $this->controller = new $ctrl_name();
 
-        if($this->controller instanceof Action) {
+        if ($this->controller instanceof Action) {
             $this->controller->setRoute($this->route);
             $this->postDispatchController();
         }
@@ -160,14 +159,14 @@ class Front
      */
     protected function _dispatchControllerAction()
     {
-        if($this->controller instanceof Action) {
+        if ($this->controller instanceof Action) {
             $this->controller->dispatch(); 
         }
     }
 
     /**
      * Get controller name
-     * 
+     *
      * @param  string $ns   namespace prefix
      * @param  string $name controller prefix name
      * @return string       
@@ -189,7 +188,7 @@ class Front
         
         $this->_dispatchController();
 
-        if(isset($exception)) {
+        if (isset($exception)) {
             $this->controller->exception = $exception;
         }
         
@@ -207,10 +206,9 @@ class Front
      */
     public function redirect($ctrl, $action = 'index', $params = null)
     {
-
         $this->route = RouteBuilder::get($ctrl, $action, $params);
 
-        if((is_object($this->controller)) && (strtolower($ctrl) === strtolower($this->controller->getTitle()))) {
+        if ((is_object($this->controller)) && (strtolower($ctrl) === strtolower($this->controller->getTitle()))) {
 
             $this->controller->setRoute($this->route);
             $this->controller->dispatchAction();
