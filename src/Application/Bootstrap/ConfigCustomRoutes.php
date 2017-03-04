@@ -23,9 +23,9 @@ class ConfigCustomRoutes
 
         $collection = new Collection();
 
-        if(!empty($routes)) {
-            foreach($routes as $r) {
-                if(isset($r['route']) && isset($r['controller']) && isset($r['action'])) {
+        if (!empty($routes)) {
+            foreach ($routes as $r) {
+                if (isset($r['route']) && isset($r['controller']) && isset($r['action'])) {
 
                     $collection[] = new CustomRoute(
                         $r['route'],
@@ -33,10 +33,10 @@ class ConfigCustomRoutes
                         $r['action']
                     );
                 }
-                elseif(is_string($r)) {
+                elseif (is_string($r)) {
 
                     $parts = explode(' | ', $r);
-                    if(count($parts) == 2) {
+                    if (count($parts) == 2) {
 
                         $ctrl_part = explode(Request::$separator, $parts[1]);
 
