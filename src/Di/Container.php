@@ -90,7 +90,7 @@ class Container
      */
     public function getInstance($name)
     {
-        if($this->hasInstance($name)) {
+        if ($this->hasInstance($name)) {
             return $this->instances[$name];
         }
         return null;
@@ -124,7 +124,7 @@ class Container
      */
     public function getInterface($name)
     {
-        if($this->hasInterface($name)) {
+        if ($this->hasInterface($name)) {
             return $this->interfaces[$name];
         }
         return null;
@@ -152,8 +152,8 @@ class Container
         $this->instances[$class] = $object;
 
         $interfaces = class_implements($object);
-        if(is_array($interfaces)) {
-            foreach($interfaces as $i) {
+        if (is_array($interfaces)) {
+            foreach ($interfaces as $i) {
                 $this->addInterface($i, $class);
             }
         }
@@ -169,16 +169,16 @@ class Container
      */
     public function deleteInstance($name)
     {
-        if($this->hasInstance($name)) {
+        if ($this->hasInstance($name)) {
 
             //remove instance
             unset($this->instances[$name]);
 
             //remove interface reference if exists
-            foreach($this->interfaces as $int => $classes) {
+            foreach ($this->interfaces as $int => $classes) {
 
                 $key = array_search($name, $classes);
-                if($key !== false) {
+                if ($key !== false) {
                     unset($classes[$key]);
                     $this->interfaces->$int = $classes;
                 }
@@ -195,12 +195,12 @@ class Container
      */
     protected function addInterface($name, $class)
     {
-        if(!$this->hasInterface($name)) {
+        if (!$this->hasInterface($name)) {
             $this->interfaces[$name] = $class;
         }
         else {
             $interface = $this->getInterface($name);
-            if(is_array($interface)) {
+            if (is_array($interface)) {
                 $interface[] = $class;
                 $this->interfaces[$name] = $interface;
             }
