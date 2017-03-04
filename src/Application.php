@@ -36,7 +36,7 @@ class Application
      * application config
      * @var Application\Config
      */
-    protected $_config = null;
+    protected $config = null;
 
     /**
      * Start framework
@@ -44,7 +44,7 @@ class Application
     private function __construct(Collection $conf)
     {   
         // application config             
-        $this->_config = $conf;
+        $this->config = $conf;
 
         // register application/view instance
         Registry::set('app', $this);
@@ -79,13 +79,13 @@ class Application
     public function config($path = null, $value = null)
     {
         if(!isset($path)) {
-            return $this->_config;
+            return $this->config;
         }
         elseif(!isset($value)) {
-            return $this->_config->get($path);
+            return $this->config->get($path);
         }
         else {
-            $this->_config->set($path, $value);
+            $this->config->set($path, $value);
             return $this;
         }
     }
