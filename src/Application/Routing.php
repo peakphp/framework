@@ -56,14 +56,12 @@ class Routing
 
     /**
      * Load a request or use server request uri
-     * 
+     *
      * @param  string|null $request
-     * 
      * @return \Peak\Routing\Route       
      */
     public function loadRequest($request = null)
     {
-
         if(isset($request)) {
             $this->request = new Request($request, $this->base_uri);
         }
@@ -75,7 +73,7 @@ class Routing
 
     /**
      * Resolve application route
-     * 
+     *
      * @return Peak\Routing\Route
      */
     public function getRoute()

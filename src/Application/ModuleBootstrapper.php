@@ -14,5 +14,4 @@ class ModuleBootstrapper extends Bootstrapper
      * @var array
      */
     protected $default_processes = [];
-
 }
