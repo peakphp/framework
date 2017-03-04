@@ -73,7 +73,7 @@ abstract class Action
     
     /**
      * Get controller class title
-     * 
+     *
      * @return string
      */
     public function getTitle()
@@ -88,7 +88,7 @@ abstract class Action
      */
     public function getAction($noprefix = false)
     {
-        if($noprefix) {
+        if ($noprefix) {
             return substr($this->action, 1);
         }
 
@@ -108,8 +108,8 @@ abstract class Action
 
         $regexp = '/^(['.$this->action_prefix.']{'.strlen($this->action_prefix).'}[a-zA-Z]{1})/';
               
-        foreach($c_methods as $method) {            
-            if(preg_match($regexp,$method)) $actions[] = $method;
+        foreach ($c_methods as $method) {            
+            if (preg_match($regexp,$method)) $actions[] = $method;
         }
 
         return $actions;
@@ -146,17 +146,17 @@ abstract class Action
      */
     public function dispatchAction()
     { 
-        if($this->isAction($this->action) === false) {
+        if ($this->isAction($this->action) === false) {
             throw new Exception('ERR_CTRL_ACTION_NOT_FOUND', [$this->action, $this->getName()]);
         }
 
         $this->file = strtolower($this->getTitle().'.'.substr($this->action, strlen($this->action_prefix)).'.php');
 
         //call requested action
-        if($this->actions_with_params) {
+        if ($this->actions_with_params) {
             $this->dispatchActionParams($this->action);
         }
-        else{
+        else {
             $method = $this->action;
             $this->$method(); 
         } 
@@ -176,17 +176,17 @@ abstract class Action
         $args   = [];
         $errors = [];
         
-        if(!empty($params)) {
-            foreach($params as $p) {
+        if (!empty($params)) {
+            foreach ($params as $p) {
                 $pname = $p->getName();
-                if(isset($this->params->$pname)) $args[] = $this->params->$pname;
-                elseif($p->isOptional()) $args[] = $p->getDefaultValue();
+                if (isset($this->params->$pname)) $args[] = $this->params->$pname;
+                elseif ($p->isOptional()) $args[] = $p->getDefaultValue();
                 else $errors[] = '$'.$pname;
             }
         }
 
         //if we got errors(param missing), we throw an exception
-        if(!empty($errors)) {
+        if (!empty($errors)) {
             throw new Exception('ERR_CTRL_ACTION_PARAMS_MISSING', [$action_name, $this->getName()]);
         }
         
@@ -249,7 +249,7 @@ abstract class Action
      */
     public function redirectUrl($url, $http_code = 302, $base_url = true)
     {
-        if($base_url) $url = url($url);
+        if ($base_url) $url = url($url);
         $this->view->header()->redirect($url, $http_code);
     }
 
