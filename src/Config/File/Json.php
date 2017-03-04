@@ -12,7 +12,6 @@ use Peak\Config\DotNotation;
  */
 class Json extends DotNotation
 {
-    
     /**
      * Allow comments in json data
      * @var boolean
@@ -33,7 +32,7 @@ class Json extends DotNotation
     public function __construct($file = null, $allow_comments = false)
     {
         $this->_allow_comments = $allow_comments;
-        if(isset($file)) $this->loadFile($file);
+        if (isset($file)) $this->loadFile($file);
     }
     
     /**
@@ -44,7 +43,7 @@ class Json extends DotNotation
      */
     public function loadFile($file)
     {
-        if(!file_exists($file)) throw new Exception('ERR_CUSTOM', __CLASS__.' has tried to load non-existent json file');
+        if (!file_exists($file)) throw new Exception('ERR_CUSTOM', __CLASS__.' has tried to load non-existent json file');
         else {
             $this->_loaded_file = $file;
             $content = file_get_contents($file);
@@ -72,14 +71,14 @@ class Json extends DotNotation
 
     /**
      * Load json url
-     * 
+     *
      * @param  string     $url 
      * @param  array|null $post_data post data if specified
      * @return false|array           return false in case url cant be reach
      */
     public function loadUrl($url, $post_data = null)
     {
-        if(!function_exists('curl_init')) {
+        if (!function_exists('curl_init')) {
             throw new Exception('ERR_CUSTOM', __CLASS__.'::loadUrl() need CURL php extension');
         }
 
@@ -88,7 +87,7 @@ class Json extends DotNotation
         curl_setopt($ch, CURLOPT_URL, $url);
 
         // post data
-        if(is_array($post_data) && !empty($post_data)) {
+        if (is_array($post_data) && !empty($post_data)) {
             curl_setopt($ch, CURLOPT_POST, 1);
             curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($post_data));
         }
@@ -100,7 +99,7 @@ class Json extends DotNotation
 
         curl_close($ch);
 
-        if($response !== false) {
+        if ($response !== false) {
             return $this->loadString($response);
         }
         else return false;
@@ -112,12 +111,12 @@ class Json extends DotNotation
      */
     private function _jsonError()
     {
-        if(function_exists('json_last_error')) {
+        if (function_exists('json_last_error')) {
 
             //workaround JSON_ERROR_UTF8 --> PHP 5 >= 5.3.3
-            if(!defined('JSON_ERROR_UTF8')) define('JSON_ERROR_UTF8',5);
+            if (!defined('JSON_ERROR_UTF8')) define('JSON_ERROR_UTF8',5);
                
-            switch(json_last_error()) {
+            switch (json_last_error()) {
                 case JSON_ERROR_DEPTH:
                     $e =  'Maximum stack depth exceeded';
                     break;
@@ -135,32 +134,32 @@ class Json extends DotNotation
                     break;
             }
             
-            if(isset($e)) throw new Exception('ERR_CUSTOM', __CLASS__.': '.$e);
+            if (isset($e)) throw new Exception('ERR_CUSTOM', __CLASS__.': '.$e);
         }
     }
 
     /**
      * Enable File write persistence. At each end of script, file data will be written to a file
      * using php register_shutdown_function() and class export2file()
-     * 
+     *
      * @param  string|null $filepath if null, $_loaded_file is used instead
      */
     public function enablePersistence($filepath = null)
     {
-        if(!isset($filepath)) $filepath = $this->_loaded_file;
+        if (!isset($filepath)) $filepath = $this->_loaded_file;
 
         register_shutdown_function(array($this, 'export2file'), $filepath);
     }
     
     /**
      * Write json to file
-     * 
+     *
      * @param  string|null $filepath if null, $_loaded_file is used instead
      */
     public function export2file($filepath = null)
     {
-        if(!isset($filepath)) {
-            if(!empty($this->_loaded_file)) {
+        if (!isset($filepath)) {
+            if (!empty($this->_loaded_file)) {
                 $filepath = $this->_loaded_file;
             }
             else {
@@ -171,9 +170,8 @@ class Json extends DotNotation
         $data = $this->items;
 
         $result = file_put_contents($filepath, json_encode($data));
-        if($result === false) {
+        if ($result === false) {
             throw new Exception('ERR_CUSTOM', __CLASS__.': Fail to write file: '.$filepath);
         }
-
     }
 }
