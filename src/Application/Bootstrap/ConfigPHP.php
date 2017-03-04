@@ -16,12 +16,12 @@ class ConfigPHP
     {
         $php_settings = Application::conf('php');
 
-        if(empty($php_settings)) return;
+        if (empty($php_settings)) return;
 
-        foreach($php_settings as $setting => $val) {
-            if(!is_array($val)) ini_set($setting, $val);
+        foreach ($php_settings as $setting => $val) {
+            if (!is_array($val)) ini_set($setting, $val);
             else {
-                foreach($val as $k => $v) ini_set($setting.'.'.$k, $v);
+                foreach ($val as $k => $v) ini_set($setting.'.'.$k, $v);
             }               
         }
     }
