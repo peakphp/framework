@@ -71,23 +71,22 @@ class Application
 
     /**
      * Access to application config object
-     * 
+     *
      * @param  string|null $path 
      * @param  mixed|null  $value
      * @return mixed
      */
     public function config($path = null, $value = null)
     {
-        if(!isset($path)) {
+        if (!isset($path)) {
             return $this->config;
         }
-        elseif(!isset($value)) {
+        elseif (!isset($value)) {
             return $this->config->get($path);
         }
-        else {
-            $this->config->set($path, $value);
-            return $this;
-        }
+        
+        $this->config->set($path, $value);
+        return $this;
     }
 
     /**
@@ -95,21 +94,20 @@ class Application
      */
     static function conf($path = null, $value = null)
     {
-        if(!isset($path)) {
+        if (!isset($path)) {
             return Registry::o()->app->config();
         }
-        elseif(!isset($value)) {
+        elseif (!isset($value)) {
             return Registry::o()->app->config($path);
         }
-        else {
-            Registry::o()->app->config($path, $value);
-            return $this;
-        }
+
+        Registry::o()->app->config($path, $value);
+        return $this;
     }
 
     /**
      * Reload application bootstrapper and front for a module
-     * 
+     *
      * @return $this
      */
     public function reload()
@@ -127,14 +125,12 @@ class Application
     private function _loadBootstrap()
     {
         $cname = $this->config('ns').'\Bootstrap';
-        if(class_exists($cname)) $this->bootstrap = new $cname();
+        if (class_exists($cname)) $this->bootstrap = new $cname();
         else $this->bootstrap = new Bootstrapper();
     }
 
     /**
      * Load and store application Front Controller
-     *
-     * @param string $prefix Front class prefix name if exists
      */
     private function _loadFront()
     {
