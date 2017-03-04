@@ -8,13 +8,21 @@ use Peak\Application\Config\AppTree;
 
 class Environment
 {
-
+    /**
+     * App file config
+     * @var Peak\Collection
+     */
     protected $file_config;
+
+    /**
+     * App default config
+     * @var Peak\Collection
+     */
     protected $app_config;
 
     /**
      * Constructor
-     * 
+     *
      * @param Collection $file_config
      * @param Collection $app_config
      */
@@ -22,13 +30,13 @@ class Environment
     {
         $this->app_config  = $app_config;
         $this->file_config = $file_config;
-        $this->_processEnv();
+        $this->processEnv();
     }
 
     /**
      * Get the final app config
-     * 
-     * @return Collection
+     *
+     * @return array
      */
     public function getEnvConfig()
     {
@@ -37,9 +45,8 @@ class Environment
 
     /**
      * Process app file config with current environment
-     * @return [type] [description]
      */
-    private function _processEnv()
+    private function processEnv()
     {
         $env     = $this->app_config->env;
         $apptree = new AppTree(APPLICATION_ABSPATH);
@@ -68,14 +75,13 @@ class Environment
         $this->file_config->mergeRecursiveDistinct($this->file_config->all, $this->file_config->$env);
     }
 
-
     /**
      * Validation application config
      */
     private function validate()
     {
         // default env aka all
-        if(!$this->file_config->have('all')) {
+        if (!$this->file_config->have('all')) {
             throw new Exception(
                 'ERR_CUSTOM', 
                 'Your application doesn\'t have default "all" configuration'
@@ -83,7 +89,7 @@ class Environment
         }
 
         // current env
-        if(!$this->file_config->have($this->app_config->env)) {
+        if (!$this->file_config->have($this->app_config->env)) {
             throw new Exception(
                 'ERR_CUSTOM', 
                 'Your application doesn\'t have "'.$this->app_config->env.'" configuration'
