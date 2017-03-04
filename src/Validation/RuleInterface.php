@@ -6,7 +6,7 @@ interface RuleInterface
 {
     /**
      * Construct
-     * 
+     *
      * @param array   $options rules options array
      * @param integer $flags   rules flags
      * @param array   $context rules context data
@@ -15,7 +15,7 @@ interface RuleInterface
 
     /**
      * Validate
-     * 
+     *
      * @param  mixed $value
      * @return bool
      */

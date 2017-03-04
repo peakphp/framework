@@ -23,8 +23,8 @@ class RuleDefinition
 
     /**
      * Construct
-     * 
-     * @param array $def 
+     *
+     * @param array $def
      */
     public function __construct($def = null)
     {
@@ -41,7 +41,7 @@ class RuleDefinition
      * @param  string $key
      * @return mixed
      */
-    public function &__get ($key) 
+    public function &__get($key) 
     {
         return $this->def[$key];
     }
