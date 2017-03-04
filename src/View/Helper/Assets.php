@@ -41,7 +41,7 @@ class Assets extends Helper
      * Delegate type method/args to process()
      *
      * @example ('css', array('theme/css/myfile1.css', ...)) will call method _asset_css() with the file(s) path(s)
-     * 
+     *
      * @param  string $method   
      * @param  string $args 
      * @return string       
@@ -51,15 +51,15 @@ class Assets extends Helper
         if(array_key_exists(1, $args)) {
             return $this->process($method, $args[0], $args[1]);
         }
-        else {
-            return $this->process($method, $args[0]);
-        }
+
+        return $this->process($method, $args[0]);  
     }
 
     /**
      * Set assets path
-     * 
-     * @param string $path
+     *
+     * @param  string $path
+     * @return object $this
      */
     public function setPath($path)
     {
@@ -69,8 +69,9 @@ class Assets extends Helper
 
     /**
      * Set assets base url
-     * 
+     *
      * @param string $url
+     * @return object $this
      */
     public function setUrl($url)
     {
@@ -98,7 +99,6 @@ class Assets extends Helper
      * @param  string        $type
      * @param  array|string  $paths
      * @param  string|null   $param add url param if specified
-     *
      * @return string
      */
     public function process($type, $paths, $param = null)
@@ -137,7 +137,6 @@ class Assets extends Helper
      * The url for the assets.
      *
      * @param  string $filepath
-     *
      * @return string
      */
     protected function _asset_url($filepath)
@@ -145,12 +144,10 @@ class Assets extends Helper
         return $this->_assets_base_url.'/'.$this->_assets_path.'/'.$filepath;
     }
 
-
     /**
      * Javascript <script> tag
      *
      * @param  string $path
-     *
      * @return string
      */
     protected function _asset_js($filepath, $param = null)
@@ -171,5 +168,4 @@ class Assets extends Helper
         $url = $this->_asset_url($filepath).((isset($param)) ? '?'.$param : '');
         return '<link rel="stylesheet" href="'.$url.'">';
     }
-
 }
