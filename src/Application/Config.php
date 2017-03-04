@@ -9,7 +9,6 @@ use Peak\Application\Config\Environment;
 
 class Config
 {
-
     /**
      * Default config
      * @var array
@@ -87,7 +86,7 @@ class Config
     {
         //define server document root absolute path
         $svr_path = str_replace('\\','/',realpath($_SERVER['DOCUMENT_ROOT']));
-        if(substr($svr_path, -1, 1) !== '/') $svr_path .= '/';
+        if (substr($svr_path, -1, 1) !== '/') $svr_path .= '/';
 
         define('SVR_ABSPATH',         $svr_path); 
         define('LIBRARY_ABSPATH',     realpath(__DIR__.'/../'));
@@ -101,18 +100,18 @@ class Config
      */
     private function validate() 
     {
-        if(!$this->app_config->have('path.public')) {
+        if (!$this->app_config->have('path.public')) {
             throw new Exception('ERR_CORE_INIT_CONST_MISSING', ['Public root','PUBLIC_ROOT']);
         }
 
-        if(!$this->app_config->have('path.app'))
+        if (!$this->app_config->have('path.app'))
             throw new Exception('ERR_CORE_INIT_CONST_MISSING', ['Application root','APPLICATION_ROOT']);
 
-        if(!$this->app_config->have('env')) {
+        if (!$this->app_config->have('env')) {
             throw new Exception('ERR_APP_ENV_MISSING');
         }
 
-        if(!$this->app_config->have('conf')) {
+        if (!$this->app_config->have('conf')) {
             throw new Exception('ERR_APP_CONF_MISSING');
         }
     }    
