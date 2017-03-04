@@ -118,7 +118,7 @@ class User implements PolicySubjectInterface
         if(isset($this->custom_abilities->$name)) {
             return $this->custom_abilities->$name;
         }
-        else return null;
+        return null;
     }
 
     /**
