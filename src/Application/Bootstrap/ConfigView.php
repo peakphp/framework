@@ -15,17 +15,17 @@ class ConfigView
      */
     public function __construct()
     {
-        if(!Application::conf()->have('view') || 
+        if (!Application::conf()->have('view') || 
             !Registry::isRegistered('view')) return;
 
         $view  = Registry::o()->view;
         $cview = Application::conf('view');
 
-        if(!empty($cview)) {
-            foreach($cview as $k => $v) {
+        if (!empty($cview)) {
+            foreach ($cview as $k => $v) {
 
-                if(is_array($v)) {
-                    foreach($v as $p1 => $p2) $view->$k($p1,$p2);
+                if (is_array($v)) {
+                    foreach ($v as $p1 => $p2) $view->$k($p1,$p2);
                 }
                 else $view->$k($v);
             }
