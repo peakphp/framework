@@ -3,6 +3,7 @@ VERSION 2.0.10
 Release Date: ?
 
  - replaced Filters component by Validation component
+ - added FormValidation and FormDataSet to Form component
 
 VERSION 2.0.9
 -------------
