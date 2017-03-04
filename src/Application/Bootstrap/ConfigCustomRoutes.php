@@ -33,7 +33,7 @@ class ConfigCustomRoutes
                         $r['action']
                     );
                 }
-                else if(is_string($r)) {
+                elseif(is_string($r)) {
 
                     $parts = explode(' | ', $r);
                     if(count($parts) == 2) {

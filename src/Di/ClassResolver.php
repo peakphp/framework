@@ -74,7 +74,7 @@ class ClassResolver
                     $class_args[] = $result;
                 }
                 // check if container has a stored instance
-                else if($container->hasInstance($name)) {
+                elseif($container->hasInstance($name)) {
                     $class_args[] = $container->getInstance($name);
                 }
                 else {
@@ -94,7 +94,7 @@ class ClassResolver
                 }
             }
             // everything else that is not a type of class or interface
-            else if(array_key_exists($i - ($class_count), $args)) {
+            elseif(array_key_exists($i - ($class_count), $args)) {
                 $class_args[] = $args[$i - $class_count];
             }
 

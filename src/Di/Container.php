@@ -189,7 +189,7 @@ class Container
 
     /**
      * Catalogue also class interface when using addInstance
-     * 
+     *
      * @param strign $name 
      * @param strign $class
      */

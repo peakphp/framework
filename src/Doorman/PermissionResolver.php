@@ -27,6 +27,7 @@ class PermissionResolver
 
     /**
      * Construtor
+     *
      * @param mixed $permission
      */
     public function __construct($permission)
@@ -51,15 +52,15 @@ class PermissionResolver
             $this->permission = FormatAlphaNum::$values[$this->raw];
         }
         // binary
-        else if(array_key_exists($this->raw, FormatBinary::$values)) {
+        elseif(array_key_exists($this->raw, FormatBinary::$values)) {
             $this->permission = FormatBinary::$values[$this->raw];
         }
         // textual format
-        else if(array_key_exists($this->raw, FormatText::$values)) {
+        elseif(array_key_exists($this->raw, FormatText::$values)) {
             $this->permission = FormatText::$values[$this->raw];
         }
         // textual format
-        else if(array_key_exists($this->raw, FormatChar::$values)) {
+        elseif(array_key_exists($this->raw, FormatChar::$values)) {
             $this->permission = FormatChar::$values[$this->raw];
         }
         elseif(is_numeric($this->raw) && $this->raw >= 0 && $this->raw <= 7) {
@@ -74,7 +75,7 @@ class PermissionResolver
 
     /**
      * Get the resolved permission decimal value
-     * 
+     *
      * @return integer
      */
     public function get()
