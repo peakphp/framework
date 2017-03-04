@@ -7,9 +7,11 @@ interface RuleInterface
     /**
      * Construct
      * 
-     * @param array $options merge options with default options
+     * @param array   $options rules options array
+     * @param integer $flags   rules flags
+     * @param array   $context rules context data
      */
-    public function __construct($options = []);
+    public function __construct($options = null, $flags = null, $context = null);
 
     /**
      * Validate

@@ -16,20 +16,26 @@ abstract class AbstractRule implements RuleInterface
      * Options
      * @var array
      */
-    protected $options = [];
+    protected $options;
 
     /**
      * Flags for php validate filters
      * @var integer
      */
-    protected $flags = null;
+    protected $flags;
+
+    /**
+     * Context data
+     * @var array
+     */
+    protected $context;
 
     /**
      * Construct
      * 
      * @param array  $options 
      */
-    public function __construct($options = null, $flags = null)
+    public function __construct($options = null, $flags = null, $context = null)
     {
         $this->options = $this->default_options;
 
@@ -38,6 +44,7 @@ abstract class AbstractRule implements RuleInterface
         }
         
         $this->flags = $flags;
+        $this->context = $context;
         $this->removeNullOptions();
         $this->init();
     }

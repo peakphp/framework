@@ -106,6 +106,7 @@ abstract class DataSet
                 $rule = Rule::create($rule_def->rule)
                     ->setOptions($rule_def->options)
                     ->setFlags($rule_def->flags)
+                    ->setContext($data)
                     ->setError($rule_def->error);
 
                 if(!$rule->validate($data[$key])) {

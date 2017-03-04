@@ -2,6 +2,8 @@
 
 namespace Peak\Validation;
 
+use Peak\Exception;
+
 /**
  * Rule builder
  */
@@ -24,6 +26,12 @@ class RuleBuilder
      * @var integer
      */
     protected $flags;
+
+    /**
+     * Rule context data
+     * @var array
+     */
+    protected $context;
 
     /**
      * Validation error message
@@ -108,19 +116,46 @@ class RuleBuilder
     }
 
     /**
+     * Set context
+     * 
+     * @param  array $context
+     * @return $this
+     */
+    public function setContext($context)
+    {
+        $this->context = $context;
+        return $this;
+    }
+
+    /**
+     * Get context
+     * 
+     * @return integer
+     */
+    public function getContext()
+    {
+        return $this->context;
+    }
+
+    /**
      * Create and get a rule
      * 
      * @return object
      */
     public function get()
     {
-        $rulename = '\Peak\Validation\Rules\\'.$this->name;
-
         if(class_exists($this->name)) {
             $rulename = $this->name;
         }
+        else {
+            $rulename = '\Peak\Validation\Rules\\'.$this->name;
+        }
 
-        return new $rulename($this->options, $this->flags);
+        if(!class_exists($rulename)) {
+            throw new Exception('ERR_CUSTOM', 'Rule '.$this->name.' not found');
+        }
+
+        return new $rulename($this->options, $this->flags, $this->context);
     }
 
     /**
