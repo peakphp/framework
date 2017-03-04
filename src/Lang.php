@@ -9,7 +9,7 @@ use Peak\Expcetion;
  * Simple lang translator based on php array
  */
 class Lang
-{     
+{
     /**
      * Language abbreviation
      * @var string
@@ -35,7 +35,7 @@ class Lang
      */
     public static function __($text, $replaces = null, $func = null)
     {
-        if(Registry::o()->lang instanceof Lang) {       
+        if(Registry::o()->lang instanceof Lang) {
             return Registry::o()->lang->translate((string)$text, $replaces, $func);
         }
         return $text;
@@ -45,8 +45,8 @@ class Lang
      * Echo the result of __() function
      */
     public static function _e($text, $replaces = null, $func = null)
-    { 
-        echo self::__($text,$replaces,$func); 
+    {
+        echo self::__($text,$replaces,$func);
     }
 
     /**
@@ -87,7 +87,7 @@ class Lang
      * @param bool   $return    if false, file content won't be added to $this->translatation
      */
     public function loadFile($filepath, $return = false)
-    {       
+    {
         if(empty($this->lang)) {
             throw new Exception(__CLASS__.': You must set the language abbreviation before loading a translation file.');
         }
@@ -167,12 +167,12 @@ class Lang
      * @return string
      */
     public function translate($item, $replaces = null)
-    {           
+    { 
         $tr = (isset($this->translations[$item])) ? $this->translations[$item] : $item;
 
         if(isset($replaces)) {
             if(is_array($replaces)) $tr = vsprintf($tr, $replaces);
-            else $tr = sprintf($tr, $replaces);         
+            else $tr = sprintf($tr, $replaces);  
         }
         
         return $tr;
