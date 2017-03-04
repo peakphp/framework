@@ -58,7 +58,7 @@ if(!function_exists('isCli')) {
      * Detect if we are in command line interface mode
      */
     function isCli() { 
-        return (php_sapi_name() === 'cli' OR defined('STDIN'));
+        return (php_sapi_name() === 'cli' || defined('STDIN'));
     }
 }
 
