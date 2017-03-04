@@ -11,7 +11,7 @@ class ClassInstantiator
 {
     /**
      * Instanciate a class
-     * 
+     *
      * @param  string $class
      * @return object
      */
