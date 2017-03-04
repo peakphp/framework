@@ -16,8 +16,8 @@ class File extends DotNotation
      */
     public function __construct($vars = null)
     {
-        if(is_array($vars)) parent::__construct($vars);
-        elseif(is_string($vars)) $this->loadFile($vars);
+        if (is_array($vars)) parent::__construct($vars);
+        elseif (is_string($vars)) $this->loadFile($vars);
     }
 
     /**
@@ -27,17 +27,17 @@ class File extends DotNotation
      */
     public function loadFile($file)
     {
-        if(pathinfo($file, PATHINFO_EXTENSION) !== 'php') {
+        if (pathinfo($file, PATHINFO_EXTENSION) !== 'php') {
             throw new Exception('ERR_CUSTOM', basename($file).' is not a php file');
         }
 
-        if(!file_exists($file)) {
+        if (!file_exists($file)) {
             throw new Exception('ERR_CUSTOM', $file.' not found');
         }
 
         $vars = include $file;
 
-        if(!is_array($vars)) {
+        if (!is_array($vars)) {
             throw new Exception('ERR_CUSTOM', $file.' should return an array');
         }
 
@@ -47,14 +47,14 @@ class File extends DotNotation
 
     /**
      * Save content to php array file
-     * 
+     *
      * @param  string|null $file if not specified, it will take the same file used by loadFile()
      */
     public function saveToFile($file = null) 
     {
-        if(isset($file)) $this->file = $file;
+        if (isset($file)) $this->file = $file;
 
-        if(file_exists($this->file) && !is_writable($this->file)) {
+        if (file_exists($this->file) && !is_writable($this->file)) {
             throw new Exception('ERR_CUSTOM', $this->file.' is not writable');
         }
 
