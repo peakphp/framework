@@ -6,7 +6,6 @@ use Peak\Routing\Request;
 
 class RequestServerURI extends Request
 {
-
     /**
      * Overload Request consctructor using $_SERVER request uri
      */

@@ -40,7 +40,7 @@ class CustomRoute
 
     /**
      * Set a regex
-     * 
+     *
      * @param string $regex
      */
     public function setRegex($regex)
@@ -50,7 +50,7 @@ class CustomRoute
 
     /**
      * Get the curretn regex
-     * 
+     *
      * @return string
      */
     public function getRegex()
@@ -60,7 +60,7 @@ class CustomRoute
 
     /**
      * Check if match
-     * 
+     *
      * @param  Request $req  
      * @return mixed        Return a route if valid, otherwise false
      */
@@ -73,7 +73,7 @@ class CustomRoute
         );
 
         //we got a positive preg_match
-        if(!empty($matches)) {
+        if (!empty($matches)) {
 
             $request->request_uri = $this->controller.Request::$separator.$this->action.$request->request_uri;
 
@@ -83,6 +83,6 @@ class CustomRoute
             return $route;
         }
 
-        else return false;
+        return false;
     }   
 }

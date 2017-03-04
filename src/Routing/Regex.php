@@ -34,7 +34,7 @@ class Regex
 
     /**
      * Build a regex and look for quick reg syntax
-     * 
+     *
      * @param string $regex the regex without the delimiters
      */
     public static function build($regex)
@@ -54,7 +54,7 @@ class Regex
 
     /**
      * Add a new quick reg
-     * 
+     *
      * @param string $shortcut shortcut without the prefix :
      * @param string $regex    the regex without the delimiters
      */

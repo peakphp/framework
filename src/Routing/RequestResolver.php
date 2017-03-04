@@ -8,7 +8,6 @@ use Peak\Collection;
 
 class RequestResolver
 {
-
     /**
      * Request object
      * @var Request
@@ -16,7 +15,7 @@ class RequestResolver
     protected $request;
 
     /**
-     * Contructor
+     * Constructor
      *
      * @param  Request $request
      */
@@ -27,13 +26,13 @@ class RequestResolver
 
     /**
      * Resolve a request
-     * 
+     *
      * @return Route
      */
     public function getRoute(Collection $regex_routes = null) 
     {
         $route = $this->lookForRegexMatch($regex_routes);
-        if($route !== false) {
+        if ($route !== false) {
             return $route;
         }
 
@@ -42,7 +41,7 @@ class RequestResolver
 
     /**
      * Resolve normal request
-     * 
+     *
      * @return Route
      */
     protected function resolve()
@@ -70,16 +69,16 @@ class RequestResolver
 
     /**
      * Try to match the current request with a custom regex route
-     * 
+     *
      * @param  Collection|null $regex_routes 
      * @return mixed                     
      */
     protected function lookForRegexMatch(Collection $regex_routes = null)
     {
-        if(isset($regex_routes)) {
-            foreach($regex_routes as $r) {
+        if (isset($regex_routes)) {
+            foreach ($regex_routes as $r) {
                 $route = $r->matchRequest($this->request);
-                if($route instanceof Route) {
+                if ($route instanceof Route) {
                     return $route;
                 }
             }
@@ -90,14 +89,16 @@ class RequestResolver
     /**
      * Transform params array to params associate array
      * To work, we need a pair number of params to transform it to key/val array
+     *
+     * @return  array
      */
     protected function paramsToAssoc($params)
     {
         $i = 0;
         $params_assoc = [];
 
-        foreach($params as $k => $v) {
-            if($i == 0) {
+        foreach ($params as $k => $v) {
+            if ($i == 0) {
                 $key = $v; 
                 ++$i;
             }

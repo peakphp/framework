@@ -36,7 +36,7 @@ class Request
      */
     public function __construct($request_uri, $base_uri = null)
     {
-        if(!isset($base_uri)) $base_uri = self::$separator;
+        if (!isset($base_uri)) $base_uri = self::$separator;
         $this->setBaseUri($base_uri);
         $this->setRequestUri($request_uri);
     }
@@ -53,20 +53,20 @@ class Request
 
     /**
      * Set request uri
-     * 
+     *
      * @param string|array $request_uri
      */
     public function setRequestUri($request)
     {
         $this->raw_uri = $request;
 
-        if(is_array($request)) {
+        if (is_array($request)) {
             $request = $this->requestArrayToString($request);
         }
 
         $request = $this->standardize($request);
 
-        if($this->base_uri !== self::$separator) {
+        if ($this->base_uri !== self::$separator) {
             $request = str_ireplace($this->base_uri, '', $request);
         }
 
@@ -75,7 +75,7 @@ class Request
 
     /**
      * Standardize the request
-     * 
+     *
      * @param  string $request 
      * @return string         
      */
@@ -83,10 +83,10 @@ class Request
     {
         $request = trim($this->removeDoubleSeparator($request));
 
-        if(substr($request, 0, 1) !== self::$separator) {
+        if (substr($request, 0, 1) !== self::$separator) {
             $request = self::$separator.$request;
         }
-        if(substr($request, -1, 1) !== self::$separator) {
+        if (substr($request, -1, 1) !== self::$separator) {
             $request = $request.self::$separator;
         }
 
@@ -97,7 +97,7 @@ class Request
 
     /**
      * Remove double separator ex: double //
-     * 
+     *
      * @param  string $request
      * @return string         
      */
@@ -112,7 +112,7 @@ class Request
 
     /**
      * Transform an array to a string
-     * 
+     *
      * @param  array  $request
      * @return string
      */

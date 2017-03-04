@@ -10,19 +10,19 @@ class RouteBuilder
 {
     /**
      * Resolve a request
-     * 
-     * @return Route
+     *
+     * @return Peak\Routing\Route
      */
     public static function get(...$segment) 
     {
         $route_arr = [];
 
-        foreach($segment as $e) {
-            if(is_string($e) || is_numeric($e)) {
+        foreach ($segment as $e) {
+            if (is_string($e) || is_numeric($e)) {
                 $route_arr[] = $e;
             }
-            elseif(is_array($e)) {
-                foreach($e as $ek => $ev) {
+            elseif (is_array($e)) {
+                foreach ($e as $ek => $ev) {
                     $route_arr[] = $ek;
                     $route_arr[] = $ev;
                 } 

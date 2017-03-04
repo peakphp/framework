@@ -52,5 +52,4 @@ class Route
      * @var array
      */
     public $params_assoc = [];
-
 }
