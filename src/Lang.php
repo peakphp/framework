@@ -35,7 +35,7 @@ class Lang
      */
     public static function __($text, $replaces = null, $func = null)
     {
-        if(Registry::o()->lang instanceof Lang) {
+        if (Registry::o()->lang instanceof Lang) {
             return Registry::o()->lang->translate((string)$text, $replaces, $func);
         }
         return $text;
@@ -56,7 +56,7 @@ class Lang
      */
     public function __construct($lang = null)
     {
-        if(isset($lang)) $this->setLang($lang);
+        if (isset($lang)) $this->setLang($lang);
     }
 
     /**
@@ -88,24 +88,24 @@ class Lang
      */
     public function loadFile($filepath, $return = false)
     {
-        if(empty($this->lang)) {
+        if (empty($this->lang)) {
             throw new Exception(__CLASS__.': You must set the language abbreviation before loading a translation file.');
         }
 
         $filepath = $this->_exists($filepath);
 
         // file exists
-        if($filepath !== false) {
+        if ($filepath !== false) {
 
             $tmp = include $filepath;
-            if(!is_array($tmp)) $tmp = array();
+            if (!is_array($tmp)) $tmp = array();
 
             $this->loaded_files[] = $filepath;
 
-            if($return) return $tmp;
+            if ($return) return $tmp;
             $this->translations = $tmp;
         }
-        elseif($return) return [];
+        elseif ($return) return [];
     }
 
     /**
@@ -115,12 +115,11 @@ class Lang
      */
     public function addFiles($files)
     {
-        if(is_array($files)) {
-            if(!empty($files)) {
-                foreach($files as $f) {
+        if (is_array($files)) {
+            if (!empty($files)) {
+                foreach ($files as $f) {
                     $tmp = $this->loadFile($f, true);
                     $this->translations = array_merge($this->translations, $tmp);
-
                 }
             }
         }
@@ -128,7 +127,7 @@ class Lang
 
     /**
      * Return loaded translation files
-     * 
+     *
      * @return array
      */
     public function getLoadedFiles()
@@ -138,20 +137,19 @@ class Lang
 
     /**
      * Return false if file don't exists, return complete filepath if exists
-     * 
+     *
      * @param  string      $file 
      * @return bool|string       
      */
     protected function _exists($file)
     {
-        if(file_exists($file)) {
+        if (file_exists($file)) {
             return $file;
         }
-
         // relative path to the current application if context apply
-        elseif(defined('APPLICATION_ABSPATH')) {
+        elseif (defined('APPLICATION_ABSPATH')) {
             $filepath = APPLICATION_ABSPATH.'/'.$file;
-            if(file_exists($filepath)) {
+            if (file_exists($filepath)) {
                 return $filepath;
             }
         }
@@ -170,8 +168,8 @@ class Lang
     { 
         $tr = (isset($this->translations[$item])) ? $this->translations[$item] : $item;
 
-        if(isset($replaces)) {
-            if(is_array($replaces)) $tr = vsprintf($tr, $replaces);
+        if (isset($replaces)) {
+            if (is_array($replaces)) $tr = vsprintf($tr, $replaces);
             else $tr = sprintf($tr, $replaces);  
         }
         
