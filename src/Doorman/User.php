@@ -199,6 +199,4 @@ class User implements PolicySubjectInterface
     {
         return $this->can($ability, Permission::EXECUTE);
     }
-
-    
 }
