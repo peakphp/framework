@@ -81,7 +81,7 @@ class Database
      * @param  mixed $args   
      * @return mixed         
      */
-    public function  __call($method, $args = null)
+    public function __call($method, $args = null)
     {
         return call_user_func_array([$this->db, $method], $args);
     }
