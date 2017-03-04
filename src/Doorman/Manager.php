@@ -55,20 +55,19 @@ class Manager implements PolicySubjectInterface
         $this->groups    = new Collection();
         $this->abilities = new Collection();
 
-        
-        if(!isset($mp)) {
+        if (!isset($mp)) {
             $mp = new ManagerPolicy();
             $mp->create($this);
         }
 
-        if(isset($up)) {
+        if (isset($up)) {
             $this->user_policy = $up;
         }
     }
 
     /**
      * Add a user policy
-     * 
+     *
      * @param  Peak\Doorman\UserPolicy $up
      * @return $this
      */
@@ -86,23 +85,22 @@ class Manager implements PolicySubjectInterface
      */
     public function createUser($name)
     {
-        if(isset($this->users->$name)) {
+        if (isset($this->users->$name)) {
             throw new Exception(__CLASS__.': User '.htmlspecialchars($name).' already exists');
         } 
         
         $this->users[$name] = new User($name);
 
-        if(isset($this->user_policy)) {
+        if (isset($this->user_policy)) {
             $this->user_policy->create($this->users[$name]);
         }
 
         return $this->users[$name];
-        
     }
 
     /**
      * Add a user object instance
-     * 
+     *
      * @param  Peak\Doorman\User $user
      * @return Peak\Doorman\User 
      */
@@ -110,13 +108,13 @@ class Manager implements PolicySubjectInterface
     {
         $name = $user->getName();
 
-        if(isset($this->users->$name)) {
+        if (isset($this->users->$name)) {
             throw new Exception(__CLASS__.': User '.htmlspecialchars($name).' already exists');
         } 
 
         $this->users[$name] = $user;
 
-        if(isset($this->user_policy)) {
+        if (isset($this->user_policy)) {
             $this->user_policy->create($user);
         }
 
@@ -125,7 +123,7 @@ class Manager implements PolicySubjectInterface
 
     /**
      * Get a user
-     * 
+     *
      * @param  string $name
      * @return Peak\Doorman\User|null
      */
@@ -136,7 +134,7 @@ class Manager implements PolicySubjectInterface
 
     /**
      * Check if user exists
-     * 
+     *
      * @param  string  $name 
      * @return boolean       
      */
@@ -147,13 +145,13 @@ class Manager implements PolicySubjectInterface
 
     /**
      * Create a group
-     * 
+     *
      * @param  string $name 
      * @return Peak\Doorman\Group      
      */
     public function createGroup($name)
     {
-        if(isset($this->groups->$name)) {
+        if (isset($this->groups->$name)) {
             throw new Exception(__CLASS__.': Group '.htmlspecialchars($name).' already exists');
         } 
 
@@ -163,7 +161,7 @@ class Manager implements PolicySubjectInterface
 
     /**
      * Add a group object instance
-     * 
+     *
      * @param  Peak\Doorman\Group $group 
      * @return Peak\Doorman\Group      
      */
@@ -171,7 +169,7 @@ class Manager implements PolicySubjectInterface
     {
         $name = $name = $group->getName();
 
-        if(isset($this->groups->$name)) {
+        if (isset($this->groups->$name)) {
             throw new Exception(__CLASS__.': Group '.htmlspecialchars($name).' already exists');
         }
 
@@ -181,7 +179,7 @@ class Manager implements PolicySubjectInterface
 
     /**
      * Get a group
-     * 
+     *
      * @param  string $name
      * @return Peak\Doorman\Group|null
      */
@@ -192,7 +190,7 @@ class Manager implements PolicySubjectInterface
 
     /**
      * Check if group exists
-     * 
+     *
      * @param  string  $name 
      * @return boolean       
      */
@@ -203,7 +201,7 @@ class Manager implements PolicySubjectInterface
 
     /**
      * Create an ability
-     * 
+     *
      * @param  string      $ability   
      * @param  string      $username  
      * @param  string      $groupname 
@@ -212,11 +210,11 @@ class Manager implements PolicySubjectInterface
      */
     public function createAbility($ability, $username, $groupname, Permissions $perms)
     {
-        if(isset($this->abilities->$ability)) {
+        if (isset($this->abilities->$ability)) {
             throw new Exception(__CLASS__.': Ability '.htmlspecialchars($ability).' already exists');
-        } elseif(!$this->hasUser($username)) {
+        } elseif (!$this->hasUser($username)) {
             throw new Exception(__CLASS__.': User '.htmlspecialchars($username).' doesn\'t exists');
-        } elseif(!$this->hasUser($groupname)) {
+        } elseif (!$this->hasUser($groupname)) {
             throw new Exception(__CLASS__.': Group '.htmlspecialchars($groupname).' doesn\'t exists');
         }
 
@@ -233,7 +231,7 @@ class Manager implements PolicySubjectInterface
     /**
      * Create an ability using the string format:
      * [ability_name] [user]:[group] [permissions]
-     * 
+     *
      * @param  string $ability_str
      * @return Peak\Doorman\Ability            
      */
@@ -241,11 +239,11 @@ class Manager implements PolicySubjectInterface
     {
         $ability_parts = explode(' ', $ability_str);
 
-        if(count($ability_parts) == 3) {
+        if (count($ability_parts) == 3) {
 
             $usergroup = explode(':', $ability_parts[1]); 
 
-            if(count($usergroup) != 2) {
+            if (count($usergroup) != 2) {
                 //exception
                 throw new Exception(__CLASS__.': Invalid ability string format for user/group');
             }
@@ -264,7 +262,7 @@ class Manager implements PolicySubjectInterface
 
     /**
      * Get an ability
-     * 
+     *
      * @param  string $name
      * @return Peak\Doorman\Ability|null
      */
@@ -275,7 +273,7 @@ class Manager implements PolicySubjectInterface
 
     /**
      * Check if ability exists
-     * 
+     *
      * @param  string  $name 
      * @return boolean       
      */

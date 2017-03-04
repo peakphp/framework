@@ -15,22 +15,22 @@ class Permissions
 
     /**
      * Static method of creating this object. 
-     * 
+     *
      * @param  array $perms 
      * @return Permissions
      */
     public static function create(...$perms)
     {
         // user, group and other separated $var
-        if(count($perms) == 3) {
+        if (count($perms) == 3) {
             $user = $perms[0];
             $group = $perms[1];
             $others = $perms[2];
         }
         // user, group and other in one $var
-        elseif(count($perms) == 1) {
+        elseif (count($perms) == 1) {
             // support decimal (ex: 777)
-            if(strlen($perms[0]) == 3) {
+            if (strlen($perms[0]) == 3) {
                 $permstr = (string)$perms[0];
                 $user = $permstr[0];
                 $group = $permstr[1];
@@ -38,7 +38,7 @@ class Permissions
             }
         }
 
-        if(!isset($user)) {
+        if (!isset($user)) {
             //error
             throw new \Exception('Permissions creation fail, invalid permission format.');
         }
@@ -52,7 +52,7 @@ class Permissions
 
     /**
      * Constructor
-     * 
+     *
      * @param PermissionInterface $user   
      * @param PermissionInterface $group  
      * @param PermissionInterface $others 
@@ -66,7 +66,7 @@ class Permissions
 
     /**
      * Get user decimal permission
-     * 
+     *
      * @return integer
      */
     public function getUserPerm()
@@ -76,7 +76,7 @@ class Permissions
 
     /**
      * Get group decimal permission
-     * 
+     *
      * @return integer
      */
     public function getGroupPerm()
@@ -86,7 +86,7 @@ class Permissions
 
     /**
      * Get others decimal permission
-     * 
+     *
      * @return integer
      */
     public function getOthersPerm()

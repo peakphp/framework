@@ -17,7 +17,7 @@ class Permission extends AbstractPermission
 
     /**
      * Get permission decimal value
-     * 
+     *
      * @return integer
      */
     public function get()
@@ -27,7 +27,7 @@ class Permission extends AbstractPermission
 
     /**
      * Set the permission decimal value
-     * 
+     *
      * @param mixed $perm
      */
     public function set($perm)

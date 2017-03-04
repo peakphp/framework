@@ -26,7 +26,7 @@ abstract class AbstractPermission implements PermissionInterface
 
     /**
      * Constructor
-     * 
+     *
      * @param mixed $perm
      */
     public function __construct($perm)

@@ -9,7 +9,7 @@ class ManagerPolicy implements PolicyInterface
 {
     /**
      * Create root default account
-     * 
+     *
      * @param PolicySubjectInterface $subject
      */
     public function create(PolicySubjectInterface $subject)

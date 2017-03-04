@@ -34,7 +34,7 @@ class Ability
     
     /**
      * Constructor
-     * 
+     *
      * @param string      $name        
      * @param User        $owner       
      * @param Group       $group       
@@ -50,7 +50,7 @@ class Ability
 
     /**
      * Get ability name
-     * 
+     *
      * @return string
      */
     public function getName()

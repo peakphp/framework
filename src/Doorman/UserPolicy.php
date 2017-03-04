@@ -15,25 +15,25 @@ class UserPolicy implements PolicyInterface
 
     /**
      * Constructor
-     * 
+     *
      * @param array|null $default_groups
      */
     public function __construct($default_groups = null)
     {
-        if(isset($default_groups)) {
+        if (isset($default_groups)) {
             $this->default_groups = $default_groups;
         }
     }
 
     /**
      * Create a user
-     * 
+     *
      * @param PolicySubjectInterface $subject
      */
     public function create(PolicySubjectInterface $subject)
     {
-        if(!empty($this->default_groups)) {
-            foreach($this->default_groups as $group) {
+        if (!empty($this->default_groups)) {
+            foreach ($this->default_groups as $group) {
                 $subject->addToGroup($group);
             }
         }

@@ -22,7 +22,7 @@ class AbilityResolver
 
     /**
      * Constructor
-     * 
+     *
      * @param User    $user   
      * @param Ability $ability
      */
@@ -34,7 +34,7 @@ class AbilityResolver
 
     /**
      * Check user permission over the current ability
-     * 
+     *
      * @param  integer $permissions
      * @return boolean
      */
@@ -55,7 +55,7 @@ class AbilityResolver
         );
 
         // if no custom user ability, use default ability perms
-        if($perms === null) {
+        if ($perms === null) {
             $perms = $this->ability->permissions;
         }
         else {
@@ -63,10 +63,10 @@ class AbilityResolver
         }
 
         // resolver user, group and other in this order
-        if($this->user->is($this->ability->owner->getName())) {
+        if ($this->user->is($this->ability->owner->getName())) {
             $iperm = $perms->getUserPerm();
         }
-        elseif($this->user->isInGroup($this->ability->group->getName())) {
+        elseif ($this->user->isInGroup($this->ability->group->getName())) {
             $iperm = $perms->getGroupPerm();
         }
         else $iperm = $perms->getOthersPerm();
@@ -76,7 +76,7 @@ class AbilityResolver
 
     /**
      * Internal method of can()
-     * 
+     *
      * @param  integer $permission
      * @return boolean
      */
@@ -85,7 +85,7 @@ class AbilityResolver
         $perm = new Permission($perm);
 
         // bypass
-        if($this->user instanceof SuperUser) {
+        if ($this->user instanceof SuperUser) {
             return true;
         }
 

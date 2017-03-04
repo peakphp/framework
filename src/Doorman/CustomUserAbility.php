@@ -24,7 +24,7 @@ class CustomUserAbility
 
     /**
      * Associated a ability with a custom permissions object
-     * 
+     *
      * @param Ability     $ability
      * @param Permissions $perm
      */
@@ -36,7 +36,7 @@ class CustomUserAbility
 
     /**
      * Get ability name (Shortcut)
-     * 
+     *
      * @return string
      */
     public function getName()

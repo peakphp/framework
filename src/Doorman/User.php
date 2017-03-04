@@ -14,7 +14,6 @@ use Peak\Doorman\PolicySubjectInterface;
  */
 class User implements PolicySubjectInterface
 {
-
     /**
      * User name or unique id
      * @var string|integer
@@ -35,7 +34,7 @@ class User implements PolicySubjectInterface
 
     /**
      * Create the user
-     * 
+     *
      * @param string|integer $name
      */
     public function __construct($name)
@@ -47,7 +46,7 @@ class User implements PolicySubjectInterface
 
     /**
      * Get current user name of unique id
-     * 
+     *
      * @return string|integer
      */
     public function getName()
@@ -57,15 +56,15 @@ class User implements PolicySubjectInterface
 
     /**
      * Add a user to group(s)
-     * 
+     *
      * @param  Group $groups
      * @return $this
      */
     public function addToGroup(...$groups)
     {
-        foreach($groups as $group) {
-            if(is_array($group)) {
-                foreach($group as $g) {
+        foreach ($groups as $group) {
+            if (is_array($group)) {
+                foreach ($group as $g) {
                     $this->groups[$g->getName()] = $g;
                 }
                 return $this;
@@ -77,7 +76,7 @@ class User implements PolicySubjectInterface
 
     /**
      * Remove user from a group
-     * 
+     *
      * @param  Group  $group
      * @return $this
      */
@@ -97,7 +96,7 @@ class User implements PolicySubjectInterface
 
     /**
      * Add custom ability
-     * 
+     *
      * @param   CustomUserAbility $custom
      * @return  $this
      */
@@ -109,13 +108,13 @@ class User implements PolicySubjectInterface
 
     /**
      * Get a custom ability if exists
-     * 
+     *
      * @param  string $name 
      * @return CustomUserAbility|null       
      */
     public function getCustomAbility($name)
     {
-        if(isset($this->custom_abilities->$name)) {
+        if (isset($this->custom_abilities->$name)) {
             return $this->custom_abilities->$name;
         }
         return null;
@@ -123,7 +122,7 @@ class User implements PolicySubjectInterface
 
     /**
      * Check if user match name or id
-     * 
+     *
      * @param  string|integer  $name
      * @return boolean
      */
@@ -134,7 +133,7 @@ class User implements PolicySubjectInterface
 
     /**
      * Check if the current user is in a group name
-     * 
+     *
      * @param  string  $name
      * @return boolean
      */
@@ -145,7 +144,7 @@ class User implements PolicySubjectInterface
 
     /**
      * Check user permission for an ability
-     * 
+     *
      * @param  Ability $ability    
      * @param  mixed   $permission 
      * @return boolean
@@ -158,7 +157,7 @@ class User implements PolicySubjectInterface
 
     /**
      * Get current user permission for an ability
-     * 
+     *
      * @param  Ability $ability    
      * @param  mixed   $permission 
      * @return boolean
@@ -171,7 +170,7 @@ class User implements PolicySubjectInterface
 
     /**
      * Can read the ability
-     * 
+     *
      * @param  Ability $ability 
      * @return boolean
      */
@@ -179,9 +178,10 @@ class User implements PolicySubjectInterface
     {
         return $this->can($ability, Permission::READ);
     }
+
     /**
      * Can write the ability
-     * 
+     *
      * @param  Ability $ability 
      * @return boolean
      */
@@ -189,9 +189,10 @@ class User implements PolicySubjectInterface
     {
         return $this->can($ability, Permission::WRITE);
     }
+
     /**
      * Can execute the ability
-     * 
+     *
      * @param  Ability $ability 
      * @return boolean
      */

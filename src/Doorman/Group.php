@@ -17,7 +17,7 @@ class Group implements PolicySubjectInterface
 
     /**
      * Constructor
-     * 
+     *
      * @param string $name
      */
     public function __construct($name)
@@ -27,7 +27,7 @@ class Group implements PolicySubjectInterface
 
     /**
      * Get group name
-     * 
+     *
      * @return string
      */
     public function getName()
