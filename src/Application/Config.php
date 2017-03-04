@@ -14,7 +14,7 @@ class Config
      * Default config
      * @var array
      */
-    private $_default = [
+    private $default = [
         'ns'   => 'App',  //namespace
         'env'  => 'prod', 
         'conf' => 'config.php',
@@ -33,12 +33,12 @@ class Config
 
     /**
      * Construct
-     * 
+     *
      * @param array $config user config
      */
     public function __construct($config = []) 
     {
-        $this->app_config = new DotNotation($this->_default);
+        $this->app_config = new DotNotation($this->default);
         $this->app_config->mergeRecursiveDistinct($config);
 
         $this->validate(); // validate user conf
@@ -49,7 +49,7 @@ class Config
         $config_loader = new Loader($this->getConfigFilepath());
 
         $config_env = new Environment(
-            $config_loader->getConfig(), 
+            $config_loader->getConfig(),
             $this->app_config
         );
 
@@ -58,7 +58,7 @@ class Config
 
     /**
      * Get app config
-     * 
+     *
      * @return object
      */
     public function getMountedConfig()
@@ -68,17 +68,15 @@ class Config
 
     /**
      * Get application config filepath
-     * 
+     *
      * @return string
      */
     private function getConfigFilepath()
     {
-
         $path = str_replace('\\', '/', 
             realpath($this->app_config->get('path.app').'/'.$this->app_config->get('conf'))
         );
         
-
         return $path;
     }
 
@@ -97,7 +95,6 @@ class Config
         define('APPLICATION_ABSPATH', realpath($this->app_config->get('path.app')));
         define('APPLICATION_ENV',     $this->app_config->get('env'));
     }
-
 
     /**
      * Validate require config values
