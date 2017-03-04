@@ -6,6 +6,10 @@ use Peak\Exception;
 
 class Loader
 {
+    /**
+     * Configuration
+     * @var object
+     */
     protected $config;
 
     /**
@@ -25,9 +29,8 @@ class Loader
      */
     protected function loadConfigFile($file)
     {
-    
         //load configuration object according to the file extension
-        switch(pathinfo($file, PATHINFO_EXTENSION)) {
+        switch (pathinfo($file, PATHINFO_EXTENSION)) {
 
             case 'php' :
                 $conf = new \Peak\Config\File($file);
@@ -51,6 +54,8 @@ class Loader
 
     /**
      * Get the loaded config object
+     *
+     * @return object
      */
     public function getConfig()
     {
