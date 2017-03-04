@@ -1,4 +1,5 @@
 <?php
+
 namespace Peak\Controller\Helper;
 
 /**
@@ -12,10 +13,10 @@ class Request
      */
     public function isAjax()
     {
-        if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest') {
+        if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest') {
             return true;
         }
-        else return false;
+        return false;
     }
     
     /**
@@ -46,25 +47,23 @@ class Request
     {
         $result = array();
 
-        if(array_key_exists('HTTP_ACCEPT_LANGUAGE', $_SERVER)) {
+        if (array_key_exists('HTTP_ACCEPT_LANGUAGE', $_SERVER)) {
 
             $pattern = '/^(?P<tag>[a-zA-Z]{2,8})'.'(?:-(?P<subtag>[a-zA-Z]{2,8}))?(?:(?:;q=)'.'(?P<quantifier>\d\.\d))?$/';
 
             foreach(explode(',', $_SERVER['HTTP_ACCEPT_LANGUAGE']) as $lang) {
 
-                if(preg_match($pattern, $lang, $splits)) {
-                    foreach($splits as $k => $v) {
-                        if(strlen($k) < 2) unset($splits[$k]);
+                if (preg_match($pattern, $lang, $splits)) {
+                    foreach ($splits as $k => $v) {
+                        if (strlen($k) < 2) unset($splits[$k]);
                     }
                     $result[] = $splits;
                 }
 
-                if($first_only) break;                
+                if ($first_only) break;                
             }
         }
 
         return ($first_only && is_array($result)) ? $result[0] : $result;
     }
-
-
 }
