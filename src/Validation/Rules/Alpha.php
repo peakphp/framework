@@ -23,7 +23,7 @@ class Alpha extends AbstractRule
 
     /**
      * Validate
-     * 
+     *
      * @param  mixed $value
      * @return bool
      */
@@ -40,7 +40,7 @@ class Alpha extends AbstractRule
 
     /**
      * Build the regex based on options
-     * 
+     *
      * @return array
      */
     protected function buildRegexOpt()

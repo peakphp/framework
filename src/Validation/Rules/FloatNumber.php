@@ -19,7 +19,7 @@ class FloatNumber extends AbstractRule
 
     /**
      * Validate
-     * 
+     *
      * @param  mixed $value
      * @return bool
      */

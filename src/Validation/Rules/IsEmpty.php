@@ -11,7 +11,7 @@ class IsEmpty extends AbstractRule
 {
     /**
      * Validate
-     * 
+     *
      * @param  mixed $value
      * @return bool
      */

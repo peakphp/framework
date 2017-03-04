@@ -19,7 +19,7 @@ class Regex extends AbstractRule
 
     /**
      * Validate
-     * 
+     *
      * @param  mixed $value
      * @return bool
      */

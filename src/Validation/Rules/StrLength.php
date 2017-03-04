@@ -20,7 +20,7 @@ class StrLength extends AbstractRule
 
     /**
      * Validate
-     * 
+     *
      * @param  mixed $value
      * @return bool
      */
