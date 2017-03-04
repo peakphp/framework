@@ -9,7 +9,6 @@ use Peak\View\Helper;
  */
 class Assets extends Helper
 {
-
     /**
      * Assets end url path
      * @var string
