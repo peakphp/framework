@@ -3,9 +3,7 @@
 namespace Peak\Spl;
 
 /**
- * Peak_Spl_Fileinfo
- * 
- * @desc    Extension of class SplFileInfo. Add auto/custom formatting options.
+ * Extension of class SplFileInfo. Add auto/custom formatting options.
  */
 class Fileinfo extends SplFileInfo 
 {
@@ -13,9 +11,11 @@ class Fileinfo extends SplFileInfo
      * Change these setting to create custom formatting
      * @var array
      */
-    public $formats = array('time'  => null,
-                            'size'  => false,
-                            'perms' => false);
+    public $formats = [
+        'time'  => null,
+        'size'  => false,
+        'perms' => false
+    ];
 
     /**
      * Specify a filepath to use and add custom format
@@ -26,7 +26,7 @@ class Fileinfo extends SplFileInfo
     public function __construct($filepath, $formats = null)
     {
         parent::__construct($filepath);
-        if(is_array($formats)) {
+        if (is_array($formats)) {
             $this->formats = array_merge($this->formats, $formats);
         }
     }
@@ -50,10 +50,10 @@ class Fileinfo extends SplFileInfo
      */
     private function getFormat($name)
     {
-        if(!is_null($this->formats[$name])) {
+        if (!is_null($this->formats[$name])) {
             return $this->formats[$name];
         }
-        else return false;
+        return false;
     }
 
     /**
@@ -65,7 +65,7 @@ class Fileinfo extends SplFileInfo
     public function getPerms($format = false)
     {
         $perms = parent::getPerms();
-        if(($format) || ($this->getFormat('perms'))) $perms = substr(sprintf('%o', $perms), -4);
+        if (($format) || ($this->getFormat('perms'))) $perms = substr(sprintf('%o', $perms), -4);
         return $perms;
     }
 
@@ -78,8 +78,8 @@ class Fileinfo extends SplFileInfo
     public function getAtime($dateformat = null)
     {
         $time = parent::getATime();
-        if(isset($dateformat)) $time = date($dateformat,$time);
-        elseif($this->getFormat('time')) $time = date($this->getFormat('time'),$time);
+        if (isset($dateformat)) $time = date($dateformat,$time);
+        elseif ($this->getFormat('time')) $time = date($this->getFormat('time'),$time);
         return $time;
     }
 
@@ -92,8 +92,8 @@ class Fileinfo extends SplFileInfo
     public function getCtime($dateformat = null)
     {
         $time = parent::getCTime();
-        if(isset($dateformat)) $time = date($dateformat,$time);
-        elseif($this->getFormat('time')) $time = date($this->getFormat('time'),$time);
+        if (isset($dateformat)) $time = date($dateformat,$time);
+        elseif ($this->getFormat('time')) $time = date($this->getFormat('time'),$time);
         return $time;
     }
 
@@ -106,8 +106,8 @@ class Fileinfo extends SplFileInfo
     public function getMtime($dateformat = null)
     {
         $time = parent::getMTime();
-        if(isset($dateformat)) $time = date($dateformat,$time);
-        elseif($this->getFormat('time')) $time = date($this->getFormat('time'),$time);
+        if (isset($dateformat)) $time = date($dateformat,$time);
+        elseif ($this->getFormat('time')) $time = date($this->getFormat('time'),$time);
         return $time;
     }
 
@@ -120,10 +120,9 @@ class Fileinfo extends SplFileInfo
     public function getSize($format = false)
     {
         if(!$format) return parent::getSize();
-        else {
-            $unit = array('B','kB','MB','GB','TB','PB');
-            return @round($this->_size/pow(1024,($i=floor(log($this->_size,1024)))),2).' '.$unit[$i];
-        }
+        
+        $unit = array('B','kB','MB','GB','TB','PB');
+        return @round($this->_size/pow(1024,($i=floor(log($this->_size,1024)))),2).' '.$unit[$i];
     }
 
     /**
