@@ -29,7 +29,6 @@ class Grid extends Helper
      */
     private $_columns_url = ['url' => '', 'binds' => '', 'result' => ''];
     
-    
     /**
      * Set which column defines the table sorting
      * @var array
@@ -60,7 +59,6 @@ class Grid extends Helper
      */
     private $_table_classes = 'table table-striped';
     
-    
     /**
      * Set-up the grid data
      *
@@ -68,7 +66,7 @@ class Grid extends Helper
      */
     public function __construct($data = null)
     {
-        if(is_array($data)) $this->setData($data);
+        if (is_array($data)) $this->setData($data);
     }
     
     /**
@@ -97,7 +95,7 @@ class Grid extends Helper
     public function setColumns($cols)
     {
         $this->_columns = array();
-        foreach($cols as $k => $v) $this->_columns[trim($k)] = $v;
+        foreach ($cols as $k => $v) $this->_columns[trim($k)] = $v;
         return $this;
     }
     
@@ -111,8 +109,8 @@ class Grid extends Helper
     public function setColumnsUrl($url, $binds = null)
     {
         $result = $url;
-        if(!empty($binds) && is_array($binds)) {
-            foreach($binds as $k => $v) {
+        if (!empty($binds) && is_array($binds)) {
+            foreach ($binds as $k => $v) {
                 $result = str_replace(':'.$k, $v, $result);
             }
         }
@@ -136,10 +134,10 @@ class Grid extends Helper
      */
     public function excludeCols($cols)
     {
-        if(is_array($cols)) {
+        if (is_array($cols)) {
             $this->_exclude_colums = array();
-            if(!empty($cols)) {
-                foreach($cols as $c) {
+            if (!empty($cols)) {
+                foreach ($cols as $c) {
                     $this->_exclude_colums[$c] = $c;
                 }
             }
@@ -168,9 +166,9 @@ class Grid extends Helper
      */
     public function addHook($colname, $fn, $params = null)
     {
-        if(is_array($fn)) $h = array('hooks' => $fn);
+        if (is_array($fn)) $h = array('hooks' => $fn);
         else {
-            if(!is_null($params)) $h = array('hooks' => array(array($fn, $params)));
+            if (!is_null($params)) $h = array('hooks' => array(array($fn, $params)));
             else $h = array('hooks' => array(array($fn)));
         }
         
@@ -202,7 +200,7 @@ class Grid extends Helper
     public function addRowDataAttr($attr, $column, $value = null)
     {
         $this->_row_data_attr = '';
-        if(is_null($value)) {
+        if (is_null($value)) {
             $this->_row_data_attrs[$attr] = $column;
         }
         else $this->_row_data_attrs[$attr] = array('value' => $value);
@@ -232,7 +230,7 @@ class Grid extends Helper
      */
     public function addTableClasses($classes)
     {
-        if(!empty($classes)) {
+        if (!empty($classes)) {
             $this->_table_classes .= (substr($classes,0,1) === ' ') ? $classes : ' '.$classes;
         }
         return $this;
@@ -248,9 +246,9 @@ class Grid extends Helper
     private function _isValidColumn($title, $row_sample = null)
     {
         //we will try to get a sample
-        if(is_null($row_sample)) {
-            if(!empty($this->_data)) {
-                foreach($this->_data as $index => $row) {
+        if (is_null($row_sample)) {
+            if (!empty($this->_data)) {
+                foreach ($this->_data as $index => $row) {
                     $row_sample = $row;
                     break;
                 }
@@ -260,8 +258,8 @@ class Grid extends Helper
         }
 
         //ok, sample is there, we can check
-        if(array_key_exists(trim($title), $row_sample) === true) return true;
-        else return false;
+        if (array_key_exists(trim($title), $row_sample) === true) return true;
+        return false;
     }
     
     /**
@@ -273,8 +271,8 @@ class Grid extends Helper
      */
     private function _isPseudoColumn($title)
     {
-        if(substr($title,0,1) === ':' && isset($this->_hooks[$title])) return true;
-        else return false;
+        if (substr($title,0,1) === ':' && isset($this->_hooks[$title])) return true;
+        return false;
     }
         
     /**
@@ -285,32 +283,32 @@ class Grid extends Helper
     public function render($force_output_on_empty_data = false)
     {
         // skip everything if we don't have data
-        if(empty($this->_data) && !$force_output_on_empty_data) return;
+        if (empty($this->_data) && !$force_output_on_empty_data) return;
 
         // discover columns if they where not specified
-        if(empty($this->_columns)) $this->_discoverColumns();
+        if (empty($this->_columns)) $this->_discoverColumns();
         
         echo '<table class="'.$this->_table_classes.'">'.$this->_line_break;
         
         // head
         echo '<thead><tr>';
-        foreach($this->_columns as $colname => $coltitle) {
+        foreach ($this->_columns as $colname => $coltitle) {
 
 
-            if( ($this->_isValidColumn($colname) || $force_output_on_empty_data) || $this->_isPseudoColumn($colname)) {
+            if ( ($this->_isValidColumn($colname) || $force_output_on_empty_data) || $this->_isPseudoColumn($colname)) {
                 
                 echo '<th data-column="'.$colname.'"';
                 
                 // add data attr for sorting
-                if($this->_column_sorting['name'] === $colname) {
+                if ($this->_column_sorting['name'] === $colname) {
                     echo ' data-sorted="yes"';
-                    if(!empty($this->_column_sorting['direction'])) echo ' data-direction="'.$this->_column_sorting['direction'].'"';
+                    if (!empty($this->_column_sorting['direction'])) echo ' data-direction="'.$this->_column_sorting['direction'].'"';
                 }
                 
                 echo '>';
                 
                 // add url to column th
-                if(!empty($this->_columns_url['result']) && !$this->_isPseudoColumn($colname)) {
+                if (!empty($this->_columns_url['result']) && !$this->_isPseudoColumn($colname)) {
                     $url = $this->_columns_url['result'];
                     $url = str_replace(':column', $colname, $url);
                     
@@ -324,21 +322,21 @@ class Grid extends Helper
         echo '</tr></thead><tbody>'.$this->_line_break;
         
         //body
-        if(!empty($this->_data)) {
-            foreach($this->_data as $index => $row) {
+        if (!empty($this->_data)) {
+            foreach ($this->_data as $index => $row) {
 
                 // try to explicitly convert object to array
-                if(is_object($row)) $row = (array)$row;
+                if (is_object($row)) $row = (array)$row;
                 
                 //new row
                 echo '<tr data-index="'.$index.'"'.$this->_rowDataAttr($row).'>';
                 
-                foreach($this->_columns as $colname => $coltitle) {
+                foreach ($this->_columns as $colname => $coltitle) {
     
                     //check if column exists
-                    if(!$this->_isValidColumn($colname, $row)) {
+                    if (!$this->_isValidColumn($colname, $row)) {
                         //here we check if its a valid "pseudo" column
-                        if($this->_isPseudoColumn($colname)) $row_data = $row;
+                        if ($this->_isPseudoColumn($colname)) $row_data = $row;
                         else continue;
                     }
                     else $row_data = $row[$colname];
@@ -369,25 +367,25 @@ class Grid extends Helper
     private function _processHook($colname, $row_data, $row_context)
     {
         //look for hook baby!
-        if(!isset($this->_hooks[$colname])) return $row_data;
+        if (!isset($this->_hooks[$colname])) return $row_data;
             
         $hooks_col = $this->_hooks[$colname];
         
         //array of hook
-        if(is_array($hooks_col)) {
+        if (is_array($hooks_col)) {
             
             $hooks = $hooks_col['hooks'];
 
-            foreach($hooks as $i => $h) {
+            foreach ($hooks as $i => $h) {
 
                 // reset
                 $hook_fn = null;
                 $params  = null;
 
                 // check if we have multiples hooks with/without params
-                if(is_array($h)) {
-                    if(array_key_exists(0, $h)) $hook_fn = $h[0];
-                    if(array_key_exists(1, $h)) $params = $h[1];
+                if (is_array($h)) {
+                    if (array_key_exists(0, $h)) $hook_fn = $h[0];
+                    if (array_key_exists(1, $h)) $params = $h[1];
                 }
                 // its just a plain hook with no params
                 else {
@@ -396,19 +394,19 @@ class Grid extends Helper
                 }
                        
                 // closure params stuff    
-                if(is_array($params) && array_key_exists('fields', $params)) {
+                if (is_array($params) && array_key_exists('fields', $params)) {
                               
-                    if(is_array($params['fields'])) {
+                    if (is_array($params['fields'])) {
                         $fields = array();
-                        foreach($params['fields'] as $field) {
-                            if(array_key_exists($field, $row_data)) $fields[$field] = $row_data[$field];
+                        foreach ($params['fields'] as $field) {
+                            if (array_key_exists($field, $row_data)) $fields[$field] = $row_data[$field];
                         }
                         $params['fields'] = $fields;
                     }
-                    elseif($params['fields'] === '*') {
+                    elseif ($params['fields'] === '*') {
                         $params['fields'] = $row_context;
                     }
-                    elseif(array_key_exists($params['fields'], $row)) {
+                    elseif (array_key_exists($params['fields'], $row)) {
                         $params['fields'] = $row_data[$h['fields']];
                     }
                     else $params['fields'] = null;
@@ -431,12 +429,12 @@ class Grid extends Helper
     {
         $cols = array();
         
-        if(empty($this->_data));
+        if (empty($this->_data));
         
-        foreach($this->_data as $row) {
-            if(is_array($row)) {
-                foreach($row as $colname => $value) {
-                    if(!isset($this->_exclude_colums[$colname])) {
+        foreach ($this->_data as $row) {
+            if (is_array($row)) {
+                foreach ($row as $colname => $value) {
+                    if (!isset($this->_exclude_colums[$colname])) {
                         $cols[$colname] = $colname;
                     }
                 }
@@ -453,16 +451,16 @@ class Grid extends Helper
     {
         $r = '';
         
-        if(empty($this->_row_data_attrs)) return $r;
+        if (empty($this->_row_data_attrs)) return $r;
 
-        foreach($this->_row_data_attrs as $attr => $v) {
+        foreach ($this->_row_data_attrs as $attr => $v) {
             
-            if(is_array($v)) {
-                if(array_key_exists('value', $v))
+            if (is_array($v)) {
+                if (array_key_exists('value', $v))
                 $r .= ' '.$attr.'="'.$v['value'].'"';
             }
             else {
-                if((array_key_exists($v,$row))) {
+                if ((array_key_exists($v,$row))) {
                     $r .= ' '.$attr.'="'.$row[$v].'"';
                 }
             } 

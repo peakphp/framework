@@ -29,10 +29,10 @@ class Assets extends Helper
     public function __construct($path = null, $url = null)
     {
         parent::__construct();
-        if(isset($path)) $this->setPath($path);
+        if (isset($path)) $this->setPath($path);
         else $this->setPath('assets');
 
-        if(isset($url)) $this->setUrl($url);
+        if (isset($url)) $this->setUrl($url);
         else $this->setUrl(url());
     }
 
@@ -47,7 +47,7 @@ class Assets extends Helper
      */
     public function __call($method, $args)
     {
-        if(array_key_exists(1, $args)) {
+        if (array_key_exists(1, $args)) {
             return $this->process($method, $args[0], $args[1]);
         }
 
@@ -74,7 +74,7 @@ class Assets extends Helper
      */
     public function setUrl($url)
     {
-        if(substr($url, -1, 1) === '/') $url = substr($url, 0, strlen($url) - 1);
+        if (substr($url, -1, 1) === '/') $url = substr($url, 0, strlen($url) - 1);
         $this->_assets_base_url = $url;
 
         return $this;
@@ -106,25 +106,25 @@ class Assets extends Helper
         $mtype  = '_asset_'.$type;
 
         // force paths to be an array
-        if(!is_array($paths)) $paths = array($paths);
-        if(empty($paths)) return;
+        if (!is_array($paths)) $paths = array($paths);
+        if (empty($paths)) return;
 
         // if asset type doesn't exists
-        if(!method_exists($this, $mtype)) {
+        if (!method_exists($this, $mtype)) {
 
             // if type is auto, we will retreive asset based on file extension if asset method exists
-            if(in_array($type, array('auto', 'auto-detect', 'autodetect'))) {
+            if (in_array($type, array('auto', 'auto-detect', 'autodetect'))) {
 
-                foreach($paths as $p) {
+                foreach ($paths as $p) {
                     $ext = '_asset_'.pathinfo($p, PATHINFO_EXTENSION);
-                    if(method_exists($this, $ext)) $output .= $this->$ext($p, $param);
+                    if (method_exists($this, $ext)) $output .= $this->$ext($p, $param);
                 }
 
             }
             else return;
         }
         else {
-            foreach($paths as $p) {
+            foreach ($paths as $p) {
                 $output .= $this->$mtype($p, $param);
             }
         }
@@ -159,7 +159,6 @@ class Assets extends Helper
      * Stylesheet <link> tag
      *
      * @param  string $path
-     *
      * @return string
      */
     protected function _asset_css($filepath, $param = null)

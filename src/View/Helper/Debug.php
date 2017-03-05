@@ -19,8 +19,7 @@ class Debug extends Helper
     {
     	$object_list = Registry::getObjectList();
     	echo '<pre class="peak_debug_tree">';
-    	foreach($object_list as $obj) {
-    		
+    	foreach ($object_list as $obj) {
     		print_r(Registry::o()->$obj);
     	}
     	echo '</pre>';
@@ -36,11 +35,11 @@ class Debug extends Helper
 		$app = Registry::o()->app;
 		$cfile_name = $app->front->controller->name;
 		$cfile = Application::conf('path.apptree.controllers').'/'.$cfile_name.'.php';
-		if(file_exists($cfile)) {
+		if (file_exists($cfile)) {
 			$cfile_content = file_get_contents($cfile);
 			return $cfile_content;
 		}
-		else return false;
+		return false;
 	}
 	
 	/**
@@ -54,11 +53,11 @@ class Debug extends Helper
 		$sfile_name = $app->front->controller->file;
 		$sfile = $app->front->controller->path.'/'.$sfile_name;
 		
-		if(file_exists($sfile)) {
+		if (file_exists($sfile)) {
 			$sfile_content = file_get_contents($sfile);
 			return $sfile_content;
 		}
-		else return false;
+		return false;
 	}
 	
 	/**
@@ -72,10 +71,10 @@ class Debug extends Helper
 		$files = array();
 		$total_size = 0;
 		$library_path = str_replace(array('\\','//'),'/',realpath(LIBRARY_ABSPATH));
-		foreach($temp as $file) {
+		foreach ($temp as $file) {
 			$total_size += filesize($file);
 			$file = str_replace('\\','/',$file);
-			if(stristr($file, $library_path) !== false) $files['peak'][] = $file;
+			if (stristr($file, $library_path) !== false) $files['peak'][] = $file;
 			else $files['app'][] = $file;
 		}
 		$files['total_size'] = $total_size;

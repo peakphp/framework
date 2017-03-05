@@ -23,7 +23,7 @@ class Tagattrs extends Helper
      */
     public function addAttrs(array $attrs)
     {
-        foreach($attrs as $k => $v) $this->_attrs[$k] = $v;
+        foreach ($attrs as $k => $v) $this->_attrs[$k] = $v;
         return $this;
     }
     
@@ -47,7 +47,7 @@ class Tagattrs extends Helper
      */
     public function addClass($name)
     {
-        if(isset($this->_attrs['class'])) {
+        if (isset($this->_attrs['class'])) {
             $this->_attrs['class'] .= ' '.$name;
         }
         else $this->setClass($name);
@@ -98,10 +98,10 @@ class Tagattrs extends Helper
      */
     public function addStyle(array $style)
     {
-         if(isset($this->_attrs['style'])) {
-             foreach($style as $k => $v) {
-                 $this->_attrs['style'][$k] = $v;
-             }
+        if (isset($this->_attrs['style'])) {
+            foreach ($style as $k => $v) {
+                $this->_attrs['style'][$k] = $v;
+            }
         }
         else $this->setStyle($style);
         return $this;
@@ -127,16 +127,16 @@ class Tagattrs extends Helper
     public function __toString()
     {
         $attrs_string = '';
-        foreach($this->_attrs as $k => $v) {
-            if(!is_array($v)) $attrs_string .= ' '.$k.'="'.$v.'"';
-            elseif($k === 'style') {
+        foreach ($this->_attrs as $k => $v) {
+            if (!is_array($v)) $attrs_string .= ' '.$k.'="'.$v.'"';
+            elseif ($k === 'style') {
                 $attrs_string .= ' style="';
-                foreach($v as $css_key => $css_val) $attrs_string .=  $css_key.':'.$css_val.';';
+                foreach ($v as $css_key => $css_val) $attrs_string .=  $css_key.':'.$css_val.';';
                 $attrs_string .= '"';
             }
             else {
                 $attrs_string .= ' '.$k.'="';
-                foreach($v as $av) $attrs_string .=  $av.' ';
+                foreach ($v as $av) $attrs_string .=  $av.' ';
                 $attrs_string .= '"';
             }
         }
