@@ -19,7 +19,6 @@ use Peak\Config\DotNotation;
  */
 class Ini extends DotNotation
 {
-
     /**
      * Load file on class construct
      *
@@ -27,7 +26,9 @@ class Ini extends DotNotation
      */
     public function __construct($file = null, $process_sections = false, $section_name = null)
     {
-        if (isset($file)) $this->loadFile($file, $process_sections, $section_name);
+        if (isset($file)) {
+            $this->loadFile($file, $process_sections, $section_name);
+        }
     }
     
     /**
@@ -54,13 +55,12 @@ class Ini extends DotNotation
         }
         
         return $this->_load($ini, $process_sections, $section_name);
-        
     }
     
     /**
      * Parse ini from a string (PHP 5 >= 5.3.0)
      *
-     * If you really need this under PHP 5 < 5.3.0, uncomment function 
+     * If you really need this under PHP 5 < 5.3.0, uncomment function
      * parse_ini_string() at the bottom of this file
      *
      * @see _load()
@@ -75,7 +75,7 @@ class Ini extends DotNotation
     /**
      * Loads in the ini file specified in filename, and returns the settings in
      * it as an associative multi-dimensional array
-     * 
+     *
      * @param  string  $ini              Parsed content by php function parse_ini_*
      * @param  boolean $process_sections By setting the process_sections parameter to TRUE,
      *                                   you get a multidimensional array, with the section
@@ -86,19 +86,23 @@ class Ini extends DotNotation
      * @return array|boolean
      */
     public function _load($ini, $process_sections = false, $section_name = null)
-    {       
+    {
         // load the raw ini file 
         //$ini = parse_ini_string($data, $process_sections);
 
         // fail if there was an error while processing the specified ini file
-        if ($ini === false) return false;
+        if ($ini === false) {
+            return false;
+        }
 
         // reset the result array
         $this->items = array();
 
         if ($process_sections === true) {
             // loop through each section
-            foreach ($ini as $section => $contents) $this->_processSection($section, $contents);
+            foreach ($ini as $section => $contents) {
+                $this->_processSection($section, $contents);
+            }
         } else {
             // treat the whole ini file as a single section
             $this->items = $this->_processSectionContents($ini);
@@ -108,8 +112,9 @@ class Ini extends DotNotation
         if ($process_sections === true) {
             if ($section_name !== null) {
                 // return the specified section contents if it exists
-                if (isset($this->items[$section_name])) $this->items = $this->items[$section_name];
-                else {
+                if (isset($this->items[$section_name])) {
+                    $this->items = $this->items[$section_name];
+                } else {
                     throw new Exception('ERR_CUSTOM', __CLASS__.': Section ' . $section_name . ' not found in the ini file');
                 }
             }
@@ -118,7 +123,6 @@ class Ini extends DotNotation
         // if no specific section is required, just return the whole result
         return $this->items;
     }
-
 
     /**
      * Process contents of the specified section
@@ -132,7 +136,6 @@ class Ini extends DotNotation
         // the section does not extend another section
         if (stripos($section, ':') === false) {
             $this->items[$section] = $this->_processSectionContents($contents);
-
         // section extends another section
         } else {
             // extract section names
@@ -152,7 +155,6 @@ class Ini extends DotNotation
             $this->items[$ext_target] = $this->_mergeRecursiveDistinct($this->items[$ext_source], $this->items[$ext_target]);
         }
     }
-
 
     /**
      * Process contents of a section
@@ -174,7 +176,6 @@ class Ini extends DotNotation
         
         return $result;
     }
-
 
     /**
      * Convert a.b.c.d paths to multi-dimensional arrays
