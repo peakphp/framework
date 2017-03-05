@@ -82,12 +82,10 @@ VERSION 2.0.0
 -------------
 Release Date: 2017-01-27
 
-#######################################################################
-Warning! Breaking changes in 2.0.* :
-If you want want to support an old application, please use version 1.*
+~ Warning! Breaking changes in 2.0.x
+If you want want to support an old application, please use version 1.x
 This version is incompatible with 1.0.0 because most componments have  
 been rewritten, splitted and/or reorganised.
-########################################################################
  
  - namespace migration
  - multiples fix due to namespace migration
