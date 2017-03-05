@@ -39,7 +39,7 @@ class Fileinfo extends SplFileInfo
      */
     public function setFile($filepath, $formats = null)
     {
-        $this->__construct($filepath,$formats);
+        $this->__construct($filepath, $formats);
     }
 
     /**
@@ -65,50 +65,61 @@ class Fileinfo extends SplFileInfo
     public function getPerms($format = false)
     {
         $perms = parent::getPerms();
-        if (($format) || ($this->getFormat('perms'))) $perms = substr(sprintf('%o', $perms), -4);
+        if (($format) || ($this->getFormat('perms'))) {
+            $perms = substr(sprintf('%o', $perms), -4);
+        }
         return $perms;
     }
 
     /**
      * Get latest file access time. use $format['time']
      *
-     * @param  string $dateformat
+     * @param  string $format
      * @return string
      */
-    public function getAtime($dateformat = null)
+    public function getAtime($format = null)
     {
         $time = parent::getATime();
-        if (isset($dateformat)) $time = date($dateformat,$time);
-        elseif ($this->getFormat('time')) $time = date($this->getFormat('time'),$time);
-        return $time;
+        return $this->formatTime($time, $format);
     }
 
     /**
      * Get file creation time. use $format['time']
      *
-     * @param  string $dateformat
+     * @param  string $format
      * @return string
      */
-    public function getCtime($dateformat = null)
+    public function getCtime($format = null)
     {
         $time = parent::getCTime();
-        if (isset($dateformat)) $time = date($dateformat,$time);
-        elseif ($this->getFormat('time')) $time = date($this->getFormat('time'),$time);
-        return $time;
+        return $this->formatTime($time, $format);
     }
 
     /**
      * Get file modification time. use $format['time']
      *
-     * @param  string $dateformat
+     * @param  string $format
      * @return string
      */
-    public function getMtime($dateformat = null)
+    public function getMtime($format = null)
     {
         $time = parent::getMTime();
-        if (isset($dateformat)) $time = date($dateformat,$time);
-        elseif ($this->getFormat('time')) $time = date($this->getFormat('time'),$time);
-        return $time;
+        return $this->formatTime($time, $format);
+    }
+
+    /**
+     * Format time
+     *
+     * @param  string $time
+     * @param  string $format
+     * @return string
+     */
+    protected function formatTime($time, $format = null)
+    {
+        if (!isset($format)) {
+            $format = $this->getFormat('time');
+        }
+        return date($format, $time);
     }
 
     /**
@@ -119,7 +130,9 @@ class Fileinfo extends SplFileInfo
      */
     public function getSize($format = false)
     {
-        if(!$format) return parent::getSize();
+        if(!$format) {
+            return parent::getSize();
+        }
         
         $unit = array('B','kB','MB','GB','TB','PB');
         return @round($this->_size/pow(1024,($i=floor(log($this->_size,1024)))),2).' '.$unit[$i];
