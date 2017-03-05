@@ -42,7 +42,7 @@ class Application
      * Start framework
      */
     private function __construct(Collection $conf)
-    {   
+    {
         // application config             
         $this->config = $conf;
 
@@ -52,18 +52,17 @@ class Application
 
         $this->routing = new Routing();
 
-        $this->_loadBootstrap();
-        $this->_loadFront();
+        $this->loadBootstrap();
+        $this->loadFront();
     }
-
 
     /**
      * Create a instance of application
-     * 
+     *
      * @param  array $config
      * @return Application
      */
-    static function create(Array $config) 
+    public static function create(Array $config) 
     {
         $config = new Config($config);
         return new static($config->getMountedConfig());
@@ -80,8 +79,7 @@ class Application
     {
         if (!isset($path)) {
             return $this->config;
-        }
-        elseif (!isset($value)) {
+        } elseif (!isset($value)) {
             return $this->config->get($path);
         }
         
@@ -91,13 +89,14 @@ class Application
 
     /**
      * Static version of config() use current Application instance in Registry
+     *
+     * @return $this
      */
-    static function conf($path = null, $value = null)
+    public static function conf($path = null, $value = null)
     {
         if (!isset($path)) {
             return Registry::o()->app->config();
-        }
-        elseif (!isset($value)) {
+        } elseif (!isset($value)) {
             return Registry::o()->app->config($path);
         }
 
@@ -112,8 +111,8 @@ class Application
      */
     public function reload()
     {
-        $this->_loadBootstrap();
-        $this->_loadFront();
+        $this->loadBootstrap();
+        $this->loadFront();
         return $this;
     }
 
@@ -122,17 +121,16 @@ class Application
      *
      * @param string $prefix Bootstrap class prefix name if exists
      */
-    private function _loadBootstrap()
+    private function loadBootstrap()
     {
         $cname = $this->config('ns').'\Bootstrap';
-        if (class_exists($cname)) $this->bootstrap = new $cname();
-        else $this->bootstrap = new Bootstrapper();
+        $this->bootstrap = (class_exists($cname)) ? new $cname() : new Bootstrapper();
     }
 
     /**
      * Load and store application Front Controller
      */
-    private function _loadFront()
+    private function loadFront()
     {
         $cname = $this->config('ns').'\Front';
         $this->front = (class_exists($cname)) ? new $cname() : new Front();
