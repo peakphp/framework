@@ -25,7 +25,7 @@ class Annotations
      * By default no tags will be detected.
      * @var array|string
      */
-    protected $_tags;
+    protected $tags;
     
     /**
      * Setup a class to use and tags to detect
@@ -67,7 +67,7 @@ class Annotations
      */
     public function setTags($tags)
     {
-        $this->_tags = $tags;
+        $this->tags = $tags;
         return $this;
     }
     
@@ -75,7 +75,7 @@ class Annotations
      * Get a methods annotation tags
      *
      * @param  string $method_name
-     * @retrun array()
+     * @return array
      */
     public function getFromMethod($method_name)
     {
@@ -90,7 +90,7 @@ class Annotations
     }
     
     /**
-     * Get all methods annotations tags 
+     * Get all methods annotations tags
      *
      * @return array
      */
@@ -125,17 +125,17 @@ class Annotations
     public function parse($string)
     {
         //in case we don't have any tag to detect or an empty doc comment, we skip this method
-        if (empty($this->_tags) || empty($string)) {
+        if (empty($this->tags) || empty($string)) {
             return [];
         }
    
-        //check what is the type of $_tags (array|string|wildcard)
-        if (is_array($this->_tags)) {
-            $tags = '('.implode('|', $this->_tags).')';
-        } elseif ($this->_tags === '*') {
+        //check what is the type of $tags (array|string|wildcard)
+        if (is_array($this->tags)) {
+            $tags = '('.implode('|', $this->tags).')';
+        } elseif ($this->tags === '*') {
             $tags = '[a-zA-Z0-9]';
         } else {
-            $tags = '('.$this->_tags.')';
+            $tags = '('.$this->tags.')';
         }
         
         //find @[tag] [params...]

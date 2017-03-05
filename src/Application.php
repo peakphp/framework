@@ -139,7 +139,7 @@ class Application
     /**
      * Start front dispatching of a request
      *
-     * @param  mixed $request if specified, force the request, 
+     * @param  mixed $request if specified, force the request,
      *         otherwise, it will use server request uri
      * @return $this
      */
