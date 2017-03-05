@@ -12,9 +12,11 @@ use Peak\View\Render;
  */
 class Layouts extends Render
 {
-        
-    protected $_layout_file;   //current layout filename       
-
+    /**
+     * Current layout filename
+     * @var string
+     */
+    protected $_layout_file;  
        
     /**
      * Set layout filename to render
@@ -23,7 +25,9 @@ class Layouts extends Render
      */
     public function useLayout($layout)
     {
-        if($this->isLayout($layout.'.php')) $this->_layout_file = $layout.'.php';
+        if ($this->isLayout($layout.'.php')) {
+            $this->_layout_file = $layout.'.php';
+        }
     }
     
     /**
@@ -45,7 +49,7 @@ class Layouts extends Render
     {
         $this->_layout_file = null;
     }
-        
+
     /**
      * Render view(s)
      *
@@ -56,40 +60,41 @@ class Layouts extends Render
     public function render($file, $path = null)
     {
         // default path, no path submitted
-        if(!isset($path)) {
+        if (!isset($path)) {
             $path = Application::conf('path.apptree.views');
             $no_cache = true;
+        } else {
+            $is_scripts_path = true;
         }
-        else $is_scripts_path = true;
 
-        
         // absolute file path to render     
         $filepath = $path.'/'.$file;
 
         // throw the most reliable exception depending on submitted arguments to this method
-        if(!file_exists($filepath)) {         
-            if(isset($is_scripts_path)) {
+        if (!file_exists($filepath)) {         
+            if (isset($is_scripts_path)) {
                 $filepath = Registry::o()->app->front->controller->getTitle() .'/'. basename($filepath);
                 throw new Exception('ERR_VIEW_SCRIPT_NOT_FOUND', basename($filepath));
-            }
-            else {
+            } else {
                 $filepath = str_replace($path, '', $filepath);
                 throw new Exception('ERR_VIEW_FILE_NOT_FOUND', basename($filepath));
             }
         }
                      
         // render the layout if is set
-        if((isset($this->_layout_file)) && ($this->isLayout($this->_layout_file))) {
+        if ((isset($this->_layout_file)) && ($this->isLayout($this->_layout_file))) {
             $filepath = Application::conf('path.apptree.views_layouts').'/'.$this->_layout_file;
             $this->scripts_file = $file;
             $this->scripts_path = $path;
         }
 
-        if(isset($no_cache)) $this->output($filepath);
-        else $this->preOutput($filepath);
+        if (isset($no_cache)) {
+            $this->output($filepath);
+        } else {
+            $this->preOutput($filepath);
+        }
     }
-    
-     
+
     /**
      * Output the main layout
      *
@@ -113,5 +118,4 @@ class Layouts extends Render
     {
         include($this->scripts_path.'/'.$this->scripts_file);
     }
-        
 }
