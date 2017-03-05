@@ -2,7 +2,7 @@
 
 namespace Peak;
 
-/** 
+/**
  * Manage a global timer and/or multiple timers
  */
 class Chrono
@@ -12,7 +12,7 @@ class Chrono
      * @var array
      */
     private static $global = [
-        'start' => false, 
+        'start' => false,
         'end' => false
     ];
 
@@ -31,12 +31,12 @@ class Chrono
     {
         if (!isset($timer_name)) {
             self::$global = [
-                'start' => self::getMicrotime(), 
+                'start' => self::getMicrotime(),
                 'end' => false
-            ];      
+            ];
         }
         else self::$timers[$timer_name] = [
-            'start' => self::getMicrotime(), 
+            'start' => self::getMicrotime(),
             'end' => false
         ];
     }
@@ -50,8 +50,9 @@ class Chrono
     {       
         if (self::timerExists($timer_name)) {
             self::$timers[$timer_name]['end'] = self::getMicrotime();
+        } else {
+            self::$global['end'] = self::getMicrotime();
         }
-        else self::$global['end'] = self::getMicrotime();     
     }
 
     /**
@@ -73,7 +74,9 @@ class Chrono
     public static function isOn($timer_name = null)
     {
         if (!isset($timer_name)) {
-            if ((self::$global['start'] === false) || (self::$global['end'] !== false)) return false;
+            if ((self::$global['start'] === false) || (self::$global['end'] !== false)) {
+                return false;
+            }
             return true;
         }
         elseif (self::timerExists($timer_name)) {
@@ -83,7 +86,6 @@ class Chrono
             return true;
         }
         return false;
-  
     }
 
     /**
@@ -95,8 +97,10 @@ class Chrono
     public static function isCompleted($timer_name = null)
     {
         if (!isset($timer_name)) {
-            if ((self::$global['start'] !== false) && (self::$global['end'] !== false)) return true;
-            else return false;
+            if ((self::$global['start'] !== false) && (self::$global['end'] !== false)) {
+                return true;
+            }
+            return false;
         }
         elseif (self::timerExists($timer_name)) {
             if ((self::$timers[$timer_name]['start'] !== false) && (self::$timers[$timer_name]['end'] !== false)) {
@@ -131,12 +135,12 @@ class Chrono
         if (self::isCompleted($timer_name)) {
             if (self::timerExists($timer_name)) {
                 $time_elapsed = self::_elapsed(self::$timers[$timer_name]);
-            }
-            else {
+            } else {
                 $time_elapsed = self::_elapsed(self::$global);
             }
             return round(($time_elapsed), $decimal_precision);
-        }        
+        }
+
         return false;
     }
 
@@ -163,7 +167,9 @@ class Chrono
         if (isset($timer_name)) {
             if (self::timerExists($timer_name)) unset(self::$timers[$timer_name]);
         }
-        else self::$global = ['start' => false, 'end' => false];  
+        else {
+            self::$global = ['start' => false, 'end' => false];
+        }
     }
 
     /**
