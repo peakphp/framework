@@ -51,10 +51,13 @@ class View
     public function __construct($vars = null)
     {
         if (isset($vars)) {
-            if (is_array($vars)) $this->_vars = $vars;
-            else $this->iniVar($vars);
+            if (is_array($vars)) {
+                $this->_vars = $vars;
+            } else {
+                $this->iniVar($vars);
+            }
         }
-    }   
+    }
 
     /**
      * Set/overwrite view variable
@@ -74,8 +77,10 @@ class View
      * @return anything
      */
     public function &__get($name)
-    {        
-        if (isset($this->_vars[$name])) return $this->_vars[$name];
+    {
+        if (isset($this->_vars[$name])) {
+            return $this->_vars[$name];
+        }
         return ${null};
     }
 
@@ -97,7 +102,9 @@ class View
      */
     public function __unset($name)
     {
-        if (array_key_exists($name,$this->_vars)) unset($this->_vars[$name]);
+        if (array_key_exists($name,$this->_vars)) {
+            unset($this->_vars[$name]);
+        }
     }
 
     /**
@@ -113,8 +120,9 @@ class View
     {
         if (method_exists($this->engine(),$method)) {
             return call_user_func_array(array($this->engine(), $method), $args);        
+        } else {
+            return $this->helper($method);
         }
-        else return $this->helper($method);
         /*
         elseif((isset($this->helper($method)) || ($this->helper()->exists($method))) {
             if(!empty($args)) {
@@ -139,7 +147,7 @@ class View
     public function set($name, $value = null)
     {
         $this->__set($name,$value);
-        return $this;       
+        return $this;
     }
 
     /**
@@ -164,6 +172,8 @@ class View
 
     /**
      * Set/Overwrite some view vars
+     *
+     * @param array $vars
      */
     public function setVars($vars)
     {
@@ -172,7 +182,7 @@ class View
 
     /**
      * Set/Add some view vars
-     * Existing var key name will be overwrited, otherwise var is added to current $_vars 
+     * Existing var key name will be overwrited, otherwise var is added to current $_vars
      */
     public function addVars($vars)
     {
@@ -192,7 +202,7 @@ class View
     /**
      * Set/Get current view rendering engine object
      *
-     * @param  string $engine_name 
+     * @param  string $engine_name
      * @return object Peak_View_Render_*
      */
     public function engine($engine_name = null)
@@ -205,7 +215,7 @@ class View
             }
             $this->_engine = new $engine_class();
         }
-        
+
         return $this->_engine;
     }
 
@@ -264,7 +274,9 @@ class View
     public function render($file, $path = null)
     {
         //skip render part(see $_render)
-        if ($this->_render === false) return;
+        if ($this->_render === false) {
+            return;
+        }
 
         if (is_object($this->_engine)) {
 
@@ -274,8 +286,9 @@ class View
             }
 
             $this->engine()->render($file, $path);
+        } else {
+            throw new Exception('ERR_VIEW_ENGINE_NOT_SET');
         }
-        else throw new Exception('ERR_VIEW_ENGINE_NOT_SET');
     }
 
     /**
@@ -297,25 +310,23 @@ class View
      *
      * @return object Peak\View\Helpers
      */
-    public function helper($name = null, $method = null, $params = array())
+    public function helper($name = null, $method = null, $params = [])
     {
         if (array_key_exists($name, $this->_helpers)) {
             return $this->_helpers[$name];
-        }
-        else {
+        } else {
             $peak_helper = 'Peak\View\Helper\\'.ucfirst($name);
             $app_helper  = 'App\Views\Helpers\\'.ucfirst($name);
+
             if (class_exists($peak_helper)) {
                 $this->_helpers[$name] = new $peak_helper();
                 return $this->_helpers[$name];
-            }
-            elseif (class_exists($app_helper)) {
+            } elseif (class_exists($app_helper)) {
                 $this->_helpers[$name] = new $app_helper();
                 return $this->_helpers[$name];
-            }
-            else {
+            } else {
                 trigger_error('[ERR] View helper '.$name.' doesn\'t exists');
             }
         }
-    }  
+    }
 }
