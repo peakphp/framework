@@ -48,17 +48,16 @@ abstract class Action
      * @var Collection
      */
     protected $params;
-    
+
     /**
      * dispatch action with argument
      * @var bool
      */
     protected $actions_with_params = true;
 
-
     public function __construct()
-    {   
-        $this->view = Registry::o()->view; 
+    {
+        $this->view = Registry::o()->view;
     }
     
     /**
@@ -78,9 +77,9 @@ abstract class Action
      */
     public function getTitle()
     {
-        return str_ireplace('controller', '', $this->getName());  
+        return str_ireplace('controller', '', $this->getName());
     }
-        
+
     /**
      * Get current action method name
      *
@@ -107,45 +106,44 @@ abstract class Action
         $c_methods = get_class_methods($this);
 
         $regexp = '/^(['.$this->action_prefix.']{'.strlen($this->action_prefix).'}[a-zA-Z]{1})/';
-              
-        foreach ($c_methods as $method) {            
+
+        foreach ($c_methods as $method) {
             if (preg_match($regexp,$method)) $actions[] = $method;
         }
 
         return $actions;
     }
 
-
     /**
      * Get data from router needed for dispatch
      */
     public function setRoute(Route $route)
     {
-        $this->params_raw   = $route->params;        
+        $this->params_raw   = $route->params;
         $this->params       = new Collection($route->params_assoc);
         $this->action       = $this->action_prefix . $route->action;
 
         //set default ctrl action if none present
-        if($this->action === $this->action_prefix) {
+        if ($this->action === $this->action_prefix) {
             $this->action  = $this->action_prefix.'index';
         }
-    }        
-    
+    }
+
     /**
      * Dispatch controller action and other stuff around it
      */
     public function dispatch()
     {
-        $this->preAction(); 
+        $this->preAction();
         $this->dispatchAction();
         $this->postAction();
     }
-    
+
     /**
      * Dispatch action requested by router or the default action(_index)
      */
     public function dispatchAction()
-    { 
+    {
         if ($this->isAction($this->action) === false) {
             throw new Exception('ERR_CTRL_ACTION_NOT_FOUND', [$this->action, $this->getName()]);
         }
@@ -155,11 +153,10 @@ abstract class Action
         //call requested action
         if ($this->actions_with_params) {
             $this->dispatchActionParams($this->action);
-        }
-        else {
+        } else {
             $method = $this->action;
             $this->$method(); 
-        } 
+        }
     }
     
     /**
@@ -179,9 +176,13 @@ abstract class Action
         if (!empty($params)) {
             foreach ($params as $p) {
                 $pname = $p->getName();
-                if (isset($this->params->$pname)) $args[] = $this->params->$pname;
-                elseif ($p->isOptional()) $args[] = $p->getDefaultValue();
-                else $errors[] = '$'.$pname;
+                if (isset($this->params->$pname)) {
+                    $args[] = $this->params->$pname;
+                } elseif ($p->isOptional()) {
+                    $args[] = $p->getDefaultValue();
+                } else {
+                    $errors[] = '$'.$pname;
+                }
             }
         }
 
@@ -209,10 +210,10 @@ abstract class Action
      * Call view render with controller $file and $path
      *
      * @return string
-     */    
+     */
     public function render()
-    {                
-        $this->view->render($this->file, Application::conf('path.apptree.views_scripts'));     
+    {
+        $this->view->render($this->file, Application::conf('path.apptree.views_scripts'));
         $this->postRender();
     }
 
@@ -227,9 +228,9 @@ abstract class Action
     {
         Registry::o()->app->front->redirect($ctrl, $action, $params);
     }
-    
+
     /**
-     * Call front controller redirect() method. 
+     * Call front controller redirect() method.
      * Same as redirect() but redirect to an action in the current controller only
      *
      * @param string     $action
@@ -239,7 +240,7 @@ abstract class Action
     {
         $this->redirect($this->getTitle(), $action, $params);
     }
-    
+
     /**
      * Use View helper "redirect" to make a HTTP header redirection
      *
@@ -249,22 +250,30 @@ abstract class Action
      */
     public function redirectUrl($url, $http_code = 302, $base_url = true)
     {
-        if ($base_url) $url = url($url);
+        if ($base_url) {
+            $url = url($url);
+        }
         $this->view->header()->redirect($url, $http_code);
     }
 
     /**
      * Action before controller requested action
      */
-    public function preAction() {}
+    public function preAction()
+    {
+    }
 
     /**
      * Action after controller requested action
      */
-    public function postAction() {}
+    public function postAction()
+    {
+    }
 
     /**
      * Action after view rendering
      */
-    public function postRender() {}
+    public function postRender()
+    {
+    }
 }
