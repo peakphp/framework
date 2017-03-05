@@ -55,7 +55,7 @@ class Cache
      */
     public function enable($time)
     {
-        if(is_integer($time)) {
+        if (is_integer($time)) {
             $this->_use_cache = true;
             $this->_cache_expire = $time;
         }
@@ -84,17 +84,17 @@ class Cache
      * Note: if $this->_cache_id is not set, this will generate a new id from $id params if set or
      * from the current controller file - path
      * Notes: Custom $id can lead to problems if used with controller redirection * need to be fix
-     * 
+     *
      * @return bool
      */
     public function isValid($id = null)
     {
-        if($this->_use_cache === false) return false;
+        if ($this->_use_cache === false) return false;
 
         //when checking isValid without a custom id in controller action we generated a new id based
         //on controller name and action name. If id is null but, cache id is already generated, we use it.
-        if(is_null($id)) {
-            if(is_null($this->_cache_id)) {
+        if (is_null($id)) {
+            if (is_null($this->_cache_id)) {
                 $this->genCacheId(Registry::o()->app->front->controller->getName(),
                                   Registry::o()->app->front->controller->action);
             }
@@ -103,13 +103,13 @@ class Cache
 
         $filepath = $this->getCacheFile();
 
-        if(file_exists($this->getCacheFile())) {
+        if (file_exists($this->getCacheFile())) {
             $file_date = filemtime($this->getCacheFile());
             $now = time();
             $delay = $now - $file_date;
             return ($delay >= $this->_cache_expire) ? false : true;
         }
-        else return false;
+        return false;
     }
 
     /**
@@ -122,10 +122,10 @@ class Cache
     public function genCacheId($path = null, $file = null, $return = false)
     {
         //use current $this->_script_file and _script_path if no path/file scpecified
-        if(!isset($path) && !isset($file)) $key = $this->getScriptPath().$this->getScriptFile();
+        if (!isset($path) && !isset($file)) $key = $this->getScriptPath().$this->getScriptFile();
         else $key = $path.$file;
 
-        if(!$return) $this->_cache_id = hash('md5', $key);
+        if (!$return) $this->_cache_id = hash('md5', $key);
         else return hash('md5', $key);
     }
 
@@ -146,7 +146,7 @@ class Cache
      */
     public function enableStrip($status)
     {
-        if(is_bool($status)) $this->_cache_strip = $status;
+        if (is_bool($status)) $this->_cache_strip = $status;
     }
 
     /**
@@ -160,11 +160,10 @@ class Cache
     public function isValidBlock($id, $expiration)
     {
         $this->enable($expiration);
-        if($this->isValid($id)) return true;
-        else {
-            ob_start();
-            return false;
-        }
+        if ($this->isValid($id)) return true;
+        
+        ob_start();
+        return false;
     }
 
     /**
@@ -181,7 +180,7 @@ class Cache
      */
     public function getCacheBlock()
     {
-        include($this->getCacheFile());
+        include $this->getCacheFile();
     }
 
     /**
@@ -191,10 +190,10 @@ class Cache
      */
     public function deleteCache($id = null)
     {
-        if(!isset($id)) $this->genCacheId();
+        if (!isset($id)) $this->genCacheId();
         else $this->genCacheId('', $id);
 
         $file = $this->getCacheFile();
-        if(file_exists($file)) unlink($file);
+        if (file_exists($file)) unlink($file);
     }
 }

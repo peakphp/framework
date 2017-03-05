@@ -121,20 +121,20 @@ class Header
      */
     public function release($die = false)
     {
-        if($this->_hold === true) return;
+        if ($this->_hold === true) return;
 
-        if(!empty($this->_header) && !headers_sent() && $this->_released === false) {
+        if (!empty($this->_header) && !headers_sent() && $this->_released === false) {
 
             $this->_released = true;
 
-            foreach($this->_header as $k => $field) {
+            foreach ($this->_header as $k => $field) {
                 header($field);
             }
-            if(!is_null($this)) {
+            if (!is_null($this)) {
                 echo $this->_content;
             }
 
-            if($die) die();
+            if ($die) die();
         }
     }
 
@@ -158,19 +158,19 @@ class Header
 
     /**
      * Set header field(s)
-     * 
+     *
      * @param  string|array $field
      * @return object       $this
      */
     public function set($field)
     {
-        if(!empty($field)) {
+        if (!empty($field)) {
 
-            if(!is_array($field)) {
+            if (!is_array($field)) {
                 $this->_header[] = $field;
             }
             else {
-                foreach($field as $f) {
+                foreach ($field as $f) {
                     $this->_header[] = $f;
                 }
             }
@@ -192,7 +192,7 @@ class Header
 
     /**
      * Flush all headers and content
-     * 
+     *
      * @return object  $this
      */
     public function reset()
@@ -205,13 +205,13 @@ class Header
 
     /**
      * Get http status code text
-     * 
+     *
      * @param  integer $code http status code
      * @return string
      */
     public function codeAsStr($code)
     {
-        if(array_key_exists($code, $this->_http_status_codes)) {
+        if (array_key_exists($code, $this->_http_status_codes)) {
             return $this->_http_status_codes[$code];
         }
         return;
@@ -219,22 +219,21 @@ class Header
 
     /**
      * Set a valid http response code
-     * 
+     *
      * @param  integer     $code
      * @param  bool|string $die   if not false, but a string instead of true, it will die with $die string as message
      * @param  string      $http
-     *
-     * @return object  $this
+     * @return $this
      */
     public function setCode($code = 200, $die = false, $http = 'HTTP/1.1')
     {
-        if(array_key_exists($code,$this->_http_status_codes)) {
+        if (array_key_exists($code,$this->_http_status_codes)) {
             $this->set($http.' '.$code.' '.$this->_http_status_codes[$code]);
         }
 
-        if($die !== false) {
+        if ($die !== false) {
             $this->release();
-            if($die === true) $die = null;
+            if ($die === true) $die = null;
             die($die);
         }
         
@@ -257,7 +256,7 @@ class Header
 
     /**
      * Redirect to an url and halt the script
-     * 
+     *
      * @param  string  $url  redirect url location
      * @param  integer $code
      */
@@ -270,15 +269,14 @@ class Header
 
     /**
      * Set header to download a file
-     * 
+     *
      * @param  string $fielpath  full path file
      * @param  string $mmtype    Represent Content-type
-     * 
-     * @return object $this
+     * @return $this
      */
     public function download($filepath, $mmtype = 'application/octet-stream')
     {
-        if(file_exists($filepath)) {
+        if (file_exists($filepath)) {
 
             // dowwload header
             $h = [
@@ -309,16 +307,15 @@ class Header
     /**
      * Compress the file before setting header to download it.
      * Use gzip compression. @see gzencode
-     * 
+     *
      * @param  string  $filepath      
      * @param  string  $archive_name  
      * @param  integer $compress_level
-     * 
-     * @return object $this
+     * @return $this
      */
     public function downloadCompressed($filepath, $archive_name, $compress_level = 1)
     {
-        if(file_exists($filepath)) {
+        if (file_exists($filepath)) {
 
             $tmppath = sys_get_temp_dir();
             $tmpfile = $tmppath.'/'.$archive_name;

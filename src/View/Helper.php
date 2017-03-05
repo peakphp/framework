@@ -9,7 +9,10 @@ use Peak\Registry;
  */
 abstract class Helper
 {
-
+    /**
+     * View instance
+     * @var Peak\View
+     */
     public $view;
     
     /**

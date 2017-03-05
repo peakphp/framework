@@ -23,14 +23,14 @@ abstract class Render
 
     /**
      * Same as render() but handle an array of file instead
-     * 
+     *
      * @param  array  $files
      */
     public function renderArray(array $files)
     {
-        if(!empty($files)) {
-            foreach($files as $k => $v) {
-                if(!is_numeric($k)) $this->render($k, $v); // file is path
+        if (!empty($files)) {
+            foreach ($files as $k => $v) {
+                if (!is_numeric($k)) $this->render($k, $v); // file is path
                 else $this->render($v);
             }
         }
@@ -61,7 +61,7 @@ abstract class Render
     /**
      * Silent call to unknow method or
      * Throw trigger error when DEV_MODE is activated 
-     * 
+     *
      * @param string $method
      * @param array  $args
      */
@@ -79,10 +79,10 @@ abstract class Render
      */
     protected function preOutput($data)
     {
-        if(!$this->cache()->isEnabled()) $this->output($data);
+        if (!$this->cache()->isEnabled()) $this->output($data);
         else {            
             //use cache instead outputing and evaluating view script
-            if($this->cache()->isValid()) include($this->cache()->getCacheFile());
+            if ($this->cache()->isValid()) include($this->cache()->getCacheFile());
             else {
                 //cache and output current view script
                 ob_start();
@@ -104,8 +104,7 @@ abstract class Render
      */
     public function cache()
     {
-        if(!is_object($this->_cache)) $this->_cache = new Cache();
+        if (!is_object($this->_cache)) $this->_cache = new Cache();
         return $this->_cache;
     }
-
 }
