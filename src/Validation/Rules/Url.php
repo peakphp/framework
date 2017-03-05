@@ -24,7 +24,7 @@ class Url extends AbstractRule
     public function validate($value)
     {
         $options = $this->getFilterVarOptions();
-        if(filter_var($value, FILTER_VALIDATE_URL, $options) !== false) {
+        if (filter_var($value, FILTER_VALIDATE_URL, $options) !== false) {
             return true;
         }
         return false;

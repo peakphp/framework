@@ -26,7 +26,7 @@ class Regex extends AbstractRule
     public function validate($value)
     {
         $options = $this->getFilterVarOptions();
-        if(filter_var($value, FILTER_VALIDATE_REGEXP, $options) !== false) {
+        if (filter_var($value, FILTER_VALIDATE_REGEXP, $options) !== false) {
             return true;
         }
         return false;

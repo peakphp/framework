@@ -28,21 +28,20 @@ class StrLength extends AbstractRule
     {
         $length = mb_strlen($value);
 
-        if(isset($this->options['min'])) {
+        if (isset($this->options['min'])) {
             $min = $this->options['min'];
         }
-        if(isset($this->options['max'])) {
+        if (isset($this->options['max'])) {
             $max = $this->options['max'];
         }
 
-        if(isset($min) && !isset($max)) {
+        if (isset($min) && !isset($max)) {
             return ($length >= $min);
         }
-        elseif(isset($max) && !isset($min)) {
+        elseif (isset($max) && !isset($min)) {
             return ($length <= $max);
         }
-        else {
-            return (($length >= $min) && ($length <= $max));
-        }
+        
+        return (($length >= $min) && ($length <= $max));
     }
 }
