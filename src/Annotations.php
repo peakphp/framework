@@ -21,7 +21,7 @@ class Annotations
     protected $classname;
     
     /**
-     * Contains list of annotation tags to be detected. 
+     * Contains list of annotation tags to be detected.
      * By default no tags will be detected.
      * @var array|string
      */
@@ -81,8 +81,7 @@ class Annotations
     {
         try {
             $method = new ReflectionMethod($this->classname, $method_name);
-        }
-        catch (ReflectionException $e) {
+        } catch (ReflectionException $e) {
             return [];
         }
 
