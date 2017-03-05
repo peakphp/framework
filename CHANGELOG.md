@@ -2,8 +2,9 @@ VERSION 2.0.10
 --------------
 Release Date: ?
 
- - replaced Filters component by Validation component
- - added FormValidation and FormDataSet to Form component
+ - added Validation component
+ - removed Filters component favor of the new Validation component
+ - added FormValidation and FormDataSet wrapper to Form component
 
 VERSION 2.0.9
 -------------
@@ -36,7 +37,7 @@ Release Date: 2017-02-14
  - removed deprecated helper notion in Peak\Controller\Action
  - cleaning code for PSR-1 and PSR-2
  - deleted method url() in Peak\View\Render
- - marked baseUrl() in Peak\View\Render as deprecated.
+ - marked baseUrl() in Peak\View\Render as deprecated
 
 VERSION 2.0.5
 -------------
@@ -81,10 +82,12 @@ VERSION 2.0.0
 -------------
 Release Date: 2017-01-27
 
+#######################################################################
 Warning! Breaking changes in 2.0.* :
 If you want want to support an old application, please use version 1.*
 This version is incompatible with 1.0.0 because most componments have  
 been rewritten, splitted and/or reorganised.
+########################################################################
  
  - namespace migration
  - multiples fix due to namespace migration
@@ -108,6 +111,12 @@ been rewritten, splitted and/or reorganised.
  - removed deprecated Router class
  - removed deprecated View\Theme
  - removed all models classes (replaced by laravel eloquent)
+
+
+
+
+
+
 
 
 VERSION 1.0.0
