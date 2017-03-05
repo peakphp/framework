@@ -7,10 +7,9 @@ use Peak\View\Render;
 
 /**
  * Peak View Render Engine: Partials
- * 
+ *
  * support groups alias from theme.ini
  * if no groups, only the controller action view file will be render
- * 
  */
 class Partials extends Render
 {
@@ -18,7 +17,6 @@ class Partials extends Render
     protected $_groups;      //available partials groups
     protected $_group;       //current partials group file to render
     protected $_group_name;  //current partials group name
-
 
     /**
      * Load Partials engine with groups alias
@@ -28,16 +26,18 @@ class Partials extends Render
     public function __construct($groups = null)
     {
         $this->_groups = $groups;
-        if (isset($this->_groups['default'])) $this->useGroup('default');
+        if (isset($this->_groups['default'])) {
+            $this->useGroup('default');
+        }
     }
-    
+
     /**
      * Submit array of files or point to $groups array keyname for rendering
      *
      * @example useGroup( array('header.php','[CONTENT]','footer.php') )
      * @example useGroup('content_left') will push $this->options['layouts'][$layout] array to $this->layout
      *
-     * @param array,string $array
+     * @param array|string $array
      */
     public function useGroup($group)
     {
@@ -116,15 +116,14 @@ class Partials extends Render
     {
         // remove partials group for Peak_View_Render_Partials
         // so we can use render() to include a single partial file without group inside view scripts
-        $this->noGroup();  
-        
+        $this->noGroup();
+
         // include controller action view with or without partials groups
         if (is_array($viewfiles)) {
-            foreach($viewfiles as $file) {
+            foreach ($viewfiles as $file) {
                 include($file);
             }
-        }
-        else {
+        } else {
             include($viewfiles);
         }
     }
