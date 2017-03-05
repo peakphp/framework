@@ -144,8 +144,7 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
 
         if (is_null($offset)) {
             $this->items[] = $value;
-        } 
-        else {
+        } else {
             $this->items[$offset] = $value;
         }
     }
@@ -273,8 +272,11 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
                 if (isset($a[$key])) {
                     $a[$key] = $this->_mergeRecursiveDistinct($a[$key], $value);
                 } else {
-                    if ($key === 0) $a= array(0 => $this->_mergeRecursiveDistinct($a, $value));
-                    else $a[$key] = $value;
+                    if ($key === 0) {
+                        $a = [0 => $this->_mergeRecursiveDistinct($a, $value)];
+                    } else {
+                        $a[$key] = $value;
+                    }
                 }
             }
         } 
