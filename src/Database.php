@@ -34,7 +34,7 @@ class Database
 
     /**
      * Constructor
-     * 
+     *
      * @param array  $conf Database configuration
      * @param string $name Connection name
      */
@@ -45,7 +45,7 @@ class Database
     
     /**
      * Connect to database
-     * 
+     *
      * @param  array $conf
      */
     protected function connect($conf, $name = 'default')
@@ -77,7 +77,7 @@ class Database
 
     /**
      * Call unknow method directly on $db object
-     * 
+     *
      * @param  string $method
      * @param  mixed  $args
      * @return mixed
@@ -89,7 +89,7 @@ class Database
 
     /**
      * Schema
-     * 
+     *
      * @return  Return schema (shortcut of self::db()->schema())
      */
     public function schema()
@@ -99,7 +99,7 @@ class Database
 
     /**
      * Get current connection name
-     * 
+     *
      * @return string
      */
     public function getConnectionName()
