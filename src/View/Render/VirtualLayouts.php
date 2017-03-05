@@ -10,7 +10,6 @@ use Peak\View\Render;
  */
 class VirtualLayouts extends Render
 {
-
     /**
      * Layout content
      * @var string
@@ -28,7 +27,7 @@ class VirtualLayouts extends Render
      * @var bool
      */
     private $_clean_all_unknown_vars = true;
-    
+
     /**
      * Set layout content
      *
@@ -47,10 +46,13 @@ class VirtualLayouts extends Render
      */
     public function setContent($content, $overwrite = false)
     {
-        if($overwrite) $this->_content = $content;
-        else $this->_content .= $content;
+        if($overwrite) {
+            $this->_content = $content;
+        } else {
+            $this->_content .= $content;
+        }
     }
-    
+
     /**
      * Render virtual layout(s)
      * 
@@ -61,15 +63,14 @@ class VirtualLayouts extends Render
      * @return string
      */
     public function render($file,$path = null)
-    {       
-        //CONTROLLER FILE VIEW       
+    {
+        //CONTROLLER FILE VIEW
         $this->scripts_file = $file;
         $this->scripts_path = $path;
 
-        if(is_null($this->_layout)) {
+        if (is_null($this->_layout)) {
             $output = $this->_content;
-        }
-        else {
+        } else {
             $output = str_ireplace('{CONTENT}', $this->_content, $this->_layout);
         }
         
@@ -87,7 +88,7 @@ class VirtualLayouts extends Render
     {
         echo $data;
     }
-    
+
     /**
      * Turn true/false property $_clean_all_unknown_vars
      *
@@ -97,7 +98,7 @@ class VirtualLayouts extends Render
     {
         $this->_clean_all_unknown_vars = ($value === true) ? true : false;
     }
-    
+
     /**
      * Process all the variables
      *
@@ -107,22 +108,24 @@ class VirtualLayouts extends Render
     protected function _proccessVariables($content)
     {
         $vars = $this->getVars();
-        if(!empty($vars)) {
+        if (!empty($vars)) {
 
             $vars_names = array();
-            foreach($vars as $k => $v) {
+            foreach ($vars as $k => $v) {
                 //remove arrays from view vars otherwise php will throw a notice about array to string conversion
-                if(is_array($v) || is_object($v)) unset($vars[$k]); 
-                else $vars_names[] = '{$'.$k.'}';
+                if (is_array($v) || is_object($v)) {
+                    unset($vars[$k]);
+                } else {
+                    $vars_names[] = '{$'.$k.'}';
+                }
             }
             $content = str_ireplace($vars_names, array_values($vars), $content);
-            
+
             //remove unknown vars {$keys}
-            if($this->_clean_all_unknown_vars) {
+            if ($this->_clean_all_unknown_vars) {
                 $content = preg_replace('#\{\$(\w+)\}#i', '', $content);
             }
         }
         return $content;
     }
-    
 }
