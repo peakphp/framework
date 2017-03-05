@@ -7,7 +7,6 @@ namespace Peak;
  */
 class Exception extends \Exception
 {
-
     /**
      * Error constant name
      * @var string
@@ -46,10 +45,10 @@ class Exception extends \Exception
      * @param string $infos
      */
     public function __construct($errkey = null, $infos = null)
-    {                   
-        $this->errkey = $errkey;    
+    {
+        $this->errkey = $errkey;
         
-        $message = $this->handleErrConstToText($errkey,$infos);     
+        $message = $this->handleErrConstToText($errkey,$infos);
    
         parent::__construct($message);
     }
@@ -61,11 +60,12 @@ class Exception extends \Exception
      * @return string  $info
      */
     public function handleErrConstToText($errkey = null, $infos = null)
-    { 
+    {
         if (defined(sprintf('%s::%s', get_class($this), $errkey))) {
             $r = constant(sprintf('%s::%s', get_class($this), $errkey));
+        } else {
+            $r = self::ERR_DEFAULT;
         }
-        else $r = self::ERR_DEFAULT;
         
         if (isset($infos)) {
             $r = (is_array($infos)) ? vsprintf($r,$infos) : sprintf($r,trim($infos));
@@ -100,7 +100,7 @@ class Exception extends \Exception
     }
 
     /**
-     * Get exception element trigger trace 
+     * Get exception element trigger trace
      *
      * @return array
      */
@@ -125,8 +125,8 @@ class Exception extends \Exception
                         $args[] = get_resource_type($arg);
                     } else {
                         $args[] = $arg;
-                    }   
-                }   
+                    }
+                }
                 $args = join(', ', $args);
             }
             $frame['file'] = str_replace(APPLICATION_ABSPATH, '', $frame['file']);
@@ -135,13 +135,13 @@ class Exception extends \Exception
         return $frame;
     }
     
-    public function getErrkey() 
+    public function getErrkey()
     {
-        return $this->errkey; 
+        return $this->errkey;
     }
 
-    public function getTime() 
-    { 
-        return date('Y-m-d H:i:s'); 
+    public function getTime()
+    {
+        return date('Y-m-d H:i:s');
     }
 }
