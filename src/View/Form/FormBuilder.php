@@ -7,6 +7,10 @@ use Peak\View\Form\FormValidation;
 
 class FormBuilder extends Collection
 {
+    /**
+     * Form object
+     * @var Peak\View\Form\Form
+     */
     protected $form;
 
     /**
@@ -25,14 +29,14 @@ class FormBuilder extends Collection
 
     /**
      * Get a html control (use App\Views\Helpers\FormControl)
-     * 
+     *
      * @param  object|string $arg1 
      * @param  string $arg1 
      * @return object       
      */
     public function control($arg1, $arg2 = null)
     {
-        if(is_string($arg1) && !isset($arg2)) {
+        if (is_string($arg1) && !isset($arg2)) {
             $name = $arg1;
             $form = $this->form;
         }  
@@ -41,13 +45,13 @@ class FormBuilder extends Collection
             $name = $arg2;
         }
 
-        if(!isset($this->items[$name])) {
+        if (!isset($this->items[$name])) {
             trigger_error('Field '.$name.' not found');
             return null;
         }
 
         // call preload(if specified) only when we need the form control
-        if(array_key_exists('preload', $this->items[$name])) {
+        if (array_key_exists('preload', $this->items[$name])) {
             $method = $this->items[$name]['preload'];
             $this->$method($this->items[$name]);
         }
@@ -63,7 +67,7 @@ class FormBuilder extends Collection
 
     /**
      * Shortcut for new FormValidation(new FormBuilder())
-     * 
+     *
      * @param  array $data
      * @return bool   
      */
@@ -72,5 +76,4 @@ class FormBuilder extends Collection
         $form = new FormValidation($this);
         return $form->validate($data);
     }
-
 }

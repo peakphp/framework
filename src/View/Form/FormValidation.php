@@ -25,8 +25,8 @@ class FormValidation
 
     /**
      * Constructor
+     *
      * @param FormBuilder $form_builder
-     * 
      */
     public function __construct(FormBuilder $form_builder)
     {
@@ -41,9 +41,9 @@ class FormValidation
     {
         $this->dataset = new FormDataSet();
 
-        foreach($this->form_builder as $name => $data) {
-            if(isset($data['validation']) && is_array($data['validation'])) {
-                foreach($data['validation'] as $rule) {
+        foreach ($this->form_builder as $name => $data) {
+            if (isset($data['validation']) && is_array($data['validation'])) {
+                foreach ($data['validation'] as $rule) {
                     $this->dataset->add($name, $rule);
                 }
                 //print_r($this->dataset);
@@ -53,7 +53,7 @@ class FormValidation
 
     /**
      * Validate 
-     * 
+     *
      * @param  array $data
      * @return bool
      */

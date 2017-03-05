@@ -13,7 +13,7 @@ class Label extends Element
 
     /**
      * Generated the control
-     * 
+     *
      * @return string
      */
     public function generate()

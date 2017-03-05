@@ -37,12 +37,14 @@ class Form extends Helper
     
     /**
      * Set data
+     * 
+     * @return $this
      */
     public function setData($data)
     {
         $d = [];
-        if(is_object($data)) {
-            foreach($data as $k => $v) {
+        if (is_object($data)) {
+            foreach ($data as $k => $v) {
                 $d[$k] = $v;
             }
         }
@@ -56,7 +58,9 @@ class Form extends Helper
 
     /**
      * Set errors
-     * @param
+     *
+     * @param  array $errors
+     * @return $this
      */
     public function setErrors($errors)
     {
@@ -66,7 +70,7 @@ class Form extends Helper
 
     /**
      * Load a form control
-     * 
+     *
      * @param  string $type   
      * @param  string $name   
      * @param  array  $options
@@ -74,7 +78,7 @@ class Form extends Helper
      */
     public function control($type, $name, $options = [])
     {
-        if(class_exists($type)) {
+        if (class_exists($type)) {
             $cname = $type;
         } 
         else $cname = 'Peak\View\Form\Control\\'.ucfirst($type);
@@ -82,7 +86,7 @@ class Form extends Helper
         $data = $this->get($name);
         $error = $this->getError($name);
 
-        if(class_exists($cname)) {
+        if (class_exists($cname)) {
             return new $cname($name, $data, $options, $error);
         }
         else {
@@ -92,14 +96,14 @@ class Form extends Helper
 
     /**
      * Get a data value if exists
-     * 
+     *
      * @param  string $name
      * @return mixed
      */
     public function get($name)
     {
         $name = strtolower($name);
-        if(is_array($this->_data) && array_key_exists($name, $this->_data)) {
+        if (is_array($this->_data) && array_key_exists($name, $this->_data)) {
             return $this->_data[$name];
         }
         return null;
@@ -107,12 +111,13 @@ class Form extends Helper
 
     /**
      * Get error
+     *
      * @param  string $name 
      * @return string       
      */
     public function getError($name)
     {
-        if(is_array($this->_errors) && array_key_exists($name, $this->_errors)) {
+        if (is_array($this->_errors) && array_key_exists($name, $this->_errors)) {
             return $this->_errors[$name];
         }
         return null;

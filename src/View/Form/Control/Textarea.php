@@ -31,7 +31,7 @@ class Textarea extends FormControl
 
     /**
      * Generated the control
-     * 
+     *
      * @return string
      */
     public function generate()

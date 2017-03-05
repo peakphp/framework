@@ -23,12 +23,12 @@ class Error extends Element
 
     /**
      * Generated the control
-     * 
+     *
      * @return string
      */
     public function generate()
     {
-        if(empty($this->data)) return '';
+        if (empty($this->data)) return '';
         $attrs = $this->attributes(false);
 
         return '

@@ -21,7 +21,7 @@ abstract class FormControl extends Element
     /**
      * Contructor overload
      * Add error support for control
-     * 
+     *
      * @see  Peak\View\Form\Element::__construct()
      */
     public function __construct($name, $data, $options = [], $error = null)
@@ -32,12 +32,12 @@ abstract class FormControl extends Element
 
     /**
      * Default this method
-     * 
+     *
      * @return string
      */
     public function error()
     {
-        if(empty($this->error)) return;
+        if (empty($this->error)) return;
 
         $element = new \Peak\View\Form\Element\Error(
             $this->name, 
@@ -70,7 +70,7 @@ abstract class FormControl extends Element
      */
     public function label()
     {
-        if(empty($this->options['label'])) return;
+        if (empty($this->options['label'])) return;
 
         $element = new \Peak\View\Form\Element\Label(
             $this->name, 
