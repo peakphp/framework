@@ -16,7 +16,7 @@ class Assets extends Helper
     private $_assets_path;
 
     /**
-     * Assets base url.
+     * Assets base url
      * @var string
      */
     private $_assets_base_url = null;
@@ -29,11 +29,17 @@ class Assets extends Helper
     public function __construct($path = null, $url = null)
     {
         parent::__construct();
-        if (isset($path)) $this->setPath($path);
-        else $this->setPath('assets');
+        if (isset($path)) {
+            $this->setPath($path);
+        } else {
+            $this->setPath('assets');
+        }
 
-        if (isset($url)) $this->setUrl($url);
-        else $this->setUrl(url());
+        if (isset($url)) {
+            $this->setUrl($url);
+        } else {
+            $this->setUrl(url());
+        }
     }
 
     /**
@@ -41,9 +47,9 @@ class Assets extends Helper
      *
      * @example ('css', array('theme/css/myfile1.css', ...)) will call method _asset_css() with the file(s) path(s)
      *
-     * @param  string $method   
-     * @param  string $args 
-     * @return string       
+     * @param  string $method
+     * @param  string $args
+     * @return string 
      */
     public function __call($method, $args)
     {
@@ -51,7 +57,7 @@ class Assets extends Helper
             return $this->process($method, $args[0], $args[1]);
         }
 
-        return $this->process($method, $args[0]);  
+        return $this->process($method, $args[0]);
     }
 
     /**
@@ -69,8 +75,8 @@ class Assets extends Helper
     /**
      * Set assets base url
      *
-     * @param string $url
-     * @return object $this
+     * @param  string $url
+     * @return $this
      */
     public function setUrl($url)
     {
@@ -106,8 +112,12 @@ class Assets extends Helper
         $mtype  = '_asset_'.$type;
 
         // force paths to be an array
-        if (!is_array($paths)) $paths = array($paths);
-        if (empty($paths)) return;
+        if (!is_array($paths)) {
+            $paths = array($paths);
+        }
+        if (empty($paths)) {
+            return;
+        }
 
         // if asset type doesn't exists
         if (!method_exists($this, $mtype)) {
@@ -117,13 +127,15 @@ class Assets extends Helper
 
                 foreach ($paths as $p) {
                     $ext = '_asset_'.pathinfo($p, PATHINFO_EXTENSION);
-                    if (method_exists($this, $ext)) $output .= $this->$ext($p, $param);
+                    if (method_exists($this, $ext)) {
+                        $output .= $this->$ext($p, $param);
+                    }
                 }
 
+            } else {
+                return;
             }
-            else return;
-        }
-        else {
+        } else {
             foreach ($paths as $p) {
                 $output .= $this->$mtype($p, $param);
             }
