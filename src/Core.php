@@ -21,9 +21,9 @@ if (!defined('PEAK_VERSION')) {
 if (!function_exists('relativeBasepath')) {
     /**
      * Get relativepath of specified dir from the server document root
-     * 
+     *
      * @param  string $dir
-     * @return string     
+     * @return string
      */
     function relativeBasepath($dir, $doc_root = null) {
         if (!isset($doc_root)) {
@@ -41,7 +41,7 @@ if (!function_exists('relativePath')) {
      * Get relative path of specified dir from the server document root
      *
      * @param  string $dir
-     * @return string     
+     * @return string
      */
     function relativePath($dir, $doc_root = null) {
         if (!isset($doc_root)) {
@@ -58,7 +58,7 @@ if (!function_exists('isCli')) {
     /**
      * Detect if we are in command line interface mode
      */
-    function isCli() { 
+    function isCli() {
         return (php_sapi_name() === 'cli' || defined('STDIN'));
     }
 }
@@ -70,7 +70,7 @@ if (!function_exists('showAllErrors')) {
     /**
      * Try to force the display of all errors
      */
-    function showAllErrors() { 
+    function showAllErrors() {
         error_reporting(E_ALL);
         ini_set('display_errors', 1);
     }
@@ -90,10 +90,10 @@ if (!function_exists('__')) {
     /**
      * Shortcut of Peak\Lang::__()
      *
-     * @param  string         $text     
-     * @param  array|string   $replaces 
-     * @param  closure        $func     
-     * @return string          
+     * @param  string         $text
+     * @param  array|string   $replaces
+     * @param  closure        $func
+     * @return string
      */
     function __($text, $replaces = null, $func = null) {
         return \Peak\Lang::__($text, $replaces, $func);
@@ -107,13 +107,13 @@ if (!function_exists('_e')) {
     /**
      * Shortcut of Peak\Lang::_e()
      *
-     * @param  string         $text     
-     * @param  array|string   $replaces 
-     * @param  closure        $func     
-     * @return string          
+     * @param  string         $text
+     * @param  array|string   $replaces
+     * @param  closure        $func
+     * @return string
      */
-    function _e($text, $replaces = null, $func = null) { 
-        \Peak\Lang::_e($text, $replaces, $func); 
+    function _e($text, $replaces = null, $func = null) {
+        \Peak\Lang::_e($text, $replaces, $func);
     }
 }
 
@@ -122,11 +122,11 @@ if (!function_exists('_e')) {
  */
 if (!function_exists('phpinput')) {
     /**
-     * Retreive a collection object from php://input 
+     * Retreive a collection object from php://input
      *
      * @return Peak\Collection
      */
-    function phpinput() { 
+    function phpinput() {
 
         $raw  = file_get_contents('php://input');
         $post = json_decode($raw, true); // for json input
@@ -146,11 +146,11 @@ if (!function_exists('phpinput')) {
 if (!function_exists('isEnv')) {
     /**
      * Check is env match curretn application env
-     * 
+     *
      * @param  string  $env
-     * @return boolean     
+     * @return boolean 
      */
-    function isEnv($env) { 
+    function isEnv($env) {
 
         if (defined('APPLICATION_ENV')) {
             return (APPLICATION_ENV === $env);
@@ -168,9 +168,9 @@ if (!function_exists('config')) {
      *
      * @param  string|null $path
      * @param  mixed|null  $value
-     * @return mixed    
+     * @return mixed
      */
-    function config($path = null, $value = null) { 
+    function config($path = null, $value = null) {
         return \Peak\Application::conf($path, $value);
     }
 }
@@ -185,7 +185,7 @@ if (!function_exists('collection')) {
      * @param  array|null $items 
      * @return \Peak\Collection     
      */
-    function collection($items = null) { 
+    function collection($items = null) {
         return \Peak\Collection::make($items);
     }
 }
@@ -196,11 +196,11 @@ if (!function_exists('collection')) {
 if (!function_exists('session')) {
     /**
      * Create/Access to session collection
-     * 
-     * @param  array|null $items 
-     * @return \Peak\session     
+     *
+     * @param  array|null $items
+     * @return \Peak\session
      */
-    function session($path = null, $value = null) { 
+    function session($path = null, $value = null) {
 
         $s = \Peak\Registry::o()->session;
         if (!isset($s)) {
@@ -209,8 +209,7 @@ if (!function_exists('session')) {
 
         if (!isset($path) && !isset($value)) {
             return $s;
-        }
-        elseif (isset($path) && !isset($value)) {
+        } elseif (isset($path) && !isset($value)) {
             return $s->get($path);
         }
         
@@ -227,7 +226,7 @@ if (!function_exists('url')) {
      *
      * @return string
      */
-    function url($path = null, $use_forwarded_host = true) { 
+    function url($path = null, $use_forwarded_host = true) {
 
         $s = $_SERVER;
 
