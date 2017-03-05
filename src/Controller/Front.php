@@ -82,32 +82,41 @@ class Front
      * Called before routing dispatching
      * Empty by default
      */
-    public function preDispatch() {}
+    public function preDispatch()
+    {
+    }
 
     /**
      * Called after controller action dispatching
      * Empty by default
      */
-    public function postDispatch() {}
+    public function postDispatch()
+    {
+    }
     
     /**
      * Called after controller loading
      * Empty by default
      */
-    public function postDispatchController() {}
-    
+    public function postDispatchController()
+    {
+    }    
 
     /**
      * Called after rendering controller view
      * Empty by default
      */
-    public function preRender() {}  
+    public function preRender()
+    {
+    }
 
     /**
      * Called after rendering controller view
      * Empty by default
      */
-    public function postRender() {}       
+    public function postRender()
+    {
+    }
 
     /**
      * Call appropriate dispatching methods
@@ -115,10 +124,9 @@ class Front
     public function dispatch()
     {
         $this->_dispatchController();
-          
         // execute a normal controller action
         if ($this->controller instanceof Action) {
-            $this->_dispatchControllerAction(); 
+            $this->_dispatchControllerAction();
         }
     }
     
@@ -143,10 +151,13 @@ class Front
             //check for peak internal controller
             if (($this->allow_internal_controllers === true) && (class_exists($internal_ctrl_name))) {
                 $this->controller = new $internal_ctrl_name();
+            } else {
+                throw new Exception('ERR_CTRL_NOT_FOUND', $this->route->controller);
             }
-            else throw new Exception('ERR_CTRL_NOT_FOUND', $this->route->controller);
         }
-        else $this->controller = new $ctrl_name();
+        else {
+            $this->controller = new $ctrl_name();
+        }
 
         if ($this->controller instanceof Action) {
             $this->controller->setRoute($this->route);
@@ -160,7 +171,7 @@ class Front
     protected function _dispatchControllerAction()
     {
         if ($this->controller instanceof Action) {
-            $this->controller->dispatch(); 
+            $this->controller->dispatch();
         }
     }
 
@@ -169,13 +180,13 @@ class Front
      *
      * @param  string $ns   namespace prefix
      * @param  string $name controller prefix name
-     * @return string       
+     * @return string
      */
     protected function _getCtrlName($ns, $name)
     {
         return $ns.ucfirst($name).'Controller';
     }
-        
+
     /**
      * Force dispatch of $error_controller
      *
@@ -185,7 +196,7 @@ class Front
     {
         $this->route->controller = $this->error_controller;
         $this->route->action     = 'index';
-        
+
         $this->_dispatchController();
 
         if (isset($exception)) {
@@ -193,7 +204,7 @@ class Front
         }
         
         $this->_dispatchControllerAction();
-        
+
         return Registry::o()->app;
     }
 
@@ -209,10 +220,10 @@ class Front
         $this->route = RouteBuilder::get($ctrl, $action, $params);
 
         if ((is_object($this->controller)) && (strtolower($ctrl) === strtolower($this->controller->getTitle()))) {
-
             $this->controller->setRoute($this->route);
             $this->controller->dispatchAction();
+        } else {
+            $this->dispatch();   
         }
-        else $this->dispatch();
     }
 }
