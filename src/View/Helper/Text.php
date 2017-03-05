@@ -95,5 +95,4 @@ class Text extends Helper
     {
         return wordwrap($string,$length,$break,$cut);
     }
-    
 }
