@@ -5,9 +5,8 @@ namespace Peak\View;
 /**
  * View helper - Http header
  */
-class Header 
+class Header
 {
-
     /**
      * Header fields
      * @var array
@@ -113,15 +112,16 @@ class Header
         599 => 'Network connect timeout error'
     ];
 
-
     /**
      * "Release" header (simply call php header()) and content if any
      *
-     * @param bool $die 
+     * @param bool $die
      */
     public function release($die = false)
     {
-        if ($this->_hold === true) return;
+        if ($this->_hold === true) {
+            return;
+        }
 
         if (!empty($this->_header) && !headers_sent() && $this->_released === false) {
 
@@ -134,7 +134,9 @@ class Header
                 echo $this->_content;
             }
 
-            if ($die) die();
+            if ($die) {
+                die(); 
+            }
         }
     }
 
@@ -188,12 +190,12 @@ class Header
     {
         $this->_content = $data;
         return $this;
-    }   
+    }
 
     /**
      * Flush all headers and content
      *
-     * @return object  $this
+     * @return $this
      */
     public function reset()
     {
@@ -233,7 +235,9 @@ class Header
 
         if ($die !== false) {
             $this->release();
-            if ($die === true) $die = null;
+            if ($die === true) {
+                $die = null;
+            }
             die($die);
         }
         
@@ -242,8 +246,8 @@ class Header
 
     /**
      * Force a browser to use fresh content (no caching)
-     * 
-     * @return object $this
+     *
+     * @return $this
      */
     public function noCache()
     {
@@ -299,7 +303,7 @@ class Header
             // output file content
             readfile($filepath);
 
-            die();          
+            die();
         }
         return $this;
     }
@@ -308,8 +312,8 @@ class Header
      * Compress the file before setting header to download it.
      * Use gzip compression. @see gzencode
      *
-     * @param  string  $filepath      
-     * @param  string  $archive_name  
+     * @param  string  $filepath
+     * @param  string  $archive_name
      * @param  integer $compress_level
      * @return $this
      */
@@ -332,7 +336,7 @@ class Header
                 //'Content-Encoding: gzip',
                 'Content-Length: ' .filesize($tmpfile),
                 'Content-Disposition: attachment; filename="'.$archive_name.'"',
-                'Content-Transfer-Encoding: binary'."\n"
+                'Content-Transfer-Encoding: binary'
             ];
 
             // set headers
