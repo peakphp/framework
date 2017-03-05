@@ -10,25 +10,33 @@ use Peak\View\Helper\Debug;
  * Graphic version of Peak_View_Helper_debug
  * @uses    jQuery, Fugue icons, Peak\View\Helper\Debug, Peak\Chrono  
  */
-class Debugbar extends Debug 
+class Debugbar extends Debug
 {
-    
-    private $_console_log = array();
-    
+
+    private $_console_log = [];
+
     /**
      * Display a bottom bar in your page
      */
     public function show($start_minimized = false, $theme = 'default')
     {
         //skip if env is not dev
-        if (APPLICATION_ENV !== 'dev') return;
-        if (!$this->view->engine() instanceof \Peak\View\Render\Layouts) return;
+        if (APPLICATION_ENV !== 'dev') {
+            return;
+        }
+        if (!$this->view->engine() instanceof \Peak\View\Render\Layouts) {
+            return;
+        }
 
         //skip if view rendering is disabled
-        if ($this->view->canRender() === false) return;
+        if ($this->view->canRender() === false) {
+            return;
+        }
 
         //skip if view engine is Json
-        if (strtolower($this->view->getEngineName()) === 'json') return;
+        if (strtolower($this->view->getEngineName()) === 'json') {
+            return;
+        }
         
         //files included                
         $files = $this->getFiles();     
@@ -38,19 +46,18 @@ class Debugbar extends Debug
         //php 5.4, use $_SERVER['REQUEST_TIME_FLOAT']
         if (version_compare(PHP_VERSION, '5.4.0') >= 0) {
             $chrono = (round(microtime(true) - $_SERVER['REQUEST_TIME_FLOAT'], 4) * 1000);
-        }
-        //php 5.1, use $_SERVER['REQUEST_TIME']
-        elseif (version_compare(PHP_VERSION, '5.1.0') >= 0) {
+        } elseif (version_compare(PHP_VERSION, '5.1.0') >= 0) {
             $chrono = (round(microtime(true) - $_SERVER['REQUEST_TIME'], 4) * 1000);
-        }
-        else {
+        } else {
             $chrono = 'n/a';
         }
         
         //save chronos into session if exists
         $sid = session_id();
         if (!empty($sid)) {
-            if (!isset($_SESSION['pkdebugbar']['chrono'])) $_SESSION['pkdebugbar']['chrono'] = '{}';
+            if (!isset($_SESSION['pkdebugbar']['chrono'])) {
+                $_SESSION['pkdebugbar']['chrono'] = '{}';
+            }
             $chronos = json_decode($_SESSION['pkdebugbar']['chrono'], true);
             $chronos[] = $chrono;
             $_SESSION['pkdebugbar']['chrono'] = json_encode($chronos);
@@ -62,7 +69,7 @@ class Debugbar extends Debug
             $chronos[] = $chrono;
             $_SESSION['pkdebugbar']['pages_chrono'][$_SERVER['REQUEST_URI']] = json_encode($chronos);
         }
-        
+
         //print css & js
         echo $this->_getAssets();
         
@@ -70,7 +77,9 @@ class Debugbar extends Debug
         $zdb_profiler = false;
         if (class_exists('Zend_Db_Table', false)) {
             $zdb_profiler = Zend_Db_Table::getDefaultAdapter()->getProfiler();
-            if ($zdb_profiler->getEnabled() === false) $zdb_profiler = false;
+            if ($zdb_profiler->getEnabled() === false) {
+                $zdb_profiler = false;
+            }
         }
          
         $theme = ($theme === 'dark') ? 'th-dark' : '';
@@ -121,13 +130,14 @@ class Debugbar extends Debug
             foreach ($_SESSION['pkdebugbar']['pages_chrono'] as $page => $chronos) {
                 $chronos = json_decode($chronos, true);
                 $count = count($chronos);
-                if (!in_array(Application::conf('path.public'), array('','/'))) $page = str_replace(Application::conf('path.public'), '', $page);
+                if (!in_array(Application::conf('path.public'), array('','/'))) {
+                    $page = str_replace(Application::conf('path.public'), '', $page);
+                }
                 $page = str_replace('//', '/', $page);
                 echo '<tr><td>'.$page.'</td><td>'.round(array_sum($chronos) / $count,2).'ms</td><td>'.$count.'</td></tr>';
             }
             echo '</table></div><script></script>';
-        }
-        elseif ($chrono === 'n/a') {
+        } elseif ($chrono === 'n/a') {
             echo 'To get chrono, you must use Peak_Chrono::start() in your app launcher.<br />
                   To gather stats about requests, you need a session';
         }
@@ -212,8 +222,6 @@ class Debugbar extends Debug
                             echo 'Query #'.($i + 1).' &nbsp;&nbsp;&nbsp; '.round($query_chrono,3).' ms ('.$query_percent.'%)<br /><br /><pre>' . $query . '</pre>';
                     }
                 }
-
-                
             }
             echo '</div>';
         }
@@ -225,17 +233,16 @@ class Debugbar extends Debug
             
             foreach ($this->_console_log as $i => $item) {
                 
-                if (isset($item['title'])) echo '<strong>'.$item['title'].'</strong><br />';
+                if (isset($item['title'])) {
+                    echo '<strong>'.$item['title'].'</strong><br />';
+                }
                 if (is_array($item['data']) || is_object($item['data'])) {
                     echo '<pre>'.htmlentities(print_r($item['data'], true)).'</pre>';
-                }
-                else {
+                } else {
                     echo '<pre>'.htmlentities($item['data']).'</pre>';
                 }
-                
                 echo '<br />';
             }
-            
             echo '</div>';
         }
         
