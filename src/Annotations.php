@@ -11,7 +11,7 @@ class Annotations
     /**
      * Class reflection object
      * @var object ReflectionClass
-     */ 
+     */
     protected $class;
     
     /**
@@ -61,7 +61,7 @@ class Annotations
     /**
      * Add annotation tag(s) to be detected
      *
-     * @param  array|string $tagname Accept a string or an array of tags 
+     * @param  array|string $tagname Accept a string or an array of tags
      *                               string '*' act as a wildcard so all tags will be detected
      * @return object       $this
      */
