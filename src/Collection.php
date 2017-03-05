@@ -47,7 +47,7 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
 
     /**
      * Check if its read only
-     * 
+     *
      * @return boolean
      */
     public function isReadOnly()
@@ -58,7 +58,7 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
     /**
      * Create a new instance of collection
      *
-     * @param  array $items 
+     * @param  array $items
      * @return Collection
      */
     public static function make($items = null)
@@ -73,7 +73,7 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
      * ex: $obj->array_keys() or $obj->keys()
      *
      * @param  string $func array_ func
-     * @param  mixed  $argv 
+     * @param  mixed  $argv
      * @return mixed
      */
     public function __call($func, $argv)
@@ -93,7 +93,7 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
      * @param  string $key
      * @return mixed
      */
-    public function &__get($key) 
+    public function &__get($key)
     {
         return $this->items[$key];
     }
@@ -106,8 +106,9 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
      */
     public function __set($key, $value) 
     {
-        if ($this->isReadOnly()) return;
-        $this->items[$key] = $value;
+        if (!$this->isReadOnly()) {
+            $this->items[$key] = $value;
+        }
     }
 
     /**
@@ -116,20 +117,21 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
      * @param   string $key
      * @return  bool
      */
-    public function __isset($key) 
+    public function __isset($key)
     {
         return isset($this->items[$key]);
     }
 
     /**
      * Unsets an item by key
-     * 
+     *
      * @param string $key
      */
-    public function __unset($key) 
+    public function __unset($key)
     {
-        if ($this->isReadOnly()) return;
-        unset($this->items[$key]);
+        if (!$this->isReadOnly()) {
+            unset($this->items[$key]);
+        }
     }
 
     /**
@@ -138,9 +140,11 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
      * @param  string $offset
      * @param  mixed  $value
      */
-    public function offsetSet($offset, $value) 
+    public function offsetSet($offset, $value)
     {
-        if ($this->isReadOnly()) return;
+        if ($this->isReadOnly()) {
+            return;
+        }
 
         if (is_null($offset)) {
             $this->items[] = $value;
@@ -155,7 +159,7 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
      * @param  string $offset
      * @return bool
      */
-    public function offsetExists($offset) 
+    public function offsetExists($offset)
     {
         return isset($this->items[$offset]);
     }
@@ -165,7 +169,7 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
      *
      * @param  string $offset
      */
-    public function offsetUnset($offset) 
+    public function offsetUnset($offset)
     {
         if ($this->isReadOnly()) return;
         unset($this->items[$offset]);
@@ -177,7 +181,7 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
      * @param  string $offset
      * @return mixed
      */
-    public function offsetGet($offset) 
+    public function offsetGet($offset)
     {
         return isset($this->items[$offset]) ? $this->items[$offset] : null;
     }
@@ -247,21 +251,23 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
      */
     public function mergeRecursiveDistinct($a, $b = null, $get_result = false)
     {
-        if (!isset($b)){
+        if (!isset($b)) {
             $this->items = $this->_mergeRecursiveDistinct($this->items, $a);
-        }
-        else {
-            if (!$get_result) $this->items = $this->_mergeRecursiveDistinct($a, $b);
-            else return $this->_mergeRecursiveDistinct($a, $b);
+        } else {
+            if (!$get_result) {
+                $this->items = $this->_mergeRecursiveDistinct($a, $b);
+            } else {
+                return $this->_mergeRecursiveDistinct($a, $b);
+            }
         }
     }
 
     /**
      * Internal process for mergeRecursiveDistinct()
      *
-     * @param  array $a 
-     * @param  array $b 
-     * @return array    
+     * @param  array $a
+     * @param  array $b
+     * @return array
      */
     protected function _mergeRecursiveDistinct($a, $b)
     {
@@ -279,7 +285,7 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
                     }
                 }
             }
-        } 
+        }
         else $a = $b; // one of values is not an array
 
         return $a;
