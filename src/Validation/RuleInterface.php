@@ -5,7 +5,7 @@ namespace Peak\Validation;
 interface RuleInterface
 {
     /**
-     * Construct
+     * Constructor
      *
      * @param array   $options rules options array
      * @param integer $flags   rules flags

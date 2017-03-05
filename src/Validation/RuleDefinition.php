@@ -22,7 +22,7 @@ class RuleDefinition
     protected $def = [];
 
     /**
-     * Construct
+     * Constructor
      *
      * @param array $def
      */
@@ -30,7 +30,7 @@ class RuleDefinition
     {
         $this->def = $this->default_def;
 
-        if(is_array($def)) {
+        if (is_array($def)) {
             $this->def = array_merge($this->default_def, $def);
         }
     }

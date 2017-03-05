@@ -31,8 +31,8 @@ abstract class AbstractRule implements RuleInterface
     protected $context;
 
     /**
-     * Construct
-     * 
+     * Constructor
+     *
      * @param array   $options rules options array
      * @param integer $flags   rules flags
      * @param array   $context rules context data
@@ -41,7 +41,7 @@ abstract class AbstractRule implements RuleInterface
     {
         $this->options = $this->default_options;
 
-        if(is_array($options)) {
+        if (is_array($options)) {
             $this->options = array_merge($this->default_options, $options);
         }
         
@@ -63,8 +63,8 @@ abstract class AbstractRule implements RuleInterface
      */
     protected function removeNullOptions()
     {
-        foreach($this->options as $key => $value) {
-            if($value === null) {
+        foreach ($this->options as $key => $value) {
+            if ($value === null) {
                 unset($this->options[$key]);
             }
         }

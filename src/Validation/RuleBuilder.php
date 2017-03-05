@@ -51,7 +51,7 @@ class RuleBuilder
 
     /**
      * Set rule options
-     * 
+     *
      * @param  string $opts
      * @return $this
      */
@@ -63,7 +63,7 @@ class RuleBuilder
 
     /**
      * Get options
-     * 
+     *
      * @return array
      */
     public function getOptions()
@@ -73,7 +73,7 @@ class RuleBuilder
 
     /**
      * Set error
-     * 
+     *
      * @param  string $error
      * @return $this
      */
@@ -85,7 +85,7 @@ class RuleBuilder
 
     /**
      * Get error
-     * 
+     *
      * @return string
      */
     public function getError()
@@ -95,7 +95,7 @@ class RuleBuilder
 
     /**
      * Set flags
-     * 
+     *
      * @param  integer $flags
      * @return $this
      */
@@ -107,7 +107,7 @@ class RuleBuilder
 
     /**
      * Get flags
-     * 
+     *
      * @return integer
      */
     public function getFlags()
@@ -117,7 +117,7 @@ class RuleBuilder
 
     /**
      * Set context
-     * 
+     *
      * @param  array $context
      * @return $this
      */
@@ -129,7 +129,7 @@ class RuleBuilder
 
     /**
      * Get context
-     * 
+     *
      * @return integer
      */
     public function getContext()
@@ -139,19 +139,19 @@ class RuleBuilder
 
     /**
      * Create and get a rule
-     * 
+     *
      * @return object
      */
     public function get()
     {
-        if(class_exists($this->name)) {
+        if (class_exists($this->name)) {
             $rulename = $this->name;
         }
         else {
             $rulename = '\Peak\Validation\Rules\\'.$this->name;
         }
 
-        if(!class_exists($rulename)) {
+        if (!class_exists($rulename)) {
             throw new Exception('ERR_CUSTOM', 'Rule '.$this->name.' not found');
         }
 

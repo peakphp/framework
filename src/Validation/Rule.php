@@ -9,6 +9,12 @@ use Peak\Validation\RuleBuilder;
  */
 class Rule
 {
+    /**
+     * Create an instance of RuleBuilder
+     *
+     * @param  string $name rule class name
+     * @return Peak\Validation\RuleBuilder
+     */
     public static function create($name)
     {
         return new RuleBuilder($name);

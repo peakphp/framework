@@ -36,17 +36,18 @@ abstract class DataSet
 
     /**
      * Add to data one or many rules definitions
-     * 
-     * @param string $name        data key name
-     * @param array  $definitions rules definitions
+     *
+     * @param  string $name        data key name
+     * @param  array  $definitions rules definitions
+     * @return $this
      */
     public function add($name, ...$definitions)
     {
-        if(!array_key_exists($name, $this->rules)) {
+        if (!array_key_exists($name, $this->rules)) {
             $this->rules[$name] = [];
         }
 
-        foreach($definitions as $def) {
+        foreach ($definitions as $def) {
             array_push($this->rules[$name], $def);
         }
 
@@ -55,7 +56,7 @@ abstract class DataSet
 
     /**
      * Get validation errors
-     * 
+     *
      * @return array
      */
     public function getErrors()
@@ -65,7 +66,7 @@ abstract class DataSet
 
     /**
      * Validate data with current rules
-     * 
+     *
      * @param  array $data
      * @return bool
      */
@@ -73,31 +74,31 @@ abstract class DataSet
     {
         $this->errors = [];
 
-        if(empty($this->rules)) {
+        if (empty($this->rules)) {
             return true;
         }
 
-        foreach($this->rules as $key => $val) {
+        foreach ($this->rules as $key => $val) {
 
             // look for special condition
-            if(!array_key_exists($key, $data)) {
-                if(in_array('required', $val)) {
+            if (!array_key_exists($key, $data)) {
+                if (in_array('required', $val)) {
                     $this->errors[$key] = 'Required';
                 }
                 continue;
             }
-            elseif(empty($data[$key])) {
-                if(in_array('if_not_empty', $val)) {
+            elseif (empty($data[$key])) {
+                if (in_array('if_not_empty', $val)) {
                     continue;
                 }
             }
 
             // process rule(s) validation on data key value
-            foreach($val as $def) {
+            foreach ($val as $def) {
 
-                if(!is_array($def)) continue;
+                if (!is_array($def)) continue;
 
-                if(in_array('empty', $val)) {
+                if (in_array('empty', $val)) {
                     $this->errors[$key] = 'Required';
                 }
 
@@ -109,7 +110,7 @@ abstract class DataSet
                     ->setContext($data)
                     ->setError($rule_def->error);
 
-                if(!$rule->validate($data[$key])) {
+                if (!$rule->validate($data[$key])) {
                     $this->errors[$key] = $rule->getError();
                 }
             }
