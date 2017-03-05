@@ -12,13 +12,13 @@ class Annotations
      * Class reflection object
      * @var object ReflectionClass
      */ 
-    protected $_class;
+    protected $class;
     
     /**
      * Class name to work on
      * @var string
      */
-    protected $_class_name;
+    protected $classname;
     
     /**
      * Contains list of annotation tags to be detected. 
@@ -32,13 +32,13 @@ class Annotations
      *
      * @uses  setClass(), setTags()
      *
-     * @param stirng|null $class_name
-     * @param stirng|null $class_name
+     * @param string $classname
+     * @param mixed  $tags
      */
-    public function __construct($class_name = null, $tags = null)
+    public function __construct($classname = null, $tags = null)
     {
-        if (isset($class_name)) {
-            $this->setClass($class_name);
+        if (isset($classname)) {
+            $this->setClass($classname);
         }
         if (isset($tags)) {
             $this->setTags($tags);
@@ -51,10 +51,10 @@ class Annotations
      * @param  string $class
      * @return $this
      */
-    public function setClass($class)
+    public function setClass($classname)
     {
-        $this->_class_name = $class;
-        $this->_class = new ReflectionClass($class);
+        $this->classname = $classname;
+        $this->class = new ReflectionClass($classname);
         return $this;
     }
 
@@ -80,9 +80,9 @@ class Annotations
     public function getFromMethod($method_name)
     {
         try {
-            $method = new ReflectionMethod($this->_class_name, $method_name);
+            $method = new ReflectionMethod($this->classname, $method_name);
         }
-        catch(ReflectionException $e) {
+        catch (ReflectionException $e) {
             return [];
         }
 
@@ -98,7 +98,7 @@ class Annotations
     {
         $a = array();
         
-        foreach ($this->_class->getMethods() as $m) {
+        foreach ($this->class->getMethods() as $m) {
             $comment = $m->getDocComment();
             $a = array_merge($a, [$m->name => $this->parse($comment)]);
         }
@@ -112,7 +112,7 @@ class Annotations
      */
     public function getFromClass()
     {
-        return $this->parse($this->_class->getDocComment());
+        return $this->parse($this->class->getDocComment());
     }
     
     /**
@@ -125,12 +125,18 @@ class Annotations
     public function parse($string)
     {
         //in case we don't have any tag to detect or an empty doc comment, we skip this method
-        if (empty($this->_tags) || empty($string)) return [];
+        if (empty($this->_tags) || empty($string)) {
+            return [];
+        }
    
         //check what is the type of $_tags (array|string|wildcard)
-        if (is_array($this->_tags)) $tags = '('.implode('|', $this->_tags).')';
-        elseif ($this->_tags === '*') $tags = '[a-zA-Z0-9]';
-        else $tags = '('.$this->_tags.')';
+        if (is_array($this->_tags)) {
+            $tags = '('.implode('|', $this->_tags).')';
+        } elseif ($this->_tags === '*') {
+            $tags = '[a-zA-Z0-9]';
+        } else {
+            $tags = '('.$this->_tags.')';
+        }
         
         //find @[tag] [params...]
         $regex = '#\* @(?P<tag>'.$tags.'+)\s+((?P<params>[\s"a-zA-Z0-9\-$\\._/-^]+)){1,}#si';
@@ -139,10 +145,8 @@ class Annotations
         $final = [];
         
         if (isset($matches)) {
-            
             $i = 0;
             foreach ($matches as $v) {
-
                 $final[$i] = array('tag' => $v['tag'], 'params' => []);
 
                 //detect here if we got a param with quote or not
@@ -155,8 +159,7 @@ class Annotations
                     foreach ($matches_params as $v) {
                         if (!empty($v['param']) && !isset($v['param2'])) {
                             $final[$i]['params'][] = $v['param'];
-                        }
-                        elseif (isset($v['param2']) && !empty($v['param2'])) {
+                        } elseif (isset($v['param2']) && !empty($v['param2'])) {
                             $final[$i]['params'][] = $v['param2'];
                         }
                     }
