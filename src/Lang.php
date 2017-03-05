@@ -61,7 +61,7 @@ class Lang
 
     /**
      * Set the language abbr
-     * 
+     *
      * @param string $lang_abbr
      */
     public function setLang($lang_abbr)
@@ -72,7 +72,7 @@ class Lang
 
     /**
      * Return current lang abbr ($_lang)
-     * 
+     *
      * @return string
      */
     public function getLang()
@@ -98,19 +98,26 @@ class Lang
         if ($filepath !== false) {
 
             $tmp = include $filepath;
-            if (!is_array($tmp)) $tmp = array();
+            if (!is_array($tmp)) {
+                $tmp = [];
+            }
 
             $this->loaded_files[] = $filepath;
 
-            if ($return) return $tmp;
+            if ($return) {
+                return $tmp;
+            }
+
             $this->translations = $tmp;
+
+        } elseif ($return) {
+            return [];
         }
-        elseif ($return) return [];
     }
 
     /**
      * Add file(s) to the current translations var
-     * 
+     *
      * @param string|array $files
      */
     public function addFiles($files)
@@ -138,22 +145,21 @@ class Lang
     /**
      * Return false if file don't exists, return complete filepath if exists
      *
-     * @param  string      $file 
-     * @return bool|string       
+     * @param  string      $file
+     * @return bool|string
      */
     protected function _exists($file)
     {
         if (file_exists($file)) {
             return $file;
-        }
-        // relative path to the current application if context apply
-        elseif (defined('APPLICATION_ABSPATH')) {
+        } elseif (defined('APPLICATION_ABSPATH')) {
+            // relative path to the current application if context apply
             $filepath = APPLICATION_ABSPATH.'/'.$file;
             if (file_exists($filepath)) {
                 return $filepath;
             }
         }
-        
+
         return false;
     }
 
@@ -165,14 +171,17 @@ class Lang
      * @return string
      */
     public function translate($item, $replaces = null)
-    { 
+    {
         $tr = (isset($this->translations[$item])) ? $this->translations[$item] : $item;
 
         if (isset($replaces)) {
-            if (is_array($replaces)) $tr = vsprintf($tr, $replaces);
-            else $tr = sprintf($tr, $replaces);  
+            if (is_array($replaces)) {
+                $tr = vsprintf($tr, $replaces);
+            } else {
+                $tr = sprintf($tr, $replaces);
+            }
         }
-        
+
         return $tr;
     }
 }
