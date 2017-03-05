@@ -157,7 +157,7 @@ class Grid extends Helper
      *                       ))
      *    
      *  #2 ->addHook('email', $hook_edit, array('fields' => '*'))
-     *    
+     *
      *  #3 ->addHook('email', $hook_strong)
      *
      * @param string      $colname

@@ -43,7 +43,7 @@ class Application
      */
     private function __construct(Collection $conf)
     {
-        // application config             
+        // application config
         $this->config = $conf;
 
         // register application/view instance
@@ -62,7 +62,7 @@ class Application
      * @param  array $config
      * @return Application
      */
-    public static function create(Array $config) 
+    public static function create(array $config)
     {
         $config = new Config($config);
         return new static($config->getMountedConfig());
@@ -71,7 +71,7 @@ class Application
     /**
      * Access to application config object
      *
-     * @param  string|null $path 
+     * @param  string|null $path
      * @param  mixed|null  $value
      * @return mixed
      */
