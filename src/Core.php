@@ -25,11 +25,12 @@ if (!function_exists('relativeBasepath')) {
      * @param  string $dir
      * @return string
      */
-    function relativeBasepath($dir, $doc_root = null) {
+    function relativeBasepath($dir, $doc_root = null) 
+    {
         if (!isset($doc_root)) {
             $doc_root = (!isset($_SERVER['DOCUMENT_ROOT'])) ? '' : $_SERVER['DOCUMENT_ROOT'];
         }
-        return substr(str_replace([$doc_root,basename($dir)],'',str_replace('\\','/',$dir)), 0, -1);
+        return substr(str_replace([$doc_root, basename($dir)], '', str_replace('\\', '/', $dir)), 0, -1);
     }
 }
 
@@ -43,11 +44,12 @@ if (!function_exists('relativePath')) {
      * @param  string $dir
      * @return string
      */
-    function relativePath($dir, $doc_root = null) {
+    function relativePath($dir, $doc_root = null) 
+    {
         if (!isset($doc_root)) {
             $doc_root = (!isset($_SERVER['DOCUMENT_ROOT'])) ? '' : $_SERVER['DOCUMENT_ROOT'];
         }
-        return str_replace([$doc_root,$dir],'',str_replace('\\','/',$dir));
+        return str_replace([$doc_root, $dir], '', str_replace('\\', '/', $dir));
     }
 }
 
@@ -58,7 +60,8 @@ if (!function_exists('isCli')) {
     /**
      * Detect if we are in command line interface mode
      */
-    function isCli() {
+    function isCli()
+    {
         return (php_sapi_name() === 'cli' || defined('STDIN'));
     }
 }
@@ -70,7 +73,8 @@ if (!function_exists('showAllErrors')) {
     /**
      * Try to force the display of all errors
      */
-    function showAllErrors() {
+    function showAllErrors()
+    {
         error_reporting(E_ALL);
         ini_set('display_errors', 1);
     }
@@ -95,7 +99,8 @@ if (!function_exists('__')) {
      * @param  closure        $func
      * @return string
      */
-    function __($text, $replaces = null, $func = null) {
+    function __($text, $replaces = null, $func = null)
+    {
         return \Peak\Lang::__($text, $replaces, $func);
     }
 }
@@ -112,7 +117,8 @@ if (!function_exists('_e')) {
      * @param  closure        $func
      * @return string
      */
-    function _e($text, $replaces = null, $func = null) {
+    function _e($text, $replaces = null, $func = null)
+    {
         \Peak\Lang::_e($text, $replaces, $func);
     }
 }
@@ -126,8 +132,8 @@ if (!function_exists('phpinput')) {
      *
      * @return Peak\Collection
      */
-    function phpinput() {
-
+    function phpinput()
+    {
         $raw  = file_get_contents('php://input');
         $post = json_decode($raw, true); // for json input
 
@@ -150,8 +156,8 @@ if (!function_exists('isEnv')) {
      * @param  string  $env
      * @return boolean 
      */
-    function isEnv($env) {
-
+    function isEnv($env)
+    {
         if (defined('APPLICATION_ENV')) {
             return (APPLICATION_ENV === $env);
         }
@@ -170,7 +176,8 @@ if (!function_exists('config')) {
      * @param  mixed|null  $value
      * @return mixed
      */
-    function config($path = null, $value = null) {
+    function config($path = null, $value = null)
+    {
         return \Peak\Application::conf($path, $value);
     }
 }
@@ -185,7 +192,8 @@ if (!function_exists('collection')) {
      * @param  array|null $items 
      * @return \Peak\Collection     
      */
-    function collection($items = null) {
+    function collection($items = null)
+    {
         return \Peak\Collection::make($items);
     }
 }
@@ -200,8 +208,8 @@ if (!function_exists('session')) {
      * @param  array|null $items
      * @return \Peak\session
      */
-    function session($path = null, $value = null) {
-
+    function session($path = null, $value = null)
+    {
         $s = \Peak\Registry::o()->session;
         if (!isset($s)) {
             $s = \Peak\Registry::set('session', new \Peak\Config\Session());
@@ -226,8 +234,8 @@ if (!function_exists('url')) {
      *
      * @return string
      */
-    function url($path = null, $use_forwarded_host = true) {
-
+    function url($path = null, $use_forwarded_host = true)
+    {
         $s = $_SERVER;
 
         $ssl      = ( ! empty( $s['HTTPS'] ) && $s['HTTPS'] == 'on' );
