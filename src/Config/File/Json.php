@@ -32,7 +32,9 @@ class Json extends DotNotation
     public function __construct($file = null, $allow_comments = false)
     {
         $this->_allow_comments = $allow_comments;
-        if (isset($file)) $this->loadFile($file);
+        if (isset($file)) {
+            $this->loadFile($file);
+        }
     }
     
     /**
@@ -43,8 +45,9 @@ class Json extends DotNotation
      */
     public function loadFile($file)
     {
-        if (!file_exists($file)) throw new Exception('ERR_CUSTOM', __CLASS__.' has tried to load non-existent json file');
-        else {
+        if (!file_exists($file)) {
+            throw new Exception('ERR_CUSTOM', __CLASS__.' has tried to load non-existent json file');
+        } else {
             $this->_loaded_file = $file;
             $content = file_get_contents($file);
             return $this->loadString($content);
@@ -102,7 +105,7 @@ class Json extends DotNotation
         if ($response !== false) {
             return $this->loadString($response);
         }
-        else return false;
+        return false;
     }
     
     /**
@@ -134,7 +137,9 @@ class Json extends DotNotation
                     break;
             }
             
-            if (isset($e)) throw new Exception('ERR_CUSTOM', __CLASS__.': '.$e);
+            if (isset($e)) {
+                throw new Exception('ERR_CUSTOM', __CLASS__.': '.$e);
+            }
         }
     }
 
@@ -146,7 +151,9 @@ class Json extends DotNotation
      */
     public function enablePersistence($filepath = null)
     {
-        if (!isset($filepath)) $filepath = $this->_loaded_file;
+        if (!isset($filepath)) {
+            $filepath = $this->_loaded_file;
+        }
 
         register_shutdown_function(array($this, 'export2file'), $filepath);
     }
@@ -161,8 +168,7 @@ class Json extends DotNotation
         if (!isset($filepath)) {
             if (!empty($this->_loaded_file)) {
                 $filepath = $this->_loaded_file;
-            }
-            else {
+            } else {
                 throw new Exception('ERR_CUSTOM', __CLASS__.': No file specified for export');
             }
         }
