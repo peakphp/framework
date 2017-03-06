@@ -7,7 +7,6 @@ namespace Peak;
  */
 class Registry
 {
-
     /**
      * Array of registered objects
      * @var array
@@ -18,15 +17,19 @@ class Registry
      * Instance of registry
      * @var object
      */
-    protected static $instance = null;                               
+    protected static $instance = null;
 
-
-    private final function __clone() 
-    { 
-        trigger_error('Can\'t clone registry', E_USER_ERROR); 
+    /**
+     * Clone
+     */
+    final private function __clone()
+    {
+        trigger_error('Can\'t clone registry', E_USER_ERROR);
     }
 
-    private final function __construct() {}
+    final private function __construct()
+    {
+    }
 
     /**
      * Return an registered object or null
@@ -34,7 +37,7 @@ class Registry
      * @param  string $name
      * @return object/null
      */
-    public function __get($name) 
+    public function __get($name)
     {
         return isset(self::$objects[$name]) ? self::$objects[$name] : null;
     }
@@ -46,7 +49,9 @@ class Registry
      */
     public static function getInstance()
     {
-        if (is_null(self::$instance)) self::$instance = new self();
+        if (is_null(self::$instance)) {
+            self::$instance = new self();
+        }
         return self::$instance;
     }
 
