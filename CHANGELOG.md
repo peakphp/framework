@@ -1,10 +1,11 @@
 VERSION 2.0.10
 --------------
-Release Date: ?
+Release Date: 2017-03-05
 
  - added Validation component
  - removed Filters component favor of the new Validation component
  - added FormValidation and FormDataSet wrapper to Form component
+ - code refactoring for PSR-2
 
 VERSION 2.0.9
 -------------
