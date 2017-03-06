@@ -86,7 +86,9 @@ class Registry
      */
     public static function get($name)
     {
-        if (self::isRegistered($name)) return self::$objects[$name];
+        if (self::isRegistered($name)) {
+            return self::$objects[$name];
+        }
     }
 
     /**
@@ -105,9 +107,11 @@ class Registry
      * @param  string $name
      * @return string|false
      */
-    public static function getClassName($name) 
+    public static function getClassName($name)
     {
-        if (self::isRegistered($name)) return get_class(self::$objects[$name]);
+        if (self::isRegistered($name)) {
+            return get_class(self::$objects[$name]);
+        }
         return false;
     }
 
@@ -128,7 +132,9 @@ class Registry
      */
     public static function unregister($name)
     {
-        if (self::isRegistered($name)) unset(self::$objects[$name]);
+        if (self::isRegistered($name)) {
+            unset(self::$objects[$name]);
+        }
     }
 
     /**
