@@ -30,3 +30,4 @@ ratings:
   - "**.php"
 exclude_paths:
   - tests/
+- "src/View/Helper/debugbar/debugbar.css"
