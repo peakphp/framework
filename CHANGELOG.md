@@ -1,3 +1,9 @@
+VERSION 2.0.11
+--------------
+Release Date: ?
+
+ - code refactoring for PSR-2
+
 VERSION 2.0.10
 --------------
 Release Date: 2017-03-05
