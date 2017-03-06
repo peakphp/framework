@@ -15,9 +15,9 @@ class Dispatcher
     /**
      * Attach an event callback. An event name can have multiple callback
      *
-     * @param  string  $name     
-     * @param  closure $callback 
-     * @return $this           
+     * @param  string  $name
+     * @param  closure $callback
+     * @return $this
      */
     public function attach($name, $callback) 
     {
@@ -33,7 +33,7 @@ class Dispatcher
      * Has an event
      *
      * @param  string  $name
-     * @return boolean      
+     * @return boolean
      */
     public function hasEvent($name)
     {
@@ -41,7 +41,7 @@ class Dispatcher
     }
 
     /**
-     * Detach an event name and all is callbacks. 
+     * Detach an event name and all is callbacks.
      *
      * @param  string|array $ev event(s) name(s)
      * @return $this
@@ -49,8 +49,11 @@ class Dispatcher
     public function detach($ev)
     {
         $events = [];
-        if (is_string($ev)) $events[] = $events;
-        elseif (is_array($ev)) $events = $ev;
+        if (is_string($ev)) {
+            $events[] = $events;
+        } elseif (is_array($ev)) {
+            $events = $ev;
+        }
 
         foreach ($events as $event) {
             unset($this->events[$event]);
@@ -74,16 +77,21 @@ class Dispatcher
      * Trigger one or many events
      *
      * @param  string|array $ev
-     * @param  mixed $argv 
+     * @param  mixed $argv
      * @param  array $data
      */
-    public function fire($ev, $argv = null) 
+    public function fire($ev, $argv = null)
     {
-        if (empty($this->events)) return;
+        if (empty($this->events)) {
+            return;
+        }
         $events = [];
 
-        if (is_string($ev)) $events[] = $ev;
-        elseif (is_array($ev)) $events = $ev;
+        if (is_string($ev)) {
+            $events[] = $ev;
+        } elseif (is_array($ev)) {
+            $events = $ev;
+        }
 
         foreach ($events as $event) {
             if (array_key_exists($event, $this->events)) {
@@ -97,9 +105,9 @@ class Dispatcher
     /**
      * Handle an event callback
      *
-     * @param  string $event    
-     * @param  mixed  $callback 
-     * @param  mixed  $argv               
+     * @param  string $event
+     * @param  mixed  $callback
+     * @param  mixed  $argv
      */
     protected function handleCallback($event, $callback, $argv = null)
     {
@@ -108,13 +116,14 @@ class Dispatcher
         }
         elseif (is_string($callback) && class_exists($callback)) {
             $e = new $callback();
-            if ($e instanceof EventInterface) $e->fire($argv);
-            else $this->eventCallbackFail($event, $i);
-        }
-        elseif (is_object($callback) && $callback instanceof EventInterface) {
+            if ($e instanceof EventInterface) {
+                $e->fire($argv);
+            } else {
+                $this->eventCallbackFail($event, $i);
+            }
+        } elseif (is_object($callback) && $callback instanceof EventInterface) {
             $callback->fire($argv);
-        }
-        else {
+        } else {
             $this->eventCallbackFail($event, $i);
         }
     }
@@ -122,8 +131,8 @@ class Dispatcher
     /**
      * Fail to call an event callback
      *
-     * @param  string  $name  
-     * @param  integer $index      
+     * @param  string  $name
+     * @param  integer $index
      */
     protected function eventCallbackFail($name, $index)
     {
