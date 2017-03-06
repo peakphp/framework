@@ -21,7 +21,7 @@ abstract class Element implements ElementInterface
      * @var array
      */
     protected $attrs_to_translate = [
-        'placeholder', 
+        'placeholder',
         'title'
     ];
 
@@ -99,13 +99,14 @@ abstract class Element implements ElementInterface
         if (!empty($this->error)) {
             if (isset($this->options['attrs']['class'])) {
                 $this->options['attrs']['class'] .= ' error';
-            }
-            else {
+            } else {
                 $this->options['attrs']['class'] = 'error';
             }
         }
 
-        if (is_null($this->options['attrs'])) $this->options['attrs'] = [];
+        if (is_null($this->options['attrs'])) {
+            $this->options['attrs'] = [];
+        }
         $attrs_array = array_merge($attrs_array, $this->options['attrs']);
 
         //create a copy before transforming it
@@ -123,17 +124,22 @@ abstract class Element implements ElementInterface
         //transform to html attribute string ( key="value" )
         foreach ($attrs_array as $k => $v) {
 
-            if ($v === null) continue;
+            if ($v === null) {
+                continue;
+            }
 
             if (in_array($k, $this->attrs_to_translate)) {
                 $v = __($v);
             }
 
             if (is_bool($v) && !is_integer($v)) {
-                if ($v === true) $attrs_string[] = $k;
+                if ($v === true) {
+                    $attrs_string[] = $k;
+                }
                 //echo $k.'BOOL ';
+            } else {
+                $attrs_string[] = $k.'="'.$v.'"';
             }
-            else $attrs_string[] = $k.'="'.$v.'"';
         }
 
         return implode(' ', $attrs_string);
@@ -142,8 +148,8 @@ abstract class Element implements ElementInterface
     /**
      * Check if string is json string
      *
-     * @param  string $string 
-     * @return boolean         
+     * @param  string $string
+     * @return boolean
      */
     protected function isJson($string) 
     {
@@ -154,32 +160,30 @@ abstract class Element implements ElementInterface
     /**
      * Bool to integer
      *
-     * @param  boolean $bool 
-     * @return integer      
+     * @param  boolean $bool
+     * @return integer
      */
     protected function bool2Int($bool)
     {
-        if ($bool === true) return 1;
-        else return 0;
+        return ($bool === true) ? 1 : 0;
     }
 
     /**
      * Bool to string
      *
-     * @param  boolean $bool 
-     * @return string      
+     * @param  boolean $bool
+     * @return string
      */
     protected function bool2String($bool)
     {
-        if ($bool === true) return 'true';
-        else return 'false';
+        return ($bool === true) ? 'true' : 'false';
     }
 
     /**
      * Transform php array to javascript array
      *
-     * @param  array $array 
-     * @return string   
+     * @param  array $array
+     * @return string
      */
     protected function array2JsArray($array)
     {
