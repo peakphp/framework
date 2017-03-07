@@ -15,7 +15,7 @@ class Config
      */
     private $default = [
         'ns'   => 'App',  //namespace
-        'env'  => 'prod', 
+        'env'  => 'prod',
         'conf' => 'config.php',
         'path' => [
             'public' => '',
@@ -35,7 +35,7 @@ class Config
      *
      * @param array $config user config
      */
-    public function __construct($config = []) 
+    public function __construct($config = [])
     {
         $this->app_config = new DotNotation($this->default);
         $this->app_config->mergeRecursiveDistinct($config);
@@ -72,10 +72,10 @@ class Config
      */
     private function getConfigFilepath()
     {
-        $path = str_replace('\\', '/', 
+        $path = str_replace('\\', '/',
             realpath($this->app_config->get('path.app').'/'.$this->app_config->get('conf'))
         );
-        
+
         return $path;
     }
 
@@ -85,10 +85,12 @@ class Config
     private function defineConstants()
     {
         //define server document root absolute path
-        $svr_path = str_replace('\\','/',realpath($_SERVER['DOCUMENT_ROOT']));
-        if (substr($svr_path, -1, 1) !== '/') $svr_path .= '/';
+        $svr_path = str_replace('\\', '/', realpath($_SERVER['DOCUMENT_ROOT']));
+        if (substr($svr_path, -1, 1) !== '/') {
+            $svr_path .= '/';
+        }
 
-        define('SVR_ABSPATH',         $svr_path); 
+        define('SVR_ABSPATH',         $svr_path);
         define('LIBRARY_ABSPATH',     realpath(__DIR__.'/../'));
         define('PUBLIC_ABSPATH',      realpath($this->app_config->get('path.public')));
         define('APPLICATION_ABSPATH', realpath($this->app_config->get('path.app')));
@@ -98,14 +100,15 @@ class Config
     /**
      * Validate require config values
      */
-    private function validate() 
+    private function validate()
     {
         if (!$this->app_config->have('path.public')) {
             throw new Exception('ERR_CORE_INIT_CONST_MISSING', ['Public root','PUBLIC_ROOT']);
         }
 
-        if (!$this->app_config->have('path.app'))
+        if (!$this->app_config->have('path.app')) {
             throw new Exception('ERR_CORE_INIT_CONST_MISSING', ['Application root','APPLICATION_ROOT']);
+        }
 
         if (!$this->app_config->have('env')) {
             throw new Exception('ERR_APP_ENV_MISSING');
@@ -114,5 +117,5 @@ class Config
         if (!$this->app_config->have('conf')) {
             throw new Exception('ERR_APP_CONF_MISSING');
         }
-    }    
+    }
 }
