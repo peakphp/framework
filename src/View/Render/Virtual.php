@@ -13,7 +13,7 @@ class Virtual extends Render
 {
 
     private $_virtual = array();
-    
+
     /**
      * Add virtual group
      *
@@ -21,9 +21,11 @@ class Virtual extends Render
      */
     public function addGroup($name)
     {        
-        if(!array_key_exists($name,$this->_virtual)) $this->_virtual[$name] = '';
+        if (!array_key_exists($name, $this->_virtual)) {
+            $this->_virtual[$name] = '';
+        }
     }
-    
+
     /**
      * Delete virtual group
      *
@@ -33,7 +35,7 @@ class Virtual extends Render
     {
         unset($this->_virtual[$name]);
     }
-    
+
     /**
      * Add virtual group data
      *
@@ -44,29 +46,34 @@ class Virtual extends Render
     public function add($group_name, $data, $overwrite = false)
     {
         $this->addGroup($group_name);
-        if(!$overwrite) $this->_virtual[$group_name] .= $data;
-        else $this->_virtual[$group_name] = $data;      
+        if (!$overwrite) {
+            $this->_virtual[$group_name] .= $data;
+        } else {
+            $this->_virtual[$group_name] = $data;
+        }
     }
-    
+
     /**
      * Render virtual group(s)
      *
-     * @param string $file
-     * @param string $path
+     * @param  string $file
+     * @param  string $path
      * @return array/string
      */
     public function render($file, $path = null)
-    {       
-        //CONTROLLER FILE VIEW       
+    {
+        //CONTROLLER FILE VIEW
         $this->scripts_file = $file;
         $this->scripts_path = $path;
 
         $output = '';
-        foreach($this->_virtual as $group => $content) $output .= $content;
+        foreach ($this->_virtual as $group => $content) {
+            $output .= $content;
+        }
 
         $this->output($output);
     }
-    
+
     /**
      * Output virtual group rendering result
      *
@@ -74,7 +81,6 @@ class Virtual extends Render
      */
     private function output($data)
     {
-        echo $data;    
+        echo $data;
     }
-    
 }
