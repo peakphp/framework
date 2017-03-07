@@ -11,31 +11,31 @@ class Header
      * Header fields
      * @var array
      */
-    protected $_header = [];
+    protected $header = [];
 
     /**
      * Additonnal content after
      * @var string
      */
-    protected $_content = null;
+    protected $content = null;
 
     /**
      * Did we release header fields
      * @var boolean
      */
-    protected $_released = false;
+    protected $released = false;
 
     /**
      * Hold stop release() method from outputting the stuff
      * @var boolean
      */
-    protected $_hold = false;
+    protected $hold = false;
 
     /**
      * List of http status codes
      * @var array
      */
-    protected $_http_status_codes = [
+    protected $http_status_codes = [
 
         100 => 'Continue',
         101 => 'Switching Protocols',
@@ -119,19 +119,19 @@ class Header
      */
     public function release($die = false)
     {
-        if ($this->_hold === true) {
+        if ($this->hold === true) {
             return;
         }
 
-        if (!empty($this->_header) && !headers_sent() && $this->_released === false) {
+        if (!empty($this->header) && !headers_sent() && $this->released === false) {
 
-            $this->_released = true;
+            $this->released = true;
 
-            foreach ($this->_header as $k => $field) {
+            foreach ($this->header as $k => $field) {
                 header($field);
             }
             if (!is_null($this)) {
-                echo $this->_content;
+                echo $this->content;
             }
 
             if ($die) {
@@ -145,7 +145,7 @@ class Header
      */
     public function holdOn()
     {
-        $this->_hold = true;
+        $this->hold = true;
         return $this;
     }
 
@@ -154,7 +154,7 @@ class Header
      */
     public function holdOff()
     {
-        $this->_hold = false;
+        $this->hold = false;
         return $this;
     }
 
@@ -169,11 +169,11 @@ class Header
         if (!empty($field)) {
 
             if (!is_array($field)) {
-                $this->_header[] = $field;
+                $this->header[] = $field;
             }
             else {
                 foreach ($field as $f) {
-                    $this->_header[] = $f;
+                    $this->header[] = $f;
                 }
             }
         }
@@ -188,7 +188,7 @@ class Header
      */
     public function setContent($data)
     {
-        $this->_content = $data;
+        $this->content = $data;
         return $this;
     }
 
@@ -199,9 +199,9 @@ class Header
      */
     public function reset()
     {
-        $this->_content  = '';
-        $this->_header[] = [];
-        $this->_released = false;
+        $this->content  = '';
+        $this->header[] = [];
+        $this->released = false;
         return $this;
     }
 
@@ -213,8 +213,8 @@ class Header
      */
     public function codeAsStr($code)
     {
-        if (array_key_exists($code, $this->_http_status_codes)) {
-            return $this->_http_status_codes[$code];
+        if (array_key_exists($code, $this->http_status_codes)) {
+            return $this->http_status_codes[$code];
         }
         return;
     }
@@ -229,8 +229,8 @@ class Header
      */
     public function setCode($code = 200, $die = false, $http = 'HTTP/1.1')
     {
-        if (array_key_exists($code,$this->_http_status_codes)) {
-            $this->set($http.' '.$code.' '.$this->_http_status_codes[$code]);
+        if (array_key_exists($code,$this->http_status_codes)) {
+            $this->set($http.' '.$code.' '.$this->http_status_codes[$code]);
         }
 
         if ($die !== false) {
