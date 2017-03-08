@@ -15,7 +15,7 @@ abstract class Render
     public $scripts_file;          //controller action script view path used 
     public $scripts_path;          //controller action script view file name used
 
-    protected $_cache;             //view cache object
+    protected $cache;              //view cache object
 
     //force child to implement those functions
     abstract public function render($file, $path = null);
@@ -90,17 +90,18 @@ abstract class Render
         //use cache instead outputing and evaluating view script
         if ($this->cache()->isValid()) {
             include($this->cache()->getCacheFile());
-        } else {
-            //cache and output current view script
-            ob_start();
-            $this->output($data);
-            //if(is_writable($cache_file)) { //fail if file cache doesn't already 
-            $content = ob_get_contents();
-                //if($this->_cache_strip) $content = preg_replace('!\s+!', ' ', $content);
-            file_put_contents($this->cache()->getCacheFile(), $content);
-            //}
-            ob_get_flush();
+            return;
         }
+
+        //cache and output current view script
+        ob_start();
+        $this->output($data);
+        //if(is_writable($cache_file)) { //fail if file cache doesn't already
+        $content = ob_get_contents();
+        //if($this->cache_strip) $content = preg_replace('!\s+!', ' ', $content);
+        file_put_contents($this->cache()->getCacheFile(), $content);
+        //}
+        ob_get_flush();
     }
 
     /**
@@ -110,7 +111,9 @@ abstract class Render
      */
     public function cache()
     {
-        if (!is_object($this->_cache)) $this->_cache = new Cache();
-        return $this->_cache;
+        if (!is_object($this->cache)) {
+            $this->cache = new Cache();
+        }
+        return $this->cache;
     }
 }
