@@ -13,13 +13,13 @@ class Assets extends Helper
      * Assets end url path
      * @var string
      */
-    private $_assets_path;
+    private $assets_path;
 
     /**
      * Assets base url
      * @var string
      */
-    private $_assets_base_url = null;
+    private $assets_base_url = null;
 
     /**
      * Init the class and set default assets path and base url optionnaly
@@ -29,6 +29,7 @@ class Assets extends Helper
     public function __construct($path = null, $url = null)
     {
         parent::__construct();
+
         if (isset($path)) {
             $this->setPath($path);
         } else {
@@ -49,7 +50,7 @@ class Assets extends Helper
      *
      * @param  string $method
      * @param  string $args
-     * @return string 
+     * @return string
      */
     public function __call($method, $args)
     {
@@ -64,11 +65,11 @@ class Assets extends Helper
      * Set assets path
      *
      * @param  string $path
-     * @return object $this
+     * @return $this
      */
     public function setPath($path)
     {
-        $this->_assets_path = $path;
+        $this->assets_path = $path;
         return $this;
     }
 
@@ -80,8 +81,10 @@ class Assets extends Helper
      */
     public function setUrl($url)
     {
-        if (substr($url, -1, 1) === '/') $url = substr($url, 0, strlen($url) - 1);
-        $this->_assets_base_url = $url;
+        if (substr($url, -1, 1) === '/') {
+            $url = substr($url, 0, strlen($url) - 1);
+        }
+        $this->assets_base_url = $url;
 
         return $this;
     }
@@ -94,7 +97,7 @@ class Assets extends Helper
      */
     public function exists($file)
     {
-        $filepath = $this->_assets_path.'/'.$file;
+        $filepath = $this->assets_path.'/'.$file;
         return file_exists($filepath);
     }
 
@@ -121,17 +124,14 @@ class Assets extends Helper
 
         // if asset type doesn't exists
         if (!method_exists($this, $mtype)) {
-
             // if type is auto, we will retreive asset based on file extension if asset method exists
             if (in_array($type, array('auto', 'auto-detect', 'autodetect'))) {
-
                 foreach ($paths as $p) {
                     $ext = '_asset_'.pathinfo($p, PATHINFO_EXTENSION);
                     if (method_exists($this, $ext)) {
                         $output .= $this->$ext($p, $param);
                     }
                 }
-
             } else {
                 return;
             }
@@ -152,7 +152,7 @@ class Assets extends Helper
      */
     protected function _asset_url($filepath)
     {
-        return $this->_assets_base_url.'/'.$this->_assets_path.'/'.$filepath;
+        return $this->assets_base_url.'/'.$this->assets_path.'/'.$filepath;
     }
 
     /**
