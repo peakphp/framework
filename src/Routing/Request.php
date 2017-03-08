@@ -4,7 +4,6 @@ namespace Peak\Routing;
 
 class Request
 {
-
     /**
      * Unprocess request uri
      * @var string
@@ -36,7 +35,9 @@ class Request
      */
     public function __construct($request_uri, $base_uri = null)
     {
-        if (!isset($base_uri)) $base_uri = self::$separator;
+        if (!isset($base_uri)) {
+            $base_uri = self::$separator;
+        }
         $this->setBaseUri($base_uri);
         $this->setRequestUri($request_uri);
     }
@@ -47,7 +48,7 @@ class Request
      * @param string $base_uri
      */
     public function setBaseUri($base_uri)
-    {               
+    {
         $this->base_uri = $this->standardize($base_uri);
     }
 
@@ -76,8 +77,8 @@ class Request
     /**
      * Standardize the request
      *
-     * @param  string $request 
-     * @return string         
+     * @param  string $request
+     * @return string
      */
     protected function standardize($request)
     {
@@ -99,13 +100,13 @@ class Request
      * Remove double separator ex: double //
      *
      * @param  string $request
-     * @return string         
+     * @return string
      */
     protected function removeDoubleSeparator($request)
     {
         return str_ireplace(
-            self::$separator.self::$separator, 
-            self::$separator, 
+            self::$separator.self::$separator,
+            self::$separator,
             $request
         );
     }

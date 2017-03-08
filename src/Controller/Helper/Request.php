@@ -26,7 +26,7 @@ class Request
      */
     public function getIp()
     {
-        foreach (array('HTTP_CLIENT_IP', 'HTTP_X_FORWARDED_FOR', 'HTTP_X_FORWARDED', 'HTTP_X_CLUSTER_CLIENT_IP', 'HTTP_FORWARDED_FOR', 'HTTP_FORWARDED', 'REMOTE_ADDR') as $key) {
+        foreach (['HTTP_CLIENT_IP', 'HTTP_X_FORWARDED_FOR', 'HTTP_X_FORWARDED', 'HTTP_X_CLUSTER_CLIENT_IP', 'HTTP_FORWARDED_FOR', 'HTTP_FORWARDED', 'REMOTE_ADDR'] as $key) {
             if (array_key_exists($key, $_SERVER) === true) {
                 foreach (explode(',', $_SERVER[$key]) as $ip) {
                     if (filter_var($ip, FILTER_VALIDATE_IP) !== false) {
@@ -45,7 +45,7 @@ class Request
      */
     public function getLanguages($first_only = false)
     {
-        $result = array();
+        $result = [];
 
         if (array_key_exists('HTTP_ACCEPT_LANGUAGE', $_SERVER)) {
 
@@ -55,12 +55,16 @@ class Request
 
                 if (preg_match($pattern, $lang, $splits)) {
                     foreach ($splits as $k => $v) {
-                        if (strlen($k) < 2) unset($splits[$k]);
+                        if (strlen($k) < 2) {
+                            unset($splits[$k]);
+                        }
                     }
                     $result[] = $splits;
                 }
 
-                if ($first_only) break;                
+                if ($first_only) {
+                    break;
+                }
             }
         }
 
