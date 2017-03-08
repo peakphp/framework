@@ -8,7 +8,7 @@ use Peak\View\Helper\Debug;
 
 /**
  * Graphic version of Peak_View_Helper_debug
- * @uses    jQuery, Fugue icons, Peak\View\Helper\Debug, Peak\Chrono  
+ * @uses    jQuery, Fugue icons, Peak\View\Helper\Debug, Peak\Chrono
  */
 class Debugbar extends Debug
 {
@@ -38,8 +38,8 @@ class Debugbar extends Debug
             return;
         }
         
-        //files included                
-        $files = $this->getFiles();     
+        //files included
+        $files = $this->getFiles();
         //print_r($files);
         $files_count = count($files['app']) + count($files['peak']);
 
@@ -51,7 +51,7 @@ class Debugbar extends Debug
         } else {
             $chrono = 'n/a';
         }
-        
+
         //save chronos into session if exists
         $sid = session_id();
         if (!empty($sid)) {
@@ -61,7 +61,7 @@ class Debugbar extends Debug
             $chronos = json_decode($_SESSION['pkdebugbar']['chrono'], true);
             $chronos[] = $chrono;
             $_SESSION['pkdebugbar']['chrono'] = json_encode($chronos);
-            
+
             if (!isset($_SESSION['pkdebugbar']['pages_chrono'][$_SERVER['REQUEST_URI']])) {
                 $_SESSION['pkdebugbar']['pages_chrono'][$_SERVER['REQUEST_URI']] = '{}';
             }
@@ -72,7 +72,7 @@ class Debugbar extends Debug
 
         //print css & js
         echo $this->_getAssets();
-        
+
         //zend_db_profiler
         $zdb_profiler = false;
         if (class_exists('Zend_Db_Table', false)) {
@@ -81,9 +81,9 @@ class Debugbar extends Debug
                 $zdb_profiler = false;
             }
         }
-         
+
         $theme = ($theme === 'dark') ? 'th-dark' : '';
-        
+
         //debug bar html
         echo '<div id="pkdebugbar" class="'.$theme.'">
               <div class="pkdbpanel">
@@ -101,7 +101,7 @@ class Debugbar extends Debug
                 <li><a class="files pkdb_tab" id="pkdb_include" onclick="pkdebugShow(\'pkdb_include\');">'.$files_count.' Files</a></li>
                 <li><a class="variables pkdb_tab" id="pkdb_vars" onclick="pkdebugShow(\'pkdb_vars\');">Variables</a></li>
                 <li><a class="registry pkdb_tab" id="pkdb_registry" onclick="pkdebugShow(\'pkdb_registry\');">Registry</a></li>';
-                
+
         if (!empty($this->_console_log)) {
             echo '<li><a class="console pkdb_tab" id="pkdb_consolelog" onclick="pkdebugShow(\'pkdb_consolelog\');">Console</a></li>';
         }
@@ -142,8 +142,8 @@ class Debugbar extends Debug
                   To gather stats about requests, you need a session';
         }
         echo '</div>';
-        
-        //files included        
+
+        //files included
         echo '<div class="window resizable" id="pkdb_include_window">';
         echo '<h2>Files information</h2>
               <strong>'.$files_count.' Files included<br />Total size: '.round($files['total_size'] / 1024,2).' Kbs</strong><br />';
@@ -172,7 +172,7 @@ class Debugbar extends Debug
         echo '<h2>$_COOKIE</h2><pre>'.print_r($_COOKIE,true).'</pre>';
         echo '<h2>$_SERVER</h2><pre>'.print_r($_SERVER,true).'</pre>';
         echo '</div>';
-        
+
         //registry
         echo '<div class="window resizable" id="pkdb_registry_window">';
         echo '<h2>'.count(Registry::getObjectsList()).' registered objects</h2>';
@@ -186,7 +186,7 @@ class Debugbar extends Debug
             echo '<h2 id="'.$name.'">'.$name.'</h2><pre>'.$object_data.'</pre>';
         }
         echo '</div>';
-        
+
         //zend db profiler
         if ($zdb_profiler !== false) {
             echo '<div class="window large" id="pkdb_database_window">';
@@ -196,9 +196,9 @@ class Debugbar extends Debug
 
                 $longest_query_chrono  = 0;
                 $longest_query = null;
-                
+
                 if (!empty($zdb_profiler->getQueryProfiles())) {
-                    
+
                     foreach ($zdb_profiler->getQueryProfiles() as $i => $query) {
                         if ($query->getElapsedSecs() > $longest_query_chrono) {
                             $longest_query_chrono = $query->getElapsedSecs();
@@ -213,26 +213,26 @@ class Debugbar extends Debug
         
                     echo 'Average: '.$average.' ms / query<br />';
                     echo 'Longest query is #'.$longest_query_no.' with '.$longest_query_chrono.' ms ('.$longest_query_percent.'%)</strong><br /><br />';
-                    
+
                     foreach ($zdb_profiler->getQueryProfiles() as $i => $query) {
-                            $query_chrono = $query->getElapsedSecs() * 1000;
-                            $query_percent = round(($query_chrono / 10) / ($zdb_profiler->getTotalElapsedSecs()));
-                            $query = htmlentities($query->getQuery());
-                            
-                            echo 'Query #'.($i + 1).' &nbsp;&nbsp;&nbsp; '.round($query_chrono,3).' ms ('.$query_percent.'%)<br /><br /><pre>' . $query . '</pre>';
+                        $query_chrono = $query->getElapsedSecs() * 1000;
+                        $query_percent = round(($query_chrono / 10) / ($zdb_profiler->getTotalElapsedSecs()));
+                        $query = htmlentities($query->getQuery());
+
+                        echo 'Query #'.($i + 1).' &nbsp;&nbsp;&nbsp; '.round($query_chrono,3).' ms ('.$query_percent.'%)<br /><br /><pre>' . $query . '</pre>';
                     }
                 }
             }
             echo '</div>';
         }
-        
+
         //console log (see method log())
         if (!empty($this->_console_log)) {
             echo '<div class="window resizable" id="pkdb_consolelog_window">';
             echo '<h2>Console log</h2>';
-            
+
             foreach ($this->_console_log as $i => $item) {
-                
+
                 if (isset($item['title'])) {
                     echo '<strong>'.$item['title'].'</strong><br />';
                 }
@@ -245,13 +245,13 @@ class Debugbar extends Debug
             }
             echo '</div>';
         }
-        
+
         echo '<script>pkdebugbar_start_minimized = '.($start_minimized ? 'true' : 'false').';</script>';
-        
-        
+
+
         echo '</div><!-- /pkdbpanel --></div><!-- /pkdebugbar -->';
     }
-    
+
     /**
      * Add misc data to log in the debugbar
      *
@@ -262,7 +262,7 @@ class Debugbar extends Debug
         $this->_console_log[] = ['data' => $data, 'title' => $title];
         return $this;
     }
-    
+
     /**
      * Get CSS & JS for the bar
      *
@@ -279,7 +279,7 @@ class Debugbar extends Debug
                 <!--[if lt IE 9]>
                 <style>
                     #pkdebugbar .clock, #pkdebugbar .memory, #pkdebugbar .files, #pkdebugbar .variables, #pkdebugbar .registry, #pkdebugbar .db,
-                    #pkdebugbar .hidebar, #pkdebugbar .showbar, #pkdebugbar .console, #pkdebugbar .thebar 
+                    #pkdebugbar .hidebar, #pkdebugbar .showbar, #pkdebugbar .console, #pkdebugbar .thebar
                     { background-image: none !important; }
                 </style>
                 <![endif]-->';
