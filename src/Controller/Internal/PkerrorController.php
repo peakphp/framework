@@ -16,17 +16,17 @@ class PkerrorController extends Action
     public function preAction()
     {
         $this->view->engine('VirtualLayouts');
-        $this->view->cache()->disable();    
+        $this->view->cache()->disable();
     }
-    
+
     /**
      * Set layout after action
      */
     public function postAction()
     {
         $this->view->setLayout($this->_layout());
-    }   
-    
+    }
+
     /**
      * Default action handler, support exception object
      */
@@ -35,26 +35,24 @@ class PkerrorController extends Action
         if (isset($this->exception)) {
             if ($this->exception instanceof Exception) {
                 switch ($this->exception->getErrkey()) {
-                    
-                    case 'ERR_CTRL_NOT_FOUND' : 
-                    case 'ERR_ROUTER_URI_NOT_FOUND' :
+                    case 'ERR_CTRL_NOT_FOUND':
+                    case 'ERR_ROUTER_URI_NOT_FOUND':
                         $this->_404();
                         break;
-                        
-                    default: 
+                    default:
                         $this->_500();
-                        break;    
+                        break;
                 }
-            }
-            elseif ($this->exception instanceof Exception) {
+            } elseif ($this->exception instanceof Exception) {
                 $this->_error();
+            } else {
+                $this->_unknow();
             }
-            else $this->_unknow();
-
+        } else {
+            $this->_unknow();
         }
-        else $this->_unknow();
     }
-    
+
     /**
      * Default error action
      */
@@ -64,7 +62,7 @@ class PkerrorController extends Action
         $this->view->title_desc = 'The page you are looking contains errors.';
         $this->devmode();
     }
-    
+
     /**
      * 404 error action
      */
@@ -74,7 +72,7 @@ class PkerrorController extends Action
         $this->view->title_desc = '404 - The page you are looking for cant be found.';
         $this->devmode();
     }
-    
+
     /**
      * 500 error action
      */
@@ -84,7 +82,7 @@ class PkerrorController extends Action
         $this->view->title_desc = '500 - The server encountered an unexpected condition which prevented it from fulfilling the request.';
         $this->devmode();
     }
-    
+
     /**
      * 503 error action
      */
@@ -103,19 +101,19 @@ class PkerrorController extends Action
         $this->view->title = 'With great power comes great responsibility';
         $this->view->title_desc = 'what are you doing here?';
     }
-    
+
     /**
      * Look for development environment and exception object infos
      */
     public function devmode()
     {
-         if ((isEnv('dev')) && (isset($this->exception))) {                            
+        if ((isEnv('dev')) && (isset($this->exception))) {
             $this->view->setContent('<div class="block"><p>');
             $this->view->setContent($this->_exception2table());
             $this->view->setContent('</p></div>');
         }
     }
-    
+
     /**
      * Tranforms array of exception infos into html table
      *
@@ -124,17 +122,20 @@ class PkerrorController extends Action
     private function _exception2table()
     {
         $content = '<table>';
-        $exception = array('Message' => $this->exception->getMessage(),
-                           'Exception' => get_class($this->exception),
-                           'File' => str_replace(array('\\',SVR_ABSPATH),array('/',''),$this->exception->getFile()),
-                           'Line' => $this->exception->getLine(),
-                           'Suspect' => '#SUSPECT#',
-                           'Code' => $this->exception->getCode());
-                                  
-        $exception['Time'] = (!method_exists($this->exception,'getTime')) ? date('Y-m-d H:i:s') : $this->exception->getTime();       
-                           
+        $exception = [
+            'Message' => $this->exception->getMessage(),
+            'Exception' => get_class($this->exception),
+            'File' => str_replace(['\\',SVR_ABSPATH], ['/',''], $this->exception->getFile()),
+            'Line' => $this->exception->getLine(),
+            'Suspect' => '#SUSPECT#',
+            'Code' => $this->exception->getCode()
+        ];
+        $exception['Time'] = (!method_exists($this->exception,'getTime')) ? date('Y-m-d H:i:s') : $this->exception->getTime();
+
         foreach ($exception as $k => $v) {
-            if ($k === 'Message') $v = '<strong>'.$v.'</strong>';
+            if ($k === 'Message') {
+                $v = '<strong>'.$v.'</strong>';
+            }
             $content .= '<tr><td><strong>'.$k.'</strong>:&nbsp;</td><td>'.$v.'</td></tr>';
         }
         $content .= '</table>';
@@ -160,11 +161,11 @@ class PkerrorController extends Action
 
     /**
      * Get exception trace as table row
-     * 
+     *
      * @param  object $exception
-     * @return array        
+     * @return array
      */
-    private function getExceptionTraceAsRow($exception) 
+    private function getExceptionTraceAsRow($exception)
     {
         $rtn     = '';
         $suspect = '';
@@ -189,19 +190,22 @@ class PkerrorController extends Action
                         $args[] = get_resource_type($arg);
                     } else {
                         $args[] = $arg;
-                    }   
-                }   
+                    }
+                }
                 $args = join(', ', $args);
             }
 
             // skip php internal php class error.
             if (!array_key_exists('file', $frame) || !array_key_exists('line', $frame)) {
                 continue;
-            }           
+            }
 
             // add class prefix if any
-            if (!array_key_exists('class', $frame)) $frame['class'] = '';
-            else $frame['class'] .= '::';
+            if (!array_key_exists('class', $frame)) {
+                $frame['class'] = '';
+            } else {
+                $frame['class'] .= '::';
+            }
 
             // format paths
             $frame['file'] = str_replace('\\','/', $frame['file']);
@@ -210,31 +214,37 @@ class PkerrorController extends Action
             $pubpath       = str_replace('\\','/', PUBLIC_ABSPATH);
             $frame['file'] = str_replace(array($apppath, $pubpath), '', $frame['file']);
 
-            $temp = sprintf('<tr><td>#%s</td><td><code>%s<strong>%s(%s)</strong></code><br /><small><i>&nbsp;%s</i> line %s</small></td></tr>',
-                                     $count,
-                                     $frame['class'],
-                                     $frame['function'],
-                                     $args,
-                                     $frame['file'],
-                                     $frame['line']
-                                      );
+            $temp = sprintf(
+                '<tr><td>#%s</td><td><code>%s<strong>%s(%s)</strong></code><br /><small><i>&nbsp;%s</i> line %s</small></td></tr>',
+                $count,
+                $frame['class'],
+                $frame['function'],
+                $args,
+                $frame['file'],
+                $frame['line']
+            );
 
             if ($count == 0) {
-                $suspect = sprintf('<code>%s<strong>%s(%s)</strong></code><br /><small><i>&nbsp;%s</i> line %s</small>',
-                                     $frame['class'],
-                                     $frame['function'],
-                                     $args,
-                                     $frame['file'],
-                                     $frame['line']);
+                $suspect = sprintf(
+                    '<code>%s<strong>%s(%s)</strong></code><br /><small><i>&nbsp;%s</i> line %s</small>',
+                    $frame['class'],
+                    $frame['function'],
+                    $args,
+                    $frame['file'],
+                    $frame['line']
+                );
             }
 
             $rtn .= $temp;
-                                     
+
             $count++;
         }
-        return array('result' => $rtn, 'suspect' => $suspect);
+        return [
+            'result' => $rtn, 
+            'suspect' => $suspect
+        ];
     }
-    
+
     /**
      * Layout content
      *
