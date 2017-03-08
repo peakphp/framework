@@ -30,8 +30,11 @@ abstract class Render
     {
         if (!empty($files)) {
             foreach ($files as $k => $v) {
-                if (!is_numeric($k)) $this->render($k, $v); // file is path
-                else $this->render($v);
+                if (!is_numeric($k)) {
+                    $this->render($k, $v); // file is path
+                } else {
+                    $this->render($v);
+                }
             }
         }
     }
@@ -79,28 +82,31 @@ abstract class Render
      */
     protected function preOutput($data)
     {
-        if (!$this->cache()->isEnabled()) $this->output($data);
-        else {            
-            //use cache instead outputing and evaluating view script
-            if ($this->cache()->isValid()) include($this->cache()->getCacheFile());
-            else {
-                //cache and output current view script
-                ob_start();
-                $this->output($data);
-                //if(is_writable($cache_file)) { //fail if file cache doesn't already 
-                    $content = ob_get_contents();
-                    //if($this->_cache_strip) $content = preg_replace('!\s+!', ' ', $content);
-                    file_put_contents($this->cache()->getCacheFile(), $content);
-                //}
-                ob_get_flush();
-            }           
-        }        
+        if (!$this->cache()->isEnabled()) {
+            $this->output($data);
+            return;
+        }
+
+        //use cache instead outputing and evaluating view script
+        if ($this->cache()->isValid()) {
+            include($this->cache()->getCacheFile());
+        } else {
+            //cache and output current view script
+            ob_start();
+            $this->output($data);
+            //if(is_writable($cache_file)) { //fail if file cache doesn't already 
+            $content = ob_get_contents();
+                //if($this->_cache_strip) $content = preg_replace('!\s+!', ' ', $content);
+            file_put_contents($this->cache()->getCacheFile(), $content);
+            //}
+            ob_get_flush();
+        }
     }
-    
+
     /**
      * Access to cache object
      *
-     * @return object Peak_View_Cache
+     * @return object Peak\View\Cache
      */
     public function cache()
     {

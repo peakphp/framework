@@ -14,64 +14,75 @@ class VirtualLayouts extends Render
      * Layout content
      * @var string
      */
-    private $_layout = null;
+    private $layout = null;
     
     /**
      * Script content
      * @var string
      */
-    private $_content = null;
+    private $content = null;
     
     /**
      * Will force processVariable() to also remove unknown variables
      * @var bool
      */
-    private $_clean_all_unknown_vars = true;
+    private $clean_all_unknown_vars = true;
 
     /**
      * Set layout content
      *
-     * @param string $name
+     * @param  string $name
+     * @return $this
      */
     public function setLayout($layout)
     {        
-        $this->_layout = $layout;
+        $this->layout = $layout;
+        return $this;
     }
 
     /**
-     * Set script content
+     * Set/Overwrite content
      *
-     * @param string $content
-     * @param bool   $overwrite if false, content will be added at the end
+     * @param  string $content
+     * @return $this
      */
-    public function setContent($content, $overwrite = false)
+    public function setContent($content)
     {
-        if($overwrite) {
-            $this->_content = $content;
-        } else {
-            $this->_content .= $content;
-        }
+        $this->content = $content;
+        return $this;
+    }
+
+    /**
+     * Add content
+     * 
+     * @param  string $content
+     * @return $this
+     */
+    public function addContent($content)
+    {
+        $this->content .= $content;
+        return $this;
     }
 
     /**
      * Render virtual layout(s)
      * 
-     * {CONTENT} tag inside layout will be replaced by $_content
+     * {CONTENT} tag inside layout will be replaced by $content
      *
      * @param  string $file
      * @param  string $path
      * @return string
      */
-    public function render($file,$path = null)
+    public function render($file, $path = null)
     {
         //CONTROLLER FILE VIEW
         $this->scripts_file = $file;
         $this->scripts_path = $path;
 
-        if (is_null($this->_layout)) {
-            $output = $this->_content;
+        if (is_null($this->layout)) {
+            $output = $this->content;
         } else {
-            $output = str_ireplace('{CONTENT}', $this->_content, $this->_layout);
+            $output = str_ireplace('{CONTENT}', $this->content, $this->layout);
         }
         
         $output = $this->_proccessVariables($output);
@@ -90,13 +101,13 @@ class VirtualLayouts extends Render
     }
 
     /**
-     * Turn true/false property $_clean_all_unknown_vars
+     * Turn true/false property $clean_all_unknown_vars
      *
      * @param $val bool
      */
     public function cleanUnknownVars($val)
     {
-        $this->_clean_all_unknown_vars = ($value === true) ? true : false;
+        $this->clean_all_unknown_vars = ($value === true) ? true : false;
     }
 
     /**
@@ -109,8 +120,7 @@ class VirtualLayouts extends Render
     {
         $vars = $this->getVars();
         if (!empty($vars)) {
-
-            $vars_names = array();
+            $vars_names = [];
             foreach ($vars as $k => $v) {
                 //remove arrays from view vars otherwise php will throw a notice about array to string conversion
                 if (is_array($v) || is_object($v)) {
@@ -122,7 +132,7 @@ class VirtualLayouts extends Render
             $content = str_ireplace($vars_names, array_values($vars), $content);
 
             //remove unknown vars {$keys}
-            if ($this->_clean_all_unknown_vars) {
+            if ($this->clean_all_unknown_vars) {
                 $content = preg_replace('#\{\$(\w+)\}#i', '', $content);
             }
         }
