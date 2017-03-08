@@ -52,20 +52,19 @@ class Environment
         $apptree = new AppTree(APPLICATION_ABSPATH);
 
         $this->app_config->set(
-            'path.apptree', 
+            'path.apptree',
             $apptree->tree
         );
  
-        //merge app config paths with core app paths    
+        //merge app config paths with core app paths
         if(isset($this->file_config->all['path'])) {
 
             $this->file_config->all['path'] = $this->file_config->mergeRecursiveDistinct(
-                $this->app_config->path, 
-                $this->file_config->all['path'], 
+                $this->app_config->path,
+                $this->file_config->all['path'],
                 true
             );
-        }
-        else {
+        } else {
             $this->file_config->set('all.path.apptree', $apptree->tree);
         }
 
@@ -83,7 +82,7 @@ class Environment
         // default env aka all
         if (!$this->file_config->have('all')) {
             throw new Exception(
-                'ERR_CUSTOM', 
+                'ERR_CUSTOM',
                 'Your application doesn\'t have default "all" configuration'
             );
         }
@@ -91,7 +90,7 @@ class Environment
         // current env
         if (!$this->file_config->have($this->app_config->env)) {
             throw new Exception(
-                'ERR_CUSTOM', 
+                'ERR_CUSTOM',
                 'Your application doesn\'t have "'.$this->app_config->env.'" configuration'
             );
         }

@@ -32,8 +32,7 @@ class ConfigCustomRoutes
                         $r['controller'],
                         $r['action']
                     );
-                }
-                elseif (is_string($r)) {
+                } elseif (is_string($r)) {
 
                     $parts = explode(' | ', $r);
                     if (count($parts) == 2) {
@@ -45,12 +44,12 @@ class ConfigCustomRoutes
                             $ctrl_part[0],    // controller
                             (isset($ctrl_part[1]) ? $ctrl_part[1] : '') // action
                         );
-
+                    } else {
+                        throw new Exception('ERR_CUSTOM', 'Invalid routing expression');
                     }
-                    else throw new Exception('ERR_CUSTOM', 'Invalid routing expression');
+                } else {
+                    throw new Exception('ERR_CUSTOM', 'Invalid routing in your application config');
                 }
-
-                else throw new Exception('ERR_CUSTOM', 'Invalid routing in your application config');
             }
         }
 

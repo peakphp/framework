@@ -13,7 +13,7 @@ class AppTree
     /**
      * Constructor
      *
-     * @param
+     * @param string $root
      */
     public function __construct($root)
     {

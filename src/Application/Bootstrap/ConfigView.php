@@ -15,8 +15,9 @@ class ConfigView
      */
     public function __construct()
     {
-        if (!Application::conf()->have('view') || 
-            !Registry::isRegistered('view')) return;
+        if (!Application::conf()->have('view') || !Registry::isRegistered('view')) {
+            return;
+        }
 
         $view  = Registry::o()->view;
         $cview = Application::conf('view');
@@ -26,9 +27,10 @@ class ConfigView
 
                 if (is_array($v)) {
                     foreach ($v as $p1 => $p2) $view->$k($p1,$p2);
+                } else {
+                    $view->$k($v);
                 }
-                else $view->$k($v);
             }
-        }   
+        }
     }
 }
