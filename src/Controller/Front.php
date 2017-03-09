@@ -63,7 +63,7 @@ class Front
     {
         $this->_appConfig();
     }
-    
+
     /**
      * Get array 'front' from registered object 'config' if exists
      */
@@ -95,7 +95,7 @@ class Front
     public function postDispatch()
     {
     }
-    
+
     /**
      * Called after controller loading
      * Empty by default
@@ -147,7 +147,6 @@ class Front
 
         //check if it's valid application controller
         if (!class_exists($ctrl_name)) {
-
             $internal_ctrl_name = $this->_getCtrlName('Peak\Controller\Internal\\', $this->route->controller);
 
             //check for peak internal controller
