@@ -9,77 +9,6 @@ if (!defined('PEAK_VERSION')) {
     define('PEAK_VERSION', '2.0.11');
 }
 
-/*
-|--------------------------------------------------------------------------
-| General related functions
-|--------------------------------------------------------------------------
-*/
-   
-/**
- * relativeBasepath()
- */
-if (!function_exists('relativeBasepath')) {
-    /**
-     * Get relativepath of specified dir from the server document root
-     *
-     * @param  string $dir
-     * @return string
-     */
-    function relativeBasepath($dir, $doc_root = null) 
-    {
-        if (!isset($doc_root)) {
-            $doc_root = (!isset($_SERVER['DOCUMENT_ROOT'])) ? '' : $_SERVER['DOCUMENT_ROOT'];
-        }
-        return substr(str_replace([$doc_root, basename($dir)], '', str_replace('\\', '/', $dir)), 0, -1);
-    }
-}
-
-/**
- * relativePath()
- */
-if (!function_exists('relativePath')) {
-    /**
-     * Get relative path of specified dir from the server document root
-     *
-     * @param  string $dir
-     * @return string
-     */
-    function relativePath($dir, $doc_root = null) 
-    {
-        if (!isset($doc_root)) {
-            $doc_root = (!isset($_SERVER['DOCUMENT_ROOT'])) ? '' : $_SERVER['DOCUMENT_ROOT'];
-        }
-        return str_replace([$doc_root, $dir], '', str_replace('\\', '/', $dir));
-    }
-}
-
-/**
- * isCli()
- */
-if (!function_exists('isCli')) {
-    /**
-     * Detect if we are in command line interface mode
-     */
-    function isCli()
-    {
-        return (php_sapi_name() === 'cli' || defined('STDIN'));
-    }
-}
-
-/**
- * showAllErrors()
- */
-if (!function_exists('showAllErrors')) {
-    /**
-     * Try to force the display of all errors
-     */
-    function showAllErrors()
-    {
-        error_reporting(E_ALL);
-        ini_set('display_errors', 1);
-    }
-}
-
 
 /*
 |--------------------------------------------------------------------------
@@ -130,19 +59,19 @@ if (!function_exists('phpinput')) {
     /**
      * Retreive a collection object from php://input
      *
-     * @return Peak\Collection
+     * @return Peak\Common\Collection
      */
     function phpinput()
     {
         $raw  = file_get_contents('php://input');
         $post = json_decode($raw, true); // for json input
 
-        // incase json post is empty but $_POST is not we will use it
-        if (!empty($raw) && empty($post) && isset($_POST)) {
-            $post = $_POST;
+        // in case json post is empty but $_POST is not we will use it
+        if (!empty($raw) && empty($post) && filter_input_array(INPUT_POST)) {
+            $post = filter_input_array(INPUT_POST);
         }
 
-        return \Peak\Collection::make($post);
+        return \Peak\Common\Collection::make($post);
     }
 }
 
@@ -190,11 +119,11 @@ if (!function_exists('collection')) {
      * Create a new Collection
      *
      * @param  array|null $items
-     * @return \Peak\Collection
+     * @return \Peak\Common\Collection
      */
     function collection($items = null)
     {
-        return \Peak\Collection::make($items);
+        return \Peak\Common\Collection::make($items);
     }
 }
 
