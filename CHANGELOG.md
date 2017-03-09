@@ -1,7 +1,9 @@
 VERSION 2.0.11
 --------------
-Release Date: ?
+Release Date: 2017-03-08
 
+ - moved Annotations, Chrono, Collection, Paginator to Common folder
+ - moved general functions from Core.php to Common\helpers.php
  - code refactoring for PSR-2
 
 VERSION 2.0.10
