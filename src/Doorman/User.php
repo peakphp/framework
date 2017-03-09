@@ -109,8 +109,8 @@ class User implements PolicySubjectInterface
     /**
      * Get a custom ability if exists
      *
-     * @param  string $name 
-     * @return CustomUserAbility|null       
+     * @param  string $name
+     * @return CustomUserAbility|null
      */
     public function getCustomAbility($name)
     {
@@ -145,8 +145,8 @@ class User implements PolicySubjectInterface
     /**
      * Check user permission for an ability
      *
-     * @param  Ability $ability    
-     * @param  mixed   $permission 
+     * @param  Ability $ability
+     * @param  mixed   $permission
      * @return boolean
      */
     public function can(Ability $ability, $permission)
@@ -158,8 +158,8 @@ class User implements PolicySubjectInterface
     /**
      * Get current user permission for an ability
      *
-     * @param  Ability $ability    
-     * @param  mixed   $permission 
+     * @param  Ability $ability
+     * @param  mixed   $permission
      * @return boolean
      */
     public function abilityPermission(Ability $ability)
@@ -171,7 +171,7 @@ class User implements PolicySubjectInterface
     /**
      * Can read the ability
      *
-     * @param  Ability $ability 
+     * @param  Ability $ability
      * @return boolean
      */
     public function canRead(Ability $ability)
@@ -182,7 +182,7 @@ class User implements PolicySubjectInterface
     /**
      * Can write the ability
      *
-     * @param  Ability $ability 
+     * @param  Ability $ability
      * @return boolean
      */
     public function canWrite(Ability $ability)
@@ -193,7 +193,7 @@ class User implements PolicySubjectInterface
     /**
      * Can execute the ability
      *
-     * @param  Ability $ability 
+     * @param  Ability $ability
      * @return boolean
      */
     public function canExecute(Ability $ability)
