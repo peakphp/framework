@@ -2,7 +2,7 @@
 
 namespace Peak\Di;
 
-use Peak\Collection;
+use Peak\Common\Collection;
 use Peak\Di\ClassResolver;
 use Peak\Di\ClassInstantiator;
 
@@ -13,13 +13,13 @@ class Container
 {
     /**
      * Container object instances collection
-     * @var Peak\Collection
+     * @var Peak\Common\Collection
      */
     protected $instances;
 
     /**
      * Container object interfaces collection
-     * @var Peak\Collection
+     * @var Peak\Common\Collection
      */
     protected $interfaces;
 

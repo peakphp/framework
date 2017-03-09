@@ -1,6 +1,6 @@
 <?php
 
-namespace Peak;
+namespace Peak\Common;
 
 use IteratorAggregate;
 use ArrayIterator;

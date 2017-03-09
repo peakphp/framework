@@ -1,6 +1,6 @@
 <?php
 
-namespace Peak;
+namespace Peak\Common;
 
 /**
  * Manage a global timer and/or multiple timers

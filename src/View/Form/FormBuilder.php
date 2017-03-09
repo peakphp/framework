@@ -2,7 +2,7 @@
 
 namespace Peak\View\Form;
 
-use Peak\Collection;
+use Peak\Common\Collection;
 use Peak\View\Form\FormValidation;
 
 class FormBuilder extends Collection

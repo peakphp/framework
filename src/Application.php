@@ -2,7 +2,7 @@
 
 namespace Peak;
 
-use Peak\Collection;
+use Peak\Common\Collection;
 use Peak\Application\Bootstrapper;
 use Peak\Application\Config;
 use Peak\Application\Routing;

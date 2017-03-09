@@ -2,7 +2,7 @@
 
 namespace Peak\Config;
 
-use Peak\Collection;
+use Peak\Common\Collection;
 
 /**
  * Dot notation for access multidimensional arrays.

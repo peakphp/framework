@@ -3,20 +3,20 @@
 namespace Peak\Application\Config;
 
 use Peak\Exception;
-use Peak\Collection;
+use Peak\Common\Collection;
 use Peak\Application\Config\AppTree;
 
 class Environment
 {
     /**
      * App file config
-     * @var Peak\Collection
+     * @var Peak\Common\Collection
      */
     protected $file_config;
 
     /**
      * App default config
-     * @var Peak\Collection
+     * @var Peak\Common\Collection
      */
     protected $app_config;
 

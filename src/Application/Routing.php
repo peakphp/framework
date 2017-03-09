@@ -3,7 +3,7 @@
 namespace Peak\Application;
 
 use Peak\Application;
-use Peak\Collection;
+use Peak\Common\Collection;
 
 use Peak\Exception;
 use Peak\Routing\Request;
@@ -31,7 +31,7 @@ class Routing
 
     /**
      * Application regex routes collection from app config
-     * @var Peak\Collection
+     * @var Peak\Common\Collection
      */
     public $custom_routes;
 

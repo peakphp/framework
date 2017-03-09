@@ -8,7 +8,7 @@ use Peak\View\Helper\Debug;
 
 /**
  * Graphic version of Peak_View_Helper_debug
- * @uses    jQuery, Fugue icons, Peak\View\Helper\Debug, Peak\Chrono
+ * @uses    jQuery, Fugue icons, Peak\View\Helper\Debug, Peak\Common\Chrono
  */
 class Debugbar extends Debug
 {

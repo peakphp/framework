@@ -2,7 +2,7 @@
 
 namespace Peak\Doorman;
 
-use Peak\Collection;
+use Peak\Common\Collection;
 use Peak\Doorman\Ability;
 use Peak\Doorman\AbilityResolver;
 use Peak\Doorman\Group;
@@ -22,13 +22,13 @@ class User implements PolicySubjectInterface
 
     /**
      * User group(s)
-     * @var Peak\Collection
+     * @var Peak\Common\Collection
      */
     protected $groups;
 
     /**
      * User custom abilities
-     * @var Peak\Collection
+     * @var Peak\Common\Collection
      */
     protected $custom_abilities;
 

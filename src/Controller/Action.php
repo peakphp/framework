@@ -3,7 +3,7 @@
 namespace Peak\Controller;
 
 use Peak\Application;
-use Peak\Collection;
+use Peak\Common\Collection;
 use Peak\Registry;
 use Peak\Exception;
 use Peak\Routing\Route;

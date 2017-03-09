@@ -4,7 +4,7 @@ namespace Peak\Routing;
 
 use Peak\Routing\Request;
 use Peak\Routing\Route;
-use Peak\Collection;
+use Peak\Common\Collection;
 
 class RequestResolver
 {

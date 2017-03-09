@@ -1,6 +1,6 @@
 <?php
 
-namespace Peak;
+namespace Peak\Common;
 
 /**
  * Peak Annotations

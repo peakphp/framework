@@ -4,7 +4,7 @@ namespace Peak\Application\Bootstrap;
 
 use Peak\Application;
 use Peak\Registry;
-use Peak\Collection;
+use Peak\Common\Collection;
 use Peak\Exception;
 use Peak\Routing\Request;
 use Peak\Routing\CustomRoute;
