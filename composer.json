@@ -24,7 +24,8 @@
     },
     "autoload": {
         "files": [
-            "src/Core.php"
+            "src/Core.php",
+            "src/Common/helpers.php"
         ],
         "psr-4": {
             "Peak\\": "src/"
