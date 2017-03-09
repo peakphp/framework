@@ -72,7 +72,9 @@ class Front
         $config = Application::conf('front');
         if (!empty($config)) {
             foreach (Application::conf('front') as $k => $v) {
-                if ($k === 'allow_internal_controllers') $v = (bool)$v;
+                if ($k === 'allow_internal_controllers') {
+                    $v = (bool)$v;
+                }
                 $this->$k = $v;
             }
         }
@@ -100,7 +102,7 @@ class Front
      */
     public function postDispatchController()
     {
-    }    
+    }
 
     /**
      * Called after rendering controller view
@@ -129,7 +131,7 @@ class Front
             $this->_dispatchControllerAction();
         }
     }
-    
+
     /**
      * Dispatch appropriate controller according to the router
      */
@@ -139,7 +141,7 @@ class Front
         if (!isset($this->route->controller)) {
             $this->route->controller = $this->default_controller;
         }
-        
+
         //set controller class name
         $ctrl_name = $this->_getCtrlName(Application::conf('ns').'\Controllers\\', $this->route->controller);
 
@@ -154,8 +156,7 @@ class Front
             } else {
                 throw new Exception('ERR_CTRL_NOT_FOUND', $this->route->controller);
             }
-        }
-        else {
+        } else {
             $this->controller = new $ctrl_name();
         }
 
