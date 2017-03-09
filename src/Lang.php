@@ -46,7 +46,7 @@ class Lang
      */
     public static function _e($text, $replaces = null, $func = null)
     {
-        echo self::__($text,$replaces,$func);
+        echo self::__($text, $replaces, $func);
     }
 
     /**
@@ -56,7 +56,9 @@ class Lang
      */
     public function __construct($lang = null)
     {
-        if (isset($lang)) $this->setLang($lang);
+        if (isset($lang)) {
+            $this->setLang($lang);
+        }
     }
 
     /**
