@@ -1,11 +1,11 @@
 <?php
 use PHPUnit\Framework\TestCase;
 
-use Peak\Collection;
+use Peak\Common\Collection;
 use Peak\Exception;
 
 /**
- * @package    Peak\Collection
+ * @package    Peak\Common\Collection
  */
 class CollectionTest extends TestCase
 {

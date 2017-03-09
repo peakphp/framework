@@ -1,10 +1,10 @@
 <?php
 use PHPUnit\Framework\TestCase;
 
-use Peak\Paginator;
+use Peak\Common\Paginator;
 
 /**
- * @package    Peak\Paginator
+ * @package    Peak\Common\Paginator
  */
 class PaginatorTest extends TestCase
 {
