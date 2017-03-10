@@ -1,6 +1,6 @@
 <?php
 
-namespace Peak\Spl;
+namespace Peak\Common\Spl;
 
 use DirectoryIterator;
 use RecursiveDirectoryIterator;

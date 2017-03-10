@@ -1,6 +1,6 @@
 <?php
 
-namespace Peak\Spl;
+namespace Peak\Common\Spl;
 
 /**
  * Extension of class SplFileInfo. Add auto/custom formatting options.
