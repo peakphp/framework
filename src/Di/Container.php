@@ -5,11 +5,12 @@ namespace Peak\Di;
 use Peak\Common\Collection;
 use Peak\Di\ClassResolver;
 use Peak\Di\ClassInstantiator;
+use Peak\Di\ContainerInterface;
 
 /**
  * Dependencies Container
  */
-class Container
+class Container implements ContainerInterface
 {
     /**
      * Container object instances collection
