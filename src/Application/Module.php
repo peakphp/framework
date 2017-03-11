@@ -29,7 +29,9 @@ class Module
         $this->name   = $app->front->route->controller;
         $app->routing = new Routing(null, relativePath(Application::conf('path.public').'/'.$this->name));
         
-        $this->backupConfig()->updateConfig()->init();
+        $this->backupConfig()
+            ->updateConfig()
+            ->init();
 
         $app->reload()->run();
     }
