@@ -3,6 +3,8 @@ VERSION 2.0.12
 Release Date: ?
 
  - code refactoring for PSR-2
+ - fixed exception namespace in Peak\Common\Collection
+ - added Peak\Di\ContainerInterface
 
 VERSION 2.0.11
 --------------
