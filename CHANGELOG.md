@@ -1,6 +1,6 @@
 VERSION 2.0.12
 --------------
-Release Date: ?
+Release Date: 2017-03-11
 
  - code refactoring for PSR-2
  - fixed exception namespace in Peak\Common\Collection
