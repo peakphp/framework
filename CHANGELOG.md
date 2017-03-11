@@ -1,3 +1,11 @@
+VERSION 2.1.0
+--------------
+Release Date: ?
+
+> Warning! Breaking changes with 2.0.x
+2.1.x is integrating
+
+
 VERSION 2.0.12
 --------------
 Release Date: 2017-03-11
