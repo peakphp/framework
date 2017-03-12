@@ -4,8 +4,10 @@ Release Date: ?
 
 > Warning! Breaking changes with 2.0.x
 
- - Replacing old Registry by Dependencies Injection Container
- - Moving Application components and Controller under Bedrock folder
+ - replaced old Registry by Dependencies Injection Container
+ - moved Application and Controller components under Bedrock folder
+ - added method instantiateAndStore() to Peak\Di\Container
+ - moved Application logic to Kernel
 
 VERSION 2.0.12
 --------------
