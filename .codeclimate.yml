@@ -21,6 +21,8 @@ engines:
         enabled: false
       Naming/ShortVariable:
         enabled: false
+      Design/TooManyPublicMethods:
+        enabled: false
   phpcodesniffer:
     enabled: true
     config:
