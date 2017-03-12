@@ -3,7 +3,6 @@
 namespace Peak\Bedrock\Controller;
 
 use Peak\Bedrock\Application;
-use Peak\Registry;
 use Peak\Exception;
 use Peak\Bedrock\Application\Module;
 use Peak\Bedrock\Controller\Action;
@@ -206,8 +205,6 @@ class Front
         }
         
         $this->_dispatchControllerAction();
-
-        return Registry::o()->app;
     }
 
     /**
