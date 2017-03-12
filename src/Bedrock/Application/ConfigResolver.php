@@ -90,11 +90,11 @@ class ConfigResolver
             $svr_path .= '/';
         }
 
-        define('SVR_ABSPATH',         $svr_path);
-        define('LIBRARY_ABSPATH',     realpath(__DIR__.'/../'));
-        define('PUBLIC_ABSPATH',      realpath($this->app_config->get('path.public')));
+        define('SVR_ABSPATH', $svr_path);
+        define('LIBRARY_ABSPATH', realpath(__DIR__.'/../'));
+        define('PUBLIC_ABSPATH', realpath($this->app_config->get('path.public')));
         define('APPLICATION_ABSPATH', realpath($this->app_config->get('path.app')));
-        define('APPLICATION_ENV',     $this->app_config->get('env'));
+        define('APPLICATION_ENV', $this->app_config->get('env'));
     }
 
     /**

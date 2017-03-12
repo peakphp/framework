@@ -5,7 +5,7 @@ namespace Peak\Common\Spl;
 /**
  * Extension of class SplFileInfo. Add auto/custom formatting options.
  */
-class Fileinfo extends SplFileInfo 
+class Fileinfo extends SplFileInfo
 {
     /**
      * Change these setting to create custom formatting

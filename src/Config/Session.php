@@ -8,7 +8,7 @@ use Peak\Config\DotNotation;
 /**
  * Wrap Collection / DotNotation abilities around php $_SESSION
  */
-class Session extends DotNotation 
+class Session extends DotNotation
 {
     /**
      * We pass $_SESSION by reference so we can alter

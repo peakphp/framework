@@ -15,4 +15,3 @@ interface ElementInterface
      */
     public function generate();
 }
-

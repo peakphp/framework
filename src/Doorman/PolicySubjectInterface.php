@@ -2,4 +2,6 @@
 
 namespace Peak\Doorman;
 
-interface PolicySubjectInterface {}
+interface PolicySubjectInterface
+{
+}

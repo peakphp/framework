@@ -21,15 +21,12 @@ class ClassInspector
         $dependencies = [];
 
         try {
-
             $r = new ReflectionClass($class);
 
             if ($r->hasMethod('__construct')) {
-
                 $rp = $r->getMethod('__construct')->getParameters();
 
                 foreach ($rp as $p) {
-
                     $prop = $p->name;
 
                     $dependencies[$prop] = [];
@@ -40,17 +37,14 @@ class ClassInspector
 
                         if (isset($class)) {
                             $dependencies[$prop]['class'] = $class->name;
+                        } else {
                         }
-                        else {
-                        }
-                    }
-                    catch (ReflectionException $e) {
+                    } catch (ReflectionException $e) {
                         $dependencies[$prop]['error'] = $e->getMessage();
                     }
                 }
             }
-        }
-        catch (ReflectionException $e) {
+        } catch (ReflectionException $e) {
             throw new \Exception('Can\'t resolve classname '.$class);
         }
 
