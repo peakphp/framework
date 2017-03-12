@@ -36,7 +36,7 @@ class Application
      */
     public static function kernel()
     {
-        return self::get('\Peak\Bedrock\Application\Kernel');
+        return self::get('Peak\Bedrock\Application\Kernel');
     }
 
     /**
@@ -88,6 +88,8 @@ class Application
                 throw new \Exception(__CLASS__.' container does not have '.$instance);
             }
         }
+
+        return $instance;
     }
 
     /**
@@ -99,9 +101,7 @@ class Application
      */
     public static function conf($path = null, $value = null)
     {
-        self::containerCheck('Peak\Bedrock\Application\Config');
-
-        $config = self::get('Peak\Bedrock\Application\Config');
+        $config = self::get(self::containerCheck('Peak\Bedrock\Application\Config'));
 
         if (!isset($path)) {
             return $config;
@@ -144,10 +144,8 @@ class Application
         // store Peak\View
         $container->addInstance(new \Peak\View);
         
-        // instantiate  and store app kernel
-        $container->addInstance(
-            $container->instantiate('\Peak\Bedrock\Application\Kernel')
-        );
+        // instantiate and store app kernel
+        $container->instantiateAndStore('\Peak\Bedrock\Application\Kernel'); 
     }
 
     /**
@@ -157,7 +155,7 @@ class Application
      */
     public function run($request = null)
     {
-        return self::get('Peak\Bedrock\Application\Kernel')->run($request);
+        return self::kernel()->run($request);
     }
 
     /**
@@ -167,6 +165,6 @@ class Application
      */
     public function render()
     {
-        return self::get('Peak\Bedrock\Application\Kernel')->render();
+        return self::kernel()->render();
     }
 }
