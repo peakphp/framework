@@ -8,8 +8,8 @@ Release Date: ?
  - moved Application and Controller components under Bedrock folder
  - added method instantiateAndStore() to Peak\Di\Container
  - moved Application logic to Bedrock\Application\Kernel
- - moved code in Core to Bedrock\helpers.php
- - added framework version const to Bedrock\Application
+ - moved code in Core.php to Bedrock\helpers.php
+ - added framework version constant to Bedrock\Application and removed PEAK_VERSION global constant
  - code refactoring for PSR-2
 
 VERSION 2.0.12
