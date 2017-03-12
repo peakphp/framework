@@ -2,8 +2,7 @@
 
 namespace Peak\View\Helper;
 
-use Peak\Application;
-use Peak\Registry;
+use Peak\Bedrock\Application;
 use Peak\View\Helper;
 
 /**
@@ -16,10 +15,9 @@ class Debug extends Helper
      */
     public function registry()
     {
-        $object_list = Registry::getObjectList();
         echo '<pre class="peak_debug_tree">';
-        foreach ($object_list as $obj) {
-            print_r(Registry::o()->$obj);
+        foreach (Application::container()->getInstances() as $obj) {
+            print_r($obj);
         }
         echo '</pre>';
     }
@@ -31,8 +29,8 @@ class Debug extends Helper
      */
     public function getControllerSource()
     {
-        $app = Registry::o()->app;
-        $cfile_name = $app->front->controller->name;
+        $kernel = Application::kernel();
+        $cfile_name = $kernel->front->controller->name;
         $cfile = Application::conf('path.apptree.controllers').'/'.$cfile_name.'.php';
         if (file_exists($cfile)) {
             $cfile_content = file_get_contents($cfile);
@@ -48,9 +46,9 @@ class Debug extends Helper
      */
     public function getScriptSource()
     {
-        $app = Registry::o()->app;
-        $sfile_name = $app->front->controller->file;
-        $sfile = $app->front->controller->path.'/'.$sfile_name;
+        $kernel = Application::kernel();
+        $sfile_name = $kernel->front->controller->file;
+        $sfile = $kernel->front->controller->path.'/'.$sfile_name;
         
         if (file_exists($sfile)) {
             $sfile_content = file_get_contents($sfile);
