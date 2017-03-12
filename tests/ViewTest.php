@@ -1,9 +1,6 @@
 <?php
 use PHPUnit\Framework\TestCase;
 
-// \Peak\Bedrock\Application::set(new \Peak\Di\Container);
-//\Peak\Bedrock\Application::instantiate('\Peak\View');
-
 /**
  * @package    Peak\View
  */
@@ -150,6 +147,9 @@ class ViewTest extends TestCase
 		$name = $this->peakview->getEngineName();
 
 		$this->assertTrue($name === null);
+
+		\Peak\Bedrock\Application::set(new \Peak\Di\Container);
+		\Peak\Bedrock\Application::instantiate('\Peak\View');
 
 		$this->peakview->engine('Layouts');
 
