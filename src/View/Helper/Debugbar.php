@@ -174,17 +174,31 @@ class Debugbar extends Debug
         echo '</div>';
 
         //registry
-        echo '<div class="window resizable" id="pkdb_registry_window">';
-        echo '<h2>'.count(Registry::getObjectsList()).' registered objects</h2>';
-        foreach (Registry::getObjectsList() as $name) {
-            $type = is_object(Registry::o()->$name) ? Registry::getClassName($name) : '';
-            echo '<strong><a href="#'.$name.'">'.$name.'</a></strong> ['.$type.']<br />';
-        }
+        // echo '<div class="window resizable" id="pkdb_registry_window">';
+        // echo '<h2>'.count(Registry::getObjectsList()).' registered objects</h2>';
+        // foreach (Registry::getObjectsList() as $name) {
+        //     $type = is_object(Registry::o()->$name) ? Registry::getClassName($name) : '';
+        //     echo '<strong><a href="#'.$name.'">'.$name.'</a></strong> ['.$type.']<br />';
+        // }
         
-        foreach (Registry::getObjectsList() as $name) {
-            $object_data = htmlentities(print_r(Registry::get($name),true));
+        // foreach (Registry::getObjectsList() as $name) {
+        //     $object_data = htmlentities(print_r(Registry::get($name),true));
+        //     echo '<h2 id="'.$name.'">'.$name.'</h2><pre>'.$object_data.'</pre>';
+        // }
+        // echo '</div>';
+
+        echo '<div class="window resizable" id="pkdb_registry_window">';
+        echo '<h2>'.count(Application::get()->getInstances()).' registered objects</h2>';
+        foreach (Application::get()->getInstances() as $name => $data) {
+            $type = $name;
+            echo '<strong><a href="#'.$name.'">'.$name.'</a></strong><br />';
+        }
+
+        foreach (Application::get()->getInstances() as $name => $data) {
+            $object_data = htmlentities(print_r($data,true));
             echo '<h2 id="'.$name.'">'.$name.'</h2><pre>'.$object_data.'</pre>';
         }
+        
         echo '</div>';
 
         //zend db profiler
