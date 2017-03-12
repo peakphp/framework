@@ -2,6 +2,7 @@
 use PHPUnit\Framework\TestCase;
 
 \Peak\Bedrock\Application::set(new \Peak\Di\Container);
+\Peak\Bedrock\Application::instantiate('\Peak\View');
 
 /**
  * @package    Peak\View
