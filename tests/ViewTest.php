@@ -149,7 +149,7 @@ class ViewTest extends TestCase
 		$this->assertTrue($name === null);
 
 		\Peak\Bedrock\Application::set(new \Peak\Di\Container);
-		\Peak\Bedrock\Application::instantiate('\Peak\View');
+		//\Peak\Bedrock\Application::instantiate('\Peak\View');
 
 		$this->peakview->engine('Layouts');
 
