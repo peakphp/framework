@@ -2,7 +2,7 @@
 
 namespace Peak\View\Render;
 
-use Peak\Application;
+use Peak\Bedrock\Application;
 use Peak\View\Render;
 
 /**

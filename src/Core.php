@@ -107,7 +107,7 @@ if (!function_exists('config')) {
      */
     function config($path = null, $value = null)
     {
-        return \Peak\Application::conf($path, $value);
+        return \Peak\Bedrock\Application::conf($path, $value);
     }
 }
 

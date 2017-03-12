@@ -2,8 +2,8 @@
 
 namespace Peak\View;
 
-use Peak\Application;
-use Peak\Registry;
+use Peak\Bedrock\Application;
+use Peak\View;
 
 /**
  * View Cache
@@ -22,7 +22,7 @@ class Cache
     /**
      * Set cache folder
      */
-    public function __construct()
+    public function __construct(View $view)
     {
         $this->_cache_path = Application::conf('path.apptree.views_cache');
     }

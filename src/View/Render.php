@@ -2,8 +2,8 @@
 
 namespace Peak\View;
 
-use Peak\Application;
-use Peak\Registry;
+use Peak\Bedrock\Application\Container;
+use Peak\View;
 use Peak\View\Cache;
 
 /**
@@ -17,9 +17,16 @@ abstract class Render
 
     protected $cache;              //view cache object
 
+    protected $view;
+
     //force child to implement those functions
     abstract public function render($file, $path = null);
     abstract protected function output($data);
+
+    public function __construct(View $view)
+    {
+        $this->view = $view;
+    }
 
     /**
      * Same as render() but handle an array of file instead
@@ -47,7 +54,7 @@ abstract class Render
      */
     public function __get($name)
     {
-        return Registry::o()->view->$name;
+        return $this->view->$name;
     }
 
     /**
@@ -58,7 +65,7 @@ abstract class Render
      */
     public function __isset($name)
     {
-        return isset(Registry::o()->view->$name);
+        return isset($this->view->$name);
     }
 
     /**
@@ -70,7 +77,7 @@ abstract class Render
      */
     public function  __call($method, $args)
     {
-        $view =& Registry::o()->view;
+        $view =& $this->view;
         return call_user_func_array(array($view, $method), $args);
     }
 
@@ -112,7 +119,7 @@ abstract class Render
     public function cache()
     {
         if (!is_object($this->cache)) {
-            $this->cache = new Cache();
+            $this->cache = Container::instantiate('Peak\View\Cache');
         }
         return $this->cache;
     }

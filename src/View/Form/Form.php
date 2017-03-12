@@ -2,13 +2,14 @@
 
 namespace Peak\View\Form;
 
+use Peak\Bedrock\Application\Container;
 use Peak\Exception;
-use Peak\View\Helper;
+use Peak\View;
 
 /**
- * Link helper
+ * Form helper
  */
-class Form extends Helper
+class Form
 {
 
     /**
@@ -30,7 +31,6 @@ class Form extends Helper
      */
     public function __construct($data = [], $errors = [])
     {
-        parent::__construct();
         $this->setData($data);
         $this->setErrors($errors);
     }

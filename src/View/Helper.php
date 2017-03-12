@@ -2,7 +2,7 @@
 
 namespace Peak\View;
 
-use Peak\Registry;
+use Peak\View;
 
 /**
  * Peak View Helper Base
@@ -18,8 +18,8 @@ abstract class Helper
     /**
      * Get view object
      */
-    public function __construct()
+    public function __construct(View $view)
     {
-        $this->view = Registry::o()->view;
+        $this->view = $view;
     } 
 }

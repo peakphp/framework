@@ -2,9 +2,9 @@
 
 namespace Peak;
 
-use Peak\Application;
-use Peak\Expcetion;
+use Peak\Bedrock\Application\Container;
 use Peak\Config\File\Ini;
+use Peak\Expcetion;
 use Peak\View\Helpers;
 use Peak\View\Header;
 
@@ -213,7 +213,7 @@ class View
             if (!class_exists($engine_class)) {
                 throw new Exception('ERR_VIEW_ENGINE_NOT_FOUND', $engine_name);
             }
-            $this->_engine = new $engine_class();
+            $this->_engine = Container::instantiate($engine_class);
         }
 
         return $this->_engine;
@@ -319,10 +319,10 @@ class View
             $app_helper  = 'App\Views\Helpers\\'.ucfirst($name);
 
             if (class_exists($peak_helper)) {
-                $this->_helpers[$name] = new $peak_helper();
+                $this->_helpers[$name] = Container::instantiate($peak_helper);
                 return $this->_helpers[$name];
             } elseif (class_exists($app_helper)) {
-                $this->_helpers[$name] = new $app_helper();
+                $this->_helpers[$name] = Container::instantiate($app_helper);
                 return $this->_helpers[$name];
             } else {
                 trigger_error('[ERR] View helper '.$name.' doesn\'t exists');

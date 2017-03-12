@@ -2,7 +2,7 @@
 
 namespace Peak\View\Helper;
 
-use Peak\Application;
+use Peak\Bedrock\Application;
 use Peak\Registry;
 use Peak\View\Helper\Debug;
 
