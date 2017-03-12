@@ -24,15 +24,15 @@ class Module
      */
     public function __construct()
     {
-        $app          = Registry::o()->app;
-        $this->name   = $app->front->route->controller;
-        $app->routing = new Routing(null, relativePath(Application::conf('path.public').'/'.$this->name));
+        $kernel          = Application::kernel();
+        $this->name      = $kernel->front->route->controller;
+        $kernel->routing = new Routing(null, relativePath(Application::conf('path.public').'/'.$this->name));
         
         $this->backupConfig()
             ->updateConfig()
             ->init();
 
-        $app->reload()->run();
+        $kernel->reload()->run();
     }
 
     public function init() {}
@@ -63,7 +63,7 @@ class Module
      */
     private function backupConfig()
     {
-        Registry::set('parent', Application::conf());
+        //Registry::set('parent', Application::conf());
         return $this;
     }
 }
