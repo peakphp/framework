@@ -70,3 +70,43 @@ if (!function_exists('showAllErrors')) {
         ini_set('display_errors', 1);
     }
 }
+
+/**
+ * collection()
+ */
+if (!function_exists('collection')) {
+    /**
+     * Create a new Collection
+     *
+     * @param  array|null $items
+     * @return \Peak\Common\Collection
+     */
+    function collection($items = null)
+    {
+        return \Peak\Common\Collection::make($items);
+    }
+}
+
+
+/**
+ * phpinput()
+ */
+if (!function_exists('phpinput')) {
+    /**
+     * Retreive a collection object from php://input
+     *
+     * @return Peak\Common\Collection
+     */
+    function phpinput()
+    {
+        $raw  = file_get_contents('php://input');
+        $post = json_decode($raw, true); // for json input
+
+        // in case json post is empty but $_POST is not we will use it
+        if (!empty($raw) && empty($post) && filter_input_array(INPUT_POST)) {
+            $post = filter_input_array(INPUT_POST);
+        }
+
+        return \Peak\Common\Collection::make($post);
+    }
+}
