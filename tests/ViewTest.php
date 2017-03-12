@@ -148,7 +148,7 @@ class ViewTest extends TestCase
 
 		$this->assertTrue($name === null);
 
-		$this->peakview->engine('layouts');
+		$this->peakview->engine('Layouts');
 
 		$name = $this->peakview->getEngineName();
 
