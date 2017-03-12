@@ -139,18 +139,20 @@ if (!function_exists('session')) {
      */
     function session($path = null, $value = null)
     {
-        $s = \Peak\Registry::o()->session;
-        if (!isset($s)) {
-            $s = \Peak\Registry::set('session', new \Peak\Config\Session());
+        $container = \Peak\Bedrock\Application::container();
+        $sess = $container->getInstance('Peak\Config\Session');
+
+        if (!$container->hasInstance('Peak\Config\Session')) {
+            $sess = $container->instantiateAndStore('Peak\Config\Session');
         }
 
         if (!isset($path) && !isset($value)) {
-            return $s;
+            return $sess;
         } elseif (isset($path) && !isset($value)) {
-            return $s->get($path);
+            return $sess->get($path);
         }
         
-        return $s->set($path, $value);
+        return $sess->set($path, $value);
     }
 }
 
