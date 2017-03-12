@@ -32,16 +32,16 @@ class FileLoader
         //load configuration object according to the file extension
         switch (pathinfo($file, PATHINFO_EXTENSION)) {
 
-            case 'php' :
+            case 'php':
                 $conf = new \Peak\Config\File($file);
                 break;
-            case 'ini' :
+            case 'ini':
                 $conf = new \Peak\Config\File\Ini($file, true);
                 break;
-            case 'json' :
+            case 'json':
                 $conf = new \Peak\Config\File\Json($file, true);
                 break;
-            default :
+            default:
                 throw new Exception('ERR_CONFIG_FILE');
                 break;
         }
