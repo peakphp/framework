@@ -9,7 +9,7 @@ use Peak\View\Helpers;
 use Peak\View\Header;
 
 /**
- * Template variables registry with objects httpheader, helpers, theme, rendering
+ * Template variables registry with objects httpheader, helpers, rendering
  */
 class View
 {
