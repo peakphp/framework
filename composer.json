@@ -24,7 +24,7 @@
     },
     "autoload": {
         "files": [
-            "src/Core.php",
+            "src/Bedrock/helpers.php",
             "src/Common/helpers.php"
         ],
         "psr-4": {
