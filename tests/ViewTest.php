@@ -1,6 +1,8 @@
 <?php
 use PHPUnit\Framework\TestCase;
 
+\Peak\Bedrock\Application::set(new \Peak\Di\Container);
+
 /**
  * @package    Peak\View
  */
