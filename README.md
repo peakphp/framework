@@ -28,8 +28,8 @@ Requirements:
     - App Modules Kernel
     - Ownership and Permissions
     - Templating
-    - Form
-    - Validator
+    - Form builder and validator
+    - Validators
     - Translation
     - Config
 
