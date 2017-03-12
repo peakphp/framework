@@ -3,7 +3,6 @@
 namespace Peak\View\Helper;
 
 use Peak\Bedrock\Application;
-use Peak\Registry;
 use Peak\View\Helper\Debug;
 
 /**
