@@ -30,6 +30,16 @@ class Application
     }
 
     /**
+     * Get application kernel
+     *
+     * @return \Peak\Bedrock\Application\Kernel
+     */
+    public static function kernel()
+    {
+        return self::get('\Peak\Bedrock\Application\Kernel');
+    }
+
+    /**
      * Set the container
      *
      * @param ContainerInterface $container
