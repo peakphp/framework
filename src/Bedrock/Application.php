@@ -36,8 +36,14 @@ class Application
      */
     public static function get($instance = null)
     {
+        if (!isset(self::$container)) {
+            throw new \Exception(__CLASS__.' as no container');
+        }
         if (!isset($instance)) {
             return self::$container;
+        }
+        if (!self::$container->has($instance)) {
+            throw new \Exception(__CLASS__.' container does not have '.$instance);
         }
 
         return self::$container->getInstance($instance);
