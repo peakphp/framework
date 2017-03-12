@@ -23,9 +23,10 @@ abstract class Render
     abstract public function render($file, $path = null);
     abstract protected function output($data);
 
-    public function __construct(View $view)
+    public function __construct(View $view, Cache $cache)
     {
         $this->view = $view;
+        $this->cache = $cache;
     }
 
     /**
@@ -118,9 +119,6 @@ abstract class Render
      */
     public function cache()
     {
-        if (!is_object($this->cache)) {
-            $this->cache = Container::instantiate('Peak\View\Cache');
-        }
         return $this->cache;
     }
 }

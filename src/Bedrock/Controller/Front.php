@@ -3,7 +3,6 @@
 namespace Peak\Bedrock\Controller;
 
 use Peak\Bedrock\Application;
-use Peak\Bedrock\Application\Container;
 use Peak\Registry;
 use Peak\Exception;
 use Peak\Bedrock\Application\Module;
@@ -158,7 +157,7 @@ class Front
                 throw new Exception('ERR_CTRL_NOT_FOUND', $this->route->controller);
             }
         } else {
-            $this->controller = Container::instantiate($ctrl_name);
+            $this->controller = Application::instantiate($ctrl_name);
             // $this->controller = new $ctrl_name();
         }
 

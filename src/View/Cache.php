@@ -18,12 +18,14 @@ class Cache
     protected $_cache_id;              //current script view md5 key. generate by preOutput()
     protected $_cache_strip = false;   //will strip all repeating space caracters
 
+    protected $view;
 
     /**
      * Set cache folder
      */
     public function __construct(View $view)
     {
+        $this->view = $view;
         $this->_cache_path = Application::conf('path.apptree.views_cache');
     }
     
@@ -34,7 +36,7 @@ class Cache
      */
     protected function getScriptFile()
     {
-        return Registry::o()->view->engine()->_scripts_file;
+        return $this->view->engine()->_scripts_file;
     }
     
     /**
@@ -44,7 +46,7 @@ class Cache
      */
     protected function getScriptPath()
     {
-        return Registry::o()->view->engine()->_scripts_path;
+        return $this->view->engine()->_scripts_path;
     }
 
     /**
@@ -95,8 +97,12 @@ class Cache
         //on controller name and action name. If id is null but, cache id is already generated, we use it.
         if (is_null($id)) {
             if (is_null($this->_cache_id)) {
-                $this->genCacheId(Registry::o()->app->front->controller->getName(),
-                                  Registry::o()->app->front->controller->action);
+                //bug
+                $kernel = Application::get('Peak\Bedrock\Application\Kernel');
+                $this->genCacheId(
+                    $kernel->front->controller->getName(),
+                    $kernel->front->controller->action
+                );
             }
         }
         else $this->genCacheId(null, $id);

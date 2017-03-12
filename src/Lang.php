@@ -2,7 +2,7 @@
 
 namespace Peak;
 
-use Peak\Bedrock\Application\Container;
+use Peak\Bedrock\Application;
 use Peak\Expcetion;
 
 /**
@@ -35,9 +35,9 @@ class Lang
      */
     public static function __($text, $replaces = null, $func = null)
     {
-        $lang = Container::get('Peak\Lang');
+        $lang = Application::get('Peak\Lang');
         if ($lang instanceof Lang) {
-            return Registry::o()->lang->translate((string)$text, $replaces, $func);
+            return $lang->translate((string)$text, $replaces, $func);
         }
         return $text;
     }

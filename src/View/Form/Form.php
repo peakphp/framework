@@ -2,7 +2,7 @@
 
 namespace Peak\View\Form;
 
-use Peak\Bedrock\Application\Container;
+use Peak\Bedrock\Application;
 use Peak\Exception;
 use Peak\View;
 

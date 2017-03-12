@@ -3,7 +3,6 @@
 namespace Peak\View\Render;
 
 use Peak\Bedrock\Application;
-use Peak\Registry;
 use Peak\Exception;
 use Peak\View\Render;
 
@@ -73,7 +72,8 @@ class Layouts extends Render
         // throw the most reliable exception depending on submitted arguments to this method
         if (!file_exists($filepath)) {         
             if (isset($is_scripts_path)) {
-                $filepath = Registry::o()->app->front->controller->getTitle() .'/'. basename($filepath);
+                $kernel = Application::get('Peak\Bedrock\Controller\Front');
+                $filepath = $kernel->front->controller->getTitle() .'/'. basename($filepath);
                 throw new Exception('ERR_VIEW_SCRIPT_NOT_FOUND', basename($filepath));
             } else {
                 $filepath = str_replace($path, '', $filepath);

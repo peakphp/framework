@@ -81,7 +81,8 @@ class Partials extends Render
         $filepath = $path.'/'.$file;
 
         if (!file_exists($filepath)) {
-            $filepath = Peak_Registry::o()->app->front->controller->title .'/'. basename($filepath);
+            $kernel = Application::get('Peak\Bedrock\Controller\Front');
+            $filepath = $kernel->front->controller->title .'/'. basename($filepath);
             throw new Peak_View_Exception('ERR_VIEW_SCRIPT_NOT_FOUND', $filepath);
         }
 

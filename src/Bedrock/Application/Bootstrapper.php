@@ -2,7 +2,7 @@
 
 namespace Peak\Bedrock\Application;
 
-use Peak\Bedrock\Application\Container;
+use Peak\Bedrock\Application;
 
 /**
  * Application Bootstrapper
@@ -40,10 +40,10 @@ class Bootstrapper
          * Execute processes
          */
         foreach ($this->default_processes as $process) {
-            Container::instantiate($process);
+            Application::instantiate($process);
         }
         foreach ($this->processes as $process) {
-            Container::instantiate($process);
+            Application::instantiate($process);
         }
 
         $this->boot();

@@ -2,23 +2,88 @@
 
 namespace Peak\Bedrock;
 
-use Peak\Di\Container;
-use Peak\Bedrock\Application\Container as AppContainer;
+use Peak\Di\ContainerInterface;
 use Peak\Bedrock\Application\ConfigResolver;
 use Peak\Bedrock\Application\Kernel;
 use Peak\Bedrock\Application\Routing;
 
+/**
+ * Application wrapper
+ */
 class Application
 {
     /**
+     * Container instance
+     * @var ContainerInterface
+     */
+    protected static $container;
+
+    /**
+     * Set the container
+     *
+     * @param ContainerInterface $container
+     */
+    public static function set(ContainerInterface $container)
+    {
+        self::$container = $container;
+    }
+
+    /**
+     * Get container / instance in the container
+     *
+     * @param  string|null $instance
+     * @return mixed
+     */
+    public static function get($instance = null)
+    {
+        if (!isset($instance)) {
+            return self::$container;
+        }
+
+        return self::$container->getInstance($instance);
+    }
+
+    /**
+     * Instantiate a class
+     *
+     * @see \Peak\Di\Container for details
+     * @return mixed
+     */
+    public static function instantiate($class, $args = [], $explict = [])
+    {
+        return self::$container->instantiate($class, $args, $explict);
+    }
+
+    /**
+     * Static version of config() use current Application instance in Registry
+     *
+     * @param  string $path
+     * @param  mixed  $value
+     * @return $this
+     */
+    public static function conf($path = null, $value = null)
+    {
+        $config = self::get('Peak\Bedrock\Application\Config');
+
+        if (!isset($path)) {
+            return $config;
+        } elseif (!isset($value)) {
+            return $config->get($path);
+        }
+
+        $config->set($path, $value);
+        return $this;
+    }
+
+    /**
      * Create application
      *
-     * @param Container $container
-     * @param array     $config   
+     * @param ContainerInterface $container
+     * @param array              $config
      */
-    public function __construct(Container $container, array $config)
+    public function __construct(ContainerInterface $container, array $config)
     {
-        AppContainer::set($container);
+        self::set($container);
         $this->create($container, $config);
     }
 
@@ -28,7 +93,7 @@ class Application
      * @param  array $config
      * @return Application
      */
-    protected function create(Container $container, array $config)
+    protected function create(ContainerInterface $container, array $config)
     {
         $config_resolver = new ConfigResolver($config);
 
@@ -55,33 +120,15 @@ class Application
     }
 
 
-    /**
-     * Static version of config() use current Application instance in Registry
-     *
-     * @return $this
-     */
-    public static function conf($path = null, $value = null)
-    {
-        $app_config = AppContainer::get('Peak\Bedrock\Application\Config');
-
-        if (!isset($path)) {
-            return $app_config;
-        } elseif (!isset($value)) {
-            return $app_config->get($path);
-        }
-
-        $app_config->set($path, $value);
-        return $this;
-    }
-
+    
     public function run($request = null)
     {
-        return AppContainer::get('Peak\Bedrock\Application\Kernel')->run($request);
+        return self::get('Peak\Bedrock\Application\Kernel')->run($request);
     }
 
     public function render()
     {
-        return AppContainer::get('Peak\Bedrock\Application\Kernel')->render();
+        return self::get('Peak\Bedrock\Application\Kernel')->render();
     }
 
 }
