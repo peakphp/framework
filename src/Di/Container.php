@@ -74,6 +74,19 @@ class Container implements ContainerInterface
     }
 
     /**
+     * Same as instantiate class but also store it with addInstance
+     *
+     * @see instantiate() for params
+     * @return object
+     */
+    public function instantiateAndStore($class, $args = [], $explict = [])
+    {
+        $object = $this->instantiate($class, $args, $explict);
+        $this->addInstance($object);
+        return $object;
+    }
+
+    /**
      * Has object instance
      *
      * @param  string $name
