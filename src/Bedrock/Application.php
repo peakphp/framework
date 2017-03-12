@@ -106,29 +106,29 @@ class Application
         // store Peak\View
         $container->addInstance(new \Peak\View);
         
-        // instanciate app kernel
+        // instantiate  and store app kernel
         $container->addInstance(
             $container->instantiate('\Peak\Bedrock\Application\Kernel')
         );
-
-
-        // $container->addInstance(
-        //     $this
-        // );
-
-        //print_r($container);
     }
 
-
-    
+    /**
+     * Run
+     *
+     * @see Peak\Bedrock\Application\Kernel
+     */
     public function run($request = null)
     {
         return self::get('Peak\Bedrock\Application\Kernel')->run($request);
     }
 
+    /**
+     * Render
+     *
+     * @see Peak\Bedrock\Application\Kernel
+     */
     public function render()
     {
         return self::get('Peak\Bedrock\Application\Kernel')->render();
     }
-
 }
