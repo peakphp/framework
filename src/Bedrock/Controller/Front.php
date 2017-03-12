@@ -1,12 +1,13 @@
 <?php
 
-namespace Peak\Controller;
+namespace Peak\Bedrock\Controller;
 
-use Peak\Application;
+use Peak\Bedrock\Application;
+use Peak\Bedrock\Application\Container;
 use Peak\Registry;
 use Peak\Exception;
-use Peak\Application\Module;
-use Peak\Controller\Action;
+use Peak\Bedrock\Application\Module;
+use Peak\Bedrock\Controller\Action;
 use Peak\Routing\RouteBuilder;
 
 /**
@@ -144,6 +145,7 @@ class Front
 
         //set controller class name
         $ctrl_name = $this->_getCtrlName(Application::conf('ns').'\Controllers\\', $this->route->controller);
+        
 
         //check if it's valid application controller
         if (!class_exists($ctrl_name)) {
@@ -156,7 +158,8 @@ class Front
                 throw new Exception('ERR_CTRL_NOT_FOUND', $this->route->controller);
             }
         } else {
-            $this->controller = new $ctrl_name();
+            $this->controller = Container::instantiate($ctrl_name);
+            // $this->controller = new $ctrl_name();
         }
 
         if ($this->controller instanceof Action) {

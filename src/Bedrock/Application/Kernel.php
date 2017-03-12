@@ -1,19 +1,18 @@
 <?php
 
-namespace Peak;
+namespace Peak\Bedrock\Application;
 
-use Peak\Common\Collection;
-use Peak\Application\Bootstrapper;
-use Peak\Application\Config;
-use Peak\Application\Routing;
-use Peak\Controller\Front;
+// use Peak\Common\Collection;
+use Peak\Bedrock\Application\Bootstrapper;
+use Peak\Bedrock\Application\Config;
+use Peak\Bedrock\Application\Routing;
+use Peak\Bedrock\Controller\Front;
 
 /**
  * Load the framework objects, application bootstrap and front controller.
  */
-class Application
+class Kernel
 {
-
     /**
      * app bootstrap object if exists
      * @var Application\Bootstrap
@@ -41,68 +40,18 @@ class Application
     /**
      * Start framework
      */
-    private function __construct(Collection $conf)
+    public function __construct(Config $config, Routing $routing)
     {
         // application config
-        $this->config = $conf;
+        $this->config = $config;
 
-        // register application/view instance
-        Registry::set('app', $this);
-        Registry::set('view', new View());
-
-        $this->routing = new Routing();
+        // application routing
+        $this->routing = $routing;
 
         $this->loadBootstrap();
         $this->loadFront();
     }
 
-    /**
-     * Create a instance of application
-     *
-     * @param  array $config
-     * @return Application
-     */
-    public static function create(array $config)
-    {
-        $config = new Config($config);
-        return new static($config->getMountedConfig());
-    }
-
-    /**
-     * Access to application config object
-     *
-     * @param  string|null $path
-     * @param  mixed|null  $value
-     * @return mixed
-     */
-    public function config($path = null, $value = null)
-    {
-        if (!isset($path)) {
-            return $this->config;
-        } elseif (!isset($value)) {
-            return $this->config->get($path);
-        }
-        
-        $this->config->set($path, $value);
-        return $this;
-    }
-
-    /**
-     * Static version of config() use current Application instance in Registry
-     *
-     * @return $this
-     */
-    public static function conf($path = null, $value = null)
-    {
-        if (!isset($path)) {
-            return Registry::o()->app->config();
-        } elseif (!isset($value)) {
-            return Registry::o()->app->config($path);
-        }
-
-        Registry::o()->app->config($path, $value);
-        return $this;
-    }
 
     /**
      * Reload application bootstrapper and front for a module
@@ -123,7 +72,7 @@ class Application
      */
     private function loadBootstrap()
     {
-        $cname = $this->config('ns').'\Bootstrap';
+        $cname = $this->config->get('ns').'\Bootstrap';
         $this->bootstrap = (class_exists($cname)) ? new $cname() : new Bootstrapper();
     }
 
@@ -132,7 +81,7 @@ class Application
      */
     private function loadFront()
     {
-        $cname = $this->config('ns').'\Front';
+        $cname = $this->config->get('ns').'\Front';
         $this->front = (class_exists($cname)) ? new $cname() : new Front();
     }
 
@@ -145,6 +94,7 @@ class Application
      */
     public function run($request = null)
     {
+        // print_r($this->routing);
         $this->routing->loadRequest($request);
         $this->front->route = $this->routing->getRoute();
 

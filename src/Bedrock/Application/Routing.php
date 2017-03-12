@@ -1,8 +1,8 @@
 <?php
 
-namespace Peak\Application;
+namespace Peak\Bedrock\Application;
 
-use Peak\Application;
+use Peak\Bedrock\Application;
 use Peak\Common\Collection;
 
 use Peak\Exception;

@@ -1,9 +1,9 @@
 <?php
 
-namespace Peak\Application\Bootstrap;
+namespace Peak\Bedrock\Application\Bootstrap;
 
-use Peak\Application;
-use Peak\Registry;
+use Peak\Bedrock\Application;
+use Peak\View;
 
 /**
  * Application Bootstrap View
@@ -13,13 +13,12 @@ class ConfigView
     /**
      * Configurate View based on Application config
      */
-    public function __construct()
+    public function __construct(View $view = null)
     {
-        if (!Application::conf()->have('view') || !Registry::isRegistered('view')) {
+        if (!isset($view) || !Application::conf()->have('view')) {
             return;
         }
 
-        $view  = Registry::o()->view;
         $cview = Application::conf('view');
 
         if (!empty($cview)) {

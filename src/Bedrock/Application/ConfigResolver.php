@@ -1,13 +1,13 @@
 <?php
 
-namespace Peak\Application;
+namespace Peak\Bedrock\Application;
 
 use Peak\Exception;
-use Peak\Config\DotNotation;
-use Peak\Application\Config\Loader;
-use Peak\Application\Config\Environment;
+use Peak\Bedrock\Application\Config;
+use Peak\Bedrock\Application\Config\FileLoader;
+use Peak\Bedrock\Application\Config\Environment;
 
-class Config
+class ConfigResolver
 {
     /**
      * Default config
@@ -37,7 +37,7 @@ class Config
      */
     public function __construct($config = [])
     {
-        $this->app_config = new DotNotation($this->default);
+        $this->app_config = new Config($this->default);
         $this->app_config->mergeRecursiveDistinct($config);
 
         $this->validate(); // validate user conf
@@ -45,7 +45,7 @@ class Config
 
         //print_r($this->app_config);
 
-        $config_loader = new Loader($this->getConfigFilepath());
+        $config_loader = new FileLoader($this->getConfigFilepath());
 
         $config_env = new Environment(
             $config_loader->getConfig(),

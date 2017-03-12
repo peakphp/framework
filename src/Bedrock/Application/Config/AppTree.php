@@ -1,6 +1,6 @@
 <?php
 
-namespace Peak\Application\Config;
+namespace Peak\Bedrock\Application\Config;
 
 class AppTree
 {

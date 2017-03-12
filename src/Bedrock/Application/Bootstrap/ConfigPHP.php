@@ -1,8 +1,8 @@
 <?php
 
-namespace Peak\Application\Bootstrap;
+namespace Peak\Bedrock\Application\Bootstrap;
 
-use Peak\Application;
+use Peak\Bedrock\Application;
 
 /**
  * Application php config

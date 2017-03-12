@@ -1,6 +1,8 @@
 <?php
 
-namespace Peak\Application;
+namespace Peak\Bedrock\Application;
+
+use Peak\Bedrock\Application\Container;
 
 /**
  * Application Bootstrapper
@@ -18,9 +20,9 @@ class Bootstrapper
      * @var array
      */
     protected $default_processes = [
-        \Peak\Application\Bootstrap\ConfigPHP::class,
-        \Peak\Application\Bootstrap\ConfigView::class,
-        \Peak\Application\Bootstrap\ConfigCustomRoutes::class
+        \Peak\Bedrock\Application\Bootstrap\ConfigPHP::class,
+        \Peak\Bedrock\Application\Bootstrap\ConfigView::class,
+        \Peak\Bedrock\Application\Bootstrap\ConfigCustomRoutes::class
     ];
 
     /**
@@ -38,10 +40,10 @@ class Bootstrapper
          * Execute processes
          */
         foreach ($this->default_processes as $process) {
-            new $process();
+            Container::instantiate($process);
         }
         foreach ($this->processes as $process) {
-            new $process();
+            Container::instantiate($process);
         }
 
         $this->boot();

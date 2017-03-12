@@ -1,11 +1,10 @@
 <?php
 
-namespace Peak\Application;
+namespace Peak\Bedrock\Application;
 
-use Peak\Registry;
-use Peak\Application;
-use Peak\Application\Routing;
-use Peak\Application\Config\AppTree;
+use Peak\Bedrock\Application;
+use Peak\Bedrock\Application\Routing;
+use Peak\Bedrock\Application\Config\AppTree;
 
 /**
  * Module Application Loader

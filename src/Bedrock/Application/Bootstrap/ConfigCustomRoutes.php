@@ -1,9 +1,9 @@
 <?php
 
-namespace Peak\Application\Bootstrap;
+namespace Peak\Bedrock\Application\Bootstrap;
 
-use Peak\Application;
-use Peak\Registry;
+use Peak\Bedrock\Application;
+use Peak\Bedrock\Application\Routing;
 use Peak\Common\Collection;
 use Peak\Exception;
 use Peak\Routing\Request;
@@ -17,7 +17,7 @@ class ConfigCustomRoutes
     /**
      * Configurate View based on Application config
      */
-    public function __construct()
+    public function __construct(Routing $routing)
     {
         $routes = Application::conf('routes');
 
@@ -53,6 +53,6 @@ class ConfigCustomRoutes
             }
         }
 
-        Registry::o()->app->routing->custom_routes = $collection;
+        $routing->custom_routes = $collection;
     }
 }

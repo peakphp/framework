@@ -1,10 +1,10 @@
 <?php
 
-namespace Peak\Application\Config;
+namespace Peak\Bedrock\Application\Config;
 
 use Peak\Exception;
 use Peak\Common\Collection;
-use Peak\Application\Config\AppTree;
+use Peak\Bedrock\Application\Config\AppTree;
 
 class Environment
 {

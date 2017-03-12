@@ -1,10 +1,10 @@
 <?php
 
-namespace Peak\Application\Config;
+namespace Peak\BedRock\Application\Config;
 
 use Peak\Exception;
 
-class Loader
+class FileLoader
 {
     /**
      * Configuration
@@ -35,15 +35,12 @@ class Loader
             case 'php' :
                 $conf = new \Peak\Config\File($file);
                 break;
-            
             case 'ini' :
                 $conf = new \Peak\Config\File\Ini($file, true);
                 break;
-
             case 'json' :
                 $conf = new \Peak\Config\File\Json($file, true);
                 break;
-
             default :
                 throw new Exception('ERR_CONFIG_FILE');
                 break;

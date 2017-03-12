@@ -1,6 +1,6 @@
 <?php
 
-namespace Peak\Controller\Helper;
+namespace Peak\Bedrock\Controller\Helper;
 
 /**
  * Get misc infos about current request

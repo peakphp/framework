@@ -1,12 +1,14 @@
 <?php
 
-namespace Peak\Controller;
+namespace Peak\Bedrock\Controller;
 
-use Peak\Application;
+use Peak\Bedrock\Application;
+use Peak\Bedrock\Application\Container;
 use Peak\Common\Collection;
 use Peak\Registry;
 use Peak\Exception;
 use Peak\Routing\Route;
+use Peak\View;
 
 /**
  * Peak abstract action controller
@@ -55,9 +57,13 @@ abstract class Action
      */
     protected $actions_with_params = true;
 
-    public function __construct()
+    /**
+     * Constructor
+     * @param View $view [description]
+     */
+    public function __construct(View $view)
     {
-        $this->view = Registry::o()->view;
+        $this->view = $view;
     }
     
     /**
