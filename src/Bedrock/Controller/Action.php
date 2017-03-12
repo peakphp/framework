@@ -5,7 +5,6 @@ namespace Peak\Bedrock\Controller;
 use Peak\Bedrock\Application;
 use Peak\Bedrock\Application\Container;
 use Peak\Common\Collection;
-use Peak\Registry;
 use Peak\Exception;
 use Peak\Routing\Route;
 use Peak\View;
@@ -232,7 +231,8 @@ abstract class Action
      */
     public function redirect($ctrl, $action = 'index', $params = null)
     {
-        Registry::o()->app->front->redirect($ctrl, $action, $params);
+        $kernel = Application::get('Peak\Bedrock\Application\Kernel');
+        $kernel->front->redirect($ctrl, $action, $params);
     }
 
     /**
