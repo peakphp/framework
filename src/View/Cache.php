@@ -97,7 +97,7 @@ class Cache
         if (is_null($id)) {
             if (is_null($this->_cache_id)) {
                 //bug
-                $kernel = Application::get('Peak\Bedrock\Application\Kernel');
+                $kernel = Application::kernel();
                 $this->genCacheId(
                     $kernel->front->controller->getName(),
                     $kernel->front->controller->action

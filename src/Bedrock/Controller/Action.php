@@ -231,8 +231,7 @@ abstract class Action
      */
     public function redirect($ctrl, $action = 'index', $params = null)
     {
-        $kernel = Application::get('Peak\Bedrock\Application\Kernel');
-        $kernel->front->redirect($ctrl, $action, $params);
+        Application::kernel()->front->redirect($ctrl, $action, $params);
     }
 
     /**
