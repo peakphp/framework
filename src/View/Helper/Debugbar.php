@@ -188,13 +188,13 @@ class Debugbar extends Debug
         // echo '</div>';
 
         echo '<div class="window resizable" id="pkdb_registry_window">';
-        echo '<h2>'.count(Application::get()->getInstances()).' registered objects</h2>';
-        foreach (Application::get()->getInstances() as $name => $data) {
+        echo '<h2>'.count(Application::container()->getInstances()).' registered objects</h2>';
+        foreach (Application::container()->getInstances() as $name => $data) {
             $type = $name;
             echo '<strong><a href="#'.$name.'">'.$name.'</a></strong><br />';
         }
 
-        foreach (Application::get()->getInstances() as $name => $data) {
+        foreach (Application::container()->getInstances() as $name => $data) {
             $object_data = htmlentities(print_r($data,true));
             echo '<h2 id="'.$name.'">'.$name.'</h2><pre>'.$object_data.'</pre>';
         }
