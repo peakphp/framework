@@ -26,7 +26,6 @@ class Cache
     public function __construct(View $view)
     {
         $this->view = $view;
-        $this->_cache_path = Application::conf('path.apptree.views_cache');
     }
     
     /**
@@ -142,7 +141,8 @@ class Cache
      */
     public function getCacheFile()
     {
-        return $this->_cache_path.'/'.$this->_cache_id.'.php';
+        $path = Application::conf('path.apptree.views_cache');
+        return $path.'/'.$this->_cache_id.'.php';
     }
 
     /**
