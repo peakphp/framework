@@ -19,6 +19,17 @@ class Application
     protected static $container;
 
     /**
+     * Get application container
+     *
+     * @return Peak\Di\ContainerInterface
+     */
+    public static function container()
+    {
+        self::containerCheck();
+        return self::$container;
+    }
+
+    /**
      * Set the container
      *
      * @param ContainerInterface $container
@@ -31,15 +42,12 @@ class Application
     /**
      * Get container / instance in the container
      *
-     * @param  string|null $instance
+     * @param  string $instance
      * @return mixed
      */
-    public static function get($instance = null)
+    public static function get($instance)
     {
-        self::containerCheck();
-        if (!isset($instance)) {
-            return self::$container;
-        }
+        self::containerCheck($instance);
         return self::$container->getInstance($instance);
     }
 
@@ -55,6 +63,11 @@ class Application
         return self::$container->instantiate($class, $args, $explict);
     }
 
+    /**
+     * Check application container
+     *
+     * @param  string|null $instance
+     */
     protected static function containerCheck($instance = null)
     {
         if (!(self::$container instanceof ContainerInterface)) {
