@@ -13,6 +13,11 @@ use Peak\Bedrock\Application\Routing;
 class Application
 {
     /**
+     * Framework version
+     */
+    const VERSION = '2.1.0';
+
+    /**
      * Container instance
      * @var ContainerInterface
      */
