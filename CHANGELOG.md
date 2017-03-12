@@ -7,7 +7,9 @@ Release Date: ?
  - replaced old Registry by Dependencies Injection Container
  - moved Application and Controller components under Bedrock folder
  - added method instantiateAndStore() to Peak\Di\Container
- - moved Application logic to Kernel
+ - moved Application logic to Bedrock\Application\Kernel
+ - moved code in Core to Bedrock\helpers.php
+ - added framework version const to Bedrock\Application
 
 VERSION 2.0.12
 --------------
