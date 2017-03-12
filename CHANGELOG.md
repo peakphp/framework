@@ -3,8 +3,9 @@ VERSION 2.1.0
 Release Date: ?
 
 > Warning! Breaking changes with 2.0.x
-2.1.x is integrating
 
+ - Replacing old Registry by Dependencies Injection Container
+ - Moving Application components and Controller under Bedrock folder
 
 VERSION 2.0.12
 --------------
