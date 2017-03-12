@@ -1,9 +1,10 @@
 <?php
 
-namespace Peak;
+namespace Peak\Common;
 
 /**
  * Peak Data container
+ * @deprecated
  */
 class Registry
 {
