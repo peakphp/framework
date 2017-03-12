@@ -31,3 +31,4 @@ ratings:
 exclude_paths:
   - tests/
   - src/View/Helper/debugbar/
+  - src/Bedrock/Controller/Internal/

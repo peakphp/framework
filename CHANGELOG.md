@@ -10,6 +10,7 @@ Release Date: ?
  - moved Application logic to Bedrock\Application\Kernel
  - moved code in Core to Bedrock\helpers.php
  - added framework version const to Bedrock\Application
+ - code refactoring for PSR-2
 
 VERSION 2.0.12
 --------------
