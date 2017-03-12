@@ -36,16 +36,10 @@ class Application
      */
     public static function get($instance = null)
     {
-        if (!isset(self::$container)) {
-            throw new \Exception(__CLASS__.' as no container');
-        }
+        self::containerCheck();
         if (!isset($instance)) {
             return self::$container;
         }
-        if (!self::$container->has($instance)) {
-            throw new \Exception(__CLASS__.' container does not have '.$instance);
-        }
-
         return self::$container->getInstance($instance);
     }
 
@@ -57,7 +51,20 @@ class Application
      */
     public static function instantiate($class, $args = [], $explict = [])
     {
+        self::containerCheck();
         return self::$container->instantiate($class, $args, $explict);
+    }
+
+    protected static function containerCheck($instance = null)
+    {
+        if (!(self::$container instanceof ContainerInterface)) {
+            throw new \Exception(__CLASS__.' as no container');
+        }
+        if (isset($instance)) {
+            if (!self::$container->hasInstance($instance)) {
+                throw new \Exception(__CLASS__.' container does not have '.$instance);
+            }
+        }
     }
 
     /**
@@ -69,6 +76,8 @@ class Application
      */
     public static function conf($path = null, $value = null)
     {
+        self::containerCheck('Peak\Bedrock\Application\Config');
+
         $config = self::get('Peak\Bedrock\Application\Config');
 
         if (!isset($path)) {
