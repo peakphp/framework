@@ -28,9 +28,7 @@ class Module
         $this->name      = $kernel->front->route->controller;
         $kernel->routing = new Routing(null, relativePath(Application::conf('path.public').'/'.$this->name));
         
-        $this->backupConfig()
-            ->updateConfig()
-            ->init();
+        $this->updateConfig()->init();
 
         $kernel->reload()->run();
     }
@@ -52,18 +50,6 @@ class Module
         $ap = new AppTree(APPLICATION_ABSPATH.'/modules/'.$this->name);
         Application::conf()->set('path.apptree', $ap->tree);
 
-        return $this;
-    }
-
-    /**
-     * Backup and register the current app config 
-     * before overwritng it with a new app tree
-     *
-     * @return $this
-     */
-    private function backupConfig()
-    {
-        //Registry::set('parent', Application::conf());
         return $this;
     }
 }
