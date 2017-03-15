@@ -49,7 +49,7 @@ class Application
      *
      * @param ContainerInterface $container
      */
-    public static function set(ContainerInterface $container)
+    public static function setContainer(ContainerInterface $container)
     {
         self::$container = $container;
     }
@@ -126,7 +126,7 @@ class Application
      */
     public function __construct(ContainerInterface $container, array $config)
     {
-        self::set($container);
+        self::setContainer($container);
         $this->create($container, $config);
     }
 
