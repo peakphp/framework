@@ -48,7 +48,7 @@ class Select extends FormControl
         if (array_key_exists('options', $this->options) && !empty($this->options['options'])) {
             foreach ($this->options['options'] as $k => $v) {
                 if ($this->options['value_as_key']) $k = $v;
-                $control .= '<option '.(($k == $data) ? 'selected' : '').' value="'.$k.'">'.__($v).'</option>';
+                $control .= '<option '.(($k == $data) ? 'selected' : '').' value="'.$k.'">'.$v.'</option>';
             }
         }
         

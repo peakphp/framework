@@ -20,6 +20,6 @@ class Label extends Element
     {
         $attrs = $this->attributes(false);
 
-        return '<label '.$attrs.'>'.__($this->data).'</label>';
+        return '<label '.$attrs.'>'.$this->data.'</label>';
     }
 }

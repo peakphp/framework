@@ -128,9 +128,10 @@ abstract class Element implements ElementInterface
                 continue;
             }
 
-            if (in_array($k, $this->attrs_to_translate)) {
-                $v = __($v);
-            }
+            // if (in_array($k, $this->attrs_to_translate)) {
+            //     if()
+            //     $v = __($v);
+            // }
 
             if (is_bool($v) && !is_integer($v)) {
                 if ($v === true) {

@@ -33,7 +33,7 @@ class Error extends Element
 
         return '
             <p '.$attrs.'>
-                '.__($this->data).'
+                '.$this->data.'
             </p>';
     }
 }
