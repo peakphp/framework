@@ -11,6 +11,7 @@ Release Date: ?
  - moved code in Core.php to Bedrock\helpers.php
  - added framework version constant to Bedrock\Application and removed PEAK_VERSION global constant
  - code refactoring for PSR-2
+ - added Common\ExceptionLogger
 
 VERSION 2.0.12
 --------------
