@@ -94,7 +94,6 @@ class Kernel
      */
     public function run($request = null)
     {
-        // print_r($this->routing);
         $this->routing->loadRequest($request);
         $this->front->route = $this->routing->getRoute();
 
