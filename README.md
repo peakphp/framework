@@ -8,7 +8,7 @@
 
 > **Note:** This repository contains the core code of the Peak framework. If you want to build an application using Peak, visit the main [Peak repository](https://github.com/peakphp/peak).
 
-###About Peak Framework v2.x
+### About Peak Framework v2.x
 
 Requirements:
 
@@ -17,11 +17,11 @@ Requirements:
     - Mbstring PHP Extension
     - Tokenizer PHP Extension
 
-###Lavarel components included:
+### Lavarel components included:
 - [illuminate/database](https://github.com/illuminate/database)
 - [illuminate/events](https://github.com/illuminate/events)
 
-###Peak components
+### Peak components
     - Dependency Injection
     - Event Dispatcher
     - App Kernel
@@ -33,11 +33,11 @@ Requirements:
     - Translation
     - Config
 
-###Api
+### Api
 
 Api documentation [here](http://api.peakframework.com)
 
-###Version 1
+### Version 1
 
 [Older version](https://github.com/1Franck/Peak) require PHP 5.2 or greater but is no more supported. 
 Both version 1 & 2 are compatible with PHP 7 but we strongly recommand to use version 2.x.
