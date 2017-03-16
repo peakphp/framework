@@ -6,24 +6,24 @@ use \Exception;
 class ExceptionLogger
 {
     /**
-     * Log file path
-     * @var string
-     */
-    protected $filepath;
-
-    /**
      * Exception object
      * @var Exception
      */
     protected $exception;
 
     /**
+     * Log file path
+     * @var string
+     */
+    protected $filepath;
+
+    /**
      * Constructor
      *
-     * @param string $filepath
      * @param object $exception 
+     * @param string $filepath
      */
-    public function __construct($filepath, Exception $exception)
+    public function __construct(Exception $exception, $filepath)
     {
         $this->filepath  = $filepath;
         $this->exception = $exception;  
