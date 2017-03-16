@@ -23,7 +23,7 @@ Requirements:
 
 ### Peak components
     - Dependency Injection
-    - Event Dispatcher
+    - Events Dispatcher
     - App Kernel
     - App Modules Kernel
     - Ownership and Permissions
@@ -31,7 +31,7 @@ Requirements:
     - Form builder and validator
     - Validators
     - Translation
-    - Config
+    - Configuration files
 
 ### Api
 
