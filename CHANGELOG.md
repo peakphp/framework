@@ -15,7 +15,7 @@ Release Date: 2017-03-16
  - added method instantiateAndStore() to Peak\Di\Container
  - moved Application logic to Bedrock\Application\Kernel
  - moved code in Core.php to Bedrock\helpers.php
- - added framework version constant to Bedrock\Application and removed PEAK_VERSION global constant
+ - added framework version constant to Peak\Bedrock\Application and removed PEAK_VERSION global constant
  - code refactoring for PSR-2
  - added Common\ExceptionLogger
 
