@@ -14,10 +14,11 @@ class ConfigResolver
      * @var array
      */
     private $default = [
-        'ns'   => 'App',  //namespace
-        'env'  => 'prod',
-        'conf' => 'config.php',
-        'path' => [
+        'ns'   => 'App',        //namespace
+        'env'  => 'prod',       //app environment (dev,prod,staging,testing)
+        'conf' => 'config.php', //app config file relative to path.app config
+        'name' => 'peakapp',    //default application name
+        'path' => [             //paths
             'public' => '',
             'app'    => '',
             'apptree' =>  []
