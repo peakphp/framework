@@ -1,3 +1,9 @@
+VERSION 2.1.1
+--------------
+Release Date: ?
+
+ - added default process Peak\Bedrock\Application\Bootstrap\Session
+
 VERSION 2.1.0
 --------------
 Release Date: 2017-03-16
