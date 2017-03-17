@@ -2,7 +2,7 @@
 
 namespace Peak\Bedrock\Application\Bootstrap;
 
-use Peak\Bedrock\Application;
+use Peak\Bedrock\Application\Config;
 
 /**
  * Application php config
@@ -11,16 +11,16 @@ class ConfigPHP
 {
     /**
      * Configurate PHP
+     *
+     * @param Peak\Bedrock\Application\Config $config
      */
-    public function __construct()
+    public function __construct(Config $config)
     {
-        $php_settings = Application::conf('php');
-
-        if (empty($php_settings)) {
+        if (empty($config->php)) {
             return;
         }
 
-        foreach ($php_settings as $setting => $val) {
+        foreach ($config->php as $setting => $val) {
             if (!is_array($val)) {
                 ini_set($setting, $val);
             } else {

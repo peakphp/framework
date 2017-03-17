@@ -2,7 +2,7 @@
 
 namespace Peak\Bedrock\Application\Bootstrap;
 
-use Peak\Bedrock\Application;
+use Peak\Bedrock\Application\Config;
 use Peak\Bedrock\Application\Routing;
 use Peak\Common\Collection;
 use Peak\Exception;
@@ -15,16 +15,17 @@ use Peak\Routing\CustomRoute;
 class ConfigCustomRoutes
 {
     /**
-     * Configurate View based on Application config
+     * Configurate Application routes based on Application config
+     *
+     * @param Peak\Bedrock\Application\Config  $config
+     * @param Peak\Bedrock\Application\Routing $routing
      */
-    public function __construct(Routing $routing)
+    public function __construct(Config $config, Routing $routing)
     {
-        $routes = Application::conf('routes');
-
         $collection = new Collection();
 
-        if (!empty($routes)) {
-            foreach ($routes as $r) {
+        if (!empty($config->routes)) {
+            foreach ($config->routes as $r) {
                 if (isset($r['route']) && isset($r['controller']) && isset($r['action'])) {
 
                     $collection[] = new CustomRoute(

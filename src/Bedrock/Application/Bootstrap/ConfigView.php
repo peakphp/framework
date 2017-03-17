@@ -2,7 +2,7 @@
 
 namespace Peak\Bedrock\Application\Bootstrap;
 
-use Peak\Bedrock\Application;
+use Peak\Bedrock\Application\Config;
 use Peak\View;
 
 /**
@@ -12,20 +12,23 @@ class ConfigView
 {
     /**
      * Configurate View based on Application config
+     *
+     * @param Peak\Bedrock\Application\Config $config
+     * @param Peak\View                       $view
      */
-    public function __construct(View $view = null)
+    public function __construct(Config $config, View $view = null)
     {
-        if (!isset($view) || !Application::conf()->have('view')) {
+        if (!isset($view) || !isset($config->view)) {
             return;
         }
 
-        $cview = Application::conf('view');
-
-        if (!empty($cview)) {
-            foreach ($cview as $k => $v) {
+        if (!empty($config->view)) {
+            foreach ($config->view as $k => $v) {
 
                 if (is_array($v)) {
-                    foreach ($v as $p1 => $p2) $view->$k($p1,$p2);
+                    foreach ($v as $p1 => $p2) {
+                        $view->$k($p1,$p2);
+                    }
                 } else {
                     $view->$k($v);
                 }
