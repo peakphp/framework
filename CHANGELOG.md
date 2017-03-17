@@ -1,8 +1,9 @@
 VERSION 2.1.1
 --------------
-Release Date: ?
+Release Date: 2017-03-17
 
  - added default process Peak\Bedrock\Application\Bootstrap\Session
+ - modified classes Peak\Bedrock\Application\Bootstrap to support Di
 
 VERSION 2.1.0
 --------------
