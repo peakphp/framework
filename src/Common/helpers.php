@@ -124,9 +124,11 @@ if (!function_exists('exceptionTrace')) {
     {
         $trace = debug_backtrace();
 
-        $content = '['.date('Y-m-d H:i:s')."]\n";
-        $content .= trim($exc->getMessage())."\n";
-        $content .= str_pad('', mb_strlen(trim($exc->getMessage())), '-')."\n";
+        $msg = trim($exc->getMessage());
+
+        $content = '['.date('Y-m-d H:i:s')."] ".get_class($exc)."\n";
+        $content .= $msg."\n";
+        $content .= str_pad('', mb_strlen($msg), '-')."\n";
         $content .= str_replace('#', "#", $exc->getTraceAsString());
 
         return $content;
