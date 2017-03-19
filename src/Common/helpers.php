@@ -110,3 +110,55 @@ if (!function_exists('phpinput')) {
         return \Peak\Common\Collection::make($post);
     }
 }
+
+/**
+ * exceptionTrace()
+ */
+if (!function_exists('exceptionTrace')) {
+    /**
+     * Retreive a more comprehensive exception debug backtrace
+     *
+     * @param  \Exception $exc
+     */
+    function exceptionTrace(\Exception $exc)
+    {
+        $trace = debug_backtrace();
+
+        $content = '['.date('Y-m-d H:i:s')."]\n";
+        $content .= trim($exc->getMessage())."\n";
+        $content .= str_pad('', mb_strlen(trim($exc->getMessage())), '-')."\n";
+        $content .= str_replace('#', "#", $exc->getTraceAsString());
+
+        return $content;
+    }
+}
+
+/**
+ * printExceptionTrace()
+ */
+if (!function_exists('printExceptionTrace')) {
+    /**
+     * Print exceptionTrace
+     * @see exceptionTrace()
+     */
+    function printExceptionTrace(\Exception $exc)
+    {
+        print_r(exceptionTrace($exc));
+    }
+}
+
+/**
+ * printHtmlExceptionTrace()
+ */
+if (!function_exists('printHtmlExceptionTrace')) {
+    /**
+     * Print exceptionTrace in html pre block
+     * @see exceptionTrace()
+     */
+    function printHtmlExceptionTrace(\Exception $exc)
+    {
+        echo '<pre>';
+        print_r(exceptionTrace($exc));
+        echo '</pre>';
+    }
+}
