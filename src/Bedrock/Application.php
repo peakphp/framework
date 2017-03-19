@@ -15,7 +15,7 @@ class Application
     /**
      * Framework version
      */
-    const VERSION = '2.1.1';
+    const VERSION = '2.1.2';
 
     /**
      * Container instance
