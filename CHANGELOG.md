@@ -1,9 +1,15 @@
+VERSION 2.1.2
+--------------
+Release Date: ?
+
+ - added HHVM test to Travis CI build
+
 VERSION 2.1.1
 --------------
 Release Date: 2017-03-17
 
  - added default process Peak\Bedrock\Application\Bootstrap\Session
- - modified classes Peak\Bedrock\Application\Bootstrap to support Di
+ - modified classes in Peak\Bedrock\Application\Bootstrap to support Di
 
 VERSION 2.1.0
 --------------
