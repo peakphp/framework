@@ -75,7 +75,8 @@ class Exception extends \Exception
     }
 
     /**
-     * Get debug trace of current exception @deprecated
+     * @deprecated
+     * Get debug trace of current exception 
      *
      * @return string
      */
@@ -92,6 +93,7 @@ class Exception extends \Exception
     }
 
     /**
+     * @deprecated
      * Print the debug trace
      */
     public function printDebugTrace()
@@ -100,6 +102,7 @@ class Exception extends \Exception
     }
 
     /**
+     * @deprecated
      * Get exception element trigger trace
      *
      * @return array
@@ -135,11 +138,17 @@ class Exception extends \Exception
         return $frame;
     }
     
+    /**
+     * @deprecated
+     */
     public function getErrkey()
     {
         return $this->errkey;
     }
 
+    /**
+     * @deprecated
+     */
     public function getTime()
     {
         return date('Y-m-d H:i:s');
