@@ -35,13 +35,8 @@ class ExceptionLogger
      */
     protected function log()
     {
-        $content = $this->exception->getMessage();
-
-        if ($this->exception instanceof \Peak\Exception) {
-            $content = $this->exception->getDebugTrace();
-        }
-
-        $content = date('Y-m-d H:i:s')."\n".strip_tags($content)."\n\n";
+        $content = exceptionTrace($this->exception);
+        $content = strip_tags($content)."\n\n";
 
         file_put_contents($this->filepath, $content, FILE_APPEND);
     }
