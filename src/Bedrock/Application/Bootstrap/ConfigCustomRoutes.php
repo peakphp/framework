@@ -5,9 +5,10 @@ namespace Peak\Bedrock\Application\Bootstrap;
 use Peak\Bedrock\Application\Config;
 use Peak\Bedrock\Application\Routing;
 use Peak\Common\Collection;
-use Peak\Exception;
+use Peak\Common\DataException;
 use Peak\Routing\Request;
 use Peak\Routing\CustomRoute;
+
 
 /**
  * Application Bootstrap Customer routes
@@ -46,10 +47,10 @@ class ConfigCustomRoutes
                             (isset($ctrl_part[1]) ? $ctrl_part[1] : '') // action
                         );
                     } else {
-                        throw new Exception('ERR_CUSTOM', 'Invalid routing expression');
+                        throw new DataException('Invalid routing expression in your application config', $r);
                     }
                 } else {
-                    throw new Exception('ERR_CUSTOM', 'Invalid routing in your application config');
+                    throw new DataException('Invalid routing in your application config', $r);
                 }
             }
         }
