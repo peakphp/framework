@@ -2,10 +2,11 @@ VERSION 2.1.2
 --------------
 Release Date: ?
 
- - marked Peak\Exception as deprecated
+ - deleted deprecated Peak\Exception
+ - updated exception dependency of many classes
  - added Peak\Common\DataException
- - added HHVM test to Travis CI build
  - moved framework version number from Peak\Bedrock\Application to Peak\Bedrock\Application\Kernel
+ - added HHVM test to Travis CI build
 
 VERSION 2.1.1
 --------------
