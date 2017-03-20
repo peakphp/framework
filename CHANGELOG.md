@@ -5,6 +5,7 @@ Release Date: ?
  - marked Peak\Exception as deprecated
  - added Peak\Common\DataException
  - added HHVM test to Travis CI build
+ - moved framework version number from Peak\Bedrock\Application to Peak\Bedrock\Application\Kernel
 
 VERSION 2.1.1
 --------------
