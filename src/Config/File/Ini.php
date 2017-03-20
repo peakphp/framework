@@ -2,7 +2,7 @@
 
 namespace Peak\Config\File;
 
-use Peak\Exception;
+use \Exception;
 use Peak\Config\DotNotation;
 
 /**
@@ -39,7 +39,7 @@ class Ini extends DotNotation
     public function loadFile($file, $process_sections = false, $section_name = null)
     {
         if (!file_exists($file)) {
-            throw new Exception('ERR_CUSTOM', __CLASS__.' has tried to load non-existent ini file');
+            throw new Exception(__CLASS__.': file "'.$file.'" not found');
         }
 
         $ini = @parse_ini_file($file, $process_sections);
@@ -50,7 +50,7 @@ class Ini extends DotNotation
         if ((version_compare(PHP_VERSION, '5.2.7') >= 0) && ($ini == false)) {
             //check if the file just empty
             if (trim(file_get_contents($file)) !== '') {
-                throw new Exception('ERR_CUSTOM', __CLASS__.': syntax error(s) in your configuration file');
+                throw new Exception(__CLASS__.': syntax error(s) in your configuration file');
             }
         }
         
@@ -115,7 +115,7 @@ class Ini extends DotNotation
                 if (isset($this->items[$section_name])) {
                     $this->items = $this->items[$section_name];
                 } else {
-                    throw new Exception('ERR_CUSTOM', __CLASS__.': Section ' . $section_name . ' not found in the ini file');
+                    throw new Exception(__CLASS__.': Section ' . $section_name . ' not found in the ini file');
                 }
             }
         }
@@ -145,7 +145,7 @@ class Ini extends DotNotation
 
             // check if the extended section exists
             if (!isset($this->items[$ext_source])) {
-                throw new Exception('ERR_CUSTOM', __CLASS__.': Unable to extend section ' . $ext_source . ', section not found');
+                throw new Exception(__CLASS__.': Unable to extend section ' . $ext_source . ', section not found');
             }
 
             // process section contents

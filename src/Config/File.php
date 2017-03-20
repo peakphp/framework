@@ -2,7 +2,7 @@
 
 namespace Peak\Config;
 
-use Peak\Exception;
+use \Exception;
 use Peak\Config\DotNotation;
 
 class File extends DotNotation
@@ -28,17 +28,17 @@ class File extends DotNotation
     public function loadFile($file)
     {
         if (pathinfo($file, PATHINFO_EXTENSION) !== 'php') {
-            throw new Exception('ERR_CUSTOM', basename($file).' is not a php file');
+            throw new Exception(__CLASS__.': '.basename($file).' is not a php file');
         }
 
         if (!file_exists($file)) {
-            throw new Exception('ERR_CUSTOM', $file.' not found');
+            throw new Exception(__CLASS__.': '.$file.' not found');
         }
 
         $vars = include $file;
 
         if (!is_array($vars)) {
-            throw new Exception('ERR_CUSTOM', $file.' should return an array');
+            throw new Exception(__CLASS__.': '.$file.' should return an array');
         }
 
         $this->items = $vars;
@@ -55,7 +55,7 @@ class File extends DotNotation
         if (isset($file)) $this->file = $file;
 
         if (file_exists($this->file) && !is_writable($this->file)) {
-            throw new Exception('ERR_CUSTOM', $this->file.' is not writable');
+            throw new Exception(__CLASS__.': '.$this->file.' is not writable');
         }
 
         file_put_contents($this->file, '<?php return ' . var_export($this->items, true) . ';');

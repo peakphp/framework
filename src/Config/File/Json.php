@@ -2,7 +2,7 @@
 
 namespace Peak\Config\File;
 
-use Peak\Exception;
+use \Exception;
 use Peak\Config\DotNotation;
 
 /**
@@ -46,7 +46,7 @@ class Json extends DotNotation
     public function loadFile($file)
     {
         if (!file_exists($file)) {
-            throw new Exception('ERR_CUSTOM', __CLASS__.' has tried to load non-existent json file');
+            throw new Exception(__CLASS__.': file "'.$file.'" not found');
         } else {
             $this->_loaded_file = $file;
             $content = file_get_contents($file);
@@ -82,7 +82,7 @@ class Json extends DotNotation
     public function loadUrl($url, $post_data = null)
     {
         if (!function_exists('curl_init')) {
-            throw new Exception('ERR_CUSTOM', __CLASS__.'::loadUrl() need CURL php extension');
+            throw new Exception(__CLASS__.'::loadUrl() need CURL php extension');
         }
 
         $ch = curl_init();
@@ -138,7 +138,7 @@ class Json extends DotNotation
             }
             
             if (isset($e)) {
-                throw new Exception('ERR_CUSTOM', __CLASS__.': '.$e);
+                throw new Exception(__CLASS__.': '.$e);
             }
         }
     }
@@ -169,7 +169,7 @@ class Json extends DotNotation
             if (!empty($this->_loaded_file)) {
                 $filepath = $this->_loaded_file;
             } else {
-                throw new Exception('ERR_CUSTOM', __CLASS__.': No file specified for export');
+                throw new Exception(__CLASS__.': No file specified for export');
             }
         }
 
@@ -177,7 +177,7 @@ class Json extends DotNotation
 
         $result = file_put_contents($filepath, json_encode($data));
         if ($result === false) {
-            throw new Exception('ERR_CUSTOM', __CLASS__.': Fail to write file: '.$filepath);
+            throw new Exception(__CLASS__.': Fail to write file: '.$filepath);
         }
     }
 }

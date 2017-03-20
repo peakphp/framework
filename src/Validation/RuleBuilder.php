@@ -2,7 +2,7 @@
 
 namespace Peak\Validation;
 
-use Peak\Exception;
+use \Exception;
 
 /**
  * Rule builder
@@ -152,7 +152,7 @@ class RuleBuilder
         }
 
         if (!class_exists($rulename)) {
-            throw new Exception('ERR_CUSTOM', 'Rule '.$this->name.' not found');
+            throw new Exception('Rule "'.$this->name.'" not found');
         }
 
         return new $rulename($this->options, $this->flags, $this->context);
