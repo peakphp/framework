@@ -2,10 +2,10 @@
 
 namespace Peak\Bedrock\Application;
 
-use Peak\Exception;
 use Peak\Bedrock\Application\Config;
 use Peak\Bedrock\Application\Config\FileLoader;
 use Peak\Bedrock\Application\Config\Environment;
+use Peak\Common\DataException;
 
 class ConfigResolver
 {
@@ -19,8 +19,8 @@ class ConfigResolver
         'conf' => 'config.php', //app config file relative to path.app config
         'name' => 'peakapp',    //default application name
         'path' => [             //paths
-            'public' => '',
-            'app'    => '',
+            'public'  => '',
+            'app'     => '',
             'apptree' =>  []
         ],
     ];
@@ -73,9 +73,14 @@ class ConfigResolver
      */
     private function getConfigFilepath()
     {
-        $path = str_replace('\\', '/',
-            realpath($this->app_config->get('path.app').'/'.$this->app_config->get('conf'))
-        );
+        $file = $this->app_config->get('path.app').'/'.$this->app_config->get('conf');
+        $realpath = realpath($file);
+
+        if ($realpath === false) {
+            throw new DataException('Application configuration file not found', $file);
+        }
+
+        $path = str_replace('\\', '/', $realpath);            
 
         return $path;
     }
@@ -103,20 +108,12 @@ class ConfigResolver
      */
     private function validate()
     {
-        if (!$this->app_config->have('path.public')) {
-            throw new Exception('ERR_CORE_INIT_CONST_MISSING', ['Public root','PUBLIC_ROOT']);
+        if (!file_exists($this->app_config->get('path.public'))) {
+            throw new DataException('Public path not found', $this->app_config->get('path.public'));
         }
 
-        if (!$this->app_config->have('path.app')) {
-            throw new Exception('ERR_CORE_INIT_CONST_MISSING', ['Application root','APPLICATION_ROOT']);
-        }
-
-        if (!$this->app_config->have('env')) {
-            throw new Exception('ERR_APP_ENV_MISSING');
-        }
-
-        if (!$this->app_config->have('conf')) {
-            throw new Exception('ERR_APP_CONF_MISSING');
+        if (!file_exists($this->app_config->get('path.app'))) {
+            throw new DataException('Application path not found', $this->app_config->get('path.app'));
         }
     }
 }
