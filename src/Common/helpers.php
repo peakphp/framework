@@ -128,7 +128,13 @@ if (!function_exists('exceptionTrace')) {
 
         $content = '['.date('Y-m-d H:i:s')."] ".get_class($exc)."\n";
         $content .= $msg."\n";
-        $content .= str_pad('', mb_strlen($msg), '-')."\n";
+
+        if ($exc instanceof \Peak\Common\DataException) {
+            $content .= $exc->dumpData();
+            $content .= str_pad('', mb_strlen($exc->dumpData()), '-')."\n";
+        } else {
+            $content .= str_pad('', mb_strlen($msg), '-')."\n";
+        }
         $content .= str_replace('#', "#", $exc->getTraceAsString());
 
         return $content;
@@ -162,5 +168,18 @@ if (!function_exists('printHtmlExceptionTrace')) {
         echo '<pre>';
         print_r(exceptionTrace($exc));
         echo '</pre>';
+    }
+}
+
+/**
+ * shortClassName()
+ */
+if (!function_exists('shortClassName')) {
+    /**
+     * Get class name of an object without the namespace
+     */
+    function shortClassName(Object $obj)
+    {
+        return ((new \ReflectionClass($obj))->getShortName());
     }
 }
