@@ -2,7 +2,7 @@
 
 namespace Peak\BedRock\Application\Config;
 
-use Peak\Exception;
+use \Exception;
 
 class FileLoader
 {
@@ -29,8 +29,10 @@ class FileLoader
      */
     protected function loadConfigFile($file)
     {
+        $extension = pathinfo($file, PATHINFO_EXTENSION);
+
         //load configuration object according to the file extension
-        switch (pathinfo($file, PATHINFO_EXTENSION)) {
+        switch ($extension) {
 
             case 'php':
                 $conf = new \Peak\Config\File($file);
@@ -42,7 +44,7 @@ class FileLoader
                 $conf = new \Peak\Config\File\Json($file, true);
                 break;
             default:
-                throw new Exception('ERR_CONFIG_FILE');
+                throw new Exception('Application configuration file format "'.$extension.'" is not supported');
                 break;
         }
 
