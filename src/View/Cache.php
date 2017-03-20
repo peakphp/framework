@@ -7,7 +7,7 @@ use Peak\View;
 
 /**
  * View Cache
- * 
+ *
  * This object manage view cache and it is encapsuled inside Peak\View\Render
  */
 class Cache
@@ -103,8 +103,9 @@ class Cache
                     $kernel->front->controller->action
                 );
             }
+        } else {
+            $this->genCacheId(null, $id);
         }
-        else $this->genCacheId(null, $id);
 
         $filepath = $this->getCacheFile();
 
@@ -126,12 +127,20 @@ class Cache
      */
     public function genCacheId($path = null, $file = null, $return = false)
     {
-        //use current $this->_script_file and _script_path if no path/file scpecified
-        if (!isset($path) && !isset($file)) $key = $this->getScriptPath().$this->getScriptFile();
-        else $key = $path.$file;
+        $key = $path.$file;
 
-        if (!$return) $this->_cache_id = hash('md5', $key);
-        else return hash('md5', $key);
+        //use current $this->_script_file and _script_path if no path/file scpecified
+        if (!isset($path) && !isset($file)) {
+            $key = $this->getScriptPath().$this->getScriptFile();
+        }
+
+        $cache_id = hash('md5', $key);
+
+        if ($return) {
+            return $cache_id;
+        }
+
+        $this->_cache_id = $cache_id;
     }
 
     /**
@@ -152,7 +161,9 @@ class Cache
      */
     public function enableStrip($status)
     {
-        if (is_bool($status)) $this->_cache_strip = $status;
+        if (is_bool($status)) {
+            $this->_cache_strip = $status;
+        }
     }
 
     /**
@@ -166,7 +177,9 @@ class Cache
     public function isValidBlock($id, $expiration)
     {
         $this->enable($expiration);
-        if ($this->isValid($id)) return true;
+        if ($this->isValid($id)) {
+            return true;
+        }
         
         ob_start();
         return false;
@@ -196,10 +209,15 @@ class Cache
      */
     public function deleteCache($id = null)
     {
-        if (!isset($id)) $this->genCacheId();
-        else $this->genCacheId('', $id);
+        if (!isset($id)) {
+            $this->genCacheId();
+        } else {
+            $this->genCacheId('', $id);
+        }
 
         $file = $this->getCacheFile();
-        if (file_exists($file)) unlink($file);
+        if (file_exists($file)) {
+            unlink($file);
+        }
     }
 }
