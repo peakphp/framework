@@ -4,8 +4,6 @@ namespace Peak\Bedrock\Application;
 
 use Peak\Bedrock\Application;
 use Peak\Common\Collection;
-
-use Peak\Exception;
 use Peak\Routing\Request;
 use Peak\Routing\RequestServerURI;
 use Peak\Routing\RequestResolver;

@@ -2,7 +2,7 @@
 
 namespace Peak\Bedrock\Application\Config;
 
-use Peak\Exception;
+use \Exception;
 use Peak\Common\Collection;
 use Peak\Bedrock\Application\Config\AppTree;
 
@@ -81,18 +81,12 @@ class Environment
     {
         // default env aka all
         if (!$this->file_config->have('all')) {
-            throw new Exception(
-                'ERR_CUSTOM',
-                'Your application doesn\'t have default "all" configuration'
-            );
+            throw new Exception('Your application doesn\'t have default "all" configuration');
         }
 
         // current env
         if (!$this->file_config->have($this->app_config->env)) {
-            throw new Exception(
-                'ERR_CUSTOM',
-                'Your application doesn\'t have "'.$this->app_config->env.'" configuration'
-            );
+            throw new Exception('Your application doesn\'t have "'.$this->app_config->env.'" configuration');
         }
     }
 }

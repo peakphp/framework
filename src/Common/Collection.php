@@ -7,6 +7,7 @@ use ArrayAccess;
 use ArrayIterator;
 use JsonSerializable;
 use IteratorAggregate;
+use \Exception;
 
 /**
  * Simple collection object
@@ -82,7 +83,7 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
             return call_user_func('array_'.$func, $this->items, ...$argv);
         }
         if (!is_callable($func) || substr($func, 0, 6) !== 'array_') {
-            throw new \Exception(__CLASS__.': method '.$func.' is unknown');
+            throw new Exception(__CLASS__.': method '.$func.' is unknown');
         }
         return call_user_func($func, $this->items, ...$argv);
     }
