@@ -14,6 +14,11 @@ use Peak\Bedrock\Controller\Front;
 class Kernel
 {
     /**
+     * Framework version
+     */
+    const VERSION = '2.1.2';
+    
+    /**
      * app bootstrap object if exists
      * @var Application\Bootstrap
      */

@@ -14,11 +14,6 @@ use \Exception;
 class Application
 {
     /**
-     * Framework version
-     */
-    const VERSION = '2.1.2';
-
-    /**
      * Container instance
      * @var ContainerInterface
      */
