@@ -6,6 +6,7 @@ use Peak\Di\ContainerInterface;
 use Peak\Bedrock\Application\ConfigResolver;
 use Peak\Bedrock\Application\Kernel;
 use Peak\Bedrock\Application\Routing;
+use \Exception;
 
 /**
  * Application wrapper
@@ -86,11 +87,11 @@ class Application
     protected static function containerCheck($instance = null)
     {
         if (!(self::$container instanceof ContainerInterface)) {
-            throw new \Exception(__CLASS__.' as no container');
+            throw new Exception(__CLASS__.' as no container');
         }
         if (isset($instance)) {
             if (!self::$container->hasInstance($instance)) {
-                throw new \Exception(__CLASS__.' container does not have '.$instance);
+                throw new Exception(__CLASS__.' container does not have '.$instance);
             }
         }
 
