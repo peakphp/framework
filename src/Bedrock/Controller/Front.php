@@ -2,8 +2,8 @@
 
 namespace Peak\Bedrock\Controller;
 
+use \Exception;
 use Peak\Bedrock\Application;
-use Peak\Exception;
 use Peak\Bedrock\Application\Module;
 use Peak\Bedrock\Controller\Action;
 use Peak\Routing\RouteBuilder;
@@ -153,7 +153,7 @@ class Front
             if (($this->allow_internal_controllers === true) && (class_exists($internal_ctrl_name))) {
                 $this->controller = new $internal_ctrl_name();
             } else {
-                throw new Exception('ERR_CTRL_NOT_FOUND', $this->route->controller);
+                throw new Exception('Application controller '.$this->route->controller.' not found');
             }
         } else {
             $this->controller = Application::instantiate($ctrl_name);

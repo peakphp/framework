@@ -2,7 +2,6 @@
 
 namespace Peak\Config;
 
-use Peak\Exception;
 use Peak\Config\DotNotation;
 
 /**

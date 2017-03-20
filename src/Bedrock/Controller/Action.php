@@ -2,10 +2,10 @@
 
 namespace Peak\Bedrock\Controller;
 
+use \Exception;
 use Peak\Bedrock\Application;
 use Peak\Bedrock\Application\Container;
 use Peak\Common\Collection;
-use Peak\Exception;
 use Peak\Routing\Route;
 use Peak\View;
 
@@ -150,7 +150,7 @@ abstract class Action
     public function dispatchAction()
     {
         if ($this->isAction($this->action) === false) {
-            throw new Exception('ERR_CTRL_ACTION_NOT_FOUND', [$this->action, $this->getName()]);
+            throw new Exception('Controller action '.$this->action.' not found in '.$this->getName());
         }
 
         $this->file = strtolower($this->getTitle().'.'.substr($this->action, strlen($this->action_prefix)).'.php');
@@ -193,7 +193,7 @@ abstract class Action
 
         //if we got errors(param missing), we throw an exception
         if (!empty($errors)) {
-            throw new Exception('ERR_CTRL_ACTION_PARAMS_MISSING', [$action_name, $this->getName()]);
+            throw new Exception(implode(', ', $errors).' argument(s) missing for action '.$action_name.' in '.$this->getName());
         }
         
         //call action with args

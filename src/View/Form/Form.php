@@ -2,8 +2,8 @@
 
 namespace Peak\View\Form;
 
+use \Exception;
 use Peak\Bedrock\Application;
-use Peak\Exception;
 use Peak\View;
 
 /**
