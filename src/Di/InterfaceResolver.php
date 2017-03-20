@@ -2,7 +2,7 @@
 
 namespace Peak\Di;
 
-use Peak\Exception;
+use \Exception;
 use Peak\Di\Container;
 
 /**

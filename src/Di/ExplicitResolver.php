@@ -2,10 +2,8 @@
 
 namespace Peak\Di;
 
-use Peak\Di\Container;
-use Peak\Exception;
-
 use Closure;
+use Peak\Di\Container;
 
 /**
  * Explicit Dependency declaration Resolver

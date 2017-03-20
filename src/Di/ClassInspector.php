@@ -2,6 +2,7 @@
 
 namespace Peak\Di;
 
+use \Exception;
 use \ReflectionClass;
 use \ReflectionException;
 
@@ -45,7 +46,7 @@ class ClassInspector
                 }
             }
         } catch (ReflectionException $e) {
-            throw new \Exception('Can\'t resolve classname '.$class);
+            throw new Exception('Can\'t resolve classname '.$class);
         }
 
         return $dependencies;

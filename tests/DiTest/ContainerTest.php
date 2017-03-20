@@ -283,7 +283,7 @@ class ContainerTest extends TestCase
         }
 
         $this->assertTrue(isset($ename));
-        $this->assertTrue($ename === 'Peak\Exception');
+        $this->assertTrue($ename === 'Exception');
     }
 
     /**

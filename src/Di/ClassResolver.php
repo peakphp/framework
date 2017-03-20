@@ -2,13 +2,13 @@
 
 namespace Peak\Di;
 
-use Peak\Exception;
+use Closure;
+use \Exception;
 use Peak\Di\Container;
 use Peak\Di\ClassInspector;
 use Peak\Di\InterfaceResolver;
 use Peak\Di\ExplicitResolver;
 
-use Closure;
 
 /**
  * Class Dependencies Resolver
@@ -59,7 +59,7 @@ class ClassResolver
         foreach ($dependencies as $key => $d) {
 
             if (isset($d['error'])) {
-                throw new \Exception($d['error']);
+                throw new Exception($d['error']);
             }
 
             // its a class or an interface
