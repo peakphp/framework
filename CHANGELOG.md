@@ -2,7 +2,7 @@ VERSION 2.1.2
 --------------
 Release Date: ?
 
- - maked Peak\Exception as deprecated
+ - marked Peak\Exception as deprecated
  - added Peak\Common\DataException
  - added HHVM test to Travis CI build
 
