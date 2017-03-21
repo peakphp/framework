@@ -1,3 +1,9 @@
+VERSION 2.1.3
+--------------
+Release Date: 2017-03-20
+
+ - Hotfix for Exception in Peak\View
+
 VERSION 2.1.2
 --------------
 Release Date: 2017-03-20
