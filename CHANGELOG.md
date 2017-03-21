@@ -1,3 +1,9 @@
+VERSION 2.1.4
+--------------
+Release Date: 2017-03-21
+
+ - fixed container wrong classname in Peak\View\Render\Layouts::render() and Peak\View\Render\Partials::render()
+
 VERSION 2.1.3
 --------------
 Release Date: 2017-03-20
