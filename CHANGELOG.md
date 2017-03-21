@@ -1,6 +1,6 @@
 VERSION 2.1.2
 --------------
-Release Date: ?
+Release Date: 2017-03-20
 
  - deleted deprecated Peak\Exception
  - updated exception dependency of many classes
