@@ -72,7 +72,7 @@ class Layouts extends Render
         // throw the most reliable exception depending on submitted arguments to this method
         if (!file_exists($filepath)) {         
             if (isset($is_scripts_path)) {
-                $kernel = Application::get('Peak\Bedrock\Controller\Front');
+                $kernel = Application::kernel();
                 $filepath = $kernel->front->controller->getTitle() .'/'. basename($filepath);
                 throw new Exception('View script file '.basename($filepath).' not found');
             } else {
