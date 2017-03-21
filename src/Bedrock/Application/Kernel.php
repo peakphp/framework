@@ -2,7 +2,6 @@
 
 namespace Peak\Bedrock\Application;
 
-// use Peak\Common\Collection;
 use Peak\Bedrock\Application\Bootstrapper;
 use Peak\Bedrock\Application\Config;
 use Peak\Bedrock\Application\Routing;
@@ -16,7 +15,7 @@ class Kernel
     /**
      * Framework version
      */
-    const VERSION = '2.1.3';
+    const VERSION = '2.1.4';
     
     /**
      * app bootstrap object if exists
