@@ -2,9 +2,9 @@
 
 namespace Peak;
 
+use \Exception;
 use Peak\Bedrock\Application;
 use Peak\Config\File\Ini;
-use Peak\Expcetion;
 use Peak\View\Helpers;
 use Peak\View\Header;
 
@@ -211,7 +211,7 @@ class View
             $engine_name = strip_tags(ucfirst($engine_name));
             $engine_class = 'Peak\View\Render\\'.$engine_name;
             if (!class_exists($engine_class)) {
-                throw new Exception('ERR_VIEW_ENGINE_NOT_FOUND', $engine_name);
+                throw new Exception('View rendering engine '.$engine_name.' not found');
             }
             $this->_engine = Application::instantiate($engine_class);
         }
@@ -287,7 +287,7 @@ class View
 
             $this->engine()->render($file, $path);
         } else {
-            throw new Exception('ERR_VIEW_ENGINE_NOT_SET');
+            throw new Exception('View rendering engine not set');
         }
     }
 
