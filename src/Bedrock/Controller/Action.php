@@ -58,7 +58,8 @@ abstract class Action
 
     /**
      * Constructor
-     * @param View $view [description]
+     *
+     * @param View $view
      */
     public function __construct(View $view)
     {
