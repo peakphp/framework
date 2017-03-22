@@ -368,4 +368,24 @@ class ContainerTest extends TestCase
         $instances = $container->getInstances();
         $this->assertTrue(count($instances) == 2);
     }
+
+    function testMethodCall()
+    {
+        $container = new \Peak\Di\Container();
+
+        $testdi = $container->instantiate('TestDi1', [
+            'value',
+            [12],
+            999
+        ]);
+
+        $arguments = ['hello'];
+        $explicits = [];
+
+        $result = $container->call([$testdi, 'methodA'], $arguments, $explicits);
+
+        //print_r($result);
+
+        $this->assertTrue($result === $arguments[0]);
+    }
 }

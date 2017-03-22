@@ -20,6 +20,12 @@ class TestDi1
         $this->arg2 = $arg2;
         $this->arg3 = $arg3;
     }
+
+    function methodA(Peak\Common\Collection $col, $arg1)
+    {
+        //print_r($col);
+        return $arg1;
+    }
 }
 
 class TestDi2
