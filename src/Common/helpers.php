@@ -178,7 +178,7 @@ if (!function_exists('shortClassName')) {
     /**
      * Get class name of an object without the namespace
      */
-    function shortClassName(Object $obj)
+    function shortClassName($obj)
     {
         return ((new \ReflectionClass($obj))->getShortName());
     }
