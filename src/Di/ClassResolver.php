@@ -51,7 +51,16 @@ class ClassResolver
      */
     public function resolve($class, Container $container, array $args = [], $explicit = [])
     {
-        $dependencies = $this->inspector->inspect($class);
+        $method = '__construct';
+
+        if (is_array($class)) {
+            if (count($class) == 2) {
+                $method = $class[1];
+                $class  = $class[0];
+            }
+        }
+
+        $dependencies = $this->inspector->inspect($class, $method);
         $class_args   = [];
         $class_count  = 0;
         $i            = 0;
@@ -102,5 +111,5 @@ class ClassResolver
         }
 
         return $class_args;
-    } 
+    }
 }
