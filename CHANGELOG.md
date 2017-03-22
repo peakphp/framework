@@ -4,6 +4,7 @@ Release Date: ?
 
 - added Peak\Di\Container::call() for resolving a class method dependencies
 - updated Peak\Di\ClassInspector and Peak\Di\ClassResolver to support Peak\Di\Container::call()
+- fixed bug with shortClassName() in Peak\Common\helpers.php by removing Object type
 
 VERSION 2.1.4
 --------------
