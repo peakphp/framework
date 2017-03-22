@@ -7,25 +7,27 @@ use \ReflectionClass;
 use \ReflectionException;
 
 /**
- * Dependency Class Constructor Inspector
+ * Dependency Class Inspector
  */
 class ClassInspector
 {
     /**
-     * Get constructor class dependencies
-     * 
+     * Get class dependencies method.
+     * By default, method is the constructor itself
+     *
      * @param  string $class
+     * @param  string $method
      * @return object
      */
-    public function inspect($class)
+    public function inspect($class, $method = '__construct')
     {
         $dependencies = [];
 
         try {
             $r = new ReflectionClass($class);
 
-            if ($r->hasMethod('__construct')) {
-                $rp = $r->getMethod('__construct')->getParameters();
+            if ($r->hasMethod($method)) {
+                $rp = $r->getMethod($method)->getParameters();
 
                 foreach ($rp as $p) {
                     $prop = $p->name;
@@ -46,7 +48,7 @@ class ClassInspector
                 }
             }
         } catch (ReflectionException $e) {
-            throw new Exception('Can\'t resolve classname '.$class);
+            throw new Exception('Can\'t resolve classname '.$class.'::'.$method);
         }
 
         return $dependencies;
