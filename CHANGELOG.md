@@ -1,6 +1,6 @@
 VERSION 2.1.5
 --------------
-Release Date: ?
+Release Date: 2017-03-22
 
 - added Peak\Di\Container::call() for resolving a class method dependencies
 - updated Peak\Di\ClassInspector and Peak\Di\ClassResolver to support Peak\Di\Container::call()
