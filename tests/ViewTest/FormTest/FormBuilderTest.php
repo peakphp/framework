@@ -1,8 +1,8 @@
 <?php
 use PHPUnit\Framework\TestCase;
 
-use Peak\View\Form\FormBuilder;
-use Peak\View\Form\FormValidation;
+use Peak\Bedrock\View\Form\FormBuilder;
+use Peak\Bedrock\View\Form\FormValidation;
 
 include __DIR__.'/../../fixtures/view/form/FormBuilderExample.php';
 

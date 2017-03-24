@@ -1,6 +1,6 @@
 <?php
 
-use Peak\View\Form\FormBuilder;
+use Peak\Bedrock\View\Form\FormBuilder;
 
 class FormBuilderExample extends FormBuilder
 {
@@ -11,6 +11,7 @@ class FormBuilderExample extends FormBuilder
             'settings' => [
                 'attrs'   => [
                     'type' => 'hidden',
+                    'test' => 123123
                 ],
             ],
             'validation' => [

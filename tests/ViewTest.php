@@ -2,7 +2,7 @@
 use PHPUnit\Framework\TestCase;
 
 /**
- * @package    Peak\View
+ * @package    Peak\Bedrock\View
  */
 class ViewTest extends TestCase
 {
@@ -11,7 +11,7 @@ class ViewTest extends TestCase
 	 */ 
 	function setUp()
 	{
-		$this->peakview = new Peak\View();
+		$this->peakview = new Peak\Bedrock\View();
 	}
 	
 	/**
@@ -27,8 +27,8 @@ class ViewTest extends TestCase
 	 */
 	function testCreateInstance()
 	{
-		$view = new Peak\View();		
-		$this->assertInstanceOf('Peak\View', $view); 
+		$view = new Peak\Bedrock\View();		
+		$this->assertInstanceOf('Peak\Bedrock\View', $view); 
 	}
 	
 	/**
@@ -36,8 +36,8 @@ class ViewTest extends TestCase
 	 */
 	function testCreateInstanceWithArray()
 	{
-		$view = new Peak\View(array('test' => 'value'));		
-		$this->assertInstanceOf('Peak\View', $view);
+		$view = new Peak\Bedrock\View(array('test' => 'value'));		
+		$this->assertInstanceOf('Peak\Bedrock\View', $view);
 		
 		$vars = $view->getVars();		
 		$this->assertArrayHasKey('test', $vars);
@@ -149,7 +149,7 @@ class ViewTest extends TestCase
 		$this->assertTrue($name === null);
 
 		\Peak\Bedrock\Application::setContainer(new \Peak\Di\Container);
-		//\Peak\Bedrock\Application::instantiate('\Peak\View');
+		//\Peak\Bedrock\Application::instantiate('\Peak\Bedrock\View');
 
 		$this->peakview->engine('Layouts');
 
@@ -179,7 +179,7 @@ class ViewTest extends TestCase
 	 */
 	function testOnOffRender()
 	{
-		$view = new Peak\View();
+		$view = new Peak\Bedrock\View();
 		
 		$this->assertTrue($view->canRender());
 
