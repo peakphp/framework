@@ -1,3 +1,11 @@
+VERSION 2.2.0
+-------------
+Release Date: ?
+
+> Warning! Breaking changes with 2.1.x. 
+
+ - Moved Peak\View component to Peak\Bedrock\View
+
 VERSION 2.1.5
 --------------
 Release Date: 2017-03-22
