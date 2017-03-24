@@ -129,7 +129,6 @@ abstract class Element implements ElementInterface
             }
 
             // if (in_array($k, $this->attrs_to_translate)) {
-            //     if()
             //     $v = __($v);
             // }
 
