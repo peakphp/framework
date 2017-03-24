@@ -16,7 +16,6 @@ class RequestResolverTest extends TestCase
      */ 
     function setUp()
     {
-        //$this->peakview = new Peak\View();
     }
     
     /**
