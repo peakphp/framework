@@ -142,8 +142,8 @@ class Application
         // store Peak\Bedrock\Application\Routing
         $container->addInstance(new \Peak\Bedrock\Application\Routing);
 
-        // store Peak\View
-        $container->addInstance(new \Peak\View);
+        // store Peak\Bedrock\View
+        $container->addInstance(new \Peak\Bedrock\View);
         
         // instantiate and store app kernel
         $container->instantiateAndStore('\Peak\Bedrock\Application\Kernel'); 

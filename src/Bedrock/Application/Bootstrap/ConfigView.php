@@ -3,7 +3,7 @@
 namespace Peak\Bedrock\Application\Bootstrap;
 
 use Peak\Bedrock\Application\Config;
-use Peak\View;
+use Peak\Bedrock\View;
 
 /**
  * Application Bootstrap View
@@ -14,7 +14,7 @@ class ConfigView
      * Configurate View based on Application config
      *
      * @param Peak\Bedrock\Application\Config $config
-     * @param Peak\View                       $view
+     * @param Peak\Bedrock\View               $view
      */
     public function __construct(Config $config, View $view = null)
     {

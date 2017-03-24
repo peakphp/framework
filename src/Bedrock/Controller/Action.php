@@ -7,7 +7,7 @@ use Peak\Bedrock\Application;
 use Peak\Bedrock\Application\Container;
 use Peak\Common\Collection;
 use Peak\Routing\Route;
-use Peak\View;
+use Peak\Bedrock\View;
 
 /**
  * Peak abstract action controller
