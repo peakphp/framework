@@ -69,8 +69,7 @@ class Database
 
             // store the schema
             $this->schema = self::$capsule->schema($name);
-        }
-        catch(PDOException $e) {
+        } catch (PDOException $e) {
             throw new \Exception('Can\'t connect to database');
         }
     }
