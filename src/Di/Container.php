@@ -50,7 +50,7 @@ class Container implements ContainerInterface
     /**
      * Instantiate a class
      *
-     * The generated instance is not stored, but may use stored 
+     * The generated instance is not stored, but may use stored
      * instance(s) as dependency when needed
      *
      * @param  string $class     The class name to instanciate
@@ -59,7 +59,7 @@ class Container implements ContainerInterface
      *                           Required when you have multiple stored instances using the same interface name.
      *                           ex: ['myinterface' => 'myinstance3']
      *                           This support also custom closure
-     *                           ex: ['myinterface' => function() { 
+     *                           ex: ['myinterface' => function() {
      *                                   return new MyClass(); // myclass implement myinterface
      *                               }]
      * @return object
@@ -77,7 +77,7 @@ class Container implements ContainerInterface
      * Similar to instantiate(), it call a method on specified object
      * 
      * @param  array  $class   first element is object and second is method name string
-     * @param  array  $args    method arguments 
+     * @param  array  $args    method arguments
      * @param  array  $explict @see intantiates
      * @return mixed  the method call return if any
      */
@@ -173,8 +173,7 @@ class Container implements ContainerInterface
     /**
      * Add an object instance. Chainable
      *
-     * @param  string      $object
-     * @param  string|null $alias if set, instance will be stored under an alias
+     * @param  string $object
      */
     public function addInstance($object) 
     {
@@ -194,8 +193,8 @@ class Container implements ContainerInterface
     /**
      * Delete an instance if exists. Chainable.
      *
-     * @param  $name 
-     * @return $this      
+     * @param  $name
+     * @return $this
      */
     public function deleteInstance($name)
     {
@@ -206,7 +205,6 @@ class Container implements ContainerInterface
 
             //remove interface reference if exists
             foreach ($this->interfaces as $int => $classes) {
-
                 $key = array_search($name, $classes);
                 if ($key !== false) {
                     unset($classes[$key]);
@@ -220,21 +218,19 @@ class Container implements ContainerInterface
     /**
      * Catalogue also class interface when using addInstance
      *
-     * @param strign $name 
+     * @param strign $name
      * @param strign $class
      */
     protected function addInterface($name, $class)
     {
         if (!$this->hasInterface($name)) {
             $this->interfaces[$name] = $class;
-        }
-        else {
+        } else {
             $interface = $this->getInterface($name);
             if (is_array($interface)) {
                 $interface[] = $class;
                 $this->interfaces[$name] = $interface;
-            }
-            else {
+            } else {
                 $this->interfaces[$name] = [
                     $this->interfaces[$name],
                     $class
