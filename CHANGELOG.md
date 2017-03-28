@@ -4,7 +4,8 @@ Release Date: ?
 
 > Warning! Breaking changes with 2.1.x. 
 
- - Moved Peak\View component to Peak\Bedrock\View
+ - moved Peak\View component to Peak\Bedrock\View
+ - added alias notion to Peak\Di\Container
 
 VERSION 2.1.5
 --------------
