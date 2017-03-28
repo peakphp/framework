@@ -19,6 +19,12 @@ class Container implements ContainerInterface
     protected $instances;
 
     /**
+     * Classes namespace alias
+     * @var array
+     */
+    protected $aliases = [];
+
+    /**
      * Container object interfaces collection
      * @var Peak\Common\Collection
      */
@@ -122,6 +128,8 @@ class Container implements ContainerInterface
     {
         if ($this->hasInstance($name)) {
             return $this->instances[$name];
+        } elseif(isset($this->aliases[$name]) && $this->hasInstance($this->aliases[$name])) {
+            return $this->instances[$this->aliases[$name]];
         }
         return null;
     }
@@ -212,6 +220,19 @@ class Container implements ContainerInterface
                 }
             }
         }
+        return $this;
+    }
+
+    /**
+     * Add a class alias
+     *
+     * @param  string $name
+     * @param  string $class
+     * @return $this
+     */
+    public function addAlias($name, $class)
+    {
+        $this->aliases[$name] = $class;
         return $this;
     }
 
