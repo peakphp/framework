@@ -406,7 +406,7 @@ class ContainerTest extends TestCase
         $this->assertTrue($testdi instanceof TestDi1);
 
         //the alias way
-        $testdi = $container->getInstance('MyClassAlisas');
+        $testdi = $container->getInstance('MyClassAlias');
         $this->assertTrue($testdi instanceof TestDi1);
     }
 }
