@@ -328,14 +328,14 @@ class ContainerTest extends TestCase
         $container = new \Peak\Di\Container();
         $container->addInstance(new TestDi3());
 
-        $this->assertTrue($container->hasInstance('TestDi3'));
-        $this->assertFalse($container->hasInstance('UnknowClass'));
+        $this->assertTrue($container->has('TestDi3'));
+        $this->assertFalse($container->has('UnknowClass'));
 
-        $testdi = $container->getInstance('TestDi3');
+        $testdi = $container->get('TestDi3');
 
         $this->assertTrue($testdi instanceof TestDi3);
 
-        $testdi9999 = $container->getInstance('TestDi9999');
+        $testdi9999 = $container->get('TestDi9999');
         $this->assertTrue(is_null($testdi9999));
     }
 
@@ -347,11 +347,11 @@ class ContainerTest extends TestCase
         $container->addInstance(new TestDi7()); 
         $container->addInstance(new TestDi8());
 
-        $this->assertTrue($container->getInstance('TestDi7') !== null);
+        $this->assertTrue($container->get('TestDi7') !== null);
 
         $container->deleteInstance('TestDi8');
-        $this->assertTrue($container->getInstance('TestDi8') === null);
-        $this->assertTrue($container->getInstance('TestDi7') !== null);
+        $this->assertTrue($container->get('TestDi8') === null);
+        $this->assertTrue($container->get('TestDi7') !== null);
     }
 
     function testGetInts()
@@ -402,11 +402,11 @@ class ContainerTest extends TestCase
         ]);
 
         //the normal way
-        $testdi = $container->getInstance(TestDi1::class);
+        $testdi = $container->get(TestDi1::class);
         $this->assertTrue($testdi instanceof TestDi1);
 
         //the alias way
-        $testdi = $container->getInstance('MyClassAlias');
+        $testdi = $container->get('MyClassAlias');
         $this->assertTrue($testdi instanceof TestDi1);
     }
 }
