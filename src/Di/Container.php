@@ -113,7 +113,7 @@ class Container implements ContainerInterface
      *
      * @param  string $name
      */
-    public function hasInstance($name)
+    public function has($name)
     {
         return isset($this->instances->$name);
     }
@@ -124,11 +124,11 @@ class Container implements ContainerInterface
      * @param  string       $name
      * @return object|null
      */
-    public function getInstance($name)
+    public function get($name)
     {
-        if ($this->hasInstance($name)) {
+        if ($this->has($name)) {
             return $this->instances[$name];
-        } elseif(isset($this->aliases[$name]) && $this->hasInstance($this->aliases[$name])) {
+        } elseif(isset($this->aliases[$name]) && $this->has($this->aliases[$name])) {
             return $this->instances[$this->aliases[$name]];
         }
         return null;
@@ -206,7 +206,7 @@ class Container implements ContainerInterface
      */
     public function deleteInstance($name)
     {
-        if ($this->hasInstance($name)) {
+        if ($this->has($name)) {
 
             //remove instance
             unset($this->instances[$name]);
