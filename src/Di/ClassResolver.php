@@ -83,8 +83,8 @@ class ClassResolver
                     $class_args[] = $result;
                 }
                 // check if container has a stored instance
-                elseif ($container->hasInstance($name)) {
-                    $class_args[] = $container->getInstance($name);
+                elseif ($container->has($name)) {
+                    $class_args[] = $container->get($name);
                 }
                 else {
                     // otherwise check if we are

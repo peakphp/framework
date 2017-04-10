@@ -59,7 +59,7 @@ class Application
     public static function get($instance)
     {
         self::containerCheck($instance);
-        return self::$container->getInstance($instance);
+        return self::$container->get($instance);
     }
 
     /**

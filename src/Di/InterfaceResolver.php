@@ -28,10 +28,10 @@ class InterfaceResolver
                 if (empty($explicit) || !array_key_exists($interface, $explicit)) {
                     throw new Exception ('Dependecies for interface '.$interface.' is ambiguous. There is '.count($instance).' differents instances for this interface.');
                 }
-                return $container->getInstance($explicit[$interface]);
+                return $container->get($explicit[$interface]);
             }
             
-            return $container->getInstance($instance);
+            return $container->get($instance);
         }
         else {
             throw new Exception('Could not find an instance that implement interface '.$interface);

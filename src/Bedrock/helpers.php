@@ -91,9 +91,9 @@ if (!function_exists('session')) {
     function session($path = null, $value = null)
     {
         $container = \Peak\Bedrock\Application::container();
-        $sess = $container->getInstance('Peak\Config\Session');
+        $sess = $container->get('Peak\Config\Session');
 
-        if (!$container->hasInstance('Peak\Config\Session')) {
+        if (!$container->has('Peak\Config\Session')) {
             $sess = $container->instantiateAndStore('Peak\Config\Session');
         }
 
