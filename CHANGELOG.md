@@ -1,3 +1,13 @@
+VERSION 2.3.0
+-------------
+Release Date: ?
+
+> Warning! Breaking changes with 2.2.x. 
+
+ - renamed method getInstance() to get() in Peak\Di\Container
+ - renamed method hasInstance() to has() in Peak\Di\Container
+ - added method get() and has() to Peak\Di\ContainerInterface
+
 VERSION 2.2.0
 -------------
 Release Date: 2017-04-06
