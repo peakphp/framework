@@ -85,7 +85,7 @@ class Application
             throw new Exception(__CLASS__.' as no container');
         }
         if (isset($instance)) {
-            if (!self::$container->hasInstance($instance)) {
+            if (!self::$container->has($instance)) {
                 throw new Exception(__CLASS__.' container does not have '.$instance);
             }
         }
