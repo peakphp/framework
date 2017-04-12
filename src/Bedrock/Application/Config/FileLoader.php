@@ -1,6 +1,6 @@
 <?php
 
-namespace Peak\BedRock\Application\Config;
+namespace Peak\Bedrock\Application\Config;
 
 use \Exception;
 
