@@ -7,6 +7,11 @@ Release Date: ?
  - renamed method getInstance() to get() in Peak\Di\Container
  - renamed method hasInstance() to has() in Peak\Di\Container
  - added method get() and has() to Peak\Di\ContainerInterface
+ - moved Peak\Database to Peak\Providers\Laravel\Database
+ - rewrited Peak\Lang to Peak\Common\Language
+ - updated function _e() and __() in Peak\Bedrock\helpers to reflect changes in Peak\Common\Language
+ - added Peak\Common\Traits\LoadArrayFiles
+
 
 VERSION 2.2.0
 -------------
