@@ -14,7 +14,7 @@ trait LoadArrayFiles
 
     /**
      * Load php array file(s)
-     * 
+     *
      * @param  array $files Files to load as array
      * @return array
      */
