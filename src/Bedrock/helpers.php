@@ -20,7 +20,8 @@ if (!function_exists('__')) {
      */
     function __($text, $replaces = null, $func = null)
     {
-        return \Peak\Lang::__($text, $replaces, $func);
+        $lang = \Peak\Bedrock\Application::get(\Peak\Common\Language::class);
+        return $lang->translate($text, $replaces);
     }
 }
 
@@ -38,7 +39,8 @@ if (!function_exists('_e')) {
      */
     function _e($text, $replaces = null, $func = null)
     {
-        \Peak\Lang::_e($text, $replaces, $func);
+        $lang = \Peak\Bedrock\Application::get(\Peak\Common\Language::class);
+        echo $lang->translate($text, $replaces);
     }
 }
 
