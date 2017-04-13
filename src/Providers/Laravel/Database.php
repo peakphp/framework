@@ -1,6 +1,6 @@
 <?php
 
-namespace Peak;
+namespace Peak\Providers\Laravel;
 
 use Illuminate\Database\Capsule\Manager as Capsule;
 use Illuminate\Container\Container as Container;
