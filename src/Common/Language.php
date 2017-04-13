@@ -77,8 +77,8 @@ class Language
     }
 
     /**
-     * Add contents
-     * 
+     * Add content
+     *
      * @param array $content
      */
     public function addContent(array $content)
