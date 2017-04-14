@@ -16,7 +16,7 @@ class Language
      * Array of translation
      * @var array
      */
-    public $translations = [];
+    protected $translations = [];
 
     /**
      * Language abbreviation
@@ -85,6 +85,17 @@ class Language
     {
         $this->translations = array_merge($this->translations, $content);
         return $this;
+    }
+
+    /**
+     * Check for translation
+     *
+     * @param  string  $item translation key name
+     * @return boolean
+     */
+    public function has($item) 
+    {
+        return (array_key_exists($item, $this->translations));
     }
 
     /**
