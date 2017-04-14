@@ -26,7 +26,24 @@ class LoadArrayFilesTest extends TestCase
         try {
             $content = $a->getContent([
                 'arrayfile2.php',
-                'arrayfile3.php'
+                'arrayfile18.php'
+            ], __DIR__.'/../../fixtures/config');
+
+        } catch(\Exception $e) {
+            $error = true;
+        }
+
+        $this->assertTrue(isset($error));
+    }
+
+    public function testExceptionFileNotAnArray()
+    {
+        $a = new A;
+
+        try {
+            $content = $a->getContent([
+                'arrayfile2.php',
+                'empty.php'
             ], __DIR__.'/../../fixtures/config');
 
         } catch(\Exception $e) {
