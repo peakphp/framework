@@ -17,9 +17,9 @@ class ServiceLocator
 
     /**
      * shortcut for register()
-     * 
-     * @param string   $name    
-     * @param callable $closure 
+     *
+     * @param string   $name
+     * @param callable $closure
      */
     public function __set($name, callable $closure)
     {
@@ -28,9 +28,9 @@ class ServiceLocator
 
     /**
      * shortcut for getService()
-     * 
-     * @param string   $name    
-     * @param callable $closure 
+     *
+     * @param string   $name
+     * @param callable $closure
      */
     public function __get($name)
     {
@@ -39,9 +39,9 @@ class ServiceLocator
 
     /**
      * Register a service closure
-     * 
-     * @param  string   $name    
-     * @param  callable $closure 
+     *
+     * @param  string   $name
+     * @param  callable $closure
      * @return $this    for chainning    
      */
     public function register($name, callable $closure)
@@ -51,9 +51,9 @@ class ServiceLocator
     }
 
     /**
-     * Get a service name closure 
-     * 
-     * @param  string $name 
+     * Get a service name closure
+     *
+     * @param  string $name
      * @return mixed  return the result of executed closure
      */
     public function getService($name)
@@ -67,7 +67,7 @@ class ServiceLocator
 
     /**
      * List services
-     * 
+     *
      * @return array
      */
     public function listServices()
@@ -77,11 +77,11 @@ class ServiceLocator
 
     /**
      * Check if has service name
-     * 
+     *
      * @param  $name
      * @return boolean
      */
-    public function hasService($name) 
+    public function hasService($name)
     {
         return array_key_exists($name, $this->services);
     }
