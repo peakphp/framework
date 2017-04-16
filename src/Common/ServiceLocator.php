@@ -58,7 +58,7 @@ class ServiceLocator
      */
     public function getService($name)
     {
-        if(!array_key_exists($name, $this->services)) {
+        if (!array_key_exists($name, $this->services)) {
             throw new Exception('The service "'.$name.'" does not exists.');
         }
 
