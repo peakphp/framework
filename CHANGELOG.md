@@ -1,6 +1,6 @@
 VERSION 2.3.0
 -------------
-Release Date: ?
+Release Date: 2017-04-20
 
 > Warning! Breaking changes with 2.2.x. 
 
@@ -11,7 +11,6 @@ Release Date: ?
  - rewrited Peak\Lang to Peak\Common\Language
  - updated function _e() and __() in Peak\Bedrock\helpers to reflect changes in Peak\Common\Language
  - added Peak\Common\Traits\LoadArrayFiles
-
 
 VERSION 2.2.0
 -------------
