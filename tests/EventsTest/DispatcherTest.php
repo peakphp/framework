@@ -74,8 +74,10 @@ class DispatcherTest extends TestCase
         $this->assertTrue($event1->i == 0);
         
         $d->fire('myevent');
+
         $d->fire('myevent');
 
+        // direct event call
         $event1->fire(null);
 
         $d->fire('myevent');
@@ -95,7 +97,7 @@ class DispatcherTest extends TestCase
         /**
          * Event classname have no memory
          */
-        $d->attach('myevent', 'Event2');
+        $d->attach('myevent', Event2::class);
         
         $d->fire('myevent');
         $d->fire('myevent');
