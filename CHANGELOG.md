@@ -1,3 +1,11 @@
+VERSION 2.4.0
+-------------
+Release Date: ?
+
+> Warning! Breaking changes with 2.2.x. 
+
+ - removed deprecated internal controllers notion
+
 VERSION 2.3.0
 -------------
 Release Date: 2017-04-20
