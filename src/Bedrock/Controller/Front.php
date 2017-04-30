@@ -38,12 +38,6 @@ class Front
     public $error_controller = 'error';
     
     /**
-     * Allow/Disallow the use of Peak library internal controllers
-     * @var bool
-     */
-    public $allow_internal_controllers = false;
-    
-    /**
      * Allow/Disallow application modules
      * @var bool
      */
@@ -70,10 +64,7 @@ class Front
     {
         $config = Application::conf('front');
         if (!empty($config)) {
-            foreach (Application::conf('front') as $k => $v) {
-                if ($k === 'allow_internal_controllers') {
-                    $v = (bool)$v;
-                }
+            foreach ($config as $k => $v) {
                 $this->$k = $v;
             }
         }
@@ -147,18 +138,10 @@ class Front
 
         //check if it's valid application controller
         if (!class_exists($ctrl_name)) {
-            $internal_ctrl_name = $this->_getCtrlName('Peak\Controller\Internal\\', $this->route->controller);
-
-            //check for peak internal controller
-            if (($this->allow_internal_controllers === true) && (class_exists($internal_ctrl_name))) {
-                $this->controller = new $internal_ctrl_name();
-            } else {
-                throw new Exception('Application controller '.$this->route->controller.' not found');
-            }
-        } else {
-            $this->controller = Application::instantiate($ctrl_name);
-            // $this->controller = new $ctrl_name();
+            throw new Exception('Application controller '.$this->route->controller.' not found');
         }
+
+        $this->controller = Application::instantiate($ctrl_name);
 
         if ($this->controller instanceof Action) {
             $this->controller->setRoute($this->route);
