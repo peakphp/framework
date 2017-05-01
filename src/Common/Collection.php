@@ -8,6 +8,7 @@ use ArrayIterator;
 use JsonSerializable;
 use IteratorAggregate;
 use \Exception;
+use \Closure;
 
 /**
  * Simple collection object
@@ -234,13 +235,34 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
     }
 
     /**
+     * To simple object
+     * 
+     */
+    public function toObject()
+    {
+        return (object)$this->items;
+    }
+
+    /**
      * Json serialize
      *
+     * @param  integer $options Bitmask (see php.net json_encode)
+     * @param  integer $depth   Set the maximum depth. Must be greater than zero.
      * @return string
      */
-    public function jsonSerialize()
+    public function jsonSerialize($options = 0, $depth = 512)
     {
-        return json_encode($this->items);
+        return json_encode($this->items, $options, $depth);
+    }
+
+    /**
+     * Array map
+     * 
+     * @param  Closure $closure
+     */
+    public function map(Closure $closure)
+    {
+        $this->items = array_map($closure, $this->items);
     }
 
     /**
