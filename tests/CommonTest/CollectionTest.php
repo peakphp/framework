@@ -146,6 +146,34 @@ class CollectionTest extends TestCase
 		$this->assertTrue($columns[1] === 'Sally');
 	}
 
+	function testMap()
+	{
+		$collection = Collection::make([
+	        'first_name' => 'John',
+	        'last_name' => 'Doe',
+	    ]);
+
+	    $collection->map(function($n) {
+	    	return strtoupper($n);
+	    });
+
+	    $this->assertTrue($collection->first_name === 'JOHN');
+	}
+
+	function testToObject()
+	{
+		$collection = Collection::make([
+	        'first_name' => 'John',
+	        'last name' => 'Doe',
+	    ]);
+
+	    $object = $collection->toObject();
+
+	    $this->assertTrue($object instanceof \stdClass);
+	    $this->assertTrue($object->first_name === 'John');
+	    $this->assertTrue($object->{"last name"} === 'Doe');
+	}
+
 	/**
 	 * Test read only
 	 */
