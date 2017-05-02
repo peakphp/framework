@@ -126,6 +126,17 @@ class ManagerTest extends TestCase
         
     }
 
+    function testCreateAbility()
+    {
+        $manager = new Manager();
+
+
+        $ability = $manager->createAbility('myability', 'root', 'root', Permissions::create(7,7,7));
+      
+
+        $this->assertTrue($ability instanceof Ability);
+    }
+
     function testCreateAbilityException()
     {
         $manager = new Manager();
