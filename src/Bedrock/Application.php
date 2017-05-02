@@ -137,13 +137,13 @@ class Application
         $config_resolver = new ConfigResolver($config);
 
         // store Peak\Bedrock\Application\Config
-        $container->addInstance($config_resolver->getMountedConfig());
+        $container->add($config_resolver->getMountedConfig());
 
         // store Peak\Bedrock\Application\Routing
-        $container->addInstance(new \Peak\Bedrock\Application\Routing);
+        $container->add(new \Peak\Bedrock\Application\Routing);
 
         // store Peak\Bedrock\View
-        $container->addInstance(new \Peak\Bedrock\View);
+        $container->add(new \Peak\Bedrock\View);
         
         // instantiate and store app kernel
         $container->instantiateAndStore('\Peak\Bedrock\Application\Kernel'); 
