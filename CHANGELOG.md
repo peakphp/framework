@@ -9,6 +9,7 @@ Release Date: ?
  - method jsonSerialize() now accept json_encode params in Peak\Common\Collection
  - renamed method addInstance() to add() in Peak\Di\Container
  - renamed method deleteInstance() to delete() in Peak\Di\Container
+ - fixed bug with createAbility() in Peak\Doorman\Manager
 
 VERSION 2.3.0
 -------------
