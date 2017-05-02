@@ -2,9 +2,13 @@ VERSION 2.4.0
 -------------
 Release Date: ?
 
+> Warning! Breaking changes with 2.3.x. 
+
  - removed deprecated internal controllers notion
  - added method map() and toObject in Peak\Common\Collection
  - method jsonSerialize() now accept json_encode params in Peak\Common\Collection
+ - renamed method addInstance() to add() in Peak\Di\Container
+ - renamed method deleteInstance() to delete() in Peak\Di\Container
 
 VERSION 2.3.0
 -------------
