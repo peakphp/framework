@@ -96,7 +96,7 @@ class Container implements ContainerInterface
     }
 
     /**
-     * Same as instantiate class but also store it with addInstance
+     * Same as instantiate class but also store it with add
      *
      * @see instantiate() for params
      * @return object
@@ -104,7 +104,7 @@ class Container implements ContainerInterface
     public function instantiateAndStore($class, $args = [], $explict = [])
     {
         $object = $this->instantiate($class, $args, $explict);
-        $this->addInstance($object);
+        $this->add($object);
         return $object;
     }
 
@@ -183,7 +183,7 @@ class Container implements ContainerInterface
      *
      * @param  string $object
      */
-    public function addInstance($object) 
+    public function add($object) 
     {
         $class = get_class($object);
         $this->instances[$class] = $object;
@@ -204,7 +204,7 @@ class Container implements ContainerInterface
      * @param  $name
      * @return $this
      */
-    public function deleteInstance($name)
+    public function delete($name)
     {
         if ($this->has($name)) {
 
@@ -237,7 +237,7 @@ class Container implements ContainerInterface
     }
 
     /**
-     * Catalogue also class interface when using addInstance
+     * Catalogue also class interface when using add
      *
      * @param strign $name
      * @param strign $class
