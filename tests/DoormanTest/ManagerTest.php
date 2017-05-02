@@ -107,4 +107,40 @@ class ManagerTest extends TestCase
         );
         
     }
+
+    function testCreateAbilityException()
+    {
+        $manager = new Manager();
+
+        // unknow group
+        try {
+            $manager->createAbility('myability', 'root', 'unknowgroup', Permissions::create(7,7,7));
+        } catch(\Exception $e) {
+            $error1 = true;
+        }
+
+        $this->assertTrue(isset($error1));
+
+        // unknow user
+        try {
+            $manager->createAbility('myability', 'unknowuser', 'unknowgroup', Permissions::create(7,7,7));
+        } catch(\Exception $e) {
+            $error2 = true;
+        }
+
+        $this->assertTrue(isset($error2));
+
+        //already existing ability
+        $manager->createAbility('myability', 'root', 'root', Permissions::create(7,7,7));
+
+        try {
+            $manager->createAbility('myability', 'root', 'root', Permissions::create(7,7,7));
+        } catch(\Exception $e) {
+            $error3 = true;
+        }
+
+        $this->assertTrue(isset($error3));
+    }
+
+
 }
