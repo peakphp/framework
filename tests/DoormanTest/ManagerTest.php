@@ -27,7 +27,7 @@ class ManagerTest extends TestCase
     }
 
 
-    function testGetUnknown()
+    function testGetUserAndGroup()
     {
         $manager = new Manager();
 
@@ -39,7 +39,25 @@ class ManagerTest extends TestCase
         $this->assertTrue($group === null);
         $this->assertTrue($ability === null);
 
+        $this->assertTrue($manager->user('root') instanceof User);
+        $this->assertTrue($manager->group('root') instanceof Group);
 
+        $this->assertTrue($manager->group('root') instanceof SuperGroup);
+        $this->assertTrue($manager->user('root') instanceof SuperUser);
+    }
+
+    function testHasUserAndGroup()
+    {
+        $manager = new Manager();
+
+        $user = $manager->user('unknow_bob');
+        $group = $manager->group('unknow_group');
+        $ability = $manager->ability('unknow_ability');
+
+        $this->assertFalse($manager->hasUser('bob'));
+        $this->assertTrue($manager->hasUser('root'));
+        $this->assertTrue($manager->hasGroup('root'));
+        $this->assertFalse($manager->hasGroup('editor'));
     }
 
     function testExceptionRootUser()
