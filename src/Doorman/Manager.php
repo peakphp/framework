@@ -214,7 +214,7 @@ class Manager implements PolicySubjectInterface
             throw new Exception(__CLASS__.': Ability '.htmlspecialchars($ability).' already exists');
         } elseif (!$this->hasUser($username)) {
             throw new Exception(__CLASS__.': User '.htmlspecialchars($username).' doesn\'t exists');
-        } elseif (!$this->hasUser($groupname)) {
+        } elseif (!$this->hasGroup($groupname)) {
             throw new Exception(__CLASS__.': Group '.htmlspecialchars($groupname).' doesn\'t exists');
         }
 
