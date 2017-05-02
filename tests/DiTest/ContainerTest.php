@@ -105,7 +105,7 @@ class ContainerTest extends TestCase
 
         $testdi7 = new TestDi7();
         $testdi7->foobar = 'foobar7';
-        $container->addInstance($testdi7);
+        $container->add($testdi7);
         
         $testdi = $container->instantiate('TestDi6');
 
@@ -119,8 +119,8 @@ class ContainerTest extends TestCase
         $container = new \Peak\Di\Container();
 
         //both implement the same interface
-        $container->addInstance(new TestDi7()); 
-        $container->addInstance(new TestDi8());
+        $container->add(new TestDi7()); 
+        $container->add(new TestDi8());
 
         $testdi = $container->instantiate(
             'TestDi6', //classname
@@ -140,8 +140,8 @@ class ContainerTest extends TestCase
         $container = new \Peak\Di\Container();
 
         //both implement the same interface
-        $container->addInstance(new TestDi7()); 
-        $container->addInstance(new TestDi8());
+        $container->add(new TestDi7()); 
+        $container->add(new TestDi8());
 
         $testdi = $container->instantiate(
             'TestDi11', //classname
@@ -166,21 +166,21 @@ class ContainerTest extends TestCase
     {
         $container = new \Peak\Di\Container();
 
-        // $container->addInstance(new \Peak\Common\Collection(['foo' => 'bar']));
+        // $container->add(new \Peak\Common\Collection(['foo' => 'bar']));
         $testdi1 = $container->instantiate('TestDi1', [
             'test',
             []
         ]);
 
-        $container->addInstance($testdi1);
+        $container->add($testdi1);
 
         //both implement the same interface (TestDiInterface)
-        $container->addInstance(new TestDi7()); 
-        $container->addInstance(new TestDi8()); 
+        $container->add(new TestDi7()); 
+        $container->add(new TestDi8()); 
         
         //TestDiInterface2
         $testdi9 = $container->instantiate('TestDi9', [['FOOBAR!']]);
-        $container->addInstance($testdi9); 
+        $container->add($testdi9); 
 
         $testdi13 = $container->instantiate(
             'TestDi13', 
@@ -206,7 +206,7 @@ class ContainerTest extends TestCase
     {
         $container = new \Peak\Di\Container();
 
-        $container->addInstance(new TestDi7()); 
+        $container->add(new TestDi7()); 
 
         $testdi13 = $container->instantiate(
             'TestDi13', 
@@ -236,7 +236,7 @@ class ContainerTest extends TestCase
     {
         $container = new \Peak\Di\Container();
 
-        $container->addInstance(new Peak\Common\Collection(['foo' => 'barNOTexplicit']));
+        $container->add(new Peak\Common\Collection(['foo' => 'barNOTexplicit']));
 
         $testdi1 = $container->instantiate(
             'TestDi1', //class
@@ -271,8 +271,8 @@ class ContainerTest extends TestCase
         try {
 
             //both implement the same interface
-            $container->addInstance(new TestDi7()); 
-            $container->addInstance(new TestDi8());
+            $container->add(new TestDi7()); 
+            $container->add(new TestDi8());
             
             //TestDi6 has an interface as dependency, both TestDi7 and TestDi8 qualify
             //but container doesn't know which one to use so it throw an LogicException 
@@ -326,7 +326,7 @@ class ContainerTest extends TestCase
     function testGetHasInstance()
     {
         $container = new \Peak\Di\Container();
-        $container->addInstance(new TestDi3());
+        $container->add(new TestDi3());
 
         $this->assertTrue($container->has('TestDi3'));
         $this->assertFalse($container->has('UnknowClass'));
@@ -344,12 +344,12 @@ class ContainerTest extends TestCase
         $container = new \Peak\Di\Container();
 
         //both implement the same interface
-        $container->addInstance(new TestDi7()); 
-        $container->addInstance(new TestDi8());
+        $container->add(new TestDi7()); 
+        $container->add(new TestDi8());
 
         $this->assertTrue($container->get('TestDi7') !== null);
 
-        $container->deleteInstance('TestDi8');
+        $container->delete('TestDi8');
         $this->assertTrue($container->get('TestDi8') === null);
         $this->assertTrue($container->get('TestDi7') !== null);
     }
@@ -359,8 +359,8 @@ class ContainerTest extends TestCase
         $container = new \Peak\Di\Container();
 
         //both implement the same interface
-        $container->addInstance(new TestDi7()); 
-        $container->addInstance(new TestDi8());
+        $container->add(new TestDi7()); 
+        $container->add(new TestDi8());
 
         $interfaces = $container->getInterfaces();
         $this->assertTrue(count($interfaces) == 1);
