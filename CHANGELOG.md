@@ -1,3 +1,7 @@
+VERSION 2.5.0
+-------------
+Release Date: ?
+
 VERSION 2.4.0
 -------------
 Release Date: 2017-05-02
