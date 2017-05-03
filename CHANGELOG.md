@@ -2,6 +2,8 @@ VERSION 2.5.0
 -------------
 Release Date: ?
 
+ - added an exception with invalid callback in Peak\Di\ClassResolver::resolve()
+
 VERSION 2.4.0
 -------------
 Release Date: 2017-05-02
