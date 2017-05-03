@@ -172,4 +172,17 @@ class ManagerTest extends TestCase
     }
 
 
+    function testHasAbility()
+    {
+        $manager = new Manager();
+
+
+        $ability = $manager->createAbility('myability', 'root', 'root', Permissions::create(7,7,7));
+      
+
+        $this->assertTrue($manager->hasAbility('myability'));
+        $this->assertFalse($manager->hasAbility('my_second_ability'));
+    }
+
+
 }
