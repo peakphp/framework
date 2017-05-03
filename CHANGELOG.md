@@ -10,6 +10,7 @@ Release Date: ?
  - renamed method addInstance() to add() in Peak\Di\Container
  - renamed method deleteInstance() to delete() in Peak\Di\Container
  - fixed bug with createAbility() in Peak\Doorman\Manager
+ - added method addItself() to Peak\Di\Container
 
 VERSION 2.3.0
 -------------
