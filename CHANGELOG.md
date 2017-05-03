@@ -1,6 +1,6 @@
 VERSION 2.4.0
 -------------
-Release Date: ?
+Release Date: 2017-05-02
 
 > Warning! Breaking changes with 2.3.x. 
 
