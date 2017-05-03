@@ -54,9 +54,12 @@ class ClassResolver
         $method = '__construct';
 
         if (is_array($class)) {
+            // treat $class as a callback
             if (count($class) == 2) {
                 $method = $class[1];
                 $class  = $class[0];
+            } else {
+                throw new Exception('Expecting a valid callback definition');
             }
         }
 
