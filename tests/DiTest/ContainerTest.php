@@ -389,6 +389,32 @@ class ContainerTest extends TestCase
         $this->assertTrue($result === $arguments[0]);
     }
 
+    function testMethodCallException()
+    {
+        $container = new \Peak\Di\Container();
+
+        $testdi = $container->instantiate('TestDi1', [
+            'value',
+            [12],
+            999
+        ]);
+
+        $arguments = ['hello'];
+        $explicits = [];
+
+        try {
+            $result = $container->call([$testdi], $arguments, $explicits);
+        } catch(Exception $e) {
+            $error = true;
+            echo $e->getMessage();
+        }
+
+        //print_r($result);
+        $this->assertTrue(isset($error));
+    }
+
+
+
     function testAliases()
     {
         $container = new \Peak\Di\Container();
