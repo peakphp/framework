@@ -82,17 +82,17 @@ class Container implements ContainerInterface
     /**
      * Similar to instantiate(), it call a method on specified object
      * 
-     * @param  array  $class   first element is object and second is method name string
-     * @param  array  $args    method arguments
-     * @param  array  $explict @see intantiates
+     * @param  array  $callback The callable to be called
+     * @param  array  $args     The parameters to be passed to the callback, as an indexed array
+     * @param  array  $explict  @see intantiates
      * @return mixed  the method call return if any
      */
-    public function call(array $class, $args = [], $explict = [])
+    public function call(array $callback, $args = [], $explict = [])
     {
         // process class dependecies
-        $args = $this->resolver->resolve($class, $this, $args, $explict);
+        $args = $this->resolver->resolve($callback, $this, $args, $explict);
 
-        return call_user_func_array($class, $args);
+        return call_user_func_array($callback, $args);
     }
 
     /**
