@@ -139,3 +139,12 @@ class TestDi14
         $this->testdiInt = $testdiInt;
     }
 }
+
+
+class TestDi15
+{
+    function __construct(\Peak\Di\Container $container)
+    {
+        $this->container = $container;
+    }
+}

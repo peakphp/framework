@@ -409,4 +409,16 @@ class ContainerTest extends TestCase
         $testdi = $container->get('MyClassAlias');
         $this->assertTrue($testdi instanceof TestDi1);
     }
+
+    function testAddItsetf()
+    {
+        $container = new \Peak\Di\Container();
+
+        $container->addAlias('MyClassAlias', TestDi1::class);
+        $container->addItself();
+
+
+        $testdi = $container->instantiate(TestDi15::class);
+        $this->assertTrue($testdi->container instanceof \Peak\Di\Container);
+    }
 }
