@@ -237,6 +237,16 @@ class Container implements ContainerInterface
     }
 
     /**
+     * Add container itself
+     * 
+     * @return $this
+     */
+    public function addItself()
+    {
+        return $this->add($this);
+    }
+
+    /**
      * Catalogue also class interface when using add
      *
      * @param strign $name
