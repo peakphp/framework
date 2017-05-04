@@ -406,7 +406,7 @@ class ContainerTest extends TestCase
             $result = $container->call([$testdi], $arguments, $explicits);
         } catch(Exception $e) {
             $error = true;
-            echo $e->getMessage();
+            //echo $e->getMessage();
         }
 
         //print_r($result);
