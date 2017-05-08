@@ -95,9 +95,10 @@ if (!function_exists('phpinput')) {
     /**
      * Retreive a collection object from php://input
      *
+     * @param  Closure $closure
      * @return Peak\Common\Collection
      */
-    function phpinput()
+    function phpinput(Closure $closure = null)
     {
         $raw  = file_get_contents('php://input');
         $post = json_decode($raw, true); // for json input
@@ -107,7 +108,13 @@ if (!function_exists('phpinput')) {
             $post = filter_input_array(INPUT_POST);
         }
 
-        return \Peak\Common\Collection::make($post);
+        $coll = \Peak\Common\Collection::make($post);
+
+        if (isset($closure)) {
+            $coll->map($closure);
+        }
+
+        return $coll;
     }
 }
 
