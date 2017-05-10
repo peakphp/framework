@@ -5,6 +5,7 @@ Release Date: ?
  - added an exception with invalid callback in Peak\Di\ClassResolver::resolve()
  - added method is() to Peak\Routing\Route
  - added closure support to phpinput() in Peak\Common\helpers.php
+ - added function detectEnvFile() in Peak\Bedrock\helpers.php
 
 VERSION 2.4.0
 -------------
