@@ -87,7 +87,6 @@ if (!function_exists('collection')) {
     }
 }
 
-
 /**
  * phpinput()
  */
