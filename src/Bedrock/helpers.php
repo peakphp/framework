@@ -64,6 +64,33 @@ if (!function_exists('isEnv')) {
 }
 
 /**
+ * detectEnvFile()
+ */
+if (!function_exists('detectEnvFile')) {
+    /**
+     * Look for environment file (.prod, .testing and .staging)
+     * and return deducted environment string
+     *
+     * @param  string $path
+     * @return string
+     */
+    function detectEnvFile($path)
+    {
+        $env = 'dev';
+
+        if (file_exists($path.'/.prod')) {
+            $env = 'prod';
+        } elseif(file_exists($path.'/.staging')) {
+            $env = 'staging';
+        } elseif(file_exists($path.'/.testing')) {
+            $env = 'testing';
+        }
+
+        return $env;
+    }
+}
+
+/**
  * config()
  */
 if (!function_exists('config')) {
