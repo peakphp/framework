@@ -13,17 +13,19 @@ class Tagattrs extends Helper
      * Attributes
      * @var array
      */
-    protected $_attrs = array();
+    protected $attributes = array();
     
     /**
-     * Add an array of atrributes to the current class $_attrs array
+     * Add an array of atrributes to the current class $attributes array
      *
      * @param  array $attrs
      * @return object
      */
     public function addAttrs(array $attrs)
     {
-        foreach ($attrs as $k => $v) $this->_attrs[$k] = $v;
+        foreach ($attrs as $k => $v) {
+            $this->attributes[$k] = $v;
+        }
         return $this;
     }
     
@@ -35,7 +37,7 @@ class Tagattrs extends Helper
      */
     public function setAttrs(array $attrs)
     {
-        $this->_attrs = $attrs;
+        $this->attributes = $attrs;
         return $this;
     }
     
@@ -47,10 +49,11 @@ class Tagattrs extends Helper
      */
     public function addClass($name)
     {
-        if (isset($this->_attrs['class'])) {
-            $this->_attrs['class'] .= ' '.$name;
+        if (isset($this->attributes['class'])) {
+            $this->attributes['class'] .= ' '.$name;
+        } else {
+            $this->setClass($name);
         }
-        else $this->setClass($name);
         return $this;
     }
     
@@ -62,7 +65,7 @@ class Tagattrs extends Helper
      */
     public function setClass($name)
     {
-        $this->_attrs['class'] = $name;
+        $this->attributes['class'] = $name;
         return $this;
     }
     
@@ -74,7 +77,7 @@ class Tagattrs extends Helper
      */
     public function setId($id)
     {
-        $this->_attrs['id'] = $id;
+        $this->attributes['id'] = $id;
         return $this;
     }
     
@@ -86,7 +89,7 @@ class Tagattrs extends Helper
      */
     public function setName($name)
     {
-        $this->_attrs['name'] = $name;
+        $this->attributes['name'] = $name;
         return $this;
     }
     
@@ -98,12 +101,13 @@ class Tagattrs extends Helper
      */
     public function addStyle(array $style)
     {
-        if (isset($this->_attrs['style'])) {
+        if (isset($this->attributes['style'])) {
             foreach ($style as $k => $v) {
-                $this->_attrs['style'][$k] = $v;
+                $this->attributes['style'][$k] = $v;
             }
+        } else {
+            $this->setStyle($style);
         }
-        else $this->setStyle($style);
         return $this;
     }
     
@@ -115,7 +119,7 @@ class Tagattrs extends Helper
      */
     public function setStyle(array $style)
     {
-        $this->_attrs['style'] = $style;
+        $this->attributes['style'] = $style;
         return $this;
     }
     
@@ -127,16 +131,20 @@ class Tagattrs extends Helper
     public function __toString()
     {
         $attrs_string = '';
-        foreach ($this->_attrs as $k => $v) {
-            if (!is_array($v)) $attrs_string .= ' '.$k.'="'.$v.'"';
-            elseif ($k === 'style') {
+        foreach ($this->attributes as $k => $v) {
+            if (!is_array($v)) {
+                $attrs_string .= ' '.$k.'="'.$v.'"';
+            } elseif ($k === 'style') {
                 $attrs_string .= ' style="';
-                foreach ($v as $css_key => $css_val) $attrs_string .=  $css_key.':'.$css_val.';';
+                foreach ($v as $css_key => $css_val) {
+                    $attrs_string .=  $css_key.':'.$css_val.';';
+                }
                 $attrs_string .= '"';
-            }
-            else {
+            } else {
                 $attrs_string .= ' '.$k.'="';
-                foreach ($v as $av) $attrs_string .=  $av.' ';
+                foreach ($v as $av) {
+                    $attrs_string .=  $av.' ';
+                }
                 $attrs_string .= '"';
             }
         }
@@ -150,7 +158,7 @@ class Tagattrs extends Helper
      */
     public function reset()
     {
-        $this->_attrs = array();
+        $this->attributes = array();
         return $this;
     }
 }
