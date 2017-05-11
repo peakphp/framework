@@ -23,8 +23,6 @@ engines:
         enabled: false
       Design/TooManyPublicMethods:
         enabled: false
-      Squiz WhiteSpace ControlStructureSpacing SpacingAfterOpen:
-        enabled: false
   phpcodesniffer:
     enabled: true
     config:
