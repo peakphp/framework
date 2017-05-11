@@ -50,7 +50,7 @@ class Text extends Helper
             return(strlen($text));
         }
 
-        return preg_match_all("/[^\s]/", $string, $match);
+        return preg_match_all("/[^\s]/", $string);
     }
 
     /**
