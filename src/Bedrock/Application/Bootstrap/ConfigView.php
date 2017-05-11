@@ -24,7 +24,6 @@ class ConfigView
 
         if (!empty($config->view)) {
             foreach ($config->view as $k => $v) {
-
                 if (is_array($v)) {
                     foreach ($v as $p1 => $p2) {
                         $view->$k($p1,$p2);
