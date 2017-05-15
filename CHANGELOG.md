@@ -6,6 +6,7 @@ Release Date: ?
  - added method is() to Peak\Routing\Route
  - added closure support to phpinput() in Peak\Common\helpers.php
  - added function detectEnvFile() in Peak\Bedrock\helpers.php
+ - added Pipelines component
 
 VERSION 2.4.0
 -------------
