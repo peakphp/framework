@@ -18,25 +18,25 @@ class Kernel
     const VERSION = '2.5.0';
     
     /**
-     * app bootstrap object if exists
+     * App bootstrap object if exists
      * @var Application\Bootstrap
      */
     public $bootstrap;
 
     /**
-     * app object front controller
+     * App object front controller
      * @var Controller\Front
      */
     public $front;
 
     /**
-     * Application routing object
+     * App routing object
      * @var Application\Routing
      */
     public $routing;
     
     /**
-     * application config
+     * App config
      * @var Application\Config
      */
     protected $config = null;
@@ -55,7 +55,6 @@ class Kernel
         $this->loadBootstrap();
         $this->loadFront();
     }
-
 
     /**
      * Reload application bootstrapper and front for a module
