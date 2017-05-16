@@ -7,6 +7,7 @@ Release Date: ?
  - added closure support to phpinput() in Peak\Common\helpers.php
  - added function detectEnvFile() in Peak\Bedrock\helpers.php
  - added Pipelines component
+ - removed deprecated class Peak\Bedrock\Controller\Helper\Request
 
 VERSION 2.4.0
 -------------
