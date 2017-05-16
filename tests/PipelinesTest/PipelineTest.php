@@ -4,6 +4,7 @@ use PHPUnit\Framework\TestCase;
 use Peak\Pipelines\Pipeline;
 use Peak\Pipelines\PipeInterface;
 use Peak\Pipelines\DefaultProcessor;
+use Peak\Pipelines\StrictProcessor;
 
 use Peak\Di\Container;
 
@@ -113,6 +114,35 @@ class PipelineTest extends TestCase
 
         $payload = $pipeline3->process();
         $this->assertTrue($payload === 'ABABCDABABCD');
+    }
+
+    /**
+     * Create a simple pipeline with class using a default processor 
+     */
+    public function testStrickProcessor()
+    {   
+        $processor = new StrictProcessor(function($payload) {
+            return ($payload > 5) ? false : true;
+        });
+
+        $pipeline = new Pipeline([
+            function($payload) {
+                $payload += 2;
+                return $payload;
+            },
+            function($payload) {
+                $payload += 4;
+                return $payload;
+            },
+            function($payload) {
+                $payload += 4;
+                return $payload;
+            }
+        ], $processor);
+
+        $payload = $pipeline->process(0);
+
+        $this->assertTrue($payload == 6);
     }
 }
 
