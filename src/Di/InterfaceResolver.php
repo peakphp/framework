@@ -33,8 +33,7 @@ class InterfaceResolver
             
             return $container->get($instance);
         }
-        else {
-            throw new Exception('Could not find an instance that implement interface '.$interface);
-        }
+
+        throw new Exception('Could not find an instance that implement interface '.$interface);
     }
 }
