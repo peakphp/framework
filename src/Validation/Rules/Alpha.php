@@ -47,18 +47,25 @@ class Alpha extends AbstractRule
     {            
         $regopt = [];
 
-        if ($this->options['lower'] === true)  $regopt[] = 'a-z';
-        if ($this->options['upper'] === true)  $regopt[] = 'A-Z';
-        if ($this->options['french'] === true) $regopt[] = 'À-ÿ';
-        if ($this->options['space'] === true)  $regopt[] = '\s';
+        if ($this->options['lower'] === true) {
+            $regopt[] = 'a-z';
+        }
+        if ($this->options['upper'] === true) {
+            $regopt[] = 'A-Z';
+        }
+        if ($this->options['french'] === true) {
+            $regopt[] = 'À-ÿ';
+        }
+        if ($this->options['space'] === true) {
+            $regopt[] = '\s';
+        }
 
         if (isset($this->options['punc'])) {
             if (is_array($this->options['punc'])) {
                 foreach ($opt['punc'] as $punc) {
                     $regopt[] = '\\'.$punc;
                 }
-            }
-            else {
+            } else {
                 $punc   = $this->options['punc'];
                 $strlen = strlen($punc);
                 for ($i = 0; $i < $strlen; $i++) {
