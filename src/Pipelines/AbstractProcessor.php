@@ -6,6 +6,7 @@ use Peak\Pipelines\Pipeline;
 use Peak\Pipelines\PipeInterface;
 use Peak\Di\ContainerInterface;
 
+use \Closure;
 use \Exception;
 
 abstract class AbstractProcessor
@@ -34,20 +35,21 @@ abstract class AbstractProcessor
      */
     protected function resolvePipe($pipe, $payload)
     {
-        if (is_callable($pipe)) {
+        if($pipe instanceof Closure) {
             // for closure
             return call_user_func($pipe, $payload);
+        } elseif (is_callable($pipe)) {
+            return $this->processPipeInstance($pipe, $payload);
+        } elseif (is_string($pipe) && class_exists($pipe)) {
+            // class string with or without di
+            $pinst = (isset($this->container)) ? $this->container->instantiate($pipe) : new $pipe();
+            if (!$pinst instanceof PipeInterface) {
+                throw new Exception('Pipe "'.$pipe.'" must implements PipeInterface');
+            }
+            return $this->processPipeInstance($pinst, $payload);
         } elseif ($pipe instanceof Pipeline) {
             // another pipeline instance
             return $pipe->process($payload);
-        } elseif (class_exists($pipe)) {
-            // class string with or without di
-            if (isset($this->container)) {
-                $pipe_instance = $this->container->instantiate($pipe);
-            } else {
-                $pipe_instance = new $pipe();
-            }
-            return $this->processPipeInstance($pipe_instance, $payload);
         }
 
         // unknow pipe type
