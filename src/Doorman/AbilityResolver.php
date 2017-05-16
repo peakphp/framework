@@ -57,19 +57,18 @@ class AbilityResolver
         // if no custom user ability, use default ability perms
         if ($perms === null) {
             $perms = $this->ability->permissions;
-        }
-        else {
+        } else {
             $perms = $perms->permissions;
         }
 
         // resolver user, group and other in this order
         if ($this->user->is($this->ability->owner->getName())) {
             $iperm = $perms->getUserPerm();
-        }
-        elseif ($this->user->isInGroup($this->ability->group->getName())) {
+        } elseif ($this->user->isInGroup($this->ability->group->getName())) {
             $iperm = $perms->getGroupPerm();
+        } else {
+            $iperm = $perms->getOthersPerm();
         }
-        else $iperm = $perms->getOthersPerm();
 
         return $iperm;
     }
