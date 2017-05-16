@@ -20,8 +20,7 @@ class RouteBuilder
         foreach ($segment as $e) {
             if (is_string($e) || is_numeric($e)) {
                 $route_arr[] = $e;
-            }
-            elseif (is_array($e)) {
+            } elseif (is_array($e)) {
                 foreach ($e as $ek => $ev) {
                     $route_arr[] = $ek;
                     $route_arr[] = $ev;
