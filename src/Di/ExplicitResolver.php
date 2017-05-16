@@ -22,8 +22,7 @@ class ExplicitResolver
         if (array_key_exists($needle, $explicit)) {
             if ($explicit[$needle] instanceof Closure) {
                 return $explicit[$needle]();
-            }
-            elseif (is_object($explicit[$needle])) {
+            } elseif (is_object($explicit[$needle])) {
                 return $explicit[$needle];
             }
         }
