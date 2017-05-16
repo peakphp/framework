@@ -37,8 +37,7 @@ class StrLength extends AbstractRule
 
         if (isset($min) && !isset($max)) {
             return ($length >= $min);
-        }
-        elseif (isset($max) && !isset($min)) {
+        } elseif (isset($max) && !isset($min)) {
             return ($length <= $max);
         }
         
