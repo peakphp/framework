@@ -86,8 +86,7 @@ abstract class DataSet
                     $this->errors[$key] = 'Required';
                 }
                 continue;
-            }
-            elseif (empty($data[$key])) {
+            } elseif (empty($data[$key])) {
                 if (in_array('if_not_empty', $val)) {
                     continue;
                 }
@@ -96,7 +95,9 @@ abstract class DataSet
             // process rule(s) validation on data key value
             foreach ($val as $def) {
 
-                if (!is_array($def)) continue;
+                if (!is_array($def)) {
+                    continue;
+                }
 
                 if (in_array('empty', $val)) {
                     $this->errors[$key] = 'Required';
