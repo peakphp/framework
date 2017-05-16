@@ -2,8 +2,6 @@
 
 namespace Peak\Events;
 
-use closure;
-
 class Dispatcher
 {
     /**
@@ -113,8 +111,7 @@ class Dispatcher
     {
         if (is_callable($callback)) {
             $callback($argv);
-        }
-        elseif (is_string($callback) && class_exists($callback)) {
+        } elseif (is_string($callback) && class_exists($callback)) {
             $e = new $callback();
             if ($e instanceof EventInterface) {
                 $e->fire($argv);
