@@ -10,7 +10,7 @@ use Peak\Bedrock\Application\Bootstrapper;
 class ModuleBootstrapper extends Bootstrapper
 {
     /**
-     * Empty default processes so it want called twice
+     * Empty default processes so it won't be called twice
      * @var array
      */
     protected $default_processes = [];
