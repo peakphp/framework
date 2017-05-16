@@ -21,7 +21,7 @@ abstract class AbstractProcessor
      * Constructor
      * @param ContainerInterface|null $container Di container to resolve pipe class
      */
-    public function __construct(ContainerInterface $container =  null)
+    public function __construct(ContainerInterface $container = null)
     {
         $this->container = $container;
     }
