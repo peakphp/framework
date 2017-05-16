@@ -26,9 +26,7 @@ class Permissions
             $user = $perms[0];
             $group = $perms[1];
             $others = $perms[2];
-        }
-        // user, group and other in one $var
-        elseif (count($perms) == 1) {
+        } elseif (count($perms) == 1) { // user, group and other in one $var
             // support decimal (ex: 777)
             if (strlen($perms[0]) == 3) {
                 $permstr = (string)$perms[0];
