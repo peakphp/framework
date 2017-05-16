@@ -48,7 +48,7 @@ class RequestResolver
     {
         $request_block = explode(Request::$separator, $this->request->request_uri);
 
-        foreach($request_block as $key => $value) {
+        foreach ($request_block as $key => $value) {
             if (strlen($value) == 0) unset($request_block[$key]);
         }
 
@@ -101,8 +101,7 @@ class RequestResolver
             if ($i == 0) {
                 $key = $v; 
                 ++$i;
-            }
-            else {
+            } else {
                 $params_assoc[$key] = $v;
                 $i = 0;
             }
