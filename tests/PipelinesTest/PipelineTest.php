@@ -119,7 +119,7 @@ class PipelineTest extends TestCase
 /**
  * Pipe with invoke
  */
-class Pipe1
+class Pipe1 implements PipeInterface
 {
     public function __invoke($payload)
     {
