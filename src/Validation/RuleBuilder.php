@@ -146,8 +146,7 @@ class RuleBuilder
     {
         if (class_exists($this->name)) {
             $rulename = $this->name;
-        }
-        else {
+        } else {
             $rulename = '\Peak\Validation\Rules\\'.$this->name;
         }
 
