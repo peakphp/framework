@@ -50,6 +50,8 @@ class ApplicationTest extends TestCase
             ->addAlias('mycol', Collection::class);
 
         $this->assertTrue(Application::get('mycol') instanceof Collection);
+
+        $this->assertTrue(Application::instantiate(Collection::class) instanceof Collection);
     }
     
 }
