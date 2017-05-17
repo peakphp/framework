@@ -2,6 +2,8 @@
 
 namespace Peak\Events;
 
+use Exception;
+
 class Dispatcher
 {
     /**
@@ -20,7 +22,7 @@ class Dispatcher
     public function attach($name, $callback) 
     {
         if (!isset($this->events[$name])) {
-            $this->events[$name] = array();
+            $this->events[$name] = [];
         }
         $this->events[$name][] = $callback;
 
@@ -94,7 +96,7 @@ class Dispatcher
         foreach ($events as $event) {
             if (array_key_exists($event, $this->events)) {
                 foreach ($this->events[$event] as $i => $callback) {
-                    $this->handleCallback($event, $callback, $argv);
+                    $this->handleCallback($event, $i, $callback, $argv);
                 }
             }
         }
@@ -107,7 +109,7 @@ class Dispatcher
      * @param  mixed  $callback
      * @param  mixed  $argv
      */
-    protected function handleCallback($event, $callback, $argv = null)
+    protected function handleCallback($event, $index, $callback, $argv = null)
     {
         if (is_callable($callback)) {
             $callback($argv);
@@ -116,12 +118,12 @@ class Dispatcher
             if ($e instanceof EventInterface) {
                 $e->fire($argv);
             } else {
-                $this->eventCallbackFail($event, $i);
+                $this->eventCallbackFail($event, $index);
             }
         } elseif (is_object($callback) && $callback instanceof EventInterface) {
             $callback->fire($argv);
         } else {
-            $this->eventCallbackFail($event, $i);
+            $this->eventCallbackFail($event, $index);
         }
     }
 
@@ -133,6 +135,6 @@ class Dispatcher
      */
     protected function eventCallbackFail($name, $index)
     {
-        throw new \Exception('Event "'.$name.'" #'.$index.' is invalid. Only Closure, Classname or Object instance implementing EventInterface are allowed.');
+        throw new Exception('Callback #'.$index.' for event "'.$name.'" is invalid. Only Closure, Classname or Object instance implementing EventInterface are allowed.');
     }
 }
