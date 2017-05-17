@@ -1,6 +1,6 @@
 VERSION 2.5.0
 -------------
-Release Date: ?
+Release Date: 2017-05-16
 
  - added an exception with invalid callback in Peak\Di\ClassResolver::resolve()
  - added method is() to Peak\Routing\Route
