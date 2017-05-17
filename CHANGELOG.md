@@ -5,6 +5,7 @@ Release Date: ?
  - removed methods getName(), getAction() and getActions() in Peak\Bedrock\Controller\Action
  - added method hasAlias() to Peak\Di\Container
  - fixed a bug with Application::get() and instance alias name
+ - fixed an undefined variable for Peak\Events\Dispatcher::handleCallback()
 
 VERSION 2.5.0
 -------------
