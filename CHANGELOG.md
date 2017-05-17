@@ -2,6 +2,8 @@ VERSION 2.6.0
 -------------
 Release Date: ?
 
+ - removed methods getName(), getAction() and getActions() in Peak\Bedrock\Controller\Action
+
 VERSION 2.5.0
 -------------
 Release Date: 2017-05-16
