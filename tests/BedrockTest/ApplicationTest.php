@@ -1,16 +1,23 @@
 <?php
 use PHPUnit\Framework\TestCase;
 
+use Peak\Bedrock\Application;
+use Peak\Di\Container;
+use Peak\Common\Collection;
+
 class ApplicationTest extends TestCase
 {
+
+    protected $app;
+
     /**
      * test application container
      */
     function testApplicationContainer()
     {
-        \Peak\Bedrock\Application::setContainer(new \Peak\Di\Container);
+        Application::setContainer(new Container);
 
-        $this->assertTrue(\Peak\Bedrock\Application::container() instanceof \Peak\Di\ContainerInterface);
+        $this->assertTrue(Application::container() instanceof \Peak\Di\ContainerInterface);
     }
 
     /**
@@ -18,9 +25,9 @@ class ApplicationTest extends TestCase
      */
     function testApplicationCreation()
     {
-        $container = new \Peak\Di\Container;
+        $container = new Container;
 
-        $app = new \Peak\Bedrock\Application($container, [
+        $app = new Application($container, [
             'env'  => 'dev',
             'conf' => 'config.php',
             'path' => [
@@ -29,7 +36,20 @@ class ApplicationTest extends TestCase
             ]
         ]);
 
-        $this->assertTrue($app instanceof \Peak\Bedrock\Application);
+        $this->assertTrue($app instanceof Application);
+
+        $this->app = $app;
+    }
+
+    /**
+     * test application container static accessor 
+     */
+    function testApplicationContainerStaticMethods()
+    {
+        Application::container()->add(new Collection)
+            ->addAlias('mycol', Collection::class);
+
+        $this->assertTrue(Application::get('mycol') instanceof Collection);
     }
     
 }
