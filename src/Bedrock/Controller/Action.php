@@ -2,12 +2,12 @@
 
 namespace Peak\Bedrock\Controller;
 
-use \Exception;
 use Peak\Bedrock\Application;
 use Peak\Bedrock\Application\Container;
 use Peak\Common\Collection;
 use Peak\Routing\Route;
 use Peak\Bedrock\View;
+use \Exception;
 
 /**
  * Peak abstract action controller
@@ -65,17 +65,7 @@ abstract class Action
     {
         $this->view = $view;
     }
-    
-    /**
-     * Get controller class name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return str_ireplace(Application::conf('ns').'\Controllers\\', '', get_class($this));
-    }
-    
+
     /**
      * Get controller class title
      *
@@ -83,41 +73,7 @@ abstract class Action
      */
     public function getTitle()
     {
-        return str_ireplace('controller', '', $this->getName());
-    }
-
-    /**
-     * Get current action method name
-     *
-     * @return string
-     */
-    public function getAction($noprefix = false)
-    {
-        if ($noprefix) {
-            return substr($this->action, 1);
-        }
-
-        return $this->action;
-    }
-    
-    /**
-     * Get array of controller "actions"(methods)
-     *
-     * @return  array
-     */
-    public function getActions()
-    {
-        $actions = [];
-        
-        $c_methods = get_class_methods($this);
-
-        $regexp = '/^(['.$this->action_prefix.']{'.strlen($this->action_prefix).'}[a-zA-Z]{1})/';
-
-        foreach ($c_methods as $method) {
-            if (preg_match($regexp,$method)) $actions[] = $method;
-        }
-
-        return $actions;
+        return str_ireplace('controller', '', shortClassName($this));
     }
 
     /**
@@ -151,7 +107,7 @@ abstract class Action
     public function dispatchAction()
     {
         if ($this->isAction($this->action) === false) {
-            throw new Exception('Controller action '.$this->action.' not found in '.$this->getName());
+            throw new Exception('Controller action '.$this->action.' not found in '.shortClassName($this));
         }
 
         $this->file = strtolower($this->getTitle().'.'.substr($this->action, strlen($this->action_prefix)).'.php');
@@ -194,7 +150,7 @@ abstract class Action
 
         //if we got errors(param missing), we throw an exception
         if (!empty($errors)) {
-            throw new Exception(implode(', ', $errors).' argument(s) missing for action '.$action_name.' in '.$this->getName());
+            throw new Exception(implode(', ', $errors).' argument(s) missing for action '.$action_name.' in '.shortClassName($this));
         }
         
         //call action with args
