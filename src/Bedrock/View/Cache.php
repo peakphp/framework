@@ -99,7 +99,7 @@ class Cache
                 //bug
                 $kernel = Application::kernel();
                 $this->genCacheId(
-                    $kernel->front->controller->getName(),
+                    shortClassName($kernel->front->controller),
                     $kernel->front->controller->action
                 );
             }
