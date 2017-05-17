@@ -128,54 +128,10 @@ class Container implements ContainerInterface
     {
         if ($this->has($name)) {
             return $this->instances[$name];
-        } elseif(isset($this->aliases[$name]) && $this->has($this->aliases[$name])) {
+        } elseif ($this->hasAlias($name) && $this->has($this->aliases[$name])) {
             return $this->instances[$this->aliases[$name]];
         }
         return null;
-    }
-
-    /**
-     * Get all stored instances
-     *
-     * @return object
-     */
-    public function getInstances()
-    {
-        return $this->instances;
-    }
-
-    /**
-     * Has an interface
-     *
-     * @return bool
-     */
-    public function hasInterface($name)
-    {
-        return isset($this->interfaces->$name);
-    }
-
-    /**
-     * Get an interface
-     *
-     * @param   $name
-     * @return  array|string instance(s) matching interface name
-     */
-    public function getInterface($name)
-    {
-        if ($this->hasInterface($name)) {
-            return $this->interfaces[$name];
-        }
-        return null;
-    }
-
-    /**
-     * Get all stored interfaces
-     *
-     * @return object
-     */
-    public function getInterfaces()
-    {
-        return $this->interfaces;
     }
 
     /**
@@ -237,6 +193,17 @@ class Container implements ContainerInterface
     }
 
     /**
+     * Has an alias
+     *
+     * @param  string  $name
+     * @return boolean
+     */
+    public function hasAlias($name)
+    {
+        return array_key_exists($name, $this->aliases);
+    }
+
+    /**
      * Add container itself
      * 
      * @return $this
@@ -244,6 +211,16 @@ class Container implements ContainerInterface
     public function addItself()
     {
         return $this->add($this);
+    }
+
+    /**
+     * Get all stored instances
+     *
+     * @return object
+     */
+    public function getInstances()
+    {
+        return $this->instances;
     }
 
     /**
@@ -268,5 +245,39 @@ class Container implements ContainerInterface
                 ];
             }
         }
+    }
+
+    /**
+     * Has an interface
+     *
+     * @return bool
+     */
+    public function hasInterface($name)
+    {
+        return isset($this->interfaces->$name);
+    }
+
+    /**
+     * Get an interface
+     *
+     * @param   $name
+     * @return  array|string instance(s) matching interface name
+     */
+    public function getInterface($name)
+    {
+        if ($this->hasInterface($name)) {
+            return $this->interfaces[$name];
+        }
+        return null;
+    }
+
+    /**
+     * Get all stored interfaces
+     *
+     * @return object
+     */
+    public function getInterfaces()
+    {
+        return $this->interfaces;
     }
 }
