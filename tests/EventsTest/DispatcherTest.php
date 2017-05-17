@@ -104,6 +104,22 @@ class DispatcherTest extends TestCase
         $d->fire('myevent');
         $d->fire('myevent');
     }
+
+    public function testException()
+    {
+        try {
+            $d = new Dispatcher();
+            $d->attach('myevent', Event2::class);
+            $d->attach('myevent', [1]); //invalid callback
+
+            $d->fire('myevent'); // should trigger exception because of second callback
+
+        } catch(Exception $e) {
+            $error = true;
+        }
+
+        $this->assertTrue(isset($error));
+    }
 }
 
 
