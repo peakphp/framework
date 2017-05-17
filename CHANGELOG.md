@@ -3,6 +3,8 @@ VERSION 2.6.0
 Release Date: ?
 
  - removed methods getName(), getAction() and getActions() in Peak\Bedrock\Controller\Action
+ - added method hasAlias() to Peak\Di\Container
+ - fixed a bug with Application::get() and instance alias name
 
 VERSION 2.5.0
 -------------
