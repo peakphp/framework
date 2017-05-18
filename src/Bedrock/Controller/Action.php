@@ -116,8 +116,7 @@ abstract class Action
         if ($this->actions_with_params) {
             $this->dispatchActionParams($this->action);
         } else {
-            $method = $this->action;
-            $this->$method(); 
+            $this->callAction($this->action);
         }
     }
     
@@ -154,7 +153,19 @@ abstract class Action
         }
         
         //call action with args
-        return call_user_func_array([$this, $action_name], $args);
+        return $this->callAction($action_name, $args);
+    }
+
+    /**
+     * Call an action
+     *
+     * @param   string $action
+     * @param   array  $args
+     * @return  mixed
+     */
+    protected function callAction($action, $args = [])
+    {
+        return call_user_func_array([$this, $action], $args);
     }
 
     /**
