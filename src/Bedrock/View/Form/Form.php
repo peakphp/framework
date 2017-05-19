@@ -70,10 +70,10 @@ class Form
     /**
      * Load a form control
      *
-     * @param  string $type   
-     * @param  string $name   
+     * @param  string $type
+     * @param  string $name
      * @param  array  $options
-     * @return object       
+     * @return object
      */
     public function control($type, $name, $options = [])
     {
@@ -111,8 +111,8 @@ class Form
     /**
      * Get error
      *
-     * @param  string $name 
-     * @return string       
+     * @param  string $name
+     * @return string
      */
     public function getError($name)
     {
