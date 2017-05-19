@@ -90,7 +90,9 @@ class Cache
      */
     public function isValid($id = null)
     {
-        if ($this->_use_cache === false) return false;
+        if ($this->_use_cache === false) {
+            return false;
+        }
 
         //when checking isValid without a custom id in controller action we generated a new id based
         //on controller name and action name. If id is null but, cache id is already generated, we use it.
