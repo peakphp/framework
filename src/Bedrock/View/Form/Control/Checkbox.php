@@ -15,7 +15,7 @@ class Checkbox extends FormControl
      */
     protected $default_options = [
         'label'       => '',
-        'description' => '',  
+        'description' => '',
         'attrs' => [
             'class'       => '',
             'required'    => false,
@@ -26,7 +26,9 @@ class Checkbox extends FormControl
     /**
      * Do stuff after constructor
      */
-    public function init() {}
+    public function init()
+    {
+    }
 
     /**
      * Generated the control
