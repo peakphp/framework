@@ -92,7 +92,7 @@ class View
      */
     public function __isset($name)
     {
-        return array_key_exists($name,$this->_vars) ? true : false;
+        return array_key_exists($name, $this->_vars) ? true : false;
     }
 
     /**
@@ -118,8 +118,8 @@ class View
      */
     public function __call($method, $args = null)
     {
-        if (method_exists($this->engine(),$method)) {
-            return call_user_func_array(array($this->engine(), $method), $args);        
+        if (method_exists($this->engine(), $method)) {
+            return call_user_func_array([$this->engine(), $method], $args);        
         } else {
             return $this->helper($method);
         }
@@ -146,7 +146,7 @@ class View
      */
     public function set($name, $value = null)
     {
-        $this->__set($name,$value);
+        $this->__set($name, $value);
         return $this;
     }
 
@@ -187,7 +187,7 @@ class View
     public function addVars($vars)
     {
         foreach ($vars as $k => $v) {
-            $this->set($k,$v);
+            $this->set($k, $v);
         }
     }
 
