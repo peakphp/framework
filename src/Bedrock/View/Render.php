@@ -7,22 +7,44 @@ use Peak\Bedrock\View;
 use Peak\Bedrock\View\Cache;
 
 /**
- * Peak_View_Render Engine base
+ * Render Engine base
  */
 abstract class Render
 {
+    /**
+     * Controller action script view path used 
+     * @var string
+     */
+    public $scripts_file;
 
-    public $scripts_file;          //controller action script view path used 
-    public $scripts_path;          //controller action script view file name used
+    /**
+     * Controller action script view file name used
+     * @var string
+     */
+    public $scripts_path;
 
-    protected $cache;              //view cache object
+    /**
+     * Cache object
+     * @var Peak\Bedrock\View\Cache
+     */
+    protected $cache;
 
+    /**
+     * View object
+     * @var Peak\Bedrock\View
+     */
     protected $view;
 
     //force child to implement those functions
     abstract public function render($file, $path = null);
     abstract protected function output($data);
 
+    /**
+     * Constructor
+     *
+     * @param View  $view
+     * @param Cache $cache
+     */
     public function __construct(View $view, Cache $cache)
     {
         $this->view = $view;
@@ -48,7 +70,7 @@ abstract class Render
     }
 
     /**
-     * Point to Peak_View __get method
+     * Point to View __get method
      *
      * @param  string $name represent view var name
      * @return misc
@@ -70,8 +92,7 @@ abstract class Render
     }
 
     /**
-     * Silent call to unknow method or
-     * Throw trigger error when DEV_MODE is activated 
+     * Silent call to unknow method
      *
      * @param string $method
      * @param array  $args
@@ -79,11 +100,11 @@ abstract class Render
     public function  __call($method, $args)
     {
         $view =& $this->view;
-        return call_user_func_array(array($view, $method), $args);
+        return call_user_func_array([$view, $method], $args);
     }
 
     /**
-     * Call child output method and cache it if cache activated;
+     * Call child output method and cache it if cache activated
      * Can be overloaded by engines to customize how the cache data
      *
      * @param misc $data
