@@ -14,6 +14,6 @@ class RequestServerURI extends Request
         parent::__construct(
             $_SERVER['REQUEST_URI'],
             $base_uri
-        );    
+        );
     }
 }
