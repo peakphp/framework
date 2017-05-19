@@ -59,7 +59,7 @@ class Routing
      * Load a request or use server request uri
      *
      * @param  string|null $request
-     * @return $this      
+     * @return $this
      */
     public function loadRequest($request = null)
     {
