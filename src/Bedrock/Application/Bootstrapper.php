@@ -61,7 +61,9 @@ class Bootstrapper
         $l = strlen($this->boot_methods_prefix);
         if (!empty($c_methods)) {
             foreach ($c_methods as $m) {            
-                if (substr($m, 0, $l) === $this->boot_methods_prefix) $this->$m();
+                if (substr($m, 0, $l) === $this->boot_methods_prefix) {
+                    $this->$m();
+                }
             }
         }
     }
