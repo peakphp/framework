@@ -41,7 +41,7 @@ class RuleBuilder
 
     /**
      * Constructor
-     * 
+     *
      * @param string $name rule classname
      */
     public function __construct($name)
