@@ -5,7 +5,7 @@ namespace Peak\Bedrock\View;
 use Peak\Bedrock\View;
 
 /**
- * Peak View Helper Base
+ * View Helper Base
  */
 abstract class Helper
 {
