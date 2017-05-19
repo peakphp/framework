@@ -73,7 +73,6 @@ class Paginator implements IteratorAggregate
      */
     public function calculate()
     {
-        
         // calculate how many page
         if ($this->items_count > 0 && $this->items_per_page > 0) {
             $this->pages_count = ceil(($this->items_count / $this->items_per_page));
@@ -133,18 +132,15 @@ class Paginator implements IteratorAggregate
      * Example:
      * If there is 100 pages, pages range of 5 and current page is 10,
      * pages array will be limited to: 5, 6, 7, 8, 9, 10, 11, 12, 13,14 ,15
-     * 
+     *
      * @param  integer
      * @return array
      */
     public function setPagesRange($range = null)
     {
         if (is_numeric($range) && ($range <= $this->pages_count) && is_array($this->pages)) {
-            
             $pages_range = [];
- 
             $diff = $range - $range - $range;
-              
             for ($i = $diff;$i <= $range;++$i) {
                 if ($i < 0) {
                     $index = $this->current_page + $i;
