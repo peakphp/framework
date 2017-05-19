@@ -16,8 +16,8 @@ class Regex
         ':num'       => '-?[0-9]+',
 
         // for float pattern, string like .5 is not valid, it must be 0.5
-        ':negfloat'  => '-([0-9]+\.[0-9]+|[0-9]+)',     
-        ':posfloat'  => '([0-9]+\.[0-9]+|[0-9]+)',     
+        ':negfloat'  => '-([0-9]+\.[0-9]+|[0-9]+)',
+        ':posfloat'  => '([0-9]+\.[0-9]+|[0-9]+)',
         ':float'     => '[-+]?([0-9]+\.[0-9]+|[0-9]+)',
 
         // chars, numbers, -, _ and + only
@@ -46,8 +46,8 @@ class Regex
 
         // replace quick pattern to a standard regex expression without delimiters
         return str_ireplace(
-            array_keys(self::$_quick_reg), 
-            array_values(self::$_quick_reg), 
+            array_keys(self::$_quick_reg),
+            array_values(self::$_quick_reg),
             $regex
         );
     }
@@ -58,8 +58,8 @@ class Regex
      * @param string $shortcut shortcut without the prefix :
      * @param string $regex    the regex without the delimiters
      */
-    public static function addQuickRegex($shortcut, $regex) 
-    {   
+    public static function addQuickRegex($shortcut, $regex)
+    {
         self::$_quick_reg[':'.$shortcut] = $regex;
     }
 }
