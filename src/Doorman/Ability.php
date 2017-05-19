@@ -18,7 +18,7 @@ class Ability
      * Owner of ability (aka as user)
      * @var Peak\Doorman\User
      */
-    public $owner; 
+    public $owner;
 
     /**
      * Group of ability
@@ -35,10 +35,10 @@ class Ability
     /**
      * Constructor
      *
-     * @param string      $name        
-     * @param User        $owner       
-     * @param Group       $group       
-     * @param Permissions $permissions 
+     * @param string      $name
+     * @param User        $owner
+     * @param Group       $group
+     * @param Permissions $permissions
      */
     public function __construct($name, User $owner, Group $group, Permissions $permissions)
     {
