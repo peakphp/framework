@@ -56,11 +56,11 @@ class Route
     /**
      * Check if match the current route
      *
-     * @param  string  $controller the controller name 
+     * @param  string  $controller the controller name
      * @param  string  $action     if specified, look also for action name
      * @return boolean
      */
-    public function is($controller, $action = null) 
+    public function is($controller, $action = null)
     {
         if (isset($action)) {
             return ($this->controller === $controller && $this->action === $action);
