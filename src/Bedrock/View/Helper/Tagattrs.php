@@ -13,7 +13,7 @@ class Tagattrs extends Helper
      * Attributes
      * @var array
      */
-    protected $attributes = array();
+    protected $attributes = [];
     
     /**
      * Add an array of atrributes to the current class $attributes array
@@ -153,12 +153,12 @@ class Tagattrs extends Helper
     
     /**
      * Reset all attributes
-     * 
+     *
      * @return object
      */
     public function reset()
     {
-        $this->attributes = array();
+        $this->attributes = [];
         return $this;
     }
 }
