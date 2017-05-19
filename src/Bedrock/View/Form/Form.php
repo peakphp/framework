@@ -47,8 +47,7 @@ class Form
             foreach ($data as $k => $v) {
                 $d[$k] = $v;
             }
-        }
-        else {
+        } else {
             $d = $data;
         }
 
@@ -80,16 +79,16 @@ class Form
     {
         if (class_exists($type)) {
             $cname = $type;
-        } 
-        else $cname = 'Peak\Bedrock\View\Form\Control\\'.ucfirst($type);
+        } else {
+            $cname = 'Peak\Bedrock\View\Form\Control\\'.ucfirst($type);
+        }
 
         $data = $this->get($name);
         $error = $this->getError($name);
 
         if (class_exists($cname)) {
             return new $cname($name, $data, $options, $error);
-        }
-        else {
+        } else {
             throw new Exception('Form control type '.$type.' not found');
         }
     }
