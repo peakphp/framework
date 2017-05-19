@@ -85,7 +85,7 @@ abstract class Element implements ElementInterface
      * @param  bool   $data_as_attrs if true, data will be added to 'value' html attribute
      * @return string
      */
-    protected function attributes($data_as_attrs = true) 
+    protected function attributes($data_as_attrs = true)
     {
         $attrs_array = [
             'id'    => 'field-'.$this->name,
