@@ -34,7 +34,9 @@ class Dirinfo
             $it = new RecursiveDirectoryIterator($path);
 
             foreach (new RecursiveIteratorIterator($it) as $f => $c) {
-                if($c->isDir() || $c->isDot()) continue;
+                if($c->isDir() || $c->isDot()) {
+                    continue;
+                }
                 $size = $c->getSize();
                 $this->_size += $size;
                 ++$this->_nbfiles;
@@ -42,7 +44,9 @@ class Dirinfo
         }
         else {
             foreach (new DirectoryIterator($path) as $f) {
-                if ($f->isDot()) continue;
+                if ($f->isDot()) {
+                    continue;
+                }
                 $size = $f->getSize();
                 $this->_size += $size;
                 ++$this->_nbfiles;
@@ -58,7 +62,9 @@ class Dirinfo
      */
     public function getSize($format = false)
     {
-        if (!$format) return $this->_size;
+        if (!$format) {
+            return $this->_size;
+        }
     
         $unit = array('b','kb','mb','gb','tb','pb');
         return @round($this->_size/pow(1024,($i=floor(log($this->_size,1024)))),2).' '.$unit[$i];
