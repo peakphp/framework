@@ -36,7 +36,6 @@ class Header
      * @var array
      */
     protected $http_status_codes = [
-
         100 => 'Continue',
         101 => 'Switching Protocols',
         102 => 'Processing',
@@ -124,16 +123,13 @@ class Header
         }
 
         if (!empty($this->header) && !headers_sent() && $this->released === false) {
-
             $this->released = true;
-
             foreach ($this->header as $k => $field) {
                 header($field);
             }
             if (!is_null($this)) {
                 echo $this->content;
             }
-
             if ($die) {
                 die(); 
             }
@@ -167,11 +163,9 @@ class Header
     public function set($field)
     {
         if (!empty($field)) {
-
             if (!is_array($field)) {
                 $this->header[] = $field;
-            }
-            else {
+            } else {
                 foreach ($field as $f) {
                     $this->header[] = $f;
                 }
@@ -281,7 +275,6 @@ class Header
     public function download($filepath, $mmtype = 'application/octet-stream')
     {
         if (file_exists($filepath)) {
-
             // dowwload header
             $h = [
                 'Cache-Control: public, must-revalidate',
@@ -320,7 +313,6 @@ class Header
     public function downloadCompressed($filepath, $archive_name, $compress_level = 1)
     {
         if (file_exists($filepath)) {
-
             $tmppath = sys_get_temp_dir();
             $tmpfile = $tmppath.'/'.$archive_name;
 
