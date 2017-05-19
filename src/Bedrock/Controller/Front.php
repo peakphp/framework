@@ -204,7 +204,7 @@ class Front
             $this->controller->setRoute($this->route);
             $this->controller->dispatchAction();
         } else {
-            $this->dispatch();   
+            $this->dispatch();
         }
     }
 }
