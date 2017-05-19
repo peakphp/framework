@@ -65,12 +65,12 @@ class Debug extends Helper
     public function getFiles()
     {
         $temp = get_included_files();
-        $files = array();
+        $files = [];
         $total_size = 0;
-        $library_path = str_replace(array('\\','//'),'/',realpath(LIBRARY_ABSPATH));
+        $library_path = str_replace(['\\', '//'], '/', realpath(LIBRARY_ABSPATH));
         foreach ($temp as $file) {
             $total_size += filesize($file);
-            $file = str_replace('\\','/',$file);
+            $file = str_replace('\\', '/', $file);
             if (stristr($file, $library_path) !== false) {
                 $files['peak'][] = $file;
             } else {
@@ -78,7 +78,7 @@ class Debug extends Helper
             }
         }
         $files['total_size'] = $total_size;
-        
+
         return $files;
     }
     
@@ -90,7 +90,7 @@ class Debug extends Helper
     public function getMemoryUsage()
     {
         $size = memory_get_peak_usage(true);
-        $unit = array('b','kb','mb','gb','tb','pb');
-        return @round($size/pow(1024,($i=floor(log($size,1024)))),4).' '.$unit[$i];
+        $unit = ['b','kb','mb','gb','tb','pb'];
+        return @round($size/pow(1024, ($i=floor(log($size, 1024)))), 4).' '.$unit[$i];
     }
 }
