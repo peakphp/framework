@@ -118,5 +118,5 @@ abstract class DataSet
         }
 
         return (empty($this->errors));
-    }    
+    }
 }
