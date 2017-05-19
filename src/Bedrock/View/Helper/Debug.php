@@ -71,8 +71,11 @@ class Debug extends Helper
         foreach ($temp as $file) {
             $total_size += filesize($file);
             $file = str_replace('\\','/',$file);
-            if (stristr($file, $library_path) !== false) $files['peak'][] = $file;
-            else $files['app'][] = $file;
+            if (stristr($file, $library_path) !== false) {
+                $files['peak'][] = $file;
+            } else {
+                $files['app'][] = $file;
+            }
         }
         $files['total_size'] = $total_size;
         
