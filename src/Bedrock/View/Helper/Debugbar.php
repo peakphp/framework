@@ -146,31 +146,31 @@ class Debugbar extends Debug
         //files included
         echo '<div class="window resizable" id="pkdb_include_window">';
         echo '<h2>Files information</h2>
-              <strong>'.$files_count.' Files included<br />Total size: '.round($files['total_size'] / 1024,2).' Kbs</strong><br />';
+              <strong>'.$files_count.' Files included<br />Total size: '.round($files['total_size'] / 1024, 2).' Kbs</strong><br />';
         echo '<h2>'.count($files['app']).' Application files:</h2>';
         foreach ($files['app'] as $appfile) {
-            $size = round(filesize($appfile) / 1024,2);
+            $size = round(filesize($appfile) / 1024, 2);
             $appfile = str_replace(basename($appfile),'<strong>'.basename($appfile).'</strong>', $appfile);
             echo $appfile.' - <small>'.$size.' Kbs</small><br />';
         }
         echo '<h2>'.count($files['peak']).' Library files:</h2>';
         foreach ($files['peak'] as $libfile) {
-            $size = round(filesize($libfile) / 1024,2);
-            $libfile = str_replace(basename($libfile),'<strong>'.basename($libfile).'</strong>', $libfile);
+            $size = round(filesize($libfile) / 1024, 2);
+            $libfile = str_replace(basename($libfile), '<strong>'.basename($libfile).'</strong>', $libfile);
             echo str_replace(LIBRARY_ABSPATH, '', $libfile).' - <small>'.$size.' Kbs</small><br />';
         }
         echo '</div>';
 
         //variables
         echo '<div class="window resizable" id="pkdb_vars_window">';
-        $views_vars = htmlentities(print_r($this->view->getVars(),true));
+        $views_vars = htmlentities(print_r($this->view->getVars(), true));
         echo '<h2>VIEW</h2><pre>'.$views_vars.'</pre>';
         if (!empty($_SESSION)) {
-            $sessions_vars = htmlentities(print_r($_SESSION,true));
+            $sessions_vars = htmlentities(print_r($_SESSION, true));
             echo '<h2>$_SESSION</h2><pre>'.$sessions_vars.'</pre>';
         }
-        echo '<h2>$_COOKIE</h2><pre>'.print_r($_COOKIE,true).'</pre>';
-        echo '<h2>$_SERVER</h2><pre>'.print_r($_SERVER,true).'</pre>';
+        echo '<h2>$_COOKIE</h2><pre>'.print_r($_COOKIE, true).'</pre>';
+        echo '<h2>$_SERVER</h2><pre>'.print_r($_SERVER, true).'</pre>';
         echo '</div>';
 
         //app container
