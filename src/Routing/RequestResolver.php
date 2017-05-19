@@ -49,7 +49,9 @@ class RequestResolver
         $request_block = explode(Request::$separator, $this->request->request_uri);
 
         foreach ($request_block as $key => $value) {
-            if (strlen($value) == 0) unset($request_block[$key]);
+            if (strlen($value) == 0) {
+                unset($request_block[$key]);
+            }
         }
 
         $route = new Route();
