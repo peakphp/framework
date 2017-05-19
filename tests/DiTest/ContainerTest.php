@@ -436,6 +436,28 @@ class ContainerTest extends TestCase
         $this->assertTrue($testdi instanceof TestDi1);
     }
 
+    function testAddWithAliases()
+    {
+        $container = new \Peak\Di\Container();
+
+
+        $testdi = $container->instantiate('TestDi1', [
+            'value',
+            [12],
+            999
+        ]);
+
+        $container->add($testdi, 'MyClassAlias');
+
+        //the normal way
+        $testdi = $container->get(TestDi1::class);
+        $this->assertTrue($testdi instanceof TestDi1);
+
+        //the alias way
+        $testdi = $container->get('MyClassAlias');
+        $this->assertTrue($testdi instanceof TestDi1);
+    }
+
     function testAddItsetf()
     {
         $container = new \Peak\Di\Container();
