@@ -35,7 +35,7 @@ abstract class AbstractProcessor
      */
     protected function resolvePipe($pipe, $payload)
     {
-        if($pipe instanceof Closure) {
+        if ($pipe instanceof Closure) {
             // for closure
             return call_user_func($pipe, $payload);
         } elseif (is_callable($pipe)) {
