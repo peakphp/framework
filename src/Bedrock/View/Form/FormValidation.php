@@ -52,7 +52,7 @@ class FormValidation
     }
 
     /**
-     * Validate 
+     * Validate
      *
      * @param  array $data
      * @return bool
