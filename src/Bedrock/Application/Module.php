@@ -16,6 +16,7 @@ class Module
 {
     /**
      * Module name
+     * @var string
      */
     public $name;
 
@@ -33,7 +34,12 @@ class Module
         $kernel->reload()->run();
     }
 
-    public function init() {}
+    /**
+     * Init
+     */
+    public function init()
+    {
+    }
 
     /**
      * Update app view path for this controllers scripts
@@ -42,7 +48,7 @@ class Module
      */
     public function updateConfig()
     {
-        //update applicatiom namespace to the module name 
+        //update applicatiom namespace to the module name
         //folder under your App\Modules folder
         Application::conf()->set('ns', Application::conf('ns').'\Modules\\'.ucfirst($this->name));
 
