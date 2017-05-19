@@ -7,6 +7,7 @@ Release Date: ?
  - fixed a bug with Application::get() and instance alias name
  - fixed an undefined variable for Peak\Events\Dispatcher::handleCallback()
  - added method callAction() to Peak\Bedrock\Controller\Action
+ - added Peak\Common\PaginatorBuilder
 
 VERSION 2.5.0
 -------------
