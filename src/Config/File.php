@@ -16,8 +16,11 @@ class File extends DotNotation
      */
     public function __construct($vars = null)
     {
-        if (is_array($vars)) parent::__construct($vars);
-        elseif (is_string($vars)) $this->loadFile($vars);
+        if (is_array($vars)) {
+            parent::__construct($vars);
+        } elseif (is_string($vars)) {
+            $this->loadFile($vars);
+        }
     }
 
     /**
@@ -52,7 +55,9 @@ class File extends DotNotation
      */
     public function saveToFile($file = null) 
     {
-        if (isset($file)) $this->file = $file;
+        if (isset($file)) {
+            $this->file = $file;
+        }
 
         if (file_exists($this->file) && !is_writable($this->file)) {
             throw new Exception(__CLASS__.': '.$this->file.' is not writable');
