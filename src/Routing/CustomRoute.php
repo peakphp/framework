@@ -61,22 +61,20 @@ class CustomRoute
     /**
      * Check if match
      *
-     * @param  Request $req  
-     * @return mixed        Return a route if valid, otherwise false
+     * @param  Request $req 
+     * @return mixed   Return a route if valid, otherwise false
      */
     public function matchRequest(Request $request)
     {
         $result = preg_match(
             '#^/'.$this->regex.'/$#', 
-            $request->request_uri, 
+            $request->request_uri,
             $matches
         );
 
         //we got a positive preg_match
         if (!empty($matches)) {
-
             $request->request_uri = $this->controller.Request::$separator.$this->action.$request->request_uri;
-
             $request_resolve = new RequestResolver($request);
             $route = $request_resolve->getRoute();
 
@@ -84,5 +82,5 @@ class CustomRoute
         }
 
         return false;
-    }   
+    }
 }
