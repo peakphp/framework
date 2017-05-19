@@ -36,7 +36,7 @@ class RequestResolver
             return $route;
         }
 
-        return $this->resolve();        
+        return $this->resolve();
     }
 
     /**
@@ -72,8 +72,8 @@ class RequestResolver
     /**
      * Try to match the current request with a custom regex route
      *
-     * @param  Collection|null $regex_routes 
-     * @return mixed                     
+     * @param  Collection|null $regex_routes
+     * @return mixed
      */
     protected function lookForRegexMatch(Collection $regex_routes = null)
     {
@@ -101,7 +101,7 @@ class RequestResolver
 
         foreach ($params as $k => $v) {
             if ($i == 0) {
-                $key = $v; 
+                $key = $v;
                 ++$i;
             } else {
                 $params_assoc[$key] = $v;
