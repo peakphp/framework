@@ -54,7 +54,7 @@ abstract class Render
     /**
      * Same as render() but handle an array of file instead
      *
-     * @param  array  $files
+     * @param array $files
      */
     public function renderArray(array $files)
     {
