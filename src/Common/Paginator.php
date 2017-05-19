@@ -130,7 +130,10 @@ class Paginator implements IteratorAggregate
     /**
      * Set a pages ranges list array
      * Range represent the number of page before and after the current page
-     *
+     * Example:
+     * If there is 100 pages, pages range of 5 and current page is 10,
+     * pages array will be limited to: 5, 6, 7, 8, 9, 10, 11, 12, 13,14 ,15
+     * 
      * @param  integer
      * @return array
      */
