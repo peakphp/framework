@@ -9,7 +9,6 @@ use Peak\Common\DataException;
 use Peak\Routing\Request;
 use Peak\Routing\CustomRoute;
 
-
 /**
  * Application Bootstrap Customer routes
  */
