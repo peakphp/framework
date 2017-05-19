@@ -8,6 +8,7 @@ Release Date: ?
  - fixed an undefined variable for Peak\Events\Dispatcher::handleCallback()
  - added method callAction() to Peak\Bedrock\Controller\Action
  - added Peak\Common\PaginatorBuilder
+ - added second argument Peak\Di\Container::add() for alias
 
 VERSION 2.5.0
 -------------
