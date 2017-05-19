@@ -7,7 +7,7 @@ use Peak\Bedrock\View;
 use Peak\Bedrock\Controller\ParentController;
 
 /**
- * For standalone controller action class 
+ * For standalone controller action class
  */
 abstract class Child
 {
