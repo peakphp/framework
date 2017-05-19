@@ -44,7 +44,7 @@ abstract class FormControl extends Element
         $element = new \Peak\Bedrock\View\Form\Element\Error(
             $this->name, 
             $this->error, 
-            [   
+            [
                 'attrs' => [
                     'id'   => null,
                     'name' => null
@@ -67,7 +67,7 @@ abstract class FormControl extends Element
 
     /**
      * Render a generic label
-     * 
+     *
      * @return string
      */
     public function label()
@@ -79,7 +79,7 @@ abstract class FormControl extends Element
         $element = new \Peak\Bedrock\View\Form\Element\Label(
             $this->name, 
             $this->options['label'],
-            [   
+            [
                 'attrs' => [
                     'id'   => null,
                     'name' => null
