@@ -138,11 +138,17 @@ class Container implements ContainerInterface
      * Add an object instance. Chainable
      *
      * @param  string $object
+     * @param  string|null $alias
+     * @return $this
      */
-    public function add($object) 
+    public function add($object, $alias = null) 
     {
         $class = get_class($object);
         $this->instances[$class] = $object;
+
+        if (isset($alias)) {
+            $this->addAlias($alias, $class);
+        }
 
         $interfaces = class_implements($object);
         if (is_array($interfaces)) {
