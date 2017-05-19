@@ -28,7 +28,9 @@ class Error extends Element
      */
     public function generate()
     {
-        if (empty($this->data)) return '';
+        if (empty($this->data)) {
+            return '';
+        }
         $attrs = $this->attributes(false);
 
         return '
