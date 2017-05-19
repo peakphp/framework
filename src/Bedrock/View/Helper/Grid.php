@@ -300,7 +300,9 @@ class Grid extends Helper
      */
     private function _isPseudoColumn($title)
     {
-        if (substr($title,0,1) === ':' && isset($this->_hooks[$title])) return true;
+        if (substr($title,0,1) === ':' && isset($this->_hooks[$title])) {
+            return true;
+        }
         return false;
     }
 
@@ -473,7 +475,9 @@ class Grid extends Helper
     {
         $cols = [];
         
-        if (empty($this->_data));
+        if (empty($this->_data)) {
+            return;
+        }
         
         foreach ($this->_data as $row) {
             if (is_array($row)) {
