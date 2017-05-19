@@ -2,6 +2,9 @@
 
 namespace Peak\Bedrock\Application\Config;
 
+use Peak\Config\File;
+use Peak\Config\File\Ini;
+use Peak\Config\File\Json;
 use \Exception;
 
 class FileLoader
@@ -33,15 +36,14 @@ class FileLoader
 
         //load configuration object according to the file extension
         switch ($extension) {
-
             case 'php':
-                $conf = new \Peak\Config\File($file);
+                $conf = new File($file);
                 break;
             case 'ini':
-                $conf = new \Peak\Config\File\Ini($file, true);
+                $conf = new Ini($file, true);
                 break;
             case 'json':
-                $conf = new \Peak\Config\File\Json($file, true);
+                $conf = new Json($file, true);
                 break;
             default:
                 throw new Exception('Application configuration file format "'.$extension.'" is not supported');
