@@ -105,7 +105,7 @@ class Partials extends Render
             }
             $this->preOutput($group_filespath);
         } else {
-            if (isset($no_cache)) 
+            if (isset($no_cache)) {
                 $this->output($filepath);
             } else {
                 $this->preOutput($filepath);
