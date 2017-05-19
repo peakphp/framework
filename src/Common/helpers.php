@@ -128,8 +128,6 @@ if (!function_exists('exceptionTrace')) {
      */
     function exceptionTrace(\Exception $exc)
     {
-        $trace = debug_backtrace();
-
         $msg = trim($exc->getMessage());
 
         $content = '['.date('Y-m-d H:i:s')."] ".get_class($exc)."\n";
