@@ -9,7 +9,6 @@ use Peak\Di\ClassInspector;
 use Peak\Di\InterfaceResolver;
 use Peak\Di\ExplicitResolver;
 
-
 /**
  * Class Dependencies Resolver
  */
@@ -69,14 +68,12 @@ class ClassResolver
         $i            = 0;
 
         foreach ($dependencies as $key => $d) {
-
             if (isset($d['error'])) {
                 throw new Exception($d['error']);
             }
 
             // its a class or an interface
             if (isset($d['class'])) {
-
                 $name = $d['class'];
                 ++$class_count;
 
@@ -84,19 +81,16 @@ class ClassResolver
                 $result = $this->explicit->resolve($name, $explicit);
                 if ($result !== null) {
                     $class_args[] = $result;
-                }
-                // check if container has a stored instance
-                elseif ($container->has($name)) {
+                } elseif ($container->has($name)) {
+                    // check if container has a stored instance
                     $class_args[] = $container->get($name);
-                }
-                else {
+                } else {
                     // otherwise check if we are
                     // dealing with an interface dependency
                     if (interface_exists($name)) {
                         $class_args[] = $this->iresolver->resolve($name, $container, $explicit);
-                    }
-                    // or resolve dependency by trying to instanciate object classname string
-                    else {
+                    } else {
+                        // or resolve dependency by trying to instanciate object classname string
                         $child_args = [];
                         if (array_key_exists($name, $args)) {
                             $child_args = $args[$name];
@@ -104,9 +98,8 @@ class ClassResolver
                         $class_args[] = $container->instantiate($name, $child_args, $explicit);
                     }
                 }
-            }
-            // everything else that is not a type of class or interface
-            elseif (array_key_exists($i - ($class_count), $args)) {
+            } elseif (array_key_exists($i - ($class_count), $args)) {
+                // everything else that is not a type of class or interface
                 $class_args[] = $args[$i - $class_count];
             }
 
