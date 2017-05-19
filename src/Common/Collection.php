@@ -173,7 +173,9 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
      */
     public function offsetUnset($offset)
     {
-        if ($this->isReadOnly()) return;
+        if ($this->isReadOnly()) {
+            return;
+        }
         unset($this->items[$offset]);
     }
 
@@ -308,8 +310,9 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
                     }
                 }
             }
+        } else {
+            $a = $b; // one of values is not an array
         }
-        else $a = $b; // one of values is not an array
 
         return $a;
     }
