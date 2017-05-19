@@ -57,8 +57,7 @@ class Environment
         );
  
         //merge app config paths with core app paths
-        if(isset($this->file_config->all['path'])) {
-
+        if (isset($this->file_config->all['path'])) {
             $this->file_config->all['path'] = $this->file_config->mergeRecursiveDistinct(
                 $this->app_config->path,
                 $this->file_config->all['path'],
