@@ -15,7 +15,7 @@ class Input extends FormControl
      */
     protected $default_options = [
         'label'       => '',
-        'description' => '',  
+        'description' => '',
         'attrs' => [
             'class'       => '',
             'required'    => false,
@@ -28,7 +28,9 @@ class Input extends FormControl
     /**
      * Do stuff after constructor
      */
-    public function init() {}
+    public function init()
+    {
+    }
 
     /**
      * Generated the control
