@@ -188,7 +188,9 @@ class Ini extends DotNotation
     {
         $pos = strpos($path, '.');
 
-        if ($pos === false)  return array($path => $value);
+        if ($pos === false) {
+            return array($path => $value);
+        }
 
         $key = substr($path, 0, $pos);
         $path = substr($path, $pos + 1);
