@@ -279,7 +279,6 @@ class View
         }
 
         if (is_object($this->_engine)) {
-
             // check if we got http header
             if (is_object($this->_header)) {
                 $this->_header->release();
