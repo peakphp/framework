@@ -44,7 +44,7 @@ class Alpha extends AbstractRule
      * @return array
      */
     protected function buildRegexOpt()
-    {            
+    {
         $regopt = [];
 
         if ($this->options['lower'] === true) {
