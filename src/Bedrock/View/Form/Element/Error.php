@@ -19,7 +19,9 @@ class Error extends Element
     /**
      * Do stuff after constructor
      */
-    public function init() {}
+    public function init()
+    {
+    }
 
     /**
      * Generated the control
