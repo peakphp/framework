@@ -15,7 +15,7 @@ class Select extends FormControl
      */
     protected $default_options = [
         'label'             => '',
-        'description'       => '', 
+        'description'       => '',
         'options'           => [],
         'default'           => '',
         'value_as_key'      => false,
@@ -30,7 +30,9 @@ class Select extends FormControl
     /**
      * Do stuff after constructor
      */
-    public function init() {}
+    public function init()
+    {
+    }
 
     /**
      * Generated the control
