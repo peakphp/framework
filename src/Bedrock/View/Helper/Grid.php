@@ -8,7 +8,7 @@ use Peak\Bedrock\View\Helper;
  * Table Grid Helper
  *
  * Create table easily
- */  
+ */
 class Grid extends Helper
 {
     /**
@@ -257,7 +257,7 @@ class Grid extends Helper
     public function addTableClasses($classes)
     {
         if (!empty($classes)) {
-            $this->_table_classes .= (substr($classes,0,1) === ' ') ? $classes : ' '.$classes;
+            $this->_table_classes .= (substr($classes, 0, 1) === ' ') ? $classes : ' '.$classes;
         }
         return $this;
     }
@@ -300,7 +300,7 @@ class Grid extends Helper
      */
     private function _isPseudoColumn($title)
     {
-        if (substr($title,0,1) === ':' && isset($this->_hooks[$title])) {
+        if (substr($title, 0, 1) === ':' && isset($this->_hooks[$title])) {
             return true;
         }
         return false;
@@ -382,7 +382,7 @@ class Grid extends Helper
                         }
                     } else {
                         $row_data = $row[$colname];
-                    }  
+                    }
 
                     $row_data = $this->_processHook($colname, $row_data, $row);
 
@@ -510,7 +510,7 @@ class Grid extends Helper
                     $r .= ' '.$attr.'="'.$v['value'].'"';
                 }
             } else {
-                if ((array_key_exists($v,$row))) {
+                if ((array_key_exists($v, $row))) {
                     $r .= ' '.$attr.'="'.$row[$v].'"';
                 }
             }
