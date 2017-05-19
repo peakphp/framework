@@ -49,7 +49,7 @@ class Cache
     }
 
     /**
-     * Enable output caching. 
+     * Enable output caching.
      * Avoid using in controllers actions that depends on $_GET, $_POST or any dynamic value for setting the view
      *
      * @param integer $time set cache expiration time(in seconds)
