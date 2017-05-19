@@ -84,7 +84,7 @@ class Container implements ContainerInterface
      * 
      * @param  array  $callback The callable to be called
      * @param  array  $args     The parameters to be passed to the callback, as an indexed array
-     * @param  array  $explict  @see intantiates
+     * @param  array  $explict  @see instantiate
      * @return mixed  the method call return if any
      */
     public function call(array $callback, $args = [], $explict = [])
