@@ -132,9 +132,9 @@ class Assets extends Helper
                         $output .= $this->$ext($p, $param);
                     }
                 }
-            } else {
-                return;
+                return $output;
             }
+            return;
         } else {
             foreach ($paths as $p) {
                 $output .= $this->$mtype($p, $param);
