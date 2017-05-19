@@ -25,22 +25,23 @@ class FormBuilder extends Collection
     /**
      * Custom stuff to do on launch
      */
-    public function init() {}
+    public function init()
+    {
+    }
 
     /**
-     * Get a html control (use App\Views\Helpers\FormControl)
+     * Get a html control
      *
-     * @param  object|string $arg1 
-     * @param  string $arg1 
-     * @return object       
+     * @param  object|string $arg1
+     * @param  string $arg1
+     * @return object
      */
     public function control($arg1, $arg2 = null)
     {
         if (is_string($arg1) && !isset($arg2)) {
             $name = $arg1;
             $form = $this->form;
-        }  
-        else {
+        } else {
             $form = $arg1;
             $name = $arg2;
         }
@@ -56,20 +57,18 @@ class FormBuilder extends Collection
             $this->$method($this->items[$name]);
         }
 
-        return 
-            
-            $form->control(
-                $this->items[$name]['type'],
-                $name,
-                $this->items[$name]['settings']
-            );
+        return $form->control(
+            $this->items[$name]['type'],
+            $name,
+            $this->items[$name]['settings']
+        );
     }
 
     /**
      * Shortcut for new FormValidation(new FormBuilder())
      *
      * @param  array $data
-     * @return bool   
+     * @return bool
      */
     public function validate($data)
     {
