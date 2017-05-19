@@ -72,7 +72,7 @@ abstract class AbstractRule implements RuleInterface
 
     /**
      * Get options array for filter_var()
-     * 
+     *
      * @return array
      */
     protected function getFilterVarOptions()

@@ -24,7 +24,7 @@ class RouteBuilder
                 foreach ($e as $ek => $ev) {
                     $route_arr[] = $ek;
                     $route_arr[] = $ev;
-                } 
+                }
             }
         }
 
