@@ -37,7 +37,9 @@ abstract class FormControl extends Element
      */
     public function error()
     {
-        if (empty($this->error)) return;
+        if (empty($this->error)) {
+            return;
+        }
 
         $element = new \Peak\Bedrock\View\Form\Element\Error(
             $this->name, 
@@ -70,7 +72,9 @@ abstract class FormControl extends Element
      */
     public function label()
     {
-        if (empty($this->options['label'])) return;
+        if (empty($this->options['label'])) {
+            return;
+        }
 
         $element = new \Peak\Bedrock\View\Form\Element\Label(
             $this->name, 
