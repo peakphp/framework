@@ -35,7 +35,7 @@ class Chrono
                 'end' => false
             ];
         } else {
-                self::$timers[$timer_name] = [
+            self::$timers[$timer_name] = [
                 'start' => self::getMicrotime(),
                 'end' => false
             ];
@@ -79,8 +79,7 @@ class Chrono
                 return false;
             }
             return true;
-        }
-        elseif (self::timerExists($timer_name)) {
+        } elseif (self::timerExists($timer_name)) {
             if ((self::$timers[$timer_name]['start'] === false) || (self::$timers[$timer_name]['end'] !== false)) {
                 return false;
             }
@@ -102,8 +101,7 @@ class Chrono
                 return true;
             }
             return false;
-        }
-        elseif (self::timerExists($timer_name)) {
+        } elseif (self::timerExists($timer_name)) {
             if ((self::$timers[$timer_name]['start'] !== false) && (self::$timers[$timer_name]['end'] !== false)) {
                 return true;
             }
@@ -173,8 +171,7 @@ class Chrono
             if (self::timerExists($timer_name)) {
                 unset(self::$timers[$timer_name]);
             }
-        }
-        else {
+        } else {
             self::$global = ['start' => false, 'end' => false];
         }
     }
