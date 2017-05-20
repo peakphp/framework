@@ -20,7 +20,6 @@ class Json extends Render
      */
     public function render($file, $path = null)
     {       
-        //CONTROLLER FILE VIEW       
         $this->scripts_file = $file;
         $this->scripts_path = $path;
 
@@ -40,7 +39,6 @@ class Json extends Render
      */
     protected function output($json)
     {
-        echo $json;    
+        echo $json;
     }
-    
 }
