@@ -131,7 +131,7 @@ class Header
                 echo $this->content;
             }
             if ($die) {
-                die(); 
+                die();
             }
         }
     }
@@ -223,7 +223,7 @@ class Header
      */
     public function setCode($code = 200, $die = false, $http = 'HTTP/1.1')
     {
-        if (array_key_exists($code,$this->http_status_codes)) {
+        if (array_key_exists($code, $this->http_status_codes)) {
             $this->set($http.' '.$code.' '.$this->http_status_codes[$code]);
         }
 
