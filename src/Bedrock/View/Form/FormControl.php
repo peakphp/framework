@@ -42,8 +42,8 @@ abstract class FormControl extends Element
         }
 
         $element = new \Peak\Bedrock\View\Form\Element\Error(
-            $this->name, 
-            $this->error, 
+            $this->name,
+            $this->error,
             [
                 'attrs' => [
                     'id'   => null,
@@ -77,7 +77,7 @@ abstract class FormControl extends Element
         }
 
         $element = new \Peak\Bedrock\View\Form\Element\Label(
-            $this->name, 
+            $this->name,
             $this->options['label'],
             [
                 'attrs' => [
