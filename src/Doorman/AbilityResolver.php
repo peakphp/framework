@@ -23,7 +23,7 @@ class AbilityResolver
     /**
      * Constructor
      *
-     * @param User    $user   
+     * @param User    $user
      * @param Ability $ability
      */
     public function __construct(User $user, Ability $ability)
