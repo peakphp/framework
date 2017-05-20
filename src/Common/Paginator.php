@@ -28,10 +28,10 @@ class Paginator implements IteratorAggregate
     /**
      * Constructor
      *
-     * @param integer  $items_per_page 
-     * @param integer  $items_count    
-     * @param integer  $current_page   
-     * @param integer  $range     
+     * @param integer  $items_per_page
+     * @param integer  $items_count
+     * @param integer  $current_page
+     * @param integer  $range
      */
     public function __construct($items_per_page, $items_count, $current_page = 1, $range = null)
     {
@@ -141,7 +141,7 @@ class Paginator implements IteratorAggregate
         if (is_numeric($range) && ($range <= $this->pages_count) && is_array($this->pages)) {
             $pages_range = [];
             $diff = $range - $range - $range;
-            for ($i = $diff;$i <= $range;++$i) {
+            for ($i = $diff; $i <= $range; ++$i) {
                 if ($i < 0) {
                     $index = $this->current_page + $i;
                 } elseif ($i == 0) {
