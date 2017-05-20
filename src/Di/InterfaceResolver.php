@@ -12,7 +12,7 @@ class InterfaceResolver
 {
     /**
      * Resolve class arguments dependencies
-     * 
+     *
      * @param  string $class
      * @return object
      */
@@ -20,20 +20,15 @@ class InterfaceResolver
     {
         // Try to find a match in the container for a class or an interface
         if ($container->hasInterface($interface)) {
-
             $instance = $container->getInterface($interface);
-
             if (is_array($instance)) {
-
                 if (empty($explicit) || !array_key_exists($interface, $explicit)) {
                     throw new Exception ('Dependecies for interface '.$interface.' is ambiguous. There is '.count($instance).' differents instances for this interface.');
                 }
                 return $container->get($explicit[$interface]);
             }
-            
             return $container->get($instance);
         }
-
         throw new Exception('Could not find an instance that implement interface '.$interface);
     }
 }
