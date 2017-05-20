@@ -146,7 +146,7 @@ class Application
         $container->add(new \Peak\Bedrock\View);
         
         // instantiate and store app kernel
-        $container->instantiateAndStore('\Peak\Bedrock\Application\Kernel'); 
+        $container->instantiateAndStore('\Peak\Bedrock\Application\Kernel');
     }
 
     /**
