@@ -13,7 +13,7 @@ class RouteBuilder
      *
      * @return Peak\Routing\Route
      */
-    public static function get(...$segment) 
+    public static function get(...$segment)
     {
         $route_arr = [];
 
