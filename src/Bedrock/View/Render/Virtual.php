@@ -6,7 +6,7 @@ use Peak\Bedrock\View\Render;
 
 /**
  * Peak View Render Engine: Virtual
- * 
+ *
  * Output virtual groups view vars
  */
 class Virtual extends Render
@@ -20,7 +20,7 @@ class Virtual extends Render
      * @param string $name
      */
     public function addGroup($name)
-    {        
+    {
         if (!array_key_exists($name, $this->_virtual)) {
             $this->_virtual[$name] = '';
         }
