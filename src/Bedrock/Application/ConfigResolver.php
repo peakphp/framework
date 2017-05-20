@@ -80,7 +80,7 @@ class ConfigResolver
             throw new DataException('Application configuration file not found', $file);
         }
 
-        $path = str_replace('\\', '/', $realpath);            
+        $path = str_replace('\\', '/', $realpath);
 
         return $path;
     }
