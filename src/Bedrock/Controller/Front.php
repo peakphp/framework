@@ -54,14 +54,6 @@ class Front
      */
     public function __construct()
     {
-        $this->_appConfig();
-    }
-
-    /**
-     * Get array 'front' from registered object 'config' if exists
-     */
-    private function _appConfig()
-    {
         $config = Application::conf('front');
         if (!empty($config)) {
             foreach ($config as $k => $v) {
@@ -119,6 +111,25 @@ class Front
         // execute a normal controller action
         if ($this->controller instanceof Action) {
             $this->_dispatchControllerAction();
+        }
+    }
+
+    /**
+     * Set a new request and redispatch the controller
+     *
+     * @param string     $ctrl
+     * @param string     $action
+     * @param array/null $params
+     */
+    public function redirect($ctrl, $action = 'index', $params = null)
+    {
+        $this->route = RouteBuilder::get($ctrl, $action, $params);
+
+        if ((is_object($this->controller)) && (strtolower($ctrl) === strtolower($this->controller->getTitle()))) {
+            $this->controller->setRoute($this->route);
+            $this->controller->dispatchAction();
+        } else {
+            $this->dispatch();
         }
     }
 
@@ -189,22 +200,4 @@ class Front
         $this->_dispatchControllerAction();
     }
 
-    /**
-     * Set a new request and redispatch the controller
-     *
-     * @param string     $ctrl
-     * @param string     $action
-     * @param array/null $params
-     */
-    public function redirect($ctrl, $action = 'index', $params = null)
-    {
-        $this->route = RouteBuilder::get($ctrl, $action, $params);
-
-        if ((is_object($this->controller)) && (strtolower($ctrl) === strtolower($this->controller->getTitle()))) {
-            $this->controller->setRoute($this->route);
-            $this->controller->dispatchAction();
-        } else {
-            $this->dispatch();
-        }
-    }
 }
