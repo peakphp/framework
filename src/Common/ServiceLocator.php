@@ -42,7 +42,7 @@ class ServiceLocator
      *
      * @param  string   $name
      * @param  callable $closure
-     * @return $this    for chainning    
+     * @return $this
      */
     public function register($name, callable $closure)
     {
