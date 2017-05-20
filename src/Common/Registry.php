@@ -73,7 +73,7 @@ class Registry
      * @param  object $obj
      * @return object
      */
-    public static function set($name,$obj)
+    public static function set($name, $obj)
     {
         self::$objects[$name] = $obj;
         return $obj;
