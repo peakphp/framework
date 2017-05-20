@@ -102,7 +102,7 @@ class View
      */
     public function __unset($name)
     {
-        if (array_key_exists($name,$this->_vars)) {
+        if (array_key_exists($name, $this->_vars)) {
             unset($this->_vars[$name]);
         }
     }
