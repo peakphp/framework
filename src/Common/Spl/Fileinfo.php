@@ -130,12 +130,12 @@ class Fileinfo extends SplFileInfo
      */
     public function getSize($format = false)
     {
-        if(!$format) {
+        if (!$format) {
             return parent::getSize();
         }
         
-        $unit = array('B','kB','MB','GB','TB','PB');
-        return @round($this->_size/pow(1024,($i=floor(log($this->_size,1024)))),2).' '.$unit[$i];
+        $unit = ['B','kB','MB','GB','TB','PB'];
+        return @round($this->_size/pow(1024, ($i=floor(log($this->_size, 1024)))), 2).' '.$unit[$i];
     }
 
     /**
