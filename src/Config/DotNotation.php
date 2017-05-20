@@ -122,7 +122,7 @@ class DotNotation extends Collection
     /**
      * Explode path string
      *
-     * @param  string $path 
+     * @param  string $path
      * @return array
      */
     protected function explode($path)
