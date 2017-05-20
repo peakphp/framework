@@ -29,7 +29,7 @@ class RequestResolver
      *
      * @return Route
      */
-    public function getRoute(Collection $regex_routes = null) 
+    public function getRoute(Collection $regex_routes = null)
     {
         $route = $this->lookForRegexMatch($regex_routes);
         if ($route !== false) {
