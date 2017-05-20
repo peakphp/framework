@@ -7,13 +7,13 @@ use Peak\Config\DotNotation;
 
 /**
  * Ini
- * 
+ *
  * This class allows you to:
  * - define multi-dimensional structures
  * - group configurations (e.g. production, development, testing, etc.) into separate sections (native INI sections)
  * - extend sections from one another
  * - override keys of extended sections in extending sections
- * 
+ *
  * @author  Original author: Andris at http://codeaid.net
  *          Thanks to him for letting me use and modify his class for the needs of the framework
  */
