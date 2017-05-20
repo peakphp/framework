@@ -81,7 +81,7 @@ class Container implements ContainerInterface
 
     /**
      * Similar to instantiate(), it call a method on specified object
-     * 
+     *
      * @param  array  $callback The callable to be called
      * @param  array  $args     The parameters to be passed to the callback, as an indexed array
      * @param  array  $explict  @see instantiate
@@ -141,7 +141,7 @@ class Container implements ContainerInterface
      * @param  string|null $alias
      * @return $this
      */
-    public function add($object, $alias = null) 
+    public function add($object, $alias = null)
     {
         $class = get_class($object);
         $this->instances[$class] = $object;
@@ -211,7 +211,7 @@ class Container implements ContainerInterface
 
     /**
      * Add container itself
-     * 
+     *
      * @return $this
      */
     public function addItself()
