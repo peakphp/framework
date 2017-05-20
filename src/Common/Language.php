@@ -71,7 +71,7 @@ class Language
      */
     public function addFiles($files, $basepath = null)
     {
-        foreach($this->getArrayFilesContent($files, $basepath) as $file) {
+        foreach ($this->getArrayFilesContent($files, $basepath) as $file) {
             $this->addContent($file);
         }
     }
