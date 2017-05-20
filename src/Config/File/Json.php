@@ -63,7 +63,7 @@ class Json extends DotNotation
     public function loadString($data)
     {
         // remove comments before decoding
-        if($this->_allow_comments === true) {
+        if ($this->_allow_comments === true) {
             $data = preg_replace("#(/\*([^*]|[\r\n]|(\*+([^*/]|[\r\n])))*\*+/)|([\s\t](//).*)#", '', $data);
         }
 
