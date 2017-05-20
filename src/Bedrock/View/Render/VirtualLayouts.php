@@ -35,7 +35,7 @@ class VirtualLayouts extends Render
      * @return $this
      */
     public function setLayout($layout)
-    {        
+    {
         $this->layout = $layout;
         return $this;
     }
@@ -54,7 +54,7 @@ class VirtualLayouts extends Render
 
     /**
      * Add content
-     * 
+     *
      * @param  string $content
      * @return $this
      */
@@ -66,7 +66,7 @@ class VirtualLayouts extends Render
 
     /**
      * Render virtual layout(s)
-     * 
+     *
      * {CONTENT} tag inside layout will be replaced by $content
      *
      * @param  string $file
