@@ -75,9 +75,9 @@ class Json extends DotNotation
     /**
      * Load json url
      *
-     * @param  string     $url 
-     * @param  array|null $post_data post data if specified
-     * @return false|array           return false in case url cant be reach
+     * @param  string      $url
+     * @param  array|null  $post_data post data if specified
+     * @return false|array return false in case url cant be reach
      */
     public function loadUrl($url, $post_data = null)
     {
