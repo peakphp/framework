@@ -6,18 +6,18 @@ use \RuntimeException;
 use Peak\Common\Collection;
 
 /**
- * Dot notation for access multidimensional arrays.
- * 
+ * Dot notation for access multidimensional arrays
+ *
  * $dn = new DotNotation([
  *     'bar'=> [
  *         'baz'=> ['foo' => true]
  *      ]
  * ]);
- * 
+ *
  * $value = $dn->get('bar.baz.foo');   // $value == true
  * $dn->set('bar.baz.foo', false);     // ['foo'=>false]
  * $dn->add('bar.baz', ['boo'=>true]); // ['foo'=>false,'boo'=>true]
- * 
+ *
  * @author Anton Medvedev <anton (at) elfet (dot) ru>
  * @version 2.0
  * @license MIT
