@@ -46,26 +46,21 @@ class PermissionResolver
         // decimal inside a string
         if (array_key_exists($this->raw, FormatDecimalString::$values)) {
             $this->permission = FormatDecimalString::$values[$this->raw];
-        }
-        // alphanum
-        elseif (array_key_exists($this->raw, FormatAlphaNum::$values)) {
+        } elseif (array_key_exists($this->raw, FormatAlphaNum::$values)) {
+            // alphanum
             $this->permission = FormatAlphaNum::$values[$this->raw];
-        }
-        // binary
-        elseif (array_key_exists($this->raw, FormatBinary::$values)) {
+        } elseif (array_key_exists($this->raw, FormatBinary::$values)) {
+            // binary
             $this->permission = FormatBinary::$values[$this->raw];
-        }
-        // textual format
-        elseif (array_key_exists($this->raw, FormatText::$values)) {
+        } elseif (array_key_exists($this->raw, FormatText::$values)) {
+            // textual format 1
             $this->permission = FormatText::$values[$this->raw];
-        }
-        // textual format
-        elseif (array_key_exists($this->raw, FormatChar::$values)) {
+        } elseif (array_key_exists($this->raw, FormatChar::$values)) {
+            // textual format 2
             $this->permission = FormatChar::$values[$this->raw];
-        }
-        elseif (is_numeric($this->raw) && $this->raw >= 0 && $this->raw <= 7) {
+        } elseif (is_numeric($this->raw) && $this->raw >= 0 && $this->raw <= 7) {
             $this->permission = $this->raw;
-        }     
+        }
 
         // Can't resolve permission format
         if ($this->permission === null) {
