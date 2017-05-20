@@ -238,7 +238,6 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
 
     /**
      * To simple object
-     * 
      */
     public function toObject()
     {
@@ -259,7 +258,7 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
 
     /**
      * Array map
-     * 
+     *
      * @param  Closure $closure
      */
     public function map(Closure $closure)
