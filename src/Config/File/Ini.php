@@ -87,7 +87,7 @@ class Ini extends DotNotation
      */
     public function _load($ini, $process_sections = false, $section_name = null)
     {
-        // load the raw ini file 
+        // load the raw ini file
         //$ini = parse_ini_string($data, $process_sections);
 
         // fail if there was an error while processing the specified ini file
