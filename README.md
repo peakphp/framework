@@ -31,6 +31,7 @@ Requirements:
     - Templating
     - Form builder and validator
     - Validators
+    - Pipelines
     - Translation
     - Configuration files
 
