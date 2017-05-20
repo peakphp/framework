@@ -93,7 +93,7 @@ class Language
      * @param  string  $item translation key name
      * @return boolean
      */
-    public function has($item) 
+    public function has($item)
     {
         return (array_key_exists($item, $this->translations));
     }
