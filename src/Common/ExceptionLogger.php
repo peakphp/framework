@@ -26,7 +26,7 @@ class ExceptionLogger
     public function __construct(Exception $exception, $filepath)
     {
         $this->filepath  = $filepath;
-        $this->exception = $exception;  
+        $this->exception = $exception;
         $this->log();
     }
 
