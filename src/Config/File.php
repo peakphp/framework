@@ -53,7 +53,7 @@ class File extends DotNotation
      *
      * @param  string|null $file if not specified, it will take the same file used by loadFile()
      */
-    public function saveToFile($file = null) 
+    public function saveToFile($file = null)
     {
         if (isset($file)) {
             $this->file = $file;
