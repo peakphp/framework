@@ -26,7 +26,7 @@ class Form
 
     /**
      * Set also the data
-     * 
+     *
      * @param array $data
      */
     public function __construct($data = [], $errors = [])
@@ -37,7 +37,7 @@ class Form
     
     /**
      * Set data
-     * 
+     *
      * @return $this
      */
     public function setData($data)
