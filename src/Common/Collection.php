@@ -106,7 +106,7 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
      * @param string $key
      * @param mixed  $value
      */
-    public function __set($key, $value) 
+    public function __set($key, $value)
     {
         if (!$this->isReadOnly()) {
             $this->items[$key] = $value;
