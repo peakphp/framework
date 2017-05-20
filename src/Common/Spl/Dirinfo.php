@@ -28,21 +28,20 @@ class Dirinfo
      *
      * @param string $path
      */
-    public function __construct($path, $recursive = true) 
+    public function __construct($path, $recursive = true)
     {
         if ($recursive) {
             $it = new RecursiveDirectoryIterator($path);
 
             foreach (new RecursiveIteratorIterator($it) as $f => $c) {
-                if($c->isDir() || $c->isDot()) {
+                if ($c->isDir() || $c->isDot()) {
                     continue;
                 }
                 $size = $c->getSize();
                 $this->_size += $size;
                 ++$this->_nbfiles;
             }
-        }
-        else {
+        } else {
             foreach (new DirectoryIterator($path) as $f) {
                 if ($f->isDot()) {
                     continue;
@@ -66,12 +65,12 @@ class Dirinfo
             return $this->_size;
         }
     
-        $unit = array('b','kb','mb','gb','tb','pb');
-        return @round($this->_size/pow(1024,($i=floor(log($this->_size,1024)))),2).' '.$unit[$i];
+        $unit = ['b','kb','mb','gb','tb','pb'];
+        return @round($this->_size/pow(1024, ($i=floor(log($this->_size, 1024)))), 2).' '.$unit[$i];
     }
 
     /**
-     * Return number of files of directory 
+     * Return number of files of directory
      *
      * @return integer
      */
