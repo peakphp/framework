@@ -15,7 +15,7 @@ class Layouts extends Render
      * Current layout filename
      * @var string
      */
-    protected $_layout_file;  
+    protected $layout_file;
        
     /**
      * Set layout filename to render
@@ -25,7 +25,7 @@ class Layouts extends Render
     public function useLayout($layout)
     {
         if ($this->isLayout($layout.'.php')) {
-            $this->_layout_file = $layout.'.php';
+            $this->layout_file = $layout.'.php';
         }
     }
     
@@ -46,7 +46,7 @@ class Layouts extends Render
      */
     public function noLayout()
     {
-        $this->_layout_file = null;
+        $this->layout_file = null;
     }
 
     /**
@@ -66,11 +66,11 @@ class Layouts extends Render
             $is_scripts_path = true;
         }
 
-        // absolute file path to render     
+        // absolute file path to render 
         $filepath = $path.'/'.$file;
 
         // throw the most reliable exception depending on submitted arguments to this method
-        if (!file_exists($filepath)) {         
+        if (!file_exists($filepath)) {   
             if (isset($is_scripts_path)) {
                 $kernel = Application::kernel();
                 $filepath = $kernel->front->controller->getTitle() .'/'. basename($filepath);
@@ -82,8 +82,8 @@ class Layouts extends Render
         }
                      
         // render the layout if is set
-        if ((isset($this->_layout_file)) && ($this->isLayout($this->_layout_file))) {
-            $filepath = Application::conf('path.apptree.views_layouts').'/'.$this->_layout_file;
+        if ((isset($this->layout_file)) && ($this->isLayout($this->layout_file))) {
+            $filepath = Application::conf('path.apptree.views_layouts').'/'.$this->layout_file;
             $this->scripts_file = $file;
             $this->scripts_path = $path;
         }
@@ -107,12 +107,12 @@ class Layouts extends Render
         $this->noLayout();
 
         // include controller action view with or without partials groups
-        include($layout);     
+        include($layout);
     }
     
     /**
      * Output Controller view content in layout
-     * @example in your layout page, use $this->layoutContent() to display where controller action view should be displayed
+     * In your layout page, use $this->layoutContent() to display where controller action view should be displayed
      */
     public function layoutContent()
     {
