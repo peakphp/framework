@@ -80,9 +80,9 @@ if (!function_exists('detectEnvFile')) {
 
         if (file_exists($path.'/.prod')) {
             $env = 'prod';
-        } elseif(file_exists($path.'/.staging')) {
+        } elseif (file_exists($path.'/.staging')) {
             $env = 'staging';
-        } elseif(file_exists($path.'/.testing')) {
+        } elseif (file_exists($path.'/.testing')) {
             $env = 'testing';
         }
 
