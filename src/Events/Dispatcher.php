@@ -19,7 +19,7 @@ class Dispatcher
      * @param  closure $callback
      * @return $this
      */
-    public function attach($name, $callback) 
+    public function attach($name, $callback)
     {
         if (!isset($this->events[$name])) {
             $this->events[$name] = [];
