@@ -30,7 +30,7 @@ class Alpha extends AbstractRule
     public function validate($value)
     {
         $regopt  = $this->buildRegexOpt();
-        $regstring = '/^['.implode('',$regopt).']+$/';
+        $regstring = '/^['.implode('', $regopt).']+$/';
 
         if (preg_match($regstring, $value)) {
             return true;
