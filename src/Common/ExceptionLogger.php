@@ -20,7 +20,7 @@ class ExceptionLogger
     /**
      * Constructor
      *
-     * @param object $exception 
+     * @param object $exception
      * @param string $filepath
      */
     public function __construct(Exception $exception, $filepath)
