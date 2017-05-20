@@ -14,9 +14,9 @@ class Permissions
     protected $others;
 
     /**
-     * Static method of creating this object. 
+     * Static method of creating this object
      *
-     * @param  array $perms 
+     * @param  array $perms
      * @return Permissions
      */
     public static function create(...$perms)
@@ -51,9 +51,9 @@ class Permissions
     /**
      * Constructor
      *
-     * @param PermissionInterface $user   
-     * @param PermissionInterface $group  
-     * @param PermissionInterface $others 
+     * @param PermissionInterface $user
+     * @param PermissionInterface $group
+     * @param PermissionInterface $others
      */
     public function __construct(PermissionInterface $user, PermissionInterface $group, PermissionInterface $others)
     {
