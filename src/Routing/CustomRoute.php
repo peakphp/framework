@@ -61,7 +61,7 @@ class CustomRoute
     /**
      * Check if match
      *
-     * @param  Request $req 
+     * @param  Request $req
      * @return mixed   Return a route if valid, otherwise false
      */
     public function matchRequest(Request $request)
