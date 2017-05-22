@@ -67,7 +67,7 @@ class Virtual extends Render
         $this->scripts_path = $path;
 
         $output = '';
-        foreach ($this->_virtual as $group => $content) {
+        foreach ($this->_virtual as $content) {
             $output .= $content;
         }
 
