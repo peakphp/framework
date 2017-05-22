@@ -66,11 +66,11 @@ class Layouts extends Render
             $is_scripts_path = true;
         }
 
-        // absolute file path to render 
+        // absolute file path to render
         $filepath = $path.'/'.$file;
 
         // throw the most reliable exception depending on submitted arguments to this method
-        if (!file_exists($filepath)) {   
+        if (!file_exists($filepath)) {
             if (isset($is_scripts_path)) {
                 $kernel = Application::kernel();
                 $filepath = $kernel->front->controller->getTitle() .'/'. basename($filepath);
