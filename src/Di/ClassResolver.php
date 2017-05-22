@@ -67,7 +67,7 @@ class ClassResolver
         $class_count  = 0;
         $i            = 0;
 
-        foreach ($dependencies as $key => $d) {
+        foreach ($dependencies as $d) {
             if (isset($d['error'])) {
                 throw new Exception($d['error']);
             }
