@@ -19,7 +19,7 @@ class Json extends Render
      * @return array/string
      */
     public function render($file, $path = null)
-    {       
+    {
         $this->scripts_file = $file;
         $this->scripts_path = $path;
 
