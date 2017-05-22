@@ -452,7 +452,7 @@ class Grid extends Helper
                         $params['fields'] = $fields;
                     } elseif ($params['fields'] === '*') {
                         $params['fields'] = $row_context;
-                    } elseif (array_key_exists($params['fields'], $row)) {
+                    } elseif (array_key_exists($params['fields'], $row_data)) {
                         $params['fields'] = $row_data[$h['fields']];
                     } else {
                         $params['fields'] = null;
