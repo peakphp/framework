@@ -124,7 +124,7 @@ class Header
 
         if (!empty($this->header) && !headers_sent() && $this->released === false) {
             $this->released = true;
-            foreach ($this->header as $k => $field) {
+            foreach ($this->header as $field) {
                 header($field);
             }
             if (!is_null($this)) {
