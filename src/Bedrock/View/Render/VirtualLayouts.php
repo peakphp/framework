@@ -107,7 +107,7 @@ class VirtualLayouts extends Render
      */
     public function cleanUnknownVars($val)
     {
-        $this->clean_all_unknown_vars = ($value === true) ? true : false;
+        $this->clean_all_unknown_vars = ($val === true) ? true : false;
     }
 
     /**
