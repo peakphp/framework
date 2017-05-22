@@ -79,7 +79,6 @@ abstract class DataSet
         }
 
         foreach ($this->rules as $key => $val) {
-
             // look for special condition
             if (!array_key_exists($key, $data)) {
                 if (in_array('required', $val)) {
@@ -94,7 +93,6 @@ abstract class DataSet
 
             // process rule(s) validation on data key value
             foreach ($val as $def) {
-
                 if (!is_array($def)) {
                     continue;
                 }
