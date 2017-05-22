@@ -12,7 +12,7 @@ use Peak\Bedrock\View\Cache;
 abstract class Render
 {
     /**
-     * Controller action script view path used 
+     * Controller action script view path used
      * @var string
      */
     public $scripts_file;
