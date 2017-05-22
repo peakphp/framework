@@ -199,5 +199,4 @@ class Front
         
         $this->_dispatchControllerAction();
     }
-
 }
