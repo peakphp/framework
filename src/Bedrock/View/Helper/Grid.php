@@ -419,7 +419,7 @@ class Grid extends Helper
 
             $hooks = $hooks_col['hooks'];
 
-            foreach ($hooks as $i => $h) {
+            foreach ($hooks as $h) {
 
                 // reset
                 $hook_fn = null;
