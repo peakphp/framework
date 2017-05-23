@@ -161,13 +161,13 @@ class Grid extends Helper
      *
      * THERE IS 3 WAYS TO USE THIS METHOD:
      *
-     *  #1 ->addHook('email', array(
-     *                             array($hook_strong, array('fields' => '*')),
-     *                             $hook_link,
-     *                             $hook_strong
-     *                       ))
+     *  #1 ->addHook('email', [
+                [$hook_strong, ['param1' => 'foo']],
+                $hook_link,
+                $hook_strong
+            ])
      *
-     *  #2 ->addHook('email', $hook_edit, array('fields' => '*'))
+     *  #2 ->addHook('email', $hook_edit)
      *
      *  #3 ->addHook('email', $hook_strong)
      *
@@ -440,23 +440,29 @@ class Grid extends Helper
                 }
 
                 // closure params stuff
-                if (is_array($params) && array_key_exists('fields', $params)) {
+                // if (is_array($params) && array_key_exists('fields', $params)) {
 
-                    if (is_array($params['fields'])) {
-                        $fields = [];
-                        foreach ($params['fields'] as $field) {
-                            if (array_key_exists($field, $row_data)) {
-                                $fields[$field] = $row_data[$field];
-                            }
-                        }
-                        $params['fields'] = $fields;
-                    } elseif ($params['fields'] === '*') {
-                        $params['fields'] = $row_context;
-                    } elseif (array_key_exists($params['fields'], $row_data)) {
-                        $params['fields'] = $row_data[$h['fields']];
-                    } else {
-                        $params['fields'] = null;
-                    }
+                //     if (is_array($params['fields'])) {
+                //         $fields = [];
+                //         foreach ($params['fields'] as $field) {
+                //             if (array_key_exists($field, $row_data)) {
+                //                 $fields[$field] = $row_data[$field];
+                //             }
+                //         }
+                //         $params['fields'] = $fields;
+                //     } elseif ($params['fields'] === '*') {
+                //         $params['fields'] = $row_context;
+                //     } elseif (array_key_exists($params['fields'], $row_data)) {
+                //         $params['fields'] = $row_data[$h['fields']];
+                //     } else {
+                //         $params['fields'] = null;
+                //     }
+                // }
+
+                if (!is_array($params)) {
+                    $params = ['data' => $row_context];
+                } else {
+                    $params['data'] = $row_context;
                 }
 
                 // execute closure
