@@ -37,7 +37,7 @@ class FormValidation
     /**
      * Create DataSet
      */
-    public function createDataSet()
+    protected function createDataSet()
     {
         $this->dataset = new FormDataSet();
 
@@ -46,7 +46,6 @@ class FormValidation
                 foreach ($data['validation'] as $rule) {
                     $this->dataset->add($name, $rule);
                 }
-                //print_r($this->dataset);
             }
         }
     }
@@ -60,5 +59,15 @@ class FormValidation
     public function validate($data)
     {
         return $this->dataset->validate($data);
+    }
+
+    /**
+     * Get validation error
+     *
+     * @return array
+     */
+    public function getErrors()
+    {
+        return $this->dataset->getErrors();
     }
 }
