@@ -92,6 +92,6 @@ class FormBuilder extends Collection
      */
     public function getErrors()
     {
-        $this->form_validation->validate($data);
+        return $this->form_validation->getErrors();
     }
 }
