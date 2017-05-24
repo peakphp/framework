@@ -5,6 +5,8 @@ Release Date: ?
  - added classes Peak\Bedrock\Controller\ParentController and Peak\Bedrock\Controller\Child to enabled
    controller to have one class per action instead of one method per action
  - added method __callStatic() to Peak\Validation\Rule
+ - added method getErrors() to Peak\Bedrock\View\Form\FormValidation and Peak\Bedrock\View\Form\FormBuilder
+ - passed to protected visibility method createDataSet() of Peak\Bedrock\View\Form\FormValidation
 
 VERSION 2.6.0
 -------------
