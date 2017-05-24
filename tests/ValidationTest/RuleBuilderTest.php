@@ -39,6 +39,23 @@ class RuleBuilderTest extends TestCase
         $this->assertFalse($pass);
     }
 
+    function testCustomeRuleContext()
+    {
+        $pass = Rule::create(MatchContextRule::class)
+            ->setContext('Hello')
+            ->validate('Hello');
+
+        $this->assertTrue($pass);
+
+        $pass = Rule::create(MatchContextRule::class)
+            ->setContext('Foobar')
+            ->validate('Hello');
+
+        $this->assertFalse($pass);
+    }
+
+
+
     function testRuleBuilderError()
     {
         $error = 'Must be an integer';
@@ -46,5 +63,19 @@ class RuleBuilderTest extends TestCase
 
         $this->assertTrue($rule->validate(58));
         $this->assertTrue($rule->getError() === $error);
+    }
+}
+
+class MatchContextRule extends \Peak\Validation\AbstractRule
+{
+    /**
+     * Validate
+     * 
+     * @param  mixed $value
+     * @return bool
+     */
+    public function validate($value)
+    {
+        return ($value === $this->context);
     }
 }
