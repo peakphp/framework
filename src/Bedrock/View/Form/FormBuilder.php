@@ -3,6 +3,7 @@
 namespace Peak\Bedrock\View\Form;
 
 use Peak\Common\Collection;
+use Peak\Bedrock\View\Form\Form;
 use Peak\Bedrock\View\Form\FormValidation;
 
 class FormBuilder extends Collection
@@ -14,9 +15,11 @@ class FormBuilder extends Collection
     protected $form;
 
     /**
-     * Add App\Views\Helpers\Form
+     * Constructor
+     *
+     * @param Form|null $form
      */
-    public function __construct($form = null)
+    public function __construct(Form $form = null)
     {
         $this->form = $form;
         $this->init();
@@ -72,7 +75,6 @@ class FormBuilder extends Collection
      */
     public function validate($data)
     {
-        $form = new FormValidation($this);
-        return $form->validate($data);
+        return (new FormValidation($this))->validate($data);
     }
 }
