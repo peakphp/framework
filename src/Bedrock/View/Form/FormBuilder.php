@@ -15,6 +15,12 @@ class FormBuilder extends Collection
     protected $form;
 
     /**
+     * Form Validation
+     * @var Peak\Bedrock\View\Form\FormValidation
+     */
+    protected $form_validation;
+
+    /**
      * Constructor
      *
      * @param Form|null $form
@@ -22,6 +28,7 @@ class FormBuilder extends Collection
     public function __construct(Form $form = null)
     {
         $this->form = $form;
+        $this->form_validation = new FormValidation($this);
         $this->init();
     }
 
@@ -68,13 +75,23 @@ class FormBuilder extends Collection
     }
 
     /**
-     * Shortcut for new FormValidation(new FormBuilder())
+     * Validate the form
      *
      * @param  array $data
      * @return bool
      */
     public function validate($data)
     {
-        return (new FormValidation($this))->validate($data);
+        return $this->form_validation->validate($data);
+    }
+
+    /**
+     * Get form validation errors
+     *
+     * @return array
+     */
+    public function getErrors()
+    {
+        $this->form_validation->validate($data);
     }
 }
