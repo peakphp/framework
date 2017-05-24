@@ -54,8 +54,6 @@ class RuleBuilderTest extends TestCase
         $this->assertFalse($pass);
     }
 
-
-
     function testRuleBuilderError()
     {
         $error = 'Must be an integer';
@@ -63,6 +61,24 @@ class RuleBuilderTest extends TestCase
 
         $this->assertTrue($rule->validate(58));
         $this->assertTrue($rule->getError() === $error);
+    }
+
+    function testRuleStaticCall()
+    {
+        $this->assertTrue(Rule::isEmpty(''));
+        $this->assertTrue(Rule::isNotEmpty('foobar'));
+        $this->assertTrue(Rule::integerNumber(10, [
+            'min_range' => 10,
+            'max_range' => 50
+        ]));
+        $this->assertFalse(Rule::integerNumber(5, [
+            'min_range' => 10,
+            'max_range' => 50
+        ]));
+
+        $this->assertTrue(Rule::integerNumber("0x0000FF", [
+            'min_range' => 10,
+        ], FILTER_FLAG_ALLOW_HEX));
     }
 }
 
