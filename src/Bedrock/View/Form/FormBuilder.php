@@ -113,7 +113,7 @@ class FormBuilder extends Collection
             throw new Expcetion('FormBuilder has no Form setted');
         }
 
-        $this->form->setErrors($data);
+        $this->form->setErrors($errors);
         return $this;
     }
 
