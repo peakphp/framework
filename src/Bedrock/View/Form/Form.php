@@ -13,10 +13,10 @@ class Form
 {
 
     /**
-     * $_data
+     * $data
      * @var array
      */
-    protected $_data = [];
+    protected $data = [];
 
     /**
      * Form errors
@@ -51,7 +51,7 @@ class Form
             $d = $data;
         }
 
-        $this->_data = $d;
+        $this->data = $d;
         return $this;
     }
 
@@ -102,8 +102,8 @@ class Form
     public function get($name)
     {
         $name = strtolower($name);
-        if (is_array($this->_data) && array_key_exists($name, $this->_data)) {
-            return $this->_data[$name];
+        if (is_array($this->data) && array_key_exists($name, $this->data)) {
+            return $this->data[$name];
         }
         return null;
     }
