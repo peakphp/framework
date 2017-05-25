@@ -7,6 +7,7 @@ Release Date: ?
  - added method __callStatic() to Peak\Validation\Rule
  - added method getErrors() to Peak\Bedrock\View\Form\FormValidation and Peak\Bedrock\View\Form\FormBuilder
  - passed to protected visibility method createDataSet() of Peak\Bedrock\View\Form\FormValidation
+ - added methods setData() and setErrors() to Peak\Bedrock\View\Form\FormBuilder
 
 VERSION 2.6.0
 -------------
