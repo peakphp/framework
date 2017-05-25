@@ -6,6 +6,8 @@ use Peak\Common\Collection;
 use Peak\Bedrock\View\Form\Form;
 use Peak\Bedrock\View\Form\FormValidation;
 
+use \Exception;
+
 class FormBuilder extends Collection
 {
     /**
@@ -83,6 +85,36 @@ class FormBuilder extends Collection
     public function validate($data)
     {
         return $this->form_validation->validate($data);
+    }
+
+    /**
+     * See Form::setData()
+     *
+     * @return $this
+     */
+    public function setData($data)
+    {
+        if (!isset($this->form)) {
+            throw new Expcetion('FormBuilder has no Form setted');
+        }
+
+        $this->form->setData($data);
+        return $this;
+    }
+
+    /**
+     * See Form::setErrors()
+     *
+     * @return $this
+     */
+    public function setErrors($errors)
+    {
+        if (!isset($this->form)) {
+            throw new Expcetion('FormBuilder has no Form setted');
+        }
+
+        $this->form->setErrors($data);
+        return $this;
     }
 
     /**
