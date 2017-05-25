@@ -84,7 +84,9 @@ class FormBuilder extends Collection
      */
     public function validate($data)
     {
-        return $this->form_validation->validate($data);
+        $pass = $this->form_validation->validate($data);
+        $this->setErrors($this->getErrors());
+        return $pass;
     }
 
     /**
