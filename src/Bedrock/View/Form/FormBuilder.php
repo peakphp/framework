@@ -45,7 +45,7 @@ class FormBuilder extends Collection
      * Get a html control
      *
      * @param  object|string $arg1
-     * @param  string $arg1
+     * @param  string $arg2
      * @return object
      */
     public function control($arg1, $arg2 = null)
