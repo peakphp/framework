@@ -8,6 +8,7 @@ Release Date: ?
  - added method getErrors() to Peak\Bedrock\View\Form\FormValidation and Peak\Bedrock\View\Form\FormBuilder
  - passed to protected visibility method createDataSet() of Peak\Bedrock\View\Form\FormValidation
  - added methods setData() and setErrors() to Peak\Bedrock\View\Form\FormBuilder
+ - Peak\Common\Paginator throw an exception instead of a notice for current page that is out of range 
 
 VERSION 2.6.0
 -------------
@@ -31,7 +32,6 @@ Release Date: 2017-05-16
  - added function detectEnvFile() in Peak\Bedrock\helpers.php
  - added Pipelines component
  - removed deprecated class Peak\Bedrock\Controller\Helper\Request
- - Peak\Common\Paginator throw an exception instead of a notice for current page that is out of range 
 
 VERSION 2.4.0
 -------------
