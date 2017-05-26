@@ -4,6 +4,7 @@ namespace Peak\Common;
 
 use IteratorAggregate;
 use ArrayIterator;
+use Exception;
 
 /**
  * Paginator model
@@ -95,14 +96,7 @@ class Paginator implements IteratorAggregate
 
         // check current page
         if (!$this->isPage($this->current_page)) {
-            trigger_error(__CLASS__.': page '.$this->current_page.' doesn\'t exists', E_USER_NOTICE);
-            if ($this->current_page > $this->pages_count) {
-                $this->current_page = $this->pages_count;
-            } elseif ($this->current_page < 1) {
-                $this->current_page = 1;
-            } else {
-                $this->current_page = 1;
-            }
+            throw new Exception(__CLASS__.': page '.$this->current_page.' doesn\'t exists');
         }
         
         // prev/next page
