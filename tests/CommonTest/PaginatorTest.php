@@ -64,24 +64,32 @@ class PaginatorTest extends TestCase
 		$this->assertTrue($pagin->current_page === 2);
 	}
 
+	/**
+	 * Out of range current_page
+	 */
 	function testNonExistentPages()
 	{
-		// throw an warning normally but for the test we will turn it off temporary
-		set_error_handler(function() { /* ignore errors */ });
+		try {
+			$ipp          = 12;
+			$total        = 198;
+			$current_page = 80;
+			$pagin = new Paginator($ipp, $total, $current_page);
+		} catch(Exception $e) {
+			$error1 = true;
+		}
 
-		$ipp          = 12;
-		$total        = 198;
-		$current_page = 80;
+		$this->assertTrue(isset($error1));
 
-		//the current page number is too high so we should get the last page instead with a warning
-		$pagin = new Paginator($ipp, $total, $current_page);
-		$this->assertTrue($pagin->current_page == 17);
+		try {
+			$ipp          = 12;
+			$total        = 198;
+			$current_page = -10;
+			$pagin = new Paginator($ipp, $total, $current_page);
+		} catch(Exception $e) {
+			$error2 = true;
+		}
 
-		//this page number is too low so we should get the first page instead with a warning
-		$pagin->setPage(-10);
-		$this->assertTrue($pagin->current_page == 1);
-
-		restore_error_handler();
+		$this->assertTrue(isset($error2));
 	}
 
 	function testPagesRanges()
