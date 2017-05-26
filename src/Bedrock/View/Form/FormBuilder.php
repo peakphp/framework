@@ -97,7 +97,7 @@ class FormBuilder extends Collection
     public function setData($data)
     {
         if (!isset($this->form)) {
-            throw new Expcetion('FormBuilder has no Form setted');
+            throw new Exception('FormBuilder has no Form setted');
         }
 
         $this->form->setData($data);
@@ -112,7 +112,7 @@ class FormBuilder extends Collection
     public function setErrors($errors)
     {
         if (!isset($this->form)) {
-            throw new Expcetion('FormBuilder has no Form setted');
+            throw new Exception('FormBuilder has no Form setted');
         }
 
         $this->form->setErrors($errors);
