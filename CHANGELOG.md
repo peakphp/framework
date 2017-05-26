@@ -31,6 +31,7 @@ Release Date: 2017-05-16
  - added function detectEnvFile() in Peak\Bedrock\helpers.php
  - added Pipelines component
  - removed deprecated class Peak\Bedrock\Controller\Helper\Request
+ - Peak\Common\Paginator throw an exception instead of a notice for current page that is out of range 
 
 VERSION 2.4.0
 -------------
