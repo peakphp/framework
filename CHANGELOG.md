@@ -2,6 +2,8 @@ VERSION 2.8.0
 -------------
 Release Date: ?
 
+ - function isEnv() now accept also an array of env as argument
+
 VERSION 2.7.0
 -------------
 Release Date: 2017-05-28
