@@ -19,7 +19,7 @@ if (!function_exists('relativeBasepath')) {
     function relativeBasepath($dir, $doc_root = null)
     {
         if (!isset($doc_root)) {
-            $doc_root = (!isset($_SERVER['DOCUMENT_ROOT'])) ? '' : $_SERVER['DOCUMENT_ROOT'];
+            $doc_root = filter_var(getenv('DOCUMENT_ROOT'));
         }
         return substr(str_replace([$doc_root, basename($dir)], '', str_replace('\\', '/', $dir)), 0, -1);
     }
@@ -38,7 +38,7 @@ if (!function_exists('relativePath')) {
     function relativePath($dir, $doc_root = null)
     {
         if (!isset($doc_root)) {
-            $doc_root = (!isset($_SERVER['DOCUMENT_ROOT'])) ? '' : $_SERVER['DOCUMENT_ROOT'];
+            $doc_root = filter_var(getenv('DOCUMENT_ROOT'));
         }
         return str_replace([$doc_root, $dir], '', str_replace('\\', '/', $dir));
     }
