@@ -1,6 +1,6 @@
 VERSION 2.7.0
 -------------
-Release Date: ?
+Release Date: 2017-05-28
 
  - added classes Peak\Bedrock\Controller\ParentController and Peak\Bedrock\Controller\Child to enabled
    controller to have one class per action instead of one method per action
