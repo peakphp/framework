@@ -37,7 +37,7 @@ abstract class ParentController extends Action
     public function actionClass($action)
     {
         $action = substr($action, 1);
-        return 'App\Controllers\\'.$this->getTitle().'\\'.ucfirst($action).'Action';
+        return Application::conf('ns').'\Controllers\\'.$this->getTitle().'\\'.ucfirst($action).'Action';
     }
 
     /**

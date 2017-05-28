@@ -315,7 +315,7 @@ class View
             return $this->_helpers[$name];
         } else {
             $peak_helper = 'Peak\Bedrock\View\Helper\\'.ucfirst($name);
-            $app_helper  = 'App\Views\Helpers\\'.ucfirst($name);
+            $app_helper  = Application::conf('ns').'\Views\Helpers\\'.ucfirst($name);
 
             if (class_exists($peak_helper)) {
                 $this->_helpers[$name] = Application::instantiate($peak_helper);
