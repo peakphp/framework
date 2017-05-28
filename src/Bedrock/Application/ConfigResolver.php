@@ -91,7 +91,7 @@ class ConfigResolver
     private function defineConstants()
     {
         //define server document root absolute path
-        $svr_path = str_replace('\\', '/', realpath($_SERVER['DOCUMENT_ROOT']));
+        $svr_path = str_replace('\\', '/', realpath(filter_var(getenv('DOCUMENT_ROOT'))));
         if (substr($svr_path, -1, 1) !== '/') {
             $svr_path .= '/';
         }
