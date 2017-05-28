@@ -26,7 +26,7 @@ class ConfigCustomRoutes
 
         if (!empty($config->routes)) {
             foreach ($config->routes as $r) {
-                if (isset($r['route']) && isset($r['controller']) && isset($r['action'])) {
+                if (isset($r['route'], $r['controller'], $r['action'])) {
                     $collection[] = new CustomRoute(
                         $r['route'],
                         $r['controller'],
