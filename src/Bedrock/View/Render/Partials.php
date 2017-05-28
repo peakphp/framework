@@ -88,7 +88,7 @@ class Partials extends Render
 
         //Partials group FILES VIEW IF EXISTS
         if (is_array($this->_group)) {
-            $group_filespath = array();
+            $group_filespath = [];
             
             foreach ($this->_group as $theme_partial) {
                 if ($theme_partial !== '[CONTENT]') {

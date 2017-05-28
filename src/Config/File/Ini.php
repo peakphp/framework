@@ -96,7 +96,7 @@ class Ini extends DotNotation
         }
 
         // reset the result array
-        $this->items = array();
+        $this->items = [];
 
         if ($process_sections === true) {
             // loop through each section
@@ -164,7 +164,7 @@ class Ini extends DotNotation
      */
     private function _processSectionContents(array $contents)
     {
-        $result = array();
+        $result = [];
 
         // loop through each line and convert it to an array
         foreach ($contents as $path => $value) {

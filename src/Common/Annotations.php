@@ -95,7 +95,7 @@ class Annotations
      */
     public function getFromAllMethods()
     {
-        $a = array();
+        $a = [];
         
         foreach ($this->class->getMethods() as $m) {
             $comment = $m->getDocComment();

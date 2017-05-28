@@ -96,7 +96,7 @@ class Grid extends Helper
      */
     public function setColumns($cols)
     {
-        $this->_columns = array();
+        $this->_columns = [];
         foreach ($cols as $k => $v) {
             $this->_columns[trim($k)] = $v;
         }
@@ -146,7 +146,7 @@ class Grid extends Helper
     public function excludeCols($cols)
     {
         if (is_array($cols)) {
-            $this->_exclude_colums = array();
+            $this->_exclude_colums = [];
             if (!empty($cols)) {
                 foreach ($cols as $c) {
                     $this->_exclude_colums[$c] = $c;
@@ -501,7 +501,7 @@ class Grid extends Helper
     /**
      * Render html attribute(s) to each row(tr)
      */
-    private function _rowDataAttr($row = array())
+    private function _rowDataAttr($row = [])
     {
         $r = '';
 
