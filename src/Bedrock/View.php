@@ -119,7 +119,7 @@ class View
     public function __call($method, $args = null)
     {
         if (method_exists($this->engine(), $method)) {
-            return call_user_func_array([$this->engine(), $method], $args);        
+            return call_user_func_array([$this->engine(), $method], $args);
         } else {
             return $this->helper($method);
         }
