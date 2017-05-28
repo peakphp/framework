@@ -196,7 +196,7 @@ class View
      */
     public function resetVars()
     {
-        $this->_vars = array();
+        $this->_vars = [];
     }
 
     /**
