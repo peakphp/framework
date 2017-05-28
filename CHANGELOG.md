@@ -9,6 +9,7 @@ Release Date: ?
  - passed to protected visibility method createDataSet() of Peak\Bedrock\View\Form\FormValidation
  - added methods setData() and setErrors() to Peak\Bedrock\View\Form\FormBuilder
  - Peak\Common\Paginator throw an exception instead of a notice for current page that is out of range 
+ - fixed hardcoded app namespace in PeakBedrock\View and Peak\Bedrock\Controller\ParentController
 
 VERSION 2.6.0
 -------------
