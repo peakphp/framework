@@ -150,7 +150,7 @@ if (!function_exists('url')) {
      */
     function url($path = null, $use_forwarded_host = true)
     {
-        $s = $_SERVER;
+        $s = filter_input_array(INPUT_SERVER);
 
         $ssl      = (!empty($s['HTTPS']) && $s['HTTPS'] == 'on');
         $sp       = strtolower($s['SERVER_PROTOCOL']);
