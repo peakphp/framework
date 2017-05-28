@@ -70,13 +70,13 @@ class DotNotation extends Collection
                     if (is_array($at)) {
                         $at[array_shift($keys)] = $value;
                     } else {
-                        throw new RuntimeException("Can not set value at this path ($path) because is not array.");
+                        throw new RuntimeException('Can not set value at this path ('.$path.') because is not array.');
                     }
                 } else {
                     $key = array_shift($keys);
 
                     if (!isset($at[$key])) {
-                        $at[$key] = array();
+                        $at[$key] = [];
                     }
 
                     $at = & $at[$key];
