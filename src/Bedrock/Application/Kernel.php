@@ -15,7 +15,7 @@ class Kernel
     /**
      * Framework version
      */
-    const VERSION = '2.7.0';
+    const VERSION = '2.8.0';
     
     /**
      * App bootstrap object if exists
