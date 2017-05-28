@@ -51,12 +51,15 @@ if (!function_exists('isEnv')) {
     /**
      * Check is env match curretn application env
      *
-     * @param  string  $env
+     * @param  string|array  $env
      * @return boolean
      */
     function isEnv($env)
     {
         if (defined('APPLICATION_ENV')) {
+            if (is_array($env)) {
+                return (in_array(APPLICATION_ENV, $env));
+            }
             return (APPLICATION_ENV === $env);
         }
         return false;
