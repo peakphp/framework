@@ -99,7 +99,7 @@ class RequestResolver
         $i = 0;
         $params_assoc = [];
 
-        foreach ($params as $k => $v) {
+        foreach ($params as $v) {
             if ($i == 0) {
                 $key = $v;
                 ++$i;
