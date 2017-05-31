@@ -6,6 +6,7 @@ Release Date: ?
  - replaced global $_SERVER by filter_input_array() for url() function
  - replaced global $_SERVER by filter_var() + getenv() for relativePath() and relativeBasepath() functions
  - function isEnv() now accept also an array of env as argument
+ - added Rbac component
 
 VERSION 2.7.0
 -------------
