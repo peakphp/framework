@@ -4,12 +4,14 @@ namespace Peak\Rbac;
 
 use Peak\Rbac\User;
 use Peak\Rbac\Permission;
-use Peak\Rbac\AbstractRolesHolder;
+use Peak\Rbac\RolesHolder;
 
 use \Exception;
 
-class Manager extends AbstractRolesHolder
+class Manager
 {
+    use RolesHolder;
+
     /**
      * Users
      * @var array
@@ -117,14 +119,14 @@ class Manager extends AbstractRolesHolder
     }
 
     /**
-     * Create a role
+     * Create a roles
      *
      * @param  string $id
      * @return Role
      */
-    public function createRole($id)
+    public function createRole($id, $desc = '')
     {
-        $this->addRole(new Role($id));
+        $this->addRole(new Role($id, $desc));
         return $this->role($id);
     }
 
@@ -140,5 +142,27 @@ class Manager extends AbstractRolesHolder
             throw new Exception(__CLASS__.': Role ['.$id.'] not found');
         }
         return $this->roles[$id];
+    }
+
+    /**
+     * Check if a user has permission(s)
+     * If multiple permissions, they must be all true, otherwise it return false
+     *
+     * @param  string $user
+     * @param  mixed  $perms A permission string or array of permissions string
+     * @return boolean
+     */
+    public function userCan($user, $perms)
+    {
+        if (is_array($perms)) {
+            foreach ($perms as $perm) {
+                if (!$this->user($user)->can($this->permission($perm))) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        return $this->user($user)->can($this->permission($perms));
     }
 }
