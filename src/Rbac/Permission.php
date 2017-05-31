@@ -2,21 +2,18 @@
 
 namespace Peak\Rbac;
 
-use Peak\Rbac\AbstractRolesHolder;
+use Peak\Rbac\AbstractHolder;
+use Peak\Rbac\RolesHolder;
 
-class Permission extends AbstractRolesHolder
+class Permission extends AbstractHolder
 {
+    use RolesHolder;
+    
     /**
      * Permission description
      * @var string
      */
     protected $desc;
-
-    /**
-     * Roles that allow this permission
-     * @var array
-     */
-    protected $roles = [];
 
     /**
      * Overload parent constructor

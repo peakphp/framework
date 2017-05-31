@@ -2,10 +2,14 @@
 
 namespace Peak\Rbac;
 
-use Peak\Rbac\AbstractRolesHolder;
+use Peak\Rbac\AbstractHolder;
+use Peak\Rbac\RolesHolder;
+use Peak\Rbac\CustomPermission;
 
-class User extends AbstractRolesHolder
+class User extends AbstractHolder
 {
+    use RolesHolder;
+
     /**
      * User custom permissions
      * @var array
@@ -20,14 +24,21 @@ class User extends AbstractRolesHolder
      */
     public function can(Permission $perm)
     {
-        $can = false;
+        // if a custom permission exists for permission, bypass role checks
+        if (isset($this->custom_perms[$perm->getId()])) {
+            return $this->custom_perms[$perm->getId()]->isAllowed();
+        }
 
         foreach ($this->roles as $role) {
             if ($perm->hasRole($role)) {
-                $can = true;
+                return true;
             }
         }
+        return false;
+    }
 
-        return $can;
+    public function addCustomPermission(CustomPermission $cperm)
+    {
+        $this->custom_perms[$cperm->getId()] = $cperm;
     }
 }
