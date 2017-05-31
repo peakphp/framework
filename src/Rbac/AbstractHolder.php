@@ -2,7 +2,7 @@
 
 namespace Peak\Rbac;
 
-abstract class AbstractIdentifierHolder
+abstract class AbstractHolder
 {
     /**
      * Identifier of the holder
