@@ -2,10 +2,7 @@
 
 namespace Peak\Rbac;
 
-use Peak\Rbac\Role;
-use Peak\Rbac\AbstractIdentifierHolder;
-
-abstract class AbstractRolesHolder extends AbstractIdentifierHolder
+trait RolesHolder
 {
     /**
      * Roles of the holder
