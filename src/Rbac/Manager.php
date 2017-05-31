@@ -4,10 +4,11 @@ namespace Peak\Rbac;
 
 use Peak\Rbac\User;
 use Peak\Rbac\Permission;
+use Peak\Rbac\AbstractRolesHolder;
 
 use \Exception;
 
-class Manager
+class Manager extends AbstractRolesHolder
 {
     /**
      * Users
@@ -113,5 +114,31 @@ class Manager
             throw new Exception(__CLASS__.': Permission ['.$id.'] not found');
         }
         return $this->permissions[$id];
+    }
+
+    /**
+     * Create a role
+     *
+     * @param  string $id
+     * @return Role
+     */
+    public function createRole($id)
+    {
+        $this->addRole(new Role($id));
+        return $this->role($id);
+    }
+
+    /**
+     * Access to a role
+     *
+     * @param  string $id
+     * @return Role
+     */
+    public function role($id)
+    {
+        if (!isset($this->roles[$id])) {
+            throw new Exception(__CLASS__.': Role ['.$id.'] not found');
+        }
+        return $this->roles[$id];
     }
 }
