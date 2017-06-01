@@ -37,8 +37,15 @@ class User extends AbstractHolder
         return false;
     }
 
+    /**
+     * Add a custom permission to bypass a permission
+     *
+     * @param  CustomPermission $cperm
+     * @return $this
+     */
     public function addCustomPermission(CustomPermission $cperm)
     {
         $this->custom_perms[$cperm->getId()] = $cperm;
+        return $this;
     }
 }
