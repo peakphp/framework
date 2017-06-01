@@ -221,6 +221,9 @@ class RbacManagerTest extends TestCase
         $this->assertTrue($result);
     }
 
+    /**
+     * Manager addRoleToUser()
+     */
     function testAddRoleToUser()
     {
         $manager = new Manager();
@@ -233,6 +236,9 @@ class RbacManagerTest extends TestCase
         $this->assertTrue($manager->user('Bob')->hasRole('administrator'));
     }
 
+    /**
+     * Manager addRoleToUser()
+     */
     function testAddRoleToPermission()
     {
         $manager = new Manager();
