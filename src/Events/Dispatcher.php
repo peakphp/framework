@@ -15,8 +15,8 @@ class Dispatcher
     /**
      * Attach an event callback. An event name can have multiple callback
      *
-     * @param  string  $name
-     * @param  closure $callback
+     * @param  string $name
+     * @param  mixed  $callback
      * @return $this
      */
     public function attach($name, $callback)
