@@ -145,6 +145,28 @@ class Manager
     }
 
     /**
+     * Add a stored role to a stored user
+     *
+     * @param string $role
+     * @param string $user
+     */
+    public function addRoleToUser($role, $user)
+    {
+        $this->user($user)->addRole($this->role($role));
+    }
+
+    /**
+     * Add a stored role to a stored permission
+     *
+     * @param string $role
+     * @param string $permission
+     */
+    public function addRoleToPermission($role, $perm)
+    {
+        $this->permission($perm)->addRole($this->role($role));
+    }
+
+    /**
      * Check if a user has permission(s)
      * If multiple permissions, they must be all true, otherwise it return false
      *
