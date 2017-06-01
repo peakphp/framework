@@ -32,9 +32,9 @@ class CustomPermission
      * Constructor
      *
      * @param Permission $perm
-     * @param bool       $allowed
+     * @param boolean    $allowed
      */
-    public function __construct(Permission $perm, bool $allowed)
+    public function __construct(Permission $perm, $allowed)
     {
         $this->permission = $perm;
         $this->allowed = $allowed;
