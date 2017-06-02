@@ -80,7 +80,7 @@ abstract class Element implements ElementInterface
     }
 
     /**
-     * Generate html attributes from an array associativate
+     * Generate html attributes from an associative array
      *
      * @param  bool   $data_as_attrs if true, data will be added to 'value' html attribute
      * @return string
