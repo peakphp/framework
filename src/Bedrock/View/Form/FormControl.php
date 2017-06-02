@@ -3,6 +3,8 @@
 namespace Peak\Bedrock\View\Form;
 
 use Peak\Bedrock\View\Form\Element;
+use Peak\Bedrock\View\Form\Element\Error;
+use Peak\Bedrock\View\Form\Element\Label;
 
 /**
  * Form control base
@@ -19,7 +21,7 @@ abstract class FormControl extends Element
     ];
 
     /**
-     * Contructor overload
+     * Constructor overload
      * Add error support for control
      *
      * @see  Peak\Bedrock\View\Form\Element::__construct()
@@ -41,7 +43,7 @@ abstract class FormControl extends Element
             return;
         }
 
-        $element = new \Peak\Bedrock\View\Form\Element\Error(
+        $element = new Error(
             $this->name,
             $this->error,
             [
@@ -76,7 +78,7 @@ abstract class FormControl extends Element
             return;
         }
 
-        $element = new \Peak\Bedrock\View\Form\Element\Label(
+        $element = new Label(
             $this->name,
             $this->options['label'],
             [
