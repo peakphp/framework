@@ -2,11 +2,10 @@
 
 namespace Peak\Bedrock\Controller;
 
-use \Exception;
 use Peak\Bedrock\Application;
-use Peak\Bedrock\Application\Module;
 use Peak\Bedrock\Controller\Action;
 use Peak\Routing\RouteBuilder;
+use \Exception;
 
 /**
  * Front controller
