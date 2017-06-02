@@ -5,7 +5,7 @@ namespace Peak\Routing;
 class Request
 {
     /**
-     * Unprocess request uri
+     * Raw request uri
      * @var string
      */
     public $raw_uri;

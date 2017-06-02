@@ -7,7 +7,7 @@ use Peak\Routing\Request;
 class RequestServerURI extends Request
 {
     /**
-     * Overload Request consctructor using $_SERVER request uri
+     * Overload Request constructor using $_SERVER request uri
      */
     public function __construct($base_uri = null)
     {

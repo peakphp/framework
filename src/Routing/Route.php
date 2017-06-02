@@ -5,7 +5,7 @@ namespace Peak\Routing;
 class Route
 {
     /**
-     * Unprocess request uri
+     * Raw request uri
      * @var string
      */
     public $raw_uri;
@@ -24,7 +24,7 @@ class Route
 
     /**
      * @deprecated
-     * Original unparsed request array
+     * Original request array
      * @var array
      */
     public $request = [];
