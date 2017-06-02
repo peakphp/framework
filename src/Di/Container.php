@@ -14,7 +14,7 @@ class Container implements ContainerInterface
 {
     /**
      * Container object instances collection
-     * @var Peak\Common\Collection
+     * @var \Peak\Common\Collection
      */
     protected $instances;
 
@@ -26,19 +26,19 @@ class Container implements ContainerInterface
 
     /**
      * Container object interfaces collection
-     * @var Peak\Common\Collection
+     * @var \Peak\Common\Collection
      */
     protected $interfaces;
 
     /**
-     * Class instantiator
-     * @var Peak\Di\ClassInstantiator
+     * Class instance creator
+     * @var \Peak\Di\ClassInstantiator
      */
     protected $instantiator;
 
     /**
      * Container object instances collection
-     * @var Peak\Di\ClassResolver
+     * @var \Peak\Di\ClassResolver
      */
     protected $resolver;
 
@@ -232,8 +232,8 @@ class Container implements ContainerInterface
     /**
      * Catalogue also class interface when using add
      *
-     * @param strign $name
-     * @param strign $class
+     * @param string $name
+     * @param string $class
      */
     protected function addInterface($name, $class)
     {
