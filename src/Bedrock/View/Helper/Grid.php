@@ -88,7 +88,7 @@ class Grid extends Helper
      *
      * ex: array('uname' => "Username", 'id' => 'Unique Id', ...)
      *
-     * pseudo additonnal column must begin by ":"
+     * pseudo additional column must begin by ":"
      * ex: array(':newcol' => 'Extra column', ...)
      *
      * @param  array $cols
@@ -138,7 +138,7 @@ class Grid extends Helper
 
     /**
      * Add columns to exclude columns
-     * Usefull with _discoverColumns()
+     * Useful with _discoverColumns()
      *
      * @param  array $cols
      * @return $this
@@ -475,7 +475,7 @@ class Grid extends Helper
 
     /**
      * Discover columns from $_data array
-     * Usefull when you don't use method setColumns()
+     * Useful when you don't use method setColumns()
      */
     private function _discoverColumns()
     {
