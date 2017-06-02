@@ -63,7 +63,7 @@ class ChronoTest extends TestCase
     function testCustomChrono2()
     {
         Peak\Common\Chrono::start('timer1');
-        usleep(100000);
+        usleep(190000);
         Peak\Common\Chrono::stop('timer1');
         $this->assertTrue(Peak\Common\Chrono::get(2,'timer1') >= 0.10);
         $this->assertTrue(Peak\Common\Chrono::isCompleted('timer1'));     
