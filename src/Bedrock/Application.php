@@ -113,7 +113,7 @@ class Application
         }
 
         $config->set($path, $value);
-        return $this;
+        return $config;
     }
 
     /**
