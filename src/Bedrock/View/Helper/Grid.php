@@ -48,7 +48,7 @@ class Grid extends Helper
     private $_hooks = [];
 
     /**
-     * Breakline for html output
+     * Break line for html output
      * @var string
      */
     private $_line_break = "\n";

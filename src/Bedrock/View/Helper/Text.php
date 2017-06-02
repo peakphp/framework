@@ -5,7 +5,7 @@ namespace Peak\Bedrock\View\Helper;
 use Peak\Bedrock\View\Helper;
 
 /**
- * Misc usefull view helper functions for text
+ * Misc useful view helper functions for text
  */
 class Text extends Helper
 {

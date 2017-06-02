@@ -85,7 +85,7 @@ class VirtualLayouts extends Render
             $output = str_ireplace('{CONTENT}', $this->content, $this->layout);
         }
         
-        $output = $this->_proccessVariables($output);
+        $output = $this->_processVariables($output);
 
         $this->output($output);
     }
@@ -116,7 +116,7 @@ class VirtualLayouts extends Render
      * @param  string $content
      * @return string
      */
-    protected function _proccessVariables($content)
+    protected function _processVariables($content)
     {
         $vars = $this->getVars();
         if (!empty($vars)) {

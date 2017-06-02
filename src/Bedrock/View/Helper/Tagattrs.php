@@ -16,7 +16,7 @@ class Tagattrs extends Helper
     protected $attributes = [];
     
     /**
-     * Add an array of atrributes to the current class $attributes array
+     * Add an array of attributes to the current class $attributes array
      *
      * @param  array $attrs
      * @return object
@@ -124,7 +124,7 @@ class Tagattrs extends Helper
     }
     
     /**
-     * Tranform all previously added attributes into string
+     * Transform all previously added attributes into string
      *
      * @return string
      */

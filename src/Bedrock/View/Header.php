@@ -14,7 +14,7 @@ class Header
     protected $header = [];
 
     /**
-     * Additonnal content after
+     * Additional content after
      * @var string
      */
     protected $content = null;

@@ -58,7 +58,7 @@ class Debug extends Helper
     }
     
     /**
-     * Get include files separated by category with additionnal info
+     * Get include files separated by category with additional info
      *
      * @return array
      */
