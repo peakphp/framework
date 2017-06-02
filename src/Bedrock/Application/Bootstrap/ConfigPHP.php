@@ -10,9 +10,9 @@ use Peak\Bedrock\Application\Config;
 class ConfigPHP
 {
     /**
-     * Configurate PHP
+     * Configure PHP
      *
-     * @param Peak\Bedrock\Application\Config $config
+     * @param \Peak\Bedrock\Application\Config $config
      */
     public function __construct(Config $config)
     {

@@ -17,19 +17,19 @@ class Routing
 {
     /**
      * Current application request
-     * @var Peak\Routing\Request
+     * @var \Peak\Routing\Request
      */
     public $request;
 
     /**
      * Final application route
-     * @var Peak\Routing\Route
+     * @var \Peak\Routing\Route
      */
     public $route;
 
     /**
      * Application regex routes collection from app config
-     * @var Peak\Common\Collection
+     * @var \Peak\Common\Collection
      */
     public $custom_routes;
 
@@ -75,7 +75,7 @@ class Routing
     /**
      * Resolve application route
      *
-     * @return Peak\Routing\Route
+     * @return \Peak\Routing\Route
      */
     public function getRoute()
     {

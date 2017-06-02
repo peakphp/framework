@@ -10,13 +10,13 @@ class Environment
 {
     /**
      * App file config
-     * @var Peak\Common\Collection
+     * @var \Peak\Common\Collection
      */
     protected $file_config;
 
     /**
      * App default config
-     * @var Peak\Common\Collection
+     * @var \Peak\Common\Collection
      */
     protected $app_config;
 

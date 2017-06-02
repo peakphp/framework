@@ -11,10 +11,10 @@ use Peak\Bedrock\View;
 class ConfigView
 {
     /**
-     * Configurate View based on Application config
+     * Configure View based on Application config
      *
-     * @param Peak\Bedrock\Application\Config $config
-     * @param Peak\Bedrock\View               $view
+     * @param \Peak\Bedrock\Application\Config $config
+     * @param \Peak\Bedrock\View               $view
      */
     public function __construct(Config $config, View $view = null)
     {

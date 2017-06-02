@@ -17,8 +17,8 @@ class ConfigCustomRoutes
     /**
      * Configurate Application routes based on Application config
      *
-     * @param Peak\Bedrock\Application\Config  $config
-     * @param Peak\Bedrock\Application\Routing $routing
+     * @param \Peak\Bedrock\Application\Config  $config
+     * @param \Peak\Bedrock\Application\Routing $routing
      */
     public function __construct(Config $config, Routing $routing)
     {
