@@ -10,7 +10,7 @@ use \ReflectionClass;
 class ClassInstantiator
 {
     /**
-     * Instanciate a class
+     * Instantiate a class
      *
      * @param  string $class
      * @return object
