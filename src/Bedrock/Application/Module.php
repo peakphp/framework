@@ -21,7 +21,7 @@ class Module
     public $name;
 
     /**
-     * Construtor
+     * Constructor
      */
     public function __construct()
     {
@@ -48,7 +48,7 @@ class Module
      */
     public function updateConfig()
     {
-        //update applicatiom namespace to the module name
+        //update application namespace to the module name
         //folder under your App\Modules folder
         Application::conf()->set('ns', Application::conf('ns').'\Modules\\'.ucfirst($this->name));
 
