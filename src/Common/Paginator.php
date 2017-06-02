@@ -4,7 +4,7 @@ namespace Peak\Common;
 
 use IteratorAggregate;
 use ArrayIterator;
-use Exception;
+use \Exception;
 
 /**
  * Paginator model

@@ -3,7 +3,6 @@
 namespace Peak\Common;
 
 use Peak\Common\Traits\LoadArrayFiles;
-use Peak\Exception;
 
 /**
  * Simple language translator based on php array

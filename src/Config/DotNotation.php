@@ -2,8 +2,8 @@
 
 namespace Peak\Config;
 
-use \RuntimeException;
 use Peak\Common\Collection;
+use \RuntimeException;
 
 /**
  * Dot notation for access multidimensional arrays
