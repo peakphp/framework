@@ -2,8 +2,8 @@
 
 namespace Peak\Config\File;
 
-use \Exception;
 use Peak\Config\DotNotation;
+use \Exception;
 
 /**
  * Ini
