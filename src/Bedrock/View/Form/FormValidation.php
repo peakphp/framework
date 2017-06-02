@@ -13,13 +13,13 @@ class FormValidation
 {
     /**
      * Form builder instance
-     * @var Peak\Bedrock\View\Form\FormBuilder
+     * @var \Peak\Bedrock\View\Form\FormBuilder
      */
     protected $form_builder;
 
     /**
      * Validation dataset
-     * @var Peak\Bedrock\View\Form\FormDataSet
+     * @var \Peak\Bedrock\View\Form\FormDataSet
      */
     protected $dataset;
 
