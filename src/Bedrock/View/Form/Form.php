@@ -3,8 +3,6 @@
 namespace Peak\Bedrock\View\Form;
 
 use \Exception;
-use Peak\Bedrock\Application;
-use Peak\Bedrock\View;
 
 /**
  * Form helper
