@@ -90,7 +90,7 @@ class ClassResolver
                     if (interface_exists($name)) {
                         $class_args[] = $this->iresolver->resolve($name, $container, $explicit);
                     } else {
-                        // or resolve dependency by trying to instanciate object classname string
+                        // or resolve dependency by trying to instantiate object classname string
                         $child_args = [];
                         if (array_key_exists($name, $args)) {
                             $child_args = $args[$name];

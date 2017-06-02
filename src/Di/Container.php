@@ -59,7 +59,7 @@ class Container implements ContainerInterface
      * The generated instance is not stored, but may use stored
      * instance(s) as dependency when needed
      *
-     * @param  string $class     The class name to instanciate
+     * @param  string $class     The class name to instantiate
      * @param  array  $args      Constructor argument(s) for parent and child if any
      * @param  array  $explicit  Determine which instance should be use for an interface name.
      *                           Required when you have multiple stored instances using the same interface name.
