@@ -11,7 +11,7 @@ abstract class Helper
 {
     /**
      * View instance
-     * @var Peak\Bedrock\View
+     * @var \Peak\Bedrock\View
      */
     public $view;
     

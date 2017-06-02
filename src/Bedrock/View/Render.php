@@ -25,13 +25,13 @@ abstract class Render
 
     /**
      * Cache object
-     * @var Peak\Bedrock\View\Cache
+     * @var \Peak\Bedrock\View\Cache
      */
     protected $cache;
 
     /**
      * View object
-     * @var Peak\Bedrock\View
+     * @var \Peak\Bedrock\View
      */
     protected $view;
 
@@ -73,7 +73,7 @@ abstract class Render
      * Point to View __get method
      *
      * @param  string $name represent view var name
-     * @return misc
+     * @return mixed
      */
     public function __get($name)
     {
@@ -92,7 +92,7 @@ abstract class Render
     }
 
     /**
-     * Silent call to unknow method
+     * Silent call to unknown method
      *
      * @param string $method
      * @param array  $args
@@ -107,7 +107,7 @@ abstract class Render
      * Call child output method and cache it if cache activated
      * Can be overloaded by engines to customize how the cache data
      *
-     * @param misc $data
+     * @param mixed $data
      */
     protected function preOutput($data)
     {
@@ -116,7 +116,7 @@ abstract class Render
             return;
         }
 
-        //use cache instead outputing and evaluating view script
+        //use cache instead outputting and evaluating view script
         if ($this->cache()->isValid()) {
             include($this->cache()->getCacheFile());
             return;

@@ -2,9 +2,9 @@
 
 namespace Peak\Bedrock\View\Render;
 
-use \Exception;
 use Peak\Bedrock\Application;
 use Peak\Bedrock\View\Render;
+use \Exception;
 
 /**
  * Peak View Render Engine: Layouts
@@ -41,7 +41,7 @@ class Layouts extends Render
     }
 
     /**
-     * Desactivate layout
+     * Deactivate layout
      * No layout means only the controller action view file is rendered
      */
     public function noLayout()
@@ -98,7 +98,7 @@ class Layouts extends Render
     /**
      * Output the main layout
      *
-     * @param string $viewfile
+     * @param string $layout
      */
     protected function output($layout)
     {
