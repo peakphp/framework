@@ -26,7 +26,7 @@ class CustomRoute
     protected $regex;
 
     /**
-     * Contructor
+     * Constructor
      *
      * @param  Request $request
      */
@@ -49,7 +49,7 @@ class CustomRoute
     }
 
     /**
-     * Get the curretn regex
+     * Get the current regex
      *
      * @return string
      */
