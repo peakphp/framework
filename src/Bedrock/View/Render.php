@@ -2,7 +2,6 @@
 
 namespace Peak\Bedrock\View;
 
-use Peak\Bedrock\Application;
 use Peak\Bedrock\View;
 use Peak\Bedrock\View\Cache;
 
