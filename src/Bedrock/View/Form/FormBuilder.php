@@ -12,13 +12,13 @@ class FormBuilder extends Collection
 {
     /**
      * Form object
-     * @var Peak\Bedrock\View\Form\Form
+     * @var \Peak\Bedrock\View\Form\Form
      */
     protected $form;
 
     /**
      * Form Validation
-     * @var Peak\Bedrock\View\Form\FormValidation
+     * @var \Peak\Bedrock\View\Form\FormValidation
      */
     protected $form_validation;
 
