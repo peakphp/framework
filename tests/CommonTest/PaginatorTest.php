@@ -1,16 +1,14 @@
 <?php
+
 use PHPUnit\Framework\TestCase;
 
 use Peak\Common\Paginator;
 
-/**
- * @package    Peak\Common\Paginator
- */
 class PaginatorTest extends TestCase
 {
 	
 	/**
-	 * instanciate class for tests
+	 * instantiate class for tests
 	 */
 	function setUp()
 	{		

@@ -2,7 +2,7 @@
 
 use PHPUnit\Framework\TestCase;
 
-class LanaguageTest extends TestCase
+class LanguageTest extends TestCase
 {
     /**
      * Create object

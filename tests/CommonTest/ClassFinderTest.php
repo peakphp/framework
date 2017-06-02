@@ -4,10 +4,10 @@ use PHPUnit\Framework\TestCase;
 
 use Peak\Common\ClassFinder;
 
-class ClassFInderTest extends TestCase
+class ClassFinderTest extends TestCase
 {
 	/**
-     * test global chrono start and stop
+     * test findFirst()
      */
     function testFindFirst()
     {
@@ -26,7 +26,7 @@ class ClassFInderTest extends TestCase
     }
 
     /**
-     * test global chrono start and stop
+     * test findLast()
      */
     function testFindLast()
     {

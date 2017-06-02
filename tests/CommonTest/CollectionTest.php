@@ -2,7 +2,6 @@
 use PHPUnit\Framework\TestCase;
 
 use Peak\Common\Collection;
-use Peak\Exception;
 
 /**
  * @package    Peak\Common\Collection
