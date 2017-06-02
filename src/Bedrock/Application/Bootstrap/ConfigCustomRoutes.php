@@ -15,7 +15,7 @@ use Peak\Routing\CustomRoute;
 class ConfigCustomRoutes
 {
     /**
-     * Configurate Application routes based on Application config
+     * Configure Application routes based on Application config
      *
      * @param \Peak\Bedrock\Application\Config  $config
      * @param \Peak\Bedrock\Application\Routing $routing
