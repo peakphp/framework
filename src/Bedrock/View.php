@@ -97,11 +97,12 @@ class View
     /**
      * We try to call View Render Engine object method.
      * If not, we try to return a helper object based on $method name.
-     * So every Rendering Engine Method can be called directly inside Peak_View and
-     * every instanciated Peak_View_Helpers
+     * So every Rendering Engine Method can be called directly inside Peak\Bedrock\View and
+     * every instanriated Peak_View_Helpers
      *
-     * @param string $method
-     * @param array  $args
+     * @param  string $method
+     * @param  array  $args
+     * @return mixed
      */
     public function __call($method, $args = null)
     {
