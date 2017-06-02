@@ -41,7 +41,7 @@ class CustomPermission
     }
 
     /**
-     * Acces to permission object
+     * Access to permission object
      *
      * @param  string $method
      * @param  array  $args
