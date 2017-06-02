@@ -3,8 +3,7 @@
 namespace Peak\Common;
 
 /**
- * Peak Data container
- * @deprecated
+ * Registry singleton container
  */
 class Registry
 {

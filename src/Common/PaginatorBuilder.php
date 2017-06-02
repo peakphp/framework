@@ -84,7 +84,7 @@ class PaginatorBuilder
     /**
      * Build Paginator
      *
-     * @return Peak\Common\Paginator
+     * @return \Peak\Common\Paginator
      */
     public function build()
     {

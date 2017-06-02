@@ -3,7 +3,7 @@
 namespace Peak\Common;
 
 /**
- * Peak commom data exception
+ * Data exception
  */
 class DataException extends \Exception
 {
