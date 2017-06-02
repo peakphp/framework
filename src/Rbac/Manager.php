@@ -108,7 +108,7 @@ class Manager
      * Access to a perms
      *
      * @param  string $id
-     * @return Perm
+     * @return Permission
      */
     public function permission($id)
     {

@@ -52,7 +52,7 @@ abstract class AbstractProcessor
             return $pipe->process($payload);
         }
 
-        // unknow pipe type
+        // unknown pipe type
         throw new Exception('Invalid pipe type');
     }
 

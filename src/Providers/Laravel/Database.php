@@ -6,11 +6,13 @@ use Illuminate\Database\Capsule\Manager as Capsule;
 use Illuminate\Container\Container as Container;
 use Illuminate\Events\Dispatcher as Dispatcher;
 
+use \PDOException;
+
 class Database
 {
     /**
      * The current database connection
-     * @var Illuminate\Database\*
+     * @var \Illuminate\Database\*
      */
     protected $db;
 
@@ -22,13 +24,13 @@ class Database
 
     /**
      * The current database schema
-     * @var Illuminate\Database\Schema\*
+     * @var \Illuminate\Database\Schema\*
      */
     protected $schema;
 
     /**
      * Capsule manager
-     * @var Illuminate\Database\Schema\Manager
+     * @var \Illuminate\Database\Schema\Manager
      */
     protected static $capsule;
 
@@ -75,7 +77,7 @@ class Database
     }
 
     /**
-     * Call unknow method directly on $db object
+     * Call unknown method directly on $db object
      *
      * @param  string $method
      * @param  mixed  $args
@@ -89,7 +91,7 @@ class Database
     /**
      * Schema
      *
-     * @return  Return schema (shortcut of self::db()->schema())
+     * @return  schema (shortcut of self::db()->schema())
      */
     public function schema()
     {
