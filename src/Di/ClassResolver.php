@@ -2,12 +2,12 @@
 
 namespace Peak\Di;
 
-use Closure;
-use \Exception;
 use Peak\Di\Container;
 use Peak\Di\ClassInspector;
 use Peak\Di\InterfaceResolver;
 use Peak\Di\ExplicitResolver;
+use \Closure;
+use \Exception;
 
 /**
  * Class Dependencies Resolver
@@ -16,19 +16,19 @@ class ClassResolver
 {
     /**
      * ClassInspector
-     * @var Peak\Di\ClassInspector
+     * @var \Peak\Di\ClassInspector
      */
     protected $inspector;
 
     /**
      * Interface resolver
-     * @var Peak\Di\InterfaceResolver
+     * @var \Peak\Di\InterfaceResolver
      */
     protected $iresolver;
 
     /**
      * Explicit resolver
-     * @var Peak\Di\ExplicitResolver
+     * @var \Peak\Di\ExplicitResolver
      */
     protected $explicit;
 
@@ -46,7 +46,7 @@ class ClassResolver
      * Resolve class arguments dependencies
      *
      * @param  string $class
-     * @return object
+     * @return array
      */
     public function resolve($class, Container $container, array $args = [], $explicit = [])
     {
