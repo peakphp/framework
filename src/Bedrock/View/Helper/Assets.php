@@ -22,7 +22,7 @@ class Assets extends Helper
     private $assets_base_url = null;
 
     /**
-     * Init the class and set default assets path and base url optionnaly
+     * Init the class and set default assets path and base url optionally
      *
      * @param   string|null $path
      */
@@ -102,7 +102,7 @@ class Assets extends Helper
     }
 
     /**
-     * Proccess a single or a bunch of assets file
+     * Process a single or a bunch of assets file
      *
      * @param  string        $type
      * @param  array|string  $paths
