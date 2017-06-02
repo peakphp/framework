@@ -70,10 +70,10 @@ class Container implements ContainerInterface
      *                               }]
      * @return object
      */
-    public function instantiate($class, $args = [], $explict = [])
+    public function instantiate($class, $args = [], $explicit = [])
     {
-        // process class dependecies
-        $args = $this->resolver->resolve($class, $this, $args, $explict);
+        // process class dependencies
+        $args = $this->resolver->resolve($class, $this, $args, $explicit);
  
         // instantiate class with resolved dependencies and args if apply
         return $this->instantiator->instantiate($class, $args);
@@ -84,13 +84,13 @@ class Container implements ContainerInterface
      *
      * @param  array  $callback The callable to be called
      * @param  array  $args     The parameters to be passed to the callback, as an indexed array
-     * @param  array  $explict  @see instantiate
+     * @param  array  $explicit @see instantiate
      * @return mixed  the method call return if any
      */
-    public function call(array $callback, $args = [], $explict = [])
+    public function call(array $callback, $args = [], $explicit = [])
     {
-        // process class dependecies
-        $args = $this->resolver->resolve($callback, $this, $args, $explict);
+        // process class dependencies
+        $args = $this->resolver->resolve($callback, $this, $args, $explicit);
 
         return call_user_func_array($callback, $args);
     }
@@ -101,9 +101,9 @@ class Container implements ContainerInterface
      * @see instantiate() for params
      * @return object
      */
-    public function instantiateAndStore($class, $args = [], $explict = [])
+    public function instantiateAndStore($class, $args = [], $explicit = [])
     {
-        $object = $this->instantiate($class, $args, $explict);
+        $object = $this->instantiate($class, $args, $explicit);
         $this->add($object);
         return $object;
     }
