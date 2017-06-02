@@ -2,15 +2,10 @@
 
 namespace Peak\Bedrock;
 
-use \Exception;
 use Peak\Bedrock\Application;
-use Peak\Bedrock\View\Helpers;
 use Peak\Bedrock\View\Header;
-use Peak\Config\File\Ini;
+use \Exception;
 
-/**
- * Template variables registry with objects httpheader, helpers, rendering
- */
 class View
 {
     /**
@@ -44,26 +39,18 @@ class View
     private $_render = true;
 
     /**
-     * Load view - set an array|ini file as template variable(s) (optionnal)
-     *
-     * @param array|string $vars
+     * Constructor
      */
-    public function __construct($vars = null)
-    {
-        if (isset($vars)) {
-            if (is_array($vars)) {
-                $this->_vars = $vars;
-            } else {
-                $this->iniVar($vars);
-            }
-        }
+    public function __construct(array $vars = [])
+    {   
+        $this->_vars = $vars;
     }
 
     /**
      * Set/overwrite view variable
      *
      * @param string $name
-     * @param anything $value
+     * @param mixed  $value
      */
     public function __set($name, $value = null)
     {
@@ -74,7 +61,7 @@ class View
      * Get view variable
      *
      * @param  string $name
-     * @return anything
+     * @return mixed
      */
     public function &__get($name)
     {
