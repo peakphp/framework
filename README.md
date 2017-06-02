@@ -28,6 +28,7 @@ Requirements:
     - App Kernel
     - App Modules Kernel
     - Ownership and Permissions
+    - Role-based access control
     - Templating
     - Form builder and validator
     - Validators
