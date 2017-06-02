@@ -15,7 +15,7 @@ class Front
 {
     /**
      * Route object
-     * @var Peak\Routing\Route
+     * @var \Peak\Routing\Route
      */
     public $route;
     

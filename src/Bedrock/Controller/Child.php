@@ -13,13 +13,13 @@ abstract class Child
 {
     /**
      * View object
-     * @var Peak\Bedrock\View
+     * @var \Peak\Bedrock\View
      */
     protected $view;
 
     /**
      * Parent controller
-     * @var Peak\Bedrock\Controller\Parent
+     * @var \Peak\Bedrock\Controller\ParentController
      */
     protected $parent;
 

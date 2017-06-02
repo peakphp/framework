@@ -8,7 +8,7 @@ use Peak\Bedrock\View;
 /**
  * View Cache
  *
- * This object manage view cache and it is encapsuled inside Peak\Bedrock\View\Render
+ * This object manage view cache and it is encapsulated inside Peak\Bedrock\View\Render
  */
 class Cache
 {
@@ -16,7 +16,7 @@ class Cache
     protected $_cache_expire;          //script cache expiration time
     protected $_cache_path;            //scripts view cache path. generate by enableCache()
     protected $_cache_id;              //current script view md5 key. generate by preOutput()
-    protected $_cache_strip = false;   //will strip all repeating space caracters
+    protected $_cache_strip = false;   //will strip all repeating space characters
 
     protected $view;
 
@@ -63,7 +63,7 @@ class Cache
     }
 
     /**
-     * Desactivate output cache
+     * Deactivate output cache
      */
     public function disable()
     {
@@ -131,7 +131,7 @@ class Cache
     {
         $key = $path.$file;
 
-        //use current $this->_script_file and _script_path if no path/file scpecified
+        //use current $this->_script_file and _script_path if no path/file specified
         if (!isset($path) && !isset($file)) {
             $key = $this->getScriptPath().$this->getScriptFile();
         }
