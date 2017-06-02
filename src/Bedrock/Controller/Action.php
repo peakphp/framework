@@ -3,7 +3,6 @@
 namespace Peak\Bedrock\Controller;
 
 use Peak\Bedrock\Application;
-use Peak\Bedrock\Application\Container;
 use Peak\Common\Collection;
 use Peak\Routing\Route;
 use Peak\Bedrock\View;
