@@ -2,15 +2,15 @@
 
 namespace Peak\Config;
 
-use \Exception;
 use Peak\Config\DotNotation;
+use \Exception;
 
 class File extends DotNotation
 {
     protected $file;
 
     /**
-     * Set array of data OR a file optionnaly
+     * Set array of data OR a file optionally
      *
      * @param array $vars
      */

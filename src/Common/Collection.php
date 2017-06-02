@@ -125,7 +125,7 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
     }
 
     /**
-     * Unsets an item by key
+     * Unset an item by key
      *
      * @param string $key
      */

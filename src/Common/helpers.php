@@ -11,7 +11,7 @@
  */
 if (!function_exists('relativeBasepath')) {
     /**
-     * Get relativepath of specified dir from the server document root
+     * Get relative path of specified dir from the server document root
      *
      * @param  string $dir
      * @return string
@@ -92,7 +92,7 @@ if (!function_exists('collection')) {
  */
 if (!function_exists('phpinput')) {
     /**
-     * Retreive a collection object from php://input
+     * Retrieve a collection object from php://input
      *
      * @param  Closure $closure
      * @return Peak\Common\Collection
@@ -122,7 +122,7 @@ if (!function_exists('phpinput')) {
  */
 if (!function_exists('exceptionTrace')) {
     /**
-     * Retreive a more comprehensive exception debug backtrace
+     * Retrieve a more comprehensive exception debug backtrace
      *
      * @param  \Exception $exc
      */
