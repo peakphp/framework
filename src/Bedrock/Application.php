@@ -2,10 +2,12 @@
 
 namespace Peak\Bedrock;
 
-use Peak\Di\ContainerInterface;
+use Peak\Bedrock\Application\Config;
 use Peak\Bedrock\Application\ConfigResolver;
 use Peak\Bedrock\Application\Kernel;
 use Peak\Bedrock\Application\Routing;
+use Peak\Bedrock\View;
+use Peak\Di\ContainerInterface;
 use \Exception;
 
 /**
@@ -37,7 +39,7 @@ class Application
      */
     public static function kernel()
     {
-        return self::get('Peak\Bedrock\Application\Kernel');
+        return self::get(Kernel::class);
     }
 
     /**
@@ -102,7 +104,7 @@ class Application
      */
     public static function conf($path = null, $value = null)
     {
-        $config = self::get(self::containerCheck('Peak\Bedrock\Application\Config'));
+        $config = self::get(self::containerCheck(Config::class));
 
         if (!isset($path)) {
             return $config;
@@ -140,13 +142,13 @@ class Application
         $container->add($config_resolver->getMountedConfig());
 
         // store Peak\Bedrock\Application\Routing
-        $container->add(new \Peak\Bedrock\Application\Routing);
+        $container->add(new Routing);
 
         // store Peak\Bedrock\View
-        $container->add(new \Peak\Bedrock\View);
+        $container->add(new View);
         
         // instantiate and store app kernel
-        $container->instantiateAndStore('\Peak\Bedrock\Application\Kernel');
+        $container->instantiateAndStore(Kernel::class);
     }
 
     /**
