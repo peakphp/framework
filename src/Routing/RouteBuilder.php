@@ -4,14 +4,13 @@ namespace Peak\Routing;
 
 use Peak\Routing\Request;
 use Peak\Routing\RequestResolver;
-use Peak\Routing\Route;
 
 class RouteBuilder
 {
     /**
      * Resolve a request
      *
-     * @return Peak\Routing\Route
+     * @return \Peak\Routing\Route
      */
     public static function get(...$segment)
     {
