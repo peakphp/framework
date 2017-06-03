@@ -5,6 +5,7 @@ Release Date: ?
  - replaced global $_SERVER by filter_var() + getenv() in Peak\Bedrock\Application\ConfigResolver
  - replaced global $_SERVER by filter_input_array() for url() function
  - replaced global $_SERVER by filter_var() + getenv() for relativePath() and relativeBasepath() functions
+ - replaced global $_SERVER by filter_var() in Peak\Routing\RequestServerURI
  - fixed bug with $this and static method conf() in Peak\Bedrock\Application
  - function isEnv() now accept also an array of env as argument
  - added Rbac component
@@ -163,7 +164,7 @@ VERSION 2.0.9
 -------------
 Release Date: 2017-02-21
 
- - added Doorman component for mananing users/groups permission(s) like linux file permissions
+ - added Doorman component for managing users/groups permission(s) like linux file permissions
  - separated default processes from app processes in Peak\Application\Bootstrapper
  - added property $boot_methods_prefix in Peak\Application\Bootstrapper
 
@@ -237,12 +238,12 @@ Release Date: 2017-01-27
 
 > Warning! Breaking changes in 2.0.x
 If you want want to support an old application, please use version 1.x
-This version is incompatible with 1.0.0 because most componments have  
+This version is incompatible with 1.0.0 because most components have  
 been rewritten, splitted and/or reorganised.
  
  - namespace migration
  - multiples fix due to namespace migration
- - switched to laravel database powerfull components
+ - switched to laravel database powerful components
  - added database wrapper around capsule manager
  - removed zend db vendor
  - removed zend reflection vendor
@@ -254,7 +255,7 @@ been rewritten, splitted and/or reorganised.
  - added new collection component
  - most code inside Core have been moved to new application components.
  - Core regroup global and app functions now
- - Config now herit from Collection
+ - Config now inherited from Collection
  - removed unused spl autoload functions
  - removed deprecated Xml and Dispatcher class
  - removed deprecated Codegen class
@@ -289,7 +290,7 @@ Release Date: 2015-01-04
  - added methods enablePersistence() and export2file() to Peak_Config_Json. 
  - fixed _get() preg_match verification in Peak_Zendatable
  - added auto zend db connection config in Peak_Application_Bootstrap
- - added a optionnal params to paging() of Peak_Zendatable
+ - added a optional params to paging() of Peak_Zendatable
  - simplified a lot Peak_Model_Pagination by using new method _get() from Peak_Zendatable. This remove query building 
    process duplication, give more flexibility, fix previous errors and security issues and standardize the whole thing.
  - added 3 methods to Peak_Zendatable : get(), getAll() and _get(). Those new methods simplifies table models 
@@ -337,7 +338,7 @@ Release Date: 2014-02-04
  - added magic method __call() to Peak_Model_Zendatable and get rid of all shortcut methods
  - added a basic but usefull class model Peak_Model_ActiveRecord based on ActiveRecord pattern
  - fixed Peak_Config methods to use array_key_exists() instead of isset()
- - fixed Peak_View_Helpers by preventing in jection of view object if this helper extends Peak_Config class
+ - fixed Peak_View_Helpers by preventing injection of view object if this helper extends Peak_Config class
  - rewrited a good portion of class Peak_Lang. It's now more granular, supports multiple translations files and more 
    independent from others Peak components
  - modified method setColumns() of Peak_View_Helper_Grid for trimming the keys of columns
@@ -360,7 +361,7 @@ Release Date: 2013-09-02
    finally added some params to method release() and setRCode()
  - added method header() to Peak_View and modified method render() t<o support this new method
  - added new class Peak_View_Header to facilitate view http headers
- - added method getTriggerTrace() to Peak_Exception. This method retreive element trace who triggered the exception
+ - added method getTriggerTrace() to Peak_Exception. This method retrieve element trace who triggered the exception
  - added methods swapKey(), swapKeyVal(), swapKeyValCallback() to Peak_Model_Zendatable
  - added the notion of param(s) after url to Peak_View_Helper_Assets
  - added method getLang() to class Peak_Lang
@@ -434,7 +435,7 @@ Release Date: 2013-02-12
  - added method getMethodCodeBlock() to class Peak_Zreflection
  - fixed a bug that return empty array with Peak_Filters::globalSanitize() when no filter is set. This method will now
    apply a default string sanitize if no filter is set.
- - added a default unknow error in class Peak_Controller_Internal_PkError
+ - added a default unknown error in class Peak_Controller_Internal_PkError
  - added a param to method show() of class Peak_View_Helper_Debugbar that make the bar starting minimized. 
    By default, this new param is set to false.
  - fixed a notice about object to string conversion in method _proccessVariables() of class Peak_View_Render_VirtualLayouts
@@ -492,7 +493,7 @@ Release Date: 2012-11-06
  - added method log() to debugbar helper.
  - added css reset to debugbar.css
  - fixed view helper debugbar to not show when rendering is disable
- - deleted previously introducted noRender() in Peak_View and added instead methods canRender(), disableRender() and 
+ - deleted previously introduced noRender() in Peak_View and added instead methods canRender(), disableRender() and 
    enableRender() and modified method render()
  - fixed debugbar.js to not load jquery when it's already loaded
  - modified function _autoloadAppBaseCustom() to support parent models in case of customs app models folder in autoload.php
@@ -524,7 +525,7 @@ Release Date: 2012-06-30
  - added method calculate() in Peak_Model_Pagination
  - added method paging() in Peak_Model_Zendatable to access to Peak_Model_Pagination 
  - added new class Peak_Model_Pagination for Peak_Model_Zendatable
- - added 4 new shorcut method for escaping stuff in Peak_Model_Zendatable
+ - added 4 new shortcut method for escaping stuff in Peak_Model_Zendatable
 
 VERSION 0.9.2
 -------------
@@ -559,7 +560,7 @@ Release Date: 2011-11-28
  - fixed method save() from Peak_Model_Zendatable to return primary key on update query
  - fixed a bug introduced in Peak_Controller_Front when added $router property
  - fixed method isValid() from Peak_View_Cache to support custom cache id
- - removed all shorcut methods about cache in Peak_View_Render
+ - removed all shortcut methods about cache in Peak_View_Render
  - renamed methods isCached() to isValid(), enableCacheStrip() to enableStrip(), isCachedBlock() to isValidBlock(),
    cacheBlockEnd() to blockEnd() in Peak_View_Cache
  - fixed bug in isCached() of class Peak_View_Cache
@@ -580,7 +581,7 @@ Release Date: 2011-10-02
 
  - fixed problem with method getProperties() with value when class is abstract or is an interface in class Peak_Zreflection
  - rewrited method getConstants() from Peak_Zreflection
- - modified method getProperties() to retreive also values of properties in class Peak_Zreflection
+ - modified method getProperties() to retrieve also values of properties in class Peak_Zreflection
  - fixed Peak_View_Helper_Debugbar by encoding html entities in html/js code data 
  - added new internal controller class named Peak_Controller_Internal_Pkdoc
  - added new class named Peak_Zreflection_Class
@@ -629,7 +630,7 @@ VERSION 0.8.7
 -------------
 Release Date: 2011-08-22
 
- - udpated method matchRegex() from Peak_Router to accept regex named subpatterns as controller params
+ - updated method matchRegex() from Peak_Router to accept regex named subpatterns as controller params
  - modified token separator from '.' to more natural '/' char in Peak_Router::addRegex()
  - added method redirectUrl() in Peak_Controller_Action
  - added method renderwithjQueryTag() to class View_Helper_js
@@ -709,7 +710,7 @@ Release Date: 2011-03-12
  - added class Peak_Controller_Internal_PkError
  - minor fixes to Peak_View_Render_VirtualLayouts
  - splited dispatch() method of Peak_Controller_Front into dispatch(), _dispatchController(), _dispatchControllerAction() and
-   _dispatchModule(). Added posibility to inject exception object to error controller with errorDispatch().
+   _dispatchModule(). Added possibility to inject exception object to error controller with errorDispatch().
  - added class Peak_View_Render_VirtualLayouts
  - fixed Peak_Application_Modules to flush previous bootstrap if modules don't have his own
  - fixed Peak_Application_Modules to load default Peak front controller if modules don't have his own
@@ -876,7 +877,7 @@ Release Date: 2010-11-05
  - fixed method output() visibility in Peak_View_Render_Json
  - fixed minor bug with views cache in Peak_View_Render::preOutput() and Peak_View_Cache::isCached()
  - Peak_Exception > added constant ERR_CTRL_ACTION_NOT_FOUND. Fixed Peak_Controller_Action:handleAction().
-                    This fix url problem with valid controller and unknow action.
+                    This fix url problem with valid controller and unknown action.
  - Peak_Controller_Front > Added method forceDispatch() and remove param $flush_request of method dispatch()
  - Peak_Router > added property $_regex, methods public addRegex() and protected matchRegex(). 
                  Tweaked getRequestUri() to support matchRegex().
@@ -1017,7 +1018,7 @@ Release Date: 2010-07-19
                Normal way -> $this->helper()->text->truncate('...')
                New way -> $this->text()->truncate('...')
  - Peak_View_Render > remove some code in __call(). Now __call() will use Peak_View object for 
-                      calling unknow Peak_Render methods like helpers and theme.
+                      calling unknown Peak_Render methods like helpers and theme.
  - autoload.php > removed method catch_autoload_err() and _autoload_err().
                   use method Peak_Exception::getDebugTrace() instead
  - Peak_Exception > added method getDebugTrace(), added constants ERR_VIEW_HELPER_NOT_FOUND and ERR_CTRL_HELPER_NOT_FOUND.
@@ -1032,10 +1033,10 @@ Release Date: 2010-07-09
  - added class Peak_View_Helpers > fixed Peak_View helper() to use this new helpers objects wrapper.
                                     We use now $this->helper()->myclass->mymethod() instead of
                                     $this->helper('myclass')->mymethod()
- - Peak_View > fixed a second issue with setRenderEngine() when calling unknow rendering engine.
+ - Peak_View > fixed a second issue with setRenderEngine() when calling unknown rendering engine.
  - Peak_Router > added property $params_assoc. fixed resolveRequest() to added params as associative array.
                  added property $params_assoc to Peak_controller too.
- - Peak_Render > fixed __call() for unknow method to check in Peak_View object if method exits and call it.
+ - Peak_Render > fixed __call() for unknown method to check in Peak_View object if method exits and call it.
                  Removed method helper().
  - fixed an issue of render() in Peak_Render_Layouts and Peak_Render_Partials 
    when use cache and render some file inside views.
@@ -1053,7 +1054,7 @@ Release Date: 2010-07-09
                      Note that _index() syntax have priority over indexAction() syntax.
  - Peak_Core > tweaked isController() and isModules() to check for the files instead of listing all controllers.
                It speedup application controllers/modules routing. Controllers and modules still can be listed on demand
- - Peak_View > fixed issue with setRenderEngine() when calling unknow rendering engine.
+ - Peak_View > fixed issue with setRenderEngine() when calling unknown rendering engine.
                Peak_View_Render_Partials is now loaded by default if no engine found.
  - Peak_View_Helpers class renamed to singular as the same for /helpers/ folder
  - Peak_View > added magic method __unset()
@@ -1106,13 +1107,13 @@ VERSION 0.7.7
    W_DEFAULT_CTRL -> APP_DEFAULT_CTLR, W_LOGIN -> APP_LOGIN_NAME, W_PASS -> APP_LOGIN_PASS
  - Peak_Registry > added method get()
  - Added Peak_View_Render_Virtual
- - Peak_View > added __call() > try to look for unknow method in view engine object
+ - Peak_View > added __call() > try to look for unknown method in view engine object
    or trigger_error if method no found and DEV_MODE is true
  - Peak_Application > added support of peak internal controller if 
    constant ENABLE_PEAK_CONTROLLER exists
    internal controllers paths: /Peak/Controller/Internal/
  - Peak_View_Render > added method baseUrl(). 
- - Peak_View_Render > added magic method __call() to silent unknow methods calls
+ - Peak_View_Render > added magic method __call() to silent unknown methods calls
    inside views files on production environment
  - Peak_Controller > fixed E_STRICT error with method helper()
  - Peak_view > fixed E_STRICT error with method helper()
@@ -1171,7 +1172,7 @@ VERSION 0.7.6
    added method set(), it do the same as register() method.
    register() is deprecated and removed, use set() instead
  - added class.wyn_bootstrap.php > abstract class base for application 
-   root bootstrap.php file. Bootstrap are optionnal and will be loaded
+   root bootstrap.php file. Bootstrap are optional and will be loaded
    and executed only if file [application_folder]/bootstrap.php exists
  - class.wyn_controller.php > method listActions() > moved $regexp outside the preg_math loop
  - class.wyn_view.php > fixed bug with iniVars() > var with multiples constants 
@@ -1182,7 +1183,7 @@ VERSION 0.7.6
    !IMPORTANT: app page changes : load app configs and core/boot.php
    and thats it! you ready to use app object to run your app   
  - Application configs simplified:
-   - Only 13 configs now. 3 of them are optionnal.
+   - Only 13 configs now. 3 of them are optional.
    - Renamed almost very constants name to more explicit,
      with fewer abbreviations name
  - class.wyn_core.php > removed all $path properties and replaced them by $paths array.
