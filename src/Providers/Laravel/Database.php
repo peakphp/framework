@@ -91,7 +91,7 @@ class Database
     /**
      * Schema
      *
-     * @return  schema (shortcut of self::db()->schema())
+     * @return  object schema (shortcut of self::db()->schema())
      */
     public function schema()
     {

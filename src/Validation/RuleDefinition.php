@@ -36,7 +36,7 @@ class RuleDefinition
     }
 
     /**
-     * Get an defition by key
+     * Get an definition by key
      *
      * @param  string $key
      * @return mixed
