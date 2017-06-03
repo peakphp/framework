@@ -12,7 +12,7 @@ class RequestServerURI extends Request
     public function __construct($base_uri = null)
     {
         parent::__construct(
-            $_SERVER['REQUEST_URI'],
+            filter_input(INPUT_SERVER, 'REQUEST_URI'),
             $base_uri
         );
     }
