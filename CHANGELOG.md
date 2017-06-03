@@ -1,6 +1,6 @@
 VERSION 2.8.0
 -------------
-Release Date: ?
+Release Date: 2017-06-03
  
  - replaced global $_SERVER by filter_var() + getenv() in Peak\Bedrock\Application\ConfigResolver
  - replaced global $_SERVER by filter_input_array() for url() function
