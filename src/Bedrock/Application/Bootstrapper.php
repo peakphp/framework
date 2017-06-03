@@ -16,18 +16,7 @@ class Bootstrapper
     protected $boot_methods_prefix = 'init';
 
     /**
-     * Default app processes before booting
-     * @var array
-     */
-    protected $default_processes = [
-        \Peak\Bedrock\Application\Bootstrap\Session::class,
-        \Peak\Bedrock\Application\Bootstrap\ConfigPHP::class,
-        \Peak\Bedrock\Application\Bootstrap\ConfigView::class,
-        \Peak\Bedrock\Application\Bootstrap\ConfigCustomRoutes::class
-    ];
-
-    /**
-     * Custom app processes before booting
+     * App processes before booting
      * @var array
      */
     protected $processes = [];
@@ -40,9 +29,6 @@ class Bootstrapper
         /**
          * Execute processes
          */
-        foreach ($this->default_processes as $process) {
-            Application::instantiate($process);
-        }
         foreach ($this->processes as $process) {
             Application::instantiate($process);
         }
