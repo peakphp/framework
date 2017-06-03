@@ -12,13 +12,13 @@ class CustomUserAbility
 {
     /**
      * Ability object
-     * @var Peak\Doorman\Ability
+     * @var \Peak\Doorman\Ability
      */
     public $ability;
 
     /**
      * Permissions object
-     * @var Peak\Doorman\Permissions
+     * @var \Peak\Doorman\Permissions
      */
     public $permissions;
 

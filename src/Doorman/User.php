@@ -22,13 +22,13 @@ class User implements PolicySubjectInterface
 
     /**
      * User group(s)
-     * @var Peak\Common\Collection
+     * @var Collection
      */
     protected $groups;
 
     /**
      * User custom abilities
-     * @var Peak\Common\Collection
+     * @var Collection
      */
     protected $custom_abilities;
 

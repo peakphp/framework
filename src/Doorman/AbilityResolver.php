@@ -10,13 +10,13 @@ class AbilityResolver
 {
     /**
      * User
-     * @var Peak\Doorman\User
+     * @var \Peak\Doorman\User
      */
     protected $user;
 
     /**
      * Ability
-     * @var Peak\Doorman\Ability
+     * @var \Peak\Doorman\Ability
      */
     protected $ability;
 
@@ -49,7 +49,7 @@ class AbilityResolver
      */
     public function abilityPermission()
     {
-        // check for custom user ability overrride
+        // check for custom user ability override
         $perms = $this->user->getCustomAbility(
             $this->ability->getName()
         );

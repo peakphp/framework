@@ -46,8 +46,8 @@ class Manager implements PolicySubjectInterface
     /**
      * Prepare mananger
      *
-     * @param  Peak\Doorman\UserPolicy $up
-     * @param  Peak\Doorman\ManagerPolicy $mp
+     * @param  UserPolicy $up
+     * @param  ManagerPolicy $mp
      */
     public function __construct(UserPolicy $up = null, ManagerPolicy $mp = null)
     {
@@ -68,7 +68,7 @@ class Manager implements PolicySubjectInterface
     /**
      * Add a user policy
      *
-     * @param  Peak\Doorman\UserPolicy $up
+     * @param  UserPolicy $up
      * @return $this
      */
     public function setUserPolicy(UserPolicy $up)
@@ -81,7 +81,7 @@ class Manager implements PolicySubjectInterface
      * Create a user
      *
      * @param  string $name
-     * @return Peak\Doorman\User
+     * @return User
      */
     public function createUser($name)
     {
@@ -101,8 +101,8 @@ class Manager implements PolicySubjectInterface
     /**
      * Add a user object instance
      *
-     * @param  Peak\Doorman\User $user
-     * @return Peak\Doorman\User
+     * @param  User $user
+     * @return User
      */
     public function addUser(User $user)
     {
@@ -125,7 +125,7 @@ class Manager implements PolicySubjectInterface
      * Get a user
      *
      * @param  string $name
-     * @return Peak\Doorman\User|null
+     * @return User|null
      */
     public function user($name)
     {
@@ -147,7 +147,7 @@ class Manager implements PolicySubjectInterface
      * Create a group
      *
      * @param  string $name
-     * @return Peak\Doorman\Group
+     * @return Group
      */
     public function createGroup($name)
     {
@@ -162,8 +162,8 @@ class Manager implements PolicySubjectInterface
     /**
      * Add a group object instance
      *
-     * @param  Peak\Doorman\Group $group
-     * @return Peak\Doorman\Group
+     * @param  Group $group
+     * @return Group
      */
     public function addGroup(Group $group)
     {
@@ -181,7 +181,7 @@ class Manager implements PolicySubjectInterface
      * Get a group
      *
      * @param  string $name
-     * @return Peak\Doorman\Group|null
+     * @return Group|null
      */
     public function group($name)
     {
@@ -206,7 +206,7 @@ class Manager implements PolicySubjectInterface
      * @param  string      $username
      * @param  string      $groupname
      * @param  Permissions $perms
-     * @return Peak\Doorman\Ability
+     * @return Ability
      */
     public function createAbility($ability, $username, $groupname, Permissions $perms)
     {
@@ -233,7 +233,7 @@ class Manager implements PolicySubjectInterface
      * [ability_name] [user]:[group] [permissions]
      *
      * @param  string $ability_str
-     * @return Peak\Doorman\Ability
+     * @return Ability
      */
     public function parseAbility($ability_str)
     {
@@ -264,7 +264,7 @@ class Manager implements PolicySubjectInterface
      * Get an ability
      *
      * @param  string $name
-     * @return Peak\Doorman\Ability|null
+     * @return Ability|null
      */
     public function ability($name)
     {

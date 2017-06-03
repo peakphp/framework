@@ -24,7 +24,7 @@ class Application
     /**
      * Get application container
      *
-     * @return Peak\Di\ContainerInterface
+     * @return \Peak\Di\ContainerInterface
      */
     public static function container()
     {

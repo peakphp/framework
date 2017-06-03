@@ -10,19 +10,19 @@ class Ability
 {
     /**
      * Permissions of ability
-     * @var Peak\Doorman\Permissions
+     * @var \Peak\Doorman\Permissions
      */
     public $permissions;
 
     /**
      * Owner of ability (aka as user)
-     * @var Peak\Doorman\User
+     * @var \Peak\Doorman\User
      */
     public $owner;
 
     /**
      * Group of ability
-     * @var Peak\Doorman\Group
+     * @var \Peak\Doorman\Group
      */
     public $group;
     
