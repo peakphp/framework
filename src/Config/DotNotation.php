@@ -96,7 +96,7 @@ class DotNotation extends Collection
     public function add($path, array $values)
     {
         $get = (array)$this->get($path);
-        $this->set($path, $this->_mergeRecursiveDistinct($get, $values));
+        $this->set($path, $this->arrayMergeRecursiveDistinct($get, $values));
     }
 
     /**

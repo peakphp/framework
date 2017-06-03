@@ -2,6 +2,8 @@
 
 namespace Peak\Common;
 
+use Peak\Common\Traits\ArrayMergeRecursiveDistinct;
+
 use Countable;
 use ArrayAccess;
 use ArrayIterator;
@@ -15,6 +17,8 @@ use \Closure;
  */
 class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSerializable
 {
+    use ArrayMergeRecursiveDistinct;
+
     /**
      * Collection items
      * @var array
@@ -276,43 +280,13 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
     public function mergeRecursiveDistinct($a, $b = null, $get_result = false)
     {
         if (!isset($b)) {
-            $this->items = $this->_mergeRecursiveDistinct($this->items, $a);
+            $this->items = $this->arrayMergeRecursiveDistinct($this->items, $a);
         } else {
             if (!$get_result) {
-                $this->items = $this->_mergeRecursiveDistinct($a, $b);
+                $this->items = $this->arrayMergeRecursiveDistinct($a, $b);
             } else {
-                return $this->_mergeRecursiveDistinct($a, $b);
+                return $this->arrayMergeRecursiveDistinct($a, $b);
             }
         }
-    }
-
-    /**
-     * Internal process for mergeRecursiveDistinct()
-     *
-     * @param  array $a
-     * @param  array $b
-     * @return array
-     */
-    protected function _mergeRecursiveDistinct($a, $b)
-    {
-        // merge arrays if both variables are arrays
-        if (is_array($a) && is_array($b)) {
-            // loop through each right array's entry and merge it into $a
-            foreach ($b as $key => $value) {
-                if (isset($a[$key])) {
-                    $a[$key] = $this->_mergeRecursiveDistinct($a[$key], $value);
-                } else {
-                    if ($key === 0) {
-                        $a = [0 => $this->_mergeRecursiveDistinct($a, $value)];
-                    } else {
-                        $a[$key] = $value;
-                    }
-                }
-            }
-        } else {
-            $a = $b; // one of values is not an array
-        }
-
-        return $a;
     }
 }

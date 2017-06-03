@@ -152,7 +152,7 @@ class Ini extends DotNotation
             $this->items[$ext_target] = $this->_processSectionContents($contents);
 
             // merge the new section with the existing section values
-            $this->items[$ext_target] = $this->_mergeRecursiveDistinct($this->items[$ext_source], $this->items[$ext_target]);
+            $this->items[$ext_target] = $this->arrayMergeRecursiveDistinct($this->items[$ext_source], $this->items[$ext_target]);
         }
     }
 
@@ -171,7 +171,7 @@ class Ini extends DotNotation
             // convert all a.b.c.d to multi-dimensional arrays
             $process = $this->_processContentEntry($path, $value);
             // merge the current line with all previous ones
-            $result = $this->_mergeRecursiveDistinct($result, $process);
+            $result = $this->arrayMergeRecursiveDistinct($result, $process);
         }
         
         return $result;
