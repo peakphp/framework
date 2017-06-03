@@ -4,6 +4,8 @@ Release Date: ?
 
  - added Peak\Common\Traits\ArrayMergeRecursiveDistinct and updated 
    Peak\Common\Collection, Peak\Config\DotNotation and Peak\Config\File\Ini accordingly
+ - removed $default_processes in Peak\Bedrock\Application\Bootstrapper moved
+   this responsibility into the application bootstrapper.
 
 VERSION 2.8.0
 -------------
