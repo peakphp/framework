@@ -7,6 +7,7 @@ Release Date: ?
  - removed $default_processes in Peak\Bedrock\Application\Bootstrapper moved
    this responsibility into the application bootstrapper.
  - passing correctly param(s) to helpers in Peak\Bedrock\View
+ - rewrited helper() method with ClassFinder in Peak\Bedrock\View
 
 VERSION 2.8.0
 -------------
