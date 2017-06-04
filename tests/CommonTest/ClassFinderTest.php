@@ -22,7 +22,7 @@ class ClassFinderTest extends TestCase
 
         $class = null;
         $class = $cf->findFirst('Test');
-        $this->assertFalse($class);
+        $this->assertNull($class);
     }
 
     /**
@@ -41,7 +41,7 @@ class ClassFinderTest extends TestCase
 
         $class = null;
         $class = $cf->findFirst('Test');
-        $this->assertFalse($class);
+        $this->assertNull($class);
     }
         	  
 }
