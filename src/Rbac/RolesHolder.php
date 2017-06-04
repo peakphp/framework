@@ -32,7 +32,7 @@ trait RolesHolder
     {
         if ($role instanceof Role) {
             return isset($this->roles[$role->getId()]);
-        } 
+        }
         return isset($this->roles[$role]);
     }
 }
