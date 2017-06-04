@@ -109,21 +109,8 @@ class View
         if (method_exists($this->engine(), $method)) {
             return call_user_func_array([$this->engine(), $method], $args);
         } else {
-            return $this->helper($method);
+            return $this->helper($method, $args);
         }
-        /*
-        elseif((isset($this->helper($method)) || ($this->helper()->exists($method))) {
-            if(!empty($args)) {
-                $helper = $method;
-                $method = $args[0]; 
-                $args = array_slice($args,1);
-                return call_user_func_array(array($this->helper()->$helper, $method), $args);
-            }
-            return $this->helper()->$method;
-        }
-        elseif(defined('APPLICATION_ENV') && in_array(APPLICATION_ENV, array('development', 'testing'))) {
-            trigger_error('View method/helper '.$method.'() doesn\'t exists');
-        }*/
     }
 
     /**
@@ -297,7 +284,7 @@ class View
      *
      * @return object Peak\Bedrock\View\Helpers
      */
-    public function helper($name = null, $method = null, $params = [])
+    public function helper($name = null, $params = [])
     {
         if (array_key_exists($name, $this->_helpers)) {
             return $this->_helpers[$name];
@@ -306,10 +293,10 @@ class View
             $app_helper  = Application::conf('ns').'\Views\Helpers\\'.ucfirst($name);
 
             if (class_exists($peak_helper)) {
-                $this->_helpers[$name] = Application::instantiate($peak_helper);
+                $this->_helpers[$name] = Application::instantiate($peak_helper, $params);
                 return $this->_helpers[$name];
             } elseif (class_exists($app_helper)) {
-                $this->_helpers[$name] = Application::instantiate($app_helper);
+                $this->_helpers[$name] = Application::instantiate($app_helper, $params);
                 return $this->_helpers[$name];
             } else {
                 trigger_error('[ERR] View helper '.$name.' doesn\'t exists');
