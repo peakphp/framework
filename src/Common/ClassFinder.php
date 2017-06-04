@@ -33,7 +33,7 @@ class ClassFinder
                 return $ns.'\\'.$basename;
             }
         }
-        return false;
+        return null;
     }
 
     /**
@@ -44,7 +44,7 @@ class ClassFinder
      */
     public function findLast($basename)
     {
-        $class = false;
+        $class = null;
         foreach ($this->namespaces as $ns) {
             if (class_exists($ns.'\\'.$basename)) {
                 $class = $ns.'\\'.$basename;
