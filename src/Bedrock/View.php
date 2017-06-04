@@ -98,7 +98,7 @@ class View
      * We try to call View Render Engine object method.
      * If not, we try to return a helper object based on $method name.
      * So every Rendering Engine Method can be called directly inside Peak\Bedrock\View and
-     * every instanriated Peak_View_Helpers
+     * every instantiated Peak_View_Helpers
      *
      * @param  string $method
      * @param  array  $args
@@ -170,7 +170,7 @@ class View
 
     /**
      * Set/Add some view vars
-     * Existing var key name will be overwrited, otherwise var is added to current $_vars
+     * Existing var key name will be overwritten, otherwise var is added to current $_vars
      */
     public function addVars($vars)
     {
