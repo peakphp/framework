@@ -66,7 +66,7 @@ class CustomRoute
      */
     public function matchRequest(Request $request)
     {
-        $result = preg_match(
+        preg_match(
             '#^/'.$this->regex.'/$#',
             $request->request_uri,
             $matches
