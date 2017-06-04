@@ -8,6 +8,7 @@ Release Date: ?
    this responsibility into the application bootstrapper.
  - passing correctly param(s) to helpers in Peak\Bedrock\View
  - rewrited helper() method with ClassFinder in Peak\Bedrock\View
+ - fixed unused variable in Peak\Bedrock\View\Cache
 
 VERSION 2.8.0
 -------------
