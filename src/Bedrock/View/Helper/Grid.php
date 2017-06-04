@@ -274,7 +274,7 @@ class Grid extends Helper
         //we will try to get a sample
         if (is_null($row_sample)) {
             if (!empty($this->_data)) {
-                foreach ($this->_data as $index => $row) {
+                foreach ($this->_data as $row) {
                     $row_sample = $row;
                     break;
                 }
