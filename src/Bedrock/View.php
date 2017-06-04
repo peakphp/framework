@@ -4,6 +4,7 @@ namespace Peak\Bedrock;
 
 use Peak\Bedrock\Application;
 use Peak\Bedrock\View\Header;
+use Peak\Common\ClassFinder;
 use \Exception;
 
 class View
@@ -282,25 +283,26 @@ class View
     /**
      * Load helpers objects method and return helper obj
      *
-     * @return object Peak\Bedrock\View\Helpers
+     * @params string $name
+     * @params array  $params
+     * @return mixed
      */
     public function helper($name = null, $params = [])
     {
         if (array_key_exists($name, $this->_helpers)) {
             return $this->_helpers[$name];
-        } else {
-            $peak_helper = 'Peak\Bedrock\View\Helper\\'.ucfirst($name);
-            $app_helper  = Application::conf('ns').'\Views\Helpers\\'.ucfirst($name);
-
-            if (class_exists($peak_helper)) {
-                $this->_helpers[$name] = Application::instantiate($peak_helper, $params);
-                return $this->_helpers[$name];
-            } elseif (class_exists($app_helper)) {
-                $this->_helpers[$name] = Application::instantiate($app_helper, $params);
-                return $this->_helpers[$name];
-            } else {
-                trigger_error('[ERR] View helper '.$name.' doesn\'t exists');
-            }
         }
+
+        $helper = (new ClassFinder([
+            'Peak\Bedrock\View\Helper',
+            Application::conf('ns').'\Views\Helpers'
+        ]))->findLast(ucfirst($name));
+
+        if ($helper === null) {
+            return trigger_error('View helper '.$name.' doesn\'t exists');
+        }
+
+        $this->_helpers[$name] = Application::instantiate($helper, $params);
+        return $this->_helpers[$name];
     }
 }
