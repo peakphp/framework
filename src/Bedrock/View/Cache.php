@@ -111,8 +111,8 @@ class Cache
 
         $filepath = $this->getCacheFile();
 
-        if (file_exists($this->getCacheFile())) {
-            $file_date = filemtime($this->getCacheFile());
+        if (file_exists($filepath)) {
+            $file_date = filemtime($filepath);
             $now = time();
             $delay = $now - $file_date;
             return ($delay >= $this->_cache_expire) ? false : true;
