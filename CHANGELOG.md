@@ -1,6 +1,6 @@
 VERSION 2.9.0
 -------------
-Release Date: ?
+Release Date: 2017-06-05
 
  - added Peak\Common\Traits\ArrayMergeRecursiveDistinct and updated 
    Peak\Common\Collection, Peak\Config\DotNotation and Peak\Config\File\Ini accordingly
