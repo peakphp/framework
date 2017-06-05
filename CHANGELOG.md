@@ -9,6 +9,7 @@ Release Date: ?
  - passing correctly param(s) to helpers in Peak\Bedrock\View
  - rewrited helper() method with ClassFinder in Peak\Bedrock\View
  - fixed unused variable in Peak\Bedrock\View\Cache
+ - added function getPhinxMigrateEnv() in Peak\Bedrock\helpers.php
 
 VERSION 2.8.0
 -------------
