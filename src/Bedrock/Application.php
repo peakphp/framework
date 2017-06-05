@@ -84,7 +84,7 @@ class Application
     protected static function containerCheck($instance = null)
     {
         if (!(self::$container instanceof ContainerInterface)) {
-            throw new Exception(__CLASS__.' as no container');
+            throw new Exception(__CLASS__.' has no container');
         }
         if (isset($instance)) {
             if (!self::$container->has($instance) && !self::$container->hasAlias($instance)) {
