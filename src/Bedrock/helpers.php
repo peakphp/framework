@@ -165,3 +165,29 @@ if (!function_exists('url')) {
         return $final;
     }
 }
+
+/**
+ * getPhinxMigrateEnv()
+ */
+if (!function_exists('getPhinxMigrateEnv')) {
+    /**
+     * Get environment argument value with Phinx migration
+     *
+     * @return string
+     */
+    function getPhinxMigrateEnv() 
+    {
+        global $argv;
+        if (!isset($argv) && !isset($_SERVER['argv'])) {
+            return 'prod';
+        } elseif((!isset($argv) && isset($_SERVER['argv']))) {
+            $argv = $_SERVER['argv'];
+        }
+        foreach ($argv as $index => $arg) {
+            if (in_array($arg,['-e', '--environment']) && isset($argv[$index + 1])) {
+                return $argv[$index + 1];
+            }
+        }
+        return 'prod';
+    }
+}
