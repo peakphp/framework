@@ -2,6 +2,8 @@ VERSION 2.10.0
 --------------
 Release Date: ?
 
+ - Application::setContainer() now return the container instance
+
 VERSION 2.9.0
 -------------
 Release Date: 2017-06-05
