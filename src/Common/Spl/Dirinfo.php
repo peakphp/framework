@@ -7,7 +7,7 @@ use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 
 /**
- * Retreive directory sizes and number of files
+ * Retrieve directory sizes and number of files
  */
 class Dirinfo
 {
