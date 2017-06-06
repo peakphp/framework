@@ -20,7 +20,7 @@ class Form
      * Form errors
      * @var array
      */
-    protected $_errors = [];
+    protected $errors = [];
 
     /**
      * Set also the data
@@ -61,7 +61,7 @@ class Form
      */
     public function setErrors($errors)
     {
-        $this->_errors = $errors;
+        $this->errors = $errors;
         return $this;
     }
 
@@ -114,8 +114,8 @@ class Form
      */
     public function getError($name)
     {
-        if (is_array($this->_errors) && array_key_exists($name, $this->_errors)) {
-            return $this->_errors[$name];
+        if (is_array($this->errors) && array_key_exists($name, $this->errors)) {
+            return $this->errors[$name];
         }
         return null;
     }
