@@ -44,7 +44,7 @@ class ViewTest extends TestCase
 	}
 	
 	/**
-	 * Test vars manpulation (get,set,isset,unset)
+	 * Test vars manipulation (get,set,isset,unset)
 	 */
 	function testManipulateVars()
 	{
