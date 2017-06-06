@@ -15,13 +15,13 @@ class Dirinfo
      * Size
      * @var integer
      */
-    protected $_size = 0;
+    protected $size = 0;
 
     /**
      * Number of files
      * @var integer
      */
-    protected $_nbfiles = 0;
+    protected $nbfiles = 0;
 
     /**
      * Gather information about directory
@@ -38,8 +38,8 @@ class Dirinfo
                     continue;
                 }
                 $size = $c->getSize();
-                $this->_size += $size;
-                ++$this->_nbfiles;
+                $this->size += $size;
+                ++$this->nbfiles;
             }
         } else {
             foreach (new DirectoryIterator($path) as $f) {
@@ -47,8 +47,8 @@ class Dirinfo
                     continue;
                 }
                 $size = $f->getSize();
-                $this->_size += $size;
-                ++$this->_nbfiles;
+                $this->size += $size;
+                ++$this->nbfiles;
             }
         }
     }
@@ -62,11 +62,11 @@ class Dirinfo
     public function getSize($format = false)
     {
         if (!$format) {
-            return $this->_size;
+            return $this->size;
         }
     
         $unit = ['b','kb','mb','gb','tb','pb'];
-        return @round($this->_size/pow(1024, ($i=floor(log($this->_size, 1024)))), 2).' '.$unit[$i];
+        return @round($this->size/pow(1024, ($i=floor(log($this->size, 1024)))), 2).' '.$unit[$i];
     }
 
     /**
@@ -76,6 +76,6 @@ class Dirinfo
      */
     public function getNbfiles()
     {
-        return $this->_nbfiles;
+        return $this->nbfiles;
     }
 }
