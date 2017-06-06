@@ -13,38 +13,38 @@ class View
      * view vars
      * @var array
      */
-    protected $_vars = [];
+    protected $vars = [];
 
     /**
      * view helpers objects
      * @var array
      */
-    private $_helpers = [];
+    private $helpers = [];
 
     /**
      * view header object
      * @var object
      */
-    private $_header;
+    private $header;
 
     /**
      * view rendering object
      * @var object
      */
-    private $_engine;
+    private $engine;
     
     /**
      * Determine if view will be rendered(view engine executed)
      * @var bool
      */
-    private $_render = true;
+    private $render = true;
 
     /**
      * Constructor
      */
     public function __construct(array $vars = [])
     {   
-        $this->_vars = $vars;
+        $this->vars = $vars;
     }
 
     /**
@@ -55,7 +55,7 @@ class View
      */
     public function __set($name, $value = null)
     {
-        $this->_vars[$name] = $value;
+        $this->vars[$name] = $value;
     }
 
     /**
@@ -66,8 +66,8 @@ class View
      */
     public function &__get($name)
     {
-        if (isset($this->_vars[$name])) {
-            return $this->_vars[$name];
+        if (isset($this->vars[$name])) {
+            return $this->vars[$name];
         }
         return ${null};
     }
@@ -80,7 +80,7 @@ class View
      */
     public function __isset($name)
     {
-        return array_key_exists($name, $this->_vars) ? true : false;
+        return array_key_exists($name, $this->vars) ? true : false;
     }
 
     /**
@@ -90,8 +90,8 @@ class View
      */
     public function __unset($name)
     {
-        if (array_key_exists($name, $this->_vars)) {
-            unset($this->_vars[$name]);
+        if (array_key_exists($name, $this->vars)) {
+            unset($this->vars[$name]);
         }
     }
 
@@ -143,7 +143,7 @@ class View
      */
     public function getVars()
     {
-        return $this->_vars;
+        return $this->vars;
     }
 
     /**
@@ -153,12 +153,12 @@ class View
      */
     public function setVars($vars)
     {
-        $this->_vars = $vars;
+        $this->vars = $vars;
     }
 
     /**
      * Set/Add some view vars
-     * Existing var key name will be overwritten, otherwise var is added to current $_vars
+     * Existing var key name will be overwritten, otherwise var is added to current $vars
      */
     public function addVars($vars)
     {
@@ -172,7 +172,7 @@ class View
      */
     public function resetVars()
     {
-        $this->_vars = [];
+        $this->vars = [];
     }
 
     /**
@@ -189,10 +189,10 @@ class View
             if (!class_exists($engine_class)) {
                 throw new Exception('View rendering engine '.$engine_name.' not found');
             }
-            $this->_engine = Application::instantiate($engine_class);
+            $this->engine = Application::instantiate($engine_class);
         }
 
-        return $this->_engine;
+        return $this->engine;
     }
 
     /**
@@ -202,8 +202,8 @@ class View
      */
     public function getEngineName()
     {
-        if (is_object($this->_engine)) {
-            return strtolower(str_replace('Peak\Bedrock\View\Render\\', '', get_class($this->_engine)));
+        if (is_object($this->engine)) {
+            return strtolower(str_replace('Peak\Bedrock\View\Render\\', '', get_class($this->engine)));
         }
         return null;
     }
@@ -215,7 +215,7 @@ class View
      */
     public function canRender()
     {
-        return $this->_render;
+        return $this->render;
     }
 
     /**
@@ -225,7 +225,7 @@ class View
      */
     public function disableRender()
     {
-        $this->_render = false;
+        $this->render = false;
         return $this;
     }
     
@@ -236,7 +236,7 @@ class View
      */
     public function enableRender()
     {
-        $this->_render = true;
+        $this->render = true;
         return $this;
     }
 
@@ -249,15 +249,15 @@ class View
      */
     public function render($file, $path = null)
     {
-        //skip render part(see $_render)
-        if ($this->_render === false) {
+        //skip render part(see $render)
+        if ($this->render === false) {
             return;
         }
 
-        if (is_object($this->_engine)) {
+        if (is_object($this->engine)) {
             // check if we got http header
-            if (is_object($this->_header)) {
-                $this->_header->release();
+            if (is_object($this->header)) {
+                $this->header->release();
             }
 
             $this->engine()->render($file, $path);
@@ -273,11 +273,11 @@ class View
      */
     public function header()
     {
-        if (!is_object($this->_header)) {
-            $this->_header = new Header();
+        if (!is_object($this->header)) {
+            $this->header = new Header();
         }
 
-        return $this->_header;
+        return $this->header;
     }
 
     /**
@@ -289,8 +289,8 @@ class View
      */
     public function helper($name = null, $params = [])
     {
-        if (array_key_exists($name, $this->_helpers)) {
-            return $this->_helpers[$name];
+        if (array_key_exists($name, $this->helpers)) {
+            return $this->helpers[$name];
         }
 
         $helper = (new ClassFinder([
@@ -302,7 +302,7 @@ class View
             return trigger_error('View helper '.$name.' doesn\'t exists');
         }
 
-        $this->_helpers[$name] = Application::instantiate($helper, $params);
-        return $this->_helpers[$name];
+        $this->helpers[$name] = Application::instantiate($helper, $params);
+        return $this->helpers[$name];
     }
 }
