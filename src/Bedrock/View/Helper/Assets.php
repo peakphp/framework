@@ -46,7 +46,7 @@ class Assets extends Helper
     /**
      * Delegate type method/args to process()
      *
-     * @example ('css', array('theme/css/myfile1.css', ...)) will call method _asset_css() with the file(s) path(s)
+     * @example ('css', array('theme/css/myfile1.css', ...)) will call method asset_css() with the file(s) path(s)
      *
      * @param  string $method
      * @param  string $args
@@ -112,7 +112,7 @@ class Assets extends Helper
     public function process($type, $paths, $param = null)
     {
         $output = '';
-        $mtype  = '_asset_'.$type;
+        $mtype  = 'asset_'.$type;
 
         // force paths to be an array
         if (!is_array($paths)) {
@@ -127,7 +127,7 @@ class Assets extends Helper
             // if type is auto, we will retreive asset based on file extension if asset method exists
             if (in_array($type, array('auto', 'auto-detect', 'autodetect'))) {
                 foreach ($paths as $p) {
-                    $ext = '_asset_'.pathinfo($p, PATHINFO_EXTENSION);
+                    $ext = 'asset_'.pathinfo($p, PATHINFO_EXTENSION);
                     if (method_exists($this, $ext)) {
                         $output .= $this->$ext($p, $param);
                     }
@@ -150,7 +150,7 @@ class Assets extends Helper
      * @param  string $filepath
      * @return string
      */
-    protected function _asset_url($filepath)
+    protected function asset_url($filepath)
     {
         return $this->assets_base_url.'/'.$this->assets_path.'/'.$filepath;
     }
@@ -161,9 +161,9 @@ class Assets extends Helper
      * @param  string $path
      * @return string
      */
-    protected function _asset_js($filepath, $param = null)
+    protected function asset_js($filepath, $param = null)
     {
-        $url = $this->_asset_url($filepath).((isset($param)) ? '?'.$param : '');
+        $url = $this->asset_url($filepath).((isset($param)) ? '?'.$param : '');
         return '<script type="text/javascript" src="'.$url.'"></script>';
     }
 
@@ -173,9 +173,9 @@ class Assets extends Helper
      * @param  string $path
      * @return string
      */
-    protected function _asset_css($filepath, $param = null)
+    protected function asset_css($filepath, $param = null)
     {
-        $url = $this->_asset_url($filepath).((isset($param)) ? '?'.$param : '');
+        $url = $this->asset_url($filepath).((isset($param)) ? '?'.$param : '');
         return '<link rel="stylesheet" href="'.$url.'">';
     }
 }
