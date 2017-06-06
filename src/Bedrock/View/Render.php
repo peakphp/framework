@@ -96,7 +96,7 @@ abstract class Render
      * @param string $method
      * @param array  $args
      */
-    public function  __call($method, $args)
+    public function __call($method, $args)
     {
         $view =& $this->view;
         return call_user_func_array([$view, $method], $args);
