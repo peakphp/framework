@@ -328,7 +328,6 @@ class Grid extends Helper
         // head
         echo '<thead><tr>';
         foreach ($this->columns as $colname => $coltitle) {
-
             if (($this->isValidColumn($colname) || $force_output_on_empty_data) || $this->isPseudoColumn($colname)) {
 
                 echo '<th data-column="'.$colname.'"';
@@ -361,7 +360,6 @@ class Grid extends Helper
         //body
         if (!empty($this->data)) {
             foreach ($this->data as $index => $row) {
-
                 // try to explicitly convert object to array
                 if (is_object($row)) {
                     $row = (array)$row;
@@ -371,7 +369,6 @@ class Grid extends Helper
                 echo '<tr data-index="'.$index.'"'.$this->rowDataAttr($row).'>';
                 
                 foreach ($this->columns as $colname => $coltitle) {
-
                     //check if column exists
                     if (!$this->isValidColumn($colname, $row)) {
                         //here we check if its a valid "pseudo" column
@@ -416,11 +413,8 @@ class Grid extends Helper
 
         //array of hook
         if (is_array($hooks_col)) {
-
             $hooks = $hooks_col['hooks'];
-
             foreach ($hooks as $h) {
-
                 // reset
                 $hook_fn = null;
                 $params  = null;
@@ -510,7 +504,6 @@ class Grid extends Helper
         }
 
         foreach ($this->_row_data_attrs as $attr => $v) {
-
             if (is_array($v)) {
                 if (array_key_exists('value', $v)) {
                     $r .= ' '.$attr.'="'.$v['value'].'"';
