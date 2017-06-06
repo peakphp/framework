@@ -138,7 +138,7 @@ class Grid extends Helper
 
     /**
      * Add columns to exclude columns
-     * Useful with _discoverColumns()
+     * Useful with discoverColumns()
      *
      * @param  array $cols
      * @return $this
@@ -269,7 +269,7 @@ class Grid extends Helper
      * @param  array|null $row_sample
      * @return bool
      */
-    private function _isValidColumn($title, $row_sample = null)
+    private function isValidColumn($title, $row_sample = null)
     {
         //we will try to get a sample
         if (is_null($row_sample)) {
@@ -298,7 +298,7 @@ class Grid extends Helper
      * @param  string $title
      * @return bool
      */
-    private function _isPseudoColumn($title)
+    private function isPseudoColumn($title)
     {
         if (substr($title, 0, 1) === ':' && isset($this->hooks[$title])) {
             return true;
@@ -320,7 +320,7 @@ class Grid extends Helper
 
         // discover columns if they where not specified
         if (empty($this->columns)) {
-            $this->_discoverColumns();
+            $this->discoverColumns();
         }
         
         echo '<table class="'.$this->table_classes.'">'.$this->line_break;
@@ -329,7 +329,7 @@ class Grid extends Helper
         echo '<thead><tr>';
         foreach ($this->columns as $colname => $coltitle) {
 
-            if (($this->_isValidColumn($colname) || $force_output_on_empty_data) || $this->_isPseudoColumn($colname)) {
+            if (($this->isValidColumn($colname) || $force_output_on_empty_data) || $this->isPseudoColumn($colname)) {
 
                 echo '<th data-column="'.$colname.'"';
 
@@ -344,7 +344,7 @@ class Grid extends Helper
                 echo '>';
 
                 // add url to column th
-                if (!empty($this->columns_url['result']) && !$this->_isPseudoColumn($colname)) {
+                if (!empty($this->columns_url['result']) && !$this->isPseudoColumn($colname)) {
                     $url = $this->columns_url['result'];
                     $url = str_replace(':column', $colname, $url);
 
@@ -368,14 +368,14 @@ class Grid extends Helper
                 }
 
                 //new row
-                echo '<tr data-index="'.$index.'"'.$this->_rowDataAttr($row).'>';
+                echo '<tr data-index="'.$index.'"'.$this->rowDataAttr($row).'>';
                 
                 foreach ($this->columns as $colname => $coltitle) {
 
                     //check if column exists
-                    if (!$this->_isValidColumn($colname, $row)) {
+                    if (!$this->isValidColumn($colname, $row)) {
                         //here we check if its a valid "pseudo" column
-                        if ($this->_isPseudoColumn($colname)) {
+                        if ($this->isPseudoColumn($colname)) {
                             $row_data = $row;
                         } else {
                             continue;
@@ -384,7 +384,7 @@ class Grid extends Helper
                         $row_data = $row[$colname];
                     }
 
-                    $row_data = $this->_processHook($colname, $row_data, $row);
+                    $row_data = $this->processHook($colname, $row_data, $row);
 
                     //print the data
                     echo '<td data-column="'.$colname.'">'.$row_data.'</td>'.$this->line_break;
@@ -405,7 +405,7 @@ class Grid extends Helper
      * @param  array  $row_context The other array data rows
      * @return string
      */
-    private function _processHook($colname, $row_data, $row_context)
+    private function processHook($colname, $row_data, $row_context)
     {
         //look for hook baby!
         if (!isset($this->hooks[$colname])) {
@@ -477,7 +477,7 @@ class Grid extends Helper
      * Discover columns from $_data array
      * Useful when you don't use method setColumns()
      */
-    private function _discoverColumns()
+    private function discoverColumns()
     {
         $cols = [];
         
@@ -501,7 +501,7 @@ class Grid extends Helper
     /**
      * Render html attribute(s) to each row(tr)
      */
-    private function _rowDataAttr($row = [])
+    private function rowDataAttr($row = [])
     {
         $r = '';
 
