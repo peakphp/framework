@@ -175,16 +175,16 @@ if (!function_exists('getPhinxMigrateEnv')) {
      *
      * @return string
      */
-    function getPhinxMigrateEnv() 
+    function getPhinxMigrateEnv()
     {
         global $argv;
         if (!isset($argv) && !isset($_SERVER['argv'])) {
             return 'prod';
-        } elseif((!isset($argv) && isset($_SERVER['argv']))) {
+        } elseif ((!isset($argv) && isset($_SERVER['argv']))) {
             $argv = $_SERVER['argv'];
         }
         foreach ($argv as $index => $arg) {
-            if (in_array($arg,['-e', '--environment']) && isset($argv[$index + 1])) {
+            if (in_array($arg, ['-e', '--environment']) && isset($argv[$index + 1])) {
                 return $argv[$index + 1];
             }
         }
