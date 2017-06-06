@@ -43,7 +43,7 @@ class View
      * Constructor
      */
     public function __construct(array $vars = [])
-    {   
+    {
         $this->vars = $vars;
     }
 
