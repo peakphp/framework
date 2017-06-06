@@ -45,11 +45,13 @@ class Application
     /**
      * Set the container
      *
-     * @param ContainerInterface $container
+     * @param  ContainerInterface $container
+     * @return ContainerInterface
      */
     public static function setContainer(ContainerInterface $container)
     {
         self::$container = $container;
+        return $container;
     }
 
     /**
