@@ -170,6 +170,6 @@ class Application
      */
     public function render()
     {
-        return self::kernel()->render();
+        self::kernel()->render();
     }
 }
