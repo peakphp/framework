@@ -27,6 +27,9 @@ class Registry
         trigger_error('Can\'t clone registry', E_USER_ERROR);
     }
 
+    /**
+     * Make Registry not instantiable
+     */
     final private function __construct()
     {
     }
