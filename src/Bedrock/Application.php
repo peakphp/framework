@@ -72,10 +72,10 @@ class Application
      * @see \Peak\Di\Container for details
      * @return mixed
      */
-    public static function instantiate($class, $args = [], $explict = [])
+    public static function instantiate($class, $args = [], $explicit = [])
     {
         self::containerCheck();
-        return self::$container->instantiate($class, $args, $explict);
+        return self::$container->instantiate($class, $args, $explicit);
     }
 
     /**
