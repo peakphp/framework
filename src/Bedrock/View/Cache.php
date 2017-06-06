@@ -12,11 +12,10 @@ use Peak\Bedrock\View;
  */
 class Cache
 {
-    protected $_use_cache = false;     //use scripts view cache, false by default
-    protected $_cache_expire;          //script cache expiration time
-    protected $_cache_path;            //scripts view cache path. generate by enableCache()
-    protected $_cache_id;              //current script view md5 key. generate by preOutput()
-    protected $_cache_strip = false;   //will strip all repeating space characters
+    protected $use_cache = false;     //use scripts view cache, false by default
+    protected $cache_expire;          //script cache expiration time
+    protected $cache_id;              //current script view md5 key. generate by preOutput()
+    protected $cache_strip = false;   //will strip all repeating space characters
 
     protected $view;
 
@@ -57,8 +56,8 @@ class Cache
     public function enable($time)
     {
         if (is_integer($time)) {
-            $this->_use_cache = true;
-            $this->_cache_expire = $time;
+            $this->use_cache = true;
+            $this->cache_expire = $time;
         }
     }
 
@@ -67,7 +66,7 @@ class Cache
      */
     public function disable()
     {
-        $this->_use_cache = false;
+        $this->use_cache = false;
     }
     
     /**
@@ -77,12 +76,12 @@ class Cache
      */
     public function isEnabled()
     {
-        return $this->_use_cache;
+        return $this->use_cache;
     }
 
     /**
      * Check if current view script file is cached/expired
-     * Note: if $this->_cache_id is not set, this will generate a new id from $id params if set or
+     * Note: if $this->cache_id is not set, this will generate a new id from $id params if set or
      * from the current controller file - path
      * Notes: Custom $id can lead to problems if used with controller redirection * need to be fix
      *
@@ -90,14 +89,14 @@ class Cache
      */
     public function isValid($id = null)
     {
-        if ($this->_use_cache === false) {
+        if ($this->use_cache === false) {
             return false;
         }
 
         //when checking isValid without a custom id in controller action we generated a new id based
         //on controller name and action name. If id is null but, cache id is already generated, we use it.
         if (is_null($id)) {
-            if (is_null($this->_cache_id)) {
+            if (is_null($this->cache_id)) {
                 //bug
                 $kernel = Application::kernel();
                 $this->genCacheId(
@@ -115,7 +114,7 @@ class Cache
             $file_date = filemtime($filepath);
             $now = time();
             $delay = $now - $file_date;
-            return ($delay >= $this->_cache_expire) ? false : true;
+            return ($delay >= $this->cache_expire) ? false : true;
         }
         return false;
     }
@@ -142,7 +141,7 @@ class Cache
             return $cache_id;
         }
 
-        $this->_cache_id = $cache_id;
+        $this->cache_id = $cache_id;
     }
 
     /**
@@ -153,7 +152,7 @@ class Cache
     public function getCacheFile()
     {
         $path = Application::conf('path.apptree.views_cache');
-        return $path.'/'.$this->_cache_id.'.php';
+        return $path.'/'.$this->cache_id.'.php';
     }
 
     /**
@@ -164,7 +163,7 @@ class Cache
     public function enableStrip($status)
     {
         if (is_bool($status)) {
-            $this->_cache_strip = $status;
+            $this->cache_strip = $status;
         }
     }
 
