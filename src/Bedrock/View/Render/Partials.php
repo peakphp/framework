@@ -14,9 +14,9 @@ use Peak\Bedrock\View\Render;
 class Partials extends Render
 {
 
-    protected $_groups;      //available partials groups
-    protected $_group;       //current partials group file to render
-    protected $_group_name;  //current partials group name
+    protected $groups;      //available partials groups
+    protected $group;       //current partials group file to render
+    protected $group_name;  //current partials group name
 
     /**
      * Load Partials engine with groups alias
@@ -25,8 +25,8 @@ class Partials extends Render
      */
     public function __construct($groups = null)
     {
-        $this->_groups = $groups;
-        if (isset($this->_groups['default'])) {
+        $this->groups = $groups;
+        if (isset($this->groups['default'])) {
             $this->useGroup('default');
         }
     }
@@ -42,11 +42,11 @@ class Partials extends Render
     public function useGroup($group)
     {
         if (is_array($group)) {
-            $this->_group = $group;
-            $this->_group_name = 'custom';
-        } elseif (isset($this->_groups[$group])) {
-            $this->_group = $this->_groups[$group];
-            $this->_group_name = $group;
+            $this->group = $group;
+            $this->group_name = 'custom';
+        } elseif (isset($this->groups[$group])) {
+            $this->group = $this->groups[$group];
+            $this->group_name = $group;
         }
     }
 
@@ -56,7 +56,7 @@ class Partials extends Render
      */
     public function noGroup()
     {
-        $this->_group = null;
+        $this->group = null;
     }
 
     /**
@@ -87,10 +87,10 @@ class Partials extends Render
         }
 
         //Partials group FILES VIEW IF EXISTS
-        if (is_array($this->_group)) {
+        if (is_array($this->group)) {
             $group_filespath = [];
             
-            foreach ($this->_group as $theme_partial) {
+            foreach ($this->group as $theme_partial) {
                 if ($theme_partial !== '[CONTENT]') {
                     if (basename($theme_partial) === $theme_partial) {
                         if (file_exists(Application::conf('path.apptree.theme_partials').'/'.$theme_partial)) {
