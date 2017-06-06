@@ -15,49 +15,49 @@ class Grid extends Helper
      * The grid data
      * @var array
      */
-    private $_data = [];
+    private $data = [];
 
     /**
      * The columns
      * @var array
      */
-    private $_columns = [];
+    private $columns = [];
 
     /**
      * The columns url pattern with binds
      * @var array
      */
-    private $_columns_url = ['url' => '', 'binds' => '', 'result' => ''];
+    private $columns_url = ['url' => '', 'binds' => '', 'result' => ''];
 
     /**
      * Set which column defines the table sorting
      * @var array
      */
-    private $_column_sorting = ['name' => '', 'direction' => ''];
+    private $column_sorting = ['name' => '', 'direction' => ''];
 
     /**
      * Excluded columns
      * @var array
      */
-    private $_exclude_colums = [];
+    private $exclude_colums = [];
 
     /**
      * Hook for the data
      * @var array
      */
-    private $_hooks = [];
+    private $hooks = [];
 
     /**
      * Break line for html output
      * @var string
      */
-    private $_line_break = "\n";
+    private $line_break = "\n";
 
     /**
      * Table classes
      * @var string
      */
-    private $_table_classes = 'table table-striped';
+    private $table_classes = 'table table-striped';
 
     /**
      * Set-up the grid data
@@ -79,7 +79,7 @@ class Grid extends Helper
      */
     public function setData($data)
     {
-        $this->_data = $data;
+        $this->data = $data;
         return $this;
     }
     
@@ -96,9 +96,9 @@ class Grid extends Helper
      */
     public function setColumns($cols)
     {
-        $this->_columns = [];
+        $this->columns = [];
         foreach ($cols as $k => $v) {
-            $this->_columns[trim($k)] = $v;
+            $this->columns[trim($k)] = $v;
         }
         return $this;
     }
@@ -118,7 +118,7 @@ class Grid extends Helper
                 $result = str_replace(':'.$k, $v, $result);
             }
         }
-        $this->_columns_url = ['url' => $url, 'binds' => $binds, 'result' => $result];
+        $this->columns_url = ['url' => $url, 'binds' => $binds, 'result' => $result];
 
         return $this;
     }
@@ -132,7 +132,7 @@ class Grid extends Helper
      */
     public function setColumnSorting($colname, $direction = 'desc')
     {
-        $this->_column_sorting = ['name' => $colname, 'direction' => $direction];
+        $this->column_sorting = ['name' => $colname, 'direction' => $direction];
         return $this;
     }
 
@@ -146,10 +146,10 @@ class Grid extends Helper
     public function excludeCols($cols)
     {
         if (is_array($cols)) {
-            $this->_exclude_colums = [];
+            $this->exclude_colums = [];
             if (!empty($cols)) {
                 foreach ($cols as $c) {
-                    $this->_exclude_colums[$c] = $c;
+                    $this->exclude_colums[$c] = $c;
                 }
             }
         }
@@ -195,7 +195,7 @@ class Grid extends Helper
             }
         }
 
-        $this->_hooks[$colname] = $h;
+        $this->hooks[$colname] = $h;
 
         return $this;
     }
@@ -208,7 +208,7 @@ class Grid extends Helper
      */
     public function setRenderLineBreak($ln)
     {
-        $this->_line_break = $ln;
+        $this->line_break = $ln;
         return $this;
     }
 
@@ -244,7 +244,7 @@ class Grid extends Helper
      */
     public function setTableClasses($classes)
     {
-        $this->_table_classes = $classes;
+        $this->table_classes = $classes;
         return $this;
     }
 
@@ -257,7 +257,7 @@ class Grid extends Helper
     public function addTableClasses($classes)
     {
         if (!empty($classes)) {
-            $this->_table_classes .= (substr($classes, 0, 1) === ' ') ? $classes : ' '.$classes;
+            $this->table_classes .= (substr($classes, 0, 1) === ' ') ? $classes : ' '.$classes;
         }
         return $this;
     }
@@ -273,8 +273,8 @@ class Grid extends Helper
     {
         //we will try to get a sample
         if (is_null($row_sample)) {
-            if (!empty($this->_data)) {
-                foreach ($this->_data as $row) {
+            if (!empty($this->data)) {
+                foreach ($this->data as $row) {
                     $row_sample = $row;
                     break;
                 }
@@ -300,7 +300,7 @@ class Grid extends Helper
      */
     private function _isPseudoColumn($title)
     {
-        if (substr($title, 0, 1) === ':' && isset($this->_hooks[$title])) {
+        if (substr($title, 0, 1) === ':' && isset($this->hooks[$title])) {
             return true;
         }
         return false;
@@ -314,38 +314,38 @@ class Grid extends Helper
     public function render($force_output_on_empty_data = false)
     {
         // skip everything if we don't have data
-        if (empty($this->_data) && !$force_output_on_empty_data) {
+        if (empty($this->data) && !$force_output_on_empty_data) {
             return;
         }
 
         // discover columns if they where not specified
-        if (empty($this->_columns)) {
+        if (empty($this->columns)) {
             $this->_discoverColumns();
         }
         
-        echo '<table class="'.$this->_table_classes.'">'.$this->_line_break;
+        echo '<table class="'.$this->table_classes.'">'.$this->line_break;
         
         // head
         echo '<thead><tr>';
-        foreach ($this->_columns as $colname => $coltitle) {
+        foreach ($this->columns as $colname => $coltitle) {
 
             if (($this->_isValidColumn($colname) || $force_output_on_empty_data) || $this->_isPseudoColumn($colname)) {
 
                 echo '<th data-column="'.$colname.'"';
 
                 // add data attr for sorting
-                if ($this->_column_sorting['name'] === $colname) {
+                if ($this->column_sorting['name'] === $colname) {
                     echo ' data-sorted="yes"';
-                    if (!empty($this->_column_sorting['direction'])) {
-                        echo ' data-direction="'.$this->_column_sorting['direction'].'"';
+                    if (!empty($this->column_sorting['direction'])) {
+                        echo ' data-direction="'.$this->column_sorting['direction'].'"';
                     }
                 }
 
                 echo '>';
 
                 // add url to column th
-                if (!empty($this->_columns_url['result']) && !$this->_isPseudoColumn($colname)) {
-                    $url = $this->_columns_url['result'];
+                if (!empty($this->columns_url['result']) && !$this->_isPseudoColumn($colname)) {
+                    $url = $this->columns_url['result'];
                     $url = str_replace(':column', $colname, $url);
 
                     echo '<a href="'.$url.'">'.$coltitle.'</a>';
@@ -356,11 +356,11 @@ class Grid extends Helper
                 echo '</th>';
             }
         }
-        echo '</tr></thead><tbody>'.$this->_line_break;
+        echo '</tr></thead><tbody>'.$this->line_break;
         
         //body
-        if (!empty($this->_data)) {
-            foreach ($this->_data as $index => $row) {
+        if (!empty($this->data)) {
+            foreach ($this->data as $index => $row) {
 
                 // try to explicitly convert object to array
                 if (is_object($row)) {
@@ -370,7 +370,7 @@ class Grid extends Helper
                 //new row
                 echo '<tr data-index="'.$index.'"'.$this->_rowDataAttr($row).'>';
                 
-                foreach ($this->_columns as $colname => $coltitle) {
+                foreach ($this->columns as $colname => $coltitle) {
 
                     //check if column exists
                     if (!$this->_isValidColumn($colname, $row)) {
@@ -387,10 +387,10 @@ class Grid extends Helper
                     $row_data = $this->_processHook($colname, $row_data, $row);
 
                     //print the data
-                    echo '<td data-column="'.$colname.'">'.$row_data.'</td>'.$this->_line_break;
+                    echo '<td data-column="'.$colname.'">'.$row_data.'</td>'.$this->line_break;
                 }
                 //close row
-                echo '</tr>'.$this->_line_break;
+                echo '</tr>'.$this->line_break;
             }
         }
 
@@ -408,11 +408,11 @@ class Grid extends Helper
     private function _processHook($colname, $row_data, $row_context)
     {
         //look for hook baby!
-        if (!isset($this->_hooks[$colname])) {
+        if (!isset($this->hooks[$colname])) {
             return $row_data;
         }
 
-        $hooks_col = $this->_hooks[$colname];
+        $hooks_col = $this->hooks[$colname];
 
         //array of hook
         if (is_array($hooks_col)) {
@@ -481,21 +481,21 @@ class Grid extends Helper
     {
         $cols = [];
         
-        if (empty($this->_data)) {
+        if (empty($this->data)) {
             return;
         }
         
-        foreach ($this->_data as $row) {
+        foreach ($this->data as $row) {
             if (is_array($row)) {
                 foreach ($row as $colname => $value) {
-                    if (!isset($this->_exclude_colums[$colname])) {
+                    if (!isset($this->exclude_colums[$colname])) {
                         $cols[$colname] = $colname;
                     }
                 }
             }
             break;
         }
-        $this->_columns = $cols;
+        $this->columns = $cols;
     }
 
     /**
