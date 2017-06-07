@@ -21,18 +21,6 @@ abstract class FormControl extends Element
     ];
 
     /**
-     * Constructor overload
-     * Add error support for control
-     *
-     * @see  Peak\Bedrock\View\Form\Element::__construct()
-     */
-    public function __construct($name, $data, $options = [], $error = null)
-    {
-        $this->error = $error;
-        parent::__construct($name, $data, $options);
-    }
-
-    /**
      * Default this method
      *
      * @return string
@@ -55,6 +43,14 @@ abstract class FormControl extends Element
         );
 
         return $element->generate();
+    }
+
+    /**
+     * Echo error()
+     */
+    public function renderError()
+    {
+        echo $this->error();
     }
 
     /**
