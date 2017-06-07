@@ -9,9 +9,8 @@ use \Exception;
  */
 class Form
 {
-
     /**
-     * $data
+     * Form data
      * @var array
      */
     protected $data = [];
@@ -26,8 +25,9 @@ class Form
      * Set also the data
      *
      * @param array $data
+     * @param array $errors
      */
-    public function __construct($data = [], $errors = [])
+    public function __construct(array $data = [], array $errors = [])
     {
         $this->setData($data);
         $this->setErrors($errors);
@@ -54,6 +54,16 @@ class Form
     }
 
     /**
+     * Get all data
+     *
+     * @return array
+     */
+    public function getData()
+    {
+        return $this->data;
+    }
+
+    /**
      * Set errors
      *
      * @param  array $errors
@@ -63,6 +73,16 @@ class Form
     {
         $this->errors = $errors;
         return $this;
+    }
+
+    /**
+     * Get all errors
+     *
+     * @return array
+     */
+    public function getErrors()
+    {
+        return $this->errors;
     }
 
     /**
@@ -100,7 +120,7 @@ class Form
     public function get($name)
     {
         $name = strtolower($name);
-        if (is_array($this->data) && array_key_exists($name, $this->data)) {
+        if (array_key_exists($name, $this->data)) {
             return $this->data[$name];
         }
         return null;
@@ -114,7 +134,7 @@ class Form
      */
     public function getError($name)
     {
-        if (is_array($this->errors) && array_key_exists($name, $this->errors)) {
+        if (array_key_exists($name, $this->errors)) {
             return $this->errors[$name];
         }
         return null;
