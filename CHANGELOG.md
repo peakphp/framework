@@ -4,7 +4,9 @@ Release Date: ?
 
  - Application::setContainer() now return the container instance
  - method validate() will now use current form data if nothing specified in Peak\Bedrock\View\Form\FormBuilder
- - added method getData() and getErrors() in Peak\Bedrock\View\Form
+ - added method getData() and getErrors() in Peak\Bedrock\View\Form\Form
+ - added method renderError() in Peak\Bedrock\View\Form\FormControl
+ - fixed missing $error arguments in Peak\Bedrock\View\Form\Element constructor
 
 VERSION 2.9.0
 -------------
