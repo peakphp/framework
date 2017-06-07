@@ -41,10 +41,11 @@ abstract class Element implements ElementInterface
      * @param mixed  $data    current element data
      * @param array  $options elements options
      */
-    public function __construct($name, $data, $options = [])
+    public function __construct($name, $data, $options = [], $error = null)
     {
         $this->name  = $name;
         $this->data  = $data;
+        $this->error = $error;
 
         if (!array_key_exists('attrs', $options)) {
             $options['attrs'] = [];
