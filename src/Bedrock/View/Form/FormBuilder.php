@@ -82,8 +82,11 @@ class FormBuilder extends Collection
      * @param  array $data
      * @return bool
      */
-    public function validate($data)
+    public function validate($data = null)
     {
+        if (!isset($data)) {
+            $data = $this->form->getData();
+        }
         $pass = $this->form_validation->validate($data);
         $this->setErrors($this->getErrors());
         return $pass;
