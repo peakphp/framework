@@ -17,7 +17,7 @@ Release Date: 2017-06-05
  - removed $default_processes in Peak\Bedrock\Application\Bootstrapper moved
    this responsibility into the application bootstrapper.
  - passing correctly param(s) to helpers in Peak\Bedrock\View
- - rewrited helper() method with ClassFinder in Peak\Bedrock\View
+ - rewritten helper() method with ClassFinder in Peak\Bedrock\View
  - fixed unused variable in Peak\Bedrock\View\Cache
  - added function getPhinxMigrateEnv() in Peak\Bedrock\helpers.php
 
@@ -93,7 +93,7 @@ Release Date: 2017-04-20
  - renamed method hasInstance() to has() in Peak\Di\Container
  - added method get() and has() to Peak\Di\ContainerInterface
  - moved Peak\Database to Peak\Providers\Laravel\Database
- - rewrited Peak\Lang to Peak\Common\Language
+ - rewritten Peak\Lang to Peak\Common\Language
  - updated function _e() and __() in Peak\Bedrock\helpers to reflect changes in Peak\Common\Language
  - added Peak\Common\Traits\LoadArrayFiles
 
@@ -323,7 +323,7 @@ Release Date: 2015-01-04
  - added method loadUrl() for Peak_Config_Json. Support get/post url. Require php extension CURL.
  - added the support of passing an object as well for the model param in Peak_Model_ActiveRecord
  - removed new array syntax in Peak_Model_ActiveRecord to keep backward compatibility with php < 5.3
- - rewrited method __construct() of Peak_Model_ActiveRecord for more flexibility and added final method readOnly()
+ - rewritten method __construct() of Peak_Model_ActiveRecord for more flexibility and added final method readOnly()
  - fixed a bug in Peak_Model_ActiveRecord $_readonly was not evaluated in save() and delete()
  - fixed a bug of cleanArray() in Peak_Model_Zendatable that let pass valid column data even if is 
    value is an array(notice array to string converstion). Now if its a valid column and data is an array,
@@ -362,7 +362,7 @@ Release Date: 2014-02-04
  - added a basic but usefull class model Peak_Model_ActiveRecord based on ActiveRecord pattern
  - fixed Peak_Config methods to use array_key_exists() instead of isset()
  - fixed Peak_View_Helpers by preventing injection of view object if this helper extends Peak_Config class
- - rewrited a good portion of class Peak_Lang. It's now more granular, supports multiple translations files and more 
+ - rewritten a good portion of class Peak_Lang. It's now more granular, supports multiple translations files and more 
    independent from others Peak components
  - modified method setColumns() of Peak_View_Helper_Grid for trimming the keys of columns
  - added a param to method getAction() of class Peak_Controller_Action to return action without the prefix
@@ -603,7 +603,7 @@ VERSION 0.9.0
 Release Date: 2011-10-02
 
  - fixed problem with method getProperties() with value when class is abstract or is an interface in class Peak_Zreflection
- - rewrited method getConstants() from Peak_Zreflection
+ - rewritten method getConstants() from Peak_Zreflection
  - modified method getProperties() to retrieve also values of properties in class Peak_Zreflection
  - fixed Peak_View_Helper_Debugbar by encoding html entities in html/js code data 
  - added new internal controller class named Peak_Controller_Internal_Pkdoc
@@ -614,10 +614,10 @@ Release Date: 2011-10-02
  - renamed view helpers classes debugbar and js based on framework class naming convention
  - changed vars print order in class View_Helper_Debugbar
  - fixed method getPropertiesByInheritance() following the change of getProperties() in Peak_Zreflection
- - rewrited completly getProperties() to return all infos of properties in array format in Peak_Zreflection
+ - rewritten completly getProperties() to return all infos of properties in array format in Peak_Zreflection
  - modified method docTagsToArray() to accept object or array of object in Peak_Zreflection
  - fixed method getMethodsByInheritance() following the change of getMethods() in Peak_Zreflection
- - rewrited completly getMethods() to return all infos of methods in array format in Peak_Zreflection
+ - rewritten completly getMethods() to return all infos of methods in array format in Peak_Zreflection
  - added method getMethodDeclaration() in Peak_Zreflection
  - modified array key name inside method docTagsToArray() of class Peak_Zreflection
  - modified method getMethodDocTags() from Peak_Zreflection to use docTagsToArray() instead of 
@@ -715,7 +715,7 @@ Release Date: 2011-03-12
  - fixed a bug in method Peak_Filters_Advanced::_filter_alpha()
  - added class Peak_Model_DataObject
  - deleted deprecated class Peak_View_Helper_Icon
- - rewrited method iniVar() from Peak_View to use Peak_Config_Ini.
+ - rewritten method iniVar() from Peak_View to use Peak_Config_Ini.
  - deleted property $actions and renamed method listActions() to getActions() in Peak_Controller_Action.
  - deleted properties $name and $title in favor of new methods getName() and getTitle() in Peak_Controller_Action and 
    modified initController() method accordingly.
@@ -756,7 +756,7 @@ Release Date: 2011-02-07
  - fixed double slash of paths in boot.php
  - deleted deprecated method config() in Peak_Core
  - added static methods reset(), resetAll(), getMS(), isCompleted() and _elapsed() to Peak_Chrono
- - rewrited class Peak_Chrono. This classs now manage a global timer and/or multiple timers
+ - rewritten class Peak_Chrono. This classs now manage a global timer and/or multiple timers
  - fixed method save() from Peak_Codegen and added constant PHP_OPEN_TAG
  - added class Peak_Codegen_Front and Peak_Codegen_Index
  - fixed method validate() of Peak_Filter_Advanced to manage $_data keyname not set
@@ -787,8 +787,8 @@ Release Date: 2010-12-17
  - fixed method dispatch() of Peak_Controller_Front when dispatching the default controller 
  - added property $error_controller and method errorDispatch() in Peak_Controller_Front
  - deleted deprecated classes Peak_Core_Extension_Codegen, Peak_Core_Extension_Configs and Peak_Core_Extension_Lang
- - rewrited Peak_Codegen_Controller class to use Peak_Codegen_Class
- - rewrited Peak_Codegen_Bootstrap class to use Peak_Codegen_Class
+ - rewritten Peak_Codegen_Controller class to use Peak_Codegen_Class
+ - rewritten Peak_Codegen_Bootstrap class to use Peak_Codegen_Class
  - fixed minor problem with methods generate() in Peak_codegen_Class_Method, Peak_codegen_Class_Property and
    Peak_codegen_Class_Param
  - added constants INDENTATION_SPACE and LINE_BREAK to Peak_Codegen
@@ -812,7 +812,7 @@ Release Date: 2010-12-17
    configuration file like set(), setRenderEngine(), rendering engine methods, etc... Config use keyname 'view'
    ex: view.set.myvar = "data", view.setRenderEngine = "Layouts", etc...
  - fixed Peak_Config_Ini::loadFile() to throw a exception if ini file contains syntax error(s) (php 5.2.7+)
- - rewrited appcreate.php to support new important changes
+ - rewritten appcreate.php to support new important changes
  - fixed listActions to flush $actions before listing actions methods and added support of $action_prefix to regex.
  - moved string to array conversion from matchRegex to addRegex in Peak_Router 
  - deleted deprecated folder views/functions
@@ -1010,7 +1010,7 @@ Release Date: 2010-07-29
  - Peak_Core > added method isInternalController(), updated run() method from Peak_Application to use this. 
  - Peak_Application > fix method run() to set router variables instead of using getRequestUri() 
                       when using $flush_request. 
- - Peak_Router > fix method getRequestUri() > app default controller was called when using fake rewrited url
+ - Peak_Router > fix method getRequestUri() > app default controller was called when using fake rewritten url
                  ending by .php extension witch is not good. Now it throw exception ERR_ROUTER_URI_NOT_FOUND
  - Peak_Exception > added constant ERR_ROUTER_URI_NOT_FOUND
  - added Peak_View_Helper_Redirect > manage url and controller http header + status code redirection
@@ -1233,7 +1233,7 @@ VERSION 0.7.5
    added router object to the registry in class.wyn.php
    @test unit: tests/router.php
    This new class allows us to use url like /controller/action/param1 and still permitS the use of 
-   non-rewrited url like index.php?controller=action&param1
+   non-rewritten url like index.php?controller=action&param1
    Requirements Rewriting url: 
       - apache mod_rewrite
       - valid .htaccess that points to application public page @see class.router.php
