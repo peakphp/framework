@@ -34,7 +34,7 @@ class Debugbar extends Debug
         }
 
         //skip if view engine is Json
-        if (strtolower($this->view->getEngineName()) === 'json') {
+        if (strtolower($this->view->getEngineName()) === 'Json') {
             return;
         }
         
