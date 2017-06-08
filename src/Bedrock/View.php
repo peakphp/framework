@@ -203,7 +203,7 @@ class View
     public function getEngineName()
     {
         if (is_object($this->engine)) {
-            return strtolower(str_replace('Peak\Bedrock\View\Render\\', '', get_class($this->engine)));
+            return shortClassName(get_class($this->engine));
         }
         return null;
     }
