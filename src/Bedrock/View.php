@@ -253,17 +253,16 @@ class View
         if ($this->render === false) {
             return;
         }
-
-        if (is_object($this->engine)) {
-            // check if we got http header
-            if (is_object($this->header)) {
-                $this->header->release();
-            }
-
-            $this->engine()->render($file, $path);
-        } else {
+        // check if engine is set
+        if (!is_object($this->engine)) {
             throw new Exception('View rendering engine not set');
         }
+        // check if we got http header
+        if (is_object($this->header)) {
+            $this->header->release();
+        }
+
+        $this->engine()->render($file, $path);
     }
 
     /**
