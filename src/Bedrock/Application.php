@@ -6,7 +6,6 @@ use Peak\Bedrock\Application\Config;
 use Peak\Bedrock\Application\ConfigResolver;
 use Peak\Bedrock\Application\Kernel;
 use Peak\Bedrock\Application\Routing;
-use Peak\Bedrock\View;
 use Peak\Di\ContainerInterface;
 use \Exception;
 
