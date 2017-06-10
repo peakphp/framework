@@ -2,7 +2,6 @@
 
 namespace Peak\Bedrock\Application;
 
-use Peak\Bedrock\Application\Config;
 use Peak\Bedrock\Application\Config\FileLoader;
 use Peak\Bedrock\Application\Config\Environment;
 use Peak\Common\DataException;
