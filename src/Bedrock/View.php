@@ -2,7 +2,6 @@
 
 namespace Peak\Bedrock;
 
-use Peak\Bedrock\Application;
 use Peak\Bedrock\View\Header;
 use Peak\Common\ClassFinder;
 use \Exception;
