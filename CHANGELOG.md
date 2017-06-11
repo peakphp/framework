@@ -7,6 +7,7 @@ Release Date: ?
  - added method getData() and getErrors() in Peak\Bedrock\View\Form\Form
  - added method renderError() in Peak\Bedrock\View\Form\FormControl
  - fixed missing $error arguments in Peak\Bedrock\View\Form\Element constructor
+ - changed trigger_error to an Exception for cloning Peak\Common\Registry
 
 VERSION 2.9.0
 -------------
