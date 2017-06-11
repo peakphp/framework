@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <phpunit bootstrap="./vendor/autoload.php">
 
+    <filter>
+        <whitelist>
+            <directory suffix=".php">src</directory>
+        </whitelist>
+    </filter>
+
     <testsuites>
         <testsuite name="Peak - TestSuite">
             <directory>./tests</directory>
