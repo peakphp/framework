@@ -2,6 +2,8 @@
 
 namespace Peak\Common;
 
+use \Exception;
+
 /**
  * Registry singleton container
  */
@@ -22,9 +24,9 @@ class Registry
     /**
      * Clone
      */
-    final private function __clone()
+    final public function __clone()
     {
-        trigger_error('Can\'t clone registry', E_USER_ERROR);
+        throw new Exception('Can\'t clone Registry');
     }
 
     /**
