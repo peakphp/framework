@@ -3,13 +3,15 @@ php:
   - 5.6
   - 7.0
   - 7.1
-
+install:
+  - composer require "satooshi/php-coveralls" "^1" --dev --no-update
+  - composer install --no-interaction
 before_script:
   - composer self-update
   - composer install
-
 notifications:
   email: false
-
 script: 
   - ./vendor/bin/phpunit
+after_success:
+  - php vendor/bin/coveralls -v
