@@ -89,6 +89,9 @@ class RegistryTest extends TestCase
     {
         $classname = Registry::getClassName('test_obj');
         $this->assertTrue($classname === 'RegisteredClass');
+
+        $classname = Registry::getClassName('unknow');
+        $this->assertFalse($classname);
     }
     
     function testIsInstanceOf()

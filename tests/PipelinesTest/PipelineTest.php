@@ -119,7 +119,7 @@ class PipelineTest extends TestCase
     /**
      * Create a simple pipeline with class using a default processor 
      */
-    public function testStrickProcessor()
+    public function testStrictProcessor()
     {   
         $processor = new StrictProcessor(function($payload) {
             return ($payload > 5) ? false : true;
