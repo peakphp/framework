@@ -147,5 +147,31 @@ class PermissionResolverTest extends TestCase
         $this->assertTrue($perm == 7);
     }
 
+    /**
+     * Test exception
+     */
+    function testExceptions()
+    {
+        try {
+            $perm = (new PermissionResolver('Unknown'))->get();
+        } catch (Exception $e) {
+            $error1 = true;
+        }
+        $this->assertTrue(isset($error1));
+
+        try {
+            $perm = (new PermissionResolver(-1))->get();
+        } catch (Exception $e) {
+            $error2 = true;
+        }
+        $this->assertTrue(isset($error2));
+
+        try {
+            $perm = (new PermissionResolver(8))->get();
+        } catch (Exception $e) {
+            $error3 = true;
+        }
+        $this->assertTrue(isset($error3));
+    }
 
 }
