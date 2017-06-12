@@ -90,6 +90,9 @@ class PaginatorTest extends TestCase
 		$this->assertTrue(isset($error2));
 	}
 
+    /**
+     * Test set page range
+     */
 	function testPagesRanges()
 	{
 		$ipp          = 2;
@@ -104,5 +107,39 @@ class PaginatorTest extends TestCase
 		// print_r($pagin);
 
 	}
+
+    /**
+     * Test getIterator
+     */
+	function testIterator()
+    {
+        $ipp          = 2;
+        $total        = 10;
+        $current_page = 1;
+
+        $pagin = new Paginator($ipp, $total, $current_page);
+
+        $i = 0;
+        foreach ($pagin as $page) {
+            ++$i;
+        }
+
+        $this->assertTrue($i == 5);
+    }
+
+    function testException()
+    {
+        $ipp          = 10;
+        $total        = 0;
+        $current_page = 1;
+
+        try {
+            $pagin = new Paginator($ipp, $total, $current_page);
+        } catch (Exception $e) {
+            $error = true;
+        }
+
+        $this->assertTrue(isset($error));
+    }
 
 }
