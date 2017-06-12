@@ -24,7 +24,7 @@ class Ini extends DotNotation
      *
      * @see loadFile()
      */
-    public function __construct($file = null, $process_sections = false, $section_name = null)
+    public function __construct($file = null, $process_sections = true, $section_name = null)
     {
         if (isset($file)) {
             $this->loadFile($file, $process_sections, $section_name);
