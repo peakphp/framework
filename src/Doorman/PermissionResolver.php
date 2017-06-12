@@ -43,7 +43,7 @@ class PermissionResolver
     {
         $this->permission = null;
 
-        // decimal inside a string
+        // numeric or decimal inside a string
         if (array_key_exists($this->raw, FormatDecimalString::$values)) {
             $this->permission = FormatDecimalString::$values[$this->raw];
         } elseif (array_key_exists($this->raw, FormatAlphaNum::$values)) {
@@ -58,8 +58,6 @@ class PermissionResolver
         } elseif (array_key_exists($this->raw, FormatChar::$values)) {
             // textual format 2
             $this->permission = FormatChar::$values[$this->raw];
-        } elseif (is_numeric($this->raw) && $this->raw >= 0 && $this->raw <= 7) {
-            $this->permission = $this->raw;
         }
 
         // Can't resolve permission format
