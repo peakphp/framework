@@ -85,20 +85,18 @@ class Paginator implements IteratorAggregate
         
         // generate pages array
         $this->pages = [];
-        if ($this->pages_count < 1) {
-            $this->pages = [];
-        } else {
+        if ($this->pages_count > 0) {
             $this->pages = range(1, $this->pages_count);
         }
-
-        $this->first_page = empty($this->pages) ? null : 1;
-        $this->last_page = ($this->pages_count < 1) ? null : $this->pages_count;
 
         // check current page
         if (!$this->isPage($this->current_page)) {
             throw new Exception(__CLASS__.': page '.$this->current_page.' doesn\'t exists');
         }
-        
+
+        $this->first_page = empty($this->pages) ? null : 1;
+        $this->last_page = ($this->pages_count < 1) ? null : $this->pages_count;
+
         // prev/next page
         $this->prev_page = ($this->current_page > 1) ? $this->current_page  - 1 : null;
         $this->next_page = (($this->current_page + 1) <= $this->pages_count) ? $this->current_page + 1 : null;
@@ -144,10 +142,9 @@ class Paginator implements IteratorAggregate
                     $index = $this->current_page + $i;
                 }
                 
-                if (!in_array($index, $this->pages)) {
-                    continue;
+                if (in_array($index, $this->pages)) {
+                    $pages_range[] = $index;
                 }
-                $pages_range[] = $index;
             }
 
             $this->pages = $pages_range;
