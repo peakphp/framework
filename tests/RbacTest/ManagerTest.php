@@ -74,6 +74,8 @@ class RbacManagerTest extends TestCase
         }
 
         $this->assertTrue(isset($error));
+
+        $this->assertTrue($manager->hasPermission('Play to soccer'));
     }
 
     /**
@@ -95,6 +97,14 @@ class RbacManagerTest extends TestCase
 
         $this->assertTrue($manager->user('Bob')->hasRole('administrator'));
         $this->assertTrue($manager->user('Bob')->hasRole($adminrole));
+
+        try {
+            $unknow = $manager->role('Foo');
+        } catch (Exception $e) {
+            $error = true;
+        }
+
+        $this->assertTrue(isset($error));
     }
 
     /**
@@ -132,8 +142,6 @@ class RbacManagerTest extends TestCase
 
         $this->assertFalse($john->can($perm1));
         $this->assertTrue($john->can($perm2));
-
-
     }
 
     /**
@@ -158,6 +166,9 @@ class RbacManagerTest extends TestCase
         ]);
 
         $this->assertFalse($result);
+
+        $this->assertFalse($manager->userCan('Bob', 'Touch the ball'));
+        $this->assertTrue($manager->userCan('Bob', 'Play to soccer'));
 
         $perm2->addRole($adminrole);
 
