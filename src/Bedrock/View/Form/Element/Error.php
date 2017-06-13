@@ -35,9 +35,6 @@ class Error extends Element
         }
         $attrs = $this->attributes(false);
 
-        return '
-            <p '.$attrs.'>
-                '.$this->data.'
-            </p>';
+        return '<p '.$attrs.'>'.$this->data.'</p>';
     }
 }
