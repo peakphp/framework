@@ -1,5 +1,9 @@
 <?php
+
 use PHPUnit\Framework\TestCase;
+
+use Peak\Bedrock\View;
+use Peak\Bedrock\Application;
 
 /**
  * @package    Peak\Bedrock\View
@@ -11,7 +15,7 @@ class ViewTest extends TestCase
 	 */ 
 	function setUp()
 	{
-		$this->peakview = new Peak\Bedrock\View();
+		$this->peakview = new View();
 	}
 	
 	/**
@@ -27,7 +31,7 @@ class ViewTest extends TestCase
 	 */
 	function testCreateInstance()
 	{
-		$view = new Peak\Bedrock\View();		
+		$view = new View();
 		$this->assertInstanceOf('Peak\Bedrock\View', $view); 
 	}
 	
@@ -36,7 +40,7 @@ class ViewTest extends TestCase
 	 */
 	function testCreateInstanceWithArray()
 	{
-		$view = new Peak\Bedrock\View(array('test' => 'value'));		
+		$view = new View(array('test' => 'value'));
 		$this->assertInstanceOf('Peak\Bedrock\View', $view);
 		
 		$vars = $view->getVars();		
@@ -173,6 +177,20 @@ class ViewTest extends TestCase
  
         $this->fail('An expected exception has not been raised.');
 	}
+
+    /**
+     * Test engine exception
+     */
+	function testEngineNotFoundException()
+    {
+        try {
+            $this->peakview->engine('Unknown');
+        } catch (Exception $e) {
+            $error = true;
+        }
+
+        $this->assertTrue(isset($error));
+    }
 	
 	/**
 	 * Test methods enableRender(), disableRender() and canRender()
@@ -191,4 +209,40 @@ class ViewTest extends TestCase
 		
 		$this->assertFalse($view->canRender());
 	}
+
+    /**
+     * Test Helper
+     *
+     * @runInSeparateProcess
+     * @preserveGlobalState disabled
+     */
+	function testHelper()
+    {
+        $container = new Peak\Di\Container;
+
+        $app = new Application($container, [
+            'env'  => 'dev',
+            'conf' => 'config.php',
+            'path' => [
+                'public' => __DIR__,
+                'app'    => __DIR__.'/../fixtures/app/',
+            ]
+        ]);
+
+        $view = Application::get(View::class);
+        $helper = $view->text();
+        $this->assertTrue($helper instanceof \Peak\Bedrock\View\Helper\Text);
+
+        $helper = $view->helper('text');
+        $this->assertTrue($helper instanceof \Peak\Bedrock\View\Helper\Text);
+
+        // test exception
+        try {
+            $helper = $view->unknown();
+        } catch (Exception $e) {
+            $error = true;
+        }
+
+        $this->assertTrue(isset($error));
+    }
 }
