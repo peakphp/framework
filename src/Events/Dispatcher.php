@@ -50,7 +50,7 @@ class Dispatcher
     {
         $events = [];
         if (is_string($ev)) {
-            $events[] = $events;
+            $events[] = $ev;
         } elseif (is_array($ev)) {
             $events = $ev;
         }
