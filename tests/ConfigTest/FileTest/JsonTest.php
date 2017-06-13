@@ -33,7 +33,7 @@ class JsonTest extends TestCase
     }
 
     /**
-     * Test Load unknown file
+     * Test Load unknown or malformed file
      */
     function testException()
     {
