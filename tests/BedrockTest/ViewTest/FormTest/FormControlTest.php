@@ -18,8 +18,17 @@ class FormControlTest extends TestCase
 
         $el = new Input($name, $data);
         $el_html = $el->generate();
+        $el_html2 = $el->get();
 
-        $this->assertTrue($el_html === '<input id="field-myinput" name="myinput" value="test" class="" placeholder="" spellcheck="true" type="text" ref="myinput">');
+        $result = '<input id="field-myinput" name="myinput" value="test" class="" placeholder="" spellcheck="true" type="text" ref="myinput">';
+
+        $this->assertTrue($el_html === $result);
+        $this->assertTrue($el_html2 === $result);
+
+        ob_start();
+        $el->render();
+        $content = ob_get_clean();
+        $this->assertTrue($content === $result);
     }
 
 }
