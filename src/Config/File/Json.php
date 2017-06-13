@@ -68,7 +68,7 @@ class Json extends DotNotation
         }
 
         $this->items = json_decode($data, true);
-        $this->_jsonError();
+        $this->jsonError();
         return $this->items;
     }
 
@@ -110,32 +110,29 @@ class Json extends DotNotation
     
     /**
      * Get last json error if exists
-     * PHP 5 >= 5.3.0
      */
-    private function _jsonError()
+    private function jsonError()
     {
-        if (function_exists('json_last_error')) {
-            switch (json_last_error()) {
-                case JSON_ERROR_DEPTH:
-                    $e =  'Maximum stack depth exceeded';
-                    break;
-                case JSON_ERROR_CTRL_CHAR:
-                    $e = 'Unexpected control character found';
-                    break;
-                case JSON_ERROR_SYNTAX:
-                    $e = 'Syntax error, malformed JSON';
-                    break;
-                case JSON_ERROR_STATE_MISMATCH:
-                    $e = 'Invalid or malformed JSON';
-                    break;
-                case JSON_ERROR_UTF8:
-                    $e = 'Malformed UTF-8 characters, possibly incorrectly encoded'; //PHP 5 >= 5.3.3
-                    break;
-            }
-            
-            if (isset($e)) {
-                throw new Exception(__CLASS__.': '.$e);
-            }
+        switch (json_last_error()) {
+            case JSON_ERROR_DEPTH:
+                $e =  'Maximum stack depth exceeded';
+                break;
+            case JSON_ERROR_CTRL_CHAR:
+                $e = 'Unexpected control character found';
+                break;
+            case JSON_ERROR_SYNTAX:
+                $e = 'Syntax error, malformed JSON';
+                break;
+            case JSON_ERROR_STATE_MISMATCH:
+                $e = 'Invalid or malformed JSON';
+                break;
+            case JSON_ERROR_UTF8:
+                $e = 'Malformed UTF-8 characters, possibly incorrectly encoded'; //PHP 5 >= 5.3.3
+                break;
+        }
+
+        if (isset($e)) {
+            throw new Exception(__CLASS__.': '.$e);
         }
     }
 
