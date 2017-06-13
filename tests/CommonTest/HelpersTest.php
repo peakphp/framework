@@ -63,4 +63,31 @@ class HelpersTest extends TestCase
         $this->assertTrue(ini_get('display_errors') == 1);
     }
 
+    /**
+     * test isCli()
+     */
+    function testIsCli()
+    {
+        $this->assertTrue(isCli());
+    }
+
+    /**
+     * test relativeBasepath()
+     */
+    function testRelativeBasepath()
+    {
+        $root = 'home/svr';
+        $path = relativeBasepath($root.'/user/bin/test', $root);
+        $this->assertTrue($path === '/user/bin');
+    }
+
+    /**
+     * test relativePath()
+     */
+    function testRelativePath()
+    {
+        $root = 'home/svr';
+        $path = relativePath($root.'/user/bin/test', $root);
+        $this->assertTrue($path === '/user/bin/test');
+    }
 }
