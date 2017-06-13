@@ -10,6 +10,7 @@ Release Date: ?
  - changed trigger_error to an Exception for cloning Peak\Common\Registry
  - changed trigger_error to an Exception for unknown helper Peak\Bedrock\View
  - fixed variable name bug in Peak\Events\Dispatcher::detach()
+ - refactored Peak\Common\Annotations
 
 VERSION 2.9.0
 -------------
