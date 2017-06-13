@@ -8,6 +8,7 @@ Release Date: ?
  - added method renderError() in Peak\Bedrock\View\Form\FormControl
  - fixed missing $error arguments in Peak\Bedrock\View\Form\Element constructor
  - changed trigger_error to an Exception for cloning Peak\Common\Registry
+ - changed trigger_error to an Exception for unknown helper Peak\Bedrock\View
 
 VERSION 2.9.0
 -------------
