@@ -45,6 +45,12 @@ class AnnotationsTest extends TestCase
         $this->assertTrue($tags[0]['tag'] == 'random');
         $this->assertTrue($tags[1]['tag'] == 'param');
 
+        $tags = $an->getMethod('__construct', ['random', 'param', 'unknown']);
+        $this->assertTrue(is_array($tags));
+        $this->assertTrue(count($tags) == 2);
+        $this->assertTrue($tags[0]['tag'] == 'random');
+        $this->assertTrue($tags[1]['tag'] == 'param');
+
         $tags = $an->getMethod('fooBar');
         $this->assertTrue(is_array($tags));
         $this->assertTrue(count($tags) == 4);
@@ -104,6 +110,11 @@ class AnnotationsTest extends TestCase
         $this->assertTrue(count($tags) == 1);
         $this->assertTrue($tags[0]['tag'] == 'myanno');
         $this->assertTrue(count($tags[0]['data']) == 3);
+
+        // empty docblock
+        $docblock = '';
+        $tags = Annotations::parse($docblock);
+        $this->assertTrue(empty($tags));
     }
 }
 
