@@ -133,4 +133,30 @@ class FormControlTest extends TestCase
         $this->assertTrue($content === $result);
     }
 
+    /**
+     * Test select form control
+     */
+    function testSelect2()
+    {
+        $name = 'myelement';
+        $data = 'test';
+        $options = [
+            'options' => [
+                'a' => 'option a',
+                'b' => 'option b'
+            ],
+            'value_as_key' => true,
+            'attrs' => [
+                'class' => 'form-control'
+            ]
+        ];
+        $error = null;
+
+        $el = new Select($name, $data, $options, $error);
+        $el_html = $el->generate();
+
+        $result = '<select id="field-myelement" name="myelement" class="form-control" placeholder=""><option  value="option a">option a</option><option  value="option b">option b</option></select>';
+
+        $this->assertTrue($el_html === $result);
+    }
 }
