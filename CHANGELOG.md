@@ -11,6 +11,7 @@ Release Date: ?
  - changed trigger_error to an Exception for unknown helper Peak\Bedrock\View
  - fixed variable name bug in Peak\Events\Dispatcher::detach()
  - refactored Peak\Common\Annotations
+ - added method has() and marked method have() as deprecated in Peak\Config\DotNotation
 
 VERSION 2.9.0
 -------------

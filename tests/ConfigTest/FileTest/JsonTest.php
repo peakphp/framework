@@ -13,9 +13,23 @@ class JsonTest extends TestCase
     {
         $config = new Json(__DIR__.'/../../fixtures/config/jsonfile.json');
 
-        $this->assertTrue($config->have('widget.debug'));
+        $this->assertTrue($config->has('widget.debug'));
         $this->assertTrue($config->get('widget.debug') === 'on');
         $this->assertTrue(is_null($config->get('widget2.debug')));
+    }
+
+    /**
+     * Test load a file with comments
+     */
+    function testLoadFileWithComment()
+    {
+        $config = new Json(__DIR__.'/../../fixtures/config/jsonfilewithcomments.json', true);
+
+        $this->assertTrue($config->has('widget.debug'));
+        $this->assertTrue($config->get('widget.debug') === 'on');
+        $this->assertTrue(is_null($config->get('widget2.debug')));
+        $this->assertFalse($config->has('widget.image.name'));
+        $this->assertTrue($config->has('widget.image.src'));
     }
 
     /**

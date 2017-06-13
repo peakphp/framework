@@ -52,9 +52,9 @@ class DotNotationTest extends TestCase
         $dn = new \Peak\Config\DotNotation($this->_array_test_1);
 
         $this->assertFalse($dn->isEmpty());
-        $this->assertTrue($dn->have('foo.bar'));
-        $this->assertTrue($dn->have('foo.deep.\bar$'));
-        $this->assertFalse($dn->have('bar.foo'));
+        $this->assertTrue($dn->has('foo.bar'));
+        $this->assertTrue($dn->has('foo.deep.\bar$'));
+        $this->assertFalse($dn->has('bar.foo'));
     }
 
     function testAdd()
@@ -63,14 +63,14 @@ class DotNotationTest extends TestCase
 
         $dn->add('foo.bar', ['test' => 456]);
 
-        $this->assertTrue($dn->have('foo.bar.test'));
-        $this->assertTrue($dn->have('foo.bar.0'));
+        $this->assertTrue($dn->has('foo.bar.test'));
+        $this->assertTrue($dn->has('foo.bar.0'));
 
 
         $dn->add('foo.bar', ['last' => 789]);
-        $this->assertTrue($dn->have('foo.bar.test'));
-        $this->assertTrue($dn->have('foo.bar.0'));
-        $this->assertTrue($dn->have('foo.bar.last'));
+        $this->assertTrue($dn->has('foo.bar.test'));
+        $this->assertTrue($dn->has('foo.bar.0'));
+        $this->assertTrue($dn->has('foo.bar.last'));
 
         $this->assertTrue($dn->get('foo.bar.0') == 123);
         $this->assertTrue($dn->get('foo.bar.test') == 456);
