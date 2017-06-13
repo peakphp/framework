@@ -2,8 +2,12 @@
 
 namespace Peak\Common;
 
+use \ReflectionClass;
+use \ReflectionMethod;
+use \ReflectionException;
+
 /**
- * Peak Annotations
+ * Annotations
  * Parse DocBlock tags of classes and methods
  */
 class Annotations
@@ -20,29 +24,15 @@ class Annotations
      */
     protected $classname;
     
+
     /**
-     * Contains list of annotation tags to be detected.
-     * By default no tags will be detected.
-     * @var array|string
-     */
-    protected $tags;
-    
-    /**
-     * Setup a class to use and tags to detect
-     *
-     * @uses  setClass(), setTags()
+     * Setup a class to use
      *
      * @param string $classname
-     * @param mixed  $tags
      */
-    public function __construct($classname = null, $tags = null)
+    public function __construct($classname)
     {
-        if (isset($classname)) {
-            $this->setClass($classname);
-        }
-        if (isset($tags)) {
-            $this->setTags($tags);
-        }
+        $this->setClass($classname);
     }
     
     /**
@@ -51,7 +41,7 @@ class Annotations
      * @param  string $class
      * @return $this
      */
-    public function setClass($classname)
+    protected function setClass($classname)
     {
         $this->classname = $classname;
         $this->class = new ReflectionClass($classname);
@@ -59,25 +49,13 @@ class Annotations
     }
 
     /**
-     * Add annotation tag(s) to be detected
-     *
-     * @param  array|string $tagname Accept a string or an array of tags
-     *                               string '*' act as a wildcard so all tags will be detected
-     * @return object       $this
-     */
-    public function setTags($tags)
-    {
-        $this->tags = $tags;
-        return $this;
-    }
-    
-    /**
      * Get a methods annotation tags
      *
      * @param  string $method_name
+     * @param  string|array  $tags   Tag(s) to retrieve, by default($tags = '*'), it look for every tags
      * @return array
      */
-    public function getFromMethod($method_name)
+    public function getMethod($method_name, $tags = '*')
     {
         try {
             $method = new ReflectionMethod($this->classname, $method_name);
@@ -85,21 +63,22 @@ class Annotations
             return [];
         }
 
-        return $this->parse($method->getDocComment());
+        return $this->parse($method->getDocComment(), $tags);
     }
     
     /**
      * Get all methods annotations tags
      *
+     * @param  string|array  $tags   Tag(s) to retrieve, by default($tags = '*'), it look for every tags
      * @return array
      */
-    public function getFromAllMethods()
+    public function getAllMethods($tags = '*')
     {
         $a = [];
         
         foreach ($this->class->getMethods() as $m) {
             $comment = $m->getDocComment();
-            $a = array_merge($a, [$m->name => $this->parse($comment)]);
+            $a = array_merge($a, [$m->name => $this->parse($comment, $tags)]);
         }
         return $a;
     }
@@ -107,38 +86,40 @@ class Annotations
     /**
      * Get class annotation tags
      *
+     * @param  string|array  $tags   Tag(s) to retrieve, by default($tags = '*'), it look for every tags
      * @return array
      */
-    public function getFromClass()
+    public function getClass($tags = '*')
     {
-        return $this->parse($this->class->getDocComment());
+        return $this->parse($this->class->getDocComment(), $tags);
     }
     
     /**
      * Parse a doc comment string
      * with annotations tag previously specified
      *
-     * @param  string $string
+     * @param  string        $string Docblock string to parse
+     * @param  string|array  $tags   Tag(s) to retrieve, by default($tags = '*'), it look for every tags
      * @return array
      */
-    public function parse($string)
+    public static function parse($string, $tags = '*')
     {
         //in case we don't have any tag to detect or an empty doc comment, we skip this method
-        if (empty($this->tags) || empty($string)) {
+        if (empty($tags) || empty($string)) {
             return [];
         }
    
         //check what is the type of $tags (array|string|wildcard)
-        if (is_array($this->tags)) {
-            $tags = '('.implode('|', $this->tags).')';
-        } elseif ($this->tags === '*') {
+        if (is_array($tags)) {
+            $tags = '('.implode('|', $tags).')';
+        } elseif ($tags === '*') {
             $tags = '[a-zA-Z0-9]';
         } else {
-            $tags = '('.$this->tags.')';
+            $tags = '('.$tags.')';
         }
         
         //find @[tag] [params...]
-        $regex = '#\* @(?P<tag>'.$tags.'+)\s+((?P<params>[\s"a-zA-Z0-9\-$\\._/-^]+)){1,}#si';
+        $regex = '#\* @(?P<tag>'.$tags.'+)\s+((?P<data>[\s"a-zA-Z0-9\-$\\._/-^]+)){1,}#si';
         preg_match_all($regex, $string, $matches, PREG_SET_ORDER);
         
         $final = [];
@@ -146,20 +127,20 @@ class Annotations
         if (isset($matches)) {
             $i = 0;
             foreach ($matches as $v) {
-                $final[$i] = array('tag' => $v['tag'], 'params' => []);
+                $final[$i] = array('tag' => $v['tag'], 'data' => []);
 
                 //detect here if we got a param with quote or not
                 //since space is the separator between params, if a param need space(s),
                 //it must be surrounded by " to be detected as 1 param
                 $regex = '#(("(?<param>([^"]{1,}))")|(?<param2>([^"\s]{1,})))#i';
-                preg_match_all($regex, trim($v['params']), $matches_params, PREG_SET_ORDER);
+                preg_match_all($regex, trim($v['data']), $matches_params, PREG_SET_ORDER);
 
                 if (!empty($matches_params)) {
                     foreach ($matches_params as $v) {
                         if (!empty($v['param']) && !isset($v['param2'])) {
-                            $final[$i]['params'][] = $v['param'];
+                            $final[$i]['data'][] = $v['param'];
                         } elseif (isset($v['param2']) && !empty($v['param2'])) {
-                            $final[$i]['params'][] = $v['param2'];
+                            $final[$i]['data'][] = $v['param2'];
                         }
                     }
                 }
