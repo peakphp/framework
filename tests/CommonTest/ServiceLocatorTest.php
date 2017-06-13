@@ -31,6 +31,7 @@ class ServiceLocatorTest extends TestCase
 
         $service2 = $sl->getService('service2');
         $this->assertTrue($service2 instanceof \stdClass);
+        $this->assertTrue($sl->service2 instanceof \stdClass);
     }
 
     function testHas()
