@@ -105,7 +105,7 @@ class DotNotation extends Collection
      * @param  string $path
      * @return bool
      */
-    public function have($path)
+    public function has($path)
     {
         $keys = $this->explode($path);
         $array = $this->items;
@@ -117,6 +117,16 @@ class DotNotation extends Collection
             }
         }
         return true;
+    }
+
+    /**
+     * @deprecated Will be removed soon
+     * @param $path
+     * @return mixed
+     */
+    public function have($path)
+    {
+        return $this->has($path);
     }
 
     /**
