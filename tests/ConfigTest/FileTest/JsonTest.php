@@ -11,7 +11,7 @@ class JsonTest extends TestCase
      */
     function testLoadFile()
     {
-        $config = new Json(__DIR__.'/../../fixtures/config/jsonfile.json');
+        $config = new Json(FIXTURES_PATH.'/config/jsonfile.json');
 
         $this->assertTrue($config->has('widget.debug'));
         $this->assertTrue($config->get('widget.debug') === 'on');
@@ -23,7 +23,7 @@ class JsonTest extends TestCase
      */
     function testLoadFileWithComment()
     {
-        $config = new Json(__DIR__.'/../../fixtures/config/jsonfilewithcomments.json', true);
+        $config = new Json(FIXTURES_PATH.'/config/jsonfilewithcomments.json', true);
 
         $this->assertTrue($config->has('widget.debug'));
         $this->assertTrue($config->get('widget.debug') === 'on');
@@ -40,7 +40,13 @@ class JsonTest extends TestCase
         try {
             $config =  new Json('unknow.file.abc');
         } catch (Exception $e) {
+        }
 
+        $this->assertFalse(isset($config));
+
+        try {
+            $config =  new Json(FIXTURES_PATH.'/config/malformed.json');
+        } catch (Exception $e) {
         }
 
         $this->assertFalse(isset($config));
