@@ -8,6 +8,9 @@ use Peak\Events\EventInterface;
 class DispatcherTest extends TestCase
 {
 
+    /**
+     * Test attach()
+     */
     public function testAttach()
     {   
         $d = new Dispatcher();  
@@ -18,6 +21,53 @@ class DispatcherTest extends TestCase
 
         $this->assertTrue($d->hasEvent('myevent'));
         $this->assertFalse($d->hasEvent('mysecondevent'));
+    }
+
+    /**
+     * Test detach()
+     */
+    public function testDetach()
+    {
+        $d = new Dispatcher();
+
+        $d->attach('myevent', function($argv) {
+            //do something
+        });
+
+        $this->assertTrue($d->hasEvent('myevent'));
+        $this->assertFalse($d->hasEvent('mysecondevent'));
+
+        $d->detach('myevent');
+
+        $this->assertFalse($d->hasEvent('myevent'));
+
+
+        $d->attach('myevent', function($argv) {
+            //do something
+        });
+        $d->attach('myevent', function($argv) {
+            //do something
+        });
+
+        $d->detachAll();
+
+        $this->assertFalse($d->hasEvent('myevent'));
+
+        $d->attach('myevent1', function($argv) {
+            //do something
+        });
+        $d->attach('myevent2', function($argv) {
+            //do something
+        });
+
+        $this->assertTrue($d->hasEvent('myevent1'));
+
+        $d->detach(['myevent1' ,'myevent2']);
+
+        $this->assertFalse($d->hasEvent('myevent1'));
+        $this->assertFalse($d->hasEvent('myevent2'));
+
+
     }
 
     public function testEventClosure()
