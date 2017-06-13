@@ -39,6 +39,28 @@ class FormControlTest extends TestCase
     }
 
     /**
+     * Test input form control with error
+     */
+    function testInput2()
+    {
+        $name = 'myinput';
+        $data = 'test';
+        $options = [
+            'attrs' => [
+                'class' => 'form-control'
+            ]
+        ];
+        $error = 'error message';
+
+        $el = new Input($name, $data, $options, $error);
+        $el_html = $el->generate();
+
+        $result = '<input id="field-myinput" name="myinput" value="test" class="form-control error" placeholder="" spellcheck="true" type="text" ref="myinput">';
+
+        $this->assertTrue($el_html === $result);
+    }
+
+    /**
      * Test checkbox form control
      */
     function testCheckbox()
