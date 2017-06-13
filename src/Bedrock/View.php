@@ -297,7 +297,7 @@ class View
         ]))->findLast(ucfirst($name));
 
         if ($helper === null) {
-            return trigger_error('View helper '.$name.' doesn\'t exists');
+            throw new Exception('View helper ['.$name.'] not found');
         }
 
         $this->helpers[$name] = Application::instantiate($helper, $params);
