@@ -8,7 +8,7 @@ return [
             'display_errors' => 1,
             'display_startup_errors' => 1,
             'date' => [
-                'timezone' => 'America/Montreal'
+                'timezone' => 'America/Toronto'
             ]
         ],
 
@@ -21,6 +21,15 @@ return [
         'view' => [
             'engine' => 'Layouts',
             'useLayout' => 'homepage',
+        ],
+        'routes' => [ //custom routes ...
+            [
+                'route'      => 'user/{id}:num',
+                'controller' => 'user',
+                'action'     => 'profile'
+            ],
+            'login | index/login',
+            'logout | index/logout'
         ],
 
     ],
