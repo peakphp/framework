@@ -18,11 +18,10 @@ class ConfigCustomRoutesTest extends TestCase
     function testBootstrap()
     {
         $app = dummyApp();
-        Application::instantiate(ConfigCustomRoutes::class); //already called when creating app
+        Application::instantiate(ConfigCustomRoutes::class); //need to call it manually because test has no bootstrap
         $kernel = Application::kernel();
         $routing = $kernel->routing;
-        print_r($routing);
-        //$this->assertTrue(count($routing->custom_routes) == 3);
-        //$this->assertTrue($routing->custom_routes[0]->controller === 'user');
+        $this->assertTrue(count($routing->custom_routes) == 3);
+        $this->assertTrue($routing->custom_routes[0]->controller === 'user');
     }
 }
