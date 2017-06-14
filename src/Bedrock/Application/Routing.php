@@ -38,7 +38,7 @@ class Routing
      * By default, it is set to application public path config
      * @var string
      */
-    public $base_uri;
+    //public $base_uri;
 
     /**
      * Constructor
@@ -47,12 +47,12 @@ class Routing
      */
     public function __construct($request = null, $base_uri = null)
     {
+        $this->custom_routes = new Collection();
+        $this->base_uri = (isset($base_uri)) ? $base_uri : relativePath(Application::conf('path.public'));
+
         if (isset($request)) {
             $this->loadRequest($request);
         }
-
-        $this->base_uri = (isset($base_uri)) ? $base_uri : relativePath(Application::conf('path.public'));
-        $this->custom_routes = new Collection();
     }
 
     /**
@@ -65,10 +65,12 @@ class Routing
     {
         if (isset($request)) {
             $this->request = new Request($request, $this->base_uri);
-            return $this;
+        } else {
+            $this->request = new RequestServerURI($this->base_uri);
         }
 
-        $this->request = new RequestServerURI($this->base_uri);
+        $this->base_uri = $this->request->base_uri;
+
         return $this;
     }
 
