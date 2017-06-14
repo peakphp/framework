@@ -99,7 +99,10 @@ abstract class Element implements ElementInterface
 
         if (!empty($this->error)) {
             if (isset($this->options['attrs']['class'])) {
-                $this->options['attrs']['class'] .= ' error';
+                $current_classes = explode(' ', $this->options['attrs']['class']);
+                if (!in_array('error', $current_classes)) {
+                    $this->options['attrs']['class'] .= ' error';
+                }
             } else {
                 $this->options['attrs']['class'] = 'error';
             }
