@@ -31,7 +31,6 @@ return [
             'login | index/login',
             'logout | index/logout'
         ],
-
     ],
 
     'dev' => [],
