@@ -4,9 +4,6 @@ use PHPUnit\Framework\TestCase;
 use Peak\Routing\Request;
 use Peak\Routing\RouteBuilder;
 
-/**
- * @package    Peak\Resolve
- */
 class RouteBuilderTest extends TestCase
 {
 

@@ -1,11 +1,9 @@
 <?php
+
 use PHPUnit\Framework\TestCase;
 
 use Peak\Routing\Request;
 
-/**
- * @package    Peak\Resolve
- */
 class RequestTest extends TestCase
 {
 
