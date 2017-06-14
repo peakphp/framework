@@ -1,6 +1,11 @@
-VERSION 2.10.0
+VERSION 2.11.0
 --------------
 Release Date: ?
+
+
+VERSION 2.10.0
+--------------
+Release Date: 2017-06-14
 
  - Application::setContainer() now return the container instance
  - method validate() will now use current form data if nothing specified in Peak\Bedrock\View\Form\FormBuilder
