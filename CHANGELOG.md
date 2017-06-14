@@ -12,6 +12,7 @@ Release Date: ?
  - fixed variable name bug in Peak\Events\Dispatcher::detach()
  - refactored Peak\Common\Annotations
  - added method has() and marked method have() as deprecated in Peak\Config\DotNotation
+ - fixed bug where "error" class could be duplicated when generating attributes in Peak\Bedrock\View\Form\Element
 
 VERSION 2.9.0
 -------------

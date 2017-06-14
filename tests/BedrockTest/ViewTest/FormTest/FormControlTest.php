@@ -36,16 +36,25 @@ class FormControlTest extends TestCase
         $el->render();
         $content = ob_get_clean();
         $this->assertTrue($content === $result);
+
+        //form control label
+        $label = $el->label();
+        $this->assertTrue(empty($label));
+
+        //form control error
+        $error = $el->error();
+        $this->assertTrue(empty($error));
     }
 
     /**
-     * Test input form control with error
+     * Test input form control with additional stuff
      */
     function testInput2()
     {
         $name = 'myinput';
         $data = 'test';
         $options = [
+            'label' => 'My label',
             'attrs' => [
                 'class' => 'form-control'
             ]
@@ -55,9 +64,31 @@ class FormControlTest extends TestCase
         $el = new Input($name, $data, $options, $error);
         $el_html = $el->generate();
 
-        $result = '<input id="field-myinput" name="myinput" value="test" class="form-control error" placeholder="" spellcheck="true" type="text" ref="myinput">';
+        $input_html = '<input id="field-myinput" name="myinput" value="test" class="form-control error" placeholder="" spellcheck="true" type="text" ref="myinput">';
 
-        $this->assertTrue($el_html === $result);
+        $this->assertTrue($el_html === $input_html);
+
+        $label_html = '<label >My label</label>';
+        $label = $el->label();
+        $this->assertTrue(!empty($label));
+        $this->assertTrue($label === $label_html);
+
+        $error_html = '<p class="error">error message</p>';
+        $error = $el->error();
+        $this->assertTrue(!empty($error));
+        $this->assertTrue($error === $error_html);
+
+        ob_start();
+        $el->renderError();
+        $content = ob_get_clean();
+        $this->assertTrue($content === $error_html);
+
+        ob_start();
+        $el->renderWithLabel();
+        $content = ob_get_clean();
+        $all_html = $label_html.$input_html.$error_html;
+        $this->assertTrue($content === $all_html);
+
     }
 
     /**
