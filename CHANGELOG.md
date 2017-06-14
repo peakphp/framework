@@ -13,6 +13,7 @@ Release Date: ?
  - refactored Peak\Common\Annotations
  - added method has() and marked method have() as deprecated in Peak\Config\DotNotation
  - fixed bug where "error" class could be duplicated when generating attributes in Peak\Bedrock\View\Form\Element
+ - fixed bug where custom $base_uri was not spread correctly to Request in Peak\Bedrock\Application\Routing
 
 VERSION 2.9.0
 -------------
