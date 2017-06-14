@@ -18,7 +18,7 @@ class ConfigCustomRoutesTest extends TestCase
     function testBootstrap()
     {
         $app = dummyApp();
-        //Application::instantiate(ConfigCustomRoutes::class); //already called when creating app
+        Application::instantiate(ConfigCustomRoutes::class); //already called when creating app
         $kernel = Application::kernel();
         $routing = $kernel->routing;
         print_r($routing);
