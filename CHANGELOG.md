@@ -2,6 +2,7 @@ VERSION 2.11.0
 --------------
 Release Date: ?
 
+ - added an exception in Peak\Bedrock\View\Form\FormBuilder::control()
 
 VERSION 2.10.0
 --------------
