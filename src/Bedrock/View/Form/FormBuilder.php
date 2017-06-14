@@ -3,9 +3,6 @@
 namespace Peak\Bedrock\View\Form;
 
 use Peak\Common\Collection;
-use Peak\Bedrock\View\Form\Form;
-use Peak\Bedrock\View\Form\FormValidation;
-
 use \Exception;
 
 class FormBuilder extends Collection
@@ -56,6 +53,10 @@ class FormBuilder extends Collection
         } else {
             $form = $arg1;
             $name = $arg2;
+
+            if (!$form instanceof Form) {
+                throw new Exception(__CLASS__.': when using 2 params with control(), first argument must be an instance of Peak\Bedrock\View\Form\Form');
+            }
         }
 
         if (!isset($this->items[$name])) {
