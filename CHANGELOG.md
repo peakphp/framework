@@ -2,7 +2,7 @@ VERSION 2.11.0
 --------------
 Release Date: ?
 
-> Warning! Breaking changes with 2.10.x and below 
+> Warning! Breaking changes with 2.10.x and below
 
  - [BC] renamed Peak\Bedrock\Controller\Front to Peak\Bedrock\Controller\FrontController
  - [BC] renamed Peak\Bedrock\Controller\Child to Peak\Bedrock\Controller\ChildActionController
