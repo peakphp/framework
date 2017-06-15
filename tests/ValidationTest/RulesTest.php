@@ -90,6 +90,14 @@ class RulesTest extends TestCase
         $this->assertTrue($rule->validate('22'));
         $this->assertTrue($rule->validate('0123456789'));
         $this->assertFalse($rule->validate('random string'));
+
+
+        $rule = new Peak\Validation\Rules\StrLength([
+            'max' => 10
+        ]);
+
+        $this->assertTrue($rule->validate('0123456789'));
+        $this->assertFalse($rule->validate('random string'));
     }
 
 
