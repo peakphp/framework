@@ -48,6 +48,12 @@ class TextUtilsTest extends TestCase
 
         $truncate = TextUtils::truncate($string, 20, '...', true, true);
         $this->assertTrue($truncate === 'Lorem is...eur sint');
+
+        $truncate = TextUtils::truncate('Hello!');
+        $this->assertTrue($truncate === 'Hello!');
+
+        $truncate = TextUtils::truncate('');
+        $this->assertTrue($truncate === '');
     }
 
     function testWordwrap()
