@@ -9,9 +9,9 @@ use Peak\Bedrock\View;
 use \Exception;
 
 /**
- * Peak abstract action controller
+ * Action(s) based controller
  */
-abstract class Action
+abstract class ActionController
 {
     /**
      * view script file to render

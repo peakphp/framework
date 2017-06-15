@@ -3,12 +3,12 @@
 namespace Peak\Bedrock\Controller;
 
 use Peak\Bedrock\Application;
-use Peak\Bedrock\Controller\Action;
+use Peak\Bedrock\Controller\ActionController;
 
 /**
  * Parent Controller
  */
-abstract class ParentController extends Action
+abstract class ParentController extends ActionController
 {
     /**
      * Turn off since we don't inspect a method anymore

@@ -4,12 +4,11 @@ namespace Peak\Bedrock\Controller;
 
 use Peak\Bedrock\Application;
 use Peak\Bedrock\View;
-use Peak\Bedrock\Controller\ParentController;
 
 /**
  * For standalone controller action class
  */
-abstract class Child
+abstract class ChildController
 {
     /**
      * View object

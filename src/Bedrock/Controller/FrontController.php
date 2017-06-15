@@ -3,14 +3,14 @@
 namespace Peak\Bedrock\Controller;
 
 use Peak\Bedrock\Application;
-use Peak\Bedrock\Controller\Action;
+use Peak\Bedrock\Controller\ActionController;
 use Peak\Routing\RouteBuilder;
 use \Exception;
 
 /**
  * Front controller
  */
-class Front
+class FrontController
 {
     /**
      * Route object
@@ -108,7 +108,7 @@ class Front
     {
         $this->_dispatchController();
         // execute a normal controller action
-        if ($this->controller instanceof Action) {
+        if ($this->controller instanceof ActionController) {
             $this->_dispatchControllerAction();
         }
     }
@@ -152,7 +152,7 @@ class Front
 
         $this->controller = Application::instantiate($ctrl_name);
 
-        if ($this->controller instanceof Action) {
+        if ($this->controller instanceof ActionController) {
             $this->controller->setRoute($this->route);
             $this->postDispatchController();
         }
@@ -163,7 +163,7 @@ class Front
      */
     protected function _dispatchControllerAction()
     {
-        if ($this->controller instanceof Action) {
+        if ($this->controller instanceof ActionController) {
             $this->controller->dispatch();
         }
     }
