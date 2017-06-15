@@ -2,6 +2,11 @@ VERSION 2.11.0
 --------------
 Release Date: ?
 
+> Warning! Breaking changes with 2.10.x and below 
+
+ - [BC] renamed Peak\Bedrock\Controller\Front to Peak\Bedrock\Controller\FrontController
+ - [BC] renamed Peak\Bedrock\Controller\Child to Peak\Bedrock\Controller\ChildController
+ - [BC] renamed Peak\Bedrock\Controller\Action to Peak\Bedrock\Controller\ActionController
  - added an exception in Peak\Bedrock\View\Form\FormBuilder::control()
 
 VERSION 2.10.0
@@ -86,13 +91,13 @@ VERSION 2.4.0
 -------------
 Release Date: 2017-05-02
 
-> Warning! Breaking changes with 2.3.x. 
+> Warning! Breaking changes with 2.3.x. and below
 
- - removed deprecated internal controllers notion
+ - [BC] removed deprecated internal controllers notion
  - added method map() and toObject in Peak\Common\Collection
  - method jsonSerialize() now accept json_encode params in Peak\Common\Collection
- - renamed method addInstance() to add() in Peak\Di\Container
- - renamed method deleteInstance() to delete() in Peak\Di\Container
+ - [BC] renamed method addInstance() to add() in Peak\Di\Container
+ - [BC] renamed method deleteInstance() to delete() in Peak\Di\Container
  - fixed bug with createAbility() in Peak\Doorman\Manager
  - added method addItself() to Peak\Di\Container
 
@@ -102,12 +107,12 @@ Release Date: 2017-04-20
 
 > Warning! Breaking changes with 2.2.x. 
 
- - renamed method getInstance() to get() in Peak\Di\Container
- - renamed method hasInstance() to has() in Peak\Di\Container
+ - [BC] renamed method getInstance() to get() in Peak\Di\Container
+ - [BC] renamed method hasInstance() to has() in Peak\Di\Container
  - added method get() and has() to Peak\Di\ContainerInterface
- - moved Peak\Database to Peak\Providers\Laravel\Database
- - rewritten Peak\Lang to Peak\Common\Language
- - updated function _e() and __() in Peak\Bedrock\helpers to reflect changes in Peak\Common\Language
+ - [BC] moved Peak\Database to Peak\Providers\Laravel\Database
+ - [BC] rewritten Peak\Lang to Peak\Common\Language
+ - [BC] updated function _e() and __() in Peak\Bedrock\helpers to reflect changes in Peak\Common\Language
  - added Peak\Common\Traits\LoadArrayFiles
 
 VERSION 2.2.0
@@ -116,7 +121,7 @@ Release Date: 2017-04-06
 
 > Warning! Breaking changes with 2.1.x. 
 
- - moved Peak\View component to Peak\Bedrock\View
+ - [BC] moved Peak\View component to Peak\Bedrock\View
  - added alias notion to Peak\Di\Container
 
 VERSION 2.1.5
@@ -162,12 +167,12 @@ Release Date: 2017-03-16
 
 > Warning! Breaking changes with 2.0.x
 
- - replaced old Registry by Dependencies Injection Container
- - moved Application and Controller components under Bedrock folder
+ - [BC] replaced old Registry by Dependencies Injection Container
+ - [BC] moved Application and Controller components under Bedrock folder
  - added method instantiateAndStore() to Peak\Di\Container
- - moved Application logic to Bedrock\Application\Kernel
- - moved code in Core.php to Bedrock\helpers.php
- - added framework version constant to Peak\Bedrock\Application and removed PEAK_VERSION global constant
+ - [BC] moved Application logic to Bedrock\Application\Kernel
+ - [BC] moved code in Core.php to Bedrock\helpers.php
+ - [BC] added framework version constant to Peak\Bedrock\Application and removed PEAK_VERSION global constant
  - code refactoring for PSR-2
  - added Common\ExceptionLogger
 
