@@ -8,7 +8,7 @@ use Peak\Bedrock\View;
 /**
  * For standalone controller action class
  */
-abstract class ChildController
+abstract class ChildActionController
 {
     /**
      * View object

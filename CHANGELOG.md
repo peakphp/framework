@@ -5,7 +5,7 @@ Release Date: ?
 > Warning! Breaking changes with 2.10.x and below 
 
  - [BC] renamed Peak\Bedrock\Controller\Front to Peak\Bedrock\Controller\FrontController
- - [BC] renamed Peak\Bedrock\Controller\Child to Peak\Bedrock\Controller\ChildController
+ - [BC] renamed Peak\Bedrock\Controller\Child to Peak\Bedrock\Controller\ChildActionController
  - [BC] renamed Peak\Bedrock\Controller\Action to Peak\Bedrock\Controller\ActionController
  - added an exception in Peak\Bedrock\View\Form\FormBuilder::control()
 
