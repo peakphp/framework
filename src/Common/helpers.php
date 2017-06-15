@@ -187,3 +187,21 @@ if (!function_exists('shortClassName')) {
         return ((new \ReflectionClass($obj))->getShortName());
     }
 }
+
+
+/**
+ * formatFileSize()
+ */
+if (!function_exists('formatFileSize')) {
+    /**
+     * Format size in bytes to a more appropriate / readable format
+     */
+    function formatFileSize($size)
+    {
+        if (empty($size)) {
+            return '0 kB';
+        }
+        $unit = ['B','kB','MB','GB','TB','PB'];
+        return round($size/pow(1024, ($i=floor(log($size, 1024)))), 2).' '.$unit[$i];
+    }
+}
