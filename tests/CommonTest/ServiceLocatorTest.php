@@ -61,7 +61,7 @@ class ServiceLocatorTest extends TestCase
         $this->assertTrue(count($services) == 1);
         $this->assertTrue($services[0] === 'service2');
     }
-    
+
     function testException()
     {
         $sl = new ServiceLocator();
