@@ -5,7 +5,7 @@ namespace Peak\Bedrock\Application;
 use Peak\Bedrock\Application\Bootstrapper;
 use Peak\Bedrock\Application\Config;
 use Peak\Bedrock\Application\Routing;
-use Peak\Bedrock\Controller\Front;
+use Peak\Bedrock\Controller\FrontController;
 
 /**
  * Load the framework objects, application bootstrap and front controller.
@@ -25,7 +25,7 @@ class Kernel
 
     /**
      * App object front controller
-     * @var Controller\Front
+     * @var Controller\FrontController
      */
     public $front;
 
@@ -85,7 +85,7 @@ class Kernel
     private function loadFront()
     {
         $cname = $this->config->get('ns').'\Front';
-        $this->front = (class_exists($cname)) ? new $cname() : new Front();
+        $this->front = (class_exists($cname)) ? new $cname() : new FrontController();
     }
 
     /**
