@@ -3,6 +3,7 @@
 use PHPUnit\Framework\TestCase;
 
 use Peak\Validation\Rule;
+use Peak\Validation\AbstractRule;
 
 class RuleBuilderTest extends TestCase
 {
@@ -16,7 +17,17 @@ class RuleBuilderTest extends TestCase
         $rule = Rule::create('StrLength');
 
         $this->assertTrue($rule instanceof Peak\Validation\RuleBuilder);
-    }   
+    }
+
+    function testRuleGet()
+    {
+        $rule = Rule::create('StrLength');
+
+        $rule->setContext('test');
+        $this->assertTrue($rule->getContext() === 'test');
+        $this->assertTrue(empty($rule->getFlags()));
+        $this->assertTrue(empty($rule->getOptions()));
+    }
 
     function testRuleBuilderValidate()
     {
@@ -79,6 +90,16 @@ class RuleBuilderTest extends TestCase
         $this->assertTrue(Rule::integerNumber("0x0000FF", [
             'min_range' => 10,
         ], FILTER_FLAG_ALLOW_HEX));
+    }
+
+    function testException()
+    {
+        try {
+            $rule = Rule::create('UnknownRule')->get();
+        } catch (Exception $e) {
+            $error = true;
+        }
+        $this->assertTrue(isset($error));
     }
 }
 
