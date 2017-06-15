@@ -90,4 +90,16 @@ class HelpersTest extends TestCase
         $path = relativePath($root.'/user/bin/test', $root);
         $this->assertTrue($path === '/user/bin/test');
     }
+
+    function testFormatFileSize()
+    {
+        $size = '1234';
+        $fsize = formatFileSize($size);
+        $this->assertTrue($fsize === '1.21 kB');
+
+        $size = 0;
+        $fsize = formatFileSize($size);
+        $this->assertTrue($fsize === '0 kB');
+//        $this->assertTrue(formatFileSize($size));
+    }
 }
