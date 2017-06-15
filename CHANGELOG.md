@@ -9,7 +9,6 @@ Release Date: ?
  - [BC] renamed Peak\Bedrock\Controller\Action to Peak\Bedrock\Controller\ActionController
  - added an exception in Peak\Bedrock\View\Form\FormBuilder::control()
  - added Peak\Common\TextUtils move code from Peak\Bedrock\View\Helper\Text there
- - 
 
 VERSION 2.10.0
 --------------
