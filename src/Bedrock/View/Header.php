@@ -17,7 +17,7 @@ class Header
      * Additional content after
      * @var string
      */
-    protected $content = null;
+    protected $content;
 
     /**
      * Did we release header fields
@@ -120,12 +120,12 @@ class Header
             foreach ($this->header as $field) {
                 header($field);
             }
-            if (!is_null($this)) {
-                echo $this->content;
-            }
-            if ($die) {
-                die();
-            }
+        }
+        if (!empty($this->content)) {
+            echo $this->content;
+        }
+        if ($die) {
+            die();
         }
     }
 
@@ -165,6 +165,17 @@ class Header
             }
         }
         return $this;
+    }
+
+    /**
+     * Check if has an header field(line)
+     *
+     * @param string $header_field
+     * @return bool
+     */
+    public function has($header_field)
+    {
+        return in_array($header_field, $this->header);
     }
 
     /**
