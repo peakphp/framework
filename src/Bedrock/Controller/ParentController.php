@@ -3,7 +3,7 @@
 namespace Peak\Bedrock\Controller;
 
 use Peak\Bedrock\Application;
-use Peak\Bedrock\Controller\ActionController;
+use Peak\Bedrock\View;
 
 /**
  * Parent Controller
@@ -15,6 +15,12 @@ abstract class ParentController extends ActionController
      * @var boolean
      */
     protected $actions_with_params = false;
+
+    /**
+     * Default Actions classes namespace
+     * @var string
+     */
+    protected $actions_ns;
 
     /**
      * Make params accessible to child
@@ -29,6 +35,24 @@ abstract class ParentController extends ActionController
     public $params_raw;
 
     /**
+     * Loaded child action instance
+     * @var object|null
+     */
+    public $child = null;
+
+    /**
+     * Constructor
+     *
+     * @param View   $view
+     * @param string $ns if not set, use default app ns (ex: App\Controllers\[controllerTitle]\)
+     */
+    public function __construct(View $view, $ns = null)
+    {
+        parent::__construct($view);
+        $this->actions_ns = (!isset($ns)) ? Application::conf('ns').'\Controllers\\'.$this->getTitle() : $ns;
+    }
+
+    /**
      * Get action class complete name
      *
      * @param  string $action
@@ -37,7 +61,7 @@ abstract class ParentController extends ActionController
     public function actionClass($action)
     {
         $action = substr($action, 1);
-        return Application::conf('ns').'\Controllers\\'.$this->getTitle().'\\'.ucfirst($action).'Action';
+        return $this->actions_ns.'\\'.ucfirst($action).'Action';
     }
 
     /**
@@ -60,7 +84,7 @@ abstract class ParentController extends ActionController
      */
     protected function callAction($action, $args = [])
     {
-        Application::instantiate($this->actionClass($action), [$args], [
+        $this->child = Application::instantiate($this->actionClass($action), [$args], [
             'Peak\Bedrock\Controller\ParentController' => $this
         ]);
     }
