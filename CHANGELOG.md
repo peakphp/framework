@@ -15,6 +15,8 @@ Release Date: ?
  - added property $child to Peak\Bedrock\Controller\ParentController to access to loaded child action instance
  - added property $action_ns to Peak\Bedrock\Controller\ParentController to customize which namespace to use
    for loading child action class
+ - fixed a bug with release() and $content in Peak\Bedrock\View\Header
+ - added method has() to Peak\Bedrock\View\Header
 
 VERSION 2.10.0
 --------------
