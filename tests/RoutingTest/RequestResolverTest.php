@@ -5,27 +5,14 @@ use Peak\Routing\Request;
 use Peak\Routing\RequestResolver;
 use Peak\Routing\Route;
 use Peak\Routing\CustomRoute;
+use Peak\Common\Collection;
 
-/**
- * @package    Peak\Resolve
- */
 class RequestResolverTest extends TestCase
 {
-    /**
-     * init view
-     */ 
-    function setUp()
-    {
-    }
-    
-    /**
-     * unset view
-     */
-    function tearDown()
-    {
-        unset($this->peakview);
-    }
 
+    /**
+     * Test empty request
+     */
     function testEmptyRequest()
     {
         $base_uri = '';
@@ -42,11 +29,12 @@ class RequestResolverTest extends TestCase
 
         $this->assertEmpty($request->raw_uri);  
         $this->assertTrue($request->request_uri === '/');  
-        $this->assertTrue($request->base_uri === '/base/'); 
+        $this->assertTrue($request->base_uri === '/base/');
+
     }
     
     /**
-     * Create instance test
+     * Test request
      */
     function testRequest()
     {
@@ -54,27 +42,34 @@ class RequestResolverTest extends TestCase
         Request::$separator = '/';
 
         $base = 'peak/framework';
-        $request = 'peak/framework/asdasd';
+        $request = 'peak/framework/test';
         $request = new Request($request, $base);
-
-        // echo "\n";
-        // echo $request->base_uri;
-        // echo "\n";
-        // echo $request->raw_uri;
-        // echo "\n";
-        // echo $request->request_uri;
-        // echo "\n";
 
         $resolver = new RequestResolver($request);
 
-        $reg = new CustomRoute('{id}:num', 'index', 'action');
-        //print_r($reg);
-        //print_r($reg->match($request));
+        $route = $resolver->getRoute();
+        $this->assertTrue($route instanceof Route);
+        $this->assertTrue($route->controller === 'test');
+    }
 
-        $reg2 = new CustomRoute(':alpha', 'module', 'action');
-        //print_r($reg2->match($request));
+    /**
+     * Test request with custom routes
+     */
+    function testRequestWithCustomRoutes()
+    {
+        $base = 'peak/framework';
+        $request = 'peak/framework/id/15';
+        $request = new Request($request, $base);
+        $resolver = new RequestResolver($request);
 
+        $customRoutes = new Collection([
+            new CustomRoute('{id}:num', 'index', 'action'),
+            new CustomRoute(':alpha', 'module', 'action')
+        ]);
 
-        //print_r($resolver->getRoute());
+        $route = $resolver->getRoute($customRoutes);
+        $this->assertTrue($route instanceof Route);
+        $this->assertTrue($route->controller === 'index');
+        $this->assertTrue($route->action === 'action');
     }
 }
