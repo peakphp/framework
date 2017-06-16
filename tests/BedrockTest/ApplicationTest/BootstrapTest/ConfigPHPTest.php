@@ -43,6 +43,5 @@ class ConfigPHPTest extends TestCase
         Application::instantiate(ConfigPHP::class);
         $this->assertTrue(ini_get('display_errors') == 0);
         $this->assertTrue(ini_get('display_startup_errors') == 0);
-        $this->assertTrue(ini_get('date.timezone') === "America/Toronto");
     }
 }
