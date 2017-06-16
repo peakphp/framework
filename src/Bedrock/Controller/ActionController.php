@@ -120,7 +120,7 @@ abstract class ActionController
     }
     
     /**
-     * Check action methods agrs needed and call it properly
+     * Check action methods args needed and call it properly
      *
      * @param string $action_name
      */
