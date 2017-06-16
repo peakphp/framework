@@ -62,7 +62,7 @@ class Alpha extends AbstractRule
 
         if (isset($this->options['punc'])) {
             if (is_array($this->options['punc'])) {
-                foreach ($opt['punc'] as $punc) {
+                foreach ($this->options['punc'] as $punc) {
                     $regopt[] = '\\'.$punc;
                 }
             } else {
