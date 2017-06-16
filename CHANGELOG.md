@@ -12,6 +12,9 @@ Release Date: ?
  - added function formatFileSize() to Peak\Common\helpers.php
  - deleted deprecated class Peak\Common\Spl\Fileinfo and Peak\Common\Spl\Dirinfo
  - fixed bug with array of punctuations in Peak\Validation\Rules\Alpha
+ - added property $child to Peak\Bedrock\Controller\ParentController to access to loaded child action instance
+ - added property $action_ns to Peak\Bedrock\Controller\ParentController to customize which namespace to use
+   for loading child action class
 
 VERSION 2.10.0
 --------------
