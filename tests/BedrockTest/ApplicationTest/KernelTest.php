@@ -7,9 +7,6 @@ use Peak\Bedrock\Controller\FrontController;
 
 class KernelTest extends TestCase
 {
-
-    protected $app;
-
     /**
      * Test reload kernel
      *
@@ -20,6 +17,18 @@ class KernelTest extends TestCase
     {
         $app = dummyApp();
         $app->kernel()->reload();
+    }
+
+    /**
+     * Test reload kernel
+     *
+     * @runInSeparateProcess
+     * @preserveGlobalState disabled
+     */
+    function testRun()
+    {
+        $app = dummyApp();
+        //$app->run();
     }
 
 }
