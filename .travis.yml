@@ -16,3 +16,5 @@ script:
   - ./vendor/bin/phpunit
 after_success:
   - php vendor/bin/coveralls -v
+  - phpunit --coverage-clover build/logs/clover.xml
+  - vendor/bin/test-reporter
