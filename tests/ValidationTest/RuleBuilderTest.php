@@ -90,6 +90,10 @@ class RuleBuilderTest extends TestCase
         $this->assertTrue(Rule::integerNumber("0x0000FF", [
             'min_range' => 10,
         ], FILTER_FLAG_ALLOW_HEX));
+
+        $this->assertTrue(Rule::integerNumber("0x0000FF", [
+            'min_range' => 10,
+        ], FILTER_FLAG_ALLOW_HEX, 'random context data'));
     }
 
     function testException()
