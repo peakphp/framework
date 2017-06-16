@@ -159,7 +159,7 @@ class Application
      */
     public function run($request = null)
     {
-        return self::kernel()->run($request);
+        return $this->kernel()->run($request);
     }
 
     /**
@@ -169,6 +169,6 @@ class Application
      */
     public function render()
     {
-        self::kernel()->render();
+        $this->kernel()->render();
     }
 }
