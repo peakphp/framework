@@ -2,9 +2,6 @@
 
 namespace Peak\Bedrock\Application;
 
-use Peak\Bedrock\Application\Bootstrapper;
-use Peak\Bedrock\Application\Config;
-use Peak\Bedrock\Application\Routing;
 use Peak\Bedrock\Controller\FrontController;
 
 /**
@@ -19,25 +16,25 @@ class Kernel
     
     /**
      * App bootstrap object if exists
-     * @var Application\Bootstrap
+     * @var Bootstrapper
      */
     public $bootstrap;
 
     /**
      * App object front controller
-     * @var Controller\FrontController
+     * @var FrontController
      */
     public $front;
 
     /**
      * App routing object
-     * @var Application\Routing
+     * @var Routing
      */
     public $routing;
     
     /**
      * App config
-     * @var Application\Config
+     * @var Config
      */
     protected $config = null;
 
@@ -57,7 +54,7 @@ class Kernel
     }
 
     /**
-     * Reload application bootstrapper and front for a module
+     * Reload application Bootstrapper and FrontController for a module
      *
      * @return $this
      */
@@ -80,7 +77,7 @@ class Kernel
     }
 
     /**
-     * Load and store application Front Controller
+     * Load and store application FrontController
      */
     private function loadFront()
     {
