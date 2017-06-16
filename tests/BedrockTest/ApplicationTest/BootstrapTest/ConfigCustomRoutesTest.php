@@ -52,7 +52,7 @@ class ConfigCustomRoutesTest extends TestCase
     function testBootstrapException2()
     {
         $app = dummyApp();
-        Application::conf()->set('routes', ['invalid route | asdasd | asdasd']);
+        Application::conf()->set('routes', 'invalid route | asdasd | asdasd');
         try {
             Application::instantiate(ConfigCustomRoutes::class); //need to call it manually because test has no bootstrap
         } catch (Exception $e) {
