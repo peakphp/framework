@@ -10,8 +10,6 @@ use Peak\Routing\Route;
 class ApplicationControllerTest extends TestCase
 {
 
-    protected $app;
-
     /**
      * Test load controller
      *
