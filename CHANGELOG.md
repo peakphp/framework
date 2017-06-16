@@ -11,6 +11,7 @@ Release Date: ?
  - added Peak\Common\TextUtils move code from Peak\Bedrock\View\Helper\Text there
  - added function formatFileSize() to Peak\Common\helpers.php
  - deleted deprecated class Peak\Common\Spl\Fileinfo and Peak\Common\Spl\Dirinfo
+ - fixed bug with array of punctuations in Peak\Validation\Rules\Alpha
 
 VERSION 2.10.0
 --------------

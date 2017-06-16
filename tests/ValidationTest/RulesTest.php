@@ -241,6 +241,15 @@ class RulesTest extends TestCase
         $this->assertTrue($rule->validate('étoile'));
         $this->assertTrue($rule->validate('Ça va bien, merci. Et toi ?'));
 
+        $rule = new Peak\Validation\Rules\Alpha([
+            'french' => true,
+            'space'  => true,
+            'punc'   => ['.', ',', '?']
+        ]);
+
+        $this->assertTrue($rule->validate('étoile'));
+        $this->assertTrue($rule->validate('Ça va bien, merci. Et toi ?'));
+
     }
 
     /**
