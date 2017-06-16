@@ -31,9 +31,24 @@ class DataSetTest extends TestCase
 
         $this->assertTrue($pass);
         $this->assertTrue(empty($dataset->getErrors()));
+    }
 
+    function testValidateEmptyRule()
+    {
+        $dataset = new DataSetExample4();
 
-    }    
+        $pass = $dataset->validate([
+            'login' => 'bob'
+        ]);
+
+        $this->assertTrue($pass);
+        $this->assertTrue(empty($dataset->getErrors()));
+
+        $pass = $dataset->validate([]);
+
+        $this->assertTrue($pass);
+        $this->assertTrue(empty($dataset->getErrors()));
+    }
 
     function testValidateRequired()
     {

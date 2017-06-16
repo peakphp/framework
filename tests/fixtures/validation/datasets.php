@@ -37,3 +37,10 @@ class DataSetExample3 extends \Peak\Validation\DataSet
         ]);
     }
 }
+
+class DataSetExample4 extends \Peak\Validation\DataSet
+{
+    public function setUp()
+    {
+    }
+}
