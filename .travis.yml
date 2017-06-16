@@ -5,6 +5,7 @@ php:
   - 7.1
 install:
   - composer require "satooshi/php-coveralls" "^1" --dev --no-update
+  - composer require codeclimate/php-test-reporter --dev
   - composer install --no-interaction
 before_script:
   - composer self-update
