@@ -47,7 +47,7 @@ class ServiceLocatorTest extends TestCase
         $this->assertFalse($sl->hasService('service1'));
     }
 
-    function listServices()
+    function testListServices()
     {
         $sl = new ServiceLocator();
         $sl->service2 = function() {
