@@ -7,9 +7,6 @@ use Peak\Bedrock\Controller\FrontController;
 
 class FrontControllerTest extends TestCase
 {
-
-    protected $app;
-
     /**
      * Test load front controller
      *
