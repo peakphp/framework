@@ -1,3 +1,7 @@
+VERSION 2.12.0
+--------------
+Release Date: ?
+
 VERSION 2.11.0
 --------------
 Release Date: 2017-06-16
