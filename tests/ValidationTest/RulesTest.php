@@ -93,7 +93,8 @@ class RulesTest extends TestCase
 
 
         $rule = new Peak\Validation\Rules\StrLength([
-            'max' => 10
+            'min' => null,
+            'max' => 10,
         ]);
 
         $this->assertTrue($rule->validate('0123456789'));
