@@ -4,7 +4,7 @@
 <a href="https://travis-ci.org/peakphp/framework"><img src="https://travis-ci.org/peakphp/framework.svg" alt="Build status"></a>
 <a href="https://codeclimate.com/github/peakphp/framework"><img src="https://codeclimate.com/github/peakphp/framework/badges/gpa.svg" /></a>
 <a href="https://packagist.org/packages/peakphp/framework"><img src="https://poser.pugx.org/peakphp/framework/downloads" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/peakphp/framework"><img src="https://poser.pugx.org/peakphp/framework/license" alt="License"></a>
+<a href="https://github.com/peakphp/framework/blob/master/LICENSE.md"><img src="https://poser.pugx.org/peakphp/framework/license" alt="License"></a>
 </p>
 
 > **Note:** This repository contains the core code of the Peak framework. If you want to build an application using Peak, visit the main [Peak repository](https://github.com/peakphp/peak).

@@ -24,4 +24,40 @@ class ConfigCustomRoutesTest extends TestCase
         $this->assertTrue(count($routing->custom_routes) == 3);
         $this->assertTrue($routing->custom_routes[0]->controller === 'user');
     }
+
+    /**
+     * Test bootstrap class exception
+     *
+     * @runInSeparateProcess
+     * @preserveGlobalState disabled
+     */
+    function testBootstrapException()
+    {
+        $app = dummyApp();
+        Application::conf()->set('routes', ['invalid route']);
+        try {
+            Application::instantiate(ConfigCustomRoutes::class); //need to call it manually because test has no bootstrap
+        } catch (Exception $e) {
+            $error = true;
+        }
+        $this->assertTrue(isset($error));
+    }
+
+    /**
+     * Test bootstrap class exception
+     *
+     * @runInSeparateProcess
+     * @preserveGlobalState disabled
+     */
+    function testBootstrapException2()
+    {
+        $app = dummyApp();
+        Application::conf()->set('routes', ['invalid route | asdasd | asdasd']);
+        try {
+            Application::instantiate(ConfigCustomRoutes::class); //need to call it manually because test has no bootstrap
+        } catch (Exception $e) {
+            $error = true;
+        }
+        $this->assertTrue(isset($error));
+    }
 }
