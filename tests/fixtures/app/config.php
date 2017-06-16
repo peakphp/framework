@@ -21,6 +21,10 @@ return [
         'view' => [
             'engine' => 'Layouts',
             'useLayout' => 'homepage',
+            'set' => [
+                'var1' => 'foo',
+                'var2' => 'bar',
+            ]
         ],
         'routes' => [ //custom routes ...
             [

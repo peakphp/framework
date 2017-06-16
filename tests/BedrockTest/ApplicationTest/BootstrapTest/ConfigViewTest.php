@@ -21,5 +21,21 @@ class ConfigViewTest extends TestCase
         Application::instantiate(ConfigView::class);
         $view = Application::get(View::class);
         $this->assertTrue($view->engine() instanceof Layouts);
+        $this->assertTrue($view->var1 === 'foo');
+        $this->assertTrue($view->var2 === 'bar');
+    }
+
+    /**
+     * Test bootstrap class with empty view
+     *
+     * @runInSeparateProcess
+     * @preserveGlobalState disabled
+     */
+    function testBootstrapEmpty()
+    {
+        $app = dummyApp();
+        $conf = Application::conf();
+        unset($conf->view);
+        Application::instantiate(ConfigView::class);
     }
 }
