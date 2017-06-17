@@ -75,6 +75,30 @@ class ApplicationControllerTest extends TestCase
         $this->assertTrue($controller->view->foo === 'bar');
     }
 
+    /**
+     * Test controller dispatch
+     *
+     * @runInSeparateProcess
+     * @preserveGlobalState disabled
+     */
+    function testControllerDispatchRedirectAction()
+    {
+        $app = dummyApp();
+        $controller = Application::instantiate(TestController::class);
+        Application::kernel()->front->controller = $controller;
+
+        $route = new Route();
+        $route->action = 'redirect';
+
+        $controller->setRoute($route);
+        $controller->dispatch();
+
+        $this->assertTrue($controller->preaction);
+        $this->assertTrue($controller->postaction);
+        $this->assertTrue($controller->redirected);
+        $this->assertTrue($controller->file === 'test.redirected.php');
+    }
+
 
     /**
      * Test controller dispatch
@@ -146,6 +170,7 @@ class TestController extends ActionController
 {
     public $preaction = false;
     public $postaction = false;
+    public $redirected = true;
     public $id = null;
     public $sort = null;
 
@@ -173,6 +198,16 @@ class TestController extends ActionController
         if(!$cachevalid) {
             // do stuff
         }
+    }
+
+    public function _redirect()
+    {
+        $this->redirectAction('redirected');
+    }
+
+    public function _redirected()
+    {
+        $this->redirected = true;
     }
 
     public function postAction()
