@@ -7,7 +7,7 @@ use Peak\Bedrock\View\Helper;
 /**
  * Assets url helpers for files like css/js/img
  */
-class Assets extends Helper
+class Assets
 {
     /**
      * Assets end url path
@@ -28,8 +28,6 @@ class Assets extends Helper
      */
     public function __construct($path = null, $url = null)
     {
-        parent::__construct();
-
         if (isset($path)) {
             $this->setPath($path);
         } else {
@@ -46,7 +44,7 @@ class Assets extends Helper
     /**
      * Delegate type method/args to process()
      *
-     * @example ('css', array('theme/css/myfile1.css', ...)) will call method asset_css() with the file(s) path(s)
+     * @example ('css',  ['theme/css/myfile1.css', ...]) will call method assetCss() with the file(s) path(s)
      *
      * @param  string $method
      * @param  string $args
@@ -74,6 +72,16 @@ class Assets extends Helper
     }
 
     /**
+     * Get assets path
+     *
+     * @return string
+     */
+    public function getPath()
+    {
+        return $this->assets_path;
+    }
+
+    /**
      * Set assets base url
      *
      * @param  string $url
@@ -90,6 +98,16 @@ class Assets extends Helper
     }
 
     /**
+     * Get assets base url
+     *
+     * @return string
+     */
+    public function getUrl()
+    {
+        return $this->assets_base_url;
+    }
+
+    /**
      * Check if javascript file exists
      *
      * @param  string $file
@@ -97,8 +115,7 @@ class Assets extends Helper
      */
     public function exists($file)
     {
-        $filepath = $this->assets_path.'/'.$file;
-        return file_exists($filepath);
+        return file_exists($this->assets_path.'/'.$file);
     }
 
     /**
@@ -111,37 +128,42 @@ class Assets extends Helper
      */
     public function process($type, $paths, $param = null)
     {
-        $output = '';
-        $mtype  = 'asset_'.$type;
-
-        // force paths to be an array
-        if (!is_array($paths)) {
-            $paths = array($paths);
-        }
         if (empty($paths)) {
             return;
         }
 
+        // force paths to be an array
+        if (!is_array($paths)) {
+            $paths = [$paths];
+        }
+
+        $mtype  = 'asset'.ucfirst($type);
         // if asset type doesn't exists
         if (!method_exists($this, $mtype)) {
-            // if type is auto, we will retreive asset based on file extension if asset method exists
-            if (in_array($type, array('auto', 'auto-detect', 'autodetect'))) {
-                foreach ($paths as $p) {
-                    $ext = 'asset_'.pathinfo($p, PATHINFO_EXTENSION);
-                    if (method_exists($this, $ext)) {
-                        $output .= $this->$ext($p, $param);
-                    }
-                }
-                return $output;
-            }
-            return;
-        } else {
-            foreach ($paths as $p) {
-                $output .= $this->$mtype($p, $param);
-            }
+            $mtype = 'assetAuto';
+        }
+
+        $output = '';
+        foreach ($paths as $p) {
+            $output .= $this->$mtype($p, $param);
         }
 
         return $output;
+    }
+
+    /**
+     * Autodetect asset based on file extension
+     *
+     * @param string $filepath
+     * @param string $param
+     * @return mixed
+     */
+    protected function assetAuto($filepath, $param = null)
+    {
+        $ext = 'asset'.ucfirst(pathinfo($filepath, PATHINFO_EXTENSION));
+        if (method_exists($this, $ext)) {
+            return $this->$ext($filepath, $param);
+        }
     }
 
     /**
@@ -150,9 +172,9 @@ class Assets extends Helper
      * @param  string $filepath
      * @return string
      */
-    protected function asset_url($filepath)
+    protected function assetUrl($filepath)
     {
-        return $this->assets_base_url.'/'.$this->assets_path.'/'.$filepath;
+        return $this->assets_base_url.'/'.$filepath;
     }
 
     /**
@@ -161,9 +183,9 @@ class Assets extends Helper
      * @param  string $path
      * @return string
      */
-    protected function asset_js($filepath, $param = null)
+    protected function assetJs($filepath, $param = null)
     {
-        $url = $this->asset_url($filepath).((isset($param)) ? '?'.$param : '');
+        $url = $this->assetUrl($filepath).((isset($param)) ? '?'.$param : '');
         return '<script type="text/javascript" src="'.$url.'"></script>';
     }
 
@@ -173,9 +195,9 @@ class Assets extends Helper
      * @param  string $path
      * @return string
      */
-    protected function asset_css($filepath, $param = null)
+    protected function assetCss($filepath, $param = null)
     {
-        $url = $this->asset_url($filepath).((isset($param)) ? '?'.$param : '');
+        $url = $this->assetUrl($filepath).((isset($param)) ? '?'.$param : '');
         return '<link rel="stylesheet" href="'.$url.'">';
     }
 }
