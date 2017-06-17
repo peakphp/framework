@@ -52,7 +52,7 @@ class ApplicationControllerTest extends TestCase
     }
 
     /**
-     * Test controller route
+     * Test controller dispatch
      *
      * @runInSeparateProcess
      * @preserveGlobalState disabled
@@ -71,6 +71,31 @@ class ApplicationControllerTest extends TestCase
         $this->assertTrue($controller->preaction);
         $this->assertTrue($controller->postaction);
         $this->assertTrue($controller->view->foo === 'bar');
+    }
+
+    /**
+     * Test controller dispatch action exception
+     *
+     * @runInSeparateProcess
+     * @preserveGlobalState disabled
+     */
+    function testControllerDispatchException()
+    {
+        $app = dummyApp();
+        $controller = Application::instantiate(TestController::class);
+
+        $route = new Route();
+        $route->action = 'unknown_action';
+
+        $controller->setRoute($route);
+
+        try {
+            $controller->dispatch();
+        } catch (Exception $e) {
+            $error = true;
+        }
+
+        $this->assertTrue(isset($error));
     }
 
 
