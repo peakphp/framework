@@ -6,6 +6,7 @@ use Peak\Bedrock\Application;
 use Peak\Bedrock\Controller\ActionController;
 use Peak\Bedrock\View;
 use Peak\Routing\Route;
+use Peak\Routing\RouteBuilder;
 
 class ApplicationControllerTest extends TestCase
 {
@@ -70,6 +71,7 @@ class ApplicationControllerTest extends TestCase
 
         $this->assertTrue($controller->preaction);
         $this->assertTrue($controller->postaction);
+        $this->assertTrue($controller->file === 'test.index.php');
         $this->assertTrue($controller->view->foo === 'bar');
     }
 
@@ -98,6 +100,26 @@ class ApplicationControllerTest extends TestCase
         $this->assertTrue(isset($error));
     }
 
+    /**
+     * Test controller dispatch with action with params
+     *
+     * @runInSeparateProcess
+     * @preserveGlobalState disabled
+     */
+    function testControllerDispatchActionParams()
+    {
+        $app = dummyApp();
+
+        $controller = Application::instantiate(TestController::class);
+        $route = RouteBuilder::get('test/actionwithparams/id/13/sort/joindate');
+
+        $controller->setRoute($route);
+        $controller->dispatch();
+
+        $this->assertTrue($controller->id == 13);
+        $this->assertTrue($controller->sort === 'joindate');
+        $this->assertTrue($controller->file === 'test.actionwithparams.php');
+    }
 
 
 }
@@ -106,6 +128,8 @@ class TestController extends ActionController
 {
     public $preaction = false;
     public $postaction = false;
+    public $id = null;
+    public $sort = null;
 
     public function preAction()
     {
@@ -115,6 +139,12 @@ class TestController extends ActionController
     public function _index()
     {
         $this->view->foo = 'bar';
+    }
+
+    public function _actionWithParams($id, $sort = 'name')
+    {
+        $this->id = $id;
+        $this->sort = $sort;
     }
 
     public function postAction()
