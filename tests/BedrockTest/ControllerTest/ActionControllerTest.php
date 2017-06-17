@@ -75,6 +75,24 @@ class ApplicationControllerTest extends TestCase
         $this->assertTrue($controller->view->foo === 'bar');
     }
 
+
+    /**
+     * Test controller dispatch
+     *
+     * @runInSeparateProcess
+     * @preserveGlobalState disabled
+     */
+    function testControllerCaching()
+    {
+        $app = dummyApp();
+
+        $controller = Application::instantiate(TestController::class);
+        $route = RouteBuilder::get('test/testingcache');
+
+        $controller->setRoute($route);
+        $controller->dispatch();
+
+    }
     /**
      * Test controller dispatch action exception
      *
@@ -145,6 +163,16 @@ class TestController extends ActionController
     {
         $this->id = $id;
         $this->sort = $sort;
+    }
+
+    public function _testingCache()
+    {
+        $this->view->cache()->genCacheId('test', 'testingcache');
+        $this->view->cache()->enable(1);
+        $cachevalid = $this->view->cache()->isValid();
+        if(!$cachevalid) {
+            // do stuff
+        }
     }
 
     public function postAction()
