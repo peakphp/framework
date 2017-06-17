@@ -3,6 +3,7 @@ VERSION 2.12.0
 Release Date: ?
 
  - deleted deprecated class Peak\Bedrock\View\Helper\Tagattrs
+ - refactored Peak\Bedrock\View\Helper\Assets
  
 VERSION 2.11.0
 --------------
