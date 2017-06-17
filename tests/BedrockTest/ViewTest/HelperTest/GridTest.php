@@ -35,6 +35,8 @@ class GridTest extends TestCase
                 'users/order/:column/by/:by',
                 ['by' => ($by === 'asc') ? 'desc' : 'asc']
             )
+            ->excludeCols(['created_at'])
+            ->setRenderLineBreak('')
             ->setTableClasses('table')
             ->setColumns([
                 'id'       => '#',
