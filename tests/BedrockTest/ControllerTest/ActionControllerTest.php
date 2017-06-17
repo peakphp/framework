@@ -37,7 +37,14 @@ class ApplicationControllerTest extends TestCase
         $controller = Application::instantiate(TestController::class);
 
         $route = new Route();
-        $route->action = 'index';
+        $route->action = 'myaction';
+
+        $controller->setRoute($route);
+
+        $this->assertTrue($controller->action === '_myaction');
+
+        $route = new Route();
+        $route->action = '';
 
         $controller->setRoute($route);
 
