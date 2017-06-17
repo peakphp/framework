@@ -2,6 +2,8 @@ VERSION 2.12.0
 --------------
 Release Date: ?
 
+ - deleted deprecated class Peak\Bedrock\View\Helper\Tagattrs
+ 
 VERSION 2.11.0
 --------------
 Release Date: 2017-06-16
