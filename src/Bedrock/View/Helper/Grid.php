@@ -232,10 +232,6 @@ class Grid extends Helper
         return $this;
     }
 
-    public function addAttrsRowColumn()
-    {
-    }
-    
     /**
      * Set table html class(es)
      *
