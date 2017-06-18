@@ -24,21 +24,13 @@ class Assets
     /**
      * Init the class and set default assets path and base url optionally
      *
-     * @param   string|null $path
+     * @param string $path
+     * @param string $url
      */
-    public function __construct($path = null, $url = null)
+    public function __construct($path, $url)
     {
-        if (isset($path)) {
-            $this->setPath($path);
-        } else {
-            $this->setPath('assets');
-        }
-
-        if (isset($url)) {
-            $this->setUrl($url);
-        } else {
-            $this->setUrl(url());
-        }
+        $this->setPath($path);
+        $this->setUrl($url);
     }
 
     /**
