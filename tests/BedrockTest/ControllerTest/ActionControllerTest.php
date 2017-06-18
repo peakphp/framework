@@ -113,6 +113,8 @@ class ApplicationControllerTest extends TestCase
         $controller = Application::instantiate(TestController::class);
         $route = RouteBuilder::get('test/testingcache');
 
+        $controller->view->engine('Layouts');
+
         $controller->setRoute($route);
         $controller->dispatch();
 
