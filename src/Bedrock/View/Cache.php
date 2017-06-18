@@ -28,30 +28,30 @@ class Cache
     }
     
     /**
-     * Get script file in View_Render
+     * Get script file of View Engine
      *
      * @return string
      */
     protected function getScriptFile()
     {
-        return $this->view->engine()->_scripts_file;
+        return $this->view->engine()->scripts_file;
     }
     
     /**
-     * Get script path in View_Render
+     * Get script path of View Engine
      *
      * @return string
      */
     protected function getScriptPath()
     {
-        return $this->view->engine()->_scripts_path;
+        return $this->view->engine()->scripts_path;
     }
 
     /**
      * Enable output caching.
      * Avoid using in controllers actions that depends on $_GET, $_POST or any dynamic value for setting the view
      *
-     * @param integer $time set cache expiration time(in seconds)
+     * @param integer $time set cache ttl(in seconds) i.e; cache will be regenerated after each $time;
      */
     public function enable($time)
     {
