@@ -1,30 +1,8 @@
 <?php
 
-namespace Peak\Config;
+namespace Peak\Common;
 
-use Peak\Common\Collection;
-use \RuntimeException;
-
-/**
- * Dot notation for access multidimensional arrays
- *
- * $dn = new DotNotation([
- *     'bar'=> [
- *         'baz'=> ['foo' => true]
- *      ]
- * ]);
- *
- * $value = $dn->get('bar.baz.foo');   // $value == true
- * $dn->set('bar.baz.foo', false);     // ['foo'=>false]
- * $dn->add('bar.baz', ['boo'=>true]); // ['foo'=>false,'boo'=>true]
- *
- * @author Anton Medvedev <anton (at) elfet (dot) ru>
- * @version 2.0
- * @license MIT
- *
- * Adapted by Francois Lajoie for Peak
- */
-class DotNotation extends Collection
+class DotNotationCollection extends Collection
 {
     const SEPARATOR = '/[:\.]/';
 
@@ -42,11 +20,10 @@ class DotNotation extends Collection
         if (!empty($path)) {
             $keys = $this->explode($path);
             foreach ($keys as $key) {
-                if (isset($array[$key])) {
-                    $array = $array[$key];
-                } else {
+                if (!array_key_exists($key, $array)) {
                     return $default;
                 }
+                $array = $array[$key];
             }
         }
 
@@ -67,19 +44,16 @@ class DotNotation extends Collection
 
             while (count($keys) > 0) {
                 if (count($keys) === 1) {
-                    if (is_array($at)) {
-                        $at[array_shift($keys)] = $value;
-                    } else {
-                        throw new RuntimeException('Can not set value at this path ('.$path.') because is not array.');
+                    if (!is_array($at)) {
+                        throw new RuntimeException('Can not set value at this path ['.$path.'] because is not array.');
                     }
+                    $at[array_shift($keys)] = $value;
                 } else {
                     $key = array_shift($keys);
-
                     if (!isset($at[$key])) {
                         $at[$key] = [];
                     }
-
-                    $at = & $at[$key];
+                    $at =& $at[$key];
                 }
             }
         } else {
@@ -110,23 +84,12 @@ class DotNotation extends Collection
         $keys = $this->explode($path);
         $array = $this->items;
         foreach ($keys as $key) {
-            if (isset($array[$key])) {
-                $array = $array[$key];
-            } else {
+            if (!array_key_exists($key, $array)) {
                 return false;
             }
+            $array = $array[$key];
         }
         return true;
-    }
-
-    /**
-     * @deprecated Will be removed soon
-     * @param $path
-     * @return mixed
-     */
-    public function have($path)
-    {
-        return $this->has($path);
     }
 
     /**

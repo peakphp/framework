@@ -1,10 +1,9 @@
 <?php
 use PHPUnit\Framework\TestCase;
 
-/**
- * @package    Peak\Config
- */
-class DotNotationTest extends TestCase
+use Peak\Common\DotNotationCollection;
+
+class DotNotationCollectionTest extends TestCase
 {
 
     protected $_array_test_1 = [
@@ -18,14 +17,14 @@ class DotNotationTest extends TestCase
 
     function testCreateObject()
     {
-        $dn = new \Peak\Config\DotNotation(['foo' => 'bar']);
+        $dn = new DotNotationCollection(['foo' => 'bar']);
         $this->assertFalse($dn->isEmpty());
     }
           
 
     function testGetPath()
     {
-        $dn = new \Peak\Config\DotNotation($this->_array_test_1);
+        $dn = new DotNotationCollection($this->_array_test_1);
 
         $this->assertFalse($dn->isEmpty());
         $this->assertTrue($dn->get('foo.bar') == 123);
@@ -35,7 +34,7 @@ class DotNotationTest extends TestCase
 
     function testSetPath()
     {
-        $dn = new \Peak\Config\DotNotation($this->_array_test_1);
+        $dn = new DotNotationCollection($this->_array_test_1);
 
         $dn->set('foo.jade.profile.new', ['test' => ['of' => 'path']]);
 
@@ -49,7 +48,7 @@ class DotNotationTest extends TestCase
 
     function testHavePath()
     {
-        $dn = new \Peak\Config\DotNotation($this->_array_test_1);
+        $dn = new DotNotationCollection($this->_array_test_1);
 
         $this->assertFalse($dn->isEmpty());
         $this->assertTrue($dn->has('foo.bar'));
@@ -59,7 +58,7 @@ class DotNotationTest extends TestCase
 
     function testAdd()
     {
-        $dn = new \Peak\Config\DotNotation($this->_array_test_1);
+        $dn = new DotNotationCollection($this->_array_test_1);
 
         $dn->add('foo.bar', ['test' => 456]);
 
