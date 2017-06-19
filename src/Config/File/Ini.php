@@ -2,7 +2,7 @@
 
 namespace Peak\Config\File;
 
-use Peak\Config\DotNotation;
+use Peak\Common\DotNotationCollection;
 use \Exception;
 
 /**
@@ -17,7 +17,7 @@ use \Exception;
  * @author  Original author: Andris at http://codeaid.net
  *          Thanks to him for letting me use and modify his class for the needs of the framework
  */
-class Ini extends DotNotation
+class Ini extends DotNotationCollection
 {
     /**
      * Load file on class construct

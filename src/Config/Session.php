@@ -2,12 +2,12 @@
 
 namespace Peak\Config;
 
-use Peak\Config\DotNotation;
+use Peak\Common\DotNotationCollection;
 
 /**
  * Wrap Collection / DotNotation abilities around php $_SESSION
  */
-class Session extends DotNotation
+class Session extends DotNotationCollection
 {
     /**
      * We pass $_SESSION by reference so we can alter

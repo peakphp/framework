@@ -13,7 +13,7 @@ class IniTest extends TestCase
     {
         $config = new Ini(__DIR__.'/../../fixtures/config/config.ini');
 
-        $this->assertTrue($config->have('all.php.display_errors'));
+        $this->assertTrue($config->has('all.php.display_errors'));
         $this->assertTrue($config->get('all.php.display_errors') == 1);
         $this->assertTrue(is_null($config->get('this.that')));
     }

@@ -2,10 +2,10 @@
 
 namespace Peak\Config;
 
-use Peak\Config\DotNotation;
+use Peak\Common\DotNotationCollection;
 use \Exception;
 
-class File extends DotNotation
+class File extends DotNotationCollection
 {
     protected $file;
 

@@ -79,12 +79,12 @@ class Environment
     private function validate()
     {
         // default env aka all
-        if (!$this->file_config->have('all')) {
+        if (!$this->file_config->has('all')) {
             throw new Exception('Your application doesn\'t have default "all" configuration');
         }
 
         // current env
-        if (!$this->file_config->have($this->app_config->env)) {
+        if (!$this->file_config->has($this->app_config->env)) {
             throw new Exception('Your application doesn\'t have "'.$this->app_config->env.'" configuration');
         }
     }

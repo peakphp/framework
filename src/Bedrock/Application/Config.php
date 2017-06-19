@@ -2,8 +2,8 @@
 
 namespace Peak\Bedrock\Application;
 
-use Peak\Config\DotNotation;
+use Peak\Common\DotNotationCollection;
 
-class Config extends DotNotation
+class Config extends DotNotationCollection
 {
 }

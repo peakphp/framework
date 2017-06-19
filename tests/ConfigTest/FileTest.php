@@ -11,8 +11,8 @@ class FileTest extends TestCase
     {
         $config =  new \Peak\Config\File(__DIR__.'/../fixtures/config/appconf_example.php');
 
-        $this->assertTrue($config->have('all.php.display_errors'));
-        $this->assertFalse($config->have('test.unknow'));
+        $this->assertTrue($config->has('all.php.display_errors'));
+        $this->assertFalse($config->has('test.unknow'));
     }
 
     function testException()

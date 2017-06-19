@@ -2,7 +2,7 @@
 
 namespace Peak\Config\File;
 
-use Peak\Config\DotNotation;
+use Peak\Common\DotNotationCollection;
 use \Exception;
 
 /**
@@ -10,7 +10,7 @@ use \Exception;
  *
  * Takes a JSON encoded file/string and converts it into a PHP variable.
  */
-class Json extends DotNotation
+class Json extends DotNotationCollection
 {
     /**
      * Allow comments in json data
