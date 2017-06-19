@@ -4,6 +4,8 @@ Release Date: ?
 
  - deleted deprecated class Peak\Bedrock\View\Helper\Tagattrs
  - refactored Peak\Bedrock\View\Helper\Assets
+ - moved Peak\Config\DotNotation to Peak\Common\DotNotationCollection
+ - removed deprecated method have() in Peak\Common\DotNotationCollection
  
 VERSION 2.11.0
 --------------
