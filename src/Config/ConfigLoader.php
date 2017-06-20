@@ -66,15 +66,32 @@ class ConfigLoader
     /**
      * Get config(s) has one merged DotNotation collection
      *
-     * @param array $files
-     * @param null $path
      * @return DotNotationCollection
-     * @throws Exception
      */
     public function asDotNotationCollection()
     {
         $collection = $this->load($this->configs, $this->path);
         return new DotNotationCollection($collection->toArray());
+    }
+
+    /**
+     * Get config(s) has one merged array
+     *
+     * @return array
+     */
+    public function asArray()
+    {
+        return $this->load($this->configs, $this->path)->toArray();
+    }
+
+    /**
+     * Get config(s) has one merged stdClass
+     *
+     * @return \stdClass
+     */
+    public function asObject()
+    {
+        return $this->load($this->configs, $this->path)->toObject();
     }
 
     /**
