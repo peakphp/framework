@@ -9,6 +9,7 @@ class CollectionLoader extends Loader
 {
     /**
      * Constructor
+     *
      * @param $config
      */
     public function __construct(Collection $config)
