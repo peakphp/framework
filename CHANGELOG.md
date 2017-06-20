@@ -7,6 +7,7 @@ Release Date: ?
  - moved Peak\Config\DotNotation to Peak\Common\DotNotationCollection
  - removed deprecated method have() in Peak\Common\DotNotationCollection
  - added Peak\Config\ConfigLoader component
+ - added method asArray() and asObject() to Peak\Config\ConfigLoader
  
 VERSION 2.11.0
 --------------

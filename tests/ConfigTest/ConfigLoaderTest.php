@@ -59,17 +59,43 @@ class ConfigLoaderTest extends TestCase
 
     function testLoadFilesAsDotNotationCollection()
     {
-        $col = (new ConfigLoader($this->good_files, FIXTURES_PATH))->AsDotNotationCollection();
+        $col = (new ConfigLoader($this->good_files, FIXTURES_PATH))->asDotNotationCollection();
         $this->assertTrue($col instanceof DotNotationCollection);
         $this->assertTrue($col->iam === 'arrayfile2');
 
-        $col = (new ConfigLoader($this->good_files2))->AsDotNotationCollection();
+        $col = (new ConfigLoader($this->good_files2))->asDotNotationCollection();
         $this->assertTrue($col instanceof DotNotationCollection);
         $this->assertTrue($col->iam === 'arrayfile2');
 
-        $col = (new ConfigLoader($this->good_files_inverse, FIXTURES_PATH))->AsDotNotationCollection();
+        $col = (new ConfigLoader($this->good_files_inverse, FIXTURES_PATH))->asDotNotationCollection();
         $this->assertTrue($col instanceof DotNotationCollection);
         $this->assertTrue($col->iam === 'arrayfile1');
+    }
+
+    function testLoadFilesAsArray()
+    {
+        $array = (new ConfigLoader($this->good_files, FIXTURES_PATH))->asArray();
+        $this->assertTrue(is_array($array));
+        $this->assertTrue($array['iam'] === 'arrayfile2');
+    }
+
+    function testLoadFilesAsObject()
+    {
+        $obj = (new ConfigLoader($this->good_files, FIXTURES_PATH))->asObject();
+        $this->assertTrue(is_object($obj));
+        $this->assertTrue($obj->iam === 'arrayfile2');
+
+        $col = (new ConfigLoader(
+            [
+                new Collection([
+                    'foo' => 'bar'
+                ]),
+                '{"foo": "bar2", "bar" : "foo"}',
+                new Collection(['foo' => 'bar']),
+                FIXTURES_PATH.'/config/arrayfile1.php',
+                ['array' => 'hophop']
+            ]
+        ))->asObject();
     }
 
     function testExceptionFileNotFound()
@@ -82,8 +108,7 @@ class ConfigLoaderTest extends TestCase
         $this->assertTrue(isset($error));
     }
 
-
-    function testMixedConfigs()
+    function testMixedTypeConfigs()
     {
         $col = (new ConfigLoader(
             [
