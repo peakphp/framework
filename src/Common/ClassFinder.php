@@ -24,7 +24,7 @@ class ClassFinder
      * Return the first classname found or false
      *
      * @param  string $basename
-     * @return string|false
+     * @return string|null
      */
     public function findFirst($basename)
     {
@@ -40,7 +40,7 @@ class ClassFinder
      * Return the last classname found or false
      *
      * @param  string $basename
-     * @return string|false
+     * @return string|null
      */
     public function findLast($basename)
     {
