@@ -6,6 +6,7 @@ Release Date: ?
  - refactored Peak\Bedrock\View\Helper\Assets
  - moved Peak\Config\DotNotation to Peak\Common\DotNotationCollection
  - removed deprecated method have() in Peak\Common\DotNotationCollection
+ - added Peak\Config\ConfigLoader component
  
 VERSION 2.11.0
 --------------
