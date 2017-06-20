@@ -9,10 +9,22 @@ use \Exception;
 
 class ConfigLoader
 {
+    /**
+     * Configs resources
+     * @var array
+     */
     protected $configs;
 
+    /**
+     * Configs resources path
+     * @var null|string
+     */
     protected $path = null;
 
+    /**
+     * Configs loader namespace(s)
+     * @var array
+     */
     protected $namespaces = [
         'Peak\Config\Type'
     ];
@@ -31,6 +43,7 @@ class ConfigLoader
 
     /**
      * Change type load namespaces
+     *
      * @param array $namespaces
      * @return $this
      */
@@ -51,7 +64,7 @@ class ConfigLoader
     }
 
     /**
-     * Get config(s) has one merged dotnotation collection
+     * Get config(s) has one merged DotNotation collection
      *
      * @param array $files
      * @param null $path
@@ -144,6 +157,8 @@ class ConfigLoader
     }
 
     /**
+     * Get loader content
+     *
      * @param LoaderInterface $loader
      * @return mixed
      */
