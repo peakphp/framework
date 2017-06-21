@@ -16,5 +16,9 @@ class CallableLoader extends Loader
     {
         $this->config = $config;
         $this->content = $config();
+
+        if (!is_array($this->content)) {
+            throw new Exception(__CLASS__.': Closure/Callable config must return an array');
+        }
     }
 }
