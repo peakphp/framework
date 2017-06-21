@@ -38,6 +38,11 @@ class ExceptionLogger
         $content = exceptionTrace($this->exception);
         $content = strip_tags($content)."\n\n";
 
+        if ( (!file_exists($this->filepath) && !is_writable(dirname($this->filepath))) ||
+            (file_exists($this->filepath) && !is_writable($this->filepath))) {
+            throw new Exception(__CLASS__.': cannot write to ['.$this->filepath.']');
+        }
+
         file_put_contents($this->filepath, $content, FILE_APPEND);
     }
 }
