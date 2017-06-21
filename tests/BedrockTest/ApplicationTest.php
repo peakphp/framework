@@ -65,10 +65,10 @@ class ApplicationTest extends TestCase
 
         $app = new Application($container, [
             'env'  => 'dev',
-            'conf' => 'config.php',
+            'conf' => FIXTURES_PATH.'/app/config.php',
             'path' => [
                 'public' => __DIR__,
-                'app'    => __DIR__.'/../fixtures/app/',
+                'app'    => FIXTURES_PATH.'/app/',
             ]
         ]);
 

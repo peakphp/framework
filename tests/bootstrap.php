@@ -21,7 +21,7 @@ if(!function_exists('dummyApp')) {
 
         $final = [
             'env'  => $env,
-            'conf' => 'config.php',
+            'conf' => FIXTURES_PATH.'/app/config.php',
             'path' => [
                 'public' => FIXTURES_PATH,
                 'app'    => FIXTURES_PATH.'/app/',
