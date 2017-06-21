@@ -5,15 +5,15 @@ namespace Peak\Bedrock\Application\Config;
 class AppTree
 {
     /**
-     * App paths tree
+     * Application paths tree
      * @var array
      */
-    public $tree;
+    protected $tree;
 
     /**
      * Constructor
      *
-     * @param string $root
+     * @param string $root application tree root
      */
     public function __construct($root)
     {
@@ -21,12 +21,21 @@ class AppTree
     }
 
     /**
-     * Generate default application tree
+     * Get application path tree
+     * @return array
+     */
+    public function get()
+    {
+        return $this->tree;
+    }
+
+    /**
+     * Generate application tree
      *
      * @param   string $root
      * @return  array
      */
-    public function defaultAppTree($root)
+    protected function defaultAppTree($root)
     {
         $this->tree = [
             'root'           => $root,
