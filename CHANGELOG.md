@@ -15,6 +15,7 @@ Release Date: ?
  - [BC] deleted Peak\Bedrock\Application\Config\Environment which is now useless with ConfigLoader
  - [BC] deleted Peak\Bedrock\Application\Config\FileLoader which is now useless with ConfigLoader
  - added method get() to Peak\Bedrock\Application\Config\AppTree
+ - added file (exists|is writable) checks to log() in Peak\Common\ExceptionLogger
  
 VERSION 2.11.0
 --------------

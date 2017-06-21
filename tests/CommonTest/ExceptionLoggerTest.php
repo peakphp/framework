@@ -18,6 +18,7 @@ class ExceptionLoggerTest extends TestCase
         );
 
         $this->assertTrue(file_exists($file));
+        //$this->assertTrue(is_writable(dirname($file)));
         unlink($file);
     }
 
