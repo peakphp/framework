@@ -98,20 +98,18 @@ class ConfigLoaderTest extends TestCase
 
     function testMixedTypeConfigs()
     {
-        $col = (new ConfigLoader(
-            [
-                new Collection([
-                    'foo' => 'bar'
-                ]),
-                '{"foo": "bar2", "bar" : "foo"}',
-                new Collection(['foo' => 'bar']),
-                FIXTURES_PATH.'/config/arrayfile1.php',
-                ['array' => 'hophop'],
-                function() {
-                    return ['anonym' => 'function'];
-                }
-            ]
-        ))->asCollection();
+        $col = (new ConfigLoader([
+            new Collection([
+                'foo' => 'bar'
+            ]),
+            '{"foo": "bar2", "bar" : "foo"}',
+            new Collection(['foo' => 'bar']),
+            FIXTURES_PATH.'/config/arrayfile1.php',
+            ['array' => 'hophop'],
+            function() {
+                return ['anonym' => 'function'];
+            }
+        ]))->asCollection();
 
         $this->assertTrue($col instanceof Collection);
         $this->assertTrue($col->iam === 'arrayfile1');
