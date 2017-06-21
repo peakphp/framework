@@ -2,6 +2,8 @@ VERSION 2.13.0
 --------------
 Release Date: ?
 
+ - added callable support to Peak\Config\ConfigLoader
+
 VERSION 2.12.0
 --------------
 Release Date: 2017-06-21

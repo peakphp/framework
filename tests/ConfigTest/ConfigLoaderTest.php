@@ -84,18 +84,6 @@ class ConfigLoaderTest extends TestCase
         $obj = (new ConfigLoader($this->good_files, FIXTURES_PATH))->asObject();
         $this->assertTrue(is_object($obj));
         $this->assertTrue($obj->iam === 'arrayfile2');
-
-        $col = (new ConfigLoader(
-            [
-                new Collection([
-                    'foo' => 'bar'
-                ]),
-                '{"foo": "bar2", "bar" : "foo"}',
-                new Collection(['foo' => 'bar']),
-                FIXTURES_PATH.'/config/arrayfile1.php',
-                ['array' => 'hophop']
-            ]
-        ))->asObject();
     }
 
     function testExceptionFileNotFound()
@@ -118,7 +106,10 @@ class ConfigLoaderTest extends TestCase
                 '{"foo": "bar2", "bar" : "foo"}',
                 new Collection(['foo' => 'bar']),
                 FIXTURES_PATH.'/config/arrayfile1.php',
-                ['array' => 'hophop']
+                ['array' => 'hophop'],
+                function() {
+                    return ['anonym' => 'function'];
+                }
             ]
         ))->asCollection();
 
@@ -127,6 +118,7 @@ class ConfigLoaderTest extends TestCase
         $this->assertTrue($col->foo === 'bar');
         $this->assertTrue($col->bar === 'foo');
         $this->assertTrue($col->array === 'hophop');
+        $this->assertTrue($col->anonym === 'function');
 
     }
 
