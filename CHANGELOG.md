@@ -2,12 +2,19 @@ VERSION 2.12.0
 --------------
 Release Date: ?
 
+> Warning! Breaking changes with 2.11.x and below
+
  - deleted deprecated class Peak\Bedrock\View\Helper\Tagattrs
  - refactored Peak\Bedrock\View\Helper\Assets
- - moved Peak\Config\DotNotation to Peak\Common\DotNotationCollection
- - removed deprecated method have() in Peak\Common\DotNotationCollection
+ - [BC] moved Peak\Config\DotNotation to Peak\Common\DotNotationCollection
+ - [BC] removed deprecated method have() in Peak\Common\DotNotationCollection
  - added Peak\Config\ConfigLoader component
  - added method asArray() and asObject() to Peak\Config\ConfigLoader
+ - [BC] refactored Peak\Bedrock\Application\ConfigResolver with new ConfigLoader component and
+   modified how application configuration(s) are setup and loaded
+ - [BC] deleted Peak\Bedrock\Application\Config\Environment which is now useless with ConfigLoader
+ - [BC] deleted Peak\Bedrock\Application\Config\FileLoader which is now useless with ConfigLoader
+ - added method get() to Peak\Bedrock\Application\Config\AppTree
  
 VERSION 2.11.0
 --------------
