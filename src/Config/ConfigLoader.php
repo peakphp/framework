@@ -133,6 +133,10 @@ class ConfigLoader
         // detect type
         if (is_array($config)) {
             $type = 'ArrayLoader';
+        } elseif(is_callable($config)) {
+            $type = 'CallableLoader';
+        } elseif ($config instanceof Collection) {
+            $type = 'CollectionLoader';
         } elseif(is_string($config)) {
             if (file_exists($config)) {
                 $ext = pathinfo($config, PATHINFO_EXTENSION);
@@ -140,8 +144,6 @@ class ConfigLoader
             } elseif (json_decode($config) && (json_last_error() === JSON_ERROR_NONE)) {
                 $type = 'JsonLoader';
             }
-        } elseif ($config instanceof Collection) {
-            $type = 'CollectionLoader';
         }
 
         if (is_null($type)) {
