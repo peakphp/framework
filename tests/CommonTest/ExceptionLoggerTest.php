@@ -22,5 +22,22 @@ class ExceptionLoggerTest extends TestCase
         unlink($file);
     }
 
+    /**
+     * test new instance
+     */
+    function testClassException()
+    {
+        try {
+            $el = new ExceptionLogger(
+                new \Exception('Message'),
+                null
+            );
+        } catch (Exception $e) {
+            $error = $e->getMessage();
+        }
+
+        $this->assertTrue(isset($error));
+    }
+
 
 }
