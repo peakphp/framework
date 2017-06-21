@@ -2,9 +2,10 @@
 
 namespace Peak\Bedrock\Application;
 
-use Peak\Bedrock\Application\Config\FileLoader;
-use Peak\Bedrock\Application\Config\Environment;
+use Peak\Bedrock\Application\Config\AppTree;
 use Peak\Common\DataException;
+use Peak\Config\ConfigLoader;
+use \Exception;
 
 class ConfigResolver
 {
@@ -37,28 +38,42 @@ class ConfigResolver
      */
     public function __construct($config = [])
     {
-        $this->app_config = new Config($this->default);
-        $this->app_config->mergeRecursiveDistinct($config);
+        // validate user conf
+        $this->validate($config);
 
-        $this->validate(); // validate user conf
-        $this->defineConstants(); // define default app constants
+        // define default app constants
+        $this->defineConstants($config);
 
-        //print_r($this->app_config);
+        // get application path tree
+        $config['path']['apptree'] = (new AppTree(APPLICATION_ABSPATH))->get();
 
-        $config_loader = new FileLoader($this->getConfigFilepath());
+        // prepare the final app configuration
+        $final = [
+            $this->default,
+            $config
+        ];
 
-        $config_env = new Environment(
-            $config_loader->getConfig(),
-            $this->app_config
+        // load external app config
+        if (isset($config['conf'])) {
+            if (is_string($config['conf'])) {
+                $final[] = $config['conf'];
+            } elseif(is_array($config['conf'])) {
+                foreach($config['conf'] as $conf) {
+                    $final[] = $conf;
+                }
+            }
+        }
+
+        // build and store final application config
+        $this->app_config = new Config(
+            (new ConfigLoader($final))->asArray()
         );
-
-        $this->app_config->mergeRecursiveDistinct($config_env->getEnvConfig());
     }
 
     /**
-     * Get app config
+     * Get app configuration
      *
-     * @return object
+     * @return Config
      */
     public function getMountedConfig()
     {
@@ -66,28 +81,38 @@ class ConfigResolver
     }
 
     /**
-     * Get application config filepath
+     * Validate require config values
      *
-     * @return string
+     * @param array $config
      */
-    private function getConfigFilepath()
+    private function validate($config)
     {
-        $file = $this->app_config->get('path.app').'/'.$this->app_config->get('conf');
-        $realpath = realpath($file);
-
-        if ($realpath === false) {
-            throw new DataException('Application configuration file not found', $file);
+        if (!isset($config['env'])) {
+            throw new Exception('Your application doesn\'t have environment configuration');
         }
 
-        $path = str_replace('\\', '/', $realpath);
+        if (!isset($config['path']['public'])) {
+            throw new Exception('Your application doesn\'t have a public path configuration');
+        }
 
-        return $path;
+        if(!file_exists($config['path']['public'])) {
+            throw new DataException('Public path not found', $config['path']['public']);
+        }
+
+        if (!isset($config['path']['app'])) {
+            throw new Exception('Your application doesn\'t have a path configuration');
+        }
+        if (!file_exists($config['path']['app'])) {
+            throw new DataException('Application path not found', $config['path']['app']);
+        }
     }
 
     /**
      * Define important constants
+     *
+     * @param array $config
      */
-    private function defineConstants()
+    private function defineConstants($config)
     {
         //define server document root absolute path
         $svr_path = str_replace('\\', '/', realpath(filter_var(getenv('DOCUMENT_ROOT'))));
@@ -97,22 +122,8 @@ class ConfigResolver
 
         define('SVR_ABSPATH', $svr_path);
         define('LIBRARY_ABSPATH', realpath(__DIR__.'/../'));
-        define('PUBLIC_ABSPATH', realpath($this->app_config->get('path.public')));
-        define('APPLICATION_ABSPATH', realpath($this->app_config->get('path.app')));
-        define('APPLICATION_ENV', $this->app_config->get('env'));
-    }
-
-    /**
-     * Validate require config values
-     */
-    private function validate()
-    {
-        if (!file_exists($this->app_config->get('path.public'))) {
-            throw new DataException('Public path not found', $this->app_config->get('path.public'));
-        }
-
-        if (!file_exists($this->app_config->get('path.app'))) {
-            throw new DataException('Application path not found', $this->app_config->get('path.app'));
-        }
+        define('PUBLIC_ABSPATH', realpath($config['path']['public']));
+        define('APPLICATION_ABSPATH', realpath($config['path']['app']));
+        define('APPLICATION_ENV', $config['env']);
     }
 }
