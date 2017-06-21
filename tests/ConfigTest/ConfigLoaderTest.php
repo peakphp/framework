@@ -117,9 +117,5 @@ class ConfigLoaderTest extends TestCase
         $this->assertTrue($col->bar === 'foo');
         $this->assertTrue($col->array === 'hophop');
         $this->assertTrue($col->anonym === 'function');
-
     }
-
-
-
 }
