@@ -1,6 +1,10 @@
-VERSION 2.12.0
+VERSION 2.13.0
 --------------
 Release Date: ?
+
+VERSION 2.12.0
+--------------
+Release Date: 2017-06-21
 
 > Warning! Breaking changes with 2.11.x and below
 
