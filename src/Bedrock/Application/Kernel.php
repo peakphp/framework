@@ -36,7 +36,7 @@ class Kernel
      * App config
      * @var Config
      */
-    protected $config = null;
+    protected $config;
 
     /**
      * Start framework
