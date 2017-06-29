@@ -43,5 +43,21 @@ class ClassFinderTest extends TestCase
         $class = $cf->findFirst('Test');
         $this->assertNull($class);
     }
+
+    /**
+     * Test suffix() and prefix()
+     */
+    function testSuffixPrefix()
+    {
+        $cf = new ClassFinder([
+            'Peak\Bedrock\Application\Bootstrap'
+        ]);
+
+        $cf->setPrefix('Config');
+        $cf->setSuffix('');
+
+        $class = $cf->findLast('CustomRoutes');
+        $this->assertTrue($class === Peak\Bedrock\Application\Bootstrap\ConfigCustomRoutes::class);
+    }
         	  
 }
