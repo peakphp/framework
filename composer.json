@@ -6,7 +6,8 @@
     "homepage": "https://peakframework.com",
     "support": {
         "issues": "https://github.com/peakphp/framework/issues",
-        "source": "https://github.com/peakphp/framework"
+        "source": "https://github.com/peakphp/framework",
+        "api": "http://api.peakframework.com/"
     },
     "authors": [
         {
@@ -16,9 +17,7 @@
     ],
     "require": {
         "php": ">=5.6.4",
-        "illuminate/database": "5.4.*@dev",
-        "illuminate/events": "5.4.*@dev",
-        "corneltek/getoptionkit": "2.5.*"
+        "symfony/console": "3.*"
     },
     "require-dev": {
         "phpunit/phpunit": "~5.7"

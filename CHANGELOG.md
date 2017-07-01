@@ -4,7 +4,9 @@ Release Date: ?
 
  - added callable support to Peak\Config\ConfigLoader
  - added setSuffix() and setPrefix() to Peak\Common\ClassFinder
-
+ - moved illuminate/database and illuminate/events as default dependencies to peak default application
+ - added symfony/console to core
+ 
 VERSION 2.12.0
 --------------
 Release Date: 2017-06-21
