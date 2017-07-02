@@ -6,6 +6,7 @@ use Peak\Common\ClassFinder;
 use Peak\Common\Collection;
 use Peak\Common\DotNotationCollection;
 use \Exception;
+use \Closure;
 
 class ConfigLoader
 {
@@ -92,6 +93,17 @@ class ConfigLoader
     public function asObject()
     {
         return $this->load($this->configs, $this->path)->toObject();
+    }
+
+    /**
+     * Execute a closure with loaded configs collection
+     *
+     * @param Closure $closure
+     * @return mixed
+     */
+    public function asClosure(Closure $closure)
+    {
+        return $closure($this->load($this->configs, $this->path));
     }
 
     /**
