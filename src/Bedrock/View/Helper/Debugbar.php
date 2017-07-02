@@ -71,16 +71,7 @@ class Debugbar extends Debug
         }
 
         //print css & js
-        echo $this->_getAssets();
-
-        //zend_db_profiler
-        $zdb_profiler = false;
-        if (class_exists('Zend_Db_Table', false)) {
-            $zdb_profiler = Zend_Db_Table::getDefaultAdapter()->getProfiler();
-            if ($zdb_profiler->getEnabled() === false) {
-                $zdb_profiler = false;
-            }
-        }
+        echo $this->getAssets();
 
         $theme = ($theme === 'dark') ? 'th-dark' : '';
 
@@ -90,13 +81,7 @@ class Debugbar extends Debug
                <ul>
                 <li><a class="thebar">&nbsp;&nbsp;&nbsp;Peak v'.Kernel::VERSION.'/PHP '.phpversion().'</a></li>
                 <li><a class="clock pkdb_tab" id="pkdb_chrono" onclick="pkdebugShow(\'pkdb_chrono\');">'.$chrono.' ms</a></li>';
-        if ($zdb_profiler !== false) {
-            $nb_query = $zdb_profiler->getTotalNumQueries();
-            $nb_query = ($nb_query > 1) ? $nb_query.' queries' : $nb_query.' query';
-            $nb_query_chrono = round($zdb_profiler->getTotalElapsedSecs() * 1000,2).' ms';
-            echo '<li><a class="db pkdb_tab" id="pkdb_database" onclick="pkdebugShow(\'pkdb_database\');">'.$nb_query_chrono.' / '.$nb_query.'</a></li>';
-        }
-        
+
         echo '  <li><a class="memory">'.$this->getMemoryUsage().'</a></li>
                 <li><a class="files pkdb_tab" id="pkdb_include" onclick="pkdebugShow(\'pkdb_include\');">'.$files_count.' Files</a></li>
                 <li><a class="variables pkdb_tab" id="pkdb_vars" onclick="pkdebugShow(\'pkdb_vars\');">Variables</a></li>
@@ -268,7 +253,7 @@ class Debugbar extends Debug
      *
      * @return string
      */
-    private function _getAssets()
+    private function getAssets()
     {
         return '<style type="text/css">
                 <!--
