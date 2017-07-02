@@ -8,6 +8,7 @@ Release Date: ?
  - added symfony/console to core
  - added method asClosure() in Peak\Config\ConfigLoader
  - added support of Yaml config for Peak\Config\ConfigLoader
+ - container is now passed to the constructor instead of hard-coded in Peak\Bedrock\Application\Bootstrapper
  
 VERSION 2.12.0
 --------------
