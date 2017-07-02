@@ -115,7 +115,7 @@ class ConfigLoaderTest extends TestCase
             '{"foo": "bar2", "bar" : "foo"}',
             new Collection(['foo' => 'bar']),
             FIXTURES_PATH.'/config/arrayfile1.php',
-            FIXTURES_PATH.'/config/confsig.yml',
+            FIXTURES_PATH.'/config/config.yml',
             ['array' => 'hophop'],
             function() {
                 return ['anonym' => 'function'];
