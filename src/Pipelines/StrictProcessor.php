@@ -2,8 +2,7 @@
 
 namespace Peak\Pipelines;
 
-use Peak\Pipelines\AbstractProcessor;
-use Peak\Pipelines\ProcessorInterface;
+use Peak\Di\ContainerInterface;
 
 class StrictProcessor extends AbstractProcessor implements ProcessorInterface
 {
@@ -21,8 +20,8 @@ class StrictProcessor extends AbstractProcessor implements ProcessorInterface
      */
     public function __construct(callable $check, ContainerInterface $container = null)
     {
+        parent::__construct($container);
         $this->check = $check;
-        $this->container = $container;
     }
 
     /**
