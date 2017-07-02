@@ -4,6 +4,7 @@ namespace Peak\Bedrock\View\Render;
 
 use Peak\Bedrock\Application;
 use Peak\Bedrock\View\Render;
+use \Exception;
 
 /**
  * Peak View Render Engine: Partials
@@ -83,7 +84,7 @@ class Partials extends Render
         if (!file_exists($filepath)) {
             $kernel = Application::kernel();
             $filepath = $kernel->front->controller->title .'/'. basename($filepath);
-            throw new Peak_View_Exception('ERR_VIEW_SCRIPT_NOT_FOUND', $filepath);
+            throw new Exception(__CLASS__.': view script ['.$filepath.'] not found');
         }
 
         //Partials group FILES VIEW IF EXISTS

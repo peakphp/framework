@@ -2,6 +2,8 @@
 
 namespace Peak\Common;
 
+use \RuntimeException;
+
 class DotNotationCollection extends Collection
 {
     const SEPARATOR = '/[:\.]/';

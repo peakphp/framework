@@ -3,6 +3,7 @@
 namespace Peak\Config\Type;
 
 use Peak\Config\Loader;
+use \Exception;
 
 class ArrayLoader extends Loader
 {
