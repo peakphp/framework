@@ -115,6 +115,7 @@ class ConfigLoaderTest extends TestCase
             '{"foo": "bar2", "bar" : "foo"}',
             new Collection(['foo' => 'bar']),
             FIXTURES_PATH.'/config/arrayfile1.php',
+            FIXTURES_PATH.'/config/confsig.yml',
             ['array' => 'hophop'],
             function() {
                 return ['anonym' => 'function'];
@@ -127,5 +128,7 @@ class ConfigLoaderTest extends TestCase
         $this->assertTrue($col->bar === 'foo');
         $this->assertTrue($col->array === 'hophop');
         $this->assertTrue($col->anonym === 'function');
+        $this->assertTrue(count($col->items) == 2);
+        $this->assertTrue(isset($col->items) == 2);
     }
 }
