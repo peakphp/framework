@@ -2,6 +2,7 @@
 
 namespace Peak\Bedrock\Application;
 
+use Peak\Bedrock\Application;
 use Peak\Bedrock\Controller\FrontController;
 
 /**
@@ -67,13 +68,13 @@ class Kernel
 
     /**
      * Load and store application Bootstrapper
-     *
-     * @param string $prefix Bootstrap class prefix name if exists
      */
     private function loadBootstrap()
     {
         $cname = $this->config->get('ns').'\Bootstrap';
-        $this->bootstrap = (class_exists($cname)) ? new $cname() : new Bootstrapper();
+        if (class_exists($cname)) {
+            $this->bootstrap = new $cname(Application::container());
+        }
     }
 
     /**
@@ -82,7 +83,10 @@ class Kernel
     private function loadFront()
     {
         $cname = $this->config->get('ns').'\Front';
-        $this->front = (class_exists($cname)) ? new $cname() : new FrontController();
+        if (!class_exists($cname)) {
+            $cname = FrontController::class;
+        }
+        $this->front = new $cname();
     }
 
     /**
