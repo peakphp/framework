@@ -2,7 +2,7 @@
 
 namespace Peak\Bedrock\Application;
 
-use Peak\Bedrock\Application;
+use Peak\Di\ContainerInterface;
 
 /**
  * Application Bootstrapper
@@ -24,13 +24,13 @@ class Bootstrapper
     /**
      * init app bootstrap
      */
-    public function __construct()
+    public function __construct(ContainerInterface $container)
     {
         /**
          * Execute processes
          */
         foreach ($this->processes as $process) {
-            Application::instantiate($process);
+            $container->instantiate($process);
         }
 
         $this->boot();
