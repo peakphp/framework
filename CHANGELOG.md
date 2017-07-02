@@ -6,6 +6,7 @@ Release Date: ?
  - added setSuffix() and setPrefix() to Peak\Common\ClassFinder
  - moved illuminate/database and illuminate/events as default dependencies to peak default application
  - added symfony/console to core
+ - added method asClosure() in Peak\Config\ConfigLoader
  
 VERSION 2.12.0
 --------------

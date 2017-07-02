@@ -86,6 +86,16 @@ class ConfigLoaderTest extends TestCase
         $this->assertTrue($obj->iam === 'arrayfile2');
     }
 
+    function testLoadFilesAsClosure()
+    {
+        $obj = (new ConfigLoader($this->good_files, FIXTURES_PATH))->asClosure(function($coll) {
+            return new Peak\Bedrock\Application\Config($coll->toArray());
+        });
+
+        $this->assertInstanceOf('Peak\Bedrock\Application\Config', $obj);
+        $this->assertTrue($obj->iam === 'arrayfile2');
+    }
+
     function testExceptionFileNotFound()
     {
         try {
