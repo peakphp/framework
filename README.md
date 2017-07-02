@@ -18,10 +18,6 @@ Requirements:
     - Mbstring PHP Extension
     - Tokenizer PHP Extension
 
-### Lavarel components included:
-- [illuminate/database](https://github.com/illuminate/database)
-- [illuminate/events](https://github.com/illuminate/events)
-
 ### Peak components
     - Dependency Injection
     - Events Dispatcher
@@ -36,6 +32,11 @@ Requirements:
     - Translation
     - Configuration files
 
+### External components
+
+   - [fpdo/fluentpdo](https://github.com/envms/fluentpdo)
+   - [symfony/console](https://github.com/symfony/console)
+   
 ### Api
 
 Api documentation [here](http://api.peakframework.com)

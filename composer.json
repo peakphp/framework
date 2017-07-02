@@ -17,6 +17,7 @@
     ],
     "require": {
         "php": ">=5.6.4",
+        "fpdo/fluentpdo": "1.1.*",
         "symfony/console": "3.*"
     },
     "require-dev": {
