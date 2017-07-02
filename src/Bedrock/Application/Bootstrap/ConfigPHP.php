@@ -12,7 +12,7 @@ class ConfigPHP
     /**
      * Configure PHP
      *
-     * @param \Peak\Bedrock\Application\Config $config
+     * @param Config $config
      */
     public function __construct(Config $config)
     {
