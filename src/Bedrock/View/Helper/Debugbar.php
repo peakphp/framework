@@ -40,7 +40,6 @@ class Debugbar extends Debug
         
         //files included
         $files = $this->getFiles();
-        //print_r($files);
         $files_count = count($files['app']) + count($files['peak']);
 
         //php 5.4, use $_SERVER['REQUEST_TIME_FLOAT']

@@ -429,26 +429,6 @@ class Grid extends Helper
                     $params = null;
                 }
 
-                // closure params stuff
-                // if (is_array($params) && array_key_exists('fields', $params)) {
-
-                //     if (is_array($params['fields'])) {
-                //         $fields = [];
-                //         foreach ($params['fields'] as $field) {
-                //             if (array_key_exists($field, $row_data)) {
-                //                 $fields[$field] = $row_data[$field];
-                //             }
-                //         }
-                //         $params['fields'] = $fields;
-                //     } elseif ($params['fields'] === '*') {
-                //         $params['fields'] = $row_context;
-                //     } elseif (array_key_exists($params['fields'], $row_data)) {
-                //         $params['fields'] = $row_data[$h['fields']];
-                //     } else {
-                //         $params['fields'] = null;
-                //     }
-                // }
-
                 if (!is_array($params)) {
                     $params = ['data' => $row_context];
                 } else {

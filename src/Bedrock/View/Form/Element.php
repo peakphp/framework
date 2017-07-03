@@ -138,7 +138,6 @@ abstract class Element implements ElementInterface
                 if ($v === true) {
                     $attrs_string[] = $k;
                 }
-                //echo $k.'BOOL ';
             } else {
                 $attrs_string[] = $k.'="'.$v.'"';
             }
