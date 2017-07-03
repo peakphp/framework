@@ -106,10 +106,10 @@ class FrontController
      */
     public function dispatch()
     {
-        $this->_dispatchController();
+        $this->dispatchController();
         // execute a normal controller action
         if ($this->controller instanceof ActionController) {
-            $this->_dispatchControllerAction();
+            $this->dispatchControllerAction();
         }
     }
 
@@ -135,7 +135,7 @@ class FrontController
     /**
      * Dispatch appropriate controller according to the router
      */
-    protected function _dispatchController()
+    protected function dispatchController()
     {
         //set default controller if router doesn't have one
         if (!isset($this->route->controller)) {
@@ -161,7 +161,7 @@ class FrontController
     /**
      * Dispatch action of controller
      */
-    protected function _dispatchControllerAction()
+    protected function dispatchControllerAction()
     {
         if ($this->controller instanceof ActionController) {
             $this->controller->dispatch();
@@ -190,12 +190,12 @@ class FrontController
         $this->route->controller = $this->error_controller;
         $this->route->action     = 'index';
 
-        $this->_dispatchController();
+        $this->dispatchController();
 
         if (isset($exception)) {
             $this->controller->exception = $exception;
         }
         
-        $this->_dispatchControllerAction();
+        $this->dispatchControllerAction();
     }
 }
