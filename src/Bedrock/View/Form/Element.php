@@ -116,8 +116,6 @@ abstract class Element implements ElementInterface
         //create a copy before transforming it
         $this->attrs_array = $attrs_array;
 
-        //print_r($attrs_array);
-
         //special cases
         if (array_key_exists('multiple', $attrs_array) && $attrs_array['multiple'] === true) {
             $attrs_array['name'] .= '[]';
@@ -132,9 +130,9 @@ abstract class Element implements ElementInterface
                 continue;
             }
 
-            // if (in_array($k, $this->attrs_to_translate)) {
-            //     $v = __($v);
-            // }
+            if (in_array($k, $this->attrs_to_translate)) {
+                $v = __($v);
+            }
 
             if (is_bool($v) && !is_integer($v)) {
                 if ($v === true) {
