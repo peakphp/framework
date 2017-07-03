@@ -34,7 +34,7 @@ class Ini extends DotNotationCollection
     /**
      * Parse ini from file
      *
-     * @see _load()
+     * @see load()
      */
     public function loadFile($file, $process_sections = false, $section_name = null)
     {
@@ -54,7 +54,7 @@ class Ini extends DotNotationCollection
             }
         }
         
-        return $this->_load($ini, $process_sections, $section_name);
+        return $this->load($ini, $process_sections, $section_name);
     }
     
     /**
@@ -63,13 +63,13 @@ class Ini extends DotNotationCollection
      * If you really need this under PHP 5 < 5.3.0, uncomment function
      * parse_ini_string() at the bottom of this file
      *
-     * @see _load()
+     * @see load()
      */
     public function loadString($string, $process_sections = false, $section_name = null)
     {
         //PHP 5 >= 5.3.0
         $ini = parse_ini_string($string, $process_sections);
-        return $this->_load($ini, $process_sections, $section_name);
+        return $this->load($ini, $process_sections, $section_name);
     }
     
     /**
@@ -85,7 +85,7 @@ class Ini extends DotNotationCollection
      * @throws Exception
      * @return array|boolean
      */
-    public function _load($ini, $process_sections = false, $section_name = null)
+    public function load($ini, $process_sections = false, $section_name = null)
     {
         // load the raw ini file
         //$ini = parse_ini_string($data, $process_sections);
@@ -101,11 +101,11 @@ class Ini extends DotNotationCollection
         if ($process_sections === true) {
             // loop through each section
             foreach ($ini as $section => $contents) {
-                $this->_processSection($section, $contents);
+                $this->processSection($section, $contents);
             }
         } else {
             // treat the whole ini file as a single section
-            $this->items = $this->_processSectionContents($ini);
+            $this->items = $this->processSectionContents($ini);
         }
 
         //  extract the required section if required
@@ -131,11 +131,11 @@ class Ini extends DotNotationCollection
      * @param  array $contents Section contents
      * @throws Exception
      */
-    private function _processSection($section, array $contents)
+    private function processSection($section, array $contents)
     {
         // the section does not extend another section
         if (stripos($section, ':') === false) {
-            $this->items[$section] = $this->_processSectionContents($contents);
+            $this->items[$section] = $this->processSectionContents($contents);
         // section extends another section
         } else {
             // extract section names
@@ -149,7 +149,7 @@ class Ini extends DotNotationCollection
             }
 
             // process section contents
-            $this->items[$ext_target] = $this->_processSectionContents($contents);
+            $this->items[$ext_target] = $this->processSectionContents($contents);
 
             // merge the new section with the existing section values
             $this->items[$ext_target] = $this->arrayMergeRecursiveDistinct($this->items[$ext_source], $this->items[$ext_target]);
@@ -162,14 +162,14 @@ class Ini extends DotNotationCollection
      * @param  array $contents Section contents
      * @return array
      */
-    private function _processSectionContents(array $contents)
+    private function processSectionContents(array $contents)
     {
         $result = [];
 
         // loop through each line and convert it to an array
         foreach ($contents as $path => $value) {
             // convert all a.b.c.d to multi-dimensional arrays
-            $process = $this->_processContentEntry($path, $value);
+            $process = $this->processContentEntry($path, $value);
             // merge the current line with all previous ones
             $result = $this->arrayMergeRecursiveDistinct($result, $process);
         }
@@ -184,7 +184,7 @@ class Ini extends DotNotationCollection
      * @param  mixed  $value Current ini file's line's value
      * @return array
      */
-    private function _processContentEntry($path, $value)
+    private function processContentEntry($path, $value)
     {
         $pos = strpos($path, '.');
 
@@ -195,6 +195,6 @@ class Ini extends DotNotationCollection
         $key = substr($path, 0, $pos);
         $path = substr($path, $pos + 1);
 
-        return array($key => $this->_processContentEntry($path, $value));
+        return array($key => $this->processContentEntry($path, $value));
     }
 }
