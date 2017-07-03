@@ -9,6 +9,8 @@ Release Date: ?
  - added method asClosure() in Peak\Config\ConfigLoader
  - added support of Yaml config for Peak\Config\ConfigLoader
  - container is now passed to the constructor instead of hard-coded in Peak\Bedrock\Application\Bootstrapper
+ - added console application component Peak\Climber based on symfony/console component
+ - updated functions __() and _e() to return text in case of not finding a valid instance of Peak\Common\Language
  
 VERSION 2.12.0
 --------------
