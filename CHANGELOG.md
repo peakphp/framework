@@ -1,6 +1,6 @@
 VERSION 2.13.0
 --------------
-Release Date: ?
+Release Date: 2017-07-03
 
  - added callable support to Peak\Config\ConfigLoader
  - added setSuffix() and setPrefix() to Peak\Common\ClassFinder
