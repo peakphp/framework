@@ -91,6 +91,6 @@ class Debug extends Helper
     {
         $size = memory_get_peak_usage(true);
         $unit = ['b','kb','mb','gb','tb','pb'];
-        return @ound($size/pow(1024, ($i=floor(log($size, 1024)))), 4).' '.$unit[$i];
+        return round($size/pow(1024, ($i=floor(log($size, 1024)))), 4).' '.$unit[$i];
     }
 }
