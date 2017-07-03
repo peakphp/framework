@@ -42,7 +42,7 @@ class Ini extends DotNotationCollection
             throw new Exception(__CLASS__.': file "'.$file.'" not found');
         }
 
-        $ini = @parse_ini_file($file, $process_sections);
+        $ini = parse_ini_file($file, $process_sections);
         
         //(php 5.2.7+) since parse_ini_file() can return false in case of error
         //but this can mean also that the file is only empty, so we don't want to throw a exception in this case
