@@ -15,10 +15,9 @@ if (!function_exists('__')) {
      *
      * @param  string         $text
      * @param  array|string   $replaces
-     * @param  closure        $func
      * @return string
      */
-    function __($text, $replaces = null, $func = null)
+    function __($text, $replaces = null)
     {
         $lang = \Peak\Bedrock\Application::get(\Peak\Common\Language::class);
         return $lang->translate($text, $replaces);
@@ -34,10 +33,9 @@ if (!function_exists('_e')) {
      *
      * @param  string         $text
      * @param  array|string   $replaces
-     * @param  closure        $func
      * @return string
      */
-    function _e($text, $replaces = null, $func = null)
+    function _e($text, $replaces = null)
     {
         $lang = \Peak\Bedrock\Application::get(\Peak\Common\Language::class);
         echo $lang->translate($text, $replaces);
