@@ -40,7 +40,27 @@ class AbilityResolver
      */
     public function can($perm)
     {
-        return $this->_can($perm);
+        return $this->handle($perm);
+    }
+
+    /**
+     * Internal method of can()
+     *
+     * @param  integer $permission
+     * @return boolean
+     */
+    protected function handle($perm)
+    {
+        $perm = new Permission($perm);
+
+        // bypass
+        if ($this->user instanceof SuperUser) {
+            return true;
+        }
+
+        $ability_perm = $this->abilityPermission();
+
+        return ($ability_perm >= $perm->get());
     }
 
     /**
@@ -71,25 +91,5 @@ class AbilityResolver
         }
 
         return $iperm;
-    }
-
-    /**
-     * Internal method of can()
-     *
-     * @param  integer $permission
-     * @return boolean
-     */
-    protected function _can($perm)
-    {
-        $perm = new Permission($perm);
-
-        // bypass
-        if ($this->user instanceof SuperUser) {
-            return true;
-        }
-
-        $ability_perm = $this->abilityPermission();
-
-        return ($ability_perm >= $perm->get());
     }
 }
