@@ -47,7 +47,7 @@ class Ini extends DotNotationCollection
         //(php 5.2.7+) since parse_ini_file() can return false in case of error
         //but this can mean also that the file is only empty, so we don't want to throw a exception in this case
         
-        if ((version_compare(PHP_VERSION, '5.2.7') >= 0) && ($ini == false)) {
+        if ((version_compare(PHP_VERSION, '5.2.7') >= 0) && ($ini === false)) {
             //check if the file just empty
             if (trim(file_get_contents($file)) !== '') {
                 throw new Exception(__CLASS__.': syntax error(s) in your configuration file');
