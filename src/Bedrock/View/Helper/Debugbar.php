@@ -172,45 +172,6 @@ class Debugbar extends Debug
         
         echo '</div>';
 
-        //zend db profiler
-        if ($zdb_profiler !== false) {
-            echo '<div class="window large" id="pkdb_database_window">';
-            echo '<h2>Database</h2><strong>'.$nb_query.' in '.$nb_query_chrono.'<br />';
-
-            if ($zdb_profiler->getTotalNumQueries() > 0) {
-
-                $longest_query_chrono  = 0;
-                $longest_query = null;
-
-                if (!empty($zdb_profiler->getQueryProfiles())) {
-
-                    foreach ($zdb_profiler->getQueryProfiles() as $i => $query) {
-                        if ($query->getElapsedSecs() > $longest_query_chrono) {
-                            $longest_query_chrono = $query->getElapsedSecs();
-                            $longest_query = htmlentities($query->getQuery());
-                            $longest_query_no = $i + 1;
-                        }
-                    }
-
-                    $longest_query_chrono = round($longest_query_chrono * 1000,2);
-                    $longest_query_percent = round($longest_query_chrono / ($zdb_profiler->getTotalElapsedSecs() * 1000) * 100);
-                    $average = round(($zdb_profiler->getTotalElapsedSecs() /$zdb_profiler->getTotalNumQueries()) *1000, 3);
-        
-                    echo 'Average: '.$average.' ms / query<br />';
-                    echo 'Longest query is #'.$longest_query_no.' with '.$longest_query_chrono.' ms ('.$longest_query_percent.'%)</strong><br /><br />';
-
-                    foreach ($zdb_profiler->getQueryProfiles() as $i => $query) {
-                        $query_chrono = $query->getElapsedSecs() * 1000;
-                        $query_percent = round(($query_chrono / 10) / ($zdb_profiler->getTotalElapsedSecs()));
-                        $query = htmlentities($query->getQuery());
-
-                        echo 'Query #'.($i + 1).' &nbsp;&nbsp;&nbsp; '.round($query_chrono,3).' ms ('.$query_percent.'%)<br /><br /><pre>' . $query . '</pre>';
-                    }
-                }
-            }
-            echo '</div>';
-        }
-
         //console log (see method log())
         if (!empty($this->_console_log)) {
             echo '<div class="window resizable" id="pkdb_consolelog_window">';
