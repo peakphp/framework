@@ -6,12 +6,15 @@
 |--------------------------------------------------------------------------
 */
 
+use Peak\Bedrock\Application;
+use Peak\Common\Language;
+
 /**
  * __()
  */
 if (!function_exists('__')) {
     /**
-     * Shortcut of Peak\Lang::__()
+     * Shortcut for $lang->translate(..)
      *
      * @param  string         $text
      * @param  array|string   $replaces
@@ -19,8 +22,11 @@ if (!function_exists('__')) {
      */
     function __($text, $replaces = null)
     {
-        $lang = \Peak\Bedrock\Application::get(\Peak\Common\Language::class);
-        return $lang->translate($text, $replaces);
+        if (Application::container()->has(Language::class)) {
+            $lang = Application::get(Language::class);
+            $text = $lang->translate($text, $replaces);
+        }
+        return $text;
     }
 }
 
@@ -29,16 +35,15 @@ if (!function_exists('__')) {
  */
 if (!function_exists('_e')) {
     /**
-     * Shortcut of Peak\Lang::_e()
+     * Shortcut for echo $lang->translate(..)
      *
      * @param  string         $text
      * @param  array|string   $replaces
-     * @return string
      */
     function _e($text, $replaces = null)
     {
-        $lang = \Peak\Bedrock\Application::get(\Peak\Common\Language::class);
-        echo $lang->translate($text, $replaces);
+        $text = __($text, $replaces);
+        echo $text;
     }
 }
 
@@ -104,7 +109,7 @@ if (!function_exists('config')) {
      */
     function config($path = null, $value = null)
     {
-        return \Peak\Bedrock\Application::conf($path, $value);
+        return Application::conf($path, $value);
     }
 }
 
@@ -120,7 +125,7 @@ if (!function_exists('session')) {
      */
     function session($path = null, $value = null)
     {
-        $container = \Peak\Bedrock\Application::container();
+        $container = Application::container();
         $sess = $container->get('Peak\Config\Session');
 
         if (!$container->has('Peak\Config\Session')) {
