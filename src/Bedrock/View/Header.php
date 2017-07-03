@@ -125,7 +125,7 @@ class Header
             echo $this->content;
         }
         if ($die) {
-            die();
+            $this->stop();
         }
     }
 
@@ -236,7 +236,7 @@ class Header
             if ($die === true) {
                 $die = null;
             }
-            die($die);
+            $this->stop($die);
         }
         
         return $this;
@@ -300,7 +300,7 @@ class Header
             // output file content
             readfile($filepath);
 
-            die();
+            $this->stop();
         }
         return $this;
     }
@@ -346,8 +346,17 @@ class Header
             // output file content
             readfile($tmpfile);
 
-            die();
+            $this->stop();
         }
         return $this;
+    }
+
+    /**
+     * Stop php
+     * @param null $message
+     */
+    protected function stop($message = null)
+    {
+        die($message);
     }
 }
