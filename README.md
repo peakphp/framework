@@ -23,6 +23,7 @@ Requirements:
     - Events Dispatcher
     - App Kernel
     - App Modules Kernel
+    - Console application
     - Ownership and Permissions
     - Role-based access control
     - Templating
