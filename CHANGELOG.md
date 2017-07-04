@@ -2,6 +2,8 @@ VERSION 2.14.0
 --------------
 Release Date: ?
 
+ - added Peak\Common\TimeExpression
+
 VERSION 2.13.0
 --------------
 Release Date: 2017-07-03
