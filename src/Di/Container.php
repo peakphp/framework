@@ -3,9 +3,7 @@
 namespace Peak\Di;
 
 use Peak\Common\Collection;
-use Peak\Di\ClassResolver;
-use Peak\Di\ClassInstantiator;
-use Peak\Di\ContainerInterface;
+use \Exception;
 
 /**
  * Dependencies Container
@@ -143,6 +141,10 @@ class Container implements ContainerInterface
      */
     public function add($object, $alias = null)
     {
+        if (!is_object($object)) {
+            throw new Exception(__CLASS__.': add() first argument must be an object.');
+        }
+
         $class = get_class($object);
         $this->instances[$class] = $object;
 
