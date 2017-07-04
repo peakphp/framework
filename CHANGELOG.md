@@ -3,6 +3,7 @@ VERSION 2.14.0
 Release Date: ?
 
  - added Peak\Common\TimeExpression
+ - added an exception in Peak\Di\Container::add()
 
 VERSION 2.13.0
 --------------
