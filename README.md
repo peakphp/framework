@@ -35,8 +35,8 @@ Requirements:
 
 ### External components
 
-   - [fpdo/fluentpdo](https://github.com/envms/fluentpdo)
    - [symfony/console](https://github.com/symfony/console)
+   - [doctrine/dbal](https://github.com/doctrine/dbal)
    
 ### Api
 
