@@ -129,7 +129,7 @@ class TimeExpression
      */
     public function toDate($format = 'Y-m-d H:i:s')
     {
-        return date($format, time() + $this->time);
+        return date($format, $this->time);
     }
 
     /**
