@@ -11,7 +11,6 @@ use \Exception;
 
 abstract class CronCommand extends CommandWithDb
 {
-
     /**
      * Initializes the command just after the input has been validated.
      *
