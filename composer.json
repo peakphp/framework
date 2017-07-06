@@ -18,6 +18,7 @@
     "require": {
         "php": ">=5.6.4",
         "symfony/console": "3.*",
+        "symfony/process": "3.*",
         "doctrine/dbal": "2.5.*"
     },
     "require-dev": {
