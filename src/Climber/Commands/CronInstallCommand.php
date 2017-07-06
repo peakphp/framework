@@ -3,6 +3,7 @@
 namespace Peak\Climber\Commands;
 
 use Peak\Climber\Application;
+use Peak\Climber\Cron\Cron;
 use Peak\Climber\Cron\CronCommand;
 use Peak\Climber\Cron\InstallDatabase;
 use Symfony\Component\Console\Input\InputInterface;
@@ -33,7 +34,7 @@ class CronInstallCommand extends CronCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        if (!$this->isInstalled()) {
+        if (!Cron::isInstalled($this->conn)) {
             $output->writeln('Installing cron system...');
             new InstallDatabase($this->conn, Application::conf('crondb.driver'));
             return $output->writeln('Done!');
