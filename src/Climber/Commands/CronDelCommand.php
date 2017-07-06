@@ -31,7 +31,7 @@ class CronDelCommand extends CronCommand
 
             ->setDefinition(
                 new InputDefinition([
-                    new InputArgument('needle', InputArgument::REQUIRED),
+                    new InputArgument('needle', InputArgument::OPTIONAL),
                     new InputOption('all', '', InputOption::VALUE_NONE, 'delete all cron jobs'),
                     new InputOption('force', 'f', InputOption::VALUE_NONE, 'force delete (skip confirmation)'),
                 ])
@@ -46,8 +46,25 @@ class CronDelCommand extends CronCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $search = $input->getArgument('needle');
+        $needle = $input->getArgument('needle');
         $force = $input->getOption('force');
+        $all = $input->getOption('all');
+
+        // delete all
+        if ($all) {
+            $answer = true;
+            // ask confirmation if no --force option
+            if ($force !== true) {
+                $io = new SymfonyStyle($input, $output);
+                $answer = $io->confirm('Are you sure about deleting all cron jobs', false);
+            }
+
+            $output->writeln('Deleting all cron jobs...');
+            $this->conn->executeQuery('DELETE FROM climber_cron');
+            return $output->writeln('Done!');
+        } elseif (empty($needle)) {
+            return $output->writeln('You must specify what you want to delete...');
+        }
 
         $qb = $this->conn->createQueryBuilder();
 
@@ -55,22 +72,22 @@ class CronDelCommand extends CronCommand
             ->from('climber_cron')
             ->where('`name` = ?')
             ->orWhere('`id` = ?')
-            ->setParameter(0, $search)
-            ->setParameter(1, $search);
+            ->setParameter(0, $needle)
+            ->setParameter(1, $needle);
 
         $result = $qb->execute();
         $count = $result->rowCount();
 
         if($count == 0) {
-            return $output->writeln('No cron job found for '.escapeshellarg($search));
+            return $output->writeln('No cron job found for '.escapeshellarg($needle));
         } elseif($count > 1) {
 
-            $output->writeln($count.' results found for '.escapeshellarg($search).'. Specify the id of you cron job you want to remove instead...');
+            $output->writeln($count.' results found for '.escapeshellarg($needle).'. Specify the id of you cron job you want to remove instead...');
 
             $command = $this->getApplication()->find('cron:list');
             return $command->run(new ArrayInput([
                 'command' => 'cron:list',
-                'needle' => $search
+                'needle' => $needle
             ]), $output);
         }
 
