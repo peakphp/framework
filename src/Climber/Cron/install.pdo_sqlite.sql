@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS `climber_cron` (
     `interval`	INTEGER,
     `last_execution`	INTEGER,
     `next_execution`	INTEGER,
-    `enabled`	INTEGER DEFAULT 0
+    `enabled`	INTEGER DEFAULT 1
 );
 
 CREATE TABLE IF NOT EXISTS `climber_console` (
