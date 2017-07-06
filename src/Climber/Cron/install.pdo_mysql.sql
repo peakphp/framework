@@ -6,11 +6,12 @@ CREATE TABLE IF NOT EXISTS `climber_cron` (
     `error`	TINYINT DEFAULT 0,
     `interval`	INTEGER,
     `last_execution`	INTEGER,
-    `next_execution`	INTEGER
+    `next_execution`	INTEGER,
+    `enabled`	TINYINT DEFAULT 0
 );
 
 CREATE TABLE IF NOT EXISTS `climber_console` (
     `id` INTEGER PRIMARY KEY AUTO_INCREMENT,
     `data` TEXT,
-    `dt_created` INTEGER
+    `created_at` INTEGER
 );
