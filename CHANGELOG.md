@@ -4,6 +4,8 @@ Release Date: ?
 
  - added Peak\Common\TimeExpression
  - added an exception in Peak\Di\Container::add()
+ - added cron job system for Peak\Climber component
+ - added Doctrine DBAL component (used by cron commands in Peak\Climber)
 
 VERSION 2.13.0
 --------------
