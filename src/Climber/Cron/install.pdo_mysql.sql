@@ -1,0 +1,16 @@
+CREATE TABLE IF NOT EXISTS `climber_cron` (
+    `id` INTEGER PRIMARY KEY AUTO_INCREMENT,
+    `name` varchar(100),
+    `cmd`	TEXT,
+    `repeat` INTEGER DEFAULT 0,
+    `error`	TINYINT DEFAULT 0,
+    `interval`	INTEGER,
+    `last_execution`	INTEGER,
+    `next_execution`	INTEGER
+);
+
+CREATE TABLE IF NOT EXISTS `climber_console` (
+    `id` INTEGER PRIMARY KEY AUTO_INCREMENT,
+    `data` TEXT,
+    `dt_created` INTEGER
+);
