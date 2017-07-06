@@ -36,6 +36,7 @@ Requirements:
 ### External components
 
    - [symfony/console](https://github.com/symfony/console)
+   - [symfony/process](https://github.com/symfony/process)
    - [doctrine/dbal](https://github.com/doctrine/dbal)
    
 ### Api
