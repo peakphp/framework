@@ -23,6 +23,8 @@ class RegisterCommands
     {
         $this->app = $app;
 
+        new Bootstrap($this->app->conf('crondb'));
+
         $this->add([
             CronAddCommand::class,
             CronDelCommand::class,
