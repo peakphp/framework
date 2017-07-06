@@ -23,11 +23,11 @@ class CronDelCommand extends CronCommand
             ->setName('cron:del')
 
             // the short description shown while running "php bin/console list"
-            ->setDescription('List climber cron jobs')
+            ->setDescription('Delete cron job(s)')
 
             // the full command description shown when running the command with
             // the "--help" option
-            ->setHelp('This will list all climber cron jobs')
+            ->setHelp('Allow to delete a specific cron job or all cron jobs at once')
 
             ->setDefinition(
                 new InputDefinition([
