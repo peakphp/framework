@@ -16,7 +16,7 @@ abstract class CommandWithDb extends Command
      * Constructor.
      * @param Connection $conn
      */
-    public function __construct(Connection $conn)
+    public function __construct(Connection $conn = null)
     {
         parent::__construct();
         $this->conn = $conn;
