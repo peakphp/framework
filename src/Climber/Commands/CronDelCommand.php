@@ -83,11 +83,13 @@ class CronDelCommand extends CommandWithDb
 
         $answer = true;
 
+        // ask confirmation if no --force option
         if ($force !== true) {
             $io = new SymfonyStyle($input, $output);
             $answer = $io->confirm('Are you sure about deleting cron #'.$data['id'].$data['name'],false);
         }
 
+        // delete the cron
         if ($answer === true) {
             $this->conn->delete('climber_cron', ['id' => $data['id']]);
             $output->writeln('cron #'.$data['id'].$data['name'].' removed');
