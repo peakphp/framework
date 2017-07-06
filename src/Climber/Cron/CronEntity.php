@@ -80,11 +80,11 @@ class CronEntity
     }
 
     /**
-     * Get readable repeat status
-     *
-     * @param $data
-     * @return string
-     */
+ * Get readable repeat status
+ *
+ * @param $data
+ * @return string
+ */
     protected function fieldRepeat($data)
     {
         if ($data == -1) {
@@ -93,5 +93,19 @@ class CronEntity
             return 'always';
         }
         return $data.' time'.(($data > 1) ? 's' : '');
+    }
+
+    /**
+     * Get readable enabled status
+     *
+     * @param $data
+     * @return string
+     */
+    protected function fieldEnabled($data)
+    {
+        if ($data == 0) {
+            return 'no';
+        }
+        return 'yes';
     }
 }
