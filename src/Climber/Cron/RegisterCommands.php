@@ -5,6 +5,7 @@ namespace Peak\Climber\Cron;
 use Peak\Climber\Application;
 use Peak\Climber\Commands\CronAddCommand;
 use Peak\Climber\Commands\CronDelCommand;
+use Peak\Climber\Commands\CronInstallCommand;
 use Peak\Climber\Commands\CronListCommand;
 
 class RegisterCommands
@@ -24,8 +25,9 @@ class RegisterCommands
 
         $this->add([
             CronAddCommand::class,
-            CronListCommand::class,
             CronDelCommand::class,
+            CronInstallCommand::class,
+            CronListCommand::class,
         ]);
     }
 
