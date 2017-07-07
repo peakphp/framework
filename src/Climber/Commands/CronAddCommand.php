@@ -29,7 +29,7 @@ class CronAddCommand extends CronCommand
                 new InputDefinition([
                     new InputOption('name', null, InputOption::VALUE_REQUIRED, 'Cron internal name'),
                     new InputOption('sys', 's', InputOption::VALUE_NONE, 'Cron command is a system command'),
-                    new InputOption('repeat', 'r', InputArgument::OPTIONAL,'Indicate if command should be repeatable (0=no, *=infinite, x=x times)'),
+                    new InputOption('repeat', 'r', InputOption::VALUE_OPTIONAL,'Indicate if command should be repeatable (0=no, *=infinite, x=x times)'),
                     new InputOption('interval', 'i', InputOption::VALUE_REQUIRED, 'Indicate the interval in sec between repeat if apply. Format example: 600, , 2d, 3h, 20m, 2y'),
                     new InputOption('cmd', 'c', InputOption::VALUE_REQUIRED, 'The command to execute.'),
                 ])
@@ -46,7 +46,7 @@ class CronAddCommand extends CronCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $command = $input->getOption('cmd');
-        $repeat = $input->getOption('repeat');
+        $repeat = trim(strtolower($input->getOption('repeat')));
         $interval = $input->getOption('interval');
         $name = $input->getOption('name');
         $sys_cmd = $input->getOption('sys');
@@ -55,22 +55,22 @@ class CronAddCommand extends CronCommand
             return $output->writeln('<info>Command is missing (-c, --cmd)... </info>');
         }
 
-        if (trim($repeat) === '' || strtolower($repeat) === 'no') {
+        if (in_array($repeat, ['no', 'n', '-1'])) {
             $repeat = -1;
-        } elseif(strtolower($repeat) === 'yes') {
+        } elseif(empty($interval) || in_array($repeat, ['yes', 'y', '*', ''])) {
             $repeat = 0;
         } elseif(!is_numeric($repeat)) {
             return $output->writeln('[repeat] option value is invalid');
         }
 
-        if (empty($interval) && $repeat != -1) {
+        if ($repeat >= 0 && empty($interval)) {
             return $output->writeln('[interval] must be specified');
         }
 
         $next_execution = null;
         if(!empty($interval)) {
             $interval = (new TimeExpression($interval))->toSeconds();
-            $next_execution = microtime() + $interval;
+            $next_execution = time() + $interval;
         }
 
 
