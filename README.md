@@ -24,6 +24,7 @@ Requirements:
     - App Kernel
     - App Modules Kernel
     - Console application
+    - Console Cron jobs system
     - Ownership and Permissions
     - Role-based access control
     - Templating
