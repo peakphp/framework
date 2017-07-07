@@ -28,6 +28,7 @@ class CronAddCommand extends CronCommand
             ->setDefinition(
                 new InputDefinition([
                     new InputOption('name', null, InputOption::VALUE_REQUIRED, 'Cron internal name'),
+                    new InputOption('sys', 's', InputOption::VALUE_NONE, 'Cron command is a system command'),
                     new InputOption('repeat', 'r', InputArgument::OPTIONAL,'Indicate if command should be repeatable (0=no, *=infinite, x=x times)'),
                     new InputOption('interval', 'i', InputOption::VALUE_REQUIRED, 'Indicate the interval in sec between repeat if apply. Format example: 600, , 2d, 3h, 20m, 2y'),
                     new InputOption('cmd', 'c', InputOption::VALUE_REQUIRED, 'The command to execute.'),
@@ -48,6 +49,7 @@ class CronAddCommand extends CronCommand
         $repeat = $input->getOption('repeat');
         $interval = $input->getOption('interval');
         $name = $input->getOption('name');
+        $sys_cmd = $input->getOption('sys');
 
         if (empty($command)) {
             return $output->writeln('<info>Command is missing (-c, --cmd)... </info>');
@@ -75,10 +77,12 @@ class CronAddCommand extends CronCommand
         $final = [
             '`name`' => $name,
             '`cmd`' => $command,
+            '`sys_cmd`' => $sys_cmd,
             '`repeat`' => $repeat,
             '`interval`' => $interval,
             '`next_execution`' => $next_execution
         ];
+
 
         $this->conn->insert('climber_cron', $final);
 
