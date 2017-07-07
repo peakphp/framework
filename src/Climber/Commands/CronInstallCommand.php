@@ -6,7 +6,9 @@ use Peak\Climber\Application;
 use Peak\Climber\Cron\Cron;
 use Peak\Climber\Cron\CronCommand;
 use Peak\Climber\Cron\InstallDatabase;
+use Symfony\Component\Console\Input\InputDefinition;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class CronInstallCommand extends CronCommand
@@ -22,7 +24,13 @@ class CronInstallCommand extends CronCommand
 
             // the full command description shown when running the command with
             // the "--help" option
-            ->setHelp('This will install and/or check if cron tables are installed correctly.');
+            ->setHelp('This will install and/or check if cron tables are installed correctly.')
+
+            ->setDefinition(
+                new InputDefinition([
+                    new InputOption('reinstall', 'r', InputOption::VALUE_NONE, 'Force re-installation if tables exists'),
+                ])
+            );
     }
 
     /**
@@ -34,6 +42,12 @@ class CronInstallCommand extends CronCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $reinstall = $input->getOption('reinstall');
+
+        if ($reinstall) {
+            $this->conn->executeQuery('DROP TABLE IF EXISTS climber_cron, climber_console');
+        }
+
         if (!Cron::isInstalled($this->conn)) {
             $output->writeln('Installing cron system...');
             new InstallDatabase($this->conn, Application::conf('crondb.driver'));
