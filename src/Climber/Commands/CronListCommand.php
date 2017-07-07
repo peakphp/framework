@@ -4,6 +4,7 @@ namespace Peak\Climber\Commands;
 
 use Peak\Climber\Cron\CronEntity;
 use Peak\Climber\Cron\CronCommand;
+use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputDefinition;
@@ -30,6 +31,7 @@ class CronListCommand extends CronCommand
 
             ->setDefinition(
                 new InputDefinition([
+                    new InputOption('table', 't', InputOption::VALUE_NONE, 'Table list view'),
                     new InputOption('compact', 'c', InputOption::VALUE_NONE, 'Compact list view'),
                     new InputArgument('needle', InputArgument::OPTIONAL),
                 ])
@@ -38,11 +40,13 @@ class CronListCommand extends CronCommand
 
     /**
      * Process list
+     *
      * @param InputInterface $input
      * @param OutputInterface $output
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $table = $input->getOption('table');
         $compact = $input->getOption('compact');
         $search = $input->getArgument('needle');
 
@@ -69,13 +73,13 @@ class CronListCommand extends CronCommand
         }
 
         $header = $count.' cron job'.(($count>1)?'s':'').':';
-        $output->writeln([
-            $header,
-            str_pad('',strlen($header),'-'),
-        ]);
+        $output->writeln($header);
+
+        if ($table === true) {
+            return $this->renderTable($result, $output);
+        }
 
         foreach ($result as $cron) {
-            ++$count;
             if ($compact === true) {
                 $this->renderCompactCronInfos($cron, $output);
             } else {
@@ -121,6 +125,34 @@ class CronListCommand extends CronCommand
             $infos[] = ''.($key).': '.$value;
         }
 
-        $output->writeln(' >>> '.implode(' ', $infos));
+        $output->writeln(' >>> '.implode(' | ', $infos));
+    }
+
+    /**
+     * Render a table list
+     *
+     * @param $data
+     * @param OutputInterface $output
+     */
+    protected function renderTable($data, OutputInterface $output)
+    {
+        $header = [];
+        $rows = [];
+        foreach ($data as $index => $row) {
+            $cron_entity = new CronEntity($row);
+            foreach($row as $key => $data) {
+                if (!in_array($key, $header)) {
+                    $header[] = $key;
+                }
+                $row[$key] = $cron_entity->$key;
+            }
+            $rows[] = array_values($row);
+        }
+
+        $table = new Table($output);
+        $table
+            ->setHeaders($header)
+            ->setRows($rows);
+        $table->render();
     }
 }
