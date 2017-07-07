@@ -5,7 +5,8 @@ Release Date: ?
  - added Peak\Common\TimeExpression
  - added an exception in Peak\Di\Container::add()
  - added cron job system for Peak\Climber component
- - added Doctrine DBAL component (used by cron commands in Peak\Climber)
+ - added doctrine/dbal component
+ - added symfony/process component
 
 VERSION 2.13.0
 --------------
@@ -14,7 +15,7 @@ Release Date: 2017-07-03
  - added callable support to Peak\Config\ConfigLoader
  - added setSuffix() and setPrefix() to Peak\Common\ClassFinder
  - moved illuminate/database and illuminate/events as default dependencies to peak default application
- - added symfony/console to core
+ - added symfony/console component
  - added method asClosure() in Peak\Config\ConfigLoader
  - added support of Yaml config for Peak\Config\ConfigLoader
  - container is now passed to the constructor instead of hard-coded in Peak\Bedrock\Application\Bootstrapper
