@@ -41,7 +41,6 @@ class CronAddCommand extends CronCommand
      *
      * @param InputInterface $input
      * @param OutputInterface $output
-     * @return mixed
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
@@ -60,19 +59,19 @@ class CronAddCommand extends CronCommand
         } elseif(empty($interval) || in_array($repeat, ['yes', 'y', '*', ''])) {
             $repeat = 0;
         } elseif(!is_numeric($repeat)) {
-            return $output->writeln('[repeat] option value is invalid');
+            return $output->writeln('[-r|--repeat] option value is invalid');
         }
 
         if ($repeat >= 0 && empty($interval)) {
-            return $output->writeln('[interval] must be specified');
+            return $output->writeln('[-i|--interval] must be specified');
         }
 
         $next_execution = null;
         if(!empty($interval)) {
-            $interval = (new TimeExpression($interval))->toSeconds();
+            $interval_exp = (new TimeExpression($interval));
+            $interval = $interval_exp->toSeconds();
             $next_execution = time() + $interval;
         }
-
 
         $final = [
             '`name`' => $name,
@@ -86,6 +85,14 @@ class CronAddCommand extends CronCommand
 
         $this->conn->insert('climber_cron', $final);
 
-        $output->writeln('Command #'.$this->conn->lastInsertId().' add to cron job!');
+        $output->writeln('Cron job #'.$this->conn->lastInsertId().' added!');
+
+        if($repeat == 0) {
+            $output->writeln('This cron job will be executed indefinitely at interval of '.$interval_exp);
+        } elseif($repeat > 0) {
+            $output->writeln('This cron job will be executed '.$repeat.' time(s) at interval of '.$interval_exp);
+        }
+
+        $output->writeln('Next execution is planned at '.(date('Y-m-d H:i:s', $next_execution)));
     }
 }
