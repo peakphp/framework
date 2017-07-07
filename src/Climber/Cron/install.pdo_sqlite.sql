@@ -2,6 +2,7 @@ CREATE TABLE IF NOT EXISTS `climber_cron` (
     `id` INTEGER PRIMARY KEY AUTOINCREMENT,
     `name` TEXT,
     `cmd`	TEXT,
+    `sys_cmd` INTEGER DEFAULT 0,
     `repeat` INTEGER DEFAULT 0,
     `error`	INTEGER DEFAULT 0,
     `interval`	INTEGER,
