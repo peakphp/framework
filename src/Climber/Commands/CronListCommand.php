@@ -59,8 +59,8 @@ class CronListCommand extends CronCommand
                 ->setParameter(1, $search);
         }
 
-        $result = $qb->execute();
-        $count = $result->rowCount();
+        $result = $qb->execute()->fetchAll();
+        $count = count($result);
 
         if($count == 0 && !empty($search)) {
             return $output->writeln('No cron job found for '.escapeshellarg($search));
