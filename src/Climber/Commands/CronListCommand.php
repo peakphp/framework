@@ -31,7 +31,7 @@ class CronListCommand extends CronCommand
 
             ->setDefinition(
                 new InputDefinition([
-                    new InputOption('table', 't', InputOption::VALUE_NONE, 'Table list view'),
+                    new InputOption('list', 'l', InputOption::VALUE_NONE, 'List view'),
                     new InputOption('compact', 'c', InputOption::VALUE_NONE, 'Compact list view'),
                     new InputArgument('needle', InputArgument::OPTIONAL),
                 ])
@@ -46,7 +46,7 @@ class CronListCommand extends CronCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $table = $input->getOption('table');
+        $list = $input->getOption('list');
         $compact = $input->getOption('compact');
         $search = $input->getArgument('needle');
 
@@ -75,15 +75,13 @@ class CronListCommand extends CronCommand
         $header = $count.' cron job'.(($count>1)?'s':'').':';
         $output->writeln($header);
 
-        if ($table === true) {
-            return $this->renderTable($result, $output);
-        }
-
         foreach ($result as $cron) {
             if ($compact === true) {
                 $this->renderCompactCronInfos($cron, $output);
-            } else {
+            } elseif ($list === true) {
                 $this->renderCronInfos($cron, $output);
+            } else {
+                return $this->renderTable($result, $output);
             }
         }
     }
