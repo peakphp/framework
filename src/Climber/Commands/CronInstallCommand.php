@@ -45,7 +45,8 @@ class CronInstallCommand extends CronCommand
         $reinstall = $input->getOption('reinstall');
 
         if ($reinstall) {
-            $this->conn->executeQuery('DROP TABLE IF EXISTS climber_cron, climber_console');
+            $this->conn->executeQuery('DROP TABLE IF EXISTS climber_cron');
+            $this->conn->executeQuery('DROP TABLE IF EXISTS climber_console');
         }
 
         if (!Cron::isInstalled($this->conn)) {
