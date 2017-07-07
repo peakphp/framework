@@ -33,6 +33,8 @@ class CronListCommand extends CronCommand
                 new InputDefinition([
                     new InputOption('list', 'l', InputOption::VALUE_NONE, 'List view'),
                     new InputOption('compact', 'c', InputOption::VALUE_NONE, 'Compact list view'),
+                    new InputOption('disabled', null, InputOption::VALUE_NONE, 'Show only disabled'),
+                    new InputOption('enabled', null, InputOption::VALUE_NONE, 'Show only enabled'),
                     new InputArgument('needle', InputArgument::OPTIONAL),
                 ])
             );
@@ -48,7 +50,9 @@ class CronListCommand extends CronCommand
     {
         $list = $input->getOption('list');
         $compact = $input->getOption('compact');
-        $search = $input->getArgument('needle');
+        $disabled = $input->getOption('disabled');
+        $enabled = $input->getOption('enabled');
+        $needle = $input->getArgument('needle');
 
         $qb = $this->conn->createQueryBuilder();
 
@@ -56,20 +60,31 @@ class CronListCommand extends CronCommand
             ->from('climber_cron')
             ->orderBy('id');
 
-        if (!empty($search)) {
-            $qb->where('`name` = ?')
-                ->orWhere('`id` = ?')
-                ->setParameter(0, $search)
-                ->setParameter(1, $search);
+        if (!empty($needle)) {
+            $qb->where(
+                $qb->expr()->orX(
+                    $qb->expr()->eq('`name`', ':search'),
+                    $qb->expr()->eq('`id`', ':search')
+                )
+            )
+            ->setParameter('search', $needle);
+        }
+
+        if ($disabled === true) {
+            $qb->where('enabled = 0');
+        }
+
+        if ($enabled === true) {
+            $qb->where('enabled = 1');
         }
 
         $result = $qb->execute()->fetchAll();
         $count = count($result);
 
-        if($count == 0 && !empty($search)) {
-            return $output->writeln('No cron job found for '.escapeshellarg($search));
+        if($count == 0 && !empty($needle)) {
+            return $output->writeln('No cron job found for '.escapeshellarg($needle));
         } elseif($count == 0) {
-            return $output->writeln('No cron job yet...');
+            return $output->writeln('No cron job found...');
         }
 
         $header = $count.' cron job'.(($count>1)?'s':'').':';
