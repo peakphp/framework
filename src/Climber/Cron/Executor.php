@@ -57,15 +57,27 @@ class Executor
             ->from('climber_cron')
             ->where('enabled = 1');
 
-        $result = $qb->execute();
-        $count = $result->rowCount();
+        $result = $qb->execute()->fetchAll();
+        $count = count($result);
 
-        $time = round(microtime(true));
+        $time = time();
+
         //echo date('Y-m-d H:i:s', $time);
         foreach ($result as $cron) {
+            $process = false;
             if ($cron['repeat'] == -1 && empty($cron['last_execution'])) {
-                $this->processCron($cron);
-            } elseif ($cron['repeat'] == 0 && ( ($cron['interval'] + $time) <= $cron['last_execution'] ) ) {
+                $process = true;
+            } elseif ($cron['repeat'] == 0) {
+                if (($cron['interval'] + $cron['last_execution']) <= $time) {
+                    $process = true;
+                } elseif (empty($cron['last_execution'])) {
+                    $process = true;
+                }
+            } elseif ($cron['repeat'] > 0 && (($cron['interval'] + $cron['last_execution']) <= $time)) {
+                $process = true;
+            }
+
+            if ($process) {
                 $this->processCron($cron);
             }
         }
@@ -77,12 +89,12 @@ class Executor
 
         $update = [
             'last_execution' => time(),
-            'error' => 0
+            'error' => 0,
+            'next_execution' => time() + $cron['interval'],
         ];
 
         if ($cron['repeat'] > 1) {
             --$cron['repeat'];
-            $update['next_execution'] = time() + $cron['interval'];
         } elseif($cron['repeat'] == 1) {
             $cron['repeat'] = -1;
         }
