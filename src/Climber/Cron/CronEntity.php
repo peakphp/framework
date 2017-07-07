@@ -3,8 +3,6 @@
 namespace Peak\Climber\Cron;
 
 use Peak\Common\TimeExpression;
-use \ArrayIterator;
-use \IteratorAggregate;
 
 class CronEntity
 {
@@ -102,6 +100,39 @@ class CronEntity
      * @return string
      */
     protected function fieldEnabled($data)
+    {
+        return $this->yesNo($data);
+    }
+
+    /**
+     * Get readable sys command flag
+     *
+     * @param $data
+     * @return string
+     */
+    protected function fieldSys_cmd($data)
+    {
+        return $this->yesNo($data);
+    }
+
+    /**
+     * Get readable error status
+     *
+     * @param $data
+     * @return string
+     */
+    protected function fieldError($data)
+    {
+        return $this->yesNo($data);
+    }
+
+    /**
+     * Yes or no value
+     *
+     * @param $data
+     * @return string
+     */
+    protected function yesNo($data)
     {
         if ($data == 0) {
             return 'no';
