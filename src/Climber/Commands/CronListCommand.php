@@ -31,6 +31,7 @@ class CronListCommand extends CronCommand
 
             ->setDefinition(
                 new InputDefinition([
+                    new InputOption('status', 's', InputOption::VALUE_OPTIONAL, 'Filter by status'),
                     new InputOption('list', 'l', InputOption::VALUE_NONE, 'List view'),
                     new InputOption('compact', 'c', InputOption::VALUE_NONE, 'Compact list view'),
                     new InputOption('disabled', null, InputOption::VALUE_NONE, 'Show only disabled'),
@@ -51,6 +52,7 @@ class CronListCommand extends CronCommand
         $list = $input->getOption('list');
         $compact = $input->getOption('compact');
         $disabled = $input->getOption('disabled');
+        $status = $input->getOption('status');
         $enabled = $input->getOption('enabled');
         $needle = $input->getArgument('needle');
 
@@ -77,6 +79,20 @@ class CronListCommand extends CronCommand
         if ($enabled === true) {
             $qb->where('enabled = 1');
         }
+
+
+        if ($status) {
+            if ($status === true) {
+                $qb->where('`status` is NULL');
+            } else {
+                $qb->where('`status` = :status')
+                    ->setParameter('status', $status);
+            }
+
+
+        }
+
+        echo $qb->getSQL();
 
         $result = $qb->execute()->fetchAll();
         $count = count($result);
@@ -158,6 +174,16 @@ class CronListCommand extends CronCommand
                     $header[] = $key;
                 }
                 $row[$key] = $cron_entity->$key;
+
+                if ($key === 'error') {
+                    $content = explode("\n", $row[$key]);
+                    if (isset($content[0])) {
+                        $row[$key] = $content[0];
+                        if (isset($content[1])) {
+                            $row[$key] .= '...';
+                        }
+                    }
+                }
             }
             $rows[] = array_values($row);
         }
