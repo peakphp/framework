@@ -49,7 +49,7 @@ class CronAddCommand extends CronCommand
         $interval = $input->getOption('interval');
         $name = $input->getOption('name');
         $sys_cmd = $input->getOption('sys');
-
+        
         if (empty($command)) {
             return $output->writeln('<info>Command is missing (-c, --cmd)... </info>');
         }
@@ -64,6 +64,10 @@ class CronAddCommand extends CronCommand
 
         if ($repeat >= 0 && empty($interval)) {
             return $output->writeln('[-i|--interval] must be specified');
+        }
+
+        if(!$sys_cmd) {
+            $sys_cmd = null;
         }
 
         $next_execution = null;
