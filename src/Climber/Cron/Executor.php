@@ -8,6 +8,7 @@ use Peak\Climber\Cron\Exception\TablesNotFoundException;
 use Peak\Di\ContainerInterface;
 use Symfony\Component\Process\Process;
 use Symfony\Component\Process\Exception\ProcessFailedException;
+use \Exception;
 
 class Executor
 {
@@ -89,7 +90,8 @@ class Executor
 
         $update = [
             'last_execution' => time(),
-            'error' => 0,
+            'status' => 1,
+            'error' => '',
             'next_execution' => time() + $cron['interval'],
         ];
 
@@ -112,21 +114,20 @@ class Executor
         echo 'Running cron job #'.$cron['id'].':'."\n";
         echo '$ '.$cmd."\n";
 
-        $process = new Process($cmd);
-        $process->run();
-
-        // executes after the command finishes
-        if (!$process->isSuccessful()) {
-            $update['error'] = 1;
+        try {
+            $process = new Process($cmd);
+            $process->run();
+            if (!$process->isSuccessful()) {
+                $update['status'] = 0;
+                throw new ProcessFailedException($process);
+            }
+        } catch(Exception $e) {
+            $update['error'] = $e->getMessage();
         }
 
         $this->conn->update('climber_cron', $update, [
             'id' => $cron['id']
         ]);
-//
-//        if (!$process->isSuccessful()) {
-//            throw new ProcessFailedException($process);
-//        }
 
         echo $process->getOutput();
     }
