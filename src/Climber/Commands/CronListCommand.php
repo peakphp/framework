@@ -42,7 +42,7 @@ class CronListCommand extends CronCommand
     }
 
     /**
-     * Process list
+     * Process command
      *
      * @param InputInterface $input
      * @param OutputInterface $output
