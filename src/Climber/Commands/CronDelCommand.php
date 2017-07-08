@@ -39,7 +39,7 @@ class CronDelCommand extends CronCommand
     }
 
     /**
-     * Process list
+     * Process command
      *
      * @param InputInterface $input
      * @param OutputInterface $output

@@ -13,6 +13,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class CronInstallCommand extends CronCommand
 {
+    /**
+     * Configure command
+     */
     protected function configure()
     {
         $this

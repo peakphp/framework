@@ -12,6 +12,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class CronAddCommand extends CronCommand
 {
+    /**
+     * Configure command
+     */
     protected function configure()
     {
         $this
@@ -49,7 +52,7 @@ class CronAddCommand extends CronCommand
         $interval = $input->getOption('interval');
         $name = $input->getOption('name');
         $sys_cmd = $input->getOption('sys');
-        
+
         if (empty($command)) {
             return $output->writeln('<info>Command is missing (-c, --cmd)... </info>');
         }
