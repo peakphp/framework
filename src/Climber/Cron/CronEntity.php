@@ -121,9 +121,14 @@ class CronEntity
      * @param $data
      * @return string
      */
-    protected function fieldError($data)
+    protected function fieldStatus($data)
     {
-        return $this->yesNo($data);
+        if (!is_null($data)) {
+            switch ($data) {
+                case 1: return 'success';
+                default: return 'fail';
+            }
+        }
     }
 
     /**
