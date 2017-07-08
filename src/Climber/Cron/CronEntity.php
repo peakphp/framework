@@ -15,7 +15,7 @@ class CronEntity
      * Constructor
      * @param array $cron
      */
-    public function __construct(array $cron)
+    public function __construct(array $cron = [])
     {
         $this->cron = $cron;
     }
@@ -28,8 +28,26 @@ class CronEntity
      */
     public function __get($name)
     {
+        $internal_name = $this->getInternalName($name);
+        $method = 'get'.$internal_name;
         $value = $this->cron[$name];
-        $method = 'field'.ucfirst($name);
+        if (method_exists($this, $method)) {
+            $value = $this->$method($value);
+        }
+        return $value;
+    }
+
+    /**
+     * Set a row field
+     *
+     * @param $name
+     * @param $value
+     * @return mixed
+     */
+    public function __set($name, $value)
+    {
+        $internal_name = $this->getInternalName($name);
+        $method = 'set'.$internal_name;
         if (method_exists($this, $method)) {
             $value = $this->$method($value);
         }
@@ -42,7 +60,7 @@ class CronEntity
      * @param $data
      * @return string
      */
-    protected function fieldInterval($data)
+    protected function getInterval($data)
     {
         if(!empty($data)) {
             $readable_data = (new TimeExpression($data))->toString();
@@ -59,7 +77,7 @@ class CronEntity
      * @param $data
      * @return string
      */
-    protected function fieldLast_execution($data)
+    protected function getLastExecution($data)
     {
         if (!empty($data)) {
             return (new TimeExpression($data))->toDate();
@@ -72,9 +90,9 @@ class CronEntity
      * @param $data
      * @return string
      */
-    protected function fieldNext_execution($data)
+    protected function getNextExecution($data)
     {
-        return $this->fieldLast_execution($data);
+        return $this->getLastExecution($data);
     }
 
     /**
@@ -83,7 +101,7 @@ class CronEntity
  * @param $data
  * @return string
  */
-    protected function fieldRepeat($data)
+    protected function getRepeat($data)
     {
         if ($data == -1) {
             return 'no';
@@ -99,7 +117,7 @@ class CronEntity
      * @param $data
      * @return string
      */
-    protected function fieldEnabled($data)
+    protected function getEnabled($data)
     {
         return $this->yesNo($data);
     }
@@ -110,7 +128,7 @@ class CronEntity
      * @param $data
      * @return string
      */
-    protected function fieldSys_cmd($data)
+    protected function getSysCmd($data)
     {
         return $this->yesNo($data);
     }
@@ -121,7 +139,7 @@ class CronEntity
      * @param $data
      * @return string
      */
-    protected function fieldStatus($data)
+    protected function getStatus($data)
     {
         if (!is_null($data)) {
             switch ($data) {
@@ -143,5 +161,21 @@ class CronEntity
             return 'no';
         }
         return 'yes';
+    }
+
+    /**
+     * Get internal name of a field
+     *
+     * @param $name
+     * @return string
+     */
+    protected function getInternalName($name)
+    {
+        $name_parts = explode('_', $name);
+        $internal_name = '';
+        foreach ($name_parts as $part) {
+            $internal_name .= ucfirst($part);
+        }
+        return $internal_name;
     }
 }
