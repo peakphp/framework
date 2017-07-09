@@ -92,8 +92,6 @@ class CronListCommand extends CronCommand
 
         }
 
-        echo $qb->getSQL();
-
         $result = $qb->execute()->fetchAll();
         $count = count($result);
 
