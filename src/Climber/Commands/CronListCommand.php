@@ -88,8 +88,6 @@ class CronListCommand extends CronCommand
                 $qb->where('`status` = :status')
                     ->setParameter('status', $status);
             }
-
-
         }
 
         $result = $qb->execute()->fetchAll();
