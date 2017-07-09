@@ -8,6 +8,7 @@ use Peak\Climber\Commands\CronDelCommand;
 use Peak\Climber\Commands\CronInstallCommand;
 use Peak\Climber\Commands\CronListCommand;
 use Peak\Climber\Commands\CronRunCommand;
+use Peak\Climber\Commands\CronUpdateCommand;
 
 class RegisterCommands
 {
@@ -28,6 +29,7 @@ class RegisterCommands
 
         $this->add([
             CronAddCommand::class,
+            CronUpdateCommand::class,
             CronDelCommand::class,
             CronListCommand::class,
             CronRunCommand::class,
