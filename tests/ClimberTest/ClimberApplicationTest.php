@@ -9,7 +9,6 @@ use Symfony\Component\Console\Tester\CommandTester;
 
 class ClimberApplicationTest extends TestCase
 {
-
     function testApplication()
     {
         $application = new Application(null, [
@@ -32,7 +31,6 @@ class ClimberApplicationTest extends TestCase
             $error = true;
         }
         $this->assertTrue(isset($error));
-
         $this->assertTrue($application instanceof Application);
         $this->assertTrue(Application::conf() instanceof \Peak\Bedrock\Application\Config);
         $this->assertTrue(Application::conf('php.date.timezone') === "America/Toronto");
