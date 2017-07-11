@@ -31,7 +31,7 @@ class ClimberApplicationTest extends TestCase
             'env' => 'dev',
             'conf' => [
                 FIXTURES_PATH . '/config/cli.yml',
-                FIXTURES_PATH . '/config/cron.database3.php',
+                FIXTURES_PATH . '/config/cron.database2.php',
             ]
         ]);
     }
@@ -97,20 +97,16 @@ class ClimberApplicationTest extends TestCase
      */
     function testConnectionFail()
     {
-        $app = $this->appNoDatabase();
+        $app = $this->appNoConnection();
 
         try {
             new RegisterCommands($app);
             $addcommand = Application::container()->instantiate(CronAddCommand::class);
             $commandTester = new CommandTester($addcommand);
             $commandTester->execute([]);
-
-
         } catch(Exception $e) {
             $error = $e;
         }
-
-        //print_r(get_class($e));
 
         $this->assertTrue(isset($error));
         $this->assertTrue($error instanceof ConnectionException);
@@ -121,6 +117,12 @@ class ClimberApplicationTest extends TestCase
      */
     function testTablesNotFoundException()
     {
+        // delete sqlite file before
+        $sqlite_file = FIXTURES_PATH.'/database/cron.sqlite';
+        if (file_exists($sqlite_file)) {
+            unlink($sqlite_file);
+        }
+
         $app = $this->appNoTables();
 
         try {
@@ -128,8 +130,6 @@ class ClimberApplicationTest extends TestCase
             $addcommand = Application::container()->instantiate(CronAddCommand::class);
             $commandTester = new CommandTester($addcommand);
             $commandTester->execute([]);
-
-
         } catch(Exception $e) {
             $error = $e;
         }
