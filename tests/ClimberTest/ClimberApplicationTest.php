@@ -10,9 +10,20 @@ use Peak\Climber\Cron\Exception\InvalidDatabaseConfigException;
 use Peak\Climber\Cron\Exception\DatabaseNotFoundException;
 use Peak\Climber\Cron\Exception\TablesNotFoundException;
 use Symfony\Component\Console\Tester\CommandTester;
+use Doctrine\DBAL\Exception\ConnectionException;
 
 class ClimberApplicationTest extends TestCase
 {
+
+    protected function appNoCronDbConfig()
+    {
+        return new Application(null, [
+            'env' => 'dev',
+            'conf' => [
+                FIXTURES_PATH . '/config/cli.yml',
+            ]
+        ]);
+    }
 
     protected function appNoConnection()
     {
@@ -20,6 +31,18 @@ class ClimberApplicationTest extends TestCase
             'env' => 'dev',
             'conf' => [
                 FIXTURES_PATH . '/config/cli.yml',
+                FIXTURES_PATH . '/config/cron.database3.php',
+            ]
+        ]);
+    }
+
+    protected function appNoDatabase()
+    {
+        return new Application(null, [
+            'env' => 'dev',
+            'conf' => [
+                FIXTURES_PATH . '/config/cli.yml',
+                FIXTURES_PATH . '/config/cron.database3.php',
             ]
         ]);
     }
@@ -35,19 +58,10 @@ class ClimberApplicationTest extends TestCase
         ]);
     }
 
-    public function setup()
-    {
-//        $this->application = new Application(null, [
-//            'env' => 'dev',
-//            'conf' => [
-//                FIXTURES_PATH . '/config/cli.yml',
-//                FIXTURES_PATH . '/config/cron.database.php',
-//            ]
-//        ]);
-//
-//        $this->container = Application::container();
-    }
 
+    /**
+     * General test
+     */
     function testApplication()
     {
         $app = $this->appNoTables();
@@ -58,9 +72,12 @@ class ClimberApplicationTest extends TestCase
         $this->assertTrue(Application::conf('php.date.timezone') === "America/Toronto");
     }
 
+    /**
+     * test Invalid configuration
+     */
     function testNoDatabaseConfiguration()
     {
-        $app = $this->appNoConnection();
+        $app = $this->appNoCronDbConfig();
 
         try {
             new RegisterCommands($app);
@@ -73,5 +90,51 @@ class ClimberApplicationTest extends TestCase
 
         $this->assertTrue(isset($error));
         $this->assertTrue($error instanceof InvalidDatabaseConfigException);
+    }
+
+    /**
+     * Connection to db fail
+     */
+    function testConnectionFail()
+    {
+        $app = $this->appNoDatabase();
+
+        try {
+            new RegisterCommands($app);
+            $addcommand = Application::container()->instantiate(CronAddCommand::class);
+            $commandTester = new CommandTester($addcommand);
+            $commandTester->execute([]);
+
+
+        } catch(Exception $e) {
+            $error = $e;
+        }
+
+        //print_r(get_class($e));
+
+        $this->assertTrue(isset($error));
+        $this->assertTrue($error instanceof ConnectionException);
+    }
+
+    /**
+     * Test no tables found for cron
+     */
+    function testTablesNotFoundException()
+    {
+        $app = $this->appNoTables();
+
+        try {
+            new RegisterCommands($app);
+            $addcommand = Application::container()->instantiate(CronAddCommand::class);
+            $commandTester = new CommandTester($addcommand);
+            $commandTester->execute([]);
+
+
+        } catch(Exception $e) {
+            $error = $e;
+        }
+
+        $this->assertTrue(isset($error));
+        $this->assertTrue($error instanceof TablesNotFoundException);
     }
 }
