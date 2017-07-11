@@ -9,6 +9,7 @@ use Peak\Climber\Commands\CronInstallCommand;
 use Peak\Climber\Commands\CronListCommand;
 use Peak\Climber\Commands\CronRunCommand;
 use Peak\Climber\Commands\CronUpdateCommand;
+use Peak\Climber\Cron\Exception\InvalidDatabaseConfigException;
 
 class RegisterCommands
 {
@@ -24,6 +25,10 @@ class RegisterCommands
     public function __construct(Application $app)
     {
         $this->app = $app;
+
+        if (!$this->app->conf()->has('crondb') || !is_array($this->app->conf('crondb'))) {
+            throw new InvalidDatabaseConfigException(__CLASS__.': configuration [crondb] is missing or invalid.');
+        }
 
         new Bootstrap($this->app->conf('crondb'));
 
