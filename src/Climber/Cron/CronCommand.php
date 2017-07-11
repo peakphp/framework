@@ -21,7 +21,7 @@ abstract class CronCommand extends CommandWithDb
         // run some validation for cron system
         if (!Cron::hasDbConnection($this->conn)) {
             throw new DatabaseNotFoundException('No connection to a database has been found!');
-        } elseif (!Cron::isInstalled($this->conn) && $this->getName() !== 'cron:install') {
+        } elseif ($this->conn->connect() && !Cron::isInstalled($this->conn) && $this->getName() !== 'cron:install') {
             throw new TablesNotFoundException('Cron system is not installed. Please, use command cron:install before using cron commands');
         }
     }
