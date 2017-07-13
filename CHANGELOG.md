@@ -1,6 +1,6 @@
 VERSION 2.14.0
 --------------
-Release Date: ?
+Release Date: 2017-07-12
 
  - added Peak\Common\TimeExpression
  - added an exception in Peak\Di\Container::add()
