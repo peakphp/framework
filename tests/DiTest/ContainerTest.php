@@ -446,7 +446,6 @@ class ContainerTest extends TestCase
             //echo $e->getMessage();
         }
 
-        //print_r($result);
         $this->assertTrue(isset($error));
     }
 
