@@ -40,7 +40,7 @@ class ClassResolver
     /**
      * Resolve class arguments dependencies
      *
-     * @param string $class
+     * @param mixed $class
      * @param Container $container
      * @param array $args
      * @param array $explicit
@@ -50,7 +50,7 @@ class ClassResolver
     public function resolve($class, Container $container, array $args = [], array $explicit = [])
     {
         $method = '__construct';
-
+        
         if (is_array($class)) {
             // treat $class as a callback
             if (count($class) == 2) {
