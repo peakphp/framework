@@ -2,11 +2,6 @@
 
 namespace Peak\Di;
 
-use Peak\Di\Container;
-use Peak\Di\ClassInspector;
-use Peak\Di\InterfaceResolver;
-use Peak\Di\ExplicitResolver;
-use \Closure;
 use \Exception;
 
 /**
@@ -45,10 +40,14 @@ class ClassResolver
     /**
      * Resolve class arguments dependencies
      *
-     * @param  string $class
+     * @param string $class
+     * @param Container $container
+     * @param array $args
+     * @param array $explicit
      * @return array
+     * @throws Exception
      */
-    public function resolve($class, Container $container, array $args = [], $explicit = [])
+    public function resolve($class, Container $container, array $args = [], array $explicit = [])
     {
         $method = '__construct';
 

@@ -2,8 +2,7 @@
 
 namespace Peak\Di;
 
-use Closure;
-use Peak\Di\Container;
+use \Closure;
 
 /**
  * Explicit Dependency declaration Resolver
@@ -16,7 +15,7 @@ class ExplicitResolver
      * @param  string $class
      * @return object
      */
-    public function resolve($needle, $explicit = [])
+    public function resolve($needle, array $explicit = [])
     {
         // Check for explicit dependency closure or object instance
         if (array_key_exists($needle, $explicit)) {

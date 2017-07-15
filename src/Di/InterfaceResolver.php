@@ -3,7 +3,6 @@
 namespace Peak\Di;
 
 use \Exception;
-use Peak\Di\Container;
 
 /**
  * Dependency Interface Resolver
