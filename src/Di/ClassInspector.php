@@ -40,7 +40,6 @@ class ClassInspector
 
                         if (isset($class)) {
                             $dependencies[$prop]['class'] = $class->name;
-                        } else {
                         }
                     } catch (ReflectionException $e) {
                         $dependencies[$prop]['error'] = $e->getMessage();
