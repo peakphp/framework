@@ -375,8 +375,8 @@ class ContainerTest extends TestCase
     }
 
     /**
-     * Test container resolve dependencies for object method
-     */
+ * Test container resolve dependencies for object method
+ */
     function testMethodCall()
     {
         $container = new Container();
@@ -395,6 +395,34 @@ class ContainerTest extends TestCase
         //print_r($result);
 
         $this->assertTrue($result === $arguments[0]);
+    }
+
+    /**
+     * Test container resolve dependencies for object method
+     */
+    function testMethodCall2()
+    {
+//        $container = new Container();
+//
+//        $testdi = $container->instantiate('TestDi1', [
+//            'value',
+//            [12],
+//            999
+//        ]);
+//
+//        $arguments = ['hello'];
+//        $explicits = [];
+//
+//        $result = $container->call(function() {
+//            return [
+//                $testdi,
+//                'methodA'
+//            ];
+//        }, $arguments, $explicits);
+//
+//        //print_r($result);
+//
+//        $this->assertTrue($result === $arguments[0]);
     }
 
     /**
