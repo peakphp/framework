@@ -2,6 +2,10 @@ VERSION 2.15.0
 --------------
 Release Date: ?
 
+ - added possibility to turn off autowiring for Peak\Di\Container
+ - added Peak\Di\ClassDefinitions for handling dependencies when autowiring is disable
+ - added method addDefinition(), setDefinitions() and hasDefinition() to Peak\Di\Container
+
 VERSION 2.14.0
 --------------
 Release Date: 2017-07-12
