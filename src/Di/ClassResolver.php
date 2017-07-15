@@ -3,6 +3,7 @@
 namespace Peak\Di;
 
 use \Exception;
+use \InvalidArgumentException;
 
 /**
  * Class Dependencies Resolver
@@ -45,7 +46,7 @@ class ClassResolver
      * @param array $args
      * @param array $explicit
      * @return array
-     * @throws Exception
+     * @throws InvalidArgumentException
      */
     public function resolve($class, Container $container, array $args = [], array $explicit = [])
     {
@@ -57,7 +58,7 @@ class ClassResolver
                 $method = $class[1];
                 $class  = $class[0];
             } else {
-                throw new Exception('Expecting a valid callback definition');
+                throw new InvalidArgumentException('Expecting a valid callback definition');
             }
         }
 
