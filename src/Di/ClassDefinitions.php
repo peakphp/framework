@@ -34,7 +34,7 @@ class ClassDefinitions
             $def_args = $definition($container);
         }
 
-        if(!is_array($def_args)) {
+        if (!is_array($def_args)) {
             throw new Exception('Definition for class must be an array or a closure returning an array');
         }
 

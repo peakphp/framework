@@ -50,7 +50,7 @@ class ClassResolver
     public function resolve($class, Container $container, array $args = [], array $explicit = [])
     {
         $method = '__construct';
-        
+
         if (is_array($class)) {
             // treat $class as a callback
             if (count($class) == 2) {
