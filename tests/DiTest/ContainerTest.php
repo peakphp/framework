@@ -5,6 +5,7 @@ use Peak\Di\Container;
 
 require __DIR__.'/../fixtures/di/test.php';
 
+
 class ContainerTest extends TestCase
 {
     
@@ -14,7 +15,7 @@ class ContainerTest extends TestCase
     function testCreateInstance()
     {
 
-        $container = new \Peak\Di\Container();
+        $container = new Container();
         $testdi = $container->instantiate('TestDi1', [
             'value',
             [12],
@@ -34,7 +35,7 @@ class ContainerTest extends TestCase
     function testCreateInstanceRecursive()
     {
 
-        $container = new \Peak\Di\Container();
+        $container = new Container();
         $testdi = $container->instantiate('TestDi4', [
             'TestDi1' => [
                 'value',
@@ -52,7 +53,7 @@ class ContainerTest extends TestCase
 
 
 
-        $container = new \Peak\Di\Container();
+        $container = new Container();
         $testdi = $container->instantiate('TestDi5', [
             'TestDi4' => [
                 'TestDi1' => [
@@ -72,7 +73,7 @@ class ContainerTest extends TestCase
 
 
         // --- restart container ---
-        $container = new \Peak\Di\Container();
+        $container = new Container();
 
         $testdi = $container->instantiate(
             'TestDi10', //classname
@@ -101,7 +102,7 @@ class ContainerTest extends TestCase
     function testCreateInstanceWithInterface()
     {
 
-        $container = new \Peak\Di\Container();
+        $container = new Container();
 
         $testdi7 = new TestDi7();
         $testdi7->foobar = 'foobar7';
@@ -116,7 +117,7 @@ class ContainerTest extends TestCase
 
 
         // --- restart container ---
-        $container = new \Peak\Di\Container();
+        $container = new Container();
 
         //both implement the same interface
         $container->add(new TestDi7()); 
@@ -137,7 +138,7 @@ class ContainerTest extends TestCase
     function testCreateInstanceWithInterface2()
     {
         // --- restart container ---
-        $container = new \Peak\Di\Container();
+        $container = new Container();
 
         //both implement the same interface
         $container->add(new TestDi7()); 
@@ -164,7 +165,7 @@ class ContainerTest extends TestCase
 
     function testCreateInstanceWithInterface3()
     {
-        $container = new \Peak\Di\Container();
+        $container = new Container();
 
         // $container->add(new \Peak\Common\Collection(['foo' => 'bar']));
         $testdi1 = $container->instantiate('TestDi1', [
@@ -204,7 +205,7 @@ class ContainerTest extends TestCase
 
     function testCreateInstanceWithClosure()
     {
-        $container = new \Peak\Di\Container();
+        $container = new Container();
 
         $container->add(new TestDi7()); 
 
@@ -234,7 +235,7 @@ class ContainerTest extends TestCase
 
     function testCreateInstanceWithClosure2()
     {
-        $container = new \Peak\Di\Container();
+        $container = new Container();
 
         $container->add(new Peak\Common\Collection(['foo' => 'barNOTexplicit']));
 
@@ -260,14 +261,12 @@ class ContainerTest extends TestCase
 
     }
 
-
- 
     /**
      * test exception with unknow class
      */  
     function testCreateInstanceWithInterfaceException()
     {
-        $container = new \Peak\Di\Container();
+        $container = new Container();
         try {
 
             //both implement the same interface
@@ -291,7 +290,7 @@ class ContainerTest extends TestCase
      */  
     function testException()
     {
-        $container = new \Peak\Di\Container();
+        $container = new Container();
         try {
             //$this->expectException(Exception::class);
             $testdi = $container->instantiate('iDontExists', [
@@ -310,7 +309,7 @@ class ContainerTest extends TestCase
      */  
     function testExceptionDependencies()
     {
-        $container = new \Peak\Di\Container();
+        $container = new Container();
         try {
             //$this->expectException(Exception::class);
             $testdi = $container->instantiate('TestDi2');
@@ -325,7 +324,7 @@ class ContainerTest extends TestCase
      */  
     function testGetHasInstance()
     {
-        $container = new \Peak\Di\Container();
+        $container = new Container();
         $container->add(new TestDi3());
 
         $this->assertTrue($container->has('TestDi3'));
@@ -339,9 +338,12 @@ class ContainerTest extends TestCase
         $this->assertTrue(is_null($testdi9999));
     }
 
+    /**
+     * Test delete instance
+     */
     function testDeleteInstance()
     {
-        $container = new \Peak\Di\Container();
+        $container = new Container();
 
         //both implement the same interface
         $container->add(new TestDi7()); 
@@ -354,9 +356,12 @@ class ContainerTest extends TestCase
         $this->assertTrue($container->get('TestDi7') !== null);
     }
 
+    /**
+     * Test get all stored instances or interfaces
+     */
     function testGetInts()
     {
-        $container = new \Peak\Di\Container();
+        $container = new Container();
 
         //both implement the same interface
         $container->add(new TestDi7()); 
@@ -369,9 +374,12 @@ class ContainerTest extends TestCase
         $this->assertTrue(count($instances) == 2);
     }
 
+    /**
+     * Test container resolve dependencies for object method
+     */
     function testMethodCall()
     {
-        $container = new \Peak\Di\Container();
+        $container = new Container();
 
         $testdi = $container->instantiate('TestDi1', [
             'value',
@@ -389,9 +397,12 @@ class ContainerTest extends TestCase
         $this->assertTrue($result === $arguments[0]);
     }
 
+    /**
+     * Test call exception
+     */
     function testMethodCallException()
     {
-        $container = new \Peak\Di\Container();
+        $container = new Container();
 
         $testdi = $container->instantiate('TestDi1', [
             'value',
@@ -413,11 +424,12 @@ class ContainerTest extends TestCase
         $this->assertTrue(isset($error));
     }
 
-
-
+    /**
+     * Test aliases
+     */
     function testAliases()
     {
-        $container = new \Peak\Di\Container();
+        $container = new Container();
 
         $container->addAlias('MyClassAlias', TestDi1::class);
 
@@ -436,9 +448,12 @@ class ContainerTest extends TestCase
         $this->assertTrue($testdi instanceof TestDi1);
     }
 
+    /**
+     * Test add object with aliases
+     */
     function testAddWithAliases()
     {
-        $container = new \Peak\Di\Container();
+        $container = new Container();
 
 
         $testdi = $container->instantiate('TestDi1', [
@@ -458,9 +473,12 @@ class ContainerTest extends TestCase
         $this->assertTrue($testdi instanceof TestDi1);
     }
 
+    /**
+     * Test add the container instance to the container itself
+     */
     function testAddItsetf()
     {
-        $container = new \Peak\Di\Container();
+        $container = new Container();
 
         $container->addAlias('MyClassAlias', TestDi1::class);
         $container->addItself();
@@ -468,5 +486,129 @@ class ContainerTest extends TestCase
 
         $testdi = $container->instantiate(TestDi15::class);
         $this->assertTrue($testdi->container instanceof \Peak\Di\Container);
+    }
+
+    /**
+     * Test definitions when autowiring is disable
+     */
+    function testDefinitions()
+    {
+        $container = new Container();
+        $container->disableAutoWiring();
+
+        $container->setDefinitions([
+            TestDi1::class => function($container) {
+                return [
+                    new Peak\Common\Collection([
+                        'foo' => 'bar'
+                    ])
+                ];
+            }
+        ]);
+
+        $object = $container->instantiate(TestDi1::class, [
+            'value',
+            [12],
+            999
+        ]);
+
+        $this->assertTrue($object instanceof TestDi1);
+        $this->assertTrue($object->col->foo === 'bar');
+        $this->assertTrue($object->arg1 === 'value');
+
+        // with predefined arguments values
+        $container->setDefinitions([
+            TestDi1::class => function($container) {
+                return [
+                    new Peak\Common\Collection([
+                        'foo' => 'bar'
+                    ]),
+                    'value',
+                    [12],
+                    999
+                ];
+            }
+        ]);
+
+        $object = $container->instantiate(TestDi1::class);
+
+        $this->assertTrue($object instanceof TestDi1);
+        $this->assertTrue($object->col->foo === 'bar');
+        $this->assertTrue($object->arg1 === 'value');
+    }
+
+    /**
+     * Test definitions when autowiring is disable
+     */
+    function testDefinitions2()
+    {
+        $container = new Container();
+        $container->disableAutoWiring();
+
+        $container->add(new Peak\Common\Collection([
+            'foo' => 'bar'
+        ]));
+
+        $container->setDefinitions([
+            TestDi1::class => function($container) {
+                return [
+                    $container->get(Peak\Common\Collection::class)
+                ];
+            }
+        ]);
+
+        $object = $container->instantiate(TestDi1::class, [
+            'value',
+            [12],
+            999
+        ]);
+
+        $this->assertTrue($object instanceof TestDi1);
+        $this->assertTrue($object->col->foo === 'bar');
+    }
+
+    /**
+     * Test autowiring off with explicit declaration and no definition
+     */
+    function testDefinitionWithExplicit()
+    {
+        $container = new Container();
+        $container->disableAutoWiring();
+
+        $object = $container->instantiate(TestDi1::class, [
+            'value',
+            [12],
+            999
+        ], function($container) {
+            return [
+                Peak\Common\Collection::class => new Peak\Common\Collection([
+                    'foo' => 'bar2'
+                ])
+            ];
+        });
+
+        $this->assertTrue($object instanceof TestDi1);
+        $this->assertTrue($object->col->foo === 'bar2');
+    }
+
+    /**
+     * Test definitions exceptions
+     */
+    function testDefinitionsException()
+    {
+        $container = new Container();
+        $container->disableAutoWiring();
+
+        try {
+            $object = $container->instantiate(TestDi1::class, [
+                'value',
+                [12],
+                999
+            ]);
+        } catch(Exception $e) {
+            $error = true;
+        }
+
+        $this->assertTrue(isset($error));
     }
 }
