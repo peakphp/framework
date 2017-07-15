@@ -480,7 +480,6 @@ class ContainerTest extends TestCase
     {
         $container = new Container();
 
-
         $testdi = $container->instantiate('TestDi1', [
             'value',
             [12],

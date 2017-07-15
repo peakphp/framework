@@ -6,7 +6,7 @@
     "homepage": "https://peakframework.com",
     "support": {
         "issues": "https://github.com/peakphp/framework/issues",
-        "source": "https://github.com/peakphp/di"
+        "source": "https://github.com/peakphp/framework"
     },
     "authors": [
         {
