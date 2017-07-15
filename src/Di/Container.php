@@ -3,7 +3,7 @@
 namespace Peak\Di;
 
 use Peak\Common\Collection;
-use \Exception;
+use \InvalidArgumentException;
 
 /**
  * Dependencies Container
@@ -41,6 +41,24 @@ class Container implements ContainerInterface
     protected $resolver;
 
     /**
+     * Class definitions resolver
+     * @var \Peak\Di\ClassDefinitions
+     */
+    protected $def_resolver;
+
+    /**
+     * Allow container to resolve automatically for your object needed
+     * @var bool
+     */
+    protected $auto_wiring = true;
+
+    /**
+     * Container configuration definitions
+     * @var array
+     */
+    protected $definitions = [];
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -48,6 +66,7 @@ class Container implements ContainerInterface
         $this->instances    = new Collection();
         $this->interfaces   = new Collection();
         $this->resolver     = new ClassResolver();
+        $this->def_resolver = new ClassDefinitions();
         $this->instantiator = new ClassInstantiator();
     }
 
@@ -70,9 +89,16 @@ class Container implements ContainerInterface
      */
     public function instantiate($class, $args = [], $explicit = [])
     {
+        $resolver = $this->resolver;
+
+        // if false, don't use reflection, use $definitions instead to resolve a class
+        if (!$this->auto_wiring) {
+            $resolver = $this->def_resolver;
+        }
+
         // process class dependencies
-        $args = $this->resolver->resolve($class, $this, $args, $explicit);
- 
+        $args = $resolver->resolve($class, $this, $args, $explicit);
+
         // instantiate class with resolved dependencies and args if apply
         return $this->instantiator->instantiate($class, $args);
     }
@@ -142,7 +168,7 @@ class Container implements ContainerInterface
     public function add($object, $alias = null)
     {
         if (!is_object($object)) {
-            throw new Exception(__CLASS__.': add() first argument must be an object.');
+            throw new InvalidArgumentException(__CLASS__.': add() first argument must be an object.');
         }
 
         $class = get_class($object);
@@ -203,7 +229,7 @@ class Container implements ContainerInterface
     /**
      * Has an alias
      *
-     * @param  string  $name
+     * @param  string $name
      * @return boolean
      */
     public function hasAlias($name)
@@ -258,6 +284,7 @@ class Container implements ContainerInterface
     /**
      * Has an interface
      *
+     * @param  string $name
      * @return bool
      */
     public function hasInterface($name)
@@ -268,7 +295,7 @@ class Container implements ContainerInterface
     /**
      * Get an interface
      *
-     * @param   $name
+     * @param   string $name
      * @return  array|string instance(s) matching interface name
      */
     public function getInterface($name)
@@ -287,5 +314,77 @@ class Container implements ContainerInterface
     public function getInterfaces()
     {
         return $this->interfaces;
+    }
+
+    /**
+     * Add class definition
+     *
+     * @param $class
+     * @param $definition
+     * @return $this
+     */
+    public function addDefinition($class, $definition)
+    {
+        $this->definitions[$class] = $definition;
+        return $this;
+    }
+
+    /**
+     * Set definitions. Use definitions when autowiring is off
+     *
+     * @param  array $definitions
+     * @return $this
+     */
+    public function setDefinitions(array $definitions)
+    {
+        $this->definitions = $definitions;
+        return $this;
+    }
+
+    /**
+     * Has a definition
+     *
+     * @param  string $name
+     * @return bool
+     */
+    public function hasDefinition($name)
+    {
+        return isset($this->definitions[$name]);
+    }
+
+    /**
+     * Get a definition
+     *
+     * @param   string $name
+     * @return  array|string instance(s) matching definition name
+     */
+    public function getDefinition($name)
+    {
+        if ($this->hasDefinition($name)) {
+            return $this->definitions[$name];
+        }
+        return null;
+    }
+
+    /**
+     * Enable Auto Wiring
+     *
+     * @return $this
+     */
+    public function enableAutoWiring()
+    {
+        $this->auto_wiring = true;
+        return $this;
+    }
+
+    /**
+     * Disable Auto Wiring
+     *
+     * @return $this
+     */
+    public function disableAutoWiring()
+    {
+        $this->auto_wiring = false;
+        return $this;
     }
 }
