@@ -392,8 +392,6 @@ class ContainerTest extends TestCase
 
         $result = $container->call([$testdi, 'methodA'], $arguments, $explicits);
 
-        //print_r($result);
-
         $this->assertTrue($result === $arguments[0]);
     }
 
