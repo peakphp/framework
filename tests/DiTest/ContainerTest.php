@@ -507,7 +507,6 @@ class ContainerTest extends TestCase
         $container->addAlias('MyClassAlias', TestDi1::class);
         $container->addItself();
 
-
         $testdi = $container->instantiate(TestDi15::class);
         $this->assertTrue($testdi->container instanceof \Peak\Di\Container);
     }
