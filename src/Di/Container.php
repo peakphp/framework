@@ -189,7 +189,7 @@ class Container implements ContainerInterface
     }
 
     /**
-     * Delete an instance if exists. Chainable.
+     * Delete an instance if exists.
      *
      * @param  $name
      * @return $this
