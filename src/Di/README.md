@@ -69,7 +69,7 @@ $foo = $container->get(MyObject::class);
 
 ```PHP
 $container->add(new Monolog\Handler\StreamHandler(), 'LogStream');
-$object = $container->get('LogStream');
+$stream = $container->get('LogStream');
 ```
 
 #### Call an object method
