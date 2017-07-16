@@ -24,14 +24,28 @@ class ClassFinder
         $this->namespaces = $namespaces;
     }
 
+    /**
+     * Add suffix to a class name
+     *
+     * @param $suffix
+     * @return $this
+     */
     public function setSuffix($suffix)
     {
         $this->suffix = $suffix;
+        return $this;
     }
 
+    /**
+     * Add prefix to a class name
+     *
+     * @param $prefix
+     * @return $this
+     */
     public function setPrefix($prefix)
     {
         $this->prefix = $prefix;
+        return $this;
     }
 
     /**
