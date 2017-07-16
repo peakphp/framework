@@ -21,19 +21,12 @@ class Foo
 
 $foo = $container->instantiate(Foo::class);
 ```
-In example above, a new ``Bar`` instance will be instantiated automatically each time when creating ``Foo``.
+In example above, a new ``Bar`` instance will be instantiated automatically is each time when creating ``Foo``. This mechanism rely on ```Reflection``` to resolve objects dependencies.
 
-Passing other types of arguments:
-```PHP
-$foo = $container->instantiate(Foo::class, [
-    12,
-    'FooBar'
-]);
-```
-
-#### Reuse a instance by storing it into the container with ```add()```
+#### Reuse a class instance by storing it in the container with ```add()```
 
 ```PHP
+class Bar {}
 
 $bar = new Bar();
 $bar->name = "John Bar";
@@ -49,6 +42,39 @@ In example above, ``$foo1`` and ``$foo2`` will have the same instance of ``Bar``
 ```PHP
 echo $foo1->bar->name; //output: John Bar
 echo $foo2->bar->name; //output: John Bar
+```
+
+#### Passing other types of arguments:
+```PHP
+$foo = $container->instantiate(Foo::class, [
+    12,
+    'FooBar'
+]);
+```
+
+#### Call an object method
+
+```PHP
+
+class Events
+{
+    public function method(Bar $bar, $alias = null)
+    {
+        //...
+    }
+}
+
+$result = $container->call([
+    $events,
+    'method
+]);
+
+// or with
+
+$foo = $container->instantiate(Foo::class, [
+    12,
+    'FooBar'
+]);
 ```
 
 ### Without Autowiring
@@ -71,5 +97,5 @@ $container->setDefinitions([
 // create foo successfully
 $foo = $container->instantiate(Foo::class);
 //throw an exception since there is no definiton for Bar
-$bar = $container->instantiate(Foo::class);
+$bar = $container->instantiate(Bar::class);
 ```
