@@ -21,7 +21,5 @@
         "psr-4": {
             "Peak\\Common\\": ""
         }
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+    }
 }

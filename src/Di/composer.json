@@ -23,7 +23,5 @@
         "psr-4": {
           "Peak\\Di\\": ""
         }
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+    }
 }
