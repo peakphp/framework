@@ -18,7 +18,7 @@ class ConfigCustomRoutesTest extends TestCase
     function testBootstrap()
     {
         $app = dummyApp();
-        Application::instantiate(ConfigCustomRoutes::class); //need to call it manually because test has no bootstrap
+        Application::create(ConfigCustomRoutes::class); //need to call it manually because test has no bootstrap
         $kernel = Application::kernel();
         $routing = $kernel->routing;
         $this->assertTrue(count($routing->custom_routes) == 3);
@@ -36,7 +36,7 @@ class ConfigCustomRoutesTest extends TestCase
         $app = dummyApp();
         Application::conf()->set('routes', ['invalid route']);
         try {
-            Application::instantiate(ConfigCustomRoutes::class); //need to call it manually because test has no bootstrap
+            Application::create(ConfigCustomRoutes::class); //need to call it manually because test has no bootstrap
         } catch (Exception $e) {
             $error = true;
         }
@@ -54,7 +54,7 @@ class ConfigCustomRoutesTest extends TestCase
         $app = dummyApp();
         Application::conf()->set('routes', [[]]);
         try {
-            Application::instantiate(ConfigCustomRoutes::class); //need to call it manually because test has no bootstrap
+            Application::create(ConfigCustomRoutes::class); //need to call it manually because test has no bootstrap
         } catch (Exception $e) {
             $error = true;
         }

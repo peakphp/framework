@@ -89,7 +89,7 @@ class ApplicationTest extends TestCase
 
         $this->assertTrue(Application::get('mycol') instanceof Collection);
 
-        $this->assertTrue(Application::instantiate(Collection::class) instanceof Collection);
+        $this->assertTrue(Application::create(Collection::class) instanceof Collection);
     }
     
 }

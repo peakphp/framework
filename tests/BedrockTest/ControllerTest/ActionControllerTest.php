@@ -20,7 +20,7 @@ class ApplicationControllerTest extends TestCase
     function testLoadController()
     {
         $app = dummyApp();
-        $controller = Application::instantiate(TestController::class);
+        $controller = Application::create(TestController::class);
         $this->assertTrue($controller->view instanceof View);
         $this->assertTrue($controller->getTitle() === 'Test');
         $this->assertFalse($controller->isAction('index'));
@@ -35,7 +35,7 @@ class ApplicationControllerTest extends TestCase
     function testControllerRoute()
     {
         $app = dummyApp();
-        $controller = Application::instantiate(TestController::class);
+        $controller = Application::create(TestController::class);
 
         $route = new Route();
         $route->action = 'myaction';
@@ -61,7 +61,7 @@ class ApplicationControllerTest extends TestCase
     function testControllerDispatch()
     {
         $app = dummyApp();
-        $controller = Application::instantiate(TestController::class);
+        $controller = Application::create(TestController::class);
 
         $route = new Route();
         $route->action = 'index';
@@ -84,7 +84,7 @@ class ApplicationControllerTest extends TestCase
     function testControllerDispatchRedirectAction()
     {
         $app = dummyApp();
-        $controller = Application::instantiate(TestController::class);
+        $controller = Application::create(TestController::class);
         Application::kernel()->front->controller = $controller;
 
         $route = new Route();
@@ -110,7 +110,7 @@ class ApplicationControllerTest extends TestCase
     {
         $app = dummyApp();
 
-        $controller = Application::instantiate(TestController::class);
+        $controller = Application::create(TestController::class);
         $route = RouteBuilder::get('test/testingcache');
 
         $controller->view->engine('Layouts');
@@ -128,7 +128,7 @@ class ApplicationControllerTest extends TestCase
     function testControllerDispatchException()
     {
         $app = dummyApp();
-        $controller = Application::instantiate(TestController::class);
+        $controller = Application::create(TestController::class);
 
         $route = new Route();
         $route->action = 'unknown_action';
@@ -154,7 +154,7 @@ class ApplicationControllerTest extends TestCase
     {
         $app = dummyApp();
 
-        $controller = Application::instantiate(TestController::class);
+        $controller = Application::create(TestController::class);
         $route = RouteBuilder::get('test/actionwithparams/id/13/sort/joindate');
 
         $controller->setRoute($route);

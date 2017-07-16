@@ -17,6 +17,6 @@ class SessionTest extends TestCase
     {
         // just for the kick, should do nothing because it's executed in cli mode
         $app = dummyApp();
-        Application::instantiate(Session::class);
+        Application::create(Session::class);
     }
 }

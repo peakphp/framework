@@ -84,7 +84,7 @@ abstract class ParentController extends ActionController
      */
     protected function callAction($action, $args = [])
     {
-        $this->child = Application::instantiate($this->actionClass($action), [$args], [
+        $this->child = Application::create($this->actionClass($action), [$args], [
             'Peak\Bedrock\Controller\ParentController' => $this
         ]);
     }

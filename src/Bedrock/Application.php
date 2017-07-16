@@ -71,10 +71,10 @@ class Application
      * @see \Peak\Di\Container for details
      * @return mixed
      */
-    public static function instantiate($class, $args = [], $explicit = [])
+    public static function create($class, $args = [], $explicit = [])
     {
         self::containerCheck();
-        return self::$container->instantiate($class, $args, $explicit);
+        return self::$container->create($class, $args, $explicit);
     }
 
     /**
@@ -126,16 +126,16 @@ class Application
     public function __construct(ContainerInterface $container, array $config)
     {
         self::setContainer($container);
-        $this->create($container, $config);
+        $this->build($container, $config);
     }
 
     /**
-     * Create a instance of application
+     * Build application base
      *
      * @param  array $config
      * @return Application
      */
-    protected function create(ContainerInterface $container, array $config)
+    protected function build(ContainerInterface $container, array $config)
     {
         $config_resolver = new ConfigResolver($config);
 
@@ -149,7 +149,7 @@ class Application
         $container->add(new View);
         
         // instantiate and store app kernel
-        $container->instantiateAndStore(Kernel::class);
+        $container->createAndStore(Kernel::class);
     }
 
     /**

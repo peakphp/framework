@@ -81,7 +81,7 @@ class ClimberApplicationTest extends TestCase
 
         try {
             new RegisterCommands($app);
-            $addcommand = Application::container()->instantiate(CronAddCommand::class);
+            $addcommand = Application::container()->create(CronAddCommand::class);
             $commandTester = new CommandTester($addcommand);
             $commandTester->execute([]);
         } catch(Exception $e) {
@@ -101,7 +101,7 @@ class ClimberApplicationTest extends TestCase
 
         try {
             new RegisterCommands($app);
-            $addcommand = Application::container()->instantiate(CronAddCommand::class);
+            $addcommand = Application::container()->create(CronAddCommand::class);
             $commandTester = new CommandTester($addcommand);
             $commandTester->execute([]);
         } catch(Exception $e) {
@@ -127,7 +127,7 @@ class ClimberApplicationTest extends TestCase
 
         try {
             new RegisterCommands($app);
-            $addcommand = Application::container()->instantiate(CronAddCommand::class);
+            $addcommand = Application::container()->create(CronAddCommand::class);
             $commandTester = new CommandTester($addcommand);
             $commandTester->execute([]);
         } catch(Exception $e) {

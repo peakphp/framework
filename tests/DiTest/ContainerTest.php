@@ -16,7 +16,7 @@ class ContainerTest extends TestCase
     {
 
         $container = new Container();
-        $testdi = $container->instantiate('TestDi1', [
+        $testdi = $container->create('TestDi1', [
             'value',
             [12],
             999
@@ -36,7 +36,7 @@ class ContainerTest extends TestCase
     {
 
         $container = new Container();
-        $testdi = $container->instantiate('TestDi4', [
+        $testdi = $container->create('TestDi4', [
             'TestDi1' => [
                 'value',
                 [12],
@@ -54,7 +54,7 @@ class ContainerTest extends TestCase
 
 
         $container = new Container();
-        $testdi = $container->instantiate('TestDi5', [
+        $testdi = $container->create('TestDi5', [
             'TestDi4' => [
                 'TestDi1' => [
                     'value',
@@ -75,7 +75,7 @@ class ContainerTest extends TestCase
         // --- restart container ---
         $container = new Container();
 
-        $testdi = $container->instantiate(
+        $testdi = $container->create(
             'TestDi10', //classname
             [
                 'foobar10', //arguments....
@@ -108,7 +108,7 @@ class ContainerTest extends TestCase
         $testdi7->foobar = 'foobar7';
         $container->add($testdi7);
         
-        $testdi = $container->instantiate('TestDi6');
+        $testdi = $container->create('TestDi6');
 
         $this->assertTrue($testdi->testdi->foobar === 'foobar7');
 
@@ -123,7 +123,7 @@ class ContainerTest extends TestCase
         $container->add(new TestDi7()); 
         $container->add(new TestDi8());
 
-        $testdi = $container->instantiate(
+        $testdi = $container->create(
             'TestDi6', //classname
             [''], //arguments.... here none
             ['TestDiInterface' => 'TestDi7'] //explicit relationship for an interface
@@ -144,7 +144,7 @@ class ContainerTest extends TestCase
         $container->add(new TestDi7()); 
         $container->add(new TestDi8());
 
-        $testdi = $container->instantiate(
+        $testdi = $container->create(
             'TestDi11', //classname
             [
                 'foobar10', //arguments....
@@ -168,7 +168,7 @@ class ContainerTest extends TestCase
         $container = new Container();
 
         // $container->add(new \Peak\Common\Collection(['foo' => 'bar']));
-        $testdi1 = $container->instantiate('TestDi1', [
+        $testdi1 = $container->create('TestDi1', [
             'test',
             []
         ]);
@@ -180,10 +180,10 @@ class ContainerTest extends TestCase
         $container->add(new TestDi8()); 
         
         //TestDiInterface2
-        $testdi9 = $container->instantiate('TestDi9', [['FOOBAR!']]);
+        $testdi9 = $container->create('TestDi9', [['FOOBAR!']]);
         $container->add($testdi9); 
 
-        $testdi13 = $container->instantiate(
+        $testdi13 = $container->create(
             'TestDi13', 
             [],
             ['TestDiInterface' => 'TestDi8'] 
@@ -192,7 +192,7 @@ class ContainerTest extends TestCase
         $this->assertTrue($testdi13->testdi12->testdi->barfoo === 'foobar8');
 
 
-        $testdi13 = $container->instantiate(
+        $testdi13 = $container->create(
             'TestDi13', 
             [],
             ['TestDiInterface' => 'TestDi7'] 
@@ -209,7 +209,7 @@ class ContainerTest extends TestCase
 
         $container->add(new TestDi7()); 
 
-        $testdi13 = $container->instantiate(
+        $testdi13 = $container->create(
             'TestDi13', 
             [],
             [
@@ -239,7 +239,7 @@ class ContainerTest extends TestCase
 
         $container->add(new Peak\Common\Collection(['foo' => 'barNOTexplicit']));
 
-        $testdi1 = $container->instantiate(
+        $testdi1 = $container->create(
             'TestDi1', //class
             [
                 'value', // arguments
@@ -275,7 +275,7 @@ class ContainerTest extends TestCase
             
             //TestDi6 has an interface as dependency, both TestDi7 and TestDi8 qualify
             //but container doesn't know which one to use so it throw an LogicException 
-            $testdi = $container->instantiate('TestDi6'); 
+            $testdi = $container->create('TestDi6');
         }
         catch(Exception $e) {
             $ename = get_class($e);
@@ -293,7 +293,7 @@ class ContainerTest extends TestCase
         $container = new Container();
         try {
             //$this->expectException(Exception::class);
-            $testdi = $container->instantiate('iDontExists', [
+            $testdi = $container->create('iDontExists', [
                 'value',
                 [12],
                 999
@@ -312,7 +312,7 @@ class ContainerTest extends TestCase
         $container = new Container();
         try {
             //$this->expectException(Exception::class);
-            $testdi = $container->instantiate('TestDi2');
+            $testdi = $container->create('TestDi2');
         }
         catch(Exception $e) {}
 
@@ -381,7 +381,7 @@ class ContainerTest extends TestCase
     {
         $container = new Container();
 
-        $testdi = $container->instantiate('TestDi1', [
+        $testdi = $container->create('TestDi1', [
             'value',
             [12],
             999
@@ -402,7 +402,7 @@ class ContainerTest extends TestCase
     {
 //        $container = new Container();
 //
-//        $testdi = $container->instantiate('TestDi1', [
+//        $testdi = $container->create('TestDi1', [
 //            'value',
 //            [12],
 //            999
@@ -430,7 +430,7 @@ class ContainerTest extends TestCase
     {
         $container = new Container();
 
-        $testdi = $container->instantiate('TestDi1', [
+        $testdi = $container->create('TestDi1', [
             'value',
             [12],
             999
@@ -458,7 +458,7 @@ class ContainerTest extends TestCase
 
         $container->addAlias('MyClassAlias', TestDi1::class);
 
-        $testdi = $container->instantiateAndStore('TestDi1', [
+        $testdi = $container->createAndStore('TestDi1', [
             'value',
             [12],
             999
@@ -480,7 +480,7 @@ class ContainerTest extends TestCase
     {
         $container = new Container();
 
-        $testdi = $container->instantiate('TestDi1', [
+        $testdi = $container->create('TestDi1', [
             'value',
             [12],
             999
@@ -507,7 +507,7 @@ class ContainerTest extends TestCase
         $container->addAlias('MyClassAlias', TestDi1::class);
         $container->addItself();
 
-        $testdi = $container->instantiate(TestDi15::class);
+        $testdi = $container->create(TestDi15::class);
         $this->assertTrue($testdi->container instanceof \Peak\Di\Container);
     }
 
@@ -529,7 +529,7 @@ class ContainerTest extends TestCase
             }
         ]);
 
-        $object = $container->instantiate(TestDi1::class, [
+        $object = $container->create(TestDi1::class, [
             'value',
             [12],
             999
@@ -553,7 +553,7 @@ class ContainerTest extends TestCase
             }
         ]);
 
-        $object = $container->instantiate(TestDi1::class);
+        $object = $container->create(TestDi1::class);
 
         $this->assertTrue($object instanceof TestDi1);
         $this->assertTrue($object->col->foo === 'bar');
@@ -580,7 +580,7 @@ class ContainerTest extends TestCase
             }
         ]);
 
-        $object = $container->instantiate(TestDi1::class, [
+        $object = $container->create(TestDi1::class, [
             'value',
             [12],
             999
@@ -598,7 +598,7 @@ class ContainerTest extends TestCase
         $container = new Container();
         $container->disableAutoWiring();
 
-        $object = $container->instantiate(TestDi1::class, [
+        $object = $container->create(TestDi1::class, [
             'value',
             [12],
             999
@@ -623,7 +623,7 @@ class ContainerTest extends TestCase
         $container->disableAutoWiring();
 
         try {
-            $object = $container->instantiate(TestDi1::class, [
+            $object = $container->create(TestDi1::class, [
                 'value',
                 [12],
                 999

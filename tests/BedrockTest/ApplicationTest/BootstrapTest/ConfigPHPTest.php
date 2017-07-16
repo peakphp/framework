@@ -19,7 +19,7 @@ class ConfigPHPTest extends TestCase
         ini_set('display_startup_errors', 0);
         $this->assertTrue(ini_get('display_errors') == 0);
         $app = dummyApp();
-        Application::instantiate(ConfigPHP::class);
+        Application::create(ConfigPHP::class);
         $this->assertTrue(ini_get('display_errors') == 1);
         $this->assertTrue(ini_get('display_startup_errors') == 1);
         $this->assertTrue(ini_get('date.timezone') === "America/Toronto");
@@ -40,7 +40,7 @@ class ConfigPHPTest extends TestCase
         ini_set('display_errors', 0);
         ini_set('display_startup_errors', 0);
         Application::conf()->set('php', []); // empty php config
-        Application::instantiate(ConfigPHP::class);
+        Application::create(ConfigPHP::class);
         $this->assertTrue(ini_get('display_errors') == 0);
         $this->assertTrue(ini_get('display_startup_errors') == 0);
     }

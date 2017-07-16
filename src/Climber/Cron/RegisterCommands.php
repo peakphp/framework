@@ -50,7 +50,7 @@ class RegisterCommands
     public function add(array $classes)
     {
         foreach ($classes as $class) {
-            $this->app->add($this->app->container()->instantiate($class));
+            $this->app->add($this->app->container()->create($class));
         }
     }
 }

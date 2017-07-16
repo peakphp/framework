@@ -95,7 +95,7 @@ class ClassResolver
                         if (array_key_exists($name, $args)) {
                             $child_args = $args[$name];
                         }
-                        $class_args[] = $container->instantiate($name, $child_args, $explicit);
+                        $class_args[] = $container->create($name, $child_args, $explicit);
                     }
                 }
             } elseif (array_key_exists($i - ($class_count), $args)) {

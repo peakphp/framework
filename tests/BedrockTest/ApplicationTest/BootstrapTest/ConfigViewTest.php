@@ -18,7 +18,7 @@ class ConfigViewTest extends TestCase
     function testBootstrap()
     {
         $app = dummyApp();
-        Application::instantiate(ConfigView::class);
+        Application::create(ConfigView::class);
         $view = Application::get(View::class);
         $this->assertTrue($view->engine() instanceof Layouts);
         $this->assertTrue($view->var1 === 'foo');
@@ -36,6 +36,6 @@ class ConfigViewTest extends TestCase
         $app = dummyApp();
         $conf = Application::conf();
         unset($conf->view);
-        Application::instantiate(ConfigView::class);
+        Application::create(ConfigView::class);
     }
 }

@@ -33,7 +33,7 @@ class ClimberInstallTest extends TestCase
 
         try {
             new RegisterCommands($app);
-            $command = Application::container()->instantiate(CronInstallCommand::class);
+            $command = Application::container()->create(CronInstallCommand::class);
             $commandTester = new CommandTester($command);
             $commandTester->execute([]);
         } catch(Exception $e) {

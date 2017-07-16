@@ -23,10 +23,10 @@ class ChildApplicationControllerTest extends TestCase
     function testLoadController()
     {
         $app = dummyApp();
-        $parent = Application::instantiate(TestParentController::class, [
+        $parent = Application::create(TestParentController::class, [
             '' // empty namespace prefix
         ]);
-        $child = Application::instantiate(TestChildAction::class, [], [
+        $child = Application::create(TestChildAction::class, [], [
             ParentController::class => $parent
         ]);
 

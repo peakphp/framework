@@ -150,7 +150,7 @@ class FrontController
             throw new Exception('Application controller '.$this->route->controller.' not found');
         }
 
-        $this->controller = Application::instantiate($ctrl_name);
+        $this->controller = Application::create($ctrl_name);
 
         if ($this->controller instanceof ActionController) {
             $this->controller->setRoute($this->route);

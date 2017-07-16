@@ -42,7 +42,7 @@ abstract class AbstractProcessor
             return $this->processPipeInstance($pipe, $payload);
         } elseif (is_string($pipe) && class_exists($pipe)) {
             // class string with or without di
-            $pinst = (isset($this->container)) ? $this->container->instantiate($pipe) : new $pipe();
+            $pinst = (isset($this->container)) ? $this->container->create($pipe) : new $pipe();
             if (!$pinst instanceof PipeInterface) {
                 throw new Exception('Pipe "'.$pipe.'" must implements PipeInterface');
             }

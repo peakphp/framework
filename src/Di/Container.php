@@ -87,7 +87,7 @@ class Container implements ContainerInterface
      *                               }]
      * @return object
      */
-    public function instantiate($class, $args = [], $explicit = [])
+    public function create($class, $args = [], $explicit = [])
     {
         $resolver = $this->resolver;
 
@@ -125,9 +125,9 @@ class Container implements ContainerInterface
      * @see instantiate() for params
      * @return object
      */
-    public function instantiateAndStore($class, $args = [], $explicit = [])
+    public function createAndStore($class, $args = [], $explicit = [])
     {
-        $object = $this->instantiate($class, $args, $explicit);
+        $object = $this->create($class, $args, $explicit);
         $this->add($object);
         return $object;
     }

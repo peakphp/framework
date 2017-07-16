@@ -188,7 +188,7 @@ class View
             if (!class_exists($engine_class)) {
                 throw new Exception('View rendering engine '.$engine_name.' not found');
             }
-            $this->engine = Application::instantiate($engine_class);
+            $this->engine = Application::create($engine_class);
         }
 
         return $this->engine;
@@ -300,7 +300,7 @@ class View
             throw new Exception('View helper ['.$name.'] not found');
         }
 
-        $this->helpers[$name] = Application::instantiate($helper, $params);
+        $this->helpers[$name] = Application::create($helper, $params);
         return $this->helpers[$name];
     }
 }

@@ -30,7 +30,7 @@ class Bootstrapper
          * Execute processes
          */
         foreach ($this->processes as $process) {
-            $container->instantiate($process);
+            $container->create($process);
         }
 
         $this->boot();
