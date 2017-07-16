@@ -13,7 +13,7 @@ use \Exception;
 use \Closure;
 
 /**
- * Simple collection object
+ * Collection object
  */
 class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSerializable
 {
