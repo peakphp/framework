@@ -62,8 +62,8 @@ $foo = $container->get(MyObject::class);
 #### Use alias for class name
 
 ```PHP
-$container->add(new Monolog\Handler\StreamHandler(), 'Logger');
-$object = $container->get('LOgger');
+$container->add(new Monolog\Handler\StreamHandler(), 'LogStream');
+$object = $container->get('LogStream');
 ```
 
 #### Call an object method
