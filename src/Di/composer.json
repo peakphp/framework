@@ -16,6 +16,7 @@
     ],
     "require": {
         "php": ">=5.6.4"
+        "peakphp/common" : "2.*"
     },
     "autoload": {
         "psr-4": {
