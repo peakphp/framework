@@ -62,7 +62,7 @@ $foo = $container->create(Foo::class, [
 
 ```PHP
 $container->add(new Monolog\Logger);
-$foo = $container->get(MyObject::class);
+$logger = $container->get(Monolog\Logger::class);
 ```
 
 #### Use alias for class name
