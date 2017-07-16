@@ -51,7 +51,7 @@ echo $foo1->bar->name; //output: John Bar
 echo $foo2->bar->name; //output: John Bar
 ```
 
-#### Without Autowiring
+### Without Autowiring
 For small and medium projects, autowiring can do the job correctly, but as your project grow, you may want have more control over how your objects are instantiated and stored.
 First you need to disable autowiring with disableAutowiring() You have to define how ```Foo``` object dependencies will be resolve. This can be be done with method ```setDefinitions()```
 
