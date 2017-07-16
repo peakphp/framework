@@ -2,7 +2,6 @@
 
 namespace Peak\Di;
 
-use Peak\Common\Collection;
 use Psr\Container\ContainerInterface;
 use \InvalidArgumentException;
 
@@ -13,9 +12,9 @@ class Container implements ContainerInterface
 {
     /**
      * Container object instances collection
-     * @var \Peak\Common\Collection
+     * @var array
      */
-    protected $instances;
+    protected $instances = [];
 
     /**
      * Classes namespace alias
@@ -25,9 +24,9 @@ class Container implements ContainerInterface
 
     /**
      * Container object interfaces collection
-     * @var \Peak\Common\Collection
+     * @var array
      */
-    protected $interfaces;
+    protected $interfaces = [];
 
     /**
      * Class instance creator
@@ -64,8 +63,6 @@ class Container implements ContainerInterface
      */
     public function __construct()
     {
-        $this->instances    = new Collection();
-        $this->interfaces   = new Collection();
         $this->resolver     = new ClassResolver();
         $this->def_resolver = new ClassDefinitions();
         $this->instantiator = new ClassInstantiator();
@@ -140,7 +137,7 @@ class Container implements ContainerInterface
      */
     public function has($id)
     {
-        return isset($this->instances->$id);
+        return isset($this->instances[$id]);
     }
 
     /**
@@ -198,7 +195,6 @@ class Container implements ContainerInterface
     public function delete($id)
     {
         if ($this->has($id)) {
-
             //remove instance
             unset($this->instances[$id]);
 
@@ -207,7 +203,7 @@ class Container implements ContainerInterface
                 $key = array_search($id, $classes);
                 if ($key !== false) {
                     unset($classes[$key]);
-                    $this->interfaces->$int = $classes;
+                    $this->interfaces[$int] = $classes;
                 }
             }
         }
@@ -235,7 +231,7 @@ class Container implements ContainerInterface
      */
     public function hasAlias($name)
     {
-        return array_key_exists($name, $this->aliases);
+        return isset($this->aliases[$name]);
     }
 
     /**
@@ -251,7 +247,7 @@ class Container implements ContainerInterface
     /**
      * Get all stored instances
      *
-     * @return object
+     * @return array
      */
     public function getInstances()
     {
@@ -290,7 +286,7 @@ class Container implements ContainerInterface
      */
     public function hasInterface($name)
     {
-        return isset($this->interfaces->$name);
+        return isset($this->interfaces[$name]);
     }
 
     /**
@@ -310,7 +306,7 @@ class Container implements ContainerInterface
     /**
      * Get all stored interfaces
      *
-     * @return object
+     * @return array
      */
     public function getInterfaces()
     {
