@@ -2,10 +2,7 @@
 
 namespace Peak\Pipelines;
 
-use Peak\Pipelines\Pipeline;
-use Peak\Pipelines\PipeInterface;
-use Peak\Di\ContainerInterface;
-
+use Psr\Container\ContainerInterface;
 use \Closure;
 use \Exception;
 

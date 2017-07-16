@@ -2,7 +2,7 @@
 
 namespace Peak\Bedrock\Application;
 
-use Peak\Di\ContainerInterface;
+use Psr\Container\ContainerInterface;
 
 /**
  * Application Bootstrapper

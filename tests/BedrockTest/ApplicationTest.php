@@ -1,4 +1,5 @@
 <?php
+
 use PHPUnit\Framework\TestCase;
 
 use Peak\Bedrock\Application;
@@ -18,7 +19,7 @@ class ApplicationTest extends TestCase
     {
         Application::setContainer(new Container);
 
-        $this->assertTrue(Application::container() instanceof \Peak\Di\ContainerInterface);
+        $this->assertTrue(Application::container() instanceof Container);
     }
 
     /**

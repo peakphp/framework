@@ -3,6 +3,7 @@
 namespace Peak\Di;
 
 use Peak\Common\Collection;
+use Psr\Container\ContainerInterface;
 use \InvalidArgumentException;
 
 /**
@@ -135,25 +136,25 @@ class Container implements ContainerInterface
     /**
      * Has object instance
      *
-     * @param  string $name
+     * @param  string $id
      */
-    public function has($name)
+    public function has($id)
     {
-        return isset($this->instances->$name);
+        return isset($this->instances->$id);
     }
 
     /**
      * Get an instance if exists, otherwise return null
      *
-     * @param  string       $name
+     * @param  string $id
      * @return object|null
      */
-    public function get($name)
+    public function get($id)
     {
-        if ($this->has($name)) {
-            return $this->instances[$name];
-        } elseif ($this->hasAlias($name) && $this->has($this->aliases[$name])) {
-            return $this->instances[$this->aliases[$name]];
+        if ($this->has($id)) {
+            return $this->instances[$id];
+        } elseif ($this->hasAlias($id) && $this->has($this->aliases[$id])) {
+            return $this->instances[$this->aliases[$id]];
         }
         return null;
     }
@@ -191,19 +192,19 @@ class Container implements ContainerInterface
     /**
      * Delete an instance if exists.
      *
-     * @param  $name
+     * @param  string $id
      * @return $this
      */
-    public function delete($name)
+    public function delete($id)
     {
-        if ($this->has($name)) {
+        if ($this->has($id)) {
 
             //remove instance
-            unset($this->instances[$name]);
+            unset($this->instances[$id]);
 
             //remove interface reference if exists
             foreach ($this->interfaces as $int => $classes) {
-                $key = array_search($name, $classes);
+                $key = array_search($id, $classes);
                 if ($key !== false) {
                     unset($classes[$key]);
                     $this->interfaces->$int = $classes;

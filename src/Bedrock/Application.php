@@ -6,7 +6,7 @@ use Peak\Bedrock\Application\Config;
 use Peak\Bedrock\Application\ConfigResolver;
 use Peak\Bedrock\Application\Kernel;
 use Peak\Bedrock\Application\Routing;
-use Peak\Di\ContainerInterface;
+use Psr\Container\ContainerInterface;
 use \Exception;
 
 /**
@@ -23,7 +23,7 @@ class Application
     /**
      * Get application container
      *
-     * @return \Peak\Di\ContainerInterface
+     * @return ContainerInterface
      */
     public static function container()
     {
