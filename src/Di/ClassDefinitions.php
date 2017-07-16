@@ -9,7 +9,6 @@ use \Exception;
  */
 class ClassDefinitions
 {
-
     /**
      * @param $class
      * @param Container $container
@@ -46,8 +45,6 @@ class ClassDefinitions
         foreach ($args as $arg) {
             $class_args[] = $arg;
         }
-
-//        print_r($class_args);
 
         return $class_args;
     }
