@@ -21,7 +21,7 @@ class Foo
 
 $foo = $container->instantiate(Foo::class);
 ```
-In example above, a new ``Bar`` instance will be instantiated automatically is each time when creating ``Foo``. This mechanism rely on ```Reflection``` to resolve objects dependencies.
+In example above, a new ``Bar`` instance will be created automatically is each time when creating ``Foo``. This mechanism rely on ```Reflection``` to resolve objects dependencies.
 
 #### Reuse a class instance by storing it in the container with ```add()```
 
@@ -52,7 +52,22 @@ $foo = $container->instantiate(Foo::class, [
 ]);
 ```
 
+#### Get a stored object instance
+
+```PHP
+$container->add(new Monolog\Logger);
+$foo = $container->get(MyObject::class);
+```
+
+#### Use alias for class name
+
+```PHP
+$container->add(new Monolog\Handler\StreamHandler(), 'Logger');
+$object = $container->get('LOgger');
+```
+
 #### Call an object method
+You can also resolve dependencies of a object method by simply using ```call()```
 
 ```PHP
 
@@ -61,19 +76,13 @@ class Events
     public function method(Bar $bar, $alias = null)
     {
         //...
+        return $bar;
     }
 }
 
-$result = $container->call([
+$bar = $container->call([
     $events,
     'method
-]);
-
-// or with
-
-$foo = $container->instantiate(Foo::class, [
-    12,
-    'FooBar'
 ]);
 ```
 
