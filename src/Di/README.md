@@ -1,6 +1,12 @@
 # Peak Di
 Dependency injection container.
 
+## Installation outside framework
+
+```
+$ composer require peakphp/di
+```
+
 ## Usages
 
 ### With Autowiring
