@@ -53,7 +53,7 @@ echo $foo2->bar->name; //output: John Bar
 
 ### Without Autowiring
 For small and medium projects, autowiring can do the job correctly, but as your project grow, you may want have more control over how your objects are instantiated and stored.
-First you need to disable autowiring with disableAutowiring() You have to define how ```Foo``` object dependencies will be resolve. This can be be done with method ```setDefinitions()```
+First you need to disable autowiring with disableAutowiring(). To resolve ```Foo```, you have to define how dependencies will be resolved. This can be be done with method ```setDefinitions()```
 
 ```PHP
 
