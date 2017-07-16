@@ -3,7 +3,7 @@ Dependency injection container.
 
 ## Usages
 
-#### With Autowiring
+### With Autowiring
 
 No configuration needed. Just type-hint your constructor parameters and the container can guess which dependencies to inject.
 
@@ -31,7 +31,7 @@ $foo = $container->instantiate(Foo::class, [
 ]);
 ```
 
-##### Reuse a instance by storing it into the container with ```add()```
+#### Reuse a instance by storing it into the container with ```add()```
 
 ```PHP
 
