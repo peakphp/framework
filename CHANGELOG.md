@@ -1,10 +1,11 @@
 VERSION 2.15.0
 --------------
-Release Date: ?
+Release Date: 2017-07-16
 
  - added possibility to turn off autowiring for Peak\Di\Container
  - added Peak\Di\ClassDefinitions for handling dependencies when autowiring is disable
  - added method addDefinition(), setDefinitions() and hasDefinition() to Peak\Di\Container
+ - upgraded Peak\Common(peakphp/common) and Peak\Di(peakphp/di) to components on packagist
 
 VERSION 2.14.0
 --------------
