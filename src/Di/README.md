@@ -19,7 +19,7 @@ class Foo
 {
     public $bar;
 
-    public function __construct(Bar $bar, $id = null, $alias)
+    public function __construct(Bar $bar, $id = null, $alias = null)
     {
         $this->bar = $bar;
     }
