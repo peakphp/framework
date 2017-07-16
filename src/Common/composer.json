@@ -1,32 +1,27 @@
 {
-  "name": "peakphp/common",
-  "description": "Peak Common package.",
-  "keywords": ["peak", "common", "misc"],
-  "license": "BSD-3-Clause",
-  "homepage": "https://peakframework.com",
-  "support": {
-    "issues": "https://github.com/peakphp/framework/issues",
-    "source": "https://github.com/peakphp/framework"
-  },
-  "authors": [
-    {
-      "name": "Francois Lajoie",
-      "email": "francois@peakframework.com"
-    }
-  ],
-  "require": {
-    "php": ">=5.6.4"
-  },
-  "extra": {
-    "branch-alias": {
-      "dev-master": "2.14-dev"
-    }
-  },
-  "autoload": {
-    "psr-4": {
-      "Peak\\Common\\": ""
-    }
-  },
-  "minimum-stability": "dev",
-  "prefer-stable": true
+    "name": "peakphp/common",
+    "description": "Peak Common package.",
+    "keywords": ["peak", "common", "misc"],
+    "license": "BSD-3-Clause",
+    "homepage": "https://peakframework.com",
+    "support": {
+        "issues": "https://github.com/peakphp/framework/issues",
+        "source": "https://github.com/peakphp/framework"
+    },
+    "authors": [
+        {
+            "name": "Francois Lajoie",
+            "email": "francois@peakframework.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.6.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Peak\\Common\\": ""
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
