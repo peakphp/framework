@@ -2,6 +2,8 @@ VERSION 2.16.0
 --------------
 Release Date: ?
 
+ - replaced Peak\Di\ContainerInterface by Psr\Container\ContainerInterface
+
 VERSION 2.15.0
 --------------
 Release Date: 2017-07-16
