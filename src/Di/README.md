@@ -21,7 +21,7 @@ class Foo
 
 $foo = $container->instantiate(Foo::class);
 ```
-In example above, a new ``Bar`` instance will be instantiated automatically each time when creating ``Foo``
+In example above, a new ``Bar`` instance will be instantiated automatically each time when creating ``Foo``.
 
 Passing other types of arguments:
 ```PHP
