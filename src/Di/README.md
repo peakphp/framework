@@ -86,6 +86,7 @@ class Events
     }
 }
 
+$events = new Events;
 $bar = $container->call([
     $events,
     'method
