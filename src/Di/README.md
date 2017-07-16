@@ -1,5 +1,5 @@
 # Peak Di
-Dependency injection container.
+Dependency injection container allows you to standardize and centralize the way objects are constructed in your application.
 
 ## Installation outside framework
 
