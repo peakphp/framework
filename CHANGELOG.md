@@ -4,6 +4,10 @@ Release Date: ?
 
  - replaced Peak\Di\ContainerInterface by Psr\Container\ContainerInterface
  - removed Peak\Common dependency for Peak\Di
+ - added method resolveDefinition() to Peak\Di\Container
+ - container is now passed to Peak\Di\ExplicitResolver
+ 
+
 
 VERSION 2.15.0
 --------------
