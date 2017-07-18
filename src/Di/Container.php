@@ -3,6 +3,7 @@
 namespace Peak\Di;
 
 use Psr\Container\ContainerInterface;
+use \Closure;
 use \InvalidArgumentException;
 
 /**
@@ -76,7 +77,7 @@ class Container implements ContainerInterface
      *
      * @param  string $class     The class name to instantiate
      * @param  array  $args      Constructor argument(s) for parent and child if any
-     * @param  array  $explicit  Determine which instance should be use for an interface name.
+     * @param  mixed  $explicit  Determine which instance should be use for an interface name.
      *                           Required when you have multiple stored instances using the same interface name.
      *                           ex: ['myinterface' => 'myinstance3']
      *                           This support also custom closure
@@ -85,7 +86,7 @@ class Container implements ContainerInterface
      *                               }]
      * @return object
      */
-    public function create($class, $args = [], $explicit = [])
+    public function create($class, $args = [], $explicit = null)
     {
         $resolver = $this->resolver;
 
@@ -106,10 +107,10 @@ class Container implements ContainerInterface
      *
      * @param  array  $callback The callable to be called
      * @param  array  $args     The parameters to be passed to the callback, as an indexed array
-     * @param  array  $explicit @see instantiate
+     * @param  mixed  $explicit @see instantiate
      * @return mixed  the method call return if any
      */
-    public function call(array $callback, $args = [], $explicit = [])
+    public function call(array $callback, $args = [], $explicit = null)
     {
         // process class dependencies
         $args = $this->resolver->resolve($callback, $this, $args, $explicit);
@@ -316,13 +317,13 @@ class Container implements ContainerInterface
     /**
      * Add class definition
      *
-     * @param $class
-     * @param $definition
+     * @param string $name
+     * @param Closure $definition
      * @return $this
      */
-    public function addDefinition($class, $definition)
+    public function addDefinition($name, Closure $definition)
     {
-        $this->definitions[$class] = $definition;
+        $this->definitions[$name] = $definition;
         return $this;
     }
 
@@ -361,6 +362,15 @@ class Container implements ContainerInterface
             return $this->definitions[$name];
         }
         return null;
+    }
+
+    public function resolveDefinition($class, $args = [], $explicit = null)
+    {
+        // process class dependencies
+        $args = $this->def_resolver->resolve($class, $this, $args, $explicit);
+
+        // instantiate class with resolved dependencies and args if apply
+        return $this->instantiator->instantiate($class, $args);
     }
 
     /**
