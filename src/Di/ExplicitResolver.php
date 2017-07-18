@@ -2,6 +2,7 @@
 
 namespace Peak\Di;
 
+use Psr\Container\ContainerInterface;
 use \Closure;
 
 /**
@@ -9,21 +10,24 @@ use \Closure;
  */
 class ExplicitResolver
 {
+
     /**
      * Resolve class arguments dependencies
      *
      * @param  string $class
      * @return object
      */
-    public function resolve($needle, array $explicit = [])
+    public function resolve($needle, ContainerInterface $container, $explicit = null)
     {
         // Check for explicit dependency closure or object instance
-        if (array_key_exists($needle, $explicit)) {
+        if (is_array($explicit) && array_key_exists($needle, $explicit)) {
             if ($explicit[$needle] instanceof Closure) {
-                return $explicit[$needle]();
+                return $explicit[$needle]($container);
             } elseif (is_object($explicit[$needle])) {
                 return $explicit[$needle];
             }
+        } elseif($explicit instanceof Closure) {
+            return $explicit($container);
         }
         return null;
     }

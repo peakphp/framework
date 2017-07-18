@@ -48,7 +48,7 @@ class ClassResolver
      * @return array
      * @throws InvalidArgumentException
      */
-    public function resolve($class, Container $container, array $args = [], array $explicit = [])
+    public function resolve($class, Container $container, array $args = [], $explicit = null)
     {
         $method = '__construct';
 
@@ -78,7 +78,7 @@ class ClassResolver
                 ++$class_count;
 
                 // look for object in explicit dependency declaration
-                $result = $this->explicit->resolve($name, $explicit);
+                $result = $this->explicit->resolve($name, $container, $explicit);
                 if ($result !== null) {
                     $class_args[] = $result;
                 } elseif ($container->has($name)) {
