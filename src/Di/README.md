@@ -89,7 +89,7 @@ class Foo {
     }
 }
 
-// thrown an exception, there is no InterfaceA stored in container
+// throw an exception, there is no InterfaceA stored in container
 $foo = $container->create(Foo::class);
 
 // by adding class A instance, the container is now able to resolve Foo correctly
@@ -97,7 +97,7 @@ $container->add(new A);
 $foo = $container->create(Foo::class);
 
 // now we add another class that implement InterfaceA so you
-// need to specify which one to use otherwise, it will throw an exception
+// need to specify which one to use, otherwise, it will throw an exception
 $container->add(new B);
 $foo = $container->create(Foo::class, [], [
     InterfaceA::class => A::class
@@ -106,7 +106,7 @@ $foo = $container->create(Foo::class, [], [
 ```
 
 
-#### Reuse a class instance by storing it in the container with ```add()```
+### Reuse a class instance by storing it in the container with ```add()```
 By default, method create() will always look for stored instance of Bar before creating a new one.
 
 ```PHP
@@ -126,21 +126,21 @@ echo $foo1->bar->name; //output: John Bar
 echo $foo2->bar->name; //output: John Bar
 ```
 
-#### Get a stored object instance with ```get()```
+### Get a stored object instance with ```get()```
 
 ```PHP
 $container->add(new Monolog\Logger);
 $logger = $container->get(Monolog\Logger::class);
 ```
 
-#### Use alias for class name
+### Use alias for class name
 
 ```PHP
 $container->add(new Monolog\Handler\StreamHandler(), 'LogStream');
 $stream = $container->get('LogStream');
 ```
 
-#### Call an object method
+### Call an object method
 You can also resolve dependencies of a object method by simply using ```call()```
 
 ```PHP
