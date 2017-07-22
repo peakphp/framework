@@ -72,10 +72,13 @@ create(string $class [, array $args = [] [, mixed $explicit = null ]]])
 ```
 
 ```$class``` 
+
 Represent the class string name you want to create.
 
 ```$args```
-Represent other(s) non-object parameters if apply (or arguments if you prefer)
+
+Represent other(s) non-object parameters if apply (or arguments if you prefer).
+
 ```PHP
 class Foo {
     public function __construct(Bar $bar, $id = null, $desc = null) {
@@ -90,6 +93,7 @@ $foo = $container->create(Foo::class, [
 ```
 
 ```$explicit```
+
 Because autowiring is not always able to resolve an interface, you need to specify how the container should resolve it.
 
 Also, because this parameters can be also used to bypass a definition and/or a stored instance, you should only use it when you have no other choice. A better choice would be to rethink which object need to be stored or disable autowiring and use bind definition to control more precisely your objects creations.
