@@ -90,7 +90,9 @@ $foo = $container->create(Foo::class, [
 ```
 
 ```$explicit```
-Because interfaces can't be resolved by autowiring, you need to specify how the container should resolve an interface dependecy.
+Because autowiring is not always able to resolve an interface, you need to specify how the container should resolve it.
+
+Also, because this parameters can be also used to bypass a definition and/or a stored instance, you should only use it when you have no other choice. A better choice would be to rethink which object need to be stored or disable autowiring and use bind definition to control more precisely your objects creations.
 
 ```PHP
 interface InterfaceA {}
