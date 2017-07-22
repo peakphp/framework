@@ -71,11 +71,11 @@ When Autowiring is disabled:
 create(string $class [, array $args = [] [, mixed $explicit = null ]]])
 ```
 
-```$class``` 
+#### ```$class``` 
 
 Represent the class string name you want to create.
 
-```$args```
+#### ```$args```
 
 Represent other(s) non-object parameters if apply (or arguments if you prefer).
 
@@ -92,7 +92,7 @@ $foo = $container->create(Foo::class, [
 ]);
 ```
 
-```$explicit```
+#### ```$explicit```
 
 Because autowiring is not always able to resolve an interface, you need to specify how the container should resolve it.
 
