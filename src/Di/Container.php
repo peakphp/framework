@@ -2,6 +2,10 @@
 
 namespace Peak\Di;
 
+use Peak\Di\Binding\Factory;
+use Peak\Di\Binding\Instance;
+use Peak\Di\Binding\Prototype;
+use Peak\Di\Binding\Singleton;
 use Psr\Container\ContainerInterface;
 use \Closure;
 use \InvalidArgumentException;
@@ -43,9 +47,9 @@ class Container implements ContainerInterface
 
     /**
      * Class definitions resolver
-     * @var \Peak\Di\ClassDefinitions
+     * @var BindingResolver
      */
-    protected $def_resolver;
+    protected $binding_resolver;
 
     /**
      * Allow container to resolve automatically for your object needed
@@ -64,9 +68,9 @@ class Container implements ContainerInterface
      */
     public function __construct()
     {
-        $this->resolver     = new ClassResolver();
-        $this->def_resolver = new ClassDefinitions();
         $this->instantiator = new ClassInstantiator();
+        $this->resolver = new ClassResolver();
+        $this->binding_resolver = new BindingResolver();
     }
 
     /**
@@ -88,15 +92,22 @@ class Container implements ContainerInterface
      */
     public function create($class, $args = [], $explicit = null)
     {
-        $resolver = $this->resolver;
-
-        // if false, don't use reflection, use $definitions instead to resolve a class
+        // if false, don't use reflection, use $definitions binding instead to resolve a class
         if (!$this->auto_wiring) {
-            $resolver = $this->def_resolver;
+            $def = $this->getDefinition($class);
+            if (is_null($def)) {
+                throw new \Exception(__CLASS__.': no definition found for '.$class);
+            }
+            return $this->binding_resolver->resolve(
+                $this->getDefinition($class),
+                $this,
+                $args,
+                $explicit
+            );
         }
 
-        // process class dependencies
-        $args = $resolver->resolve($class, $this, $args, $explicit);
+        // process class dependencies with reflection
+        $args = $this->resolver->resolve($class, $this, $args, $explicit);
 
         // instantiate class with resolved dependencies and args if apply
         return $this->instantiator->instantiate($class, $args);
@@ -129,6 +140,23 @@ class Container implements ContainerInterface
         $object = $this->create($class, $args, $explicit);
         $this->add($object);
         return $object;
+    }
+
+    /**
+     * Resolve a stored definition
+     *
+     * @param string $definition
+     * @param array $args
+     * @throws \Exception
+     */
+    public function resolve($definition, $args = [])
+    {
+        $def = $this->getDefinition($definition);
+        if (is_null($def)) {
+            throw new \Exception('No definition found for '.$definition);
+        }
+
+        return $this->binding_resolver->resolve($def, $this, $args);
     }
 
     /**
@@ -321,7 +349,7 @@ class Container implements ContainerInterface
      * @param Closure $definition
      * @return $this
      */
-    public function addDefinition($name, Closure $definition)
+    public function addDefinition($name, $definition)
     {
         $this->definitions[$name] = $definition;
         return $this;
@@ -364,13 +392,43 @@ class Container implements ContainerInterface
         return null;
     }
 
-    public function resolveDefinition($class, $args = [], $explicit = null)
+    /**
+     * Add a singleton definition
+     *
+     * @param string $name
+     * @param mixed $definition
+     * @return $this
+     */
+    public function bind($name, $definition)
     {
-        // process class dependencies
-        $args = $this->def_resolver->resolve($class, $this, $args, $explicit);
+        $this->definitions[$name] = new Singleton($name, $definition);
+        return $this;
+    }
 
-        // instantiate class with resolved dependencies and args if apply
-        return $this->instantiator->instantiate($class, $args);
+    /**
+     * Add a prototype definition
+     *
+     * @param string $name
+     * @param mixed $definition
+     * @return $this
+     */
+    public function bindPrototype($name, $definition)
+    {
+        $this->definitions[$name] = new Prototype($name, $definition);
+        return $this;
+    }
+
+    /**
+     * Add a factory definition
+     *
+     * @param $name
+     * @param $definition
+     * @return $this
+     */
+    public function bindFactory($name, $definition)
+    {
+        $this->definitions[$name] = new Factory($name, $definition);
+        return $this;
     }
 
     /**
