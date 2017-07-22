@@ -100,6 +100,8 @@ Also, because this parameters can be also used to bypass a definition and/or a s
 
 ```PHP
 interface InterfaceA {}
+class A implements InterfaceA {}
+class B implements InterfaceA {}
 
 class Foo {
     public function __construct(InterfaceA $a) {
@@ -107,7 +109,20 @@ class Foo {
     }
 }
 
+// thrown an exception, there is no InterfaceA stored in container
 $foo = $container->create(Foo::class);
+
+// by adding class A instance, the container is now able to resolve foo correctly
+$container->add(new A);
+$foo = $container->create(Foo::class);
+
+// now we had another class that implement InterfaceA so you
+// need to specify which one to use otherwise it will throw an exception
+$container->add(new B);
+$foo = $container->create(Foo::class, [], [
+    InterfaceA::class => A::class
+]);
+
 ```
 
 #### Get a stored object instance
