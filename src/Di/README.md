@@ -31,7 +31,7 @@ $foo = $container->create(Foo::class);
 In example above, a new ``Bar`` instance will be created automatically is each time when creating ``Foo``. This mechanism rely on ```Reflection``` to resolve objects dependencies.
 
 #### Reuse a class instance by storing it in the container with ```add()```
-By default, method create() will always look
+By default, method create() will always look for stored instance of Bar before creating a new one.
 
 ```PHP
 $bar = new Bar();
@@ -59,15 +59,14 @@ Under the hood, ```create()``` go through those steps in order:
 When Autowiring is enabled :
  - Check constructor type-hinted argument(s) using Reflection
  - Check for $explicit definition(s) to overload/guide the resolver
- - If no $explicit, look for a stored instance in the container, or
-   use create() recursivly to instantiate a new one
+ - If no $explicit, look for a stored instance in the container, or instantiate a new one
    
 When Autowiring is disabled:
  - Check for $explicit definition(s) to overload/guide the resolver.
  - If no $explicit, look for a matching definition and resolve it.
 
 
-##### Parameters
+#### Parameters
 ```
 create(string $class [, array $args = [] [, mixed $explicit = null ]]])
 ```
