@@ -13,5 +13,4 @@ interface BindingInterface
     public function getDefinition();
 
     public function resolve(ContainerInterface $container, $args = [], $explicit = null);
-
 }

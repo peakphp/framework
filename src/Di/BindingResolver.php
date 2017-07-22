@@ -19,5 +19,4 @@ class BindingResolver
     {
         return $binding->resolve($container, $args, $explicit);
     }
-
 }
