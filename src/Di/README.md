@@ -28,27 +28,7 @@ class Foo
 $container = new Container;
 $foo = $container->create(Foo::class);
 ```
-In example above, a new ``Bar`` instance will be created automatically is each time when creating ``Foo``. This mechanism rely on ```Reflection``` to resolve objects dependencies.
-
-#### Reuse a class instance by storing it in the container with ```add()```
-By default, method create() will always look for stored instance of Bar before creating a new one.
-
-```PHP
-$bar = new Bar();
-$bar->name = "John Bar";
-
-$container->add($bar);
-
-$foo1 = $container->create(Foo::class);
-$foo2 = $container->create(Foo::class);
-```
-
-In example above, ``$foo1`` and ``$foo2`` will have the same instance of ``Bar``.
-
-```PHP
-echo $foo1->bar->name; //output: John Bar
-echo $foo2->bar->name; //output: John Bar
-```
+In example above, a new ``Bar`` instance is created automatically each time ```Foo``` is created. This mechanism rely on ```Reflection``` to resolve objects dependencies.
 
 ### How method create() work
 The method create() will help you to instantiate objects. It is important to understand that enabling/disabling autowiring affect how this method create objects.
@@ -125,7 +105,28 @@ $foo = $container->create(Foo::class, [], [
 
 ```
 
-#### Get a stored object instance
+
+#### Reuse a class instance by storing it in the container with ```add()```
+By default, method create() will always look for stored instance of Bar before creating a new one.
+
+```PHP
+$bar = new Bar();
+$bar->name = "John Bar";
+
+$container->add($bar);
+
+$foo1 = $container->create(Foo::class);
+$foo2 = $container->create(Foo::class);
+```
+
+In example above, ``$foo1`` and ``$foo2`` will have the same instance of ``Bar``.
+
+```PHP
+echo $foo1->bar->name; //output: John Bar
+echo $foo2->bar->name; //output: John Bar
+```
+
+#### Get a stored object instance with ```get()```
 
 ```PHP
 $container->add(new Monolog\Logger);
@@ -144,10 +145,8 @@ You can also resolve dependencies of a object method by simply using ```call()``
 
 ```PHP
 
-class Events
-{
-    public function method(Bar $bar, $alias = null)
-    {
+class Events {
+    public function method(Bar $bar, $alias = null) {
         //...
         return $bar;
     }
