@@ -112,12 +112,12 @@ class Foo {
 // thrown an exception, there is no InterfaceA stored in container
 $foo = $container->create(Foo::class);
 
-// by adding class A instance, the container is now able to resolve foo correctly
+// by adding class A instance, the container is now able to resolve Foo correctly
 $container->add(new A);
 $foo = $container->create(Foo::class);
 
-// now we had another class that implement InterfaceA so you
-// need to specify which one to use otherwise it will throw an exception
+// now we add another class that implement InterfaceA so you
+// need to specify which one to use otherwise, it will throw an exception
 $container->add(new B);
 $foo = $container->create(Foo::class, [], [
     InterfaceA::class => A::class
