@@ -375,8 +375,8 @@ class ContainerTest extends TestCase
     }
 
     /**
- * Test container resolve dependencies for object method
- */
+    * Test container resolve dependencies for object method
+    */
     function testMethodCall()
     {
         $container = new Container();
@@ -509,129 +509,5 @@ class ContainerTest extends TestCase
 
         $testdi = $container->create(TestDi15::class);
         $this->assertTrue($testdi->container instanceof \Peak\Di\Container);
-    }
-
-    /**
-     * Test definitions when autowiring is disable
-     */
-    function testDefinitions()
-    {
-        $container = new Container();
-        $container->disableAutoWiring();
-
-        $container->setDefinitions([
-            TestDi1::class => function($container) {
-                return [
-                    new Peak\Common\Collection([
-                        'foo' => 'bar'
-                    ])
-                ];
-            }
-        ]);
-
-        $object = $container->create(TestDi1::class, [
-            'value',
-            [12],
-            999
-        ]);
-
-        $this->assertTrue($object instanceof TestDi1);
-        $this->assertTrue($object->col->foo === 'bar');
-        $this->assertTrue($object->arg1 === 'value');
-
-        // with predefined arguments values
-        $container->setDefinitions([
-            TestDi1::class => function($container) {
-                return [
-                    new Peak\Common\Collection([
-                        'foo' => 'bar'
-                    ]),
-                    'value',
-                    [12],
-                    999
-                ];
-            }
-        ]);
-
-        $object = $container->create(TestDi1::class);
-
-        $this->assertTrue($object instanceof TestDi1);
-        $this->assertTrue($object->col->foo === 'bar');
-        $this->assertTrue($object->arg1 === 'value');
-    }
-
-    /**
-     * Test definitions when autowiring is disable
-     */
-    function testDefinitions2()
-    {
-        $container = new Container();
-        $container->disableAutoWiring();
-
-        $container->add(new Peak\Common\Collection([
-            'foo' => 'bar'
-        ]));
-
-        $container->setDefinitions([
-            TestDi1::class => function($container) {
-                return [
-                    $container->get(Peak\Common\Collection::class)
-                ];
-            }
-        ]);
-
-        $object = $container->create(TestDi1::class, [
-            'value',
-            [12],
-            999
-        ]);
-
-        $this->assertTrue($object instanceof TestDi1);
-        $this->assertTrue($object->col->foo === 'bar');
-    }
-
-    /**
-     * Test autowiring off with explicit declaration and no definition
-     */
-    function testDefinitionWithExplicit()
-    {
-        $container = new Container();
-        $container->disableAutoWiring();
-
-        $object = $container->create(TestDi1::class, [
-            'value',
-            [12],
-            999
-        ], function($container) {
-            return [
-                Peak\Common\Collection::class => new Peak\Common\Collection([
-                    'foo' => 'bar2'
-                ])
-            ];
-        });
-
-        $this->assertTrue($object instanceof TestDi1);
-        $this->assertTrue($object->col->foo === 'bar2');
-    }
-
-    /**
-     * Test definitions exceptions
-     */
-    function testDefinitionsException()
-    {
-        $container = new Container();
-        $container->disableAutoWiring();
-
-        try {
-            $object = $container->create(TestDi1::class, [
-                'value',
-                [12],
-                999
-            ]);
-        } catch(Exception $e) {
-            $error = true;
-        }
-
-        $this->assertTrue(isset($error));
     }
 }

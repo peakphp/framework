@@ -2,12 +2,13 @@ VERSION 2.16.0
 --------------
 Release Date: ?
 
- - replaced Peak\Di\ContainerInterface by Psr\Container\ContainerInterface
- - removed Peak\Common dependency for Peak\Di
- - added method resolveDefinition() to Peak\Di\Container
- - container is now passed to Peak\Di\ExplicitResolver
- 
+> Warning! Breaking changes with 2.15
 
+ - [BC] replaced Peak\Di\ContainerInterface by Psr\Container\ContainerInterface
+ - removed Peak\Common dependency for Peak\Di
+ - added method resolve(), bind(), bindPrototype() and bindFactory() to Peak\Di\Container
+ - [BC] container is now passed to Peak\Di\ExplicitResolver
+ - [BC] rewrited completely the definition part for Peak\Di and removed old Peak\Di\ClassDefinitions
 
 VERSION 2.15.0
 --------------
