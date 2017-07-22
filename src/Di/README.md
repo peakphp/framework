@@ -84,7 +84,7 @@ class Foo {
 }
 
 $foo = $container->create(Foo::class, [
-    12, // id
+    12, // $id
     'FooBar' // $desc
 ]);
 ```
