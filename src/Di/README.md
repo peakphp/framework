@@ -217,7 +217,7 @@ $foo2 = $container->create(Foo::class);
 ```
 
 ### Prototype definition with ```bindFactory()```
-Prototype accept various definitions and always try to return an new instance of dependencies. ```bindPrototype()``` will ignore stored instance(s) and definition(s) in the container.
+Prototype accept various definitions and always try to return a new instance of dependencies. ```bindPrototype()``` will ignore stored instance(s) and definition(s) in the container.
 
 ```PHP
 
@@ -245,11 +245,12 @@ $container->bindPrototype(Chest::class, [
 ]);
 
 $chest = $container->create(Chest::class);
-// $chest will always contain a new instance of Arm and Arm will always contains a new instance of Hand and so on. 
+// $chest will always contain a new instance of Arm and Arm will 
+// always contains a new instance of Hand and so on. 
 ```
 
 ### Definitions type
-There is many way you can declare definition. Here a list of accepted definition for each bind:
+There is many way you can declare definition. Here a list of accepted definition for each one:
 
 - ```bind()``` : callable, classname string, object, array of definition
 - ```bindFactory()``` : callable only
@@ -280,7 +281,7 @@ class D {}
 
 $container->bind(A::class, [
     A::class, // represent the class to instantiate
-    B: class => [ // nested definition for $b
+    B::class => [ // nested definition for $b
         B::class, // represent the class to instantiate
         D::class, // $d
         'JohnDoe' // $name
