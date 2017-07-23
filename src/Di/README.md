@@ -49,7 +49,7 @@ When Autowiring is disabled:
 
 
 #### Parameters
-```
+```PHP
 create(string $class [, array $args = [] [, mixed $explicit = null ]]])
 ```
 
@@ -292,7 +292,7 @@ $container->bind(A::class, [
 
 $a = $container->create(A::class);
 
-// vanilla php equivalent would be (without stored instance(s))
+// what php equivalent look like (without stored instance(s))
 $a = new A(
     new B(
         new D,
@@ -303,7 +303,7 @@ $a = new A(
 );
 ```
 
-In the example above, the main difference between bind() and php vanilla is that bind() will look for stored instance or definition to resolve dependency before creating a new instance. To reproduce the same behavior with php vanilla, bind() should be replaced by bindPrototype().  
+In the example above, the main difference between ```bind()``` and php vanilla is that ```bind()``` will look for stored instance or definition to resolve dependency before creating a new instance. To reproduce the same behavior with php vanilla, bind() should be replaced by ```bindPrototype()```.  
 
 A more concrete example would be something like:
 
@@ -317,7 +317,12 @@ class Database {
 
 // bind a singleton for database configuration
 $container->bind(DatabaseConfiguration::class, function(ContainerInterface $c) {
-    return new DatabaseConfiguration('locahost', 'dbexample', 'root', 'root');
+    return new DatabaseConfiguration(
+        'locahost', 
+        'dbexample', 
+        'root', 
+        'root'
+    );
 });
 
 $container->bind(Database::class, [
