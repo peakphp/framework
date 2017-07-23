@@ -1,7 +1,6 @@
 # Peak\Di
 ### PSR-11 Dependency Injection Container
-This component allows you to standardize and centralize the way objects are constructed in your application. 
-Implements [PSR-11](http://www.php-fig.org/psr/psr-11/)
+This component allows you to standardize and centralize the way objects are constructed in your application.
 
 ## Installation outside framework
 
