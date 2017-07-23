@@ -140,8 +140,8 @@ $container->add(new Monolog\Handler\StreamHandler(), 'LogStream');
 $stream = $container->get('LogStream');
 ```
 
-### Call an object method
-You can also resolve dependencies of a object method by simply using ```call()```
+### Call an object method with ``call()```
+You can also resolve dependencies of a object method with```call()```. It work like method ```create()``` except for the first parameter which must be an array containing the object instance and the method string name. 
 
 ```PHP
 
