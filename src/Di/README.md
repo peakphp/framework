@@ -163,13 +163,13 @@ $bar = $container->call([
 
 ### Definitions (Autowiring disabled)
 
-For small and medium projects, autowiring can do the job correctly, but as your project grow, you may want have more control over how your objects are instantiated and stored.
+For small and medium projects, autowiring can do the job correctly, but as your project grow, you may want to have more control over your objects creations.
 
-This can be be done with methods:
+This can be done with methods:
 
 - ```bind()```
-- ```bindFactory()```
 - ```bindPrototype()```
+- ```bindFactory()```
 
 To use definitions with ```create()```, you need to disable autowiring which is enabled by default:
 
@@ -180,7 +180,7 @@ $container->disableAutowiring();
 
  
 
-### Singleton definition
+### Singleton definition with ```bind()```
 The default singleton definition binding is an object that is first created than stored and reused.
 
 ```PHP
@@ -196,7 +196,7 @@ $other_foo = $container->create(Foo::class);
 // $foo === $other_foo
 ```
 
-### Factory definition
+### Factory definition with ```bindFactory()```
 A factory definition accept a callable definition that is executed each time.
 
 ```PHP
@@ -216,7 +216,7 @@ $foo2 = $container->create(Foo::class);
 // $foo !== $foo2
 ```
 
-### Prototype definition
+### Prototype definition with ```bindFactory()```
 Prototype accept various definitions and always try to return an new instance of dependencies. ```bindPrototype()``` will ignore stored instance(s) and definition(s) in the container.
 
 ```PHP
