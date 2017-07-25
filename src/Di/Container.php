@@ -6,6 +6,7 @@ use Peak\Di\Binding\Factory;
 use Peak\Di\Binding\Instance;
 use Peak\Di\Binding\Prototype;
 use Peak\Di\Binding\Singleton;
+use Peak\Di\Exception\NotFoundException;
 use Psr\Container\ContainerInterface;
 use \Closure;
 use \InvalidArgumentException;
@@ -174,6 +175,7 @@ class Container implements ContainerInterface
      *
      * @param  string $id
      * @return object|null
+     * @throws NotFoundException
      */
     public function get($id)
     {
@@ -182,7 +184,8 @@ class Container implements ContainerInterface
         } elseif ($this->hasAlias($id) && $this->has($this->aliases[$id])) {
             return $this->instances[$this->aliases[$id]];
         }
-        return null;
+
+        throw new NotFoundException($id);
     }
 
     /**
