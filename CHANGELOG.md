@@ -9,6 +9,7 @@ Release Date: ?
  - added method resolve(), bind(), bindPrototype() and bindFactory() to Peak\Di\Container
  - [BC] container is now passed to Peak\Di\ExplicitResolver
  - [BC] rewrited completely the definition part for Peak\Di and removed old Peak\Di\ClassDefinitions
+ - [BC] get() can throw a NotFoundException if id not found in Peak\Di\Container (PSR-11)
 
 VERSION 2.15.0
 --------------

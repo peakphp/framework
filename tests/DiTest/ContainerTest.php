@@ -334,8 +334,11 @@ class ContainerTest extends TestCase
 
         $this->assertTrue($testdi instanceof TestDi3);
 
-        $testdi9999 = $container->get('TestDi9999');
-        $this->assertTrue(is_null($testdi9999));
+        try {
+            $testdi9999 = $container->get('TestDi9999');
+        } catch(Exception $e) {
+        }
+        $this->assertTrue($e instanceof \Peak\Di\Exception\NotFoundException);
     }
 
     /**
@@ -349,11 +352,11 @@ class ContainerTest extends TestCase
         $container->add(new TestDi7()); 
         $container->add(new TestDi8());
 
-        $this->assertTrue($container->get('TestDi7') !== null);
+        $this->assertTrue($container->has('TestDi7') !== null);
 
         $container->delete('TestDi8');
-        $this->assertTrue($container->get('TestDi8') === null);
-        $this->assertTrue($container->get('TestDi7') !== null);
+        $this->assertFalse($container->has('TestDi8'));
+        $this->assertTrue($container->has('TestDi7'));
     }
 
     /**
