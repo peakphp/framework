@@ -99,16 +99,16 @@ class Cache
             if (is_null($this->cache_id)) {
                 //bug
                 $kernel = Application::kernel();
-                $this->genCacheId(
+                $this->generateId(
                     shortClassName($kernel->front->controller),
                     $kernel->front->controller->action
                 );
             }
         } else {
-            $this->genCacheId(null, $id);
+            $this->generateId(null, $id);
         }
 
-        $filepath = $this->getCacheFile();
+        $filepath = $this->getFile();
 
         if (file_exists($filepath)) {
             $file_date = filemtime($filepath);
@@ -126,7 +126,7 @@ class Cache
      * @param string $path
      * @param string $file
      */
-    public function genCacheId($path = null, $file = null, $return = false)
+    public function generateId($path = null, $file = null, $return = false)
     {
         $key = $path.$file;
 
@@ -149,7 +149,7 @@ class Cache
      *
      * @return string
      */
-    public function getCacheFile()
+    public function getFile()
     {
         $path = Application::conf('path.apptree.views_cache');
         return $path.'/'.$this->cache_id.'.php';
@@ -178,12 +178,20 @@ class Cache
     public function isValidBlock($id, $expiration)
     {
         $this->enable($expiration);
+
         if ($this->isValid($id)) {
             return true;
         }
-        
-        ob_start();
+
         return false;
+    }
+
+    /**
+     * Start a block cache
+     */
+    public function blockStart()
+    {
+        ob_start();
     }
 
     /**
@@ -191,16 +199,16 @@ class Cache
      */
     public function blockEnd()
     {
-        file_put_contents($this->getCacheFile(), preg_replace('!\s+!', ' ', ob_get_contents()));
+        file_put_contents($this->getFile(), preg_replace('!\s+!', ' ', ob_get_contents()));
         ob_get_flush();
     }
 
     /**
-     * Get a custom cache block
+     * Get cache content block
      */
-    public function getCacheBlock()
+    public function getContent()
     {
-        include $this->getCacheFile();
+        include $this->getFile();
     }
 
     /**
@@ -208,15 +216,13 @@ class Cache
      *
      * @param string $id
      */
-    public function deleteCache($id = null)
+    public function delete($id = null)
     {
-        if (!isset($id)) {
-            $this->genCacheId();
-        } else {
-            $this->genCacheId('', $id);
+        if (isset($id)) {
+            $this->generateId('', $id);
         }
 
-        $file = $this->getCacheFile();
+        $file = $this->getFile();
         if (file_exists($file)) {
             unlink($file);
         }
