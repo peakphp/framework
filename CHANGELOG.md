@@ -2,7 +2,7 @@ VERSION 2.16.0
 --------------
 Release Date: ?
 
-> Warning! Breaking changes with 2.15
+> Warning! Breaking changes with 2.15.x and below
 
  - [BC] replaced Peak\Di\ContainerInterface by Psr\Container\ContainerInterface
  - removed Peak\Common dependency for Peak\Di
@@ -10,6 +10,10 @@ Release Date: ?
  - [BC] container is now passed to Peak\Di\ExplicitResolver
  - [BC] rewrited completely the definition part for Peak\Di and removed old Peak\Di\ClassDefinitions
  - [BC] get() can throw a NotFoundException if id not found in Peak\Di\Container (PSR-11)
+ - [BC] renamed method genCacheId() to generateId(), getCacheFile() to getFile(), deleteCache() to
+   delete() and getCacheBlock() to getContent() in Peak\Bedrock\View\Cache
+ - [BC] removed ability to start the cache when using isValidBlock() in Peak\Bedrock\View\Cache
+ - added method blockStart() in Peak\Bedrock\View\Cache
 
 VERSION 2.15.0
 --------------
