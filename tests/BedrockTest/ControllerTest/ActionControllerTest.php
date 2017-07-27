@@ -194,7 +194,7 @@ class TestController extends ActionController
 
     public function _testingCache()
     {
-        $this->view->cache()->genCacheId('test', 'testingcache');
+        $this->view->cache()->generateId('test', 'testingcache');
         $this->view->cache()->enable(1);
         $cachevalid = $this->view->cache()->isValid();
         if(!$cachevalid) {
