@@ -117,7 +117,7 @@ abstract class Render
 
         //use cache instead outputting and evaluating view script
         if ($this->cache()->isValid()) {
-            include($this->cache()->getCacheFile());
+            include($this->cache()->getFile());
             return;
         }
 
@@ -127,7 +127,7 @@ abstract class Render
         //if(is_writable($cache_file)) { //fail if file cache doesn't already
         $content = ob_get_contents();
         //if($this->cache_strip) $content = preg_replace('!\s+!', ' ', $content);
-        file_put_contents($this->cache()->getCacheFile(), $content);
+        file_put_contents($this->cache()->getFile(), $content);
         //}
         ob_get_flush();
     }
