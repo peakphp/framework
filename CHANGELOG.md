@@ -14,6 +14,7 @@ Release Date: ?
    delete() and getCacheBlock() to getContent() in Peak\Bedrock\View\Cache
  - [BC] removed ability to start the cache when using isValidBlock() in Peak\Bedrock\View\Cache
  - added method blockStart() in Peak\Bedrock\View\Cache
+ - fixed bug with function session() in Peak\Bedrock\helpers.php
 
 VERSION 2.15.0
 --------------
