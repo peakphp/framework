@@ -121,15 +121,16 @@ if (!function_exists('session')) {
      * Create/Access to session collection
      *
      * @param  array|null $items
-     * @return \Peak\session
+     * @return \Peak\Config\Session
      */
     function session($path = null, $value = null)
     {
         $container = Application::container();
-        $sess = $container->get('Peak\Config\Session');
 
         if (!$container->has('Peak\Config\Session')) {
-            $sess = $container->instantiateAndStore('Peak\Config\Session');
+            $sess = $container->createAndStore('Peak\Config\Session');
+        } else {
+            $sess = $container->get('Peak\Config\Session');
         }
 
         if (!isset($path) && !isset($value)) {
