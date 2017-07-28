@@ -1,6 +1,6 @@
 VERSION 2.16.0
 --------------
-Release Date: ?
+Release Date: 2017-07-28
 
 > Warning! Breaking changes with 2.15.x and below
 
