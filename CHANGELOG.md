@@ -15,6 +15,7 @@ Release Date: ?
  - [BC] removed ability to start the cache when using isValidBlock() in Peak\Bedrock\View\Cache
  - added method blockStart() in Peak\Bedrock\View\Cache
  - fixed bug with function session() in Peak\Bedrock\helpers.php
+ - added Peak\Climber\Application instance to the container when creating it
 
 VERSION 2.15.0
 --------------
