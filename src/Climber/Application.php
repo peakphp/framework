@@ -71,6 +71,9 @@ class Application
         // set di container
         self::$container = $container;
 
+        // add app to the container
+        self::container()->add($this);
+
         // set configuration
         $this->config = (new ConfigResolver($config))->getMountedConfig();
         self::container()->add($this->config);
