@@ -2,7 +2,7 @@
 
 namespace Peak\Pipelines;
 
-use Peak\Di\ContainerInterface;
+use Psr\Container\ContainerInterface;
 
 class StrictProcessor extends AbstractProcessor implements ProcessorInterface
 {

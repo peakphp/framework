@@ -5,7 +5,7 @@ namespace Peak\Climber\Cron;
 use Peak\Climber\Application;
 use Peak\Climber\Cron\Exception\DatabaseNotFoundException;
 use Peak\Climber\Cron\Exception\TablesNotFoundException;
-use Peak\Di\ContainerInterface;
+use Psr\Container\ContainerInterface;
 use Symfony\Component\Process\Process;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 use \Exception;

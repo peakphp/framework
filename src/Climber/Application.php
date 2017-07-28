@@ -4,7 +4,7 @@ namespace Peak\Climber;
 
 use Peak\Bedrock\Application\Config;
 use Peak\Di\Container;
-use Peak\Di\ContainerInterface;
+use Psr\Container\ContainerInterface;
 use Symfony\Component\Console\Application as ConsoleApplication;
 
 class Application
