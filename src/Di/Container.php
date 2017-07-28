@@ -3,7 +3,6 @@
 namespace Peak\Di;
 
 use Peak\Di\Binding\Factory;
-use Peak\Di\Binding\Instance;
 use Peak\Di\Binding\Prototype;
 use Peak\Di\Binding\Singleton;
 use Peak\Di\Exception\NotFoundException;
