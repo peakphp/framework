@@ -5,6 +5,7 @@ Release Date: ?
  - renamed Peak\Climber\Cron\Bootstrap to Peak\Climber\Cron\BootstrapDatabase
  - added default prefix and output a message when cron job failed in Peak\Climber\Cron\Executor
  - renamed Climber cron commands to avoid collision with user app cli commands names
+ - added Peak\Climber\Bootstrap\ConfigCommands
 
 VERSION 2.16.0
 --------------
