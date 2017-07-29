@@ -6,7 +6,7 @@ use Doctrine\DBAL\Configuration;
 use Doctrine\DBAL\DriverManager;
 use Peak\Climber\Application;
 
-class Bootstrap
+class BootstrapDatabase
 {
     /**
      * Constructor.
