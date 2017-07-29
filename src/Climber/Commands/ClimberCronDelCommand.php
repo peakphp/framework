@@ -11,7 +11,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-class CronDelCommand extends CronCommand
+class ClimberCronDelCommand extends CronCommand
 {
     /**
      * Configure command
@@ -20,7 +20,7 @@ class CronDelCommand extends CronCommand
     {
         $this
             // the name of the command (the part after "bin/console")
-            ->setName('cron:del')
+            ->setName($this->prefix.':del')
 
             // the short description shown while running "php bin/console list"
             ->setDescription('Delete cron job(s)')

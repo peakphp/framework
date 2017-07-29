@@ -12,7 +12,7 @@ use Symfony\Component\Console\Input\InputDefinition;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class CronUpdateCommand extends CronCommand
+class ClimberCronUpdateCommand extends CronCommand
 {
     /**
      * Configure command
@@ -21,7 +21,7 @@ class CronUpdateCommand extends CronCommand
     {
         $this
             // the name of the command (the part after "bin/console")
-            ->setName('cron:update')
+            ->setName($this->prefix.':update')
 
             // the short description shown while running "php bin/console list"
             ->setDescription('Update cron job')

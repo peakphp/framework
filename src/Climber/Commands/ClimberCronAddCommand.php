@@ -2,6 +2,7 @@
 
 namespace Peak\Climber\Commands;
 
+use Peak\Bedrock\Application;
 use Peak\Climber\Cron\CronCommand;
 use Peak\Climber\Cron\OptionFormat;
 use Peak\Common\TimeExpression;
@@ -11,7 +12,7 @@ use Symfony\Component\Console\Input\InputDefinition;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class CronAddCommand extends CronCommand
+class ClimberCronAddCommand extends CronCommand
 {
     /**
      * Configure command
@@ -20,7 +21,7 @@ class CronAddCommand extends CronCommand
     {
         $this
             // the name of the command (the part after "bin/console")
-            ->setName('cron:add')
+            ->setName($this->prefix.':add')
 
             // the short description shown while running "php bin/console list"
             ->setDescription('Add cron job')

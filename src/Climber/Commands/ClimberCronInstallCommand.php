@@ -11,7 +11,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class CronInstallCommand extends CronCommand
+class ClimberCronInstallCommand extends CronCommand
 {
     /**
      * Configure command
@@ -20,7 +20,7 @@ class CronInstallCommand extends CronCommand
     {
         $this
             // the name of the command (the part after "bin/console")
-            ->setName('cron:install')
+            ->setName($this->prefix.':install')
 
             // the short description shown while running "php bin/console list"
             ->setDescription('Install and/or check if cron tables are installed correctly.')

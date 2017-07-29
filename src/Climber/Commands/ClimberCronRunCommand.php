@@ -12,7 +12,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use \Exception;
 
-class CronRunCommand extends CronCommand
+class ClimberCronRunCommand extends CronCommand
 {
     /**
      * Configure command
@@ -21,7 +21,7 @@ class CronRunCommand extends CronCommand
     {
         $this
             // the name of the command (the part after "bin/console")
-            ->setName('cron:run')
+            ->setName($this->prefix.':run')
 
             // the short description shown while running "php bin/console list"
             ->setDescription('Run cron jobs')
