@@ -3,12 +3,6 @@
 namespace Peak\Climber\Cron;
 
 use Peak\Climber\Application;
-use Peak\Climber\Commands\CronAddCommand;
-use Peak\Climber\Commands\CronDelCommand;
-use Peak\Climber\Commands\CronInstallCommand;
-use Peak\Climber\Commands\CronListCommand;
-use Peak\Climber\Commands\CronRunCommand;
-use Peak\Climber\Commands\CronUpdateCommand;
 use Peak\Climber\Cron\Exception\InvalidDatabaseConfigException;
 
 class RegisterCommands
@@ -19,27 +13,33 @@ class RegisterCommands
     protected $app;
 
     /**
+     * Cron commands classes
+     * @var array
+     */
+    protected $commands = [
+        \Peak\Climber\Commands\CronAddCommand::class,
+        \Peak\Climber\Commands\CronDelCommand::class,
+        \Peak\Climber\Commands\CronInstallCommand::class,
+        \Peak\Climber\Commands\CronListCommand::class,
+        \Peak\Climber\Commands\CronRunCommand::class,
+        \Peak\Climber\Commands\CronUpdateCommand::class,
+    ];
+
+    /**
      * Constructor
      * @param Application $app
      */
-    public function __construct(Application $app)
+    public function __construct(Application $app, $prefix = 'cron')
     {
         $this->app = $app;
 
-        if (!$this->app->conf()->has('crondb') || !is_array($this->app->conf('crondb'))) {
-            throw new InvalidDatabaseConfigException(__CLASS__.': configuration [crondb] is missing or invalid.');
+        if (!$this->app->conf()->has('cron.db') || !is_array($this->app->conf('cron.db'))) {
+            throw new InvalidDatabaseConfigException(__CLASS__.': configuration [cron.db] is missing or invalid.');
         }
 
-        new Bootstrap($this->app->conf('crondb'));
+        new BootstrapDatabase($this->app->conf('cron.db'));
 
-        $this->add([
-            CronAddCommand::class,
-            CronUpdateCommand::class,
-            CronDelCommand::class,
-            CronListCommand::class,
-            CronRunCommand::class,
-            CronInstallCommand::class,
-        ]);
+        $this->add($this->commands);
     }
 
     /**
