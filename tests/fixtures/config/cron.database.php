@@ -2,8 +2,10 @@
 
 return [
     //sqlite
-    'crondb' => [
-        'driver' => 'pdo_sqlite',
-        'path' => FIXTURES_PATH.'/database/cron.sqlite'
+    'cron' => [
+        'db' => [
+            'driver' => 'pdo_sqlite',
+            'path' => FIXTURES_PATH.'/database/cron.sqlite'
+        ]
     ]
 ];
