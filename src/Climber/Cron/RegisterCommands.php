@@ -17,12 +17,12 @@ class RegisterCommands
      * @var array
      */
     protected $commands = [
-        \Peak\Climber\Commands\CronAddCommand::class,
-        \Peak\Climber\Commands\CronDelCommand::class,
-        \Peak\Climber\Commands\CronInstallCommand::class,
-        \Peak\Climber\Commands\CronListCommand::class,
-        \Peak\Climber\Commands\CronRunCommand::class,
-        \Peak\Climber\Commands\CronUpdateCommand::class,
+        \Peak\Climber\Commands\ClimberCronAddCommand::class,
+        \Peak\Climber\Commands\ClimberCronDelCommand::class,
+        \Peak\Climber\Commands\ClimberCronInstallCommand::class,
+        \Peak\Climber\Commands\ClimberCronListCommand::class,
+        \Peak\Climber\Commands\ClimberCronRunCommand::class,
+        \Peak\Climber\Commands\ClimberCronUpdateCommand::class,
     ];
 
     /**
