@@ -23,6 +23,12 @@ class Executor
     protected $app;
 
     /**
+     * Default prefix for executing climber commands
+     * @var string
+     */
+    protected $default_prefix = 'php climber';
+
+    /**
      * Constructor
      *
      * @param ContainerInterface|null $container
@@ -32,10 +38,9 @@ class Executor
      */
     public function __construct(ContainerInterface $container = null, array $config = [])
     {
-
         $this->app = new Application($container, $config);
 
-        new Bootstrap($this->app->conf('crondb'));
+        new BootstrapDatabase($this->app->conf('cron.db'));
 
         $this->conn = Application::container()->get('CronDbConnection');
 
@@ -84,9 +89,17 @@ class Executor
         }
     }
 
+    /**
+     * Process cron job
+     * @param $cron
+     */
     public function processCron($cron)
     {
-        $climber_prefix = $this->app->conf('climber_cmd_prefix');
+        $climber_prefix = $this->default_prefix;
+
+        if ($this->app->conf()->has('cmd_prefix')) {
+            $climber_prefix = $this->app->conf('cmd_prefix');
+        }
 
         $update = [
             'last_execution' => time(),
@@ -123,6 +136,7 @@ class Executor
             }
         } catch(Exception $e) {
             $update['error'] = $e->getMessage();
+            echo 'Cron #'.$cron['id'].' failed!';
         }
 
         $this->conn->update('climber_cron', $update, [
