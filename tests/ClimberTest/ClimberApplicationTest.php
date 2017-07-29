@@ -4,7 +4,7 @@ use PHPUnit\Framework\TestCase;
 
 use Peak\Climber\Application;
 use Peak\Bedrock\Application\Config;
-use Peak\Climber\Commands\CronAddCommand;
+use Peak\Climber\Commands\ClimberCronAddCommand;
 use Peak\Climber\Cron\RegisterCommands;
 use Peak\Climber\Cron\Exception\InvalidDatabaseConfigException;
 use Peak\Climber\Cron\Exception\DatabaseNotFoundException;
@@ -81,7 +81,7 @@ class ClimberApplicationTest extends TestCase
 
         try {
             new RegisterCommands($app);
-            $addcommand = Application::container()->create(CronAddCommand::class);
+            $addcommand = Application::container()->create(ClimberCronAddCommand::class);
             $commandTester = new CommandTester($addcommand);
             $commandTester->execute([]);
         } catch(Exception $e) {
@@ -101,7 +101,7 @@ class ClimberApplicationTest extends TestCase
 
         try {
             new RegisterCommands($app);
-            $addcommand = Application::container()->create(CronAddCommand::class);
+            $addcommand = Application::container()->create(ClimberCronAddCommand::class);
             $commandTester = new CommandTester($addcommand);
             $commandTester->execute([]);
         } catch(Exception $e) {
@@ -127,7 +127,7 @@ class ClimberApplicationTest extends TestCase
 
         try {
             new RegisterCommands($app);
-            $addcommand = Application::container()->create(CronAddCommand::class);
+            $addcommand = Application::container()->create(ClimberCronAddCommand::class);
             $commandTester = new CommandTester($addcommand);
             $commandTester->execute([]);
         } catch(Exception $e) {

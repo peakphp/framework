@@ -3,7 +3,7 @@
 use PHPUnit\Framework\TestCase;
 
 use Peak\Climber\Application;
-use Peak\Climber\Commands\CronInstallCommand;
+use Peak\Climber\Commands\ClimberCronInstallCommand;
 use Peak\Climber\Cron\RegisterCommands;
 use Symfony\Component\Console\Tester\CommandTester;
 
@@ -33,7 +33,7 @@ class ClimberInstallTest extends TestCase
 
         try {
             new RegisterCommands($app);
-            $command = Application::container()->create(CronInstallCommand::class);
+            $command = Application::container()->create(ClimberCronInstallCommand::class);
             $commandTester = new CommandTester($command);
             $commandTester->execute([]);
         } catch(Exception $e) {
