@@ -97,8 +97,8 @@ class Executor
     {
         $climber_prefix = $this->default_prefix;
 
-        if ($this->app->conf()->has('cmd_prefix')) {
-            $climber_prefix = $this->app->conf('cmd_prefix');
+        if ($this->app->conf()->has('cron.processor_prefix')) {
+            $climber_prefix = $this->app->conf('cron.processor_prefix');
         }
 
         $update = [
