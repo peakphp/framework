@@ -54,7 +54,7 @@ class CronInstallCommand extends CronCommand
 
         if (!Cron::isInstalled($this->conn)) {
             $output->writeln('Installing cron system...');
-            new InstallDatabase($this->conn, Application::conf('crondb.driver'));
+            new InstallDatabase($this->conn, Application::conf('cron.db.driver'));
             return $output->writeln('Done!');
         }
 
