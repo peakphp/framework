@@ -38,6 +38,9 @@ class ConfigLoaderTest extends TestCase
         FIXTURES_PATH.'/config/malformed.json',
     ];
 
+    /**
+     * Test load as Collection object
+     */
     function testLoadFilesAsCollection()
     {
         $col = (new ConfigLoader(
@@ -57,6 +60,9 @@ class ConfigLoaderTest extends TestCase
         $this->assertTrue($col->iam === 'arrayfile1');
     }
 
+    /**
+     * Test load as DotNotationCollection object
+     */
     function testLoadFilesAsDotNotationCollection()
     {
         $col = (new ConfigLoader($this->good_files, FIXTURES_PATH))->asDotNotationCollection();
@@ -72,6 +78,9 @@ class ConfigLoaderTest extends TestCase
         $this->assertTrue($col->iam === 'arrayfile1');
     }
 
+    /**
+     * Test load as array
+     */
     function testLoadFilesAsArray()
     {
         $array = (new ConfigLoader($this->good_files, FIXTURES_PATH))->asArray();
@@ -79,6 +88,9 @@ class ConfigLoaderTest extends TestCase
         $this->assertTrue($array['iam'] === 'arrayfile2');
     }
 
+    /**
+     * Test load as object
+     */
     function testLoadFilesAsObject()
     {
         $obj = (new ConfigLoader($this->good_files, FIXTURES_PATH))->asObject();
@@ -86,6 +98,9 @@ class ConfigLoaderTest extends TestCase
         $this->assertTrue($obj->iam === 'arrayfile2');
     }
 
+    /**
+     * Test load as closure
+     */
     function testLoadFilesAsClosure()
     {
         $obj = (new ConfigLoader($this->good_files, FIXTURES_PATH))->asClosure(function($coll) {
@@ -96,6 +111,9 @@ class ConfigLoaderTest extends TestCase
         $this->assertTrue($obj->iam === 'arrayfile2');
     }
 
+    /**
+     * Test not found
+     */
     function testExceptionFileNotFound()
     {
         try {
@@ -106,9 +124,13 @@ class ConfigLoaderTest extends TestCase
         $this->assertTrue(isset($error));
     }
 
+    /**
+     * Test multiple configuration type together
+     */
     function testMixedTypeConfigs()
     {
         $col = (new ConfigLoader([
+            FIXTURES_PATH.'/config/simple.txt',
             new Collection([
                 'foo' => 'bar'
             ]),
@@ -119,7 +141,7 @@ class ConfigLoaderTest extends TestCase
             ['array' => 'hophop'],
             function() {
                 return ['anonym' => 'function'];
-            }
+            },
         ]))->asCollection();
 
         $this->assertTrue($col instanceof Collection);
@@ -129,6 +151,8 @@ class ConfigLoaderTest extends TestCase
         $this->assertTrue($col->array === 'hophop');
         $this->assertTrue($col->anonym === 'function');
         $this->assertTrue(count($col->items) == 2);
+        $this->assertTrue(isset($col[0]));
+        $this->assertTrue(trim($col[0]) === 'John');
         $this->assertTrue(isset($col->items) == 2);
     }
 }
