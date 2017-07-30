@@ -2,7 +2,6 @@
 
 namespace Peak\Config;
 
-
 class Loader implements LoaderInterface
 {
     /**
@@ -19,6 +18,7 @@ class Loader implements LoaderInterface
 
     /**
      * Return content
+     *
      * @return array
      */
     public function getContent()
