@@ -6,6 +6,7 @@ Release Date: ?
  - added default prefix and output a message when cron job failed in Peak\Climber\Cron\Executor
  - renamed Climber cron commands to avoid collision with user app cli commands names
  - added Peak\Climber\Bootstrap\ConfigCommands
+ - added lock mechanism in Peak\Climber\Cron\Executor to prevent re-executing unfinished jobs.
 
 VERSION 2.16.0
 --------------
