@@ -44,12 +44,19 @@ class TimeExpression
      * @var array
      */
     protected $str_tokens = [
+        'ms',
         'sec',
         'min',
         'hour',
         'day',
         'year'
     ];
+
+    /**
+     * Default string format for __toString()
+     * @var string
+     */
+    protected $string_format = '%d%s';
 
     /**
      * Constructor.
@@ -80,12 +87,17 @@ class TimeExpression
                 continue;
             }
             $mod = 0;
-            if (($time % $value) > 0) {
-                $mod = ($time % $value);
-                $time -= round($mod);
+            if (($time & $value)) {
+                $mod = fmod ($time, $value);
+                $time -= $mod;
             }
-            $div = $time / $value;
-            $expression[] = $div.' '.$token.(($div > 1) ? 's' : '');
+            $div = round($time / $value);
+
+            $expression[] = sprintf(
+                $this->string_format,
+                $div,
+                ($token.(($div > 1 && substr($token,-1,1) !== 's') ? 's' : ''))
+            );
             $time = $mod;
         }
 
@@ -93,11 +105,15 @@ class TimeExpression
     }
 
     /**
-     * Shortcut
+     * Shortcut of __toString + can overload string format
+     *
      * @return string
      */
-    public function toString()
+    public function toString($format = null)
     {
+        if (isset($format)) {
+            $this->string_format = $format;
+        }
         return $this->__toString();
     }
 
