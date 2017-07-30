@@ -56,7 +56,7 @@ class TimeExpression
      * Default string format for __toString()
      * @var string
      */
-    protected $string_format = '%d%s';
+    protected $string_format = '%d %s';
 
     /**
      * Constructor.
