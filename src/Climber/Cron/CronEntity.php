@@ -143,8 +143,10 @@ class CronEntity
     {
         if (!is_null($data)) {
             switch ($data) {
-                case 1: return 'success';
-                default: return 'fail';
+                case 1:
+                    return 'success';
+                default:
+                    return 'fail';
             }
         }
     }
