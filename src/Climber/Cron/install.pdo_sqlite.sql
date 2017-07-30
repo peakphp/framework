@@ -5,6 +5,7 @@ CREATE TABLE IF NOT EXISTS `climber_cron` (
     `sys_cmd` INTEGER DEFAULT 0,
     `repeat` INTEGER DEFAULT 0,
     `status`	INTEGER DEFAULT NULL,
+    `in_action` INTEGER DEFAULT 0,
     `error` TEXT,
     `interval`	INTEGER,
     `last_execution`	INTEGER,
