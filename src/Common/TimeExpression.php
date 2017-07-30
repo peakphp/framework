@@ -151,7 +151,7 @@ class TimeExpression
             $this->time = $this->expression;
         } elseif(is_string($this->expression)) {
             if (preg_match_all($this->regexPattern(), $this->expression, $matches)) {
-                foreach( $matches[1] as $index => $value) {
+                foreach ($matches[1] as $index => $value) {
                     $this->time += $this->tokens[$matches[2][$index]] * $value;
                 }
             }
