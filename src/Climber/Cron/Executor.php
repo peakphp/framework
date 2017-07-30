@@ -61,7 +61,8 @@ class Executor
 
         $qb->select('*')
             ->from('climber_cron')
-            ->where('enabled = 1');
+            ->where('enabled = 1')
+            ->where('in_action = 0');
 
         $result = $qb->execute()->fetchAll();
         $count = count($result);
@@ -106,6 +107,7 @@ class Executor
             'status' => 1,
             'error' => '',
             'next_execution' => time() + $cron['interval'],
+            'in_action' => 0
         ];
 
         if ($cron['repeat'] > 1) {
@@ -127,6 +129,13 @@ class Executor
         echo 'Running cron job #'.$cron['id'].':'."\n";
         echo '$ '.$cmd."\n";
 
+        // lock job
+        $this->conn->update('climber_cron',
+            ['in_action' => 1],
+            ['id' => $cron['id']]
+        );
+
+        // run the job
         try {
             $process = new Process($cmd);
             $process->run();
