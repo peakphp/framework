@@ -15,7 +15,7 @@ class Loader implements LoaderInterface
      * Config resource content
      * @var array
      */
-    protected $content;
+    protected $content = [];
 
     /**
      * Return content
