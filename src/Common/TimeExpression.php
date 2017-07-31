@@ -101,7 +101,12 @@ class TimeExpression
             $time = $mod;
         }
 
-        return implode(' ', $expression);
+        $return = implode(' ', $expression);
+        if (empty($return)) {
+            $return = sprintf($this->string_format, 0, 'ms');
+        }
+
+        return $return;
     }
 
     /**
