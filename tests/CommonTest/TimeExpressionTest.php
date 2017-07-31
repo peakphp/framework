@@ -23,5 +23,8 @@ class TimeExpressionTest extends TestCase
 
         $this->assertTrue((new TimeExpression(60.50001))->toString() === '1 min 500 ms');
         $this->assertTrue((new TimeExpression(60.50001))->toString('%d%s') === '1min 500ms');
+
+        echo (new TimeExpression(0))->toString('%d%s');
+        $this->assertTrue((new TimeExpression(0))->toString('%d%s') === '0ms');
     }
 }
