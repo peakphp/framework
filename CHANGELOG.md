@@ -10,6 +10,7 @@ Release Date: ?
  - added Peak\Config\Type\TxtLoader
  - added ms precision and formatting option for toString() in Peak\Common\TimeExpression
  - fixed bug in Peak\Climber\Cron\Executor where cron repeat count field was not updated
+ - fixed bug in Peak\Common\TimeExpression::toString() when time is 0
 
 VERSION 2.16.0
 --------------
