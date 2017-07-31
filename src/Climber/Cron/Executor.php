@@ -116,6 +116,8 @@ class Executor
             $cron['repeat'] = -1;
         }
 
+        $update['repeat'] = $cron['repeat'];
+
         if ($cron['repeat'] == -1) {
             $update['enabled'] = 0;
             $update['next_execution'] = null;
