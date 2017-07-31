@@ -9,6 +9,7 @@ Release Date: ?
  - added lock mechanism in Peak\Climber\Cron\Executor to prevent re-executing unfinished jobs.
  - added Peak\Config\Type\TxtLoader
  - added ms precision and formatting option for toString() in Peak\Common\TimeExpression
+ - fixed bug in Peak\Climber\Cron\Executor where cron repeat count field was not updated
 
 VERSION 2.16.0
 --------------
