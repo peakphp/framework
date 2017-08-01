@@ -12,6 +12,7 @@ Release Date: ?
  - fixed bug in Peak\Climber\Cron\Executor where cron repeat count field was not updated
  - fixed bug in Peak\Common\TimeExpression::toString() when time is 0
  - updated function config() in Peak\Bedrock\helpers.php to support cli application config too
+ - updated Peak\Climber\Commands\ClimberCronRunCommand to propagate current environment to cron running configuration
 
 VERSION 2.16.0
 --------------
