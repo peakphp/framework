@@ -53,11 +53,33 @@ class ClimberCronRunCommand extends CronCommand
             return $output->writeln($e->getMessage());
         }
 
+        $config = $this->propagateEnv($config);
+
         try {
             // create cli application for cron
             (new Executor(null, $config))->run();
         } catch(Exception $e) {
             echo '['.get_class($e).']:'."\n".$e->getMessage();
         }
+    }
+
+
+    /**
+     * Propagate current environment to cron run config. Recursive
+     *
+     * @param $config
+     * @return mixed
+     */
+    protected function propagateEnv($config)
+    {
+        foreach ($config as $c) {
+            if (is_array($c)) {
+                $c = $this->propagateEnv($c);
+            } else {
+                $c = str_replace('%env%', APPLICATION_ENV, $c);
+            }
+        }
+
+        return $config;
     }
 }
