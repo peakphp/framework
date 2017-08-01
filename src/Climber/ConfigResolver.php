@@ -43,7 +43,6 @@ class ConfigResolver
             $config
         ];
 
-
         if (isset($config['conf']) && !empty($config['conf'])) {
             if (!is_array($config['conf'])) {
                 $config['conf'] = [$config['conf']];
