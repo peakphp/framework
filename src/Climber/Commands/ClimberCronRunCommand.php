@@ -72,11 +72,11 @@ class ClimberCronRunCommand extends CronCommand
      */
     protected function propagateEnv($config)
     {
-        foreach ($config as $c) {
+        foreach ($config as $index => $c) {
             if (is_array($c)) {
-                $c = $this->propagateEnv($c);
+                $config[$index] = $this->propagateEnv($c);
             } else {
-                $c = str_replace('%env%', APPLICATION_ENV, $c);
+                $config[$index] = str_replace('%env%', APPLICATION_ENV, $c);
             }
         }
 
