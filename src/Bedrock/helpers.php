@@ -7,6 +7,7 @@
 */
 
 use Peak\Bedrock\Application;
+use Peak\Climber\Application as CliApplication;
 use Peak\Common\Language;
 
 /**
@@ -109,6 +110,9 @@ if (!function_exists('config')) {
      */
     function config($path = null, $value = null)
     {
+        if (isCli()) {
+            return CliApplication::conf($path, $value);
+        }
         return Application::conf($path, $value);
     }
 }
