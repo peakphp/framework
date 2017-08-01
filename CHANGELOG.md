@@ -1,6 +1,6 @@
 VERSION 2.17.0
 --------------
-Release Date: ?
+Release Date: 2017-08-01
 
  - renamed Peak\Climber\Cron\Bootstrap to Peak\Climber\Cron\BootstrapDatabase
  - added default prefix and output a message when cron job failed in Peak\Climber\Cron\Executor
