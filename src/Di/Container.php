@@ -384,7 +384,7 @@ class Container implements ContainerInterface
      * Get a definition
      *
      * @param   string $name
-     * @return  array|string instance(s) matching definition name
+     * @return  mixed
      */
     public function getDefinition($name)
     {

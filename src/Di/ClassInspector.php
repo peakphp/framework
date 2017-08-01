@@ -17,7 +17,7 @@ class ClassInspector
      *
      * @param  string $class
      * @param  string $method
-     * @return object
+     * @return array
      */
     public function inspect($class, $method = '__construct')
     {
