@@ -70,13 +70,15 @@ class ClimberCronDelCommand extends CronCommand
 
         $qb->select('*')
             ->from('climber_cron')
-            ->where('`name` = ?')
-            ->orWhere('`id` = ?')
-            ->setParameter(0, $needle)
-            ->setParameter(1, $needle);
+            ->where('`name` = :name')
+            ->orWhere('`id` = :id')
+            ->setParameters([
+                'name' => $needle,
+                'id' => $needle
+            ]);
 
-        $result = $qb->execute();
-        $count = $result->rowCount();
+        $data = $qb->execute()->fetchAll();
+        $count = count($data);
 
         if($count == 0) {
             return $output->writeln('No cron job found for '.escapeshellarg($needle));
@@ -91,23 +93,21 @@ class ClimberCronDelCommand extends CronCommand
             ]), $output);
         }
 
-        $data = $result->fetch();
-        if(!empty($data['name'])) {
-            $data['name'] = '('.$data['name'].')';
-        }
+        $name =  $data[0]['name'];
+        $id = $data[0]['id'];
 
         $answer = true;
 
         // ask confirmation if no --force option
         if ($force !== true) {
             $io = new SymfonyStyle($input, $output);
-            $answer = $io->confirm('Are you sure about deleting cron #'.$data['id'].$data['name'],false);
+            $answer = $io->confirm('Are you sure about deleting cron #'.$id.' ('.$name.')',false);
         }
 
         // delete the cron
         if ($answer === true) {
-            $this->conn->delete('climber_cron', ['id' => $data['id']]);
-            $output->writeln('cron #'.$data['id'].$data['name'].' removed');
+            $this->conn->delete('climber_cron', ['id' => $id]);
+            $output->writeln('cron #'.$id.' ('.$name.') removed');
         }
     }
 }
