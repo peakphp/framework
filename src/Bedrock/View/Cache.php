@@ -17,6 +17,16 @@ class Cache
     protected $cache_id;              //current script view md5 key. generate by preOutput()
     protected $cache_strip = false;   //will strip all repeating space characters
 
+    /**
+     * Path
+     * @var string
+     */
+    protected $path;
+
+    /**
+     * View instance
+     * @var View
+     */
     protected $view;
 
     /**
@@ -25,28 +35,21 @@ class Cache
     public function __construct(View $view)
     {
         $this->view = $view;
-    }
-    
-    /**
-     * Get script file of View Engine
-     *
-     * @return string
-     */
-    protected function getScriptFile()
-    {
-        return $this->view->engine()->scripts_file;
-    }
-    
-    /**
-     * Get script path of View Engine
-     *
-     * @return string
-     */
-    protected function getScriptPath()
-    {
-        return $this->view->engine()->scripts_path;
+
+        //default path
+        $this->path = Application::conf('path.app').'/../cache/views';
     }
 
+    /**
+     * Set cache path
+     * @param string $path
+     * @return $this
+     */
+    public function setPath($path)
+    {
+        $this->path = $path;
+        return $this;
+    }
     /**
      * Enable output caching.
      * Avoid using in controllers actions that depends on $_GET, $_POST or any dynamic value for setting the view
@@ -128,12 +131,13 @@ class Cache
      */
     public function generateId($path = null, $file = null, $return = false)
     {
-        $key = $path.$file;
-
         //use current $this->_script_file and _script_path if no path/file specified
         if (!isset($path) && !isset($file)) {
-            $key = $this->getScriptPath().$this->getScriptFile();
+            $path = $this->view->engine()->scripts_path;
+            $file = $this->view->engine()->scripts_file;
         }
+
+        $key = $path.$file;
 
         $cache_id = hash('md5', $key);
 
@@ -151,8 +155,7 @@ class Cache
      */
     public function getFile()
     {
-        $path = Application::conf('path.apptree.views_cache');
-        return $path.'/'.$this->cache_id.'.php';
+        return $this->path.'/'.$this->cache_id.'.php';
     }
 
     /**
