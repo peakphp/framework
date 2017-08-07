@@ -2,6 +2,7 @@
 
 namespace Peak\Bedrock\View;
 
+use Peak\Bedrock\Application;
 use Peak\Bedrock\View;
 use Peak\Bedrock\View\Cache;
 
@@ -44,10 +45,9 @@ abstract class Render
      * @param View  $view
      * @param Cache $cache
      */
-    public function __construct(View $view, Cache $cache)
+    public function __construct(View $view)
     {
         $this->view = $view;
-        $this->cache = $cache;
     }
 
     /**
@@ -139,6 +139,11 @@ abstract class Render
      */
     public function cache()
     {
+        if (!$this->cache instanceof Cache) {
+            $this->cache = Application::create(Cache::class, [
+                Application::conf('path.app').'/../cache/views'
+            ]);
+        }
         return $this->cache;
     }
 }
