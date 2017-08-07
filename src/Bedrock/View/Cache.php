@@ -32,17 +32,10 @@ class Cache
     /**
      * Set cache folder
      */
-    public function __construct(View $view, $path = null)
+    public function __construct(View $view, $path)
     {
         $this->view = $view;
         $this->setPath($path);
-
-        //default path
-        if (!isset($path)) {
-            $this->setPath(Application::conf('path.app').'/../cache/views');
-        }
-
-        $this->createCachePath();
     }
 
     /**
@@ -53,6 +46,7 @@ class Cache
     public function setPath($path)
     {
         $this->path = $path;
+        $this->createCachePath();
         return $this;
     }
     /**
