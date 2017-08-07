@@ -101,7 +101,7 @@ class Application
      *
      * @param  string $path
      * @param  mixed  $value
-     * @return $this
+     * @return mixed
      */
     public static function conf($path = null, $value = null)
     {
