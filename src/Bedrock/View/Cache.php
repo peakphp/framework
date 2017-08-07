@@ -18,7 +18,7 @@ class Cache
     protected $cache_strip = false;   //will strip all repeating space characters
 
     /**
-     * Path
+     * Path where cache are stored
      * @var string
      */
     protected $path;
@@ -32,12 +32,17 @@ class Cache
     /**
      * Set cache folder
      */
-    public function __construct(View $view)
+    public function __construct(View $view, $path = null)
     {
         $this->view = $view;
+        $this->setPath($path);
 
         //default path
-        $this->path = Application::conf('path.app').'/../cache/views';
+        if (!isset($path)) {
+            $this->setPath(Application::conf('path.app').'/../cache/views');
+        }
+
+        $this->createCachePath();
     }
 
     /**
@@ -228,6 +233,19 @@ class Cache
         $file = $this->getFile();
         if (file_exists($file)) {
             unlink($file);
+        }
+    }
+
+    /**
+     * Attempt to create the cache path
+     * @throws \Exception
+     */
+    protected function createCachePath()
+    {
+        if (!file_exists($this->path)) {
+            if(mkdir($this->path, 755, true)) {
+                throw new \Exception('Cannot create cache folder at '.$this->path);
+            }
         }
     }
 }
