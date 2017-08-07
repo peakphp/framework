@@ -7,6 +7,7 @@ use Peak\Bedrock\View;
 
 class CacheTest extends TestCase
 {
+    protected $cache_path = FIXTURES_PATH.'/cache/views';
     /**
      * Test code
      */
@@ -14,7 +15,7 @@ class CacheTest extends TestCase
     {
         $view = new View();
         $view->engine('Layouts');
-        $cache = new Cache($view);
+        $cache = new Cache($view, $this->cache_path);
 
         $cache->disable();
         $this->assertFalse($cache->isEnabled());
@@ -35,7 +36,7 @@ class CacheTest extends TestCase
         $app = dummyApp();
         $view = $app->container()->get(View::class);
         $view->engine('Layouts');
-        $cache = new Cache($view);
+        $cache = new Cache($view, $this->cache_path);
 
         $cache->enable(2);
         $this->assertTrue($cache->isEnabled());
