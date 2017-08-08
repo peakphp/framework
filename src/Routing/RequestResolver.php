@@ -29,18 +29,22 @@ class RequestResolver
      *
      * @return Route
      */
-    public function getRoute(Collection $regex_routes = null)
+    public function getRoute(Collection $regex_routes = null, $auto_routing = true)
     {
         $route = $this->lookForRegexMatch($regex_routes);
+        
         if ($route !== false) {
             return $route;
+        } elseif(!$auto_routing && $this->request->request_uri !== '/') {
+            return null;
         }
 
+        // go with auto-routing
         return $this->resolve();
     }
 
     /**
-     * Resolve normal request
+     * Resolve normal request (auto-routing)
      *
      * @return Route
      */
