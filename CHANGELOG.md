@@ -4,11 +4,13 @@ Release Date: ?
 
  - fixed a bug with query in Peak\Cli\Commands\ClimberCronDelCommand
  - removed methods getScriptFile() and getScriptPath() in Peak\Bedrock\View\Cache
- - addded method setPath() and updated default path in Peak\Bedrock\View\Cache
+ - added method setPath() and updated default path in Peak\Bedrock\View\Cache
  - added method createCachePath() in Peak\Bedrock\View\Cache and throw an exception if cannot create cache path
  - Peak\Bedrock\View\Render create cache object only when needed now and pass the cache path argument
  - added a new setting "auto_routing" that allow to disable "magic routing" and rely exclusively on 
    user pre-defined custom route(s)
+ - fixed a bug in Peak\Bedrock\Controller\ActionController::dispatchActionParams() could not match action param(s)
+   correctly in some situations
 
 VERSION 2.17.0
 --------------
