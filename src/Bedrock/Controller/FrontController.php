@@ -4,6 +4,7 @@ namespace Peak\Bedrock\Controller;
 
 use Peak\Bedrock\Application;
 use Peak\Bedrock\Controller\ActionController;
+use Peak\Routing\Route;
 use Peak\Routing\RouteBuilder;
 use \Exception;
 
@@ -137,6 +138,10 @@ class FrontController
      */
     protected function dispatchController()
     {
+        if ($this->route === null) {
+            throw new Exception('No route found for this request...');
+        }
+
         //set default controller if router doesn't have one
         if (!isset($this->route->controller)) {
             $this->route->controller = $this->default_controller;
@@ -187,6 +192,10 @@ class FrontController
      */
     public function errorDispatch($exception = null)
     {
+        if (!$this->route instanceof Route) {
+            $this->route = new Route();
+        }
+
         $this->route->controller = $this->error_controller;
         $this->route->action     = 'index';
 
