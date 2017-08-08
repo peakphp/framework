@@ -83,7 +83,12 @@ class Routing
     {
         $resolver = new RequestResolver($this->request);
 
-        $this->route = $resolver->getRoute($this->custom_routes);
+        $auto_routing = true;
+        if (Application::conf()->has('auto_routing')) {
+            $auto_routing = Application::conf('auto_routing');
+        }
+
+        $this->route = $resolver->getRoute($this->custom_routes, $auto_routing);
 
         return $this->route;
     }
