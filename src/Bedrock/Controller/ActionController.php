@@ -138,6 +138,8 @@ abstract class ActionController
                 $pname = $p->getName();
                 if (isset($this->params->$pname)) {
                     $args[] = $this->params->$pname;
+                } elseif (($key = array_search($pname, $this->params_raw)) !== false && array_key_exists($key+1, $this->params_raw)) {
+                    $args[] = $this->params_raw[$key+1];
                 } elseif ($p->isOptional()) {
                     $args[] = $p->getDefaultValue();
                 } else {
