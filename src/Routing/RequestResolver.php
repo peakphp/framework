@@ -32,7 +32,7 @@ class RequestResolver
     public function getRoute(Collection $regex_routes = null, $auto_routing = true)
     {
         $route = $this->lookForRegexMatch($regex_routes);
-        
+
         if ($route !== false) {
             return $route;
         } elseif(!$auto_routing && $this->request->request_uri !== '/') {
