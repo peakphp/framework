@@ -140,16 +140,17 @@ class Application
         $config_resolver = new ConfigResolver($config);
 
         // store Peak\Bedrock\Application\Config
-        $container->add($config_resolver->getMountedConfig());
+        $container->add($config_resolver->getMountedConfig(), 'AppConfig');
 
         // store Peak\Bedrock\Application\Routing
-        $container->add(new Routing);
+        $container->add(new Routing, 'AppRouting');
 
         // store Peak\Bedrock\View
-        $container->add(new View);
+        $container->add(new View, 'AppView');
         
         // instantiate and store app kernel
         $container->createAndStore(Kernel::class);
+        $container->addAlias('AppKernel', Kernel::class);
     }
 
     /**
