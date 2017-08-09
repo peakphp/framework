@@ -125,6 +125,20 @@ class ConfigLoaderTest extends TestCase
     }
 
     /**
+     * Test ini
+     */
+    function testIni()
+    {
+        $col = (new ConfigLoader([
+            FIXTURES_PATH.'/config/config.ini',
+        ]))->asCollection();
+
+        $this->assertTrue($col instanceof Collection);
+        $this->assertTrue($col->all['php']['display_errors'] == 1);
+        $this->assertTrue($col->all['front']['default_controller'] === 'index');
+    }
+
+    /**
      * Test multiple configuration type together
      */
     function testMixedTypeConfigs()
