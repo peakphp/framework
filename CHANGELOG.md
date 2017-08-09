@@ -12,6 +12,7 @@ Release Date: ?
  - fixed a bug in Peak\Bedrock\Controller\ActionController::dispatchActionParams() could not match action param(s)
    correctly in some situations
  - added Peak\Config\Type\IniLoader and removed deprecated classes Peak\Config\File\Ini and Peak\Config\Type\Json
+ - added aliases for main application classes
 
 VERSION 2.17.0
 --------------
