@@ -22,7 +22,7 @@ class JsonLoader extends Loader
         $config = preg_replace("#(/\*([^*]|[\r\n]|(\*+([^*/]|[\r\n])))*\*+/)|([\s\t](//).*)#", '', $config);
         $this->content = json_decode($config, true);
         if (json_last_error() !== JSON_ERROR_NONE) {
-            throw new Exception(__CLASS__.': error while decoding file ['.$file.'] > '.json_last_error_msg());
+            throw new Exception(__CLASS__.': error while decoding json > '.json_last_error_msg());
         }
     }
 }
