@@ -117,7 +117,7 @@ abstract class Render
 
         //use cache instead outputting and evaluating view script
         if ($this->cache()->isValid()) {
-            include($this->cache()->getFile());
+            echo $this->cache->getContent();
             return;
         }
 
