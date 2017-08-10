@@ -233,7 +233,10 @@ class Cache
      */
     public function getContent()
     {
+        ob_start();
         include $this->getFile();
+        $content = ob_get_clean();
+        return $content;
     }
 
     /**
