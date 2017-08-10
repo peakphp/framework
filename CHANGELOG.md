@@ -1,3 +1,7 @@
+VERSION 2.19.0
+--------------
+Release Date: ?
+
 VERSION 2.18.0
 --------------
 Release Date: 2017-08-10
