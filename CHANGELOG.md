@@ -14,6 +14,8 @@ Release Date: ?
  - added Peak\Config\Type\IniLoader and removed deprecated classes Peak\Config\File\Ini and Peak\Config\Type\Json
  - added aliases for main application classes
  - removed deprecated Peak\Config\File
+ - replace enableStrip() by trimSpaces() in Peak\Bedrock\View\Cache
+ - added saveContent() in Peak\Bedrock\View\Cache to implements cache file compression
 
 VERSION 2.17.0
 --------------
