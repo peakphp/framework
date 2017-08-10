@@ -4,6 +4,7 @@ namespace Peak\Bedrock\View;
 
 use Peak\Bedrock\Application;
 use Peak\Bedrock\View;
+use \Exception;
 
 /**
  * View Cache
@@ -12,10 +13,24 @@ use Peak\Bedrock\View;
  */
 class Cache
 {
-    protected $use_cache = false;     //use scripts view cache, false by default
-    protected $cache_expire;          //script cache expiration time
-    protected $cache_id;              //current script view md5 key. generate by preOutput()
-    protected $cache_strip = false;   //will strip all repeating space characters
+
+    /**
+     * Cache expiration time in sec
+     * @var integer
+     */
+    protected $cache_expire;
+
+    /**
+     * Cache unique id
+     * @var string
+     */
+    protected $cache_id;
+
+    /**
+     * Strip all repeating spaces characters before saving cache content
+     * @var bool
+     */
+    protected $trim_spaces = false;
 
     /**
      * Path where cache are stored
@@ -49,11 +64,13 @@ class Cache
         $this->createCachePath();
         return $this;
     }
+
     /**
      * Enable output caching.
      * Avoid using in controllers actions that depends on $_GET, $_POST or any dynamic value for setting the view
      *
      * @param integer $time set cache ttl(in seconds) i.e; cache will be regenerated after each $time;
+     * @return $this
      */
     public function enable($time)
     {
@@ -61,16 +78,20 @@ class Cache
             $this->use_cache = true;
             $this->cache_expire = $time;
         }
+        return $this;
     }
 
     /**
      * Deactivate output cache
+     *
+     * @return $this
      */
     public function disable()
     {
         $this->use_cache = false;
+        return $this;
     }
-    
+
     /**
      * Check if cache is enabled
      *
@@ -83,9 +104,10 @@ class Cache
 
     /**
      * Check if current view script file is cached/expired
-     * Note: if $this->cache_id is not set, this will generate a new id from $id params if set or
-     * from the current controller file - path
-     * Notes: Custom $id can lead to problems if used with controller redirection * need to be fix
+     * Notes:
+     *  - If $this->cache_id is not set, this will generate a new id from $id params if set or
+     *    from the current controller file path
+     *  - Custom $id can lead to collision if used with controller redirection
      *
      * @return bool
      */
@@ -127,6 +149,7 @@ class Cache
      *
      * @param string $path
      * @param string $file
+     * @return $this
      */
     public function generateId($path = null, $file = null, $return = false)
     {
@@ -145,28 +168,17 @@ class Cache
         }
 
         $this->cache_id = $cache_id;
+        return $this;
     }
 
     /**
-     * Get current cached view script complete filepath
+     * Get current cached view script complete file path
      *
      * @return string
      */
     public function getFile()
     {
         return $this->path.'/'.$this->cache_id.'.php';
-    }
-
-    /**
-     * Enable/disable cache compression
-     *
-     * @param bool $status
-     */
-    public function enableStrip($status)
-    {
-        if (is_bool($status)) {
-            $this->cache_strip = $status;
-        }
     }
 
     /**
@@ -186,6 +198,17 @@ class Cache
         }
 
         return false;
+    }
+
+    /**
+     * Indicate if multiple spaces must be stripped from cache file
+     *
+     * @param bool $status
+     */
+    public function trimSpaces($status)
+    {
+        $this->trim_spaces = $status;
+        return $this;
     }
 
     /**
@@ -214,9 +237,23 @@ class Cache
     }
 
     /**
+     * Save cache content to his respective file
+     *
+     * @param string $content
+     */
+    public function saveContent($content)
+    {
+        if ($this->trim_spaces) {
+            $content = preg_replace('!\s+!', ' ', $content);
+        }
+        file_put_contents($this->getFile(), $content);
+    }
+
+    /**
      * Delete current cache file or custom cache file id
      *
      * @param string $id
+     * @return $this
      */
     public function delete($id = null)
     {
@@ -228,6 +265,7 @@ class Cache
         if (file_exists($file)) {
             unlink($file);
         }
+        return $this;
     }
 
     /**
@@ -238,7 +276,7 @@ class Cache
     {
         if (!file_exists($this->path)) {
             if(!@mkdir($this->path, 755, true)) {
-                throw new \Exception('Cannot create cache folder at '.$this->path);
+                throw new Exception('Cannot create cache folder at '.$this->path);
             }
         }
     }
