@@ -1,6 +1,6 @@
 VERSION 2.18.0
 --------------
-Release Date: ?
+Release Date: 2017-08-10
 
  - fixed a bug with query in Peak\Cli\Commands\ClimberCronDelCommand
  - removed methods getScriptFile() and getScriptPath() in Peak\Bedrock\View\Cache
