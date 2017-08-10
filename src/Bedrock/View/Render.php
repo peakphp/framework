@@ -124,11 +124,8 @@ abstract class Render
         //cache and output current view script
         ob_start();
         $this->output($data);
-        //if(is_writable($cache_file)) { //fail if file cache doesn't already
         $content = ob_get_contents();
-        //if($this->cache_strip) $content = preg_replace('!\s+!', ' ', $content);
-        file_put_contents($this->cache()->getFile(), $content);
-        //}
+        $this->cache->saveContent($content);
         ob_get_flush();
     }
 
