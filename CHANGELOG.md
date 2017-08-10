@@ -13,6 +13,7 @@ Release Date: ?
    correctly in some situations
  - added Peak\Config\Type\IniLoader and removed deprecated classes Peak\Config\File\Ini and Peak\Config\Type\Json
  - added aliases for main application classes
+ - removed deprecated Peak\Config\File
 
 VERSION 2.17.0
 --------------
