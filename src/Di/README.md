@@ -9,4 +9,3 @@ $ composer require peakphp/di
 ```
 
 See [documentation](https://peak.readthedocs.io/en/latest/components/di/introduction/) for more infos
-
