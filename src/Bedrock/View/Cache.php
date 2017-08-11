@@ -87,7 +87,6 @@ class Cache
     public function enable($time)
     {
         $time = (new TimeExpression($time))->toSeconds();
-        echo $time;
         if (is_integer($time)) {
             $this->use_cache = true;
             $this->cache_expire = $time;
