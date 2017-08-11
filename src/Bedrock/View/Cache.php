@@ -4,6 +4,7 @@ namespace Peak\Bedrock\View;
 
 use Peak\Bedrock\Application;
 use Peak\Bedrock\View;
+use Peak\Common\TimeExpression;
 use \Exception;
 
 /**
@@ -36,6 +37,12 @@ class Cache
      * @var bool
      */
     protected $trim_spaces = false;
+
+    /**
+     * Compress cache file using bzip2
+     * @var bool
+     */
+    protected $compress = false;
 
     /**
      * Path where cache are stored
@@ -74,11 +81,13 @@ class Cache
      * Enable output caching.
      * Avoid using in controllers actions that depends on $_GET, $_POST or any dynamic value for setting the view
      *
-     * @param integer $time set cache ttl(in seconds) i.e; cache will be regenerated after each $time;
+     * @param mixed $time set cache ttl(in seconds) i.e; cache will be regenerated after each $time;
      * @return $this
      */
     public function enable($time)
     {
+        $time = (new TimeExpression($time))->toSeconds();
+        echo $time;
         if (is_integer($time)) {
             $this->use_cache = true;
             $this->cache_expire = $time;
@@ -217,6 +226,18 @@ class Cache
     }
 
     /**
+     * Indicate if cache file is using compression
+     *
+     * @param $status
+     * @return $this
+     */
+    public function compress($status)
+    {
+        $this->compress = $status;
+        return $this;
+    }
+
+    /**
      * Start a block cache
      */
     public function blockStart()
@@ -229,8 +250,8 @@ class Cache
      */
     public function blockEnd()
     {
-        file_put_contents($this->getFile(), preg_replace('!\s+!', ' ', ob_get_contents()));
-        ob_get_flush();
+        $content = ob_get_flush();
+        $this->saveContent($content);
     }
 
     /**
@@ -241,6 +262,9 @@ class Cache
         ob_start();
         include $this->getFile();
         $content = ob_get_clean();
+        if ($this->compress) {
+            $content = bzdecompress($content);
+        }
         return $content;
     }
 
@@ -253,6 +277,9 @@ class Cache
     {
         if ($this->trim_spaces) {
             $content = preg_replace('!\s+!', ' ', $content);
+        }
+        if ($this->compress === true) {
+            $content = bzcompress($content);
         }
         file_put_contents($this->getFile(), $content);
     }
