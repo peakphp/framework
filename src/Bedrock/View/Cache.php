@@ -13,6 +13,11 @@ use \Exception;
  */
 class Cache
 {
+    /**
+     * Activate/Deactivate cache
+     * @var bool
+     */
+    protected $use_cache = false;
 
     /**
      * Cache expiration time in sec
