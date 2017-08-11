@@ -1,6 +1,8 @@
-VERSION 2.19.0
+VERSION 2.18.1
 --------------
-Release Date: ?
+Release Date: 2017-08-11
+
+ - fixed missing property $use_cache in Peak\Bedrock\View\Cache
 
 VERSION 2.18.0
 --------------
