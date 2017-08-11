@@ -6,3 +6,4 @@ This component contains a bunch of usefull tools like Collections, TextUtils, Pa
 ```
 $ composer require peakphp/common
 ```
+
