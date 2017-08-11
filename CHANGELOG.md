@@ -1,6 +1,9 @@
 VERSION 2.19.0
 --------------
 Release Date: ?
+
+ - added bzip2 compression option in Peak\Bedrock\View\Cache
+ - fixed method blockEnd() to use correctly saveContent() in Peak\Bedrock\View\Cache
  
 VERSION 2.18.1
 --------------
