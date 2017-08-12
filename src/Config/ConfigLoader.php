@@ -31,6 +31,12 @@ class ConfigLoader
     ];
 
     /**
+     * If true, unknown config files and types are simply ignored
+     * @var bool
+     */
+    protected $soft = false;
+
+    /**
      * ConfigLoader constructor
      *
      * @param array $configs
@@ -124,8 +130,12 @@ class ConfigLoader
             }
 
             $loader = $this->detectType($config);
-            $content = $this->getContent($loader);
 
+            if(!isset($loader)) {
+                continue;
+            }
+
+            $content = $this->getContent($loader);
             $collection->mergeRecursiveDistinct($content);
         }
 
@@ -159,6 +169,9 @@ class ConfigLoader
         }
 
         if (is_null($type)) {
+            if ($this->soft) {
+                return null;
+            }
             throw new Exception(__CLASS__.': unknown config type for ['.$config.']');
         }
 
