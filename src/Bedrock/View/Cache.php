@@ -309,7 +309,7 @@ class Cache
     protected function createCachePath()
     {
         if (!file_exists($this->path)) {
-            if(!@mkdir($this->path, 755, true)) {
+            if (!@mkdir($this->path, 755, true)) {
                 throw new Exception('Cannot create cache folder at '.$this->path);
             }
         }

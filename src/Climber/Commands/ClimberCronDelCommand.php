@@ -82,10 +82,8 @@ class ClimberCronDelCommand extends CronCommand
 
         if($count == 0) {
             return $output->writeln('No cron job found for '.escapeshellarg($needle));
-        } elseif($count > 1) {
-
+        } elseif ($count > 1) {
             $output->writeln($count.' results found for '.escapeshellarg($needle).'. Specify the id of you cron job you want to remove instead...');
-
             $command = $this->getApplication()->find('cron:list');
             return $command->run(new ArrayInput([
                 'command' => 'cron:list',

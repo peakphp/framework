@@ -57,8 +57,8 @@ class ConfigResolver
         if (isset($config['conf'])) {
             if (is_string($config['conf'])) {
                 $final[] = $config['conf'];
-            } elseif(is_array($config['conf'])) {
-                foreach($config['conf'] as $conf) {
+            } elseif (is_array($config['conf'])) {
+                foreach ($config['conf'] as $conf) {
                     $final[] = $conf;
                 }
             }
