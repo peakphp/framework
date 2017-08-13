@@ -5,6 +5,8 @@ Release Date: ?
  - added bzip2 compression option in Peak\Bedrock\View\Cache
  - fixed method blockEnd() to use correctly saveContent() in Peak\Bedrock\View\Cache
  - added Peak\Config\ConfigSoftLoader
+ - added option for using ConfigSoftLoader with application config(s)
+ - changed default application name
  
 VERSION 2.18.1
 --------------
