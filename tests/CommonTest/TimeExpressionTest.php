@@ -11,6 +11,11 @@ class TimeExpressionTest extends TestCase
         $this->assertTrue( (new TimeExpression(1))->toMicroseconds() === 1000);
         $this->assertTrue( (new TimeExpression(1000))->toSeconds() === 1000);
         $this->assertTrue( (new TimeExpression("2d"))->toSeconds() === 172800);
+        $this->assertTrue( (new TimeExpression("2 d"))->toSeconds() === 172800);
+        $this->assertTrue( (new TimeExpression("2 day"))->toSeconds() === 172800);
+        $this->assertTrue( (new TimeExpression("2 days"))->toSeconds() === 172800);
+        $this->assertTrue( (new TimeExpression("2     days"))->toSeconds() === 172800);
+        $this->assertTrue( (new TimeExpression("2 days 1 sec"))->toSeconds() === 172801);
         $this->assertTrue( (new TimeExpression("2d15min"))->toSeconds() === 173700);
         $this->assertTrue( (new TimeExpression("2d 15min"))->toSeconds() === 173700);
         $this->assertTrue( (new TimeExpression("15min2d"))->toSeconds() === 173700);
@@ -26,5 +31,6 @@ class TimeExpressionTest extends TestCase
 
         //echo (new TimeExpression(0))->toString('%d%s');
         $this->assertTrue((new TimeExpression(0))->toString('%d%s') === '0ms');
+
     }
 }
