@@ -4,7 +4,6 @@ namespace Peak\Bedrock\Application;
 
 use Peak\Bedrock\Application\Config\AppTree;
 use Peak\Common\DataException;
-use Peak\Config\ConfigLoader;
 use \Exception;
 
 class ConfigResolver
@@ -14,10 +13,11 @@ class ConfigResolver
      * @var array
      */
     private $default = [
-        'ns'   => 'App',        //namespace
-        'env'  => 'prod',       //app environment (dev,prod,staging,testing)
-        'conf' => 'config.php', //app config file relative to path.app config
-        'name' => 'peakapp',    //default application name
+        'ns' => 'App',          //namespace
+        'env' => 'prod',        //app environment (dev,prod,staging,testing)
+        'soft_conf' => false,   //indicate we should use soft loader for configs
+        'conf' => [],           //config(s) file(s)
+        'name' => 'app',        //default application name
         'path' => [             //paths
             'public'  => '',
             'app'     => '',
@@ -64,9 +64,14 @@ class ConfigResolver
             }
         }
 
+        $loader = 'Peak\Config\ConfigLoader';
+        if (isset($config['soft_conf']) && $config['soft_conf'] === true) {
+            $loader = 'Peak\Config\ConfigSoftLoader';
+        }
+
         // build and store final application config
         $this->app_config = new Config(
-            (new ConfigLoader($final))->asArray()
+            (new $loader($final))->asArray()
         );
     }
 
