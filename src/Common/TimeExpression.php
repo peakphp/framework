@@ -80,14 +80,14 @@ class TimeExpression
         $expression = [];
 
         foreach ($tokens as $token => $value) {
-            if($time <= 0) {
+            if ($time <= 0) {
                 break;
             }
             if ($time < $value || !in_array($token, $this->str_tokens)) {
                 continue;
             }
             $mod = 0;
-            if (($time & $value)) {
+            if ($time & $value) {
                 $mod = fmod ($time, $value);
                 $time -= $mod;
             }
@@ -170,7 +170,7 @@ class TimeExpression
     {
         if (is_numeric($this->expression)) {
             $this->time = $this->expression;
-        } elseif(is_string($this->expression)) {
+        } elseif (is_string($this->expression)) {
             if (preg_match_all($this->regexPattern(), $this->expression, $matches)) {
                 foreach ($matches[1] as $index => $value) {
                     $this->time += $this->tokens[$matches[2][$index]] * $value;
