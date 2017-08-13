@@ -49,7 +49,7 @@ class ClimberCronRunCommand extends CronCommand
 
         try {
             $config = (new ConfigLoader([$file]))->asArray();
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return $output->writeln($e->getMessage());
         }
 
@@ -58,7 +58,7 @@ class ClimberCronRunCommand extends CronCommand
         try {
             // create cli application for cron
             (new Executor(null, $config))->run();
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             echo '['.get_class($e).']:'."\n".$e->getMessage();
         }
     }

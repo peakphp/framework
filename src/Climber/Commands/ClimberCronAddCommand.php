@@ -65,7 +65,7 @@ class ClimberCronAddCommand extends CronCommand
                 return $output->writeln('[-r|--repeat] option value is invalid');
             }
             $repeat = OptionFormat::repeat($repeat);
-        } elseif($repeat === null) {
+        } elseif ($repeat === null) {
             // -r flag is passed without value
             $repeat = 0;
         }
@@ -76,13 +76,13 @@ class ClimberCronAddCommand extends CronCommand
         }
 
         // if flag -s is no specified, nullify system command field
-        if(!$sys_cmd) {
+        if (!$sys_cmd) {
             $sys_cmd = null;
         }
 
         // handle interval as time expression
         $next_execution = time();
-        if(!empty($interval)) {
+        if (!empty($interval)) {
             $interval_exp = (new TimeExpression($interval));
             $interval = $interval_exp->toSeconds();
             $next_execution = $next_execution + $interval;
@@ -102,9 +102,9 @@ class ClimberCronAddCommand extends CronCommand
 
         $output->writeln('Cron job #'.$this->conn->lastInsertId().' added!');
 
-        if($repeat == 0) {
+        if ($repeat == 0) {
             $output->writeln('This cron job will be executed indefinitely at interval of '.$interval_exp);
-        } elseif($repeat > 0) {
+        } elseif ($repeat > 0) {
             $output->writeln('This cron job will be executed '.$repeat.' time(s) at interval of '.$interval_exp);
         }
 

@@ -93,9 +93,9 @@ class ClimberCronListCommand extends CronCommand
         $result = $qb->execute()->fetchAll();
         $count = count($result);
 
-        if($count == 0 && !empty($needle)) {
+        if ($count == 0 && !empty($needle)) {
             return $output->writeln('No cron job found for '.escapeshellarg($needle));
-        } elseif($count == 0) {
+        } elseif ($count == 0) {
             return $output->writeln('No cron job found...');
         }
 
@@ -165,7 +165,7 @@ class ClimberCronListCommand extends CronCommand
         $rows = [];
         foreach ($data as $index => $row) {
             $cron_entity = new CronEntity($row);
-            foreach($row as $key => $data) {
+            foreach ($row as $key => $data) {
                 if (!in_array($key, $header)) {
                     $header[] = $key;
                 }

@@ -98,27 +98,27 @@ class ClimberCronUpdateCommand extends CronCommand
         $update = [];
         $cron = $cron[0];
 
-        if($sys_cmd) {
+        if ($sys_cmd) {
             $update['sys_cmd'] = 1;
         }
 
-        if($climber_cmd) {
+        if ($climber_cmd) {
             $update['sys_cmd'] = 0;
         }
 
-        if($enable) {
+        if ($enable) {
             $update['enabled'] = 1;
         }
 
-        if($disable) {
+        if ($disable) {
             $update['enabled'] = 0;
         }
 
-        if($name) {
+        if ($name) {
             $update['name'] = $name;
         }
 
-        if($interval) {
+        if ($interval) {
             $interval_exp = (new TimeExpression($interval));
             $interval = $interval_exp->toSeconds();
             if (empty($cron['last_execution'])) {
