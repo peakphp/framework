@@ -160,7 +160,7 @@ class TimeExpression
      */
     protected function regexPattern()
     {
-        return '#([0-9]+)('.implode('|', array_keys($this->tokens)).'){1}#i';
+        return '#([0-9]+)[\s]*('.implode('|', array_keys($this->tokens)).'){1}#i';
     }
 
     /**
