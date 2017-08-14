@@ -7,7 +7,7 @@ Release Date: ?
  - added Peak\Config\ConfigSoftLoader
  - added option for using ConfigSoftLoader with application config(s)
  - changed default application name
- - updated Peak\Common\TimeExpression to support space(s) between numbers and tokens
+ - rewrited Peak\Common\TimeExpression to extends DateInterval
  
 VERSION 2.18.1
 --------------
