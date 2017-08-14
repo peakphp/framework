@@ -2,9 +2,11 @@
 
 namespace Peak\Common;
 
+use \DateInterval;
+use \DateTime;
 use \Exception;
 
-class TimeExpression
+class TimeExpression extends DateInterval
 {
     /**
      * Time string expression
@@ -22,41 +24,30 @@ class TimeExpression
      * Tokens values in seconds
      * @var array
      */
-    protected $tokens = [
+    protected $tokens_values = [
         'ms' => 0.001, //milliseconds
-        's' => 1, //seconds
         'sec' => 1, //seconds
         'min' => 60, //minute
-        'h' => 3600, //hour
         'hour' => 3600, //hour
-        'd' => 86400, //day
         'day' => 86400, //day
-        'w' => 604800, //week
-        'week' => 86400, //week
-        'm' => 2592000, //month (rounded to 30 days)
-        'month' => 2592000, //month (rounded to 30 days)
-        'y' => 31536000, //year (rounded to 365 days)
         'year' => 31536000 //year (rounded to 365 days)
     ];
 
     /**
-     * Selected tokens for toString()
      * @var array
      */
-    protected $str_tokens = [
-        'ms',
-        'sec',
-        'min',
-        'hour',
-        'day',
-        'year'
+    protected static $tokens = [
+        'y' => 'year',
+        'm' => 'month',
+        'd' => 'day',
+        'h' => 'hour',
+        'i' => 'minute',
+        's' => 'second',
     ];
 
-    /**
-     * Default string format for __toString()
-     * @var string
-     */
-    protected $string_format = '%d %s';
+    protected static $tokens_substitution = [
+        'i' => 'm',
+    ];
 
     /**
      * Constructor.
@@ -75,38 +66,18 @@ class TimeExpression
      */
     public function __toString()
     {
-        $time = $this->time;
-        $tokens = array_reverse($this->tokens, true);
-        $expression = [];
+        $format = '';
 
-        foreach ($tokens as $token => $value) {
-            if ($time <= 0) {
-                break;
+        foreach(self::$tokens as $token => $title) {
+            $value = $this->$token;
+            if ($value > 0) {
+                $format .= '%'.$token.' '.$title.(($value < 2) ? '' : 's'). ' ';
             }
-            if ($time < $value || !in_array($token, $this->str_tokens)) {
-                continue;
-            }
-            $mod = 0;
-            if ($time & $value) {
-                $mod = fmod ($time, $value);
-                $time -= $mod;
-            }
-            $div = round($time / $value);
-
-            $expression[] = sprintf(
-                $this->string_format,
-                $div,
-                ($token.(($div > 1 && substr($token,-1,1) !== 's') ? 's' : ''))
-            );
-            $time = $mod;
         }
 
-        $return = implode(' ', $expression);
-        if (empty($return)) {
-            $return = sprintf($this->string_format, 0, 'ms');
-        }
-
-        return $return;
+        return trim((new DateTime('@0'))
+            ->diff(new DateTime('@'.$this->time))
+            ->format($format));
     }
 
     /**
@@ -117,7 +88,9 @@ class TimeExpression
     public function toString($format = null)
     {
         if (isset($format)) {
-            $this->string_format = $format;
+            return (new DateTime('@0'))
+                ->diff(new DateTime('@'.$this->time))
+                ->format($format);
         }
         return $this->__toString();
     }
@@ -154,30 +127,112 @@ class TimeExpression
     }
 
     /**
-     * Create regex
-     *
-     * @return string
-     */
-    protected function regexPattern()
-    {
-        return '#([0-9]+)[\s]*('.implode('|', array_keys($this->tokens)).'){1}#i';
-    }
-
-    /**
      * Decode expression
      */
     protected function decode()
     {
+        $error = false;
+
         if (is_numeric($this->expression)) {
-            $this->time = $this->expression;
-        } elseif (is_string($this->expression)) {
-            if (preg_match_all($this->regexPattern(), $this->expression, $matches)) {
-                foreach ($matches[1] as $index => $value) {
-                    $this->time += $this->tokens[$matches[2][$index]] * $value;
-                }
+            $this->expression = $this->integerToString($this->expression);
+        }
+
+        try {
+            $di = new DateInterval($this->expression);
+            parent::__construct($this->expression);
+            $this->time = (new DateTime('@0'))
+                ->add($di)
+                ->getTimestamp();
+        } catch (Exception $e) {
+            $error = true;
+        }
+
+        if ($error) {
+            $error = false;
+            $di = DateInterval::createFromDateString($this->expression);
+            $this->time = (new DateTime('@0'))
+                ->add($di)
+                ->getTimestamp();
+            try {
+                parent::__construct($this->dateIntervalToIntervalSpec($di));
+            } catch (Exception $e) {
+                $error = true;
             }
-        } else {
+        }
+
+
+        if ($error) {
             throw new Exception(__CLASS__.': Invalid time expression');
         }
+    }
+
+    /**
+     * Transform a DateInterval to a valid ISO8601 interval
+     *
+     * @param DateInterval $di
+     * @return string
+     */
+    public static function dateIntervalToIntervalSpec(DateInterval $di)
+    {
+        $time_parts = ['h', 'i', 's', 'f'];
+        $time_token_set = false;
+        $interval_spec = 'P';
+
+        foreach (self::$tokens as $token => $title) {
+            if (in_array($token, $time_parts) && $time_token_set === false && $di->$token > 0) {
+                $interval_spec .= 'T';
+                $time_token_set = true;
+            }
+            if ($di->$token > 0) {
+                $token_string = $token;
+                if (array_key_exists($token, self::$tokens_substitution)) {
+                    $token_string = self::$tokens_substitution[$token];
+                }
+                $interval_spec .= $di->$token.strtoupper($token_string);
+            }
+        }
+
+        return $interval_spec;
+    }
+
+    /**
+     * Transform an integer to a non ISO8601 interval string
+     *
+     * @param $time
+     * @return string
+     */
+    protected function integerToString($time)
+    {
+        $tokens = array_reverse($this->tokens_values, true);
+        $expression = [];
+
+        foreach ($tokens as $token => $value) {
+            if ($time <= 0) {
+                break;
+            }
+            if ($time < $value || !in_array($token, array_keys($this->tokens_values))) {
+                continue;
+            }
+            $mod = 0;
+            if ($time & $value) {
+                $mod = fmod ($time, $value);
+                $time -= $mod;
+            }
+            $div = round($time / $value);
+
+            $expression[] = sprintf(
+                '%d %s',
+                $div,
+                ($token.(($div > 1 && substr($token,-1,1) !== 's') ? 's' : ''))
+            );
+            $time = $mod;
+        }
+
+        $return = implode(' ', $expression);
+        if (empty($return)) {
+            $return = sprintf('%d %s', 0, 'ms');
+        }
+
+        return $return;
     }
 }
