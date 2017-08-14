@@ -167,6 +167,16 @@ class TimeExpression extends DateInterval
     }
 
     /**
+     * Get ISO8601 interval spec string
+     *
+     * @return string
+     */
+    public function toIntervalSpec()
+    {
+        return self::dateIntervalToIntervalSpec($this);
+    }
+
+    /**
      * Transform a DateInterval to a valid ISO8601 interval
      *
      * @param DateInterval $di
