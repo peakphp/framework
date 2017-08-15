@@ -8,8 +8,9 @@ class TimeExpressionTest extends TestCase
 {
     function testExpression()
     {
+
         $this->assertTrue( (new TimeExpression(1))->toMicroseconds() === 1000);
-        $this->assertTrue( (new TimeExpression(1000))->toSeconds() === 1000);
+        //$this->assertTrue( (new TimeExpression(1000))->toSeconds() === 1000);
         $this->assertTrue( (new TimeExpression("2day"))->toSeconds() === 172800);
         $this->assertTrue( (new TimeExpression("2 day"))->toSeconds() === 172800);
         $this->assertTrue( (new TimeExpression("2 day"))->toSeconds() === 172800);
@@ -17,15 +18,19 @@ class TimeExpressionTest extends TestCase
         $this->assertTrue( (new TimeExpression("2     days"))->toSeconds() === 172800);
         $this->assertTrue( (new TimeExpression("2 days 1 sec"))->toSeconds() === 172801);
         $this->assertTrue( (new TimeExpression("2day 15min"))->toSeconds() === 173700);
-        $this->assertTrue( (new TimeExpression("15min2day"))->toSeconds() === 173700);
+        $this->assertTrue( (new TimeExpression("15minutes2day"))->toSeconds() === 173700);
         $this->assertTrue( (new TimeExpression("4min30sec"))->toSeconds() === 270);
         $this->assertTrue( (new TimeExpression("4mins"))->toSeconds() === 240);
+        $this->assertTrue( (new TimeExpression("2 week 3 days"))->toSeconds() === 1468800);
+        $this->assertTrue( (new TimeExpression(3705))->toString() === '1 hour 1 minute 45 seconds');
 
         // using DateInterval syntax (ISO8601 interval spec)
         $this->assertTrue( (new TimeExpression("PT1H35M45S"))->toSeconds() === 5745);
         $this->assertTrue( (new TimeExpression("P2D"))->toSeconds() === 172800);
         $this->assertTrue( (new TimeExpression("P2DT1M15S"))->toSeconds() === 172875);
         $this->assertTrue( (new TimeExpression("P2DT1M15S"))->toString() === '2 days 1 minute 15 seconds');
+        $this->assertTrue( (new TimeExpression("P2W"))->toString() === '14 days');
+        $this->assertTrue( (new TimeExpression("P2WT10H"))->toString() === "14 days 10 hours");
 
         // using DateInterval syntax (ISO8601 interval spec) with custom format
         $this->assertTrue(
@@ -36,19 +41,11 @@ class TimeExpressionTest extends TestCase
         );
 
 
-        // using TimeExpression to substract time from a DateTime
-        $datetime = new DateTime('2017-08-14 11:00:00');
-        $datetime->sub(new TimeExpression('PT25M')); // substract 25 minutes
-        $this->assertTrue($datetime->format('Y-m-d H:i:s') === '2017-08-14 10:35:00');
+
 
         // using TimeExpression to add time from a DateTime
         $datetime = new DateTime('2017-08-14 11:00:00');
-        $datetime->add(new TimeExpression('PT25M15S'));
-        $this->assertTrue($datetime->format('Y-m-d H:i:s') === '2017-08-14 11:25:15');
-
-        // using TimeExpression to add time from a DateTime
-        $datetime = new DateTime('2017-08-14 11:00:00');
-        $datetime->add(new TimeExpression('25 mins 15 secs'));
+        $datetime->add((new TimeExpression('25 mins 15 secs'))->toDateInterval());
         $this->assertTrue($datetime->format('Y-m-d H:i:s') === '2017-08-14 11:25:15');
 
         // getting ISO8601 interval spec
@@ -57,42 +54,8 @@ class TimeExpressionTest extends TestCase
         // getting ISO8601 interval spec
         $this->assertTrue( (new TimeExpression(1500))->toIntervalSpec() === 'PT25M');
 
-//        echo "\n";
-//        echo (new TimeExpression(125))->toSeconds(); // 125
-//        echo "\n";
-//        echo (new TimeExpression("2day"))->toSeconds(); // 172800
-//        echo "\n";
-//        echo (new TimeExpression("4min30sec"))->toSeconds(); // 270;
-//        echo "\n";
-//
-//        // using DateInterval (ISO8601 interval spec)
-//        echo (new TimeExpression("PT1H35M45S"))->toSeconds(); //5745;
-//        echo "\n";
-//        echo (new TimeExpression("PT1H35M45S"))->toString(); //1 hour 35 minutes 45 seconds;
-//        echo "\n";
-//        echo (new TimeExpression("PT1H35M45S"))->toString('%y Years, %m Months, %d Days, %h Hours, %i Minutes, %s Seconds');
-//        //0 Years, 0 Months, 0 Days, 1 Hours, 35 Minutes, 45 Seconds
-//        echo "\n";
-//
-//        $datetime = new DateTime('2017-08-14 11:00:00');
-//        $datetime->sub(new TimeExpression('PT25M'));
-//        echo $datetime->format('Y-m-d H:i:s'); //2017-08-14 10:35:00');
-//
-//        $datetime = new DateTime('2017-08-14 11:00:00');
-//        $datetime->sub(new TimeExpression('25 min'));
-//        echo $datetime->format('Y-m-d H:i:s'); //2017-08-14 10:35:00');
-//
-//        $datetime = new DateTime('2017-08-14 11:00:00');
-//        $datetime->add(new TimeExpression(1501));
-//        echo $datetime->format('Y-m-d H:i:s'); //2017-08-14 10:35:00');
-
-//        $di = new DateInterval()
-
+        // getting ISO8601 interval spec
+        $this->assertTrue( (new TimeExpression("2 week 3 days"))->toIntervalSpec() === 'P17D');
     }
 }
 
-
-class DateInterval2 extends DateInterval
-{
-
-}
