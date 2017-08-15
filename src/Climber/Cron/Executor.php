@@ -145,7 +145,7 @@ class Executor
                 $update['status'] = 0;
                 throw new ProcessFailedException($process);
             }
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             $update['error'] = $e->getMessage();
             echo 'Cron #'.$cron['id'].' failed!';
         }
