@@ -20,6 +20,7 @@ class TimeExpressionTest extends TestCase
         $this->assertTrue( (new TimeExpression("2day 15min"))->toSeconds() === 173700);
         $this->assertTrue( (new TimeExpression("15minutes2day"))->toSeconds() === 173700);
         $this->assertTrue( (new TimeExpression("4min30sec"))->toSeconds() === 270);
+        $this->assertTrue( (new TimeExpression("4mins"))->toMicroseconds() === 240000);
         $this->assertTrue( (new TimeExpression("4mins"))->toSeconds() === 240);
         $this->assertTrue( (new TimeExpression("2 week 3 days"))->toSeconds() === 1468800);
         $this->assertTrue( (new TimeExpression(3705))->toString() === '1 hour 1 minute 45 seconds');
