@@ -46,9 +46,9 @@ class Executor
 
         // run some validation for cron system
         if (!Cron::hasDbConnection($this->conn)) {
-            throw new DatabaseNotFoundException('No connection to a database has been found!');
+            throw new DatabaseNotFoundException();
         } elseif (!Cron::isInstalled($this->conn)) {
-            throw new TablesNotFoundException('Cron system is not installed. Please, use command cron:install before using cron executor.');
+            throw new TablesNotFoundException();
         }
     }
 
