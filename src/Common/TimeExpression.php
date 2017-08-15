@@ -6,7 +6,7 @@ use \DateInterval;
 use \DateTime;
 use \Exception;
 
-class TimeExpression extends DateInterval
+class TimeExpression
 {
     /**
      * Time string expression
@@ -19,6 +19,12 @@ class TimeExpression extends DateInterval
      * @var int
      */
     protected $time = 0;
+
+    /**
+     * Internal DateInternal instance
+     * @var DateInterval
+     */
+    protected $di;
 
     /**
      * Tokens values in seconds
@@ -34,6 +40,7 @@ class TimeExpression extends DateInterval
     ];
 
     /**
+     * DateInterval tokens
      * @var array
      */
     protected static $tokens = [
@@ -45,12 +52,16 @@ class TimeExpression extends DateInterval
         's' => 'second',
     ];
 
+    /**
+     * DateTokens
+     * @var array
+     */
     protected static $tokens_substitution = [
         'i' => 'm',
     ];
 
     /**
-     * Constructor.
+     * Constructor
      *
      * @param $expression
      */
@@ -62,6 +73,7 @@ class TimeExpression extends DateInterval
 
     /**
      * Transform time into readable time expression
+     *
      * @return string
      */
     public function __toString()
@@ -69,9 +81,8 @@ class TimeExpression extends DateInterval
         $format = '';
 
         foreach(self::$tokens as $token => $title) {
-            $value = $this->$token;
-            if ($value > 0) {
-                $format .= '%'.$token.' '.$title.(($value < 2) ? '' : 's'). ' ';
+            if ($this->di->$token > 0) {
+                $format .= '%'.$token.' '.$title.(($this->di->$token < 2) ? '' : 's'). ' ';
             }
         }
 
@@ -127,6 +138,16 @@ class TimeExpression extends DateInterval
     }
 
     /**
+     * Get internal DateInterval instance
+     *
+     * @return DateInterval
+     */
+    public function toDateInterval()
+    {
+        return $this->di;
+    }
+
+    /**
      * Decode expression
      */
     protected function decode()
@@ -138,10 +159,9 @@ class TimeExpression extends DateInterval
         }
 
         try {
-            $di = new DateInterval($this->expression);
-            parent::__construct($this->expression);
+            $this->di = new DateInterval($this->expression);
             $this->time = (new DateTime('@0'))
-                ->add($di)
+                ->add($this->di)
                 ->getTimestamp();
         } catch (Exception $e) {
             $error = true;
@@ -153,13 +173,14 @@ class TimeExpression extends DateInterval
             $this->time = (new DateTime('@0'))
                 ->add($di)
                 ->getTimestamp();
+
+            // force verification
             try {
-                parent::__construct($this->dateIntervalToIntervalSpec($di));
+                $this->di = new DateInterval($this->dateIntervalToIntervalSpec($di));
             } catch (Exception $e) {
                 $error = true;
             }
         }
-
 
         if ($error) {
             throw new Exception(__CLASS__.': Invalid time expression');
@@ -173,7 +194,7 @@ class TimeExpression extends DateInterval
      */
     public function toIntervalSpec()
     {
-        return self::dateIntervalToIntervalSpec($this);
+        return self::dateIntervalToIntervalSpec($this->di);
     }
 
     /**
