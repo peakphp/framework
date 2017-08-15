@@ -80,7 +80,7 @@ class ClimberCronDelCommand extends CronCommand
         $data = $qb->execute()->fetchAll();
         $count = count($data);
 
-        if($count == 0) {
+        if ($count == 0) {
             return $output->writeln('No cron job found for '.escapeshellarg($needle));
         } elseif ($count > 1) {
             $output->writeln($count.' results found for '.escapeshellarg($needle).'. Specify the id of you cron job you want to remove instead...');
