@@ -80,7 +80,7 @@ class TimeExpression
     {
         $format = '';
 
-        foreach(self::$tokens as $token => $title) {
+        foreach (self::$tokens as $token => $title) {
             if ($this->di->$token > 0) {
                 $format .= '%'.$token.' '.$title.(($this->di->$token < 2) ? '' : 's'). ' ';
             }
@@ -130,7 +130,7 @@ class TimeExpression
      * Get date from time
      *
      * @param string $format
-     * @return false|string
+     * @return mixed
      */
     public function toDate($format = 'Y-m-d H:i:s')
     {
@@ -209,7 +209,7 @@ class TimeExpression
         $time_token_set = false;
         $interval_spec = 'P';
 
-        foreach (self::$tokens as $token => $title) {
+        foreach (array_keys(self::$tokens) as $token) {
             if (in_array($token, $time_parts) && $time_token_set === false && $di->$token > 0) {
                 $interval_spec .= 'T';
                 $time_token_set = true;
@@ -254,7 +254,7 @@ class TimeExpression
             $expression[] = sprintf(
                 '%d %s',
                 $div,
-                ($token.(($div > 1 && substr($token,-1,1) !== 's') ? 's' : ''))
+                ($token.(($div > 1 && substr($token, -1, 1) !== 's') ? 's' : ''))
             );
             $time = $mod;
         }
