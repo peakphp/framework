@@ -62,7 +62,7 @@ class CronEntity
      */
     protected function getInterval($data)
     {
-        if(!empty($data)) {
+        if (!empty($data)) {
             $readable_data = (new TimeExpression($data))->toString();
             if ($readable_data === $data.' secs') {
                 return $data;

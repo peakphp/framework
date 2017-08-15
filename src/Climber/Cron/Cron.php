@@ -30,7 +30,7 @@ class Cron
         try {
             $conn->query("SELECT id FROM climber_cron LIMIT 1");
             return true;
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             return false;
         }
     }

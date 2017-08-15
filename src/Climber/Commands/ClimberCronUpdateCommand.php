@@ -35,7 +35,7 @@ class ClimberCronUpdateCommand extends CronCommand
                     new InputOption('name', null, InputOption::VALUE_REQUIRED, 'Cron internal name'),
                     new InputOption('sys', '', InputOption::VALUE_NONE, 'Cron command is a system command'),
                     new InputOption('climber', '', InputOption::VALUE_NONE, 'Cron command is a climber command'),
-                    new InputOption('repeat', 'r', InputOption::VALUE_REQUIRED,'Indicate if command should be repeatable', '-1'),
+                    new InputOption('repeat', 'r', InputOption::VALUE_REQUIRED, 'Indicate if command should be repeatable', '-1'),
                     new InputOption('interval', 'i', InputOption::VALUE_REQUIRED, 'Indicate the interval in second between repetition if apply.'),
                     new InputOption('cmd', 'c', InputOption::VALUE_REQUIRED, 'The command to execute.'),
                     new InputOption('enable', null, InputOption::VALUE_NONE, 'Enable the command'),

@@ -127,7 +127,7 @@ class ClimberCronListCommand extends CronCommand
             if (empty($value)) {
                 $value = '-';
             }
-            $output->writeln(' '.str_pad($key, 17,'.').' '.$value );
+            $output->writeln(' '.str_pad($key, 17, '.').' '.$value);
         }
         $output->writeln('');
     }
