@@ -34,7 +34,7 @@ class RegisterCommands
         $this->app = $app;
 
         if (!$this->app->conf()->has('cron.db') || !is_array($this->app->conf('cron.db'))) {
-            throw new InvalidDatabaseConfigException(__CLASS__.': configuration [cron.db] is missing or invalid.');
+            throw new InvalidDatabaseConfigException();
         }
 
         new BootstrapDatabase($this->app->conf('cron.db'));
