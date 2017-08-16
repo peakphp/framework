@@ -148,6 +148,45 @@ class TimeExpression
     }
 
     /**
+     * Get ISO8601 interval spec string
+     *
+     * @return string
+     */
+    public function toIntervalSpec()
+    {
+        return self::dateIntervalToIntervalSpec($this->di);
+    }
+
+    /**
+     * Transform a DateInterval to a valid ISO8601 interval
+     *
+     * @param DateInterval $di
+     * @return string
+     */
+    public static function dateIntervalToIntervalSpec(DateInterval $di)
+    {
+        $time_parts = ['h', 'i', 's', 'f'];
+        $time_token_set = false;
+        $interval_spec = 'P';
+
+        foreach (array_keys(self::$tokens) as $token) {
+            if (in_array($token, $time_parts) && $time_token_set === false && $di->$token > 0) {
+                $interval_spec .= 'T';
+                $time_token_set = true;
+            }
+            if ($di->$token > 0) {
+                $token_string = $token;
+                if (array_key_exists($token, self::$tokens_substitution)) {
+                    $token_string = self::$tokens_substitution[$token];
+                }
+                $interval_spec .= $di->$token.strtoupper($token_string);
+            }
+        }
+
+        return $interval_spec;
+    }
+
+    /**
      * Decode expression
      */
     protected function decode()
@@ -185,45 +224,6 @@ class TimeExpression
         if ($error) {
             throw new Exception(__CLASS__.': Invalid time expression');
         }
-    }
-
-    /**
-     * Get ISO8601 interval spec string
-     *
-     * @return string
-     */
-    public function toIntervalSpec()
-    {
-        return self::dateIntervalToIntervalSpec($this->di);
-    }
-
-    /**
-     * Transform a DateInterval to a valid ISO8601 interval
-     *
-     * @param DateInterval $di
-     * @return string
-     */
-    public static function dateIntervalToIntervalSpec(DateInterval $di)
-    {
-        $time_parts = ['h', 'i', 's', 'f'];
-        $time_token_set = false;
-        $interval_spec = 'P';
-
-        foreach (array_keys(self::$tokens) as $token) {
-            if (in_array($token, $time_parts) && $time_token_set === false && $di->$token > 0) {
-                $interval_spec .= 'T';
-                $time_token_set = true;
-            }
-            if ($di->$token > 0) {
-                $token_string = $token;
-                if (array_key_exists($token, self::$tokens_substitution)) {
-                    $token_string = self::$tokens_substitution[$token];
-                }
-                $interval_spec .= $di->$token.strtoupper($token_string);
-            }
-        }
-
-        return $interval_spec;
     }
 
     /**
