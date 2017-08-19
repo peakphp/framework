@@ -37,6 +37,7 @@ class ClimberCronAddCommand extends CronCommand
                     new InputOption('repeat', 'r', InputOption::VALUE_OPTIONAL,'Indicate if command should be repeatable', '-1'),
                     new InputOption('interval', 'i', InputOption::VALUE_REQUIRED, 'Indicate the interval in second between repetition if apply.'),
                     new InputOption('cmd', 'c', InputOption::VALUE_REQUIRED, 'The command to execute.'),
+                    new InputOption('initial-delay', 'd', InputOption::VALUE_REQUIRED, 'Initial delay (this delay is added to cronjob next_execution field', 0),
                 ])
             );
     }
@@ -54,6 +55,7 @@ class ClimberCronAddCommand extends CronCommand
         $interval = $input->getOption('interval');
         $name = $input->getOption('name');
         $sys_cmd = $input->getOption('sys');
+        $delay = $input->getOption('initial-delay');
 
         if (empty($command)) {
             return $output->writeln('<error>Command is missing (-c, --cmd)... </error>');
@@ -84,8 +86,7 @@ class ClimberCronAddCommand extends CronCommand
         $next_execution = time();
         if (!empty($interval)) {
             $interval_exp = (new TimeExpression($interval));
-            $interval = $interval_exp->toSeconds();
-            $next_execution = $next_execution + $interval;
+            $next_execution += $interval_exp->toSeconds() + (new TimeExpression($delay))->toSeconds();
         }
 
         // final array to insert into database
