@@ -6,6 +6,15 @@ use \DateInterval;
 use \DateTime;
 use \Exception;
 
+/**
+ * TimeExpression
+ *
+ * Formats supported:
+ * - Integer (treated as seconds)
+ * - Interval spec (ex: P2DT4M34S, PT3M, etc.) see http://php.net/manual/en/class.dateinterval.php
+ * - String (ex: 2 days 1 hour, 2d1h, etc.)
+ * - Clock style HH:MM:SS or MM:SS (ex: 13:23:56, 12:01, etc.)
+ */
 class TimeExpression
 {
     /**
