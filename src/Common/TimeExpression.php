@@ -80,6 +80,10 @@ class TimeExpression
     {
         $format = '';
 
+        if (empty($this->time)) {
+            return '0 second';
+        }
+
         foreach (self::$tokens as $token => $title) {
             if ($this->di->$token > 0) {
                 $format .= '%'.$token.' '.$title.(($this->di->$token < 2) ? '' : 's'). ' ';
@@ -192,6 +196,10 @@ class TimeExpression
     protected function decode()
     {
         $error = false;
+
+        if (empty($this->expression)) {
+            return;
+        }
 
         if (is_numeric($this->expression)) {
             $this->expression = $this->integerToString($this->expression);
