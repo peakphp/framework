@@ -80,7 +80,7 @@ class CronEntity
     protected function getLastExecution($data)
     {
         if (!empty($data)) {
-            return (new TimeExpression($data))->toDate();
+            return date('Y-m-d H:i:s', $data);
         }
     }
 
