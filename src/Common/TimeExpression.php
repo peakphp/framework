@@ -32,10 +32,18 @@ class TimeExpression
      */
     protected $tokens_values = [
         'ms' => 0.001, //milliseconds
+        's' => 1, //seconds
         'sec' => 1, //seconds
+        'm' => 60, //minute
         'min' => 60, //minute
+        'h' => 3600, //hour
         'hour' => 3600, //hour
+        'd' => 86400, //day
         'day' => 86400, //day
+        'w' => 604800, //week
+        'week' => 86400, //week
+        'month' => 2592000, //month (rounded to 30 days)
+        'y' => 31536000, //year (rounded to 365 days)
         'year' => 31536000 //year (rounded to 365 days)
     ];
 
@@ -206,32 +214,89 @@ class TimeExpression
         }
 
         try {
-            $this->di = new DateInterval($this->expression);
-            $this->time = (new DateTime('@0'))
-                ->add($this->di)
-                ->getTimestamp();
+            $this->decodeIntervalSpec();
         } catch (Exception $e) {
             $error = true;
         }
 
         if ($error) {
             $error = false;
-            $di = DateInterval::createFromDateString($this->expression);
-            $this->time = (new DateTime('@0'))
-                ->add($di)
-                ->getTimestamp();
-
-            // force verification
             try {
-                $this->di = new DateInterval($this->dateIntervalToIntervalSpec($di));
+                $this->decodeTimeString();
             } catch (Exception $e) {
                 $error = true;
+            }
+
+            // last resort
+            if ($error) {
+                $error = false;
+                if ($this->decodeRegexString() === false) {
+                    $error = true;
+                }
             }
         }
 
         if ($error) {
             throw new Exception(__CLASS__.': Invalid time expression');
         }
+    }
+
+    /**
+     * Decode a DateInterval Interval spec format
+     */
+    protected function decodeIntervalSpec()
+    {
+        $this->di = new DateInterval($this->expression);
+        $this->time = (new DateTime('@0'))
+            ->add($this->di)
+            ->getTimestamp();
+    }
+
+    /**
+     * Decode DateInterval string format (Uses the normal php date parsers)
+     */
+    protected function decodeTimeString()
+    {
+        $di = DateInterval::createFromDateString($this->expression);
+        $this->time = (new DateTime('@0'))
+            ->add($di)
+            ->getTimestamp();
+
+        // force verification
+        $this->di = new DateInterval($this->dateIntervalToIntervalSpec($di));
+    }
+
+    /**
+     * Decode string with customs regex formats
+     *
+     * @return bool
+     */
+    protected function decodeRegexString()
+    {
+        $regex_string = '#([0-9]+)[\s]*('.implode('|', array_keys($this->tokens_values)).'){1}#i';
+        $regex_clock_string = '#^(?:(?:([01]?\d|2[0-3]):)?([0-5]?\d):)?([0-5]?\d)$#i';
+
+        if (preg_match_all($regex_string, $this->expression, $matches)) {
+            foreach( $matches[1] as $index => $value) {
+                $this->time += $this->tokens_values[$matches[2][$index]] * $value;
+            }
+            $this->di = DateInterval::createFromDateString($this->integerToString($this->time));
+            return true;
+        } elseif (preg_match_all($regex_clock_string, $this->expression, $matches) && count($matches) == 4) {
+            if (!empty($matches[1][0])) {
+                $this->time += (int)$matches[1][0] * 3600;
+            }
+            if (!empty($matches[2][0])) {
+                $this->time += (int)$matches[2][0] * 60;
+            }
+            if (!empty($matches[3][0])) {
+                $this->time += (int)$matches[3][0];
+            }
+            $this->di = DateInterval::createFromDateString($this->integerToString($this->time));
+            return true;
+        }
+
+        return false;
     }
 
     /**
