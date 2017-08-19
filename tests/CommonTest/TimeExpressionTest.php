@@ -27,9 +27,11 @@ class TimeExpressionTest extends TestCase
         $this->assertTrue( (new TimeExpression(3705))->toString() === '1 hour 1 minute 45 seconds');
 
         // 0 or empty
-        $this->assertTrue( (new TimeExpression(0))->toSeconds() === 0);
+        $this->assertTrue( (new TimeExpression(0))->toSeconds() == 0);
         $this->assertTrue( (new TimeExpression(0))->toString() === '0 second');
         $this->assertTrue( (new TimeExpression(0))->toString('%h hour(s)') === '0 hour(s)');
+        $this->assertTrue( (new TimeExpression(''))->toString('%h hour(s)') === '0 hour(s)');
+        $this->assertTrue( (new TimeExpression(''))->toSeconds() == 0);
 
 
         // using DateInterval syntax (ISO8601 interval spec)
