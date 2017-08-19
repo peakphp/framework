@@ -148,17 +148,6 @@ class TimeExpression
     }
 
     /**
-     * Get date from time
-     *
-     * @param string $format
-     * @return mixed
-     */
-    public function toDate($format = 'Y-m-d H:i:s')
-    {
-        return date($format, $this->time);
-    }
-
-    /**
      * Get internal DateInterval instance
      *
      * @return DateInterval
