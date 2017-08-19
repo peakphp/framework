@@ -1,17 +1,21 @@
+VERSION 2.20.0
+--------------
+Release Date: ?
+
 VERSION 2.19.0
 --------------
 Release Date: 2017-08-19
 
- - added bzip2 compression option in Peak\Bedrock\View\Cache
- - fixed method blockEnd() to use correctly saveContent() in Peak\Bedrock\View\Cache
- - added Peak\Config\ConfigSoftLoader
- - added option for using ConfigSoftLoader with application config(s)
- - changed default application name
- - rewritten Peak\Common\TimeExpression to use DateInterval
- - fixed an error with 0|empty time expression in Peak\Common\TimeExpression
- - added the support of format HH:MM:SS to Peak\Common\TimeExpression
- - removed method toDate() in Peak\Common\TimeExpression
- - added flag for delaying the first execution for climber command cron:add
+- added bzip2 compression option in Peak\Bedrock\View\Cache
+- fixed method blockEnd() to use correctly saveContent() in Peak\Bedrock\View\Cache
+- added Peak\Config\ConfigSoftLoader
+- added option for using ConfigSoftLoader with application config(s)
+- changed default application name
+- rewritten Peak\Common\TimeExpression to use DateInterval
+- fixed an error with 0|empty time expression in Peak\Common\TimeExpression
+- added the support of format HH:MM:SS to Peak\Common\TimeExpression
+- removed method toDate() in Peak\Common\TimeExpression
+- added flag for delaying the first execution for climber command cron:add
  
 VERSION 2.18.1
 --------------
