@@ -198,6 +198,8 @@ class TimeExpression
 
     /**
      * Decode expression
+     *
+     * @throws Exception
      */
     protected function decode()
     {
