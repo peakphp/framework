@@ -10,6 +10,8 @@ Release Date: ?
  - rewritten Peak\Common\TimeExpression to use DateInterval
  - fixed an error with 0|empty time expression in Peak\Common\TimeExpression
  - added the support of format HH:MM:SS to Peak\Common\TimeExpression
+ - removed method toDate() in Peak\Common\TimeExpression
+ - added flag for delaying the first execution for climber command cron:add
  
 VERSION 2.18.1
 --------------
