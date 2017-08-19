@@ -14,6 +14,7 @@ class TimeExpressionTest extends TestCase
         $this->assertTrue( (new TimeExpression("2day"))->toSeconds() === 172800);
         $this->assertTrue( (new TimeExpression("2 day"))->toSeconds() === 172800);
         $this->assertTrue( (new TimeExpression("2 day"))->toSeconds() === 172800);
+        $this->assertTrue( (new TimeExpression("14 day"))->toSeconds() === 1209600);
         $this->assertTrue( (new TimeExpression("2 days"))->toSeconds() === 172800);
         $this->assertTrue( (new TimeExpression("2     days"))->toSeconds() === 172800);
         $this->assertTrue( (new TimeExpression("2 days 1 sec"))->toSeconds() === 172801);
@@ -24,6 +25,12 @@ class TimeExpressionTest extends TestCase
         $this->assertTrue( (new TimeExpression("4mins"))->toSeconds() === 240);
         $this->assertTrue( (new TimeExpression("2 week 3 days"))->toSeconds() === 1468800);
         $this->assertTrue( (new TimeExpression(3705))->toString() === '1 hour 1 minute 45 seconds');
+
+        // 0 or empty
+        $this->assertTrue( (new TimeExpression(0))->toSeconds() === 0);
+        $this->assertTrue( (new TimeExpression(0))->toString() === '0 second');
+        $this->assertTrue( (new TimeExpression(0))->toString('%h hour(s)') === '0 hour(s)');
+
 
         // using DateInterval syntax (ISO8601 interval spec)
         $this->assertTrue( (new TimeExpression("PT1H35M45S"))->toSeconds() === 5745);

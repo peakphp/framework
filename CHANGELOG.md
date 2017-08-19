@@ -8,6 +8,7 @@ Release Date: ?
  - added option for using ConfigSoftLoader with application config(s)
  - changed default application name
  - rewrited Peak\Common\TimeExpression to use DateInterval
+ - fixed an error with 0|empty time expression in Peak\Common\TimeExpression
  
 VERSION 2.18.1
 --------------
