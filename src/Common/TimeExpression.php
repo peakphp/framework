@@ -197,6 +197,39 @@ class TimeExpression
     }
 
     /**
+     * Check if expression is valid
+     *
+     * @param $expression
+     * @return bool
+     */
+    public static function isValid($expression)
+    {
+        try {
+            new self($expression);
+            return true;
+        } catch (Exception $e) {
+            return false;
+        }
+    }
+
+    /**
+     * Try to create a TimeExpression.
+     * If fail, false is returned instead of throwing an exception
+     *
+     * @param $expression
+     * @return mixed
+     */
+    public static function createFrom($expression)
+    {
+        try {
+            $te = new self($expression);
+            return $te;
+        } catch (Exception $e) {
+            return false;
+        }
+    }
+
+    /**
      * Decode expression
      *
      * @throws Exception
