@@ -107,8 +107,11 @@ class TimeExpression
             }
         }
 
+//        return trim((new DateTime('@0'))
+//            ->diff(new DateTime('@'.$this->time))
+//            ->format($format));
         return trim((new DateTime('@0'))
-            ->diff(new DateTime('@'.$this->time))
+            ->diff(new DateTime('@'.round($this->time, 0)))
             ->format($format));
     }
 
@@ -121,7 +124,7 @@ class TimeExpression
     {
         if (isset($format)) {
             return (new DateTime('@0'))
-                ->diff(new DateTime('@'.$this->time))
+                ->diff(new DateTime('@'.round($this->time, 0)))
                 ->format($format);
         }
         return $this->__toString();
