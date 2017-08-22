@@ -139,7 +139,8 @@ class FrontController
     protected function dispatchController()
     {
         if ($this->route === null) {
-            throw new Exception('No route found for this request...');
+            $request = Application::get('AppRouting')->request->request_uri;
+            throw new Exception('No route found for request ['.strip_tags($request).'] ...');
         }
 
         //set default controller if router doesn't have one
