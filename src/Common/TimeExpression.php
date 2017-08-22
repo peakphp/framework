@@ -50,7 +50,7 @@ class TimeExpression
         'd' => 86400, //day
         'day' => 86400, //day
         'w' => 604800, //week
-        'week' => 86400, //week
+        'week' => 604800, //week
         'month' => 2592000, //month (rounded to 30 days)
         'y' => 31536000, //year (rounded to 365 days)
         'year' => 31536000 //year (rounded to 365 days)
@@ -107,9 +107,6 @@ class TimeExpression
             }
         }
 
-//        return trim((new DateTime('@0'))
-//            ->diff(new DateTime('@'.$this->time))
-//            ->format($format));
         return trim((new DateTime('@0'))
             ->diff(new DateTime('@'.round($this->time, 0)))
             ->format($format));
