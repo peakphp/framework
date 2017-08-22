@@ -8,12 +8,35 @@ class TimeExpressionTest extends TestCase
 {
     function testExpression()
     {
+//        echo "\n";
+//        echo (new TimeExpression(86400))->toString();
+//        echo "\n";
+//
+//        echo "\n";
+//        echo (new TimeExpression(59))->toString();
+//        echo "\n";
+//
+//        die();
+
+        $this->assertTrue( (new TimeExpression(86400))->toString() === '1 day');
+        $this->assertTrue( (new TimeExpression(86400*2))->toString() === '2 days');
+        $this->assertTrue( (new TimeExpression(86400*3))->toString() === '3 days');
+        $this->assertTrue( (new TimeExpression(86400*4))->toString() === '4 days');
+        $this->assertTrue( (new TimeExpression(86400*5))->toString() === '5 days');
+        $this->assertTrue( (new TimeExpression(86400*6))->toString() === '6 days');
+        $this->assertTrue( (new TimeExpression(86400*7))->toString() === '7 days');
+        $this->assertTrue( (new TimeExpression(86400*30))->toString() === '1 month');
+        $this->assertTrue( (new TimeExpression(86400*60))->toString() === '2 months');
+        $this->assertTrue( (new TimeExpression(86400*365))->toString() === '1 year');
+        $this->assertTrue( (new TimeExpression(86400*365*2))->toString() === '2 years');
+
         $this->assertTrue( (new TimeExpression(1))->toMicroseconds() === 1000);
         $this->assertTrue( (new TimeExpression("2day"))->toSeconds() === 172800);
         $this->assertTrue( (new TimeExpression("2 day"))->toSeconds() === 172800);
         $this->assertTrue( (new TimeExpression("2 days"))->toSeconds() === 172800);
         $this->assertTrue( (new TimeExpression("2d"))->toSeconds() === 172800);
         $this->assertTrue( (new TimeExpression("2 d"))->toSeconds() === 172800);
+        $this->assertTrue( (new TimeExpression("1 day"))->toSeconds() === 86400);
         $this->assertTrue( (new TimeExpression("2     days"))->toSeconds() === 172800);
         $this->assertTrue( (new TimeExpression("2hour"))->toSeconds() === 7200);
         $this->assertTrue( (new TimeExpression("14 day"))->toSeconds() === 1209600);
@@ -26,7 +49,6 @@ class TimeExpressionTest extends TestCase
         $this->assertTrue( (new TimeExpression("4mins"))->toMicroseconds() === 240000);
         $this->assertTrue( (new TimeExpression("4mins"))->toSeconds() === 240);
         $this->assertTrue( (new TimeExpression(3705))->toString() === '1 hour 1 minute 45 seconds');
-
     }
 
     function testClockFormat()
