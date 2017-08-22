@@ -82,11 +82,12 @@ class ClimberCronAddCommand extends CronCommand
             $sys_cmd = null;
         }
 
+        $interval_sec = (new TimeExpression($interval))->toSeconds();
+
         // handle interval as time expression
         $next_execution = time();
         if (!empty($interval)) {
-            $interval_exp = (new TimeExpression($interval));
-            $next_execution += $interval_exp->toSeconds() + (new TimeExpression($delay))->toSeconds();
+            $next_execution += $interval_sec + (new TimeExpression($delay))->toSeconds();
         }
 
         // final array to insert into database
@@ -95,7 +96,7 @@ class ClimberCronAddCommand extends CronCommand
             '`cmd`' => $command,
             '`sys_cmd`' => $sys_cmd,
             '`repeat`' => $repeat,
-            '`interval`' => $interval,
+            '`interval`' => $interval_sec,
             '`next_execution`' => $next_execution
         ];
 
@@ -104,9 +105,9 @@ class ClimberCronAddCommand extends CronCommand
         $output->writeln('Cron job #'.$this->conn->lastInsertId().' added!');
 
         if ($repeat == 0) {
-            $output->writeln('This cron job will be executed indefinitely at interval of '.$interval_exp);
+            $output->writeln('This cron job will be executed indefinitely at interval of '.(new TimeExpression($interval))->toString());
         } elseif ($repeat > 0) {
-            $output->writeln('This cron job will be executed '.$repeat.' time(s) at interval of '.$interval_exp);
+            $output->writeln('This cron job will be executed '.$repeat.' time(s) at interval of '.(new TimeExpression($interval))->toString());
         }
 
         $output->writeln('Next execution is planned at '.(date('Y-m-d H:i:s', $next_execution)));
