@@ -65,7 +65,7 @@ class TimeExpressionTest extends TestCase
         );
 
         // getting ISO8601 interval spec
-        echo (new TimeExpression('2 day 1 sec'))->toIntervalSpec();
+//        echo (new TimeExpression('2 day 1 sec'))->toIntervalSpec();
         $this->assertTrue( (new TimeExpression('2 days 1 sec'))->toIntervalSpec() === 'P2DT1S');
 
         // getting ISO8601 interval spec
