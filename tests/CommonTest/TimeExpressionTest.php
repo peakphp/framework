@@ -9,15 +9,14 @@ class TimeExpressionTest extends TestCase
     function testExpression()
     {
         $this->assertTrue( (new TimeExpression(1))->toMicroseconds() === 1000);
-        //$this->assertTrue( (new TimeExpression(1000))->toSeconds() === 1000);
         $this->assertTrue( (new TimeExpression("2day"))->toSeconds() === 172800);
         $this->assertTrue( (new TimeExpression("2 day"))->toSeconds() === 172800);
-        $this->assertTrue( (new TimeExpression("2 day"))->toSeconds() === 172800);
+        $this->assertTrue( (new TimeExpression("2 days"))->toSeconds() === 172800);
         $this->assertTrue( (new TimeExpression("2d"))->toSeconds() === 172800);
         $this->assertTrue( (new TimeExpression("2 d"))->toSeconds() === 172800);
-        $this->assertTrue( (new TimeExpression("14 day"))->toSeconds() === 1209600);
-        $this->assertTrue( (new TimeExpression("2 days"))->toSeconds() === 172800);
         $this->assertTrue( (new TimeExpression("2     days"))->toSeconds() === 172800);
+        $this->assertTrue( (new TimeExpression("2hour"))->toSeconds() === 7200);
+        $this->assertTrue( (new TimeExpression("14 day"))->toSeconds() === 1209600);
         $this->assertTrue( (new TimeExpression("2 days 1 sec"))->toSeconds() === 172801);
         $this->assertTrue( (new TimeExpression("2day 15min"))->toSeconds() === 173700);
         $this->assertTrue( (new TimeExpression("15minutes2day"))->toSeconds() === 173700);
@@ -66,6 +65,7 @@ class TimeExpressionTest extends TestCase
         );
 
         // getting ISO8601 interval spec
+        echo (new TimeExpression('2 day 1 sec'))->toIntervalSpec();
         $this->assertTrue( (new TimeExpression('2 days 1 sec'))->toIntervalSpec() === 'P2DT1S');
 
         // getting ISO8601 interval spec

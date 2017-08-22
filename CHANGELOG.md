@@ -3,6 +3,7 @@ VERSION 2.20.0
 Release Date: ?
 
  - added static method isValid() and createFrom() to Peak\Common\TimeExpression
+ - added the request uri exception message in Peak\Bedrock\Controller\FrontController
 
 VERSION 2.19.0
 --------------
