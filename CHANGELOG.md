@@ -5,6 +5,7 @@ Release Date: ?
  - added static method isValid() and createFrom() to Peak\Common\TimeExpression
  - added the request uri exception message in Peak\Bedrock\Controller\FrontController
  - rounded time before outputting string in Peak\Common\TimeExpression
+ - output milliseconds string if time is between 0 and 1 second in Peak\Common\TimeExpression
 
 VERSION 2.19.0
 --------------

@@ -172,6 +172,7 @@ class ConfigLoader
             if ($this->soft) {
                 return null;
             }
+
             throw new Exception(__CLASS__.': unknown config type for ['.$config.']');
         }
 

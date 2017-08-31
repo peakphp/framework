@@ -49,6 +49,7 @@ class TimeExpressionTest extends TestCase
         $this->assertTrue( (new TimeExpression("4mins"))->toMicroseconds() === 240000);
         $this->assertTrue( (new TimeExpression("4mins"))->toSeconds() === 240);
         $this->assertTrue( (new TimeExpression(3705))->toString() === '1 hour 1 minute 45 seconds');
+        $this->assertTrue( (new TimeExpression(0.10))->toString() === '100 milliseconds');
     }
 
     function testClockFormat()
