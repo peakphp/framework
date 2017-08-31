@@ -99,6 +99,8 @@ class TimeExpression
 
         if (empty($this->time)) {
             return '0 second';
+        } elseif($this->time < 1) {
+            return ($this->time * 1000).' milliseconds';
         }
 
         foreach (self::$tokens as $token => $title) {
