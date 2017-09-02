@@ -54,9 +54,21 @@ class TimeExpressionTest extends TestCase
 
     function testClockFormat()
     {
-        $this->assertTrue( (new TimeExpression('02:40:40'))->toSeconds() == 9640);
-        $this->assertTrue( (new TimeExpression('4:30'))->toSeconds() == 270);
-        $this->assertTrue( (new TimeExpression('4:30'))->toString() == '4 minutes 30 seconds');
+        //echo (new TimeExpression('02:40:40'))->toClockString();
+//        echo (new TimeExpression(1))->toClockString()."\n";
+//        echo (new TimeExpression('02:40:40'))->toClockString()."\n";
+//        echo (new TimeExpression('02:00:40'))->toClockString()."\n";
+//        echo (new TimeExpression('1 day 36 hour'))->toClockString()."\n";
+//        echo (new TimeExpression(65048))->toClockString()."\n";
+        $this->assertTrue( (new TimeExpression('02:40:40'))->toClockString() == '02:40:40');
+        $this->assertTrue( (new TimeExpression('02:00:40'))->toClockString() == '02:00:40');
+        $this->assertTrue( (new TimeExpression("1day"))->toClockString() == '24:00:00');
+        $this->assertTrue( (new TimeExpression("3day"))->toClockString() == '72:00:00');
+        $this->assertTrue( (new TimeExpression("1min"))->toClockString() == '00:01:00');
+        $this->assertTrue( (new TimeExpression("1 day 36 hour"))->toClockString() == '60:00:00');
+        $this->assertTrue( (new TimeExpression(12445))->toClockString() == '03:27:25');
+        $this->assertTrue( (new TimeExpression("1min"))->toClockString(true) == '01:00');
+        $this->assertTrue( (new TimeExpression("1 day 36 hour"))->toClockString(true) == '60:00:00');
     }
 
     function testEmpty()
