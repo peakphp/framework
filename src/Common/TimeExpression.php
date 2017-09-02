@@ -130,6 +130,46 @@ class TimeExpression
     }
 
     /**
+     * Get time in HH:MM:SS format
+     * @param $truncated If true, hour parts is removed when empty
+     * @return string
+     */
+    public function toClockString($truncated = false)
+    {
+        $clock = [];
+        $time = $this->time;
+
+        $tokens = [
+            'hour' => $this->tokens_values['hour'],
+            'min' => $this->tokens_values['min'],
+            'sec' => $this->tokens_values['sec']
+        ];
+
+        foreach ($tokens as $token_name => $token) {
+            $clock[$token_name] = '00';
+            if ($time >= $token) {
+                $mod = fmod ($time, $token);
+                $time -= $mod;
+                $clock[$token_name] = round($time / $token);
+                $time = $mod;
+            }
+        }
+
+        if($truncated && $clock['hour'] === '00') {
+            unset($clock['hour']);
+        }
+
+        foreach ($clock as $name => $value) {
+            $length = strlen($value);
+            if ($length == 1) {
+                $clock[$name] = '0'.$value;
+            }
+        }
+
+        return implode(':', $clock);
+    }
+
+    /**
      * Get time expression in milliseconds
      *
      * @return integer
