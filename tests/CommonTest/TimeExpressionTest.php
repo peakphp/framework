@@ -60,6 +60,7 @@ class TimeExpressionTest extends TestCase
 //        echo (new TimeExpression('02:00:40'))->toClockString()."\n";
 //        echo (new TimeExpression('1 day 36 hour'))->toClockString()."\n";
 //        echo (new TimeExpression(65048))->toClockString()."\n";
+        $this->assertTrue( (new TimeExpression('4h 36m 21s'))->toClockString() == '04:36:21');
         $this->assertTrue( (new TimeExpression('02:40:40'))->toClockString() == '02:40:40');
         $this->assertTrue( (new TimeExpression('02:00:40'))->toClockString() == '02:00:40');
         $this->assertTrue( (new TimeExpression("1day"))->toClockString() == '24:00:00');
