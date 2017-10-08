@@ -6,8 +6,7 @@ use Peak\Bedrock\Application\Config;
 use Peak\Bedrock\Application\Routing;
 use Peak\Common\Collection;
 use Peak\Common\DataException;
-use Peak\Routing\Request;
-use Peak\Routing\CustomRoute;
+use Peak\Routing\CustomRouteBuilder;
 
 /**
  * Application Bootstrap Customer routes
@@ -26,27 +25,12 @@ class ConfigCustomRoutes
 
         if (!empty($config->routes)) {
             foreach ($config->routes as $r) {
-                if (isset($r['route'], $r['controller'], $r['action'])) {
-                    $collection[] = new CustomRoute(
-                        $r['route'],
-                        $r['controller'],
-                        $r['action']
-                    );
+                if (is_array($r)) {
+                    $collection[] = CustomRouteBuilder::createFromArray($r);
                 } elseif (is_string($r)) {
-                    $parts = explode(' | ', $r);
-                    if (count($parts) == 2) {
-                        $ctrl_part = explode(Request::$separator, $parts[1]);
-
-                        $collection[] = new CustomRoute(
-                            trim($parts[0]),  // route
-                            $ctrl_part[0],    // controller
-                            (isset($ctrl_part[1]) ? $ctrl_part[1] : '') // action
-                        );
-                    } else {
-                        throw new DataException('Invalid routing expression in your application config', $r);
-                    }
+                    $collection[] = CustomRouteBuilder::createFromString($r);
                 } else {
-                    throw new DataException('Invalid routing in your application config', $r);
+                    throw new DataException('Invalid custom route type in your application config', $r);
                 }
             }
         }
