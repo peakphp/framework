@@ -16,8 +16,18 @@ class TimeExpressionTest extends TestCase
 //        echo (new TimeExpression(59))->toString();
 //        echo "\n";
 //
+//        echo "\n";
+//        echo (new TimeExpression('30d'))->toString();
+//        echo (new TimeExpression(0))->toString('%h hour(s)');
 //        die();
+//        echo "\n";
+//        echo (new TimeExpression('31d'))->toString();
+//        echo "\n";
+//        echo (new TimeExpression('32d'))->toString('%d day');
+//        echo "\n"; die();
 
+        $this->assertTrue( (new TimeExpression('30d'))->toString() === '1 month');
+        $this->assertTrue( (new TimeExpression('31d'))->toString() === '1 month 1 day');
         $this->assertTrue( (new TimeExpression(86400))->toString() === '1 day');
         $this->assertTrue( (new TimeExpression(86400*2))->toString() === '2 days');
         $this->assertTrue( (new TimeExpression(86400*3))->toString() === '3 days');
