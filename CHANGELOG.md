@@ -9,6 +9,9 @@ Release Date: ?
  - added method toClockString() in Peak\Common\TimeExpression
  - fixed bug in Peak\Common\TimeExpression::toString() with "30 day" to 1 month conversion
  - Peak\Bedrock\Application\Bootstrapper is now able to resolve dependencies for init* and per environment methods
+ - added Peak\Routing\CustomRouteBuilder
+ - updated Peak\Bedrock\Application\Bootstrap\ConfigCustomRoutes to use CustomRouteBuilder
+ - added method push() to Peak\Common\Collection
 
 VERSION 2.19.0
 --------------
