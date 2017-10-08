@@ -274,4 +274,19 @@ class CollectionTest extends TestCase
         $this->assertTrue($collection instanceof Collection);
     }
 
+    /**
+     * Test push()
+     */
+    public function testPush()
+    {
+        $collection = new Collection();
+        $this->assertTrue(count($collection) == 0);
+        $collection->push('foo');
+        $this->assertTrue(count($collection) == 1);
+        $collection->push('bar');
+        $this->assertTrue(count($collection) == 2);
+        $this->assertTrue($collection[0] === 'foo');
+        $this->assertTrue($collection[1] === 'bar');
+    }
+
 }
