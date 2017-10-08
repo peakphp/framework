@@ -2,6 +2,7 @@
 
 namespace Peak\Bedrock\Application;
 
+use Peak\Bedrock\Application;
 use Psr\Container\ContainerInterface;
 
 /**
@@ -48,7 +49,7 @@ class Bootstrapper
         if (!empty($c_methods)) {
             foreach ($c_methods as $m) {
                 if (substr($m, 0, $l) === $this->boot_methods_prefix) {
-                    $this->$m();
+                    Application::container()->call([$this, $m]);
                 }
             }
         }
@@ -63,7 +64,7 @@ class Bootstrapper
         if (defined('APPLICATION_ENV')) {
             $env_method = 'env'.APPLICATION_ENV;
             if (method_exists($this, $env_method)) {
-                $this->$env_method();
+                Application::container()->call([$this, $env_method]);
             }
         }
     }
