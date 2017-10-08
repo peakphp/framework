@@ -195,6 +195,18 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
     }
 
     /**
+     * Push item to the end of collection
+     *
+     * @param mixed $item
+     * @return $this
+     */
+    public function push($item)
+    {
+        $this->items[] = $item;
+        return $this;
+    }
+
+    /**
      * Count items
      *
      * @return integer
