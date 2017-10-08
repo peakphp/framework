@@ -95,28 +95,27 @@ class TimeExpression
      */
     public function __toString()
     {
-        $format = '';
-
         if (empty($this->time)) {
             return '0 second';
         } elseif($this->time < 1) {
             return ($this->time * 1000).' milliseconds';
         }
 
+        $string = '';
+
         foreach (self::$tokens as $token => $title) {
             if ($this->di->$token > 0) {
-                $format .= '%'.$token.' '.$title.(($this->di->$token < 2) ? '' : 's'). ' ';
+                $string .= $this->di->$token.' '.$title.(($this->di->$token < 2) ? '' : 's'). ' ';
             }
         }
 
-        return trim((new DateTime('@0'))
-            ->diff(new DateTime('@'.round($this->time, 0)))
-            ->format($format));
+        return trim($string);
     }
 
     /**
      * Shortcut of __toString + can overload string format
      *
+     * @param null|string $format a valid DateInterval::format (See http://php.net/manual/en/dateinterval.format.php)
      * @return string
      */
     public function toString($format = null)
