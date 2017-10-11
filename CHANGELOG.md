@@ -1,6 +1,8 @@
-VERSION 2.21.0
+VERSION 2.20.1
 --------------
-Release Date: ?
+Release Date: 2017-10-11
+
+ - fixed missing app container in Peak\Bedrock\Application\Bootstrapper for climber
 
 VERSION 2.20.0
 --------------
