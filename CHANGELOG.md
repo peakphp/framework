@@ -2,6 +2,9 @@ VERSION 2.21.0
 --------------
 Release Date: ?
 
+ - added Peak\Bedrock\Application\Exceptions\NoRouteFoundException
+ - added Peak\Bedrock\Application\Exceptions\ControllerNotFoundException
+
 VERSION 2.20.1
 --------------
 Release Date: 2017-10-11
