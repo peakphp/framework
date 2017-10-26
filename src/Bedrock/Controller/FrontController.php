@@ -3,10 +3,10 @@
 namespace Peak\Bedrock\Controller;
 
 use Peak\Bedrock\Application;
-use Peak\Bedrock\Controller\ActionController;
+use Peak\Bedrock\Application\Exceptions\NoRouteFoundException;
+use Peak\Bedrock\Application\Exceptions\ControllerNotFoundException;
 use Peak\Routing\Route;
 use Peak\Routing\RouteBuilder;
-use \Exception;
 
 /**
  * Front controller
@@ -140,7 +140,7 @@ class FrontController
     {
         if ($this->route === null) {
             $request = Application::get('AppRouting')->request->request_uri;
-            throw new Exception('No route found for request ['.strip_tags($request).'] ...');
+            throw new NoRouteFoundException($request);
         }
 
         //set default controller if router doesn't have one
@@ -153,7 +153,7 @@ class FrontController
 
         //check if it's valid application controller
         if (!class_exists($ctrl_name)) {
-            throw new Exception('Application controller '.$this->route->controller.' not found');
+            throw new ControllerNotFoundException($this->route->controller);
         }
 
         $this->controller = Application::create($ctrl_name);
