@@ -18,7 +18,10 @@ class CronBuilder
         'repeat' => -1,
         'interval' => null,
         'enabled' => '1',
+        'next_execution' => null,
     ];
+
+    protected $delay = 0;
 
     /**
      * @param $name
@@ -64,7 +67,6 @@ class CronBuilder
         if (!OptionFormat::repeatValid($repeat)) {
             throw new InvalidDatabaseConfigException('repeat');
         }
-        echo 'VALID';
         $this->cron['repeat'] = OptionFormat::repeat($repeat);
         return $this;
     }
@@ -94,6 +96,17 @@ class CronBuilder
     }
 
     /**
+     * @param $enabled
+     * @return $this
+     * @throws InvalidDatabaseConfigException
+     */
+    public function delay($delay)
+    {
+        $this->delay = (new TimeExpression($delay))->toSeconds();
+        return $this;
+    }
+
+    /**
      * Build
      * @return array
      * @throws \Exception
@@ -106,6 +119,12 @@ class CronBuilder
         if(empty($this->cron['cmd'])) {
             throw new CronBuilderException('Cron command is empty');
         }
+
+        $this->cron['next_execution'] = time();
+        if ($this->cron['interval'] !== null) {
+            $this->cron['next_execution'] += $this->cron['interval'] + $this->delay;
+        }
+
         return $this->cron;
     }
 }
