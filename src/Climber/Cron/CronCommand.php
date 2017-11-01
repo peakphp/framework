@@ -5,8 +5,8 @@ namespace Peak\Climber\Cron;
 use Doctrine\DBAL\Connection;
 use Peak\Bedrock\Application\Config;
 use Peak\Climber\CommandWithDb;
-use Peak\Climber\Cron\Exception\DatabaseNotFoundException;
-use Peak\Climber\Cron\Exception\TablesNotFoundException;
+use Peak\Climber\Cron\Exceptions\DatabaseNotFoundException;
+use Peak\Climber\Cron\Exceptions\TablesNotFoundException;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -41,9 +41,9 @@ abstract class CronCommand extends CommandWithDb
     protected function initialize(InputInterface $input, OutputInterface $output)
     {
         // run some validation for cron system
-        if (!Cron::hasDbConnection($this->conn)) {
+        if (!CronSystem::hasDbConnection($this->conn)) {
             throw new DatabaseNotFoundException();
-        } elseif ($this->conn->connect() && !Cron::isInstalled($this->conn) && $this->getName() !== 'cron:install') {
+        } elseif ($this->conn->connect() && !CronSystem::isInstalled($this->conn) && $this->getName() !== 'cron:install') {
             throw new TablesNotFoundException();
         }
     }
