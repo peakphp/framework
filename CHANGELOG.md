@@ -2,6 +2,7 @@ VERSION 2.21.0
 --------------
 Release Date: ?
 
+ - added Peak\Climber\Cron\CronApi
  - added Peak\Climber\Cron\CronBuilder
  - added Peak\Climber\Cron\Exceptions\CronBuilderException
  - added Peak\Climber\Cron\Exceptions\InvalidDatabaseConfigException
