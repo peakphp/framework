@@ -45,9 +45,9 @@ class Executor
         $this->conn = Application::container()->get('CronDbConnection');
 
         // run some validation for cron system
-        if (!Cron::hasDbConnection($this->conn)) {
+        if (!CronSystem::hasDbConnection($this->conn)) {
             throw new DatabaseNotFoundException();
-        } elseif (!Cron::isInstalled($this->conn)) {
+        } elseif (!CronSystem::isInstalled($this->conn)) {
             throw new TablesNotFoundException();
         }
     }
