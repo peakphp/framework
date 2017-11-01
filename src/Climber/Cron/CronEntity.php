@@ -38,6 +38,17 @@ class CronEntity
     }
 
     /**
+     * Get a raw value
+     *
+     * @param $name
+     * @return mixed
+     */
+    public function raw($name)
+    {
+        return $this->cron[$name];
+    }
+
+    /**
      * Set a row field
      *
      * @param $name
