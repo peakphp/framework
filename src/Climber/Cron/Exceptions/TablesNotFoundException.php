@@ -1,6 +1,6 @@
 <?php
 
-namespace Peak\Climber\Cron\Exception;
+namespace Peak\Climber\Cron\Exceptions;
 
 use \Exception;
 
