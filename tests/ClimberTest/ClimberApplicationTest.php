@@ -6,9 +6,9 @@ use Peak\Climber\Application;
 use Peak\Bedrock\Application\Config;
 use Peak\Climber\Commands\ClimberCronAddCommand;
 use Peak\Climber\Cron\RegisterCommands;
-use Peak\Climber\Cron\Exception\InvalidDatabaseConfigException;
-use Peak\Climber\Cron\Exception\DatabaseNotFoundException;
-use Peak\Climber\Cron\Exception\TablesNotFoundException;
+use Peak\Climber\Cron\Exceptions\InvalidDatabaseConfigException;
+use Peak\Climber\Cron\Exceptions\DatabaseNotFoundException;
+use Peak\Climber\Cron\Exceptions\TablesNotFoundException;
 use Symfony\Component\Console\Tester\CommandTester;
 use Doctrine\DBAL\Exception\ConnectionException;
 
