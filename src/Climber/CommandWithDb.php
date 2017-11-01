@@ -8,7 +8,7 @@ use Symfony\Component\Console\Command\Command;
 abstract class CommandWithDb extends Command
 {
     /**
-     * @var Connection Cron
+     * @var Connection
      */
     protected $conn;
 
