@@ -27,7 +27,7 @@ abstract class ActionController
     
     /**
      * instance of view
-     * @var object
+     * @var View
      */
     public $view;
     
