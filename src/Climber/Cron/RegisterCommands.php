@@ -3,7 +3,7 @@
 namespace Peak\Climber\Cron;
 
 use Peak\Climber\Application;
-use Peak\Climber\Cron\Exception\InvalidDatabaseConfigException;
+use Peak\Climber\Cron\Exceptions\InvalidDatabaseConfigException;
 
 class RegisterCommands
 {
