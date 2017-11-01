@@ -2,6 +2,8 @@ VERSION 2.21.0
 --------------
 Release Date: ?
 
+ - added method raw() to Peak\Climber\Cron\CronEntity
+ - renamed Peak\Climber\Cron\Cron to Peak\Climber\Cron\CronSystem and added static method connect()
  - added Peak\Bedrock\Application\Exceptions\NoRouteFoundException
  - added Peak\Bedrock\Application\Exceptions\ControllerNotFoundException
 
