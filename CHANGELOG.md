@@ -2,6 +2,10 @@ VERSION 2.21.0
 --------------
 Release Date: ?
 
+ - added Peak\Climber\Cron\CronBuilder
+ - added Peak\Climber\Cron\Exceptions\CronBuilderException
+ - added Peak\Climber\Cron\Exceptions\InvalidDatabaseConfigException
+ - added method yesNoValid() to Peak\Climber\Cron\OptionFormat
  - added method raw() to Peak\Climber\Cron\CronEntity
  - renamed Peak\Climber\Cron\Cron to Peak\Climber\Cron\CronSystem and added static method connect()
  - added Peak\Bedrock\Application\Exceptions\NoRouteFoundException
