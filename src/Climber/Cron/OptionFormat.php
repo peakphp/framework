@@ -13,10 +13,12 @@ class OptionFormat
         'yes' => 1,
         '1' => 1,
         'true' => 1,
+        true => 1,
         'n' => 0,
         'no' => 0,
         'false' => 0,
-        '0' => 0
+        '0' => 0,
+        false => 0,
     ];
 
     /**
@@ -34,6 +36,8 @@ class OptionFormat
         'always' => 0,
         '*' => 0,
         true => 0,
+        0 => 0,
+        -1 => -1,
     ];
 
     /**
@@ -50,6 +54,20 @@ class OptionFormat
             $result = self::$yesno[$option];
         }
         return $result;
+    }
+
+    /**
+     * Handle Yes/No value
+     *
+     * @param $option
+     * @return mixed|null
+     */
+    public static function yesNoValid($option)
+    {
+        if (self::yesNo($option) === null) {
+            return false;
+        }
+        return true;
     }
 
     /**
