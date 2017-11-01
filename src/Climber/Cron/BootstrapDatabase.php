@@ -13,7 +13,9 @@ class BootstrapDatabase
      */
     public function __construct(array $database_config)
     {
-        $conn = DriverManager::getConnection($database_config, new Configuration());
-        Application::container()->add($conn, 'CronDbConnection');
+        Application::container()->add(
+            CronSystem::connect($database_config),
+            'CronDbConnection'
+        );
     }
 }
