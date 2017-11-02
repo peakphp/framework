@@ -2,6 +2,7 @@ VERSION 2.21.0
 --------------
 Release Date: ?
 
+ - added method __call() to Peak\Bedrock\Controller\ChildActionController to check in parent controller for unknown methods
  - added Peak\Climber\Cron\CronApi
  - added Peak\Climber\Cron\CronBuilder
  - added Peak\Climber\Cron\Exceptions\CronBuilderException
