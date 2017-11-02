@@ -54,7 +54,7 @@ class Module
 
         //update application tree
         $ap = new AppTree(APPLICATION_ABSPATH.'/modules/'.$this->name);
-        Application::conf()->set('path.apptree', $ap->tree);
+        Application::conf()->set('path.apptree', $ap->get());
 
         return $this;
     }
