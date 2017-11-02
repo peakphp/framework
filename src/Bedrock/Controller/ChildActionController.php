@@ -38,4 +38,21 @@ abstract class ChildActionController
             [$this, 'process']
         );
     }
+
+    /**
+     * Check method exists in parent
+     *
+     * @param $method
+     * @param null $args
+     * @return mixed
+     * @throws \Exception
+     */
+    public function __call($method, $args = null)
+    {
+        if (!method_exists($this->parent, $method)) {
+            $line = debug_backtrace()[0]['line'];
+            throw new Exception('Method '.$method.'() not found in '.get_class($this).' on line '.$line);
+        }
+        return call_user_func_array([$this->parent, $method], $args);
+    }
 }
