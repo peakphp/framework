@@ -2,6 +2,7 @@ VERSION 2.21.0
 --------------
 Release Date: ?
 
+ - added the ability to store closures in view variables and be used inside templates like a normal view helper
  - added method __call() to Peak\Bedrock\Controller\ChildActionController to check in parent controller for unknown methods
  - added Peak\Climber\Cron\CronApi
  - added Peak\Climber\Cron\CronBuilder
