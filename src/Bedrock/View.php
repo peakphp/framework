@@ -108,6 +108,8 @@ class View
     {
         if (method_exists($this->engine(), $method)) {
             return call_user_func_array([$this->engine(), $method], $args);
+        } elseif(array_key_exists($method, $this->vars) && $this->vars[$method] instanceof \Closure) {
+            return call_user_func_array($this->vars[$method], $args);
         } else {
             return $this->helper($method, $args);
         }
