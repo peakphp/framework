@@ -1,6 +1,6 @@
 VERSION 2.21.0
 --------------
-Release Date: ?
+Release Date: 2017-11-03
 
  - added the ability to store closures in view variables and be used inside templates like a normal view helper
  - added method __call() to Peak\Bedrock\Controller\ChildActionController to check in parent controller for unknown methods
