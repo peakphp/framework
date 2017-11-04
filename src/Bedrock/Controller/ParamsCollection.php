@@ -27,6 +27,17 @@ class ParamsCollection extends Collection
     }
 
     /**
+     * Check if key exists. Same behavior as has()
+     *
+     * @param   string $key
+     * @return  bool
+     */
+    public function __isset($key)
+    {
+        return $this->has($key);
+    }
+
+    /**
      * Has key with value
      * Can also add a rule to check is key value validate
      *
