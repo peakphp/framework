@@ -22,10 +22,11 @@ class ParamsCollectionTest extends TestCase
         $this->assertTrue($params[0] === 'vote');
         $this->assertTrue(isset($params[1]));
         $this->assertTrue($params[1] === 'id');
-
-        $this->assertTrue($params[1] === 'id');
+        $this->assertTrue(isset($params[2]));
         $this->assertTrue($params[2] == 234234);
+        $this->assertTrue(isset($params[3]));
         $this->assertTrue($params[3] === 'note');
+        $this->assertTrue(isset($params[4]));
         $this->assertTrue($params[4] == 1);
 
         $this->assertFalse(isset($params[5]));
@@ -56,6 +57,21 @@ class ParamsCollectionTest extends TestCase
 
         $this->assertTrue($params->has(4));
         $this->assertFalse($params->has('abc'));
+    }
+
+    /**
+     * test isset()
+     */
+    function testIsset()
+    {
+        $params = new ParamsCollection([
+            'vote', 'id', 234234, 'note', 'abc'
+        ]);
+
+        $this->assertTrue(isset($params->vote));
+        $this->assertTrue(isset($params->id));
+        $this->assertTrue(isset($params->note));
+        $this->assertFalse(isset($params->abc));
     }
 
     /**
