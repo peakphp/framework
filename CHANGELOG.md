@@ -2,9 +2,9 @@ VERSION 2.22.0
 --------------
 Release Date: ?
 
-> Warning! Breaking changes with 2.15.x and below
+> Warning! Breaking changes with 2.21.x and below
 
- - replaced old way to manage controller action params. 
+ - [BC] replaced old way to manage controller action params. 
    $params is now an instance Peak\Bedrock\Controller\ParamsCollection and $params_raw has been removed
 
 VERSION 2.21.0
