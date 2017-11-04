@@ -72,7 +72,7 @@ abstract class ActionController
 
         //set default ctrl action if none present
         if ($this->action === $this->action_prefix) {
-            $this->action  = $this->action_prefix.'index';
+            $this->action = $this->action_prefix.'index';
         }
     }
 
