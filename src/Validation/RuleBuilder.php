@@ -130,7 +130,7 @@ class RuleBuilder
     /**
      * Get context
      *
-     * @return integer
+     * @return mixed
      */
     public function getContext()
     {

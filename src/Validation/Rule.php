@@ -13,7 +13,7 @@ class Rule
      * Create an instance of RuleBuilder
      *
      * @param  string $name rule class name
-     * @return Peak\Validation\RuleBuilder
+     * @return RuleBuilder
      */
     public static function create($name)
     {
