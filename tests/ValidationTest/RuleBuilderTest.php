@@ -50,6 +50,15 @@ class RuleBuilderTest extends TestCase
         $this->assertFalse($pass);
     }
 
+    function testRuleBuilderEnum()
+    {
+        $pass = Rule::create(\Peak\Validation\Rules\Enum::class)
+            ->setOptions(['allo', 'Hello'])
+            ->validate('Hello');
+
+        $this->assertTrue($pass);
+    }
+
     function testCustomeRuleContext()
     {
         $pass = Rule::create(MatchContextRule::class)
