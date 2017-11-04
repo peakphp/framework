@@ -186,10 +186,10 @@ class TestController extends ActionController
         $this->view->foo = 'bar';
     }
 
-    public function _actionWithParams($id, $sort = 'name')
+    public function _actionWithParams()
     {
-        $this->id = $id;
-        $this->sort = $sort;
+        $this->id = $this->params->id;
+        $this->sort = $this->params->sort;
     }
 
     public function _testingCache()
