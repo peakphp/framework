@@ -4,6 +4,8 @@ namespace Peak\Bedrock\Controller;
 
 use Peak\Bedrock\Application;
 use Peak\Bedrock\View;
+use \Exception;
+
 
 /**
  * For standalone controller action class
@@ -23,15 +25,22 @@ abstract class ChildActionController
     protected $parent;
 
     /**
+     * Params collection
+     * @var ParamsCollection
+     */
+    protected $params;
+
+    /**
      * Constructor
      *
      * @param View $view
      * @param ParentController $parent
      */
-    public function __construct(View $view, ParentController $parent)
+    public function __construct(View $view, ParentController $parent, ParamsCollection $params)
     {
         $this->view = $view;
         $this->parent = $parent;
+        $this->params = $params;
 
         // call child process() with di
         Application::container()->call(

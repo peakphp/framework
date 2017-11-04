@@ -11,28 +11,10 @@ use Peak\Bedrock\View;
 abstract class ParentController extends ActionController
 {
     /**
-     * Turn off since we don't inspect a method anymore
-     * @var boolean
-     */
-    protected $actions_with_params = false;
-
-    /**
      * Default Actions classes namespace
      * @var string
      */
     protected $actions_ns;
-
-    /**
-     * Make params accessible to child
-     * @var array
-     */
-    public $params;
-
-    /**
-     * Make params_raw accessible to child
-     * @var array
-     */
-    public $params_raw;
 
     /**
      * Loaded child action instance
@@ -85,7 +67,8 @@ abstract class ParentController extends ActionController
     protected function callAction($action, $args = [])
     {
         $this->child = Application::create($this->actionClass($action), [$args], [
-            'Peak\Bedrock\Controller\ParentController' => $this
+            'Peak\Bedrock\Controller\ParentController' => $this,
+            'Peak\Bedrock\Controller\ParamsCollection' => $this->params
         ]);
     }
 }

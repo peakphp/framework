@@ -3,7 +3,6 @@
 namespace Peak\Bedrock\Controller;
 
 use Peak\Bedrock\Application;
-use Peak\Common\Collection;
 use Peak\Routing\Route;
 use Peak\Bedrock\View;
 use \Exception;
@@ -38,22 +37,10 @@ abstract class ActionController
     protected $action_prefix = '_';
 
     /**
-     * request params array
-     * @var array
-     */
-    protected $params_raw;
-
-    /**
-     * request params associative collection
-     * @var Collection
+     * Params collection
+     * @var ParamsCollection
      */
     protected $params;
-
-    /**
-     * dispatch action with argument
-     * @var bool
-     */
-    protected $actions_with_params = true;
 
     /**
      * Constructor
@@ -80,9 +67,8 @@ abstract class ActionController
      */
     public function setRoute(Route $route)
     {
-        $this->params_raw   = $route->params;
-        $this->params       = new Collection($route->params_assoc);
-        $this->action       = $this->action_prefix . $route->action;
+        $this->params = new ParamsCollection($route->params);
+        $this->action = $this->action_prefix . $route->action;
 
         //set default ctrl action if none present
         if ($this->action === $this->action_prefix) {
@@ -111,50 +97,7 @@ abstract class ActionController
 
         $this->file = strtolower($this->getTitle().'.'.substr($this->action, strlen($this->action_prefix)).'.php');
 
-        //call requested action
-        if ($this->actions_with_params) {
-            $this->dispatchActionParams($this->action);
-        } else {
-            $this->callAction($this->action);
-        }
-    }
-    
-    /**
-     * Check action methods args needed and call it properly
-     *
-     * @param string $action_name
-     */
-    private function dispatchActionParams($action_name)
-    {
-        $r = new \ReflectionMethod($this, $action_name);
-        $params = $r->getParameters();
- 
-        //fetch request params with action params
-        $args   = [];
-        $errors = [];
-        
-        if (!empty($params)) {
-            foreach ($params as $p) {
-                $pname = $p->getName();
-                if (isset($this->params->$pname)) {
-                    $args[] = $this->params->$pname;
-                } elseif (($key = array_search($pname, $this->params_raw)) !== false && array_key_exists($key+1, $this->params_raw)) {
-                    $args[] = $this->params_raw[$key+1];
-                } elseif ($p->isOptional()) {
-                    $args[] = $p->getDefaultValue();
-                } else {
-                    $errors[] = '$'.$pname;
-                }
-            }
-        }
-
-        //if we got errors(param missing), we throw an exception
-        if (!empty($errors)) {
-            throw new Exception(implode(', ', $errors).' argument(s) missing for action '.$action_name.' in '.shortClassName($this));
-        }
-        
-        //call action with args
-        return $this->callAction($action_name, $args);
+        $this->callAction($this->action);
     }
 
     /**
