@@ -3,6 +3,7 @@
 namespace Peak\Climber\Bootstrap;
 
 use Peak\Climber\Application;
+use Psr\Container\ContainerInterface;
 
 class ConfigCommands
 {
@@ -35,7 +36,9 @@ class ConfigCommands
     {
         foreach ($classes as $class) {
             $this->app->add(
-                $this->app->container()->create($class)
+                $this->app->container()->create($class, [], [
+                    ContainerInterface::class => $this->app->container()
+                ])
             );
         }
     }
