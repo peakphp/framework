@@ -43,7 +43,9 @@ class Bootstrapper
     protected function runProcesses()
     {
         foreach ($this->processes as $process) {
-            $this->container->create($process);
+            $this->container->create($process, [], [
+                ContainerInterface::class => $this->container
+            ]);
         }
     }
 
