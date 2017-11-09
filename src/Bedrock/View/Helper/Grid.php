@@ -82,7 +82,7 @@ class Grid extends Helper
         $this->data = $data;
         return $this;
     }
-    
+
     /**
      * Set column name and title
      *
@@ -122,7 +122,7 @@ class Grid extends Helper
 
         return $this;
     }
-    
+
     /**
      * Set column sorting
      *
@@ -162,10 +162,10 @@ class Grid extends Helper
      * THERE IS 3 WAYS TO USE THIS METHOD:
      *
      *  #1 ->addHook('email', [
-                [$hook_strong, ['param1' => 'foo']],
-                $hook_link,
-                $hook_strong
-            ])
+    [$hook_strong, ['param1' => 'foo']],
+    $hook_link,
+    $hook_strong
+    ])
      *
      *  #2 ->addHook('email', $hook_edit)
      *
@@ -228,7 +228,7 @@ class Grid extends Helper
         } else {
             $this->_row_data_attrs[$attr] = ['value' => $value];
         }
-        
+
         return $this;
     }
 
@@ -280,13 +280,17 @@ class Grid extends Helper
             }
         }
 
+        if(is_object($row_sample)) {
+            $row_sample = $this->convertObjectToArray($row_sample);
+        }
+
         //ok, sample is there, we can check
-        if (array_key_exists(trim($title), $row_sample) === true) {
+        if (is_array($row_sample) && array_key_exists(trim($title), $row_sample) === true) {
             return true;
         }
         return false;
     }
-    
+
     /**
      * here we check if its a "pseudo" column
      * note: a pseudo column MUST HAVE a hook
@@ -314,13 +318,14 @@ class Grid extends Helper
             return;
         }
 
+
         // discover columns if they where not specified
         if (empty($this->columns)) {
             $this->discoverColumns();
         }
-        
+
         echo '<table class="'.$this->table_classes.'">'.$this->line_break;
-        
+
         // head
         echo '<thead><tr>';
         foreach ($this->columns as $colname => $coltitle) {
@@ -349,21 +354,23 @@ class Grid extends Helper
                 }
 
                 echo '</th>';
+            } else {
+                print_r("ET");
             }
         }
         echo '</tr></thead><tbody>'.$this->line_break;
-        
+
         //body
         if (!empty($this->data)) {
             foreach ($this->data as $index => $row) {
                 // try to explicitly convert object to array
                 if (is_object($row)) {
-                    $row = (array)$row;
+                    $row = $this->convertObjectToArray($row);
                 }
 
                 //new row
                 echo '<tr data-index="'.$index.'"'.$this->rowDataAttr($row).'>';
-                
+
                 foreach ($this->columns as $colname => $coltitle) {
                     //check if column exists
                     if (!$this->isValidColumn($colname, $row)) {
@@ -439,7 +446,7 @@ class Grid extends Helper
                 $row_data = $hook_fn($row_data, $params);
             }
         }
-        
+
         return $row_data;
     }
 
@@ -450,12 +457,12 @@ class Grid extends Helper
     private function discoverColumns()
     {
         $cols = [];
-        
-        if (empty($this->data)) {
-            return;
-        }
-        
+
         foreach ($this->data as $row) {
+            if (is_object($row)) {
+                $row = $this->convertObjectToArray($row);
+            }
+
             if (is_array($row)) {
                 foreach ($row as $colname => $value) {
                     if (!isset($this->exclude_colums[$colname])) {
@@ -465,7 +472,21 @@ class Grid extends Helper
             }
             break;
         }
+
         $this->columns = $cols;
+    }
+
+    /**
+     * Convert object to array
+     * @param $object
+     * @return array
+     */
+    private function convertObjectToArray($object)
+    {
+        if (method_exists($object, 'toArray')) {
+            return $object->toArray();
+        }
+        return (array)$object;
     }
 
     /**
