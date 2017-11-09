@@ -24,7 +24,7 @@ class Database
 
     /**
      * The current database schema
-     * @var \Illuminate\Database\Schema\*
+     * @var \Illuminate\Database\Schema\Builder
      */
     protected $schema;
 
@@ -91,7 +91,7 @@ class Database
     /**
      * Schema
      *
-     * @return  object schema (shortcut of self::db()->schema())
+     * @return \Illuminate\Database\Schema\Builder
      */
     public function schema()
     {
