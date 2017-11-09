@@ -6,6 +6,8 @@ Release Date: ?
 
  - [BC] replaced old way to manage controller action params. 
    $params is now an instance Peak\Bedrock\Controller\ParamsCollection and $params_raw has been removed
+ - bootstrap processes can now request the container in their constructors
+ - cli commands can now request the container in their constructors
 
 VERSION 2.21.0
 --------------
