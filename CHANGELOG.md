@@ -8,6 +8,7 @@ Release Date: ?
    $params is now an instance Peak\Bedrock\Controller\ParamsCollection and $params_raw has been removed
  - bootstrap processes can now request the container in their constructors
  - cli commands can now request the container in their constructors
+ - added support of object to Peak\Bedrock\View\Helper\Grid
 
 VERSION 2.21.0
 --------------
