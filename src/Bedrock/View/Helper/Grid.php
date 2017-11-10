@@ -354,8 +354,6 @@ class Grid extends Helper
                 }
 
                 echo '</th>';
-            } else {
-                print_r("ET");
             }
         }
         echo '</tr></thead><tbody>'.$this->line_break;
