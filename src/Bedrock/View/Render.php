@@ -69,6 +69,16 @@ abstract class Render
     }
 
     /**
+     * Render a Block
+     * @param $block
+     */
+    public function renderBlock($block, array $block_data = [])
+    {
+        $block = new Block($this->view, $block, $block_data);
+        $block->render();
+    }
+
+    /**
      * Point to View __get method
      *
      * @param  string $name represent view var name
