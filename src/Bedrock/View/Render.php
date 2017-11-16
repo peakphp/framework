@@ -69,13 +69,14 @@ abstract class Render
     }
 
     /**
-     * Render a Block
+     * Render a block
+     *
      * @param $block
+     * @param array $block_data
      */
     public function renderBlock($block, array $block_data = [])
     {
-        $block = new Block($this->view, $block, $block_data);
-        $block->render();
+        (new Block($this->view, $block, $block_data))->render();
     }
 
     /**
