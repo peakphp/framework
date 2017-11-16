@@ -9,6 +9,7 @@ Release Date: ?
  - bootstrap processes can now request the container in their constructors
  - cli commands can now request the container in their constructors
  - added support of object to Peak\Bedrock\View\Helper\Grid
+ - updated method addRowDataAttr() and rowDataAttr() in Peak\Bedrock\View\Helper\Grid to support Closure
  - added renderable view block
 
 VERSION 2.21.0
