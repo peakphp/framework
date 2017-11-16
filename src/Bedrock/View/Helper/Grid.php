@@ -36,6 +36,12 @@ class Grid extends Helper
     private $column_sorting = ['name' => '', 'direction' => ''];
 
     /**
+     * Row attributes
+     * @var array
+     */
+    private $row_data_attrs = [];
+
+    /**
      * Excluded columns
      * @var array
      */
@@ -215,20 +221,13 @@ class Grid extends Helper
     /**
      * Fill html attribute to each row(tr) with a row column or customize value
      *
-     * @param  string     $attr
-     * @param  string     $column
-     * @param  array|null $value
+     * @param  string    $attr
+     * @param  mixed     $column
      * @return $this
      */
-    public function addRowDataAttr($attr, $column, $value = null)
+    public function addRowDataAttr($attr, $column)
     {
-        $this->_row_data_attr = '';
-        if (is_null($value)) {
-            $this->_row_data_attrs[$attr] = $column;
-        } else {
-            $this->_row_data_attrs[$attr] = ['value' => $value];
-        }
-
+        $this->row_data_attrs[$attr] = $column;
         return $this;
     }
 
@@ -492,24 +491,21 @@ class Grid extends Helper
      */
     private function rowDataAttr($row = [])
     {
-        $r = '';
+        $attrs = [];
 
-        if (empty($this->_row_data_attrs)) {
-            return $r;
+        if (empty($this->row_data_attrs)) {
+            return '';
         }
 
-        foreach ($this->_row_data_attrs as $attr => $v) {
-            if (is_array($v)) {
-                if (array_key_exists('value', $v)) {
-                    $r .= ' '.$attr.'="'.$v['value'].'"';
-                }
-            } else {
-                if ((array_key_exists($v, $row))) {
-                    $r .= ' '.$attr.'="'.$row[$v].'"';
-                }
+        foreach ($this->row_data_attrs as $attr => $v) {
+            if ($v instanceof \Closure) {
+                $v = $v($row);
+                $attrs[] = $attr.'="'.$v.'"';
+            } elseif (array_key_exists($v, $row)) {
+                $attrs[] = $attr.'="'.$row[$v].'"';
             }
         }
 
-        return $r;
+        return implode(' ', $attrs);
     }
 }
