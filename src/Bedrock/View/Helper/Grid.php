@@ -366,7 +366,7 @@ class Grid extends Helper
                 }
 
                 //new row
-                echo '<tr data-index="'.$index.'"'.$this->rowDataAttr($row).'>';
+                echo '<tr data-index="'.$index.'" '.$this->rowDataAttr($row).'>';
 
                 foreach ($this->columns as $colname => $coltitle) {
                     //check if column exists
