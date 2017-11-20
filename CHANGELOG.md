@@ -11,6 +11,7 @@ Release Date: ?
  - added support of object to Peak\Bedrock\View\Helper\Grid
  - updated method addRowDataAttr() and rowDataAttr() in Peak\Bedrock\View\Helper\Grid to support Closure
  - added renderable view block
+ - moved logic from helper function phpinput to Peak\Common\PhpInput
 
 VERSION 2.21.0
 --------------
