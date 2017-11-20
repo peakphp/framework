@@ -95,25 +95,17 @@ if (!function_exists('phpinput')) {
      * Retrieve a collection object from php://input
      *
      * @param  Closure $closure
-     * @return Peak\Common\Collection
+     * @return Peak\Common\PhpInput
      */
     function phpinput(Closure $closure = null)
     {
-        $raw  = file_get_contents('php://input');
-        $post = json_decode($raw, true); // for json input
-
-        // in case json post is empty but $_POST is not we will use it
-        if (!empty($raw) && empty($post) && filter_input_array(INPUT_POST)) {
-            $post = filter_input_array(INPUT_POST);
-        }
-
-        $coll = \Peak\Common\Collection::make($post);
+        $phpinput = new \Peak\Common\PhpInput();
 
         if (isset($closure)) {
-            $coll->map($closure);
+            $phpinput->map($closure);
         }
 
-        return $coll;
+        return $phpinput;
     }
 }
 
