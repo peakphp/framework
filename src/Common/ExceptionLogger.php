@@ -5,6 +5,8 @@ use \Exception;
 
 class ExceptionLogger
 {
+    const MODE_NORMAL = 1;
+    const MODE_VERBOSE = 2;
     /**
      * Exception object
      * @var Exception
@@ -18,15 +20,22 @@ class ExceptionLogger
     protected $filepath;
 
     /**
-     * Constructor
-     *
-     * @param object $exception
-     * @param string $filepath
+     * Log mode
+     * @var int
      */
-    public function __construct(Exception $exception, $filepath)
+    protected $mode;
+
+    /**
+     * Constructor
+     * @param Exception $exception
+     * @param $filepath
+     * @param int $mode
+     */
+    public function __construct(Exception $exception, $filepath, $mode = self::MODE_NORMAL)
     {
-        $this->filepath  = $filepath;
         $this->exception = $exception;
+        $this->filepath  = $filepath;
+        $this->mode = $mode;
         $this->log();
     }
 
@@ -35,8 +44,14 @@ class ExceptionLogger
      */
     protected function log()
     {
-        $content = exceptionTrace($this->exception);
-        $content = strip_tags($content)."\n\n";
+        if ($this->mode == self::MODE_VERBOSE) {
+            $content = exceptionTrace($this->exception);
+            $content = strip_tags($content)."\n\n";
+        } else {
+            $msg = trim($this->exception->getMessage());
+            $content = '['.date('Y-m-d H:i:s')."] ".get_class($this->exception)."\n";
+            $content .= $msg."\n\n";
+        }
 
         if ( (!file_exists($this->filepath) && !is_writable(dirname($this->filepath))) ||
             (file_exists($this->filepath) && !is_writable($this->filepath))) {
