@@ -27,6 +27,16 @@ class ParamsCollection extends Collection
     }
 
     /**
+     * Use get() when key name is not possible to retrieve via magic method __get()
+     * ex: params->get('my-page-id')
+     * @param $key
+     */
+    public function get($key)
+    {
+        return $this->__get($key);
+    }
+
+    /**
      * Check if key exists. Same behavior as has()
      *
      * @param   string $key
