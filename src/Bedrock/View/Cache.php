@@ -258,9 +258,7 @@ class Cache
      */
     public function getContent()
     {
-        ob_start();
-        include $this->getFile();
-        $content = ob_get_clean();
+        $content = file_get_contents($this->getFile());
         if ($this->compress) {
             $content = bzdecompress($content);
         }
