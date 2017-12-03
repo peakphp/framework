@@ -13,6 +13,7 @@ Release Date: ?
  - added renderable view block
  - moved logic from helper function phpinput to Peak\Common\PhpInput
  - added mode param to Peak\Common\ExceptionLogger
+ - fixed a bug with getting cache content in Peak\Bedrock\View\Cache
 
 VERSION 2.21.0
 --------------
