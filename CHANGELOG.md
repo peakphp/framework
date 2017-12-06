@@ -1,6 +1,6 @@
 VERSION 2.22.0
 --------------
-Release Date: ?
+Release Date: 2017-12-06
 
 > Warning! Breaking changes with 2.21.x and below
 
@@ -14,7 +14,7 @@ Release Date: ?
  - moved logic from helper function phpinput to Peak\Common\PhpInput
  - added mode param to Peak\Common\ExceptionLogger
  - fixed a bug with getting cache content in Peak\Bedrock\View\Cache
- - Updated Peak\Common\ExceptionLogger to support custom log content closure
+ - updated Peak\Common\ExceptionLogger to support custom log content closure
 
 VERSION 2.21.0
 --------------
