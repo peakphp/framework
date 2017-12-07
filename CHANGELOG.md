@@ -2,6 +2,8 @@ VERSION 2.23.0
 --------------
 Release Date: ?
 
+ - added class Peak\Config\Type\LogLoader
+
 VERSION 2.22.0
 --------------
 Release Date: 2017-12-06
