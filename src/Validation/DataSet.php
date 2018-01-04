@@ -111,6 +111,7 @@ abstract class DataSet
 
                 if (!$rule->validate($data[$key])) {
                     $this->errors[$key] = $rule->getError();
+                    break;
                 }
             }
         }
