@@ -4,6 +4,7 @@ Release Date: ?
 
  - added class Peak\Config\Type\LogLoader
  - fixed a bug where Peak\Validation\DataSet::validate won't stop at first error rule
+ - added support of session options from config in Peak\Bedrock\Application\Bootstrap\Session
 
 VERSION 2.22.0
 --------------
