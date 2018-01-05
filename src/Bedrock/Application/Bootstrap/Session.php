@@ -16,12 +16,19 @@ class Session
      */
     public function __construct(Config $config)
     {
-        if (!isCli()) {
-            if (isset($config['php']['session.save_path'])) {
-                session_save_path($config['php']['session.save_path']);
-            }
-            session_name($config->name);
-            session_start();
+        if (isCli()) {
+            return;
         }
+
+        if (isset($config['php']['session.save_path'])) {
+            session_save_path($config['php']['session.save_path']);
+        }
+        session_name($config->name);
+
+        $options = [];
+        if (isset($config['session']) && is_array($config['session'])) {
+            $options = $config['session'];
+        }
+        session_start($options);
     }
 }
