@@ -5,6 +5,8 @@ Release Date: ?
  - added class Peak\Config\Type\LogLoader
  - fixed a bug where Peak\Validation\DataSet::validate won't stop at first error rule
  - added support of session options from config in Peak\Bedrock\Application\Bootstrap\Session
+ - fixed rare bug where filter_input(INPUT_SERVER, 'REQUEST_URI') return nothing in
+   Peak\Routing\RequestServerURI (thanks to Mogwy)
 
 VERSION 2.22.0
 --------------
