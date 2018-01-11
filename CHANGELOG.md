@@ -7,6 +7,8 @@ Release Date: ?
  - added support of session options from config in Peak\Bedrock\Application\Bootstrap\Session
  - fixed rare bug where filter_input(INPUT_SERVER, 'REQUEST_URI') return nothing in
    Peak\Routing\RequestServerURI (thanks to Mogwy)
+ - added Peak\Bedrock\Application\Bootstrap\RedirectRoutes and Peak\Bedrock\Controller\RedirectionController to handle
+   routes URLs redirections gracefully
 
 VERSION 2.22.0
 --------------
