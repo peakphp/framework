@@ -11,9 +11,7 @@ class RequestServerURI extends Request
      */
     public function __construct($base_uri = null)
     {
-        parent::__construct(
-            filter_var($_SERVER['REQUEST_URI']),
-            $base_uri
-        );
+        $request_uri = isCli() ? '' : filter_var($_SERVER['REQUEST_URI']);
+        parent::__construct($request_uri, $base_uri);
     }
 }
