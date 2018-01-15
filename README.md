@@ -51,7 +51,7 @@ There is many way you can help:
 - Feedbacks
 - Pull requests / bug submissions
 - Documentation
-- Patreon [link](https://www.patreon.com/francoislajoie)
+- Contribute via my Patreon page: [https://www.patreon.com/francoislajoie](https://www.patreon.com/francoislajoie)
 
 ### Version 1
 
