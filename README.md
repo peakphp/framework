@@ -44,6 +44,14 @@ Requirements:
 - [Documentation](https://peak.readthedocs.io) (Work in progress)
 - [Api Documentation](http://api.peakframework.com)
 
+### Contributes
+
+There is many way you can help:
+    - Feedbacks
+    - Pull requests / bug submissions
+    - Documentation
+    - Patreon [link](https://www.patreon.com/francoislajoie)
+
 ### Version 1
 
 [Older version](https://github.com/1Franck/Peak) require PHP 5.2 or greater but is no more supported. 
