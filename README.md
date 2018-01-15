@@ -46,7 +46,7 @@ Requirements:
 
 ### Contributes
 
-There is many way you can help:
+There is many ways you can help:
 
 - Feedbacks
 - Pull requests / bug submissions
