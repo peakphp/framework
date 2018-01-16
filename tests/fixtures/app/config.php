@@ -35,5 +35,17 @@ return [
         'login | index/login',
         'logout | index/logout'
     ],
+
+    'redirects' => [
+        'home' => [
+            'route' => 'homepage', // route that trigger redirect
+            'destination' => '', //empty mean root of public
+            'code' => 301, // http status code
+        ],
+        'old_user_url' => [
+            'route' => 'member/{id}:num', // route that trigger redirect
+            'destination' => 'user/id/{id}',
+        ],
+    ]
 ];
 

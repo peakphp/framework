@@ -20,6 +20,7 @@ if(!function_exists('dummyApp')) {
     function dummyApp($env = 'dev', $config = null) {
 
         $final = [
+            'ns' => 'Test',
             'env'  => $env,
             'conf' => FIXTURES_PATH.'/app/config.php',
             'path' => [
