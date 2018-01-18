@@ -65,19 +65,17 @@ class Debug extends Helper
     public function getFiles()
     {
         $temp = get_included_files();
-        $files = [];
-        $total_size = 0;
-        $library_path = str_replace(['\\', '//'], '/', realpath(LIBRARY_ABSPATH));
+        $files = [
+            'app' => [],
+            'total_size' => 0,
+            'basepath' => '',
+        ];
         foreach ($temp as $file) {
-            $total_size += filesize($file);
-            $file = str_replace('\\', '/', $file);
-            if (stristr($file, $library_path) !== false) {
-                $files['peak'][] = $file;
-            } else {
-                $files['app'][] = $file;
-            }
+            $files['total_size'] += filesize($file);
+            $file = str_replace(['\\','//'], '/', $file);
+            $files['app'][] = $file;
         }
-        $files['total_size'] = $total_size;
+        natsort($files['app']);
 
         return $files;
     }

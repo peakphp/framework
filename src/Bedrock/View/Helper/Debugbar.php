@@ -40,7 +40,7 @@ class Debugbar extends Debug
         
         //files included
         $files = $this->getFiles();
-        $files_count = count($files['app']) + count($files['peak']);
+        $files_count = count($files['app']);
 
         //php 5.4, use $_SERVER['REQUEST_TIME_FLOAT']
         if (version_compare(PHP_VERSION, '5.4.0') >= 0) {
@@ -130,19 +130,19 @@ class Debugbar extends Debug
         //files included
         echo '<div class="window resizable" id="pkdb_include_window">';
         echo '<h2>Files information</h2>
-              <strong>'.$files_count.' Files included<br />Total size: '.round($files['total_size'] / 1024, 2).' Kbs</strong><br />';
-        echo '<h2>'.count($files['app']).' Application files:</h2>';
+              <strong>'.$files_count.' Files included<br />Total size: '.round($files['total_size'] / 1024, 2).' Kbs</strong><hr />';
+        //echo '<h2>'.count($files['app']).' Current files:</h2>';
         foreach ($files['app'] as $appfile) {
             $size = round(filesize($appfile) / 1024, 2);
             $appfile = str_replace(basename($appfile),'<strong>'.basename($appfile).'</strong>', $appfile);
             echo $appfile.' - <small>'.$size.' Kbs</small><br />';
         }
-        echo '<h2>'.count($files['peak']).' Library files:</h2>';
-        foreach ($files['peak'] as $libfile) {
-            $size = round(filesize($libfile) / 1024, 2);
-            $libfile = str_replace(basename($libfile), '<strong>'.basename($libfile).'</strong>', $libfile);
-            echo str_replace(LIBRARY_ABSPATH, '', $libfile).' - <small>'.$size.' Kbs</small><br />';
-        }
+//        echo '<h2>'.count($files['peak']).' Library files:</h2>';
+//        foreach ($files['peak'] as $libfile) {
+//            $size = round(filesize($libfile) / 1024, 2);
+//            $libfile = str_replace(basename($libfile), '<strong>'.basename($libfile).'</strong>', $libfile);
+//            echo str_replace(LIBRARY_ABSPATH, '', $libfile).' - <small>'.$size.' Kbs</small><br />';
+//        }
         echo '</div>';
 
         //variables
