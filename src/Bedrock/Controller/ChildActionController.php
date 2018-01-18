@@ -6,7 +6,6 @@ use Peak\Bedrock\Application;
 use Peak\Bedrock\View;
 use \Exception;
 
-
 /**
  * For standalone controller action class
  */
