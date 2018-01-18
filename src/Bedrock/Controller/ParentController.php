@@ -3,6 +3,7 @@
 namespace Peak\Bedrock\Controller;
 
 use Peak\Bedrock\Application;
+use Peak\Bedrock\Application\Config;
 use Peak\Bedrock\View;
 
 /**
@@ -28,9 +29,9 @@ abstract class ParentController extends ActionController
      * @param View   $view
      * @param string $ns if not set, use default app ns (ex: App\Controllers\[controllerTitle]\)
      */
-    public function __construct(View $view, $ns = null)
+    public function __construct(View $view, Config $config, $ns = null)
     {
-        parent::__construct($view);
+        parent::__construct($view, $config);
         $this->actions_ns = (!isset($ns)) ? Application::conf('ns').'\Controllers\\'.$this->getTitle() : $ns;
     }
 
