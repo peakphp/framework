@@ -7,6 +7,7 @@ use Illuminate\Container\Container as Container;
 use Illuminate\Events\Dispatcher as Dispatcher;
 
 use \PDOException;
+use \Exception;
 
 class Database
 {
@@ -49,6 +50,7 @@ class Database
      * Connect to database
      *
      * @param  array $conf
+     * @throws Exception
      */
     protected function connect($conf, $name = 'default')
     {
@@ -72,7 +74,7 @@ class Database
             // store the schema
             $this->schema = self::$capsule->schema($name);
         } catch (PDOException $e) {
-            throw new \Exception('Can\'t connect to database');
+            throw new Exception('Can\'t connect to database');
         }
     }
 
