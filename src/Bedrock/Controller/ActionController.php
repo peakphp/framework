@@ -3,6 +3,7 @@
 namespace Peak\Bedrock\Controller;
 
 use Peak\Bedrock\Application;
+use Peak\Bedrock\Application\Config;
 use Peak\Routing\Route;
 use Peak\Bedrock\View;
 use \Exception;
@@ -29,6 +30,18 @@ abstract class ActionController
      * @var View
      */
     public $view;
+
+    /**
+     * instance of application config
+     * @var Config
+     */
+    public $config;
+
+    /**
+     * Params collection
+     * @var ParamsCollection
+     */
+    public $params;
     
     /**
      * Action method prefix
@@ -37,19 +50,14 @@ abstract class ActionController
     protected $action_prefix = '_';
 
     /**
-     * Params collection
-     * @var ParamsCollection
-     */
-    protected $params;
-
-    /**
      * Constructor
      *
      * @param View $view
      */
-    public function __construct(View $view)
+    public function __construct(View $view, Config $config)
     {
         $this->view = $view;
+        $this->config = $config;
     }
 
     /**
@@ -78,6 +86,8 @@ abstract class ActionController
 
     /**
      * Dispatch controller action and other stuff around it
+     *
+     * @throws Exception
      */
     public function dispatch()
     {
@@ -88,6 +98,8 @@ abstract class ActionController
 
     /**
      * Dispatch action requested by router or the default action(_index)
+     *
+     * @throws Exception
      */
     public function dispatchAction()
     {
@@ -127,10 +139,14 @@ abstract class ActionController
      * Call view render with controller $file and $path
      *
      * @return string
+     * @throws Exception
      */
     public function render()
     {
-        $this->view->render($this->file, Application::conf('path.apptree.views_scripts'));
+        $this->view->render(
+            $this->file,
+            $this->config->get('path.apptree.views_scripts')
+        );
         $this->postRender();
     }
 
