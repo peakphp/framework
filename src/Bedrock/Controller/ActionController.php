@@ -71,6 +71,16 @@ abstract class ActionController
     }
 
     /**
+     * Get action title
+     *
+     * @return string
+     */
+    public function getActionTitle()
+    {
+        return substr($this->action, strlen($this->action_prefix));
+    }
+
+    /**
      * Get data from router needed for dispatch
      */
     public function setRoute(Route $route)
