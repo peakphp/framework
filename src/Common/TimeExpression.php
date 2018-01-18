@@ -97,7 +97,7 @@ class TimeExpression
     {
         if (empty($this->time)) {
             return '0 second';
-        } elseif($this->time < 1) {
+        } elseif ($this->time < 1) {
             return ($this->time * 1000).' milliseconds';
         }
 
@@ -351,7 +351,7 @@ class TimeExpression
         $regex_clock_string = '#^(?:(?:([01]?\d|2[0-3]):)?([0-5]?\d):)?([0-5]?\d)$#i';
 
         if (preg_match_all($regex_string, $this->expression, $matches)) {
-            foreach( $matches[1] as $index => $value) {
+            foreach ($matches[1] as $index => $value) {
                 $this->time += $this->tokens_values[$matches[2][$index]] * $value;
             }
             $this->di = DateInterval::createFromDateString($this->integerToString($this->time));

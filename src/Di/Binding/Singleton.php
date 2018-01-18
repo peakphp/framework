@@ -43,7 +43,7 @@ class Singleton extends AbstractBinding
         if (!is_null($explicit) && !empty($explicit)) {
             $definition = $explicit;
             $is_explicit = true;
-        } elseif(!isset($is_explicit) && $container->has($this->name)) {
+        } elseif (!isset($is_explicit) && $container->has($this->name)) {
             return $container->get($this->name);
         }
 

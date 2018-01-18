@@ -118,7 +118,6 @@ class ConfigLoader
      * @param array $files
      * @param null $path
      * @return Collection
-     * @throws Exception
      */
     protected function load(array $configs, $path = null)
     {
@@ -131,7 +130,7 @@ class ConfigLoader
 
             $loader = $this->detectType($config);
 
-            if(!isset($loader)) {
+            if (!isset($loader)) {
                 continue;
             }
 
@@ -147,6 +146,7 @@ class ConfigLoader
      *
      * @param $config
      * @return mixed
+     * @throws Exception
      */
     protected function detectType($config)
     {
@@ -155,11 +155,11 @@ class ConfigLoader
         // detect type
         if (is_array($config)) {
             $type = 'ArrayLoader';
-        } elseif(is_callable($config)) {
+        } elseif (is_callable($config)) {
             $type = 'CallableLoader';
         } elseif ($config instanceof Collection) {
             $type = 'CollectionLoader';
-        } elseif(is_string($config)) {
+        } elseif (is_string($config)) {
             if (file_exists($config)) {
                 $ext = pathinfo($config, PATHINFO_EXTENSION);
                 $type = ucfirst($ext) . 'Loader';
@@ -184,6 +184,7 @@ class ConfigLoader
      *
      * @param LoaderInterface $loader
      * @return array
+     * @throws Exception
      */
     protected function initLoaderType($config, $type)
     {
