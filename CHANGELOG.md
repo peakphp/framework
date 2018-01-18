@@ -9,6 +9,13 @@ Release Date: ?
    Peak\Routing\RequestServerURI (thanks to Mogwy)
  - added Peak\Bedrock\Application\Bootstrap\RedirectRoutes and Peak\Bedrock\Controller\RedirectionController to handle
    routes URLs redirections gracefully
+ - added application config instance to Peak\Bedrock\Controller\ActionController constructor
+ - added Peak\Bedrock\Application\Exceptions\MissingConfigException
+ - updated Peak\Bedrock\Application\ConfigResolver to use MissingConfigException
+ - renamed constant SVR_ABSPATH to ROOT_ABSPATH
+ - deleted deprecated constant LIBRARY_ABSPATH
+ - updated Peak\Bedrock\Controller\ChildController to check in $parent for unknown property instead of
+   injecting instances in constructor
 
 VERSION 2.22.0
 --------------
