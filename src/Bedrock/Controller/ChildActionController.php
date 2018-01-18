@@ -64,4 +64,15 @@ abstract class ChildActionController
         // throw default undefined property notice
         return $this->$name;
     }
+
+    /**
+     * Internal isset for ParentController property
+     *
+     * @param $name
+     * @return bool
+     */
+    public function __isset($name)
+    {
+        return isset($this->parent->$name);
+    }
 }
