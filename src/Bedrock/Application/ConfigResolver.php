@@ -3,8 +3,8 @@
 namespace Peak\Bedrock\Application;
 
 use Peak\Bedrock\Application\Config\AppTree;
+use Peak\Bedrock\Application\Exceptions\MissingConfigException;
 use Peak\Common\DataException;
-use \Exception;
 
 class ConfigResolver
 {
@@ -93,11 +93,11 @@ class ConfigResolver
     private function validate($config)
     {
         if (!isset($config['env'])) {
-            throw new Exception('Your application doesn\'t have environment configuration');
+            throw new MissingConfigException('env');
         }
 
         if (!isset($config['path']['public'])) {
-            throw new Exception('Your application doesn\'t have a public path configuration');
+            throw new MissingConfigException('path.public');
         }
 
         if(!file_exists($config['path']['public'])) {
@@ -105,7 +105,7 @@ class ConfigResolver
         }
 
         if (!isset($config['path']['app'])) {
-            throw new Exception('Your application doesn\'t have a path configuration');
+            throw new MissingConfigException('path.app');
         }
         if (!file_exists($config['path']['app'])) {
             throw new DataException('Application path not found', $config['path']['app']);
@@ -120,13 +120,12 @@ class ConfigResolver
     private function defineConstants($config)
     {
         //define server document root absolute path
-        $svr_path = str_replace('\\', '/', realpath(filter_var(getenv('DOCUMENT_ROOT'))));
-        if (substr($svr_path, -1, 1) !== '/') {
-            $svr_path .= '/';
+        $doc_path = str_replace('\\', '/', realpath(filter_var(getenv('DOCUMENT_ROOT'))));
+        if (substr($doc_path, -1, 1) !== '/') {
+            $doc_path .= '/';
         }
 
-        define('SVR_ABSPATH', $svr_path);
-        define('LIBRARY_ABSPATH', realpath(__DIR__.'/../'));
+        define('ROOT_ABSPATH', $doc_path);
         define('PUBLIC_ABSPATH', realpath($config['path']['public']));
         define('APPLICATION_ABSPATH', realpath($config['path']['app']));
         define('APPLICATION_ENV', $config['env']);
