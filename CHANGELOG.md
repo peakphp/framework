@@ -16,6 +16,7 @@ Release Date: ?
  - deleted deprecated constant LIBRARY_ABSPATH
  - updated Peak\Bedrock\Controller\ChildController to check in $parent for unknown property instead of
    injecting instances in constructor
+ - added Peak\Bedrock\View\Exceptions\BlockNotFoundException
 
 VERSION 2.22.0
 --------------
