@@ -117,7 +117,7 @@ abstract class ActionController
             throw new Exception('Controller action '.$this->action.' not found in '.shortClassName($this));
         }
 
-        $this->file = strtolower($this->getTitle().'.'.substr($this->action, strlen($this->action_prefix)).'.php');
+        $this->file = strtolower($this->getTitle().'.'.$this->getActionTitle().'.php');
 
         $this->callAction($this->action);
     }
