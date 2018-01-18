@@ -25,6 +25,8 @@ class Block extends Collection implements RenderableInterface
 
     /**
      * Get view object
+     *
+     * @throws BlockNotFoundException
      */
     public function __construct(View $view, $block_file, $block_data)
     {
@@ -44,6 +46,7 @@ class Block extends Collection implements RenderableInterface
 
     /**
      * Render a block with vars
+     *
      * @param array $vars
      */
     public function render()
