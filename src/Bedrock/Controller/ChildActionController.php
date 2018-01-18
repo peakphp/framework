@@ -13,22 +13,10 @@ use \Exception;
 abstract class ChildActionController
 {
     /**
-     * View object
-     * @var \Peak\Bedrock\View
-     */
-    protected $view;
-
-    /**
      * Parent controller
      * @var \Peak\Bedrock\Controller\ParentController
      */
     protected $parent;
-
-    /**
-     * Params collection
-     * @var ParamsCollection
-     */
-    protected $params;
 
     /**
      * Constructor
@@ -36,11 +24,9 @@ abstract class ChildActionController
      * @param View $view
      * @param ParentController $parent
      */
-    public function __construct(View $view, ParentController $parent, ParamsCollection $params)
+    public function __construct(ParentController $parent)
     {
-        $this->view = $view;
         $this->parent = $parent;
-        $this->params = $params;
 
         // call child process() with di
         Application::container()->call(
@@ -63,5 +49,20 @@ abstract class ChildActionController
             throw new Exception('Method '.$method.'() not found in '.get_class($this).' on line '.$line);
         }
         return call_user_func_array([$this->parent, $method], $args);
+    }
+
+    /**
+     * Check in ParentController for unknown property
+     *
+     * @param $name
+     * @return mixed
+     */
+    public function __get($name)
+    {
+        if (isset($this->parent->$name)) {
+            return $this->parent->$name;
+        }
+        // throw default undefined property notice
+        return $this->$name;
     }
 }
