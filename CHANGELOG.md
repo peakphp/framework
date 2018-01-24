@@ -17,6 +17,7 @@ Release Date: ?
  - updated Peak\Bedrock\Controller\ChildController to check in $parent for unknown property instead of
    injecting instances in constructor
  - added Peak\Bedrock\View\Exceptions\BlockNotFoundException
+ - added function fileExpired() in Peak\Common\helpers.php
 
 VERSION 2.22.0
 --------------
