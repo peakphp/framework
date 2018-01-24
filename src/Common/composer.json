@@ -1,7 +1,7 @@
 {
     "name": "peakphp/common",
     "description": "Peak Common package.",
-    "keywords": ["peak", "common", "misc"],
+    "keywords": ["peak", "common", "misc", "tools", "library"],
     "license": "BSD-3-Clause",
     "homepage": "https://peakframework.com",
     "support": {
