@@ -1,6 +1,6 @@
 VERSION 2.23.0
 --------------
-Release Date: ?
+Release Date: 2018-01-24
 
  - added class Peak\Config\Type\LogLoader
  - fixed a bug where Peak\Validation\DataSet::validate won't stop at first error rule
