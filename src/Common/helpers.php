@@ -197,3 +197,23 @@ if (!function_exists('formatFileSize')) {
         return round($size/pow(1024, ($i=floor(log($size, 1024)))), 2).' '.$unit[$i];
     }
 }
+
+
+/**
+ * fileExpired()
+ */
+if (!function_exists('fileExpired')) {
+    /**
+     * Check if file is expired
+     * @param $file
+     * @return string
+     */
+    function fileExpired($file, $expiration_time)
+    {
+        if (empty($size)) {
+            return '0 kB';
+        }
+        $unit = ['B','kB','MB','GB','TB','PB'];
+        return round($size/pow(1024, ($i=floor(log($size, 1024)))), 2).' '.$unit[$i];
+    }
+}
