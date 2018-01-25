@@ -279,7 +279,7 @@ class Grid extends Helper
             }
         }
 
-        if(is_object($row_sample)) {
+        if (is_object($row_sample)) {
             $row_sample = $this->convertObjectToArray($row_sample);
         }
 

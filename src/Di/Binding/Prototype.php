@@ -40,7 +40,7 @@ class Prototype extends AbstractBinding
 
         $def_args = [];
 
-        if(is_string($definition)) {
+        if (is_string($definition)) {
             return $this->instantiator->instantiate($definition, $args);
         } elseif (is_array($definition)) {
             return (new ArrayDefinition())

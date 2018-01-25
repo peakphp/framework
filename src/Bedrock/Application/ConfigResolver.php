@@ -89,6 +89,8 @@ class ConfigResolver
      * Validate require config values
      *
      * @param array $config
+     * @throws MissingConfigException
+     * @throws DataException
      */
     private function validate($config)
     {
@@ -100,7 +102,7 @@ class ConfigResolver
             throw new MissingConfigException('path.public');
         }
 
-        if(!file_exists($config['path']['public'])) {
+        if (!file_exists($config['path']['public'])) {
             throw new DataException('Public path not found', $config['path']['public']);
         }
 

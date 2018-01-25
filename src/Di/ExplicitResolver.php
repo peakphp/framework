@@ -26,7 +26,7 @@ class ExplicitResolver
             } elseif (is_object($explicit[$needle])) {
                 return $explicit[$needle];
             }
-        } elseif($explicit instanceof Closure) {
+        } elseif ($explicit instanceof Closure) {
             return $explicit($container);
         }
         return null;
