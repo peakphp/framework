@@ -25,7 +25,7 @@ abstract class RedirectionController extends ActionController
      */
     public function __construct(View $view, Config $config, Routing $routing)
     {
-        parent::__construct($view);
+        parent::__construct($view, $config);
         if (isset($config->redirects)) {
             $this->redirects = $config->redirects;
         }
