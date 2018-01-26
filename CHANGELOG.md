@@ -3,6 +3,7 @@ VERSION 2.24.0
 Release Date: ?
 
  - deleted deprecated Peak\Bedrock\View\Render\Partials, Virtual and VirtualLayouts
+ - fixed missing argument in Peak\Bedrock\ControllerRedirectionController constructor
 
 VERSION 2.23.0
 --------------
