@@ -1,3 +1,7 @@
+VERSION 2.24.0
+--------------
+Release Date: ?
+
 VERSION 2.23.2
 --------------
 Release Date: 2018-01-29
