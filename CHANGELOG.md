@@ -1,6 +1,8 @@
-VERSION 2.24.0
+VERSION 2.23.2
 --------------
-Release Date: ?
+Release Date: 2018-01-29
+
+ - fixed another rare bug where filter_input(INPUT_SERVER) return nothing in function url() Peak\Bedrock\helpers.php
 
 VERSION 2.23.1
 --------------
