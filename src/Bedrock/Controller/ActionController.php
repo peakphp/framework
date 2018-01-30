@@ -191,7 +191,7 @@ abstract class ActionController
      * @param bool    $base_url
      * @param integer $http_code
      */
-    public function redirectUrl($url, $http_code = 302, $base_url = true)
+    public function redirectUrl($url = '', $http_code = 302, $base_url = true)
     {
         if ($base_url) {
             $url = url($url);
