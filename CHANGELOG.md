@@ -5,7 +5,6 @@ Release Date: ?
  - updated param $url of method redirectUrl() to make it optional when redirecting to home page
    in Peak\Bedrock\Controller\ActionController
    
-
 VERSION 2.23.2
 --------------
 Release Date: 2018-01-29
