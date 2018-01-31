@@ -1,6 +1,7 @@
 <?php
 
 namespace Peak\Bedrock\View;
+use Peak\Common\TimeExpression;
 
 /**
  * View helper - Http header
@@ -214,7 +215,7 @@ class Header
         if (array_key_exists($code, $this->http_status_codes)) {
             return $this->http_status_codes[$code];
         }
-        return;
+        return null;
     }
 
     /**
@@ -238,7 +239,30 @@ class Header
             }
             $this->stop($die);
         }
-        
+
+        return $this;
+    }
+
+    /**
+     * Set cache header
+     *
+     * @param mixed $max_age (int of string support by TimeExpression)
+     * @param string $visibility
+     * @return $this
+     */
+    public function setCache($max_age, $visibility = 'public')
+    {
+        if (!is_numeric($max_age)) {
+            $max_age = (new TimeExpression($max_age))->toSeconds();
+        }
+
+        $directive = 'Cache-Control: max-age='.$max_age;
+        if (!empty($visibility)) {
+            $directive .= ','.$visibility;
+        }
+
+        $this->set($directive);
+
         return $this;
     }
 
@@ -249,11 +273,12 @@ class Header
      */
     public function noCache()
     {
-        $h = [
+        $this->set([
             'Cache-Control: no-cache, must-revalidate',
             'Expires: Thu, 01 Jan 1970 00:00:00 GMT'
-        ];
-        return $this->set($h);
+        ]);
+
+        return $this;
     }
 
     /**
