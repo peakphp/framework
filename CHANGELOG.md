@@ -4,6 +4,7 @@ Release Date: ?
 
  - updated param $url of method redirectUrl() to make it optional when redirecting to home page
    in Peak\Bedrock\Controller\ActionController
+ - added method setCache() to Peak\Bedrock\View\Header
    
 VERSION 2.23.2
 --------------
