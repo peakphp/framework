@@ -6,6 +6,7 @@ Release Date: ?
    in Peak\Bedrock\Controller\ActionController
  - added method setCache() to Peak\Bedrock\View\Header
  - added Peak\Common\CollectionFlattener
+ - deleted deprecated application module in favor of parent/child action controller
    
 VERSION 2.23.2
 --------------
