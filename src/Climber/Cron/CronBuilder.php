@@ -113,10 +113,10 @@ class CronBuilder
      */
     public function build()
     {
-        if($this->cron['repeat'] > -1 && $this->cron['interval'] === null) {
+        if ($this->cron['repeat'] > -1 && $this->cron['interval'] === null) {
             throw new CronBuilderException('Cron interval time must be defined when repeat option is on');
         }
-        if(empty($this->cron['cmd'])) {
+        if (empty($this->cron['cmd'])) {
             throw new CronBuilderException('Cron command is empty');
         }
 
