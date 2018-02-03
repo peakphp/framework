@@ -7,6 +7,9 @@ Release Date: ?
  - added method setCache() to Peak\Bedrock\View\Header
  - added Peak\Common\CollectionFlattener
  - deleted deprecated application module in favor of parent/child action controller
+ - added function isDev() in Peak\Bedrock\helpers.php
+ - added a second param to detectEnvFile() in Peak\Bedrock\helpers.php for default fallback env, added detection 
+   of .dev and maked .prod file first priority
    
 VERSION 2.23.2
 --------------
