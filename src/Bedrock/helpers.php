@@ -53,7 +53,7 @@ if (!function_exists('_e')) {
  */
 if (!function_exists('isEnv')) {
     /**
-     * Check is env match curretn application env
+     * Check is env match current application env
      *
      * @param  string|array  $env
      * @return boolean
@@ -71,19 +71,35 @@ if (!function_exists('isEnv')) {
 }
 
 /**
+ * isDev()
+ */
+if (!function_exists('isDev')) {
+    /**
+     * Check is env is to dev mode
+     *
+     * @return boolean
+     */
+    function isDev($env)
+    {
+        return isEnv('dev');
+    }
+}
+
+/**
  * detectEnvFile()
  */
 if (!function_exists('detectEnvFile')) {
     /**
-     * Look for environment file (.prod, .testing and .staging)
-     * and return deducted environment string
+     * Look for environment file .prod, .staging, .testing or .dev in this order
+     * or return the fallback default value
      *
-     * @param  string $path
+     * @param string $path
+     * @param string $default_fallback
      * @return string
      */
-    function detectEnvFile($path)
+    function detectEnvFile($path, $default_fallback = 'dev')
     {
-        $env = 'dev';
+        $env = $default_fallback;
 
         if (file_exists($path.'/.prod')) {
             $env = 'prod';
@@ -91,6 +107,8 @@ if (!function_exists('detectEnvFile')) {
             $env = 'staging';
         } elseif (file_exists($path.'/.testing')) {
             $env = 'testing';
+        } elseif (file_exists($path.'/.dev')) {
+            $env = 'dev';
         }
 
         return $env;
