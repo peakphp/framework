@@ -4,7 +4,7 @@ namespace Peak\Climber\Cron\Exceptions;
 
 use \Exception;
 
-class InvalidDatabaseConfigException extends Exception
+class InvalidOptionFormatException extends Exception
 {
     /**
      * InvalidDatabaseConfigException constructor.
