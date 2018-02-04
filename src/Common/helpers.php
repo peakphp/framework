@@ -205,15 +205,17 @@ if (!function_exists('formatFileSize')) {
 if (!function_exists('fileExpired')) {
     /**
      * Check if file is expired
-     * @param $file
-     * @return string
+     *
+     * @param string $file
+     * @param mixed $expiration_time expiration time, \Peak\Common\TimeExpression expression accepted
+     * @return bool
      */
     function fileExpired($file, $expiration_time)
     {
-        if (empty($size)) {
-            return '0 kB';
-        }
-        $unit = ['B','kB','MB','GB','TB','PB'];
-        return round($size/pow(1024, ($i=floor(log($size, 1024)))), 2).' '.$unit[$i];
+        $expiration_time = (new \Peak\Common\TimeExpression($expiration_time))->toSeconds();
+        $file_date = filemtime($file);
+        $now = time();
+        $delay = $now - $file_date;
+        return ($delay >= $expiration_time) ? true : false;
     }
 }
