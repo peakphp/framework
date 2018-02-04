@@ -71,12 +71,13 @@ abstract class Render
     /**
      * Render a block
      *
-     * @param $block
+     * @param string $block_file
      * @param array $block_data
      */
-    public function renderBlock($block, array $block_data = [])
+    public function renderBlock($block_file, array $block_data = [])
     {
-        (new Block($this->view, $block, $block_data))->render();
+        $block_file = config('path.apptree.views').'/'.$block_file;
+        (new Block($this->view, $block_file, $block_data))->render();
     }
 
     /**
