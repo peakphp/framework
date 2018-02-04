@@ -9,7 +9,9 @@ Release Date: ?
  - deleted deprecated application module in favor of parent/child action controller
  - added function isDev() in Peak\Bedrock\helpers.php
  - added a second param to detectEnvFile() in Peak\Bedrock\helpers.php for default fallback env, added detection 
-   of .dev and maked .prod file first priority
+   of .dev and chosen .prod file as first priority
+ - removed application view path from Peak\Bedrock\View\Block::__construct()
+ - added application view path to Peak\Bedrock\View::renderBlock()
    
 VERSION 2.23.2
 --------------
