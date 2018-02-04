@@ -31,7 +31,7 @@ class Block extends Collection implements RenderableInterface
     public function __construct(View $view, $block_file, $block_data)
     {
         $this->view = $view;
-        $this->block_file = config('path.apptree.views').'/'.$block_file;
+        $this->block_file = $block_file;
 
         if (!file_exists($this->block_file)) {
             throw new BlockNotFoundException($block_file);
