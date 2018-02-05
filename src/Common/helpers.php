@@ -180,6 +180,19 @@ if (!function_exists('shortClassName')) {
     }
 }
 
+/**
+ * getClassPath()
+ */
+if (!function_exists('getClassPath')) {
+    /**
+     * Get class name of an object without the namespace
+     */
+    function getClassPath($obj)
+    {
+        return (new \ReflectionClass($obj))->getFileName();
+    }
+}
+
 
 /**
  * formatFileSize()
