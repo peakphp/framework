@@ -9,5 +9,5 @@ interface Renderable
      *
      * @return string
      */
-    public function initialize();
+    public function renderable();
 }
