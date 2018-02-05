@@ -15,7 +15,7 @@ Release Date: ?
  - added interfaces Peak\Common\Renderable, Peak\Common\Outputable and Peak\Common\Initializable
  - updated class Peak\Bedrock\View\Block to use Peak\Common\Interfaces\Renderable instead of Peak\Bedrock\View\RenderableInterface
  - deleted Peak\Bedrock\View\RenderableInterface
- - added function getClassPath() in Peak\Bedrock\helpers.php
+ - added function getClassPath() in Peak\Common\helpers.php
  
 VERSION 2.23.2
 --------------
