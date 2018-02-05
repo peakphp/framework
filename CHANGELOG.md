@@ -13,7 +13,9 @@ Release Date: ?
  - removed application view path from Peak\Bedrock\View\Block::__construct()
  - added application view path to Peak\Bedrock\View::renderBlock()
  - added interfaces Peak\Common\Renderable, Peak\Common\Outputable and Peak\Common\Initializable
-   
+ - updated class Peak\Bedrock\View\Block to use Peak\Common\Interfaces\Renderable instead of Peak\Bedrock\View\RenderableInterface
+ - deleted Peak\Bedrock\View\RenderableInterface
+ 
 VERSION 2.23.2
 --------------
 Release Date: 2018-01-29
