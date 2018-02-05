@@ -5,6 +5,7 @@ namespace Peak\Bedrock\View\Helper;
 use Peak\Bedrock\Application;
 use Peak\Bedrock\Application\Kernel;
 use Peak\Bedrock\View\Helper\Debug;
+use Peak\Common\CollectionFlattener;
 
 /**
  * Graphic version of Peak_View_Helper_debug
@@ -84,7 +85,8 @@ class Debugbar extends Debug
         echo '  <li><a class="memory">'.$this->getMemoryUsage().'</a></li>
                 <li><a class="files pkdb_tab" id="pkdb_include" onclick="pkdebugShow(\'pkdb_include\');">'.$files_count.' Files</a></li>
                 <li><a class="variables pkdb_tab" id="pkdb_vars" onclick="pkdebugShow(\'pkdb_vars\');">Variables</a></li>
-                <li><a class="registry pkdb_tab" id="pkdb_registry" onclick="pkdebugShow(\'pkdb_registry\');">App Container</a></li>';
+                <li><a class="registry pkdb_tab" id="pkdb_registry" onclick="pkdebugShow(\'pkdb_registry\');">App Container</a></li>
+                <li><a class="config pkdb_tab" id="pkdb_config" onclick="pkdebugShow(\'pkdb_config\');">App Config</a></li>';
 
         if (!empty($this->_console_log)) {
             echo '<li><a class="console pkdb_tab" id="pkdb_consolelog" onclick="pkdebugShow(\'pkdb_consolelog\');">Console</a></li>';
@@ -170,6 +172,24 @@ class Debugbar extends Debug
         }
         
         echo '</div>';
+
+        //variables
+        echo '<div class="window resizable" id="pkdb_config_window">';
+        $config = (new CollectionFlattener(Application::container()->get(Application\Config::class)))->flatAll();
+        echo '<h2>Application config</h2><table>';
+        $part = '';
+        foreach ($config as $name => $val) {
+            $name_parts = explode('.', $name);
+            if ($part !== $name_parts[0]) {
+                $part = $name_parts[0];
+                echo '<tr><td>&nbsp;</td><td></td></tr>';
+            }
+            if (is_bool($val)) {
+                $val = ($val === true) ? 'true' : 'false';
+            }
+            echo '<tr><td style="width:1px;font-weight:bold;">'.$name.'</td><td>'.$val.'</td></tr>';
+        }
+        echo '</table></div>';
 
         //console log (see method log())
         if (!empty($this->_console_log)) {
