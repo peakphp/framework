@@ -12,6 +12,7 @@ Release Date: ?
    of .dev and chosen .prod file as first priority
  - removed application view path from Peak\Bedrock\View\Block::__construct()
  - added application view path to Peak\Bedrock\View::renderBlock()
+ - added interfaces Peak\Common\Renderable, Peak\Common\Outputable and Peak\Common\Initializable
    
 VERSION 2.23.2
 --------------
