@@ -4,12 +4,13 @@ namespace Peak\Bedrock\View;
 
 use Peak\Bedrock\View;
 use Peak\Common\Collection;
+use Peak\Common\Interfaces\Renderable;
 use Peak\Bedrock\View\Exceptions\BlockNotFoundException;
 
 /**
  * View renderable block file
  */
-class Block extends Collection implements RenderableInterface
+class Block extends Collection implements Renderable
 {
     /**
      * View instance
@@ -47,10 +48,14 @@ class Block extends Collection implements RenderableInterface
     /**
      * Render a block with vars
      *
-     * @param array $vars
+     * @return string
      */
     public function render()
     {
+        ob_start();
         include $this->block_file;
+        $content = ob_get_contents();
+        ob_end_clean();
+        return $content;
     }
 }
