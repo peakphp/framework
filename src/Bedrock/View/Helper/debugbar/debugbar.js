@@ -1,6 +1,6 @@
 //load jquery function
 load = function() {
-    if(typeof $  == "undefined") load.getScript("http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js");
+    if(typeof $  == "undefined") load.getScript("https://code.jquery.com/jquery-3.3.1.min.js");
     load.tryReady(0);
 }
 
