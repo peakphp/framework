@@ -13,8 +13,9 @@ if (!function_exists('relativeBasepath')) {
     /**
      * Get relative path of specified dir from the server document root
      *
-     * @param  string $dir
-     * @return string
+     * @param string $dir
+     * @param null|string $doc_root
+     * @return mixed
      */
     function relativeBasepath($dir, $doc_root = null)
     {
@@ -32,8 +33,9 @@ if (!function_exists('relativePath')) {
     /**
      * Get relative path of specified dir from the server document root
      *
-     * @param  string $dir
-     * @return string
+     * @param string $dir
+     * @param null|string $doc_root
+     * @return mixed
      */
     function relativePath($dir, $doc_root = null)
     {
@@ -50,6 +52,8 @@ if (!function_exists('relativePath')) {
 if (!function_exists('isCli')) {
     /**
      * Detect if we are in command line interface mode
+     *
+     * @return bool
      */
     function isCli()
     {
@@ -116,7 +120,8 @@ if (!function_exists('exceptionTrace')) {
     /**
      * Retrieve a more comprehensive exception debug backtrace
      *
-     * @param  \Exception $exc
+     * @param \Exception $exc
+     * @return string
      */
     function exceptionTrace(\Exception $exc)
     {
@@ -173,6 +178,9 @@ if (!function_exists('printHtmlExceptionTrace')) {
 if (!function_exists('shortClassName')) {
     /**
      * Get class name of an object without the namespace
+     *
+     * @param mixed $obj
+     * @return string
      */
     function shortClassName($obj)
     {
@@ -186,6 +194,9 @@ if (!function_exists('shortClassName')) {
 if (!function_exists('getClassFilePath')) {
     /**
      * Get class complete file path
+     *
+     * @param mixed $obj
+     * @return string
      */
     function getClassFilePath($obj)
     {
@@ -197,11 +208,14 @@ if (!function_exists('getClassFilePath')) {
 /**
  * formatFileSize()
  */
-if (!function_exists('formatFileSize')) {
+if (!function_exists('formatSize')) {
     /**
      * Format size in bytes to a more appropriate / readable format
+     *
+     * @param integer $size
+     * @return string
      */
-    function formatFileSize($size)
+    function formatSize($size)
     {
         if (empty($size)) {
             return '0 kB';
@@ -230,5 +244,25 @@ if (!function_exists('fileExpired')) {
         $now = time();
         $delay = $now - $file_date;
         return ($delay >= $expiration_time) ? true : false;
+    }
+}
+
+/**
+ * catchOutput()
+ */
+if (!function_exists('catchOutput')) {
+    /**
+     * Catch output with OB Control
+     *
+     * @param Closure $closure
+     * @return string
+     */
+    function catchOutput(\Closure $closure)
+    {
+        ob_start();
+        $closure();
+        $content = ob_get_contents();
+        ob_end_clean();
+        return $content;
     }
 }
