@@ -181,13 +181,13 @@ if (!function_exists('shortClassName')) {
 }
 
 /**
- * getClassPath()
+ * getClassFilePath()
  */
-if (!function_exists('getClassPath')) {
+if (!function_exists('getClassFilePath')) {
     /**
-     * Get class name of an object without the namespace
+     * Get class complete file path
      */
-    function getClassPath($obj)
+    function getClassFilePath($obj)
     {
         return (new \ReflectionClass($obj))->getFileName();
     }
