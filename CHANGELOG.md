@@ -2,7 +2,11 @@ VERSION 2.25.0
 --------------
 Release Date: ?
 
- - renamed function getClassPath() to getClassFilePath() in Peak\Common\helpers.php
+> Warning! This version contains breaking changes with 2.24.x and below
+
+ - added function catchOutput() in Peak\Common\helpers.php
+ - [BC] renamed function getClassPath() to getClassFilePath() in Peak\Common\helpers.php
+ - [BC] renamed function formatFileSize() to formatSize() in Peak\Common\helpers.php
 
 VERSION 2.24.0
 --------------
