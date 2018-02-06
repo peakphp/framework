@@ -94,11 +94,11 @@ class HelpersTest extends TestCase
     function testFormatFileSize()
     {
         $size = '1234';
-        $fsize = formatFileSize($size);
+        $fsize = formatSize($size);
         $this->assertTrue($fsize === '1.21 kB');
 
         $size = 0;
-        $fsize = formatFileSize($size);
+        $fsize = formatSize($size);
         $this->assertTrue($fsize === '0 kB');
 //        $this->assertTrue(formatFileSize($size));
     }
