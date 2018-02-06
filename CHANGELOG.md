@@ -2,6 +2,8 @@ VERSION 2.25.0
 --------------
 Release Date: ?
 
+ - renamed function getClassPath() to getClassFilePath() in Peak\Common\helpers.php
+
 VERSION 2.24.0
 --------------
 Release Date: 2018-02-05
