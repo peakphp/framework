@@ -66,11 +66,20 @@ abstract class AbstractProcessor
      */
     protected function processPipeClassName($pipe, $payload)
     {
-        $pinst = (isset($this->container)) ? $this->container->create($pipe) : new $pipe();
+        if (isset($this->container)) {
+            if (get_class($this->container) === 'Peak\Di\Container') {
+                $pinst = $this->container->create($pipe);
+            } else {
+                $pinst = $this->container->get($pipe);
+            }
+        } else {
+            $pinst = new $pipe();
+        }
 
         if (!$pinst instanceof PipeInterface) {
             throw new MissingPipeInterfaceException(get_class($pinst));
         }
+
         return $pinst($payload);
     }
 
