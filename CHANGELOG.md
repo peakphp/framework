@@ -4,6 +4,8 @@ Release Date: ?
 
 > Warning! This version contains breaking changes with 2.24.x and below [BC]
 
+ - updated Peak\Pipelines\AbstractProcessor to use InvalidPipeException and MissingPipeInterfaceException
+ - added Peak\Pipelines\Exceptions\InvalidPipeException and Peak\Pipelines\Exceptions\MissingPipeInterfaceException
  - [BC] standardized configuration for Peak\Bedrock\Application\Bootstrap\Session
  - [BC] rebuilded completly Peak\Bedrock\View\Helper\DebugBar
  - added function catchOutput() in Peak\Common\helpers.php
