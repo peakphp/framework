@@ -2,8 +2,10 @@ VERSION 2.25.0
 --------------
 Release Date: ?
 
-> Warning! This version contains breaking changes with 2.24.x and below
+> Warning! This version contains breaking changes with 2.24.x and below [BC]
 
+ - [BC] standardized configuration for Peak\Bedrock\Application\Bootstrap\Session
+ - [BC] rebuilded completly Peak\Bedrock\View\Helper\DebugBar
  - added function catchOutput() in Peak\Common\helpers.php
  - [BC] renamed function getClassPath() to getClassFilePath() in Peak\Common\helpers.php
  - [BC] renamed function formatFileSize() to formatSize() in Peak\Common\helpers.php
