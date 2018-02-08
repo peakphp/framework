@@ -2,15 +2,17 @@
 use PHPUnit\Framework\TestCase;
 
 use Peak\Pipelines\Pipeline;
-use Peak\Pipelines\PipeInterface;
+use Peak\Pipelines\Exceptions\MissingPipeInterfaceException;
+use Peak\Pipelines\Exceptions\InvalidPipeException;
 use Peak\Pipelines\DefaultProcessor;
 use Peak\Pipelines\StrictProcessor;
 
 use Peak\Di\Container;
 
+require __DIR__.'/../fixtures/pipelines/pipes.php';
+
 class PipelineTest extends TestCase
 {
-
     /**
      * Create a simple pipeline with class
      */
@@ -144,92 +146,49 @@ class PipelineTest extends TestCase
 
         $this->assertTrue($payload == 6);
     }
-}
 
-/**
- * Pipe with invoke
- */
-class Pipe1 implements PipeInterface
-{
-    public function __invoke($payload)
+    /**
+     * Test pipe function
+     */
+    public function testPipeFunction()
     {
-        return ++$payload;
-    }
-}
+        $pipeline = new Pipeline([
+            'pipeFunction'
+        ]);
 
-/**
- * Pipe as class
- */
-class Pipe2 implements PipeInterface
-{
-    public function __invoke($payload)
-    {
-        return ++$payload;
-    }
-}
-
-/**
- * Pipe as class with
- */
-class Pipe3 implements PipeInterface
-{
-    public function __construct(\Peak\Common\Collection $coll)
-    {
-        $this->coll = $coll;
+        $payload = $pipeline->process(0);
+        $this->assertTrue($payload == 1);
     }
 
-    public function __invoke($payload)
+    /**
+     * Exceptions tests
+     */
+    public function testExceptions()
     {
-        $this->coll->payload = ++$payload;
-        return $this->coll;
-    }
-}
+        $error1 = false;
+        try {
+            $pipeline = new Pipeline([
+                new Pipe14
+            ]);
+
+            $payload = $pipeline->process(1);
+        } catch(MissingPipeInterfaceException $e) {
+            $error1 = true;
+        }
+
+        $this->assertTrue($error1);
 
 
-/**
- * Pipe with invoke
- */
-class Pipe10 implements PipeInterface
-{
-    public function __invoke($payload)
-    {
-        $payload .= 'A';
-        return $payload;
-    }
-}
+        $error2 = false;
+        try {
+            $pipeline = new Pipeline([
+                'randomstring'
+            ]);
+            $payload = $pipeline->process(1);
+        } catch(InvalidPipeException $e) {
+            $error2 = true;
+        }
 
-/**
- * Pipe with invoke
- */
-class Pipe11 implements PipeInterface
-{
-    public function __invoke($payload)
-    {
-        $payload .= 'B';
-        return $payload;
-    }
-}
-
-/**
- * Pipe with invoke
- */
-class Pipe12 implements PipeInterface
-{
-    public function __invoke($payload)
-    {
-        $payload .= 'C';
-        return $payload;
-    }
-}
-
-/**
- * Pipe with invoke
- */
-class Pipe13 implements PipeInterface
-{
-    public function __invoke($payload)
-    {
-        $payload .= 'D';
-        return $payload;
+        $this->assertTrue($error2);
     }
 }
