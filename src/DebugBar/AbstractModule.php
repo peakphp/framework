@@ -5,6 +5,9 @@ namespace Peak\DebugBar;
 use Peak\Common\Collection;
 use Peak\Common\Interfaces\Initializable;
 use Peak\Common\Interfaces\Renderable;
+use Peak\DebugBar\View\Layout;
+use Peak\DebugBar\View\View;
+use Peak\DebugBar\View\ViewNotFoundException;
 
 abstract class AbstractModule implements Renderable, Initializable
 {
@@ -52,6 +55,26 @@ abstract class AbstractModule implements Renderable, Initializable
     }
 
     /**
+     * Get module view file path
+     *
+     * @return string
+     */
+    protected function getModuleView()
+    {
+        return $this->getModulePath().'/view.php';
+    }
+
+    /**
+     * Get module layout file path
+     *
+     * @return string
+     */
+    protected function getModuleLayout()
+    {
+        return __DIR__.'/View/scripts/window.layout.php';
+    }
+
+    /**
      * Disable render flag
      *
      * @param bool $bool
@@ -85,6 +108,8 @@ abstract class AbstractModule implements Renderable, Initializable
 
     /**
      * Render SVG logo if file exists
+     *
+     * @return bool|string
      */
     public function renderLogo()
     {
@@ -92,24 +117,31 @@ abstract class AbstractModule implements Renderable, Initializable
         if (file_exists($logo_file)) {
             return file_get_contents($logo_file);
         }
+        return '';
     }
 
     /**
-     * Render the block
+     * Render the module with DebugBar window layout
      *
      * @return string
+     * @throws ViewNotFoundException
      */
-    final public function render()
+    public function render()
     {
-        $view_file = $this->getModulePath().'/view.php';
+        $file = $this->getModuleView();
+        $layout = $this->getModuleLayout();
 
-        if (!file_exists($view_file)) {
+        if (!file_exists($file)) {
             return '';
         }
 
-        return (new View(
-            $view_file,
-            $this->data->toArray())
-        )->render();
+        $module_content = (new View($file, $this->data))->render();
+
+        $data = new Collection([
+            'window' => $this->getName()
+        ]);
+
+        return (new Layout($layout, $data, $module_content))->render();
+
     }
 }

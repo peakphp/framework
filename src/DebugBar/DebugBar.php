@@ -2,8 +2,10 @@
 
 namespace Peak\DebugBar;
 
+use Peak\Common\Collection;
 use Peak\Common\Interfaces\Renderable;
 use Peak\Common\Session;
+use Peak\DebugBar\View\Layout;
 
 
 /**
@@ -68,6 +70,18 @@ class DebugBar implements Renderable
     }
 
     /**
+     * Add modules
+     *
+     * @param array $modules
+     * @return $this
+     */
+    public function addModules(array $modules)
+    {
+        $this->modules = array_merge($this->modules, $modules);
+        return $this;
+    }
+
+    /**
      * Overwrite modules
      *
      * @param array $modules
@@ -82,12 +96,14 @@ class DebugBar implements Renderable
     /**
      * Render debug bar modules
      *
-     * @return string
+     * @return null|string
+     * @throws View\ViewNotFoundException
      */
     public function render()
     {
         $content = '';
         $tabs = [];
+
         foreach ($this->modules as $module) {
             $module_obj = new $module();
             if ($module_obj->isRenderDisabled()) {
@@ -104,8 +120,15 @@ class DebugBar implements Renderable
             $content .= $this->renderModule($module_obj);
         }
 
-        return (new View(__DIR__.'/View/layout.php', $content))
-            ->renderLayout($content, $tabs);
+        $layout_content = new Collection([
+            'tabs' => $tabs
+        ]);
+
+        return (new Layout(
+            __DIR__.'/View/scripts/bar.layout.php',
+                $layout_content,
+                $content)
+            )->render();
     }
 
     /**
