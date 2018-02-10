@@ -9,6 +9,7 @@
 use Peak\Bedrock\Application;
 use Peak\Climber\Application as CliApplication;
 use Peak\Common\Language;
+use Peak\Common\Session;
 
 /**
  * __()
@@ -149,10 +150,10 @@ if (!function_exists('session')) {
     {
         $container = Application::container();
 
-        if (!$container->has('Peak\Config\Session')) {
-            $sess = $container->createAndStore('Peak\Config\Session');
+        if (!$container->has(Session::class)) {
+            $sess = $container->createAndStore(Session::class);
         } else {
-            $sess = $container->get('Peak\Config\Session');
+            $sess = $container->get(Session::class);
         }
 
         if (!isset($path) && !isset($value)) {
