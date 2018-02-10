@@ -16,6 +16,7 @@ class Files extends AbstractModule
      */
     public function initialize()
     {
+        $root_abspath = isset($_SERVER['DOCUMENT_ROOT']) ? $_SERVER['DOCUMENT_ROOT'] : '';
         $temp = get_included_files();
         $files = [
             'files' => [],
@@ -29,7 +30,7 @@ class Files extends AbstractModule
                 'size' => filesize($file),
                 'path' => str_replace(['\\','//'], '/', $file),
             ];
-            $data['shortpath'] = str_replace(ROOT_ABSPATH, '', $data['path']);
+            $data['shortpath'] = str_replace($root_abspath, '', $data['path']);
 
             $files['files'][$data['path']] = $data;
             $files['total_size'] += $data['size'];
