@@ -122,13 +122,13 @@
   right: 0;
   width: 100%;
   height: 100%;
-  display: block;
+  display: none;
   font: 12px/1.4em -apple-system, "Helvetica Neue", BlinkMacSystemFont, "Open Sans", "Segoe UI", Roboto, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   z-index: 999999;
   opacity: 1;
   padding: 0;
   margin: 0;
-  overflow: none; }
+  overflow: hidden; }
   #pkdebugbar .pkdebugbar-menu-wrapper {
     position: absolute;
     bottom: 0;

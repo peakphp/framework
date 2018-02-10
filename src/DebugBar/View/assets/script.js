@@ -1,17 +1,22 @@
 /* Peak DebugBar */
+/* ie 10+ */
 var peakDebugBar = (function() {
     "use strict";
 
-    /* ie 10+ */
     var bar = document.querySelector("#pkdebugbar");
     var tabs = document.querySelectorAll(".pkdebugbar-tab");
 
+    // show the bar
+    document.addEventListener("DOMContentLoaded", function() {
+        bar.style.display = "block";
+    });
+
     function targetName(el) {
-        return el.getAttribute('data-target');
+        return el.getAttribute("data-target");
     }
 
     function targetElFromName(name) {
-        return bar.querySelector('.pkdebugbar-window-' + name);
+        return bar.querySelector(".pkdebugbar-window-" + name);
     }
 
     function targetEl(el) {
