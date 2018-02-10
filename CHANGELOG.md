@@ -4,10 +4,12 @@ Release Date: ?
 
 > Warning! This version contains breaking changes with 2.24.x and below [BC]
 
+ - deleted deprecated Peak\Bedrock\View\Helper\Debug
+ - added Peak\Common\Session and removed Peak\Config\Session
  - updated Peak\Pipelines\AbstractProcessor to use InvalidPipeException and MissingPipeInterfaceException
  - added Peak\Pipelines\Exceptions\InvalidPipeException and Peak\Pipelines\Exceptions\MissingPipeInterfaceException
  - [BC] standardized configuration for Peak\Bedrock\Application\Bootstrap\Session
- - [BC] rebuilded completly Peak\Bedrock\View\Helper\DebugBar
+ - [BC] rebuilded completely Peak\Bedrock\View\Helper\DebugBar
  - added function catchOutput() in Peak\Common\helpers.php
  - [BC] renamed function getClassPath() to getClassFilePath() in Peak\Common\helpers.php
  - [BC] renamed function formatFileSize() to formatSize() in Peak\Common\helpers.php
