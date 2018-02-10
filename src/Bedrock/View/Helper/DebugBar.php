@@ -41,12 +41,22 @@ class DebugBar
     /**
      * Add module
      *
-     * @param string $module
-     * @return $this
+     * @see DebugBar::addModule()
      */
     public function addModule($module)
     {
         $this->dbar->addModule($module);
+        return $this;
+    }
+
+    /**
+     * Add modules
+     *
+     * @see DebugBar::addModules()
+     */
+    public function addModules($modules)
+    {
+        $this->dbar->addModule($modules);
         return $this;
     }
 
