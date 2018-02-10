@@ -1,0 +1,223 @@
+/*! custom css normalize based on github.com/necolas/normalize.css (v.7.0.0) */
+#pkdebugbar {
+  line-height: 1.15;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  margin: 0; }
+  #pkdebugbar article, #pkdebugbar aside, #pkdebugbar footer, #pkdebugbar header, #pkdebugbar nav, #pkdebugbar section {
+    display: block; }
+  #pkdebugbar h1 {
+    font-size: 2em;
+    margin: 0.67em 0; }
+  #pkdebugbar figcaption, #pkdebugbar figure, #pkdebugbar main {
+    display: block; }
+  #pkdebugbar figure {
+    margin: 1em 40px; }
+  #pkdebugbar hr {
+    box-sizing: content-box;
+    height: 0;
+    overflow: visible; }
+  #pkdebugbar pre {
+    font-family: monospace, monospace;
+    font-size: 1em; }
+  #pkdebugbar a {
+    background-color: transparent;
+    -webkit-text-decoration-skip: objects; }
+  #pkdebugbar abbr[title] {
+    border-bottom: none;
+    text-decoration: underline;
+    text-decoration: underline dotted; }
+  #pkdebugbar b, #pkdebugbar strong {
+    font-weight: inherit;
+    font-weight: bolder; }
+  #pkdebugbar code, #pkdebugbar kbd, #pkdebugbar samp {
+    font-family: monospace, monospace;
+    font-size: 1em; }
+  #pkdebugbar dfn {
+    font-style: italic; }
+  #pkdebugbar mark {
+    background-color: #ff0;
+    color: #000; }
+  #pkdebugbar small {
+    font-size: 80%; }
+  #pkdebugbar sub, #pkdebugbar sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline; }
+  #pkdebugbar sub {
+    bottom: -0.25em; }
+  #pkdebugbar sup {
+    top: -0.5em; }
+  #pkdebugbar img {
+    border-style: none; }
+  #pkdebugbar svg:not(:root) {
+    overflow: hidden; }
+  #pkdebugbar button, #pkdebugbar input, #pkdebugbar optgroup, #pkdebugbar select, #pkdebugbar textarea {
+    font-family: sans-serif;
+    font-size: 100%;
+    line-height: 1.15;
+    margin: 0; }
+  #pkdebugbar button, #pkdebugbar input {
+    overflow: visible; }
+  #pkdebugbar button, #pkdebugbar select {
+    text-transform: none; }
+  #pkdebugbar button, #pkdebugbar html [type="button"], #pkdebugbar [type="reset"], #pkdebugbar [type="submit"] {
+    -webkit-appearance: button; }
+  #pkdebugbar button::-moz-focus-inner, #pkdebugbar [type="button"]::-moz-focus-inner, #pkdebugbar [type="reset"]::-moz-focus-inner, #pkdebugbar [type="submit"]::-moz-focus-inner {
+    border-style: none;
+    padding: 0; }
+  #pkdebugbar button:-moz-focusring, #pkdebugbar [type="button"]:-moz-focusring, #pkdebugbar [type="reset"]:-moz-focusring, #pkdebugbar [type="submit"]:-moz-focusring {
+    outline: 1px dotted ButtonText; }
+  #pkdebugbar fieldset {
+    padding: 0.35em 0.75em 0.625em; }
+  #pkdebugbar legend {
+    box-sizing: border-box;
+    color: inherit;
+    display: table;
+    max-width: 100%;
+    padding: 0;
+    white-space: normal; }
+  #pkdebugbar progress {
+    display: inline-block;
+    vertical-align: baseline; }
+  #pkdebugbar textarea {
+    overflow: auto; }
+  #pkdebugbar [type="checkbox"], #pkdebugbar [type="radio"] {
+    box-sizing: border-box;
+    padding: 0; }
+  #pkdebugbar [type="number"]::-webkit-inner-spin-button, #pkdebugbar [type="number"]::-webkit-outer-spin-button {
+    height: auto; }
+  #pkdebugbar [type="search"] {
+    -webkit-appearance: textfield;
+    outline-offset: -2px; }
+  #pkdebugbar [type="search"]::-webkit-search-cancel-button, #pkdebugbar [type="search"]::-webkit-search-decoration {
+    -webkit-appearance: none; }
+  #pkdebugbar ::-webkit-file-upload-button {
+    -webkit-appearance: button;
+    font: inherit; }
+  #pkdebugbar details, #pkdebugbar menu {
+    display: block; }
+  #pkdebugbar summary {
+    display: list-item; }
+  #pkdebugbar canvas {
+    display: inline-block; }
+  #pkdebugbar template {
+    display: none; }
+  #pkdebugbar [hidden] {
+    display: none; }
+
+/**
+  DebugBar variables
+*/
+/**
+  DebugBar actual style
+*/
+#pkdebugbar {
+  background: transparent;
+  position: fixed !important;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  font: 12px/1.4em -apple-system, "Helvetica Neue", BlinkMacSystemFont, "Open Sans", "Segoe UI", Roboto, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  z-index: 999999;
+  opacity: 1;
+  padding: 0;
+  margin: 0;
+  overflow: none; }
+  #pkdebugbar .pkdebugbar-menu-wrapper {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 42px;
+    background: linear-gradient(to bottom, #e5e5e5, #e5e5e5);
+    border-top: 1px solid #999;
+    color: #222; }
+  #pkdebugbar .pkdebugbar-menu {
+    list-style-type: none;
+    padding: 0;
+    margin: 0; }
+    #pkdebugbar .pkdebugbar-menu .pkdebugbar-tab {
+      position: relative;
+      display: block;
+      float: left;
+      height: 42px;
+      letter-spacing: 0.05em;
+      line-height: 42px;
+      font-family: -apple-system, "Helvetica Neue", BlinkMacSystemFont, "Open Sans", "Segoe UI", Roboto, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+      color: #222;
+      border-right: 1px solid #b2b2b2;
+      padding: 0 15px;
+      cursor: pointer;
+      overflow: hidden; }
+      #pkdebugbar .pkdebugbar-menu .pkdebugbar-tab.open {
+        border-bottom: 4px solid #333;
+        background: linear-gradient(to top, #333 4px, #e5e5e5 0px, #e5e5e5 100%); }
+      #pkdebugbar .pkdebugbar-menu .pkdebugbar-tab:first-child {
+        padding-left: 45px; }
+      #pkdebugbar .pkdebugbar-menu .pkdebugbar-tab > svg {
+        vertical-align: middle;
+        padding-right: 2px; }
+      #pkdebugbar .pkdebugbar-menu .pkdebugbar-tab sup {
+        padding: 1px 5px;
+        border-radius: 12px;
+        font-family: monospace;
+        font-size: 11px;
+        background: #666;
+        color: #e5e5e5; }
+      #pkdebugbar .pkdebugbar-menu .pkdebugbar-tab .pkdebugbar-logo {
+        display: block;
+        position: absolute;
+        top: 0px;
+        left: 2px;
+        width: 36px; }
+        #pkdebugbar .pkdebugbar-menu .pkdebugbar-tab .pkdebugbar-logo .pkdebugbar-logo-path1 {
+          fill: #333; }
+        #pkdebugbar .pkdebugbar-menu .pkdebugbar-tab .pkdebugbar-logo .pkdebugbar-logo-path2 {
+          fill: #333; }
+  #pkdebugbar .pkdebugbar-window {
+    display: none;
+    background: #e5e5e5;
+    color: #222;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    left: 20px;
+    bottom: 43px;
+    padding: 20px;
+    z-index: 999998;
+    overflow: auto;
+    font-family: -apple-system, "Helvetica Neue", BlinkMacSystemFont, "Open Sans", "Segoe UI", Roboto, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    line-height: 14px; }
+    #pkdebugbar .pkdebugbar-window.open {
+      display: block; }
+    #pkdebugbar .pkdebugbar-window h1, #pkdebugbar .pkdebugbar-window h2, #pkdebugbar .pkdebugbar-window h3, #pkdebugbar .pkdebugbar-window h4, #pkdebugbar .pkdebugbar-window h5, #pkdebugbar .pkdebugbar-window h6 {
+      margin: 10px 0 10px -8px;
+      padding: 0;
+      width: auto;
+      display: block; }
+      #pkdebugbar .pkdebugbar-window h1 .hblock, #pkdebugbar .pkdebugbar-window h2 .hblock, #pkdebugbar .pkdebugbar-window h3 .hblock, #pkdebugbar .pkdebugbar-window h4 .hblock, #pkdebugbar .pkdebugbar-window h5 .hblock, #pkdebugbar .pkdebugbar-window h6 .hblock {
+        padding: 6px 8px;
+        background: #222;
+        color: #e5e5e5;
+        display: inline-block; }
+    #pkdebugbar .pkdebugbar-window > h1 {
+      margin-top: 0; }
+    #pkdebugbar .pkdebugbar-window table {
+      width: 100%; }
+      #pkdebugbar .pkdebugbar-window table td {
+        font-size: 12px;
+        padding: 0 6px;
+        color: #222;
+        vertical-align: top; }
+        #pkdebugbar .pkdebugbar-window table td:first-child {
+          font-weight: bold; }
+      #pkdebugbar .pkdebugbar-window table.border-inside td {
+        border-bottom: 1px solid #cccccc; }
+
+/*# sourceMappingURL=style.css.map */

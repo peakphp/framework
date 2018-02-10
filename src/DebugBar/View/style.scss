@@ -1,0 +1,316 @@
+/*! custom css normalize based on github.com/necolas/normalize.css (v.7.0.0) */
+#pkdebugbar {
+  line-height: 1.15;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  margin: 0;
+  article, aside, footer, header, nav, section {
+    display: block;
+  }
+  h1 {
+    font-size: 2em;
+    margin: 0.67em 0;
+  }
+  figcaption, figure, main {
+    display: block;
+  }
+  figure {
+    margin: 1em 40px;
+  }
+  hr {
+    box-sizing: content-box;
+    height: 0;
+    overflow: visible;
+  }
+  pre {
+    font-family: monospace, monospace;
+    font-size: 1em;
+  }
+  a {
+    background-color: transparent;
+    -webkit-text-decoration-skip: objects;
+  }
+  abbr[title] {
+    border-bottom: none;
+    text-decoration: underline;
+    text-decoration: underline dotted;
+  }
+  b, strong {
+    font-weight: inherit;
+    font-weight: bolder;
+  }
+  code, kbd, samp {
+    font-family: monospace, monospace;
+    font-size: 1em;
+  }
+  dfn {
+    font-style: italic;
+  }
+  mark {
+    background-color: #ff0;
+    color: #000;
+  }
+  small {
+    font-size: 80%;
+  }
+  sub, sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+  }
+  sub {
+    bottom: -0.25em;
+  }
+  sup {
+    top: -0.5em;
+  }
+  img {
+    border-style: none;
+  }
+  svg:not(:root) {
+    overflow: hidden;
+  }
+  button, input, optgroup, select, textarea {
+    font-family: sans-serif;
+    font-size: 100%;
+    line-height: 1.15;
+    margin: 0;
+  }
+  button, input {
+    overflow: visible;
+  }
+  button, select {
+    text-transform: none;
+  }
+  button, html [type="button"], [type="reset"], [type="submit"] {
+    -webkit-appearance: button;
+  }
+  button::-moz-focus-inner, [type="button"]::-moz-focus-inner, [type="reset"]::-moz-focus-inner, [type="submit"]::-moz-focus-inner {
+    border-style: none;
+    padding: 0;
+  }
+  button:-moz-focusring, [type="button"]:-moz-focusring, [type="reset"]:-moz-focusring, [type="submit"]:-moz-focusring {
+    outline: 1px dotted ButtonText;
+  }
+  fieldset {
+    padding: 0.35em 0.75em 0.625em;
+  }
+  legend {
+    box-sizing: border-box;
+    color: inherit;
+    display: table;
+    max-width: 100%;
+    padding: 0;
+    white-space: normal;
+  }
+  progress {
+    display: inline-block;
+    vertical-align: baseline;
+  }
+  textarea {
+    overflow: auto;
+  }
+  [type="checkbox"], [type="radio"] {
+    box-sizing: border-box;
+    padding: 0;
+  }
+  [type="number"]::-webkit-inner-spin-button, [type="number"]::-webkit-outer-spin-button {
+    height: auto;
+  }
+  [type="search"] {
+    -webkit-appearance: textfield;
+    outline-offset: -2px;
+  }
+  [type="search"]::-webkit-search-cancel-button, [type="search"]::-webkit-search-decoration {
+    -webkit-appearance: none;
+  }
+  ::-webkit-file-upload-button {
+    -webkit-appearance: button;
+    font: inherit;
+  }
+  details, menu {
+    display: block;
+  }
+  summary {
+    display: list-item;
+  }
+  canvas {
+    display: inline-block;
+  }
+  template {
+    display: none;
+  }
+  [hidden] {
+    display: none;
+  }
+}
+
+/**
+  DebugBar variables
+*/
+
+$font-default: -apple-system, "Helvetica Neue", BlinkMacSystemFont, "Open Sans",  "Segoe UI", Roboto, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+$font-mono: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+$height: 42px;
+$logo_color: #333;//#EE562F;
+$bg-color-1: #e5e5e5;
+$bg-color-2: #e5e5e5;
+$text-color: #222;
+$border-color: #999;
+$tab-color: #222;
+$tab-content-padding: 20px;
+
+
+/**
+  DebugBar actual style
+*/
+
+#pkdebugbar {
+  background: transparent;
+  position: fixed !important;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  display:block;
+  font: 12px/1.4em $font-default;
+  z-index: 999999;
+  opacity: 1;
+  padding: 0;
+  margin: 0;
+  overflow: none;
+
+  .pkdebugbar-menu-wrapper {
+
+    position: absolute;
+    bottom: 0;
+    left:0;
+    right: 0;
+    height: $height;
+    background: linear-gradient(to bottom, $bg-color-1, $bg-color-2);
+    border-top:1px solid $border-color;
+    color: $text-color;
+  }
+
+  .pkdebugbar-menu  {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    .pkdebugbar-tab {
+      position: relative;
+      display: block;
+      float:left;
+      height: $height;
+      letter-spacing: 0.05em;
+      line-height: $height;
+      font-family: $font-default;
+      color: $tab-color;
+      border-right: 1px solid darken($bg-color-1, 20%);
+      padding: 0 15px;
+      cursor: pointer;
+      overflow:hidden;
+
+      &.open {
+        border-bottom: 4px solid $logo_color;
+        background: linear-gradient(to top, $logo_color 4px, $bg-color-1 0px, $bg-color-1 100%);
+      }
+
+      &:first-child {
+        padding-left:45px;
+      }
+
+      & > svg {
+        vertical-align: middle;
+        padding-right: 2px;
+      }
+
+      sup {
+        padding: 1px 5px;
+        border-radius: 12px;
+        font-family: monospace;
+        font-size:11px;
+        background: #666;
+        color: $bg-color-1;
+      }
+
+      .pkdebugbar-logo {
+        display: block;
+        position:absolute;
+        top:0px;
+        left: 2px;
+        width:36px;
+        .pkdebugbar-logo-path1 {
+          fill: $logo_color;
+        }
+        .pkdebugbar-logo-path2 {
+          fill: #333;
+
+        }
+      }
+    }
+  }
+
+  .pkdebugbar-window {
+    display:none;
+    background: $bg-color-1;
+    color: $text-color;
+    position:absolute;
+    top:$tab-content-padding;
+    right: $tab-content-padding;
+    left: $tab-content-padding;
+    bottom: $height+1;
+    padding:20px;
+    z-index: 999998;
+    overflow:auto;
+    font-family: $font-default;
+    line-height:14px;
+    //border:2px solid $border-color;
+    //border-bottom:0;
+    //background: linear-gradient(to top, #000 0, $bg-color-1 30px, $bg-color-1 50%);
+
+    &.open {
+      display:block;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      margin: 10px 0 10px -8px;
+      padding:0;
+      width:auto;
+      display:block;
+      .hblock {
+        padding: 6px 8px;
+        background: $text-color;
+        color: $bg-color-1;
+        display: inline-block;
+      }
+    }
+
+    & > h1 {
+      margin-top:0;
+    }
+
+
+    table {
+      width: 100%;
+      td {
+        font-size: 12px;
+        padding:0 6px;
+        color: $text-color;
+        vertical-align: top;
+
+        &:first-child {
+          font-weight: bold;
+        }
+      }
+
+      &.border-inside td {
+        border-bottom:1px solid darken($bg-color-1, 10%);
+      }
+    }
+
+
+  }
+}
