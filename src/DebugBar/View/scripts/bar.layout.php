@@ -10,5 +10,5 @@
     </div>
     <?php echo $content; ?>
 </div>
-<style><?php include __DIR__.'/style.css'; ?></style>
-<script><?php include __DIR__.'/script.js'; ?></script>
+<style><?php include __DIR__.'/../assets/style.css'; ?></style>
+<script><?php include __DIR__.'/../assets/script.js'; ?></script>
