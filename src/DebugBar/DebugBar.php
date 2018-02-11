@@ -103,9 +103,11 @@ class DebugBar implements Renderable
     {
         $content = '';
         $tabs = [];
+        $storage = new SessionStorage();
+//        $storage->reset();
 
         foreach ($this->modules as $module) {
-            $module_obj = new $module();
+            $module_obj = new $module($storage);
             if ($module_obj->isRenderDisabled()) {
                 continue;
             }
