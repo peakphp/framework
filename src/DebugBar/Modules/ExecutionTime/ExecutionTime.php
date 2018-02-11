@@ -13,6 +13,7 @@ class ExecutionTime extends AbstractModule
     protected $time = 'n/a';
 
     /**
+     * Raw time in seconds
      * @var integer
      */
     protected $raw_time = 0;
@@ -22,12 +23,23 @@ class ExecutionTime extends AbstractModule
      */
     protected $suffix = 'ms';
 
+
+    protected $default_storage_data = [
+        'requests' => [],
+        'nb_requests' => 0,
+        'average_request' => 0,
+        'sum_requests' => 0,
+        'current_request' => [],
+        'last_request' => [],
+        'longest_request' => [],
+        'shortest_request' => [],
+    ];
+
     /**
      * Initialize block
      */
     public function initialize()
     {
-
         if (isset($_SERVER['REQUEST_TIME_FLOAT'])) {
             $this->time = filter_var($_SERVER['REQUEST_TIME_FLOAT']);
         } elseif (isset($_SERVER['REQUEST_TIME'])) {
@@ -35,11 +47,11 @@ class ExecutionTime extends AbstractModule
         }
 
         if (is_numeric($this->time)) {
-            $this->raw_time = $this->time;
+            $this->raw_time = microtime(true) - $this->time;
         }
 
         if (is_numeric($this->time)) {
-            $this->time = round(microtime(true) - $this->time, 4) * 1000;
+            $this->time = round($this->raw_time, 4) * 1000;
 
             if ($this->time >= 1000) {
                 $this->time = round($this->time / 1000, 3);
@@ -47,54 +59,9 @@ class ExecutionTime extends AbstractModule
             }
         }
 
-        // check if we have an active session to store page execution times
-        if (Session::isStarted()) {
-
-            // chronometer
-//            if (isset($_SERVER['REQUEST_URI'])) {
-//                $request_uri = filter_var($_SERVER['REQUEST_URI']);
-//
-//                $request_chronos = [];
-//                if (isset($_SESSION['pkdebugbar']['chronometers'][$request_uri])) {
-//                    $request_chronos = unserialize($_SESSION['pkdebugbar']['chronometers'][$request_uri]);
-//                }
-//
-//                $request_chronos[] = $this->raw_time;
-//                $_SESSION['pkdebugbar']['chronometers'][$request_uri] = serialize($request_chronos);
-//            }
-        }
-
-//        $nb_chrono = count($chronos);
-//        $sum_chrono = array_sum($chronos);
-//        $average_chrono = $sum_chrono / $nb_chrono;
-//        sort($chronos);
-//        $short = $chronos[0];
-//        rsort($chronos);
-//        $long = $chronos[0];
-//        echo 'Number of requests: '.$nb_chrono.'<br />';
-//        echo 'Average: '.round($average_chrono,2).'ms / request<br /><br />';
-//        echo 'Fastest request: '.$short.'ms<br />';
-//        echo 'Longest request: '.$long.'ms<br /><br />';
-
-    }
-
-    protected function buildStats()
-    {
-        if (!Session::isStarted()) {
-            return;
-        }
-
-        if (isset($_SERVER['REQUEST_URI'])) {
-            $request_uri = filter_var($_SERVER['REQUEST_URI']);
-
-            $request_chronos = [];
-            if (isset($_SESSION['pkdebugbar']['chronometers'][$request_uri])) {
-                $request_chronos = unserialize($_SESSION['pkdebugbar']['chronometers'][$request_uri]);
-            }
-
-            $request_chronos[] = $this->raw_time;
-            $_SESSION['pkdebugbar']['chronometers'][$request_uri] = serialize($request_chronos);
-        }
+        $this->data->time = $this->time;
+        $this->buildStats();
+        $this->data->stats = $this->getStorage();
     }
 
     /**
@@ -107,4 +74,64 @@ class ExecutionTime extends AbstractModule
         return $this->time.' '.$this->suffix;
     }
 
+    /**
+     * Build various stats
+     */
+    protected function buildStats()
+    {
+        $storage = $this->getStorage();
+
+        // requests, current_request and last_request
+        if (isset($_SERVER['REQUEST_URI'])) {
+            $request_uri = filter_var($_SERVER['REQUEST_URI']);
+            $storage['requests'][$request_uri][] = $this->raw_time;
+
+            if (!empty($storage['current_request'])) {
+                $storage['last_request'] = [
+                    'uri' => $storage['current_request']['uri'],
+                    'time' => $storage['current_request']['time'],
+                ];
+            }
+            $storage['current_request'] = [
+                'uri' => $request_uri,
+                'time' => $this->raw_time,
+            ];
+        }
+
+        // count and sum all requests
+        foreach ($storage['requests'] as $uri => $uri_times) {
+            if (empty($storage['shortest_request'])) {
+                $storage['shortest_request'] = $storage['current_request'];
+            }
+            if (empty($storage['longest_request'])) {
+                $storage['longest_request'] = $storage['current_request'];
+            }
+
+            sort($storage['requests'][$uri]);
+
+            if ($storage['requests'][$uri][0] < $storage['shortest_request']['time']) {
+                $storage['shortest_request'] = [
+                    'uri' => $uri,
+                    'time' => $storage['requests'][$uri][0]
+                ];
+            }
+
+            rsort($storage['requests'][$uri]);
+
+            if ($storage['requests'][$uri][0] > $storage['longest_request']['time']) {
+                $storage['longest_request'] = [
+                    'uri' => $uri,
+                    'time' => $storage['requests'][$uri][0]
+                ];
+            }
+
+            $storage['nb_requests'] += count($uri_times);
+            $storage['sum_requests'] += array_sum($uri_times);
+        }
+
+        // average requests
+        $storage['average_request'] = $storage['sum_requests'] / $storage['nb_requests'];
+
+        $this->saveToStorage($storage);
+    }
 }

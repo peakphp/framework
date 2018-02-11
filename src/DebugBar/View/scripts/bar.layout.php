@@ -1,4 +1,5 @@
-<div id="pkdebugbar">
+<style><?php include __DIR__.'/../assets/style.css'; ?></style>
+<div id="pkdebugbar" style=""display:none;">
     <div class="pkdebugbar-menu-wrapper">
         <ul class="pkdebugbar-menu">
             <?php
@@ -10,5 +11,4 @@
     </div>
     <?php echo $content; ?>
 </div>
-<style><?php include __DIR__.'/../assets/style.css'; ?></style>
 <script><?php include __DIR__.'/../assets/script.js'; ?></script>
