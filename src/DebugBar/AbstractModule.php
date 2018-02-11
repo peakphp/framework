@@ -12,10 +12,20 @@ use Peak\DebugBar\View\ViewNotFoundException;
 abstract class AbstractModule implements Renderable, Initializable
 {
     /**
-     * Block data
+     * View data
      * @var Collection
      */
     protected $data;
+
+    /**
+     * @var SessionStorage
+     */
+    private $storage;
+
+    /**
+     * @var array
+     */
+    protected $default_storage_data = [];
 
     /**
      * Disable render flag
@@ -32,14 +42,48 @@ abstract class AbstractModule implements Renderable, Initializable
     /**
      * DebugBarBlock constructor.
      */
-    public function __construct()
+    public function __construct(SessionStorage $storage)
     {
         $this->module_path = $this->getModulePath();
         $this->data = new Collection();
+        $this->storage = $storage;
+        $this->initializeDefaultDataStorage();
         $this->initialize();
     }
 
     abstract public function renderTitle();
+
+    /**
+     * Initiate module data storage
+     */
+    protected function initializeDefaultDataStorage()
+    {
+        if (!isset($this->storage[$this->getName()]) && !empty($this->default_storage_data)) {
+            $this->saveToStorage($this->default_storage_data);
+        }
+    }
+
+    /**
+     * Get module storage
+     *
+     * @return mixed
+     */
+    protected function getStorage()
+    {
+        return $this->storage[$this->getName()];
+    }
+
+    /**
+     * Save data to module storage
+     *
+     * @param $data
+     */
+    protected function saveToStorage($data)
+    {
+        $this->storage->mergeWith([
+            $this->getName() => $data
+        ])->save();
+    }
 
     /**
      * Get module absolute path
