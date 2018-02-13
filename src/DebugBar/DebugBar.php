@@ -33,28 +33,24 @@ class DebugBar implements Renderable
     protected $modules_instances = [];
 
     /**
+     * Storage handler
+     * @var AbstractStorage|SessionStorage
+     */
+    protected $storage;
+
+    /**
      * DebugBar constructor
      */
-    public function __construct(array $modules = [])
+    public function __construct(AbstractStorage $storage = null, array $modules = [])
     {
+        if (!isset($storage)) {
+            $storage = new SessionStorage();
+        }
+        $this->storage = $storage;
+
         if (!empty($modules)) {
             $this->setModules($modules);
         }
-        $this->initializeSession();
-    }
-
-    /**
-     * Initialize stuff if session started
-     */
-    protected function initializeSession()
-    {
-//        if (Session::isStarted()) {
-//            if (!isset($_SESSION['pkdebugbar'])) {
-//                $_SESSION['pkdebugbar'] = serialize([
-//                    'chronometers' => []
-//                ]);
-//            }
-//        }
     }
 
     /**
@@ -103,11 +99,9 @@ class DebugBar implements Renderable
     {
         $content = '';
         $tabs = [];
-        $storage = new SessionStorage();
-//        $storage->reset();
 
         foreach ($this->modules as $module) {
-            $module_obj = new $module($storage);
+            $module_obj = new $module($this->storage);
             if ($module_obj->isRenderDisabled()) {
                 continue;
             }

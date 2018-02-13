@@ -35,7 +35,7 @@ class DebugBar
      */
     public function __construct()
     {
-        $this->dbar = new DebugBarComponent($this->modules);
+        $this->dbar = new DebugBarComponent(null, $this->modules);
     }
 
     /**
