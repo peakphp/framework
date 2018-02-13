@@ -16,7 +16,7 @@ class Files extends AbstractModule
      */
     public function initialize()
     {
-        $root_abspath = isset($_SERVER['DOCUMENT_ROOT']) ? $_SERVER['DOCUMENT_ROOT'] : '';
+        $root_abspath = isset($_SERVER['DOCUMENT_ROOT']) ? filter_var($_SERVER['DOCUMENT_ROOT']) : '';
         $temp = get_included_files();
         $files = [
             'files' => [],
@@ -25,7 +25,6 @@ class Files extends AbstractModule
             'basepath' => '',
         ];
         foreach ($temp as $file) {
-
             $data = [
                 'size' => filesize($file),
                 'path' => str_replace(['\\','//'], '/', $file),
