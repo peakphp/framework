@@ -1,3 +1,3 @@
-<h1><div class="hblock">Session</div></h1>
-<pre><?php print_r($view->session); ?></pre>
+<h1>Session</h1>
+<pre class="pre-block"><?php print_r($view->session); ?></pre>
 

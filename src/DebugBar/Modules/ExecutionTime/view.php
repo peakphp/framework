@@ -1,4 +1,4 @@
-<h1><div class="hblock">Execution time</div></h1>
+<h1>Execution time</h1>
 
 <h3><div class="hblock">Current Request</div></h3>
 <?php echo $view->stats['current_request']['uri']; ?><br>

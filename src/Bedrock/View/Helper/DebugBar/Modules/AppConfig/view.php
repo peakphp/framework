@@ -1,4 +1,4 @@
-<h1><div class="hblock">Application configuration</div></h1>
+<h1>Application Configurations</h1>
 <table class="border-inside">
 <?php
     $part = '';
