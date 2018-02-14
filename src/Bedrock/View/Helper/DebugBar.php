@@ -40,25 +40,13 @@ class DebugBar
     }
 
     /**
-     * Add module
+     * Return DebugBar instance
      *
-     * @see DebugBar::addModule()
+     * @return DebugBarComponent
      */
-    public function addModule($module)
+    public function bar()
     {
-        $this->dbar->addModule($module);
-        return $this;
-    }
-
-    /**
-     * Add modules
-     *
-     * @see DebugBar::addModules()
-     */
-    public function addModules($modules)
-    {
-        $this->dbar->addModule($modules);
-        return $this;
+        return $this->dbar;
     }
 
     /**
