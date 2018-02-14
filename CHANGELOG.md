@@ -13,6 +13,7 @@ Release Date: ?
  - added function catchOutput() in Peak\Common\helpers.php
  - [BC] renamed function getClassPath() to getClassFilePath() in Peak\Common\helpers.php
  - [BC] renamed function formatFileSize() to formatSize() in Peak\Common\helpers.php
+ - added function interpolate() in Peak\Common\helpers.php
 
 VERSION 2.24.0
 --------------
