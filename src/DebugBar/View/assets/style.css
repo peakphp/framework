@@ -207,7 +207,8 @@
         color: #e5e5e5;
         display: inline-block; }
     #pkdebugbar .pkdebugbar-window > h1 {
-      margin-top: 0; }
+      margin-top: 0;
+      margin-bottom: 15px; }
     #pkdebugbar .pkdebugbar-window table {
       width: 100%; }
       #pkdebugbar .pkdebugbar-window table td {
@@ -219,5 +220,14 @@
           font-weight: bold; }
       #pkdebugbar .pkdebugbar-window table.border-inside td {
         border-bottom: 1px solid #cccccc; }
+    #pkdebugbar .pkdebugbar-window .pre-block {
+      font-size: 12px;
+      font-family: monospace;
+      font-weight: normal;
+      background: #f2f2f2;
+      padding: 8px;
+      color: #222;
+      overflow-wrap: break-word;
+      white-space: pre-wrap; }
 
 /*# sourceMappingURL=style.css.map */

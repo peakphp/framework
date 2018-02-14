@@ -290,6 +290,7 @@ $tab-content-padding: 20px;
 
     & > h1 {
       margin-top:0;
+      margin-bottom: 15px;
     }
 
 
@@ -309,6 +310,17 @@ $tab-content-padding: 20px;
       &.border-inside td {
         border-bottom:1px solid darken($bg-color-1, 10%);
       }
+    }
+
+    .pre-block {
+      font-size:12px;
+      font-family: monospace;
+      font-weight: normal;
+      background: lighten($bg-color-1, 5%);
+      padding:8px;
+      color: $text-color;
+      overflow-wrap: break-word;
+      white-space: pre-wrap;
     }
 
 
