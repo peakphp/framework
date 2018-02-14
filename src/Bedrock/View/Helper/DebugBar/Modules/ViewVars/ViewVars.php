@@ -9,7 +9,7 @@ use Peak\DebugBar\AbstractModule;
 class ViewVars extends AbstractModule
 {
     protected $use_default_logo = true;
-    
+
     /**
      * Initialize block
      */
