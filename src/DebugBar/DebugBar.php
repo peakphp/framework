@@ -91,10 +91,23 @@ class DebugBar implements Renderable
     }
 
     /**
+     * Get module
+     *
+     * @param $module
+     * @return mixed
+     * @throws ModuleNotFoundException
+     */
+    public function getModule($module)
+    {
+        return $this->getModuleInstance($module);
+    }
+
+    /**
      * Render debug bar modules
      *
      * @return null|string
      * @throws View\ViewNotFoundException
+     * @throws ModuleNotFoundException
      */
     public function render()
     {
@@ -102,7 +115,9 @@ class DebugBar implements Renderable
         $tabs = [];
 
         foreach ($this->modules as $module) {
-            $module_obj = new $module($this->storage);
+
+            $module_obj = $this->getModuleInstance($module);
+
             if ($module_obj->isRenderDisabled()) {
                 continue;
             }
@@ -126,6 +141,26 @@ class DebugBar implements Renderable
                 $layout_content,
                 $content)
             )->render();
+    }
+
+    /**
+     * Get module instance
+     *
+     * @param $module
+     * @return mixed
+     * @throws ModuleNotFoundException
+     */
+    protected function getModuleInstance($module)
+    {
+        if (!in_array($module, $this->modules, true)) {
+            throw new ModuleNotFoundException($module);
+        }
+
+        if (!isset($this->modules_instances[$module])) {
+            $this->modules_instances[$module] = new $module($this->storage);
+        }
+
+        return $this->modules_instances[$module];
     }
 
     /**
