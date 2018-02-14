@@ -266,3 +266,35 @@ if (!function_exists('catchOutput')) {
         return $content;
     }
 }
+
+/**
+ * interpolate()
+ */
+if (!function_exists('interpolate')) {
+
+    /**
+     * Interpolation of message. Based on psr-3 example
+     *
+     * @param $message
+     * @param array $context
+     * @param Closure|null $fn
+     * @return string
+     */
+    function interpolate($message, array $context = array(), \Closure $fn = null)
+    {
+        // build a replacement array with braces around the context keys
+        $replace = array();
+        foreach ($context as $key => $val) {
+            // check that the value can be casted to string
+            if (!is_array($val) && (!is_object($val) || method_exists($val, '__toString'))) {
+                if (isset($fn)) {
+                    $val = $fn($val);
+                }
+                $replace['{' . $key . '}'] = $val;
+            }
+        }
+
+        // interpolate replacement values into the message and return
+        return strtr($message, $replace);
+    }
+}
