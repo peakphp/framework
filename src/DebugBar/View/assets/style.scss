@@ -159,7 +159,8 @@ $bg-color-2: #e5e5e5;
 $text-color: #222;
 $border-color: #999;
 $tab-color: #222;
-$tab-content-padding: 20px;
+$window-margin: 20px;
+$window-padding: 20px;
 
 
 /**
@@ -258,11 +259,11 @@ $tab-content-padding: 20px;
     background: $bg-color-1;
     color: $text-color;
     position:absolute;
-    top:$tab-content-padding;
-    right: $tab-content-padding;
-    left: $tab-content-padding;
+    top:$window-margin;
+    right: $window-margin;
+    left: $window-margin;
     bottom: $height+1;
-    padding:20px;
+    padding: $window-padding;
     z-index: 999998;
     overflow:auto;
     font-family: $font-default;
@@ -270,6 +271,13 @@ $tab-content-padding: 20px;
     //border:2px solid $border-color;
     //border-bottom:0;
     //background: linear-gradient(to top, #000 0, $bg-color-1 30px, $bg-color-1 50%);
+
+    hr {
+      border-width: 0;
+      border-style: solid;
+      border-color: darken($bg-color-1, 20%);
+      border-top-width: 1px;
+    }
 
     &.open {
       display:block;
@@ -289,13 +297,20 @@ $tab-content-padding: 20px;
     }
 
     & > h1 {
-      margin-top:0;
-      margin-bottom: 15px;
+      &:first-child {
+        background: $text-color;
+        color: $bg-color-1;
+        margin: (-$window-padding) (-$window-padding) 20px (-$window-padding);
+        padding: 18px 15px;
+        display: block;
+        width: auto;
+      }
     }
 
 
     table {
       width: 100%;
+      background: lighten($bg-color-1, 5%);
       td {
         font-size: 12px;
         padding:0 6px;
@@ -308,7 +323,7 @@ $tab-content-padding: 20px;
       }
 
       &.border-inside td {
-        border-bottom:1px solid darken($bg-color-1, 10%);
+        border-bottom:1px solid darken($bg-color-1, 5%);
       }
     }
 
@@ -319,8 +334,10 @@ $tab-content-padding: 20px;
       background: lighten($bg-color-1, 5%);
       padding:8px;
       color: $text-color;
-      overflow-wrap: break-word;
-      white-space: pre-wrap;
+      .line:hover {
+        background: lighten($bg-color-1, 8%);
+
+      }
     }
 
 
