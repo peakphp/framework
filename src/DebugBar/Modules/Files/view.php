@@ -3,7 +3,7 @@
     <?php count($view->files); ?> Files included<br />
     Total size: <?php echo round($view->files['total_size'] / 1024, 2); ?> Kbs
 </strong>
-<hr />
+<div class="pre-block">
 <?php
     foreach ($view->files['files'] as $file) {
         $filename = str_replace(
@@ -11,7 +11,7 @@
             '<strong>'.basename($file['shortpath']).'</strong>',
             $file['shortpath']
         );
-        echo $filename.' - <small>'.formatSize($file['size']).'</small><br />';
+        echo '<div class="line">'.$filename.' <small style="float:right">'.formatSize($file['size']).'</small></div>';
     }
 ?>
-
+</div>
