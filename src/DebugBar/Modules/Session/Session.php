@@ -6,6 +6,8 @@ use Peak\DebugBar\AbstractModule;
 
 class Session extends AbstractModule
 {
+    protected $use_default_logo = true;
+
     /**
      * Initialize block
      */

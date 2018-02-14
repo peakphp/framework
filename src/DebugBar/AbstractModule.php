@@ -40,6 +40,12 @@ abstract class AbstractModule implements Renderable, Initializable
     private $module_path;
 
     /**
+     * Use View/assets/default-logo.svg if true and no module logo.svg file found
+     * @var bool
+     */
+    protected $use_default_logo = false;
+
+    /**
      * DebugBarBlock constructor.
      */
     public function __construct(SessionStorage $storage)
@@ -51,6 +57,10 @@ abstract class AbstractModule implements Renderable, Initializable
         $this->initialize();
     }
 
+    /**
+     * Render the tab title
+     * @return mixed
+     */
     abstract public function renderTitle();
 
     /**
@@ -160,6 +170,8 @@ abstract class AbstractModule implements Renderable, Initializable
         $logo_file = $this->getModulePath().'/logo.svg';
         if (file_exists($logo_file)) {
             return file_get_contents($logo_file);
+        } elseif ($this->use_default_logo) {
+            return file_get_contents(__DIR__.'/View/assets/default-logo.svg');
         }
         return '';
     }
