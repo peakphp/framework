@@ -29,10 +29,10 @@ class ExecutionTime extends AbstractModule
         'nb_requests' => 0,
         'average_request' => 0,
         'sum_requests' => 0,
-        'current_request' => [],
-        'last_request' => [],
-        'longest_request' => [],
-        'shortest_request' => [],
+        'current_request' => ['uri' => '', 'time' => 0],
+        'last_request' => ['uri' => '', 'time' => 0],
+        'longest_request' => ['uri' => '', 'time' => 0],
+        'shortest_request' => ['uri' => '', 'time' => 0],
     ];
 
     /**
@@ -130,7 +130,9 @@ class ExecutionTime extends AbstractModule
         }
 
         // average requests
-        $storage['average_request'] = $storage['sum_requests'] / $storage['nb_requests'];
+        if ($storage['sum_requests'] > 0) {
+            $storage['average_request'] = $storage['sum_requests'] / $storage['nb_requests'];
+        }
 
         $this->saveToStorage($storage);
     }
