@@ -28,6 +28,7 @@ class DebugBar
         \Peak\DebugBar\Modules\Inputs\Inputs::class,
         \Peak\Bedrock\View\Helper\DebugBar\Modules\AppContainer\AppContainer::class,
         \Peak\Bedrock\View\Helper\DebugBar\Modules\AppConfig\AppConfig::class,
+        \Peak\DebugBar\Modules\UserConstants\UserConstants::class,
     ];
 
     /**
