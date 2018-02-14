@@ -91,6 +91,9 @@ class HelpersTest extends TestCase
         $this->assertTrue($path === '/user/bin/test');
     }
 
+    /**
+     * test formatSize()
+     */
     function testFormatFileSize()
     {
         $size = '1234';
@@ -100,6 +103,23 @@ class HelpersTest extends TestCase
         $size = 0;
         $fsize = formatSize($size);
         $this->assertTrue($fsize === '0 kB');
-//        $this->assertTrue(formatFileSize($size));
+    }
+
+    /**
+     * test interpolate()
+     */
+    function testInterpolate()
+    {
+        $message = 'User {username} created';
+        $context = ['username' => 'foobar'];
+        $final = interpolate($message, $context);
+
+        $this->assertTrue($final === 'User foobar created');
+
+        $final = interpolate($message, $context, function($val) {
+            return strtoupper($val);
+        });
+
+        $this->assertTrue($final === 'User FOOBAR created');
     }
 }
