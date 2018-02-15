@@ -19,6 +19,18 @@ class Session extends AbstractModule
         }
 
         $this->data->session = filter_var_array($_SESSION);
+
+        $this->data->infos = [
+            'id' => session_id(),
+            'name' => session_name(),
+            'cache_expire' => session_cache_expire(),
+            'cache_limiter' => session_cache_limiter(),
+            'module_name' => session_module_name(),
+            'save_path' => realpath(session_save_path()),
+            'cookie_params' => session_get_cookie_params(),
+        ];
+
+        print_r(session_get_cookie_params());
     }
 
     /**
