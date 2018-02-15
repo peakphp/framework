@@ -37,11 +37,12 @@ class ArrayTable implements Renderable
         foreach ($this->data as $key => $val) {
             $content .= '<tr>';
             if (is_array($val)) {
-                foreach ($val as $item) {
-                    $content .= '<td>'.$item.'</td>';
+                $content .= '<td colspan="2">'.$key.'</td></tr>';
+                foreach ($val as $vkey => $item) {
+                    $content .= '<tr><td>&nbsp;&nbsp;└&nbsp;'.$vkey.'</td><td>'.$this->formatVal($item).'</td></tr>';
                 }
             } else {
-                $content .= '<td>'.$key.'</td><td>'.$val.'</td>';
+                $content .= '<td>'.$key.'</td><td>'.$this->formatVal($val).'</td>';
             }
 
             $content .= '</tr>';
@@ -50,5 +51,19 @@ class ArrayTable implements Renderable
         $content .= '</table>';
 
         return $content;
+    }
+
+    /**
+     * Format value
+     *
+     * @param $val
+     * @return string
+     */
+    public function formatVal($val)
+    {
+        if (is_bool($val)) {
+            $val = ($val === true) ? 'true' : 'false';
+        }
+        return $val;
     }
 }
