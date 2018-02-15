@@ -163,7 +163,7 @@ class DebugBar implements Renderable
 
         if (!isset($this->modules_instances[$module])) {
             $this->modules_instances[$module] = new $module($this->storage);
-            if ($this->modules_instances[$module] instanceof AbstractModule) {
+            if (!$this->modules_instances[$module] instanceof AbstractModule) {
                 throw new InvalidModuleException($module);
             }
         }
