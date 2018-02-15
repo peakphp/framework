@@ -51,6 +51,10 @@ class DebugBar
 
     /**
      * Render and output the bar
+     *
+     * @throws \Peak\DebugBar\Exceptions\InvalidModuleException
+     * @throws \Peak\DebugBar\Exceptions\ModuleNotFoundException
+     * @throws \Peak\DebugBar\View\ViewNotFoundException
      */
     public function render()
     {
