@@ -80,7 +80,7 @@ if (!function_exists('isDev')) {
      *
      * @return boolean
      */
-    function isDev($env)
+    function isDev()
     {
         return isEnv('dev');
     }
