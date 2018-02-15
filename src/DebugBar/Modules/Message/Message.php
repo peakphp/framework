@@ -11,11 +11,11 @@ class Message extends AbstractModule implements LoggerInterface
     use LoggerTrait;
 
     /**
-     * Initialize block
+     * Initialize module
      */
     public function initialize()
     {
-        // nothing to do
+        // initiate messages array
         $this->data->messages = [];
     }
 
