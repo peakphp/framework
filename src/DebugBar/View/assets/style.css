@@ -227,7 +227,10 @@
         color: #222;
         vertical-align: top; }
         #pkdebugbar .pkdebugbar-window table td:first-child {
-          font-weight: bold; }
+          font-weight: bold;
+          width: 1px; }
+      #pkdebugbar .pkdebugbar-window table tr:nth-child(odd) td {
+        background-color: #eaeaea; }
       #pkdebugbar .pkdebugbar-window table.border-inside td {
         border-bottom: 1px solid #d8d8d8; }
     #pkdebugbar .pkdebugbar-window .pre-block {
@@ -236,7 +239,9 @@
       font-weight: normal;
       background: #f2f2f2;
       padding: 8px;
-      color: #222; }
+      color: #222;
+      width: auto;
+      overflow: auto; }
       #pkdebugbar .pkdebugbar-window .pre-block .line:hover {
         background: #f9f9f9; }
     #pkdebugbar .pkdebugbar-window .message {

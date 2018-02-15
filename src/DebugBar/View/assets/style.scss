@@ -319,7 +319,12 @@ $window-padding: 20px;
 
         &:first-child {
           font-weight: bold;
+          width:1px;
         }
+      }
+
+      tr:nth-child(odd) td {
+        background-color: lighten($bg-color-1, 2%);
       }
 
       &.border-inside td {
@@ -334,6 +339,8 @@ $window-padding: 20px;
       background: lighten($bg-color-1, 5%);
       padding:8px;
       color: $text-color;
+      width: auto;
+      overflow:auto;
       .line:hover {
         background: lighten($bg-color-1, 8%);
 
