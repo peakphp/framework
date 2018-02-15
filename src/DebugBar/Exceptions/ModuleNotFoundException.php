@@ -1,6 +1,6 @@
 <?php
 
-namespace Peak\DebugBar;
+namespace Peak\DebugBar\Exceptions;
 
 class ModuleNotFoundException extends \Exception
 {
