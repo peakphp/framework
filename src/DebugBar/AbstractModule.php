@@ -177,6 +177,14 @@ abstract class AbstractModule implements Renderable, Initializable
     }
 
     /**
+     * Execute before renderTitle(), renderLogo() and render()
+     */
+    public function preRender()
+    {
+        // nothing to do by default
+    }
+
+    /**
      * Render the module with DebugBar window layout
      *
      * @return string
