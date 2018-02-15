@@ -4,7 +4,8 @@ namespace Peak\DebugBar;
 
 use Peak\Common\Collection;
 use Peak\Common\Interfaces\Renderable;
-use Peak\Common\Session;
+use Peak\DebugBar\Exceptions\InvalidModuleException;
+use Peak\DebugBar\Exceptions\ModuleNotFoundException;
 use Peak\DebugBar\View\Layout;
 
 
@@ -95,6 +96,7 @@ class DebugBar implements Renderable
      *
      * @param $module
      * @return mixed
+     * @throws InvalidModuleException
      * @throws ModuleNotFoundException
      */
     public function getModule($module)
@@ -107,6 +109,7 @@ class DebugBar implements Renderable
      *
      * @return null|string
      * @throws View\ViewNotFoundException
+     * @throws InvalidModuleException
      * @throws ModuleNotFoundException
      */
     public function render()
@@ -117,6 +120,7 @@ class DebugBar implements Renderable
         foreach ($this->modules as $module) {
 
             $module_obj = $this->getModuleInstance($module);
+            $module_obj->preRender();
 
             if ($module_obj->isRenderDisabled()) {
                 continue;
@@ -139,8 +143,8 @@ class DebugBar implements Renderable
         return (new Layout(
             __DIR__.'/View/scripts/bar.layout.php',
                 $layout_content,
-                $content)
-            )->render();
+                $content
+            ))->render();
     }
 
     /**
@@ -148,6 +152,7 @@ class DebugBar implements Renderable
      *
      * @param $module
      * @return mixed
+     * @throws InvalidModuleException
      * @throws ModuleNotFoundException
      */
     protected function getModuleInstance($module)
@@ -158,6 +163,9 @@ class DebugBar implements Renderable
 
         if (!isset($this->modules_instances[$module])) {
             $this->modules_instances[$module] = new $module($this->storage);
+            if ($this->modules_instances[$module] instanceof AbstractModule) {
+                throw new InvalidModuleException($module);
+            }
         }
 
         return $this->modules_instances[$module];
