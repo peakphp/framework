@@ -239,5 +239,35 @@
       color: #222; }
       #pkdebugbar .pkdebugbar-window .pre-block .line:hover {
         background: #f9f9f9; }
+    #pkdebugbar .pkdebugbar-window .message {
+      padding: 5px 5px;
+      font-size: 13px;
+      margin-bottom: 3px; }
+      #pkdebugbar .pkdebugbar-window .message .message-level {
+        color: #b2b2b2;
+        float: right; }
+      #pkdebugbar .pkdebugbar-window .message.message-emergency {
+        color: #fff;
+        background: #cc0000;
+        font-weight: bold;
+        letter-spacing: 1px; }
+      #pkdebugbar .pkdebugbar-window .message.message-alert {
+        color: #fff;
+        background: #EF993A; }
+      #pkdebugbar .pkdebugbar-window .message.message-critical {
+        color: #ff6666;
+        font-weight: bold;
+        background: #fff; }
+      #pkdebugbar .pkdebugbar-window .message.message-error {
+        color: #cc0000;
+        background: #FFF0F0; }
+      #pkdebugbar .pkdebugbar-window .message.message-warning {
+        color: #E68213; }
+      #pkdebugbar .pkdebugbar-window .message.message-notice {
+        color: #000; }
+      #pkdebugbar .pkdebugbar-window .message.message-info {
+        color: #0080C0; }
+      #pkdebugbar .pkdebugbar-window .message.message-debug {
+        color: #666; }
 
 /*# sourceMappingURL=style.css.map */

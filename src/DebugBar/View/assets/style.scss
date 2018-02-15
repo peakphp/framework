@@ -341,5 +341,49 @@ $window-padding: 20px;
     }
 
 
+    .message {
+      padding:5px 5px;
+      font-size: 13px;
+      margin-bottom:3px;
+
+      .message-level {
+        color: darken($bg-color-1, 20%);
+        float:right;
+      }
+      &.message-emergency {
+        color: #fff;
+        background: #cc0000;
+        font-weight: bold;
+        letter-spacing: 1px;
+      }
+      &.message-alert {
+        color: #fff;
+        background: #EF993A;
+        //font-weight: bold;
+      }
+      &.message-critical {
+        color: #ff6666;
+        font-weight: bold;
+        background: #fff;
+      }
+      &.message-error {
+        color: #cc0000;
+        background: #FFF0F0;
+      }
+      &.message-warning {
+        color: #E68213;
+      }
+      &.message-notice {
+        color: #000;
+      }
+      &.message-info {
+        color: #0080C0;
+      }
+      &.message-debug {
+        color: #666;
+      }
+
+    }
+
   }
 }
