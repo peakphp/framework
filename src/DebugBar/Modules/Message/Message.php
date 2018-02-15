@@ -39,6 +39,16 @@ class Message extends AbstractModule implements LoggerInterface
     }
 
     /**
+     * Disable message if no message
+     */
+    public function preRender()
+    {
+        if (empty($this->data->messages)) {
+            $this->disableRender();
+        }
+    }
+
+    /**
      * Render tab title
      *
      * @return string
