@@ -288,7 +288,7 @@ $window-padding: 20px;
       padding:0;
       width:auto;
       display:block;
-      .hblock {
+      .h-block {
         padding: 6px 8px;
         background: $text-color;
         color: $bg-color-1;
@@ -321,6 +321,10 @@ $window-padding: 20px;
           font-weight: bold;
           width:1px;
         }
+
+        &.width-1 {
+          width:1px;
+        }
       }
 
       tr:nth-child(odd) td {
@@ -345,6 +349,13 @@ $window-padding: 20px;
         background: lighten($bg-color-1, 8%);
 
       }
+    }
+
+    .strong-block {
+      font-weight: bold;
+      background: lighten($bg-color-1, 8%);
+      display: inline-block;
+      padding:6px 8px;
     }
 
 

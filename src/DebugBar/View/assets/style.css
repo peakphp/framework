@@ -206,7 +206,7 @@
       padding: 0;
       width: auto;
       display: block; }
-      #pkdebugbar .pkdebugbar-window h1 .hblock, #pkdebugbar .pkdebugbar-window h2 .hblock, #pkdebugbar .pkdebugbar-window h3 .hblock, #pkdebugbar .pkdebugbar-window h4 .hblock, #pkdebugbar .pkdebugbar-window h5 .hblock, #pkdebugbar .pkdebugbar-window h6 .hblock {
+      #pkdebugbar .pkdebugbar-window h1 .h-block, #pkdebugbar .pkdebugbar-window h2 .h-block, #pkdebugbar .pkdebugbar-window h3 .h-block, #pkdebugbar .pkdebugbar-window h4 .h-block, #pkdebugbar .pkdebugbar-window h5 .h-block, #pkdebugbar .pkdebugbar-window h6 .h-block {
         padding: 6px 8px;
         background: #222;
         color: #e5e5e5;
@@ -229,6 +229,8 @@
         #pkdebugbar .pkdebugbar-window table td:first-child {
           font-weight: bold;
           width: 1px; }
+        #pkdebugbar .pkdebugbar-window table td.width-1 {
+          width: 1px; }
       #pkdebugbar .pkdebugbar-window table tr:nth-child(odd) td {
         background-color: #eaeaea; }
       #pkdebugbar .pkdebugbar-window table.border-inside td {
@@ -244,6 +246,11 @@
       overflow: auto; }
       #pkdebugbar .pkdebugbar-window .pre-block .line:hover {
         background: #f9f9f9; }
+    #pkdebugbar .pkdebugbar-window .strong-block {
+      font-weight: bold;
+      background: #f9f9f9;
+      display: inline-block;
+      padding: 6px 8px; }
     #pkdebugbar .pkdebugbar-window .message {
       padding: 5px 5px;
       font-size: 13px;
