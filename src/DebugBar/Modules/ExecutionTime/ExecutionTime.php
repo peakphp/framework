@@ -19,20 +19,19 @@ class ExecutionTime extends AbstractModule
     protected $raw_time = 0;
 
     /**
-     * @var string
+     * Default storage data
+     * @var array
      */
-    protected $suffix = 'ms';
-
-
     protected $default_storage_data = [
         'requests' => [],
+        'requests_avg' => [],
         'nb_requests' => 0,
         'average_request' => 0,
         'sum_requests' => 0,
-        'current_request' => ['uri' => '', 'time' => 0],
-        'last_request' => ['uri' => '', 'time' => 0],
-        'longest_request' => ['uri' => '', 'time' => 0],
-        'shortest_request' => ['uri' => '', 'time' => 0],
+        'current_request' => ['uri' => null, 'time' => 0],
+        'last_request' => ['uri' => null, 'time' => 0],
+        'longest_request' => ['uri' => null, 'time' => 0],
+        'shortest_request' => ['uri' => null, 'time' => 0],
     ];
 
     /**
@@ -40,6 +39,7 @@ class ExecutionTime extends AbstractModule
      */
     public function initialize()
     {
+
         if (isset($_SERVER['REQUEST_TIME_FLOAT'])) {
             $this->time = filter_var($_SERVER['REQUEST_TIME_FLOAT']);
         } elseif (isset($_SERVER['REQUEST_TIME'])) {
@@ -51,12 +51,7 @@ class ExecutionTime extends AbstractModule
         }
 
         if (is_numeric($this->time)) {
-            $this->time = round($this->raw_time, 4) * 1000;
-
-            if ($this->time >= 1000) {
-                $this->time = round($this->time / 1000, 3);
-                $this->suffix = 'sec';
-            }
+            $this->time = $this->formatDuration($this->time);
         }
 
         $this->data->time = $this->time;
@@ -71,7 +66,24 @@ class ExecutionTime extends AbstractModule
      */
     public function renderTitle()
     {
-        return $this->time.' '.$this->suffix;
+        return $this->time;
+    }
+
+    /**
+     * Format duration
+     *
+     * @param integer $sec
+     * @return string
+     */
+    protected function formatDuration($sec)
+    {
+        $suffix = 'ms';
+        $time = round($this->raw_time, 4) * 1000;
+        if ($time >= 1000) {
+            $time = round($this->time / 1000, 3);
+            $suffix = 'sec';
+        }
+        return $time.' '.$suffix;
     }
 
     /**
@@ -89,49 +101,60 @@ class ExecutionTime extends AbstractModule
             if (!empty($storage['current_request'])) {
                 $storage['last_request'] = [
                     'uri' => $storage['current_request']['uri'],
-                    'time' => $storage['current_request']['time'],
+                    'time' => $this->formatDuration($storage['current_request']['time']),
                 ];
             }
             $storage['current_request'] = [
                 'uri' => $request_uri,
-                'time' => $this->raw_time,
+                'time' => $this->time,
             ];
         }
 
         // count and sum all requests
         foreach ($storage['requests'] as $uri => $uri_times) {
-            if (empty($storage['shortest_request'])) {
+            if (is_null($storage['shortest_request']['uri'])) {
                 $storage['shortest_request'] = $storage['current_request'];
             }
-            if (empty($storage['longest_request'])) {
+            if (is_null($storage['longest_request']['uri'])) {
                 $storage['longest_request'] = $storage['current_request'];
             }
 
-            sort($storage['requests'][$uri]);
+            sort($uri_times);
 
-            if ($storage['requests'][$uri][0] < $storage['shortest_request']['time']) {
+            if ($uri_times[0] < $storage['shortest_request']['time']) {
                 $storage['shortest_request'] = [
                     'uri' => $uri,
-                    'time' => $storage['requests'][$uri][0]
+                    'time' => $this->formatDuration($uri_times[0])
                 ];
             }
 
-            rsort($storage['requests'][$uri]);
+            rsort($uri_times);
 
-            if ($storage['requests'][$uri][0] > $storage['longest_request']['time']) {
+            if ($uri_times[0] > $storage['longest_request']['time']) {
                 $storage['longest_request'] = [
                     'uri' => $uri,
-                    'time' => $storage['requests'][$uri][0]
+                    'time' => $this->formatDuration($uri_times[0])
                 ];
             }
 
             $storage['nb_requests'] += count($uri_times);
             $storage['sum_requests'] += array_sum($uri_times);
+
+            $storage['requests_avg'][$request_uri] = [
+                'total' => array_sum($uri_times),
+                'count' => count($uri_times),
+                'average' => 0,
+            ];
+
+            $storage['requests_avg'][$request_uri]['average'] = $this->formatDuration(
+                $storage['requests_avg'][$request_uri]['total'] / $storage['requests_avg'][$request_uri]['count']
+            );
+            $storage['requests_avg'][$request_uri]['total'] += $this->raw_time;
         }
 
         // average requests
         if ($storage['sum_requests'] > 0) {
-            $storage['average_request'] = $storage['sum_requests'] / $storage['nb_requests'];
+            $storage['average_request'] = $this->formatDuration($storage['sum_requests'] / $storage['nb_requests']);
         }
 
         $this->saveToStorage($storage);
