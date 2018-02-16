@@ -29,8 +29,6 @@ class Session extends AbstractModule
             'save_path' => realpath(session_save_path()),
             'cookie_params' => session_get_cookie_params(),
         ];
-
-        print_r(session_get_cookie_params());
     }
 
     /**
