@@ -32,7 +32,7 @@ class ArrayTable implements Renderable
             return 'No data';
         }
 
-        $content = '<table class="border-inside">';
+        $content = '<table class="table-full-width table-border-inside">';
 
         foreach ($this->data as $key => $val) {
             $content .= '<tr>';

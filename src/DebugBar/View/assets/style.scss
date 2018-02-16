@@ -309,8 +309,16 @@ $window-padding: 20px;
 
 
     table {
-      width: 100%;
+      width: auto;
       background: lighten($bg-color-1, 5%);
+
+      &.table-full-width {
+        width: 100%;
+      }
+      &.table-border-inside td {
+        border-bottom:1px solid darken($bg-color-1, 5%);
+      }
+
       td {
         font-size: 12px;
         padding:0 6px;
@@ -329,10 +337,6 @@ $window-padding: 20px;
 
       tr:nth-child(odd) td {
         background-color: lighten($bg-color-1, 2%);
-      }
-
-      &.border-inside td {
-        border-bottom:1px solid darken($bg-color-1, 5%);
       }
     }
 

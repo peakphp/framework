@@ -1,5 +1,5 @@
 <h1>Application Configurations</h1>
-<table class="border-inside">
+<table class="table-full-width table-border-inside">
 <?php
     $part = '';
     foreach ($view->config as $name => $val) {
@@ -11,7 +11,7 @@
         if (is_bool($val)) {
             $val = ($val === true) ? 'true' : 'false';
         }
-        echo '<tr><td style="width:1px;font-weight:bold;">'.$name.'</td><td>'.$val.'</td></tr>';
+        echo '<tr><td class="width-1"><strong>'.$name.'</strong></td><td>'.$val.'</td></tr>';
     }
 ?>
 </table>

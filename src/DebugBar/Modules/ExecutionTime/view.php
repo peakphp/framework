@@ -31,7 +31,7 @@
 foreach ($view->stats['requests_avg'] as $uri => $stats) {
     echo '<tr>
             <td class="width-1"><strong>'.$uri.'</strong></td>
-            <td class="width-1">'.$stats['average'].'</td>
+            <td class="">'.$stats['average'].'</td>
             <td class="width-1">'.$stats['count'].'</td>
           </tr>';
 }

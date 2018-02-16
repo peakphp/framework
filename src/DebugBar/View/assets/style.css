@@ -219,8 +219,12 @@
       display: block;
       width: auto; }
     #pkdebugbar .pkdebugbar-window table {
-      width: 100%;
+      width: auto;
       background: #f2f2f2; }
+      #pkdebugbar .pkdebugbar-window table.table-full-width {
+        width: 100%; }
+      #pkdebugbar .pkdebugbar-window table.table-border-inside td {
+        border-bottom: 1px solid #d8d8d8; }
       #pkdebugbar .pkdebugbar-window table td {
         font-size: 12px;
         padding: 0 6px;
@@ -233,8 +237,6 @@
           width: 1px; }
       #pkdebugbar .pkdebugbar-window table tr:nth-child(odd) td {
         background-color: #eaeaea; }
-      #pkdebugbar .pkdebugbar-window table.border-inside td {
-        border-bottom: 1px solid #d8d8d8; }
     #pkdebugbar .pkdebugbar-window .pre-block {
       font-size: 12px;
       font-family: monospace;
