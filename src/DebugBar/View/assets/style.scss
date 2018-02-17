@@ -319,6 +319,16 @@ $window-padding: 20px;
         border-bottom:1px solid darken($bg-color-1, 5%);
       }
 
+      th {
+        text-align: left;
+        font-size: 14px;
+        font-weight: bold;
+        color: $text-color;
+        background: transparent;
+        border-bottom:1px solid darken($bg-color-1, 20%);
+        padding:8px 6px;
+      }
+
       td {
         font-size: 12px;
         padding:0 6px;
