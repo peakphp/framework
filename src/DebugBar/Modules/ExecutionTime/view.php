@@ -4,7 +4,7 @@
 <span class="strong-block"><?php echo $view->stats['current_request']['time']; ?></span>
 <span class="strong-block"><?php echo $view->stats['current_request']['uri']; ?></span>
 
-<?php if (!empty($view->stats['last_request'])) : ?>
+<?php if (!empty($view->stats['last_request']['uri'])) : ?>
     <h3><div class="h-block">Last request</div></h3>
     <span class="strong-block"><?php echo $view->stats['last_request']['time']; ?></span>
     <span class="strong-block"><?php echo $view->stats['last_request']['uri']; ?></span>
@@ -26,14 +26,23 @@
 <?php endif; ?>
 
 <h3><div class="h-block">Stats</div></h3>
-<table style="width:auto;">
-<?php
-foreach ($view->stats['requests_avg'] as $uri => $stats) {
-    echo '<tr>
-            <td class="width-1"><strong>'.$uri.'</strong></td>
-            <td class="">'.$stats['average'].'</td>
-            <td class="width-1">'.$stats['count'].'</td>
-          </tr>';
-}
-?>
+<table style="table-border-line">
+    <thead>
+    <tr>
+        <th>URI</th>
+        <th>Average</th>
+        <th>Nb. request</th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php
+        foreach ($view->stats['requests_avg'] as $uri => $stats) {
+            echo '<tr>
+                    <td class="width-1"><strong>'.$uri.'</strong></td>
+                    <td class="">'.$stats['average'].'</td>
+                    <td class="width-1">'.$stats['count'].'</td>
+                  </tr>';
+        }
+    ?>
+    </tbody>
 </table>

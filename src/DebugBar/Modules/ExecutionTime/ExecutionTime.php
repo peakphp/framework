@@ -98,15 +98,15 @@ class ExecutionTime extends AbstractModule
             $request_uri = filter_var($_SERVER['REQUEST_URI']);
             $storage['requests'][$request_uri][] = $this->raw_time;
 
-            if (!empty($storage['current_request'])) {
+            if (!is_null($storage['current_request']['uri'])) {
                 $storage['last_request'] = [
                     'uri' => $storage['current_request']['uri'],
-                    'time' => $this->formatDuration($storage['current_request']['time']),
+                    'time' => $this->formatDuration($this->raw_time),
                 ];
             }
             $storage['current_request'] = [
                 'uri' => $request_uri,
-                'time' => $this->time,
+                'time' => $this->formatDuration($this->time),
             ];
         }
 
