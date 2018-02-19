@@ -7,6 +7,11 @@ use Peak\DebugBar\AbstractModule;
 class Headers extends AbstractModule
 {
     /**
+     * @var bool
+     */
+    protected $use_default_logo = true;
+
+    /**
      * Initialize module
      */
     public function initialize()
