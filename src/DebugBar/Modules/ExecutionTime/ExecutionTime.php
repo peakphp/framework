@@ -48,10 +48,7 @@ class ExecutionTime extends AbstractModule
 
         if (is_numeric($this->time)) {
             $this->raw_time = microtime(true) - $this->time;
-        }
-
-        if (is_numeric($this->time)) {
-            $this->time = $this->formatDuration($this->time);
+            $this->time = $this->formatDuration($this->raw_time);
         }
 
         $this->data->time = $this->time;
@@ -78,9 +75,9 @@ class ExecutionTime extends AbstractModule
     protected function formatDuration($sec)
     {
         $suffix = 'ms';
-        $time = round($this->raw_time, 4) * 1000;
+        $time = round($sec, 4) * 1000;
         if ($time >= 1000) {
-            $time = round($this->time / 1000, 3);
+            $time = round($time / 1000, 3);
             $suffix = 'sec';
         }
         return $time.' '.$suffix;
