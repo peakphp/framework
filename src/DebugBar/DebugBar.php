@@ -25,6 +25,7 @@ class DebugBar implements Renderable
         \Peak\DebugBar\Modules\Files\Files::class,
         \Peak\DebugBar\Modules\Session\Session::class,
         \Peak\DebugBar\Modules\Inputs\Inputs::class,
+        \Peak\DebugBar\Modules\Headers\Headers::class,
         \Peak\DebugBar\Modules\UserConstants\UserConstants::class,
     ];
 

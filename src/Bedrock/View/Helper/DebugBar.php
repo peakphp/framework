@@ -26,6 +26,7 @@ class DebugBar
         \Peak\Bedrock\View\Helper\DebugBar\Modules\ViewVars\ViewVars::class,
         \Peak\DebugBar\Modules\Session\Session::class,
         \Peak\DebugBar\Modules\Inputs\Inputs::class,
+        \Peak\DebugBar\Modules\Headers\Headers::class,
         \Peak\Bedrock\View\Helper\DebugBar\Modules\AppContainer\AppContainer::class,
         \Peak\Bedrock\View\Helper\DebugBar\Modules\AppConfig\AppConfig::class,
         \Peak\DebugBar\Modules\UserConstants\UserConstants::class,
