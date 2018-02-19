@@ -343,6 +343,15 @@ $window-padding: 20px;
         &.width-1 {
           width:1px;
         }
+        &.width-100 {
+          width:100px;
+        }
+        &.width-150 {
+          width:150px;
+        }
+        &.width-200 {
+          width:200px;
+        }
       }
 
       tr:nth-child(odd) td {

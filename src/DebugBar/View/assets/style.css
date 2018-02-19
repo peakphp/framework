@@ -243,6 +243,12 @@
           width: 1px; }
         #pkdebugbar .pkdebugbar-window table td.width-1 {
           width: 1px; }
+        #pkdebugbar .pkdebugbar-window table td.width-100 {
+          width: 100px; }
+        #pkdebugbar .pkdebugbar-window table td.width-150 {
+          width: 150px; }
+        #pkdebugbar .pkdebugbar-window table td.width-200 {
+          width: 200px; }
       #pkdebugbar .pkdebugbar-window table tr:nth-child(odd) td {
         background-color: #eaeaea; }
     #pkdebugbar .pkdebugbar-window .pre-block {
