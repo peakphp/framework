@@ -12,6 +12,21 @@ class ArrayTable implements Renderable
     protected $data = [];
 
     /**
+     * @var string
+     */
+    protected $table_class = 'table-full-width table-border-inside';
+
+    /**
+     * @var string
+     */
+    protected $first_column_class = '';
+
+    /**
+     * @var string
+     */
+    protected $last_column_class = '';
+
+    /**
      * ArrayTable constructor.
      *
      * @param array $data
@@ -19,6 +34,42 @@ class ArrayTable implements Renderable
     public function __construct($data)
     {
         $this->data = $data;
+    }
+
+    /**
+     * Set table class
+     *
+     * @param string $class
+     * @return $this
+     */
+    public function setTableClass($class)
+    {
+        $this->table_class = $class;
+        return $this;
+    }
+
+    /**
+     * Set the first column td class
+     *
+     * @param string $class
+     * @return $this
+     */
+    public function setFirstColumnClass($class)
+    {
+        $this->first_column_class = $class;
+        return $this;
+    }
+
+    /**
+     * Set the last column td class
+     *
+     * @param string $class
+     * @return $this
+     */
+    public function setLastColumnClass($class)
+    {
+        $this->last_column_class = $class;
+        return $this;
     }
 
     /**
@@ -32,25 +83,39 @@ class ArrayTable implements Renderable
             return 'No data';
         }
 
-        $content = '<table class="table-full-width table-border-inside">';
+        $content = '<table class="'.$this->table_class.'">';
 
         foreach ($this->data as $key => $val) {
             $content .= '<tr>';
             if (is_array($val)) {
                 $content .= '<td colspan="2">'.$key.'</td></tr>';
                 foreach ($val as $vkey => $item) {
-                    $content .= '<tr><td>&nbsp;&nbsp;└&nbsp;'.$vkey.'</td><td>'.$this->formatVal($item).'</td></tr>';
+                    $vkey = '&nbsp;&nbsp;└&nbsp;'.$vkey;
+                    $content .= '<tr>'.$this->renderTdRow($vkey, $item).'</tr>';
                 }
             } else {
-                $content .= '<td>'.$key.'</td><td>'.$this->formatVal($val).'</td>';
+                $content .= $this->renderTdRow($key, $val);
             }
-
             $content .= '</tr>';
         }
 
         $content .= '</table>';
 
         return $content;
+    }
+
+    /**
+     * Render a table row
+     *
+     * @param string $key
+     * @param mixed $val
+     * @return string
+     */
+    protected function renderTdRow($key, $val)
+    {
+        return '
+            <td class="'.$this->first_column_class.'">'.$key.'</td>
+            <td class="'.$this->last_column_class.'">'.$this->formatVal($val).'</td>';
     }
 
     /**
