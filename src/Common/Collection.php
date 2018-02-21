@@ -288,17 +288,23 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
      *
      * @param  array $a      Array to merge to the current collection
      * @param  array|null $b If specified, $b will be merge into $a and replace current collection
+     * @return array
      */
     public function mergeRecursiveDistinct($a, $b = null, $get_result = false)
     {
         if (!isset($b)) {
-            $this->items = $this->arrayMergeRecursiveDistinct($this->items, $a);
-        } else {
-            if (!$get_result) {
-                $this->items = $this->arrayMergeRecursiveDistinct($a, $b);
-            } else {
-                return $this->arrayMergeRecursiveDistinct($a, $b);
-            }
+            $temp = $a;
+            $a = $this->items;
+            $b = $temp;
         }
+
+        $items = $this->arrayMergeRecursiveDistinct($a, $b);
+
+        if ($get_result) {
+            return $items;
+        }
+
+        $this->items = $items;
+        return null;
     }
 }
