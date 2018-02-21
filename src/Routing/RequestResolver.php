@@ -35,7 +35,7 @@ class RequestResolver
 
         if ($route !== false) {
             return $route;
-        } elseif(!$auto_routing && $this->request->request_uri !== '/') {
+        } elseif (!$auto_routing && $this->request->request_uri !== '/') {
             return null;
         }
 
