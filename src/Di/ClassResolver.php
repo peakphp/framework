@@ -53,13 +53,12 @@ class ClassResolver
         $method = '__construct';
 
         if (is_array($class)) {
-            // treat $class as a callback
-            if (count($class) == 2) {
-                $method = $class[1];
-                $class  = $class[0];
-            } else {
+            if (count($class) != 2) {
                 throw new InvalidArgumentException('Expecting a valid callback definition');
             }
+            // treat $class as a callback
+            $method = $class[1];
+            $class  = $class[0];
         }
 
         $dependencies = $this->inspector->inspect($class, $method);
