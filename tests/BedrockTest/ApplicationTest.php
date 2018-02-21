@@ -4,6 +4,8 @@ use PHPUnit\Framework\TestCase;
 
 use Peak\Bedrock\Application;
 use Peak\Bedrock\Application\Config;
+use Peak\Bedrock\Application\Exceptions\MissingContainerException;
+use Peak\Bedrock\Application\Exceptions\InstanceNotFoundException;
 use Peak\Di\Container;
 use Peak\Common\Collection;
 
@@ -33,10 +35,11 @@ class ApplicationTest extends TestCase
         try {
             $test = Application::get('test');
         } catch (Exception $e) {
+            $this->assertTrue($e instanceof MissingContainerException);
             $error = $e->getMessage();
         }
         $this->assertTrue(isset($error));
-        $this->assertTrue($error === 'Peak\Bedrock\Application has no container');
+        $this->assertTrue($error === 'Application has no container');
     }
 
     /**
@@ -51,10 +54,11 @@ class ApplicationTest extends TestCase
         try {
             $test = Application::get('test');
         } catch (Exception $e) {
+            $this->assertTrue($e instanceof InstanceNotFoundException);
             $error = $e->getMessage();
         }
         $this->assertTrue(isset($error));
-        $this->assertTrue($error === 'Peak\Bedrock\Application container does not have test');
+        $this->assertTrue($error === 'Application container does not have test');
     }
 
     /**
