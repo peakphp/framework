@@ -68,7 +68,6 @@ class RequestResolver
         $route->action       = array_shift($request_block);
         $route->action       = (empty($route->action)) ? '' : $route->action;
         $route->params       = $request_block;
-        $route->params_assoc = $this->paramsToAssoc($route->params);
 
         return $route;
     }
@@ -90,29 +89,5 @@ class RequestResolver
             }
         }
         return false;
-    }
-
-    /**
-     * Transform params array to params associate array
-     * To work, we need a pair number of params to transform it to key/val array
-     *
-     * @return  array
-     */
-    protected function paramsToAssoc($params)
-    {
-        $i = 0;
-        $params_assoc = [];
-
-        foreach ($params as $v) {
-            if ($i == 0) {
-                $key = $v;
-                ++$i;
-            } else {
-                $params_assoc[$key] = $v;
-                $i = 0;
-            }
-        }
-
-        return $params_assoc;
     }
 }

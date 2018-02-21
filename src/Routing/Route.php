@@ -48,12 +48,6 @@ class Route
     public $params = [];
 
     /**
-     * Actions param(s) associative array
-     * @var array
-     */
-    public $params_assoc = [];
-
-    /**
      * Check if match the current route
      *
      * @param  string  $controller the controller name
