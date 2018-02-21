@@ -147,7 +147,7 @@ class TimeExpression
         foreach ($tokens as $token_name => $token) {
             $clock[$token_name] = '00';
             if ($time >= $token) {
-                $mod = fmod ($time, $token);
+                $mod = fmod($time, $token);
                 $time -= $mod;
                 $clock[$token_name] = round($time / $token);
                 $time = $mod;
