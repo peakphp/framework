@@ -44,7 +44,7 @@ abstract class AbstractProcessor
         } elseif (is_string($pipe) && class_exists($pipe)) {
             // process pipe class name
             return $this->processPipeClassName($pipe, $payload);
-        } elseif(is_object($pipe)) {
+        } elseif (is_object($pipe)) {
             // process pipe object instance
             return $this->processPipeObject($pipe, $payload);
         } elseif (is_callable($pipe)) {
