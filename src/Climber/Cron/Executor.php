@@ -3,8 +3,8 @@
 namespace Peak\Climber\Cron;
 
 use Peak\Climber\Application;
-use Peak\Climber\Cron\Exception\DatabaseNotFoundException;
-use Peak\Climber\Cron\Exception\TablesNotFoundException;
+use Peak\Climber\Cron\Exceptions\DatabaseNotFoundException;
+use Peak\Climber\Cron\Exceptions\TablesNotFoundException;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\Process\Process;
 use Symfony\Component\Process\Exception\ProcessFailedException;
@@ -112,7 +112,7 @@ class Executor
 
         if ($cron['repeat'] > 1) {
             --$cron['repeat'];
-        } elseif($cron['repeat'] == 1) {
+        } elseif ($cron['repeat'] == 1) {
             $cron['repeat'] = -1;
         }
 
