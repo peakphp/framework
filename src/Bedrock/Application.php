@@ -4,6 +4,8 @@ namespace Peak\Bedrock;
 
 use Peak\Bedrock\Application\Config;
 use Peak\Bedrock\Application\ConfigResolver;
+use Peak\Bedrock\Application\Exceptions\InstanceNotFoundException;
+use Peak\Bedrock\Application\Exceptions\MissingContainerException;
 use Peak\Bedrock\Application\Kernel;
 use Peak\Bedrock\Application\Routing;
 use Psr\Container\ContainerInterface;
@@ -80,16 +82,19 @@ class Application
     /**
      * Check application container
      *
-     * @param  string|null $instance
+     * @param null $instance
+     * @return null
+     * @throws InstanceNotFoundException
+     * @throws MissingContainerException
      */
     protected static function containerCheck($instance = null)
     {
         if (!(self::$container instanceof ContainerInterface)) {
-            throw new Exception(__CLASS__.' has no container');
+            throw new MissingContainerException();
         }
         if (isset($instance)) {
             if (!self::$container->has($instance) && !self::$container->hasAlias($instance)) {
-                throw new Exception(__CLASS__.' container does not have '.$instance);
+                throw new InstanceNotFoundException($instance);
             }
         }
 
