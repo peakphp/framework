@@ -99,7 +99,7 @@ class ClimberCronDelCommand extends CronCommand
         // ask confirmation if no --force option
         if ($force !== true) {
             $io = new SymfonyStyle($input, $output);
-            $answer = $io->confirm('Are you sure about deleting cron #'.$id.' ('.$name.')',false);
+            $answer = $io->confirm('Are you sure about deleting cron #'.$id.' ('.$name.')', false);
         }
 
         // delete the cron
