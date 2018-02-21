@@ -6,4 +6,3 @@ foreach ($view->messages as $message) {
             <div class="message-level">'.$message->level.'</div>
           </div>';
 }
-?>

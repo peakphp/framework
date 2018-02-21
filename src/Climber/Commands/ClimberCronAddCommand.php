@@ -34,7 +34,7 @@ class ClimberCronAddCommand extends CronCommand
                 new InputDefinition([
                     new InputOption('name', null, InputOption::VALUE_REQUIRED, 'Cron internal name'),
                     new InputOption('sys', 's', InputOption::VALUE_NONE, 'Cron command is a system command'),
-                    new InputOption('repeat', 'r', InputOption::VALUE_OPTIONAL,'Indicate if command should be repeatable', '-1'),
+                    new InputOption('repeat', 'r', InputOption::VALUE_OPTIONAL, 'Indicate if command should be repeatable', '-1'),
                     new InputOption('interval', 'i', InputOption::VALUE_REQUIRED, 'Indicate the interval in second between repetition if apply.'),
                     new InputOption('cmd', 'c', InputOption::VALUE_REQUIRED, 'The command to execute.'),
                     new InputOption('initial-delay', 'd', InputOption::VALUE_REQUIRED, 'Initial delay (this delay is added to cronjob next_execution field', 0),

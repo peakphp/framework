@@ -154,7 +154,7 @@ class TimeExpression
             }
         }
 
-        if($truncated && $clock['hour'] === '00') {
+        if ($truncated && $clock['hour'] === '00') {
             unset($clock['hour']);
         }
 
@@ -393,7 +393,7 @@ class TimeExpression
             }
             $mod = 0;
             if ($time & $value) {
-                $mod = fmod ($time, $value);
+                $mod = fmod($time, $value);
                 $time -= $mod;
             }
             $div = round($time / $value);
