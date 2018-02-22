@@ -1,8 +1,9 @@
 VERSION 2.25.0
 --------------
-Release Date: ?
+Release Date: 2018-02-21
 
 > Warning! This version contains breaking changes with 2.24.x and below [BC]
+> Also, composer packages prefix has been renamed from peakphp/* to peak/*
 
  - deleted deprecated Peak\Bedrock\View\Helper\Debug
  - added Peak\Common\Session and removed Peak\Config\Session
