@@ -6,4 +6,3 @@ This component provide a flexible and extensible debug bar for your project deve
 ```
 $ composer require peak/debugbar
 ```
-
