@@ -156,6 +156,7 @@ class CronEntity
                     return 'fail';
             }
         }
+        return 'n/a';
     }
 
     /**
