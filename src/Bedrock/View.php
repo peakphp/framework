@@ -2,6 +2,8 @@
 
 namespace Peak\Bedrock;
 
+use Peak\Bedrock\View\Exceptions\EngineNotSetException;
+use Peak\Bedrock\View\Exceptions\HelperNotFoundException;
 use Peak\Bedrock\View\Header;
 use Peak\Common\ClassFinder;
 use \Exception;
@@ -244,9 +246,10 @@ class View
     /**
      * Render Controller Action View file with the current rendering engine
      *
-     * @param  string $file
-     * @param  string $path
-     * @return string or array   return array of view files when layout is used
+     * @param $file
+     * @param string|null $path
+     * @throws EngineNotSetException
+     * @throws Exception
      */
     public function render($file, $path = null)
     {
@@ -256,7 +259,7 @@ class View
         }
         // check if engine is set
         if (!is_object($this->engine)) {
-            throw new Exception('View rendering engine not set');
+            throw new EngineNotSetException();
         }
         // check if we got http header
         if (is_object($this->header)) {
@@ -283,9 +286,10 @@ class View
     /**
      * Load helpers objects method and return helper obj
      *
-     * @params string $name
-     * @params array  $params
+     * @param null $name
+     * @param array $params
      * @return mixed
+     * @throws HelperNotFoundException
      */
     public function helper($name = null, $params = [])
     {
@@ -299,7 +303,7 @@ class View
         ]))->findLast(ucfirst($name));
 
         if ($helper === null) {
-            throw new Exception('View helper ['.$name.'] not found');
+            throw new HelperNotFoundException($name);
         }
 
         $this->helpers[$name] = Application::create($helper, $params);
