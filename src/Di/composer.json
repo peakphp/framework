@@ -1,5 +1,5 @@
 {
-    "name": "peakphp/di",
+    "name": "peak/di",
     "description": "Peak Dependency Injection Container package.",
     "keywords": ["peak", "di", "dependency injection", "container"],
     "license": "BSD-3-Clause",
