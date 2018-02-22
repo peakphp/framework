@@ -16,6 +16,7 @@ Release Date: ?
  - added function interpolate() in Peak\Common\helpers.php
  - added Peak\Bedrock\Application\Exceptions\ InstanceNotFoundException and MissingContainerException
  - added new mode to Peak\Common\ExceptionLogger
+ - added Peak\Bedrock\View\Exceptions\ EngineNotSetException and HelperNotFoundException
 
 VERSION 2.24.0
 --------------
