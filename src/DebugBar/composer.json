@@ -16,7 +16,7 @@
     ],
     "require": {
         "php": ">=5.6.4",
-        "peak/common" : "2.25.0",
+        "peak/common" : "2.26.0",
         "psr/container": "^1.0",
         "psr/log": "^1.0"
     },
@@ -27,7 +27,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "2.25-dev"
+            "dev-master": "2.26-dev"
         }
     },
     "minimum-stability": "dev",
