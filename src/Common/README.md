@@ -4,6 +4,6 @@ This component contains a bunch of usefull tools like Collections, TextUtils, Pa
 ## Installation outside framework
 
 ```
-$ composer require peakphp/common
+$ composer require peak/common
 ```
 
