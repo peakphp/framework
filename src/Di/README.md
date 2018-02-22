@@ -5,7 +5,7 @@ This component allows you to standardize and centralize the way objects are cons
 ## Installation outside framework
 
 ```
-$ composer require peakphp/di
+$ composer require peak/di
 ```
 
 See [documentation](https://peak.readthedocs.io/en/latest/components/di/introduction/) for more infos
