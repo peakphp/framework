@@ -1,6 +1,7 @@
 <?php
 use PHPUnit\Framework\TestCase;
 
+use Peak\Common\Collection;
 use Peak\Pipelines\Pipeline;
 use Peak\Pipelines\Exceptions\MissingPipeInterfaceException;
 use Peak\Pipelines\Exceptions\InvalidPipeException;
@@ -75,17 +76,21 @@ class PipelineTest extends TestCase
      * Create a simple pipeline with class using a default processor 
      */
     public function testPipeInterfaceAndDi()
-    {   
-        $processor = new DefaultProcessor(new Container());
+    {
+        $container = new Container();
+        $container->add(new Pipe3(new Collection(['foo' => 'bar'])));
 
-        $pipeline = (new Pipeline([], $processor))
-            ->add(Pipe3::class);
+        $processor = new DefaultProcessor($container);
+        $pipeline = (new Pipeline([
+            Pipe3::class
+        ], $processor));
 
         $payload = 0;
 
         $payload = $pipeline->process($payload);
 
-        $this->assertTrue($payload instanceof \Peak\Common\Collection);
+        $this->assertTrue($payload instanceof Collection);
+        $this->assertTrue($payload instanceof Collection);
     }
 
     /**
