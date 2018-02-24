@@ -1,6 +1,9 @@
 VERSION 2.26.0
 --------------
-Release Date: ?
+Release Date: 2018-02-24
+
+ - simplified Peak\Pipelines\AbstractProcessor container support
+ - added composer.json to Peak\Pipelines component
 
 VERSION 2.25.0
 --------------
