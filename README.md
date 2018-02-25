@@ -9,35 +9,22 @@
 
 > **Note:** This repository contains the core code of the Peak framework. If you want to build an application using Peak, visit the main [Peak repository](https://github.com/peakphp/peak).
 
-### About Peak Framework v2.x
+### About Peak Framework [v2.x](https://github.com/peakphp/framework/tree/2.27.0) (STABLE)
+
+### About Peak Framework v3.x (NOT STABLE) and currently under development in master branch
 
 Requirements:
 
-    - PHP >= 5.6.4
+    - PHP >= 7.1.3
     - PDO PHP Extension
     - Mbstring PHP Extension
     - Tokenizer PHP Extension
-
-### Peak components
-    - Dependency Injection
-    - Events Dispatcher
-    - App Kernel
-    - App Modules Kernel
-    - Console application
-    - Console Cron jobs system
-    - Ownership and Permissions
-    - Role-based access control
-    - Templating
-    - Form builder and validator
-    - Validators
-    - Pipelines
-    - Translation
-    - Configuration files
 
 ### External components
 
    - [symfony/console](https://github.com/symfony/console)
    - [symfony/process](https://github.com/symfony/process)
+   - [symfony/yaml](https://github.com/symfony/yaml)
    - [doctrine/dbal](https://github.com/doctrine/dbal)
    
 ### Usefull links:
@@ -52,11 +39,6 @@ There is many ways you can help:
 - Pull requests / bug submissions
 - Documentation
 - Contribute via my Patreon page: [https://www.patreon.com/francoislajoie](https://www.patreon.com/francoislajoie)
-
-### Version 1
-
-[Older version](https://github.com/1Franck/Peak) require PHP 5.2 or greater but is no more supported. 
-Both version 1 & 2 are compatible with PHP 7 but we strongly recommend to use version 2.x.
 
 
 
