@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Common;
 
-use \Exception;
+use Exception;
 
 /**
  * Service Locator
@@ -21,7 +23,7 @@ class ServiceLocator
      * @param string   $name
      * @param callable $closure
      */
-    public function __set($name, callable $closure)
+    public function __set(string $name, callable $closure): void
     {
         $this->register($name, $closure);
     }
@@ -29,10 +31,10 @@ class ServiceLocator
     /**
      * shortcut for getService()
      *
-     * @param string   $name
-     * @param callable $closure
+     * @param string $name
+     * @throws Exception
      */
-    public function __get($name)
+    public function __get(string $name)
     {
         return $this->getService($name);
     }
@@ -44,7 +46,7 @@ class ServiceLocator
      * @param  callable $closure
      * @return $this
      */
-    public function register($name, callable $closure)
+    public function register(string $name, callable $closure): ServiceLocator
     {
         $this->services[$name] = $closure;
         return $this;
@@ -55,8 +57,9 @@ class ServiceLocator
      *
      * @param  string $name
      * @return mixed  return the result of executed closure
+     * @throws Exception
      */
-    public function getService($name)
+    public function getService(string $name)
     {
         if (!array_key_exists($name, $this->services)) {
             throw new Exception('The service "'.$name.'" does not exists.');
@@ -70,7 +73,7 @@ class ServiceLocator
      *
      * @return array
      */
-    public function listServices()
+    public function listServices(): array
     {
         return array_keys($this->services);
     }
@@ -81,7 +84,7 @@ class ServiceLocator
      * @param  $name
      * @return boolean
      */
-    public function hasService($name)
+    public function hasService(string $name): bool
     {
         return array_key_exists($name, $this->services);
     }
