@@ -1,15 +1,22 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Peak\Common;
 
 use \Exception;
 
 class ExceptionLogger
 {
+
     const MODE_NORMAL = 1;
     const MODE_VERBOSE = 2;
     const MODE_CLOSURE = 3;
     const MODE_CUSTOM = 4;
 
+    /**
+     * @var array
+     */
     protected $modes = [
         self::MODE_NORMAL => 'normalContent',
         self::MODE_VERBOSE => 'verboseContent',
@@ -47,13 +54,14 @@ class ExceptionLogger
 
     /**
      * Constructor
+     *
      * @param Exception $exception
      * @param string $filepath
      * @param int $mode
      * @param mixed $custom
      * @throws Exception
      */
-    public function __construct(Exception $exception, $filepath, $mode = self::MODE_NORMAL, $custom = null)
+    public function __construct(Exception $exception, string $filepath, int $mode = self::MODE_NORMAL, $custom = null)
     {
         $this->exception = $exception;
         $this->filepath  = $filepath;
@@ -67,7 +75,7 @@ class ExceptionLogger
     /**
      * Default content
      */
-    protected function initDefaultContent()
+    protected function initDefaultContent(): void
     {
         $this->default_content = [
             'datetime' => date('Y-m-d H:i:s'),
@@ -84,7 +92,7 @@ class ExceptionLogger
      *
      * @throws Exception
      */
-    protected function log()
+    protected function log(): void
     {
         if (!isset($this->modes[$this->mode])) {
             throw new Exception(__CLASS__.' mode is invalid');
@@ -98,10 +106,11 @@ class ExceptionLogger
 
     /**
      * Write content
+     *
      * @param $content
      * @throws Exception
      */
-    protected function write($content)
+    protected function write(string $content): void
     {
         if ( (!file_exists($this->filepath) && !is_writable(dirname($this->filepath))) ||
             (file_exists($this->filepath) && !is_writable($this->filepath))) {
@@ -113,9 +122,10 @@ class ExceptionLogger
 
     /**
      * MODE_VERBOSE
+     *
      * @return string
      */
-    protected function verboseContent()
+    protected function verboseContent(): string
     {
         $content = exceptionTrace($this->exception);
         $content = strip_tags($content)."\n\n";
@@ -124,10 +134,11 @@ class ExceptionLogger
 
     /**
      * MODE_CLOSURE
+     *
      * @return string
      * @throws Exception
      */
-    protected function closureContent()
+    protected function closureContent(): string
     {
         if (!is_callable($this->custom_closure)) {
             throw new Exception(__CLASS__.': you need to specify a closure when using custom mode');
@@ -138,10 +149,11 @@ class ExceptionLogger
 
     /**
      * MODE_CUSTOM
+     *
      * @return string
      * @throws Exception
      */
-    protected function customContent()
+    protected function customContent(): string
     {
         $content = array_merge($this->default_content, $this->custom['content']);
         return interpolate($this->custom['message'], $content);
@@ -149,9 +161,10 @@ class ExceptionLogger
 
     /**
      * MODE_NORMAL
+     *
      * @return string
      */
-    protected function normalContent()
+    protected function normalContent(): string
     {
         $message = "[{datetime}] {exception_class}\n{exception}\n\n";
         return interpolate($message, $this->default_content);
