@@ -32,6 +32,7 @@ class ServiceLocator
      * shortcut for getService()
      *
      * @param string $name
+     * @return mixed
      * @throws Exception
      */
     public function __get(string $name)
