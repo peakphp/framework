@@ -28,9 +28,11 @@ class ExceptionLoggerTest extends TestCase
     function testClassException()
     {
         try {
+            $file = __DIR__.'/error.log';
             $el = new ExceptionLogger(
                 new \Exception('Message'),
-                null
+                $file,
+                5
             );
         } catch (Exception $e) {
             $error = $e->getMessage();
@@ -38,6 +40,4 @@ class ExceptionLoggerTest extends TestCase
 
         $this->assertTrue(isset($error));
     }
-
-
 }
