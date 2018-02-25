@@ -24,7 +24,7 @@ if (!function_exists('relativeBasepath')) {
      * @param null|string $doc_root
      * @return string
      */
-    function relativeBasepath(string $dir, string $doc_root = null): string
+    function relativeBasepath(string $dir, string $doc_root = null)
     {
         if (!isset($doc_root)) {
             $doc_root = filter_var(getenv('DOCUMENT_ROOT'));
