@@ -1,5 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
+use Peak\Common\Collection;
+use Peak\Common\PhpInput;
+use Peak\Common\DataException;
+use Peak\Common\TimeExpression;
+
 /*
 |--------------------------------------------------------------------------
 | General helper functions
@@ -15,9 +22,9 @@ if (!function_exists('relativeBasepath')) {
      *
      * @param string $dir
      * @param null|string $doc_root
-     * @return mixed
+     * @return string
      */
-    function relativeBasepath($dir, $doc_root = null)
+    function relativeBasepath(string $dir, string $doc_root = null): string
     {
         if (!isset($doc_root)) {
             $doc_root = filter_var(getenv('DOCUMENT_ROOT'));
@@ -35,9 +42,9 @@ if (!function_exists('relativePath')) {
      *
      * @param string $dir
      * @param null|string $doc_root
-     * @return mixed
+     * @return string
      */
-    function relativePath($dir, $doc_root = null)
+    function relativePath(string $dir, string $doc_root = null): string
     {
         if (!isset($doc_root)) {
             $doc_root = filter_var(getenv('DOCUMENT_ROOT'));
@@ -55,7 +62,7 @@ if (!function_exists('isCli')) {
      *
      * @return bool
      */
-    function isCli()
+    function isCli(): bool
     {
         return (php_sapi_name() === 'cli' || defined('STDIN'));
     }
@@ -68,10 +75,10 @@ if (!function_exists('showAllErrors')) {
     /**
      * Try to force the display of all errors
      */
-    function showAllErrors()
+    function showAllErrors(): void
     {
         error_reporting(E_ALL);
-        ini_set('display_errors', 1);
+        ini_set('display_errors', '1');
     }
 }
 
@@ -83,11 +90,11 @@ if (!function_exists('collection')) {
      * Create a new Collection
      *
      * @param  array|null $items
-     * @return \Peak\Common\Collection
+     * @return Collection
      */
-    function collection($items = null)
+    function collection(array $items = null): Collection
     {
-        return \Peak\Common\Collection::make($items);
+        return Collection::make($items);
     }
 }
 
@@ -99,11 +106,11 @@ if (!function_exists('phpinput')) {
      * Retrieve a collection object from php://input
      *
      * @param  Closure $closure
-     * @return Peak\Common\PhpInput
+     * @return PhpInput
      */
-    function phpinput(Closure $closure = null)
+    function phpinput(Closure $closure = null): PhpInput
     {
-        $phpinput = new \Peak\Common\PhpInput();
+        $phpinput = new PhpInput();
 
         if (isset($closure)) {
             $phpinput->map($closure);
@@ -120,17 +127,17 @@ if (!function_exists('exceptionTrace')) {
     /**
      * Retrieve a more comprehensive exception debug backtrace
      *
-     * @param \Exception $exc
+     * @param Exception $exc
      * @return string
      */
-    function exceptionTrace(\Exception $exc)
+    function exceptionTrace(Exception $exc): string
     {
         $msg = trim($exc->getMessage());
 
         $content = '['.date('Y-m-d H:i:s')."] ".get_class($exc)."\n";
         $content .= $msg."\n";
 
-        if ($exc instanceof \Peak\Common\DataException) {
+        if ($exc instanceof DataException) {
             $content .= $exc->dumpData();
             $content .= str_pad('', mb_strlen($exc->dumpData()), '-')."\n";
         } else {
@@ -150,7 +157,7 @@ if (!function_exists('printExceptionTrace')) {
      * Print exceptionTrace
      * @see exceptionTrace()
      */
-    function printExceptionTrace(\Exception $exc)
+    function printExceptionTrace(Exception $exc): void
     {
         print_r(exceptionTrace($exc));
     }
@@ -164,7 +171,7 @@ if (!function_exists('printHtmlExceptionTrace')) {
      * Print exceptionTrace in html pre block
      * @see exceptionTrace()
      */
-    function printHtmlExceptionTrace(\Exception $exc)
+    function printHtmlExceptionTrace(Exception $exc): void
     {
         echo '<pre>';
         print_r(exceptionTrace($exc));
@@ -182,9 +189,9 @@ if (!function_exists('shortClassName')) {
      * @param mixed $obj
      * @return string
      */
-    function shortClassName($obj)
+    function shortClassName($obj): string
     {
-        return ((new \ReflectionClass($obj))->getShortName());
+        return ((new ReflectionClass($obj))->getShortName());
     }
 }
 
@@ -198,9 +205,9 @@ if (!function_exists('getClassFilePath')) {
      * @param mixed $obj
      * @return string
      */
-    function getClassFilePath($obj)
+    function getClassFilePath($obj): string
     {
-        return (new \ReflectionClass($obj))->getFileName();
+        return (new ReflectionClass($obj))->getFileName();
     }
 }
 
@@ -215,7 +222,7 @@ if (!function_exists('formatSize')) {
      * @param integer $size
      * @return string
      */
-    function formatSize($size)
+    function formatSize(int $size): string
     {
         if (empty($size)) {
             return '0 kB';
@@ -237,9 +244,9 @@ if (!function_exists('fileExpired')) {
      * @param mixed $expiration_time expiration time, \Peak\Common\TimeExpression expression accepted
      * @return bool
      */
-    function fileExpired($file, $expiration_time)
+    function fileExpired(string $file, $expiration_time): bool
     {
-        $expiration_time = (new \Peak\Common\TimeExpression($expiration_time))->toSeconds();
+        $expiration_time = (new TimeExpression($expiration_time))->toSeconds();
         $file_date = filemtime($file);
         $now = time();
         $delay = $now - $file_date;
@@ -257,7 +264,7 @@ if (!function_exists('catchOutput')) {
      * @param Closure $closure
      * @return string
      */
-    function catchOutput(\Closure $closure)
+    function catchOutput(Closure $closure)
     {
         ob_start();
         $closure();
@@ -275,12 +282,12 @@ if (!function_exists('interpolate')) {
     /**
      * Interpolation of message. Based on psr-3 example
      *
-     * @param $message
+     * @param string $message
      * @param array $context
      * @param Closure|null $fn
      * @return string
      */
-    function interpolate($message, array $context = array(), \Closure $fn = null)
+    function interpolate(string $message, array $context = array(), Closure $fn = null): string
     {
         // build a replacement array with braces around the context keys
         $replace = array();
