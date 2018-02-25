@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Common;
 
 use IteratorAggregate;
 use ArrayIterator;
-use \Exception;
+use Exception;
 
 /**
  * Paginator model
@@ -33,8 +35,9 @@ class Paginator implements IteratorAggregate
      * @param integer  $items_count
      * @param integer  $current_page
      * @param integer  $range
+     * @throws Exception
      */
-    public function __construct($items_per_page, $items_count, $current_page = 1, $range = null)
+    public function __construct(int $items_per_page, int $items_count, int $current_page = 1, int $range = null)
     {
         $this->items_per_page = $items_per_page;
         $this->items_count = $items_count;
@@ -52,7 +55,7 @@ class Paginator implements IteratorAggregate
      *
      * @return ArrayIterator
      */
-    public function getIterator()
+    public function getIterator(): ArrayIterator
     {
         return new ArrayIterator($this->pages);
     }
@@ -61,8 +64,9 @@ class Paginator implements IteratorAggregate
      * Set page and (re)calculate
      *
      * @param integer $page
+     * @throws Exception
      */
-    public function setPage($page)
+    public function setPage(int $page): Paginator
     {
         $this->current_page = $page;
         $this->calculate();
@@ -71,8 +75,10 @@ class Paginator implements IteratorAggregate
 
     /**
      * Calculate stuff for pagination
+     *
+     * @throws Exception
      */
-    public function calculate()
+    public function calculate(): Paginator
     {
         // calculate how many page
         if ($this->items_count > 0 && $this->items_per_page > 0) {
@@ -126,11 +132,11 @@ class Paginator implements IteratorAggregate
      * pages array will be limited to: 5, 6, 7, 8, 9, 10, 11, 12, 13,14 ,15
      *
      * @param  integer
-     * @return array
+     * @return $this
      */
-    public function setPagesRange($range = null)
+    public function setPagesRange(int $range = null): Paginator
     {
-        if (is_numeric($range) && ($range <= $this->pages_count) && is_array($this->pages)) {
+        if (!is_null($range) && ($range <= $this->pages_count) && is_array($this->pages)) {
             $pages_range = [];
             $diff = $range - $range - $range;
             for ($i = $diff; $i <= $range; ++$i) {
@@ -161,7 +167,7 @@ class Paginator implements IteratorAggregate
      * @param  integer $page_number
      * @return bool
      */
-    public function isPage($number)
+    public function isPage(int $number): bool
     {
         return (in_array($number, $this->pages)) ? true : false;
     }
