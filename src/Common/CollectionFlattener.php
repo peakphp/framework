@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Common;
 
 use \Exception;
@@ -38,7 +40,7 @@ class CollectionFlattener
      * @return $this
      * @throws Exception
      */
-    public function separator($sep)
+    public function separator(string $sep): CollectionFlattener
     {
         if (mb_strlen($sep) != 1 || $sep === '*') {
             throw new Exception(__CLASS__.': Separator must be 1 character and cannot be an asterisk (*)');
@@ -52,7 +54,7 @@ class CollectionFlattener
      *
      * @return array
      */
-    public function flatAll()
+    public function flatAll(): array
     {
         $this->search = [];
         return $this->flatCollection($this->collection->toArray());
@@ -63,7 +65,7 @@ class CollectionFlattener
      *
      * @param mixed $prefix
      */
-    public function flatKey($key)
+    public function flatKey($key): array
     {
         $this->search = [$key];
         return $this->flatCollection($this->collection->toArray());
@@ -74,7 +76,7 @@ class CollectionFlattener
      *
      * @param mixed $prefix
      */
-    public function flatKeys(array $keys)
+    public function flatKeys(array $keys): array
     {
         $this->search = $keys;
         return $this->flatCollection($this->collection->toArray());
@@ -88,7 +90,7 @@ class CollectionFlattener
      * @param array $flat_data
      * @return array
      */
-    protected function flatCollection(array $data, $prefix = null, $flat_data = [])
+    protected function flatCollection(array $data, string $prefix = null, array $flat_data = []): array
     {
         foreach ($data as $key => $val) {
             if ($prefix !== null) {
@@ -118,10 +120,10 @@ class CollectionFlattener
     /**
      * Detect if search is finishing by a wildcard (.*)
      *
-     * @param $search
+     * @param string $search
      * @return bool
      */
-    protected function hasWildCard($search)
+    protected function hasWildCard(string $search): bool
     {
         return (substr($search, -2) === $this->separator.'*');
     }
@@ -129,10 +131,10 @@ class CollectionFlattener
     /**
      * Detect if key must be skipped according to $search
      *
-     * @param $key
+     * @param string $key
      * @return bool
      */
-    protected function skipKey($key)
+    protected function skipKey(string $key): bool
     {
         if (!empty($this->search)) {
             foreach ($this->search as $search) {
