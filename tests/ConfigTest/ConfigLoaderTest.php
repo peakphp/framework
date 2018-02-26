@@ -3,6 +3,9 @@
 use PHPUnit\Framework\TestCase;
 
 use Peak\Config\ConfigLoader;
+use Peak\Config\ConfigData;
+use Peak\Config\ConfigFile;
+use Peak\Config\Processors\JsonProcessor;
 use Peak\Common\DotNotationCollection;
 use Peak\Common\Collection;
 
@@ -126,6 +129,8 @@ class ConfigLoaderTest extends TestCase
 
     /**
      * Test ini
+     *
+     * @throws \Peak\Config\Exceptions\UnknownTypeException
      */
     function testIni()
     {
@@ -140,6 +145,8 @@ class ConfigLoaderTest extends TestCase
 
     /**
      * Test multiple configuration type together
+     *
+     * @throws \Peak\Config\Exceptions\UnknownTypeException
      */
     function testMixedTypeConfigs()
     {
@@ -148,7 +155,6 @@ class ConfigLoaderTest extends TestCase
             new Collection([
                 'foo' => 'bar'
             ]),
-            '{"foo": "bar2", "bar" : "foo"}',
             new Collection(['foo' => 'bar']),
             FIXTURES_PATH.'/config/arrayfile1.php',
             FIXTURES_PATH.'/config/config.yml',
@@ -161,12 +167,29 @@ class ConfigLoaderTest extends TestCase
         $this->assertTrue($col instanceof Collection);
         $this->assertTrue($col->iam === 'arrayfile1');
         $this->assertTrue($col->foo === 'bar');
-        $this->assertTrue($col->bar === 'foo');
+        //$this->assertTrue($col->bar === 'foo');
         $this->assertTrue($col->array === 'hophop');
         $this->assertTrue($col->anonym === 'function');
         $this->assertTrue(count($col->items) == 2);
         $this->assertTrue(isset($col[0]));
         $this->assertTrue(trim($col[0]) === 'John');
         $this->assertTrue(isset($col->items) == 2);
+    }
+
+    /**
+     * Test multiple configuration with ConfigFile and ConfigData
+     *
+     * @throws \Peak\Config\Exceptions\UnknownTypeException
+     */
+    function testMixedTypeConfigs2()
+    {
+        $col = (new ConfigLoader([
+            new ConfigData('{"foo": "bar2", "bar" : "foo"}', new JsonProcessor()),
+            new ConfigFile(FIXTURES_PATH.'/config/jsonfile.json')
+        ]))->asCollection();
+
+        $this->assertTrue($col->foo === 'bar2');
+        $this->assertTrue($col->bar === 'foo');
+        $this->assertTrue(is_array($col->widget));
     }
 }
