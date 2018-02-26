@@ -1,11 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Config;
 
-use Peak\Common\ClassFinder;
 use Peak\Common\Collection;
 use Peak\Common\DotNotationCollection;
-use \Exception;
+use Peak\Config\Exceptions\UnknownTypeException;
+use Peak\Config\Processors\ArrayProcessor;
+use Peak\Config\Processors\CallableProcessor;
+use Peak\Config\Processors\CollectionProcessor;
 use \Closure;
 
 class ConfigLoader
@@ -23,20 +27,6 @@ class ConfigLoader
     protected $path = null;
 
     /**
-     * Configs loader namespace(s)
-     * @var array
-     */
-    protected $namespaces = [
-        'Peak\Config\Type'
-    ];
-
-    /**
-     * If true, unknown config files and types are simply ignored
-     * @var bool
-     */
-    protected $soft = false;
-
-    /**
      * ConfigLoader constructor
      *
      * @param array $configs
@@ -49,23 +39,12 @@ class ConfigLoader
     }
 
     /**
-     * Change type load namespaces
-     *
-     * @param array $namespaces
-     * @return $this
-     */
-    public function ns(array $namespaces)
-    {
-        $this->namespaces = $namespaces;
-        return $this;
-    }
-
-    /**
      * Get config(s) has one merged collection
      *
      * @return Collection
+     * @throws UnknownTypeException
      */
-    public function asCollection()
+    public function asCollection(): Collection
     {
         return $this->load($this->configs, $this->path);
     }
@@ -74,8 +53,9 @@ class ConfigLoader
      * Get config(s) has one merged DotNotation collection
      *
      * @return DotNotationCollection
+     * @throws UnknownTypeException
      */
-    public function asDotNotationCollection()
+    public function asDotNotationCollection(): DotNotationCollection
     {
         $collection = $this->load($this->configs, $this->path);
         return new DotNotationCollection($collection->toArray());
@@ -85,8 +65,9 @@ class ConfigLoader
      * Get config(s) has one merged array
      *
      * @return array
+     * @throws UnknownTypeException
      */
-    public function asArray()
+    public function asArray(): array
     {
         return $this->load($this->configs, $this->path)->toArray();
     }
@@ -95,8 +76,9 @@ class ConfigLoader
      * Get config(s) has one merged stdClass
      *
      * @return \stdClass
+     * @throws UnknownTypeException
      */
-    public function asObject()
+    public function asObject(): \stdClass
     {
         return $this->load($this->configs, $this->path)->toObject();
     }
@@ -106,6 +88,7 @@ class ConfigLoader
      *
      * @param Closure $closure
      * @return mixed
+     * @throws UnknownTypeException
      */
     public function asClosure(Closure $closure)
     {
@@ -113,28 +96,32 @@ class ConfigLoader
     }
 
     /**
-     * Internal config loader loader
+     * Load all configuration
      *
-     * @param array $files
+     * @param array $configs
      * @param null $path
      * @return Collection
+     * @throws UnknownTypeException
      */
-    protected function load(array $configs, $path = null)
+    protected function load(array $configs, $path = null): Collection
     {
         $collection = new Collection();
 
         foreach ($configs as $config) {
+
             if (isset($path)) {
                 $config = $path.'/'.$config;
             }
 
-            $loader = $this->detectType($config);
+            $content = $this->getContent($config);
 
-            if (!isset($loader)) {
-                continue;
+            if (is_null($content)) {
+                if ($this->soft === true) {
+                    continue;
+                }
+                throw new UnknownTypeException();
             }
 
-            $content = $this->getContent($loader);
             $collection->mergeRecursiveDistinct($content);
         }
 
@@ -142,74 +129,39 @@ class ConfigLoader
     }
 
     /**
-     * Detect config type
-     *
      * @param $config
-     * @return mixed
-     * @throws Exception
+     * @return array|null
      */
-    protected function detectType($config)
+    protected function getContent($config): ?array
     {
-        $type = null;
+        $content = null;
 
-        // detect type
+        // detect best way to load and process configuration content
         if (is_array($config)) {
-            $type = 'ArrayLoader';
+            $content = $this->processConfig(new ArrayProcessor(), $config);
         } elseif (is_callable($config)) {
-            $type = 'CallableLoader';
+            $content = $this->processConfig(new CallableProcessor(), $config);
         } elseif ($config instanceof Collection) {
-            $type = 'CollectionLoader';
+            $content = $this->processConfig(new CollectionProcessor(), $config);
+        } elseif ($config instanceof ConfigFile || $config instanceof ConfigData) {
+            $content = $config->get();
         } elseif (is_string($config)) {
-            if (file_exists($config)) {
-                $ext = pathinfo($config, PATHINFO_EXTENSION);
-                $type = ucfirst($ext) . 'Loader';
-            } elseif (json_decode($config) && (json_last_error() === JSON_ERROR_NONE)) {
-                $type = 'JsonLoader';
-            }
+            $content = (new ConfigFile($config))->get();
         }
 
-        if (is_null($type)) {
-            if ($this->soft) {
-                return null;
-            }
-
-            throw new Exception(__CLASS__.': unknown config type for ['.$config.']');
-        }
-
-        return $this->initLoaderType($config, ucfirst($type));
+        return $content;
     }
 
     /**
-     * Get loader type
+     * Process content of configuration
      *
-     * @param LoaderInterface $loader
+     * @param ProcessorInterface $processor
+     * @param $config
      * @return array
-     * @throws Exception
      */
-    protected function initLoaderType($config, $type)
+    protected function processConfig(ProcessorInterface $processor, $config): array
     {
-        $loader = (new ClassFinder($this->namespaces))->findLast($type);
-
-        if (is_null($loader)) {
-            if (is_array($config) || is_object($config)) {
-                ob_start();
-                var_dump($config);
-                $config = ob_get_clean();
-            }
-            throw new Exception(__CLASS__.': no config loader found type ['.$type.'] of ['.$config.']');
-        }
-
-        return (new $loader($config));
-    }
-
-    /**
-     * Get loader content
-     *
-     * @param LoaderInterface $loader
-     * @return mixed
-     */
-    protected function getContent(LoaderInterface $loader)
-    {
-        return $loader->getContent();
+        $processor->process($config);
+        return $processor->getContent();
     }
 }

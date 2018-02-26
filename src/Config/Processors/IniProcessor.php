@@ -1,54 +1,28 @@
 <?php
 
-namespace Peak\Config\Type;
+namespace Peak\Config\Processors;
 
 use Peak\Common\Traits\ArrayMergeRecursiveDistinct;
-use Peak\Config\Loader;
+use Peak\Config\AbstractProcessor;
 use \Exception;
 
-class IniLoader extends Loader
+class IniProcessor extends AbstractProcessor
 {
     use ArrayMergeRecursiveDistinct;
 
     /**
-     * Constructor
-     *
-     * @param $config
+     * @throws Exception
      */
-    public function __construct($config)
+    public function process($data)
     {
-        $this->config = $config;
-        $this->loadFile($config);
-    }
-
-    /**
-     * Parse ini from file
-     *
-     * @see load()
-     */
-    public function loadFile($file)
-    {
-        if (!file_exists($file)) {
-            throw new Exception(__CLASS__.': file "'.$file.'" not found');
-        }
-
-        $ini = parse_ini_file($file, true);
-
-        //parse_ini_file() can return false in case of error
-        //but this can mean also that the file is only empty,
-        //so we don't want to throw a exception in this case
-        if ($ini === false && (trim(file_get_contents($file)) !== '')) {
-            throw new Exception(__CLASS__.': syntax error(s) in your configuration file');
-        }
-
-        return $this->load($ini);
+        $this->load($data);
     }
 
     /**
      * Loads in the ini file specified in filename, and returns the settings in
      * it as an associative multi-dimensional array
      *
-     * @param  string  $ini              Parsed content by php function parse_ini_*
+     * @param  string  $data             Parsed content by php function parse_ini_*
      * @param  boolean $process_sections By setting the process_sections parameter to TRUE,
      *                                   you get a multidimensional array, with the section
      *                                   names and settings included. The default for
@@ -57,10 +31,12 @@ class IniLoader extends Loader
      * @throws Exception
      * @return array|boolean
      */
-    public function load($ini)
+    public function load($data)
     {
+        $data = parse_ini_string($data, true);
+
         // fail if there was an error while processing the specified ini file
-        if ($ini === false) {
+        if ($data === false) {
             return false;
         }
 
@@ -68,7 +44,7 @@ class IniLoader extends Loader
         $this->content = [];
 
         // loop through each section
-        foreach ($ini as $section => $contents) {
+        foreach ($data as $section => $contents) {
             $this->processSection($section, $contents);
         }
     }
