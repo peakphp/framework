@@ -5,6 +5,7 @@ namespace Peak\Bedrock\Application;
 use Peak\Bedrock\Application\Config\AppTree;
 use Peak\Bedrock\Application\Exceptions\MissingConfigException;
 use Peak\Common\DataException;
+use Peak\Config\ConfigLoader;
 
 class ConfigResolver
 {
@@ -15,7 +16,6 @@ class ConfigResolver
     private $default = [
         'ns' => 'App',          //namespace
         'env' => 'prod',        //app environment (dev,prod,staging,testing)
-        'soft_conf' => false,   //indicate we should use soft loader for configs
         'conf' => [],           //config(s) file(s)
         'name' => 'app',        //default application name
         'path' => [             //paths
@@ -32,9 +32,12 @@ class ConfigResolver
     protected $app_config;
 
     /**
-     * Construct
+     * ConfigResolver constructor.
      *
-     * @param array $config user config
+     * @param array $config
+     * @throws DataException
+     * @throws MissingConfigException
+     * @throws \Peak\Config\Exceptions\UnknownTypeException
      */
     public function __construct($config = [])
     {
@@ -64,14 +67,9 @@ class ConfigResolver
             }
         }
 
-        $loader = 'Peak\Config\ConfigLoader';
-        if (isset($config['soft_conf']) && $config['soft_conf'] === true) {
-            $loader = 'Peak\Config\ConfigSoftLoader';
-        }
-
         // build and store final application config
         $this->app_config = new Config(
-            (new $loader($final))->asArray()
+            (new ConfigLoader($final))->asArray()
         );
     }
 
