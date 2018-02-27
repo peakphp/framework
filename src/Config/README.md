@@ -25,8 +25,6 @@ $cl = new ConfigLoader([
     'config/app.dev.php',
     'config/database.yml',
     'config/widget.json',
-    new ConfigFile('cumstom.csv', new DefaultLoader(), new MyCustomProcessor()),
-    new ConfigData('{"foo": "bar2", "bar" : "foo"}', new JsonProcessor()),
 ]);
 
 // plain array
@@ -49,7 +47,7 @@ $config = $cl->asClosure(function(Collection $coll) {
 
 ## Loaders
 
-Loader are mean to handle how we retrieve the configuration file content. Peak\Config comes with 3 loaders that handle most common cases:
+Loaders are mean to handle how we retrieve the configuration content. Peak\Config comes with 3 loaders that handle most common cases:
 
  - ```DefaultLoader``` use file_get_contents()
  - ```PhpLoader``` use include(), the file must return an array
@@ -57,7 +55,7 @@ Loader are mean to handle how we retrieve the configuration file content. Peak\C
  
 ## Processors
 
-Processor are mean for how we handle configuration file content. Peak\Config comes with 6 processors:
+Processors are mean for how we handle configuration content. Peak\Config comes with 6 processors:
 
  - ```ArrayProcessor```
  - ```CallableProcessor``` closure and callable
@@ -70,9 +68,7 @@ Processor are mean for how we handle configuration file content. Peak\Config com
 
 Create your own configuration loader and processor.
 
-Loader are mean to handle how we retrieve the file content and Processor are mean for how we handle the file content.
-
-To use you custom loader/processor:
+To use a custom loader/processor:
 
 ```php
 // example 1
@@ -94,6 +90,12 @@ $content = (new ConfigData(
     '... misc data...', 
     new MyCustomProcessor()
 )->get();
+
+// example 4 using config loader
+$coll = (new ConfigLoader([
+    'file1.php',
+    new ConfigFile('cumstom.file', new CustomLoader(), new ArrayProcessor())
+]))->asCollection();
 ```
 
 
