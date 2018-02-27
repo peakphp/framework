@@ -91,7 +91,7 @@ class ConfigFileTest extends TestCase
     }
 
     /**
-     * @expectedException Peak\Config\Exceptions\UnknownFileTypeException
+     * @expectedException Peak\Config\Exceptions\FileTypesNotSupportedException
      */
     public function testUnknownFileTypeException()
     {
