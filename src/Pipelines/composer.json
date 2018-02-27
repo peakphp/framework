@@ -2,7 +2,7 @@
   "name": "peak/pipelines",
   "description": "Pipelines component",
   "keywords": ["peak", "pipelines", "pipes"],
-  "license": "BSD-3-Clause",
+  "license": "MIT",
   "homepage": "https://peakframework.com",
   "support": {
     "issues": "https://github.com/peakphp/framework/issues",
