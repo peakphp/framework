@@ -109,16 +109,9 @@ class ConfigLoader
 
         foreach ($configs as $config) {
 
-            if (isset($path)) {
-                $config = $path.'/'.$config;
-            }
-
-            $content = $this->getContent($config);
+            $content = $this->getContent($config, $path);
 
             if (is_null($content)) {
-                if ($this->soft === true) {
-                    continue;
-                }
                 throw new UnknownTypeException();
             }
 
@@ -129,10 +122,13 @@ class ConfigLoader
     }
 
     /**
-     * @param $config
+     * Get configuration processed content
+     *
+     * @param mixed $config
+     * @param string $path
      * @return array|null
      */
-    protected function getContent($config): ?array
+    protected function getContent($config, string $path = null): ?array
     {
         $content = null;
 
@@ -146,6 +142,9 @@ class ConfigLoader
         } elseif ($config instanceof ConfigFile || $config instanceof ConfigData) {
             $content = $config->get();
         } elseif (is_string($config)) {
+            if (isset($path)) {
+                $config = $path.'/'.$config;
+            }
             $content = (new ConfigFile($config))->get();
         }
 
