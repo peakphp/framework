@@ -2,7 +2,7 @@
 
 namespace Peak\Config\Exceptions;
 
-class UnknownFileTypeException extends \Exception
+class FileTypesNotSupportedException extends \Exception
 {
     /**
      * UnknownFileTypeException constructor.
@@ -11,6 +11,6 @@ class UnknownFileTypeException extends \Exception
      */
     public function __construct(string $type)
     {
-        parent::__construct('Unknown config type "'.$type.'"');
+        parent::__construct('No support found for "'.$type.'" file type.');
     }
 }
