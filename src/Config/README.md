@@ -1,5 +1,5 @@
 # Peak\Config
-#### Load multiple configuration files like a pro!
+#### Manage multiple configuration resources like a pro!
 This component manage configuration of various format and source and merge them recursivly into one configuration collection 
 
 
@@ -17,7 +17,7 @@ $ composer require peak/config
  - Ini
  - Yaml
 
-## Getting started
+## Quick start
 
 ```php
 $cl = new ConfigLoader([
