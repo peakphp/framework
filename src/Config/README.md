@@ -1,5 +1,5 @@
 # Peak\Config
-This component manage configuration of various format and source and merge them recursivly into one configurations collection.
+This component manage configuration of various format and source and merge them recursivly into one configuration collection.
 
 ## Installation outside framework
 
