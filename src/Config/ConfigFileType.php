@@ -4,14 +4,7 @@ declare(strict_types=1);
 
 namespace Peak\Config;
 
-use Peak\Config\Loaders\DefaultLoader;
-use Peak\Config\Loaders\PhpLoader;
-use Peak\Config\Loaders\TextLoader;
-use Peak\Config\Processors\ArrayProcessor;
-use Peak\Config\Processors\IniProcessor;
-use Peak\Config\Processors\JsonProcessor;
-use Peak\Config\Processors\YamlProcessor;
-use Peak\Config\Exceptions\UnknownFileTypeException;
+use Peak\Config\Exceptions\FileTypesNotSupportedException;
 
 class ConfigFileType
 {
@@ -24,45 +17,21 @@ class ConfigFileType
      * Known configuration file type
      * @var array
      */
-    protected $types = [
-        'php' => [
-            'loader' => PhpLoader::class,
-            'processor' => ArrayProcessor::class
-        ],
-        'json' => [
-            'loader' => DefaultLoader::class,
-            'processor' => JsonProcessor::class
-        ],
-        'yml' => [
-            'loader' => DefaultLoader::class,
-            'processor' => YamlProcessor::class
-        ],
-        'ini' => [
-            'loader' => DefaultLoader::class,
-            'processor' => IniProcessor::class
-        ],
-        'txt' => [
-            'loader' => TextLoader::class,
-            'processor' => ArrayProcessor::class
-        ],
-        'log' => [
-            'loader' => TextLoader::class,
-            'processor' => ArrayProcessor::class
-        ],
-    ];
+    protected $types = [];
 
     /**
      * ConfigFileType constructor.
      *
      * @param string $file
-     * @throws UnknownFileTypeException
+     * @throws FileTypesNotSupportedException
      */
-    public function __construct(string $file)
+    public function __construct(string $file, array $types = [])
     {
         $this->extension = strtolower(pathinfo($file, PATHINFO_EXTENSION));
+        $this->types = $types;
 
         if (!array_key_exists($this->extension, $this->types)) {
-            throw new UnknownFileTypeException($this->extension);
+            throw new FileTypesNotSupportedException($this->extension);
         }
     }
 

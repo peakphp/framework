@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Peak\Config;
 
 use Peak\Config\Exceptions\FileNotFoundException;
+use Peak\Config\Exceptions\InvalidTypeDefinitionException;
 use Peak\Config\Loaders\TextLoader;
 use Peak\Config\Processors\ArrayProcessor;
 
@@ -26,6 +27,11 @@ class ConfigFile
     protected $default_processor = ArrayProcessor::class;
 
     /**
+     * @var array
+     */
+    protected static $types = [];
+
+    /**
      * ConfigFile constructor.
      *
      * @param string $source
@@ -42,19 +48,18 @@ class ConfigFile
         if (!isset($loader) && !isset($processor)) {
             // automatic detection of file
             $automatic_mode = true;
-            $type = (new ConfigFileType($source))->get();
+            $this->initTypes();
+            $type = (new ConfigFileType($source, self::$types))->get();
             $loader = new $type['loader']();
             $processor = new $type['processor']();
         }
 
         if (!isset($automatic_mode)) {
             if (!isset($loader)) {
-                $default_loader = $this->default_loader;
-                $loader = new $default_loader();
+                $loader = new $this->default_loader();
             }
             if (!isset($processor)) {
-                $default_processor = $this->default_processor;
-                $processor = new $default_processor();
+                $processor = new $this->default_processor();
             }
         }
 
@@ -70,5 +75,46 @@ class ConfigFile
     public function get(): array
     {
         return $this->processed_content;
+    }
+
+    /**
+     * Initiate default files types
+     */
+    protected function initTypes(): void
+    {
+        if (empty(self::$types)) {
+            self::$types = DefaultFileTypes::get();
+        }
+    }
+
+    /**
+     * Add or override a file type definition
+     *
+     * @param string $name
+     * @param string $loader
+     * @param string $processor
+     */
+    public static function setType(string $name, string $loader, string $processor)
+    {
+        self::$types[$name] = [
+            'loader' => $loader,
+            'processor' => $processor,
+        ];
+    }
+
+    /**
+     * Overwrite file types definitions
+     *
+     * @param array $types
+     * @throws InvalidTypeDefinitionException
+     */
+    public static function setTypes(array $types): void
+    {
+        foreach ($types as $type => $definition) {
+            if (!isset($definition['loader']) || !isset($definition['processor'])) {
+                throw new InvalidTypeDefinitionException($type);
+            }
+            self::setType($type, $definition['loader'], $definition['processor']);
+        }
     }
 }
