@@ -1,0 +1,33 @@
+{
+  "name": "peak/config",
+  "description": "Peak Configuration Component",
+  "keywords": ["peak", "config", "configuration", "env"],
+  "license": "MIT",
+  "homepage": "https://peakframework.com",
+  "support": {
+    "issues": "https://github.com/peakphp/framework/issues",
+    "source": "https://github.com/peakphp/framework"
+  },
+  "authors": [
+    {
+      "name": "Francois Lajoie",
+      "email": "francois@peakframework.com"
+    }
+  ],
+  "require": {
+    "php": "^7.1.3",
+    "peak/common": "^3.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Peak\\Config\\": ""
+    }
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "3.0-dev"
+    }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}
