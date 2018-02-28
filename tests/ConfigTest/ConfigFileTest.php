@@ -91,9 +91,9 @@ class ConfigFileTest extends TestCase
     }
 
     /**
-     * @expectedException Peak\Config\Exceptions\FileTypesNotSupportedException
+     * @expectedException Peak\Config\Exceptions\NoFileHandlersException
      */
-    public function testUnknownFileTypeException()
+    public function testNoFileHandlersException()
     {
         $cf = new ConfigFile(FIXTURES_PATH.'/config/unknown.type');
     }
