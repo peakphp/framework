@@ -15,10 +15,10 @@ use Peak\Config\Processors\YamlProcessor;
 class DefaultFileHandlers
 {
     /**
-     * Known configuration file type
+     * Configuration file handlers
      * @var array
      */
-    protected static $types = [
+    protected static $handlers = [
         'php' => [
             'loader' => PhpLoader::class,
             'processor' => ArrayProcessor::class
@@ -46,12 +46,12 @@ class DefaultFileHandlers
     ];
 
     /**
-     * Get default file type definition
+     * Get default file handlers definition
      *
      * @return array
      */
     public static function get(): array
     {
-        return self::$types;
+        return self::$handlers;
     }
 }
