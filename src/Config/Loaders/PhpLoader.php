@@ -6,8 +6,12 @@ use Peak\Config\LoaderInterface;
 
 class PhpLoader implements LoaderInterface
 {
-    public function loadFileContent($file)
+    /**
+     * @param $resource
+     * @return mixed
+     */
+    public function load($resource)
     {
-        return include $file;
+        return include $resource;
     }
 }

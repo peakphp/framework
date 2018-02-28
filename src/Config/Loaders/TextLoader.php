@@ -8,16 +8,16 @@ use \Exception;
 class TextLoader implements LoaderInterface
 {
     /**
-     * @param $file
+     * @param $resource
      * @throws Exception
      */
-    public function loadFileContent($file)
+    public function load($resource)
     {
         $content = [];
-        $handle = fopen($file, 'r');
+        $handle = fopen($resource, 'r');
 
         if (!$handle) {
-            throw new Exception(__CLASS__ . ': unable to load ' . $file);
+            throw new Exception(__CLASS__ . ': unable to load ' . $resource);
         }
 
         while (($line = fgets($handle)) !== false) {

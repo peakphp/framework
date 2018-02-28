@@ -56,7 +56,7 @@ class ConfigFile
             }
         }
 
-        $processor->process($loader->loadFileContent($source));
+        $processor->process($loader->load($source));
         $this->processed_content = $processor->getContent();
     }
 
