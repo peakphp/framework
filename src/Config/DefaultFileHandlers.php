@@ -12,7 +12,7 @@ use Peak\Config\Processors\IniProcessor;
 use Peak\Config\Processors\JsonProcessor;
 use Peak\Config\Processors\YamlProcessor;
 
-class DefaultFileTypes
+class DefaultFileHandlers
 {
     /**
      * Known configuration file type
