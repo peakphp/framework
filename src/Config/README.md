@@ -17,8 +17,8 @@ $ composer require peak/config
  - Ini
  - Yaml
 
-## Quick start
-
+## Load multiple config resource at once
+This the most common and direct way to access to all you configuration resources.
 ```php
 $cl = new ConfigLoader([
     'config/app.php',
@@ -45,17 +45,17 @@ $config = $cl->asClosure(function(Collection $coll) {
 });
 ```
 
-## Loaders
+## How it works
 
-Loaders are mean to handle how we retrieve the configuration content. Peak\Config comes with 3 loaders that handle most common cases:
+Each config pass through 1 or 2 handlers, a Loader and a Processor and should terminate by an array.
+
+Loaders are mean to handle how we retrieve the configuration content which is useful when comes to files. Peak\Config comes with 3 loaders that handle most common cases:
 
  - ```DefaultLoader``` use file_get_contents()
  - ```PhpLoader``` use include(), the file must return an array
  - ```TextLoader``` use fread()
- 
-## Processors
 
-Processors are mean for how we handle configuration content. Peak\Config comes with 6 processors:
+Processors are mean to handle how to process configuration data to an array. Peak\Config comes with 6 processors:
 
  - ```ArrayProcessor```
  - ```CallableProcessor``` closure and callable
@@ -63,6 +63,36 @@ Processors are mean for how we handle configuration content. Peak\Config comes w
  - ```IniProcessor``` Supported advanced ini with dot notation
  - ```JsonProcessor```
  - ```YamlProcessor``` You will need symfony/yaml for this one
+ 
+## Adding or changing a file handlers
+
+```ConfigFile``` use the file handlers to determine how to load and process a file based on its extension. 
+
+For example a php file will use the ```PhpLoader``` and the ```ArrayProcessor```. 
+
+Default handlers are used by default and are stored in ```DefaultFileHandlers```.
+You can add/override file handlers easily with ```FileHandlers::setHandler()``` and ```FileHandlers::setHandlers()```
+
+```php
+// adding a new handler (if handler already exists, it will be overrided)
+FileHandlers::setHandler(
+    'xml',
+    MyLoader::class,
+    MyProcessor::class,
+);
+
+// adding/replacing multiple handlers
+FileHandlers::setHandlers([
+    'xml' => [
+        'loader' => MyLoader::class,
+        'processor' => MyProcessor::class,
+    ],
+    'json' => [
+        // ...
+    ], 
+    // ...
+]);
+```
 
 ## Extends
 
