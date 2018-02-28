@@ -76,7 +76,7 @@ class FileHandlers
      * @param string $loader file loader
      * @param string $processor file processor
      */
-    public static function setHandler(string $name, string $loader, string $processor)
+    public static function setHandler(string $name, string $loader, string $processor): void
     {
         self::$handlers[$name] = [
             'loader' => $loader,
