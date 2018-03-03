@@ -2,8 +2,10 @@
 
 use PHPUnit\Framework\TestCase;
 
+use Peak\Common\Collection;
 use Peak\Config\Processors\ArrayProcessor;
 use Peak\Config\Processors\CallableProcessor;
+use Peak\Config\Processors\CollectionProcessor;
 
 class ProcessorsTest extends TestCase
 {
@@ -22,7 +24,7 @@ class ProcessorsTest extends TestCase
 
     /**
      * Test ArrayProcessor exception
-     * @expectedException \Exception
+     * @expectedException \Peak\Config\Exceptions\ProcessorException
      */
     function testArrayProcessorException()
     {
@@ -32,7 +34,7 @@ class ProcessorsTest extends TestCase
 
 
     /**
-     * Test ArrayProcessor
+     * Test CallableProcessor
      */
     function testCallableProcessor()
     {
@@ -70,5 +72,32 @@ class ProcessorsTest extends TestCase
             $test = 'foo';
         });
     }
+
+    /**
+     * Test CollectionProcessor
+     */
+    function testCollectionProcessor()
+    {
+        $processor = new CollectionProcessor();
+
+        $processor->process(new Collection(['foo' => 'bar']));
+
+        $content = $processor->getContent();
+
+        $this->assertTrue(is_array($content));
+        $this->assertTrue(isset($content['foo']));
+    }
+
+    /**
+     * Test CollectionProcessor exception
+     * @expectedException \Peak\Config\Exceptions\ProcessorException
+     */
+    function testCollectionProcessorException()
+    {
+        $processor = new CollectionProcessor();
+        $processor->process('data');
+    }
+
+
 
 }
