@@ -33,11 +33,13 @@ class IniProcessor extends AbstractProcessor
      */
     public function load($data)
     {
-        $data = parse_ini_string($data, true);
+        // we silence error(s) so we can catch them and throw a proper exception after
+        $data = @parse_ini_string($data, true);
 
         // fail if there was an error while processing the specified ini file
         if ($data === false) {
-            return false;
+            $error = error_get_last();
+            throw new ProcessorException(__CLASS__.' fail to parse data: '.$error['message']);
         }
 
         // reset the result array
