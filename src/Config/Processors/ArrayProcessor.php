@@ -3,18 +3,18 @@
 namespace Peak\Config\Processors;
 
 use Peak\Config\AbstractProcessor;
-use \Exception;
+use Peak\Config\Exceptions\ProcessorException;
 
 class ArrayProcessor extends AbstractProcessor
 {
     /**
      * Array processor
-     * @throws Exception
+     * @throws ProcessorException
      */
     public function process($data)
     {
         if (!is_array($data)) {
-            throw new Exception(__CLASS__.': config ['.$data.'] is not an array');
+            throw new ProcessorException(__CLASS__.' expects data to be an array. '.gettype($data).' given.');
         }
 
         $this->content = $data;

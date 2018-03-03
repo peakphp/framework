@@ -4,14 +4,14 @@ namespace Peak\Config\Processors;
 
 use Peak\Common\Traits\ArrayMergeRecursiveDistinct;
 use Peak\Config\AbstractProcessor;
-use \Exception;
+use Peak\Config\Exceptions\ProcessorException;
 
 class IniProcessor extends AbstractProcessor
 {
     use ArrayMergeRecursiveDistinct;
 
     /**
-     * @throws Exception
+     * @throws ProcessorException
      */
     public function process($data)
     {
@@ -28,7 +28,7 @@ class IniProcessor extends AbstractProcessor
      *                                   names and settings included. The default for
      *                                   process_sections is FALSE
      * @param  string $section_name      Specific section name to extract upon processing
-     * @throws Exception
+     * @throws ProcessorException
      * @return array|boolean
      */
     public function load($data)
@@ -54,7 +54,7 @@ class IniProcessor extends AbstractProcessor
      *
      * @param  string $section Section name
      * @param  array $contents Section contents
-     * @throws Exception
+     * @throws ProcessorException
      */
     private function processSection($section, array $contents)
     {
@@ -72,7 +72,7 @@ class IniProcessor extends AbstractProcessor
 
         // check if the extended section exists
         if (!isset($this->content[$ext_source])) {
-            throw new Exception(__CLASS__.': Unable to extend section ' . $ext_source . ', section not found');
+            throw new ProcessorException(__CLASS__.': Unable to extend section ' . $ext_source . ', section not found');
         }
 
         // process section contents
