@@ -6,6 +6,7 @@ use Peak\Common\Collection;
 use Peak\Config\Processors\ArrayProcessor;
 use Peak\Config\Processors\CallableProcessor;
 use Peak\Config\Processors\CollectionProcessor;
+use Peak\Config\Processors\IniProcessor;
 
 class ProcessorsTest extends TestCase
 {
@@ -98,6 +99,31 @@ class ProcessorsTest extends TestCase
         $processor->process('data');
     }
 
+    /**
+     * Test IniProcessor
+     */
+    function testIniProcessor()
+    {
+        $processor = new IniProcessor();
+
+        $ini = file_get_contents(FIXTURES_PATH.'/config/config.ini');
+        $processor->process($ini);
+
+        $content = $processor->getContent();
+
+        $this->assertTrue(is_array($content));
+        $this->assertTrue(isset($content['all']));
+    }
+
+    /**
+     * Test IniProcessor exception
+     * @expectedException \Peak\Config\Exceptions\ProcessorException
+     */
+    function testIniProcessorException()
+    {
+        $processor = new IniProcessor();
+        $processor->process('data = ;;;;');
+    }
 
 
 }
