@@ -14,7 +14,9 @@ class TextLoader implements LoaderInterface
     public function load($resource)
     {
         $content = [];
-        $handle = fopen($resource, 'r');
+
+        // we silence error(s) so we can catch them and throw a proper exception after
+        $handle = @fopen($resource, 'r');
 
         if (!$handle) {
             throw new LoaderException(__CLASS__ . ': unable to load ' . $resource);
