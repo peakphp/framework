@@ -125,5 +125,15 @@ class ProcessorsTest extends TestCase
         $processor->process('data = ;;;;');
     }
 
+    /**
+     * Test IniProcessor exception
+     * @expectedException \Peak\Config\Exceptions\ProcessorException
+     */
+    function testIniProcessorException2()
+    {
+        $processor = new IniProcessor();
+        $processor->process('[all:php]');
+    }
+
 
 }
