@@ -97,4 +97,13 @@ class ConfigFileTest extends TestCase
     {
         $cf = new ConfigFile(FIXTURES_PATH.'/config/unknown.type');
     }
+
+    /**
+     * @expectedException Peak\Config\Exceptions\LoaderException
+     */
+    public function testLoaderException()
+    {
+        $tl = new TextLoader();
+        $tl->load(true);
+    }
 }
