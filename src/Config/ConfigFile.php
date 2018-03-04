@@ -26,11 +26,13 @@ class ConfigFile
     protected $default_processor = ArrayProcessor::class;
 
     /**
-     * ConfigFile constructor.
+     * ConfigFile constructor
      *
      * @param string $source
      * @param LoaderInterface|null $loader
      * @param ProcessorInterface|null $processor
+     * @throws Exceptions\InvalidFileHandlerException
+     * @throws Exceptions\NoFileHandlersException
      * @throws FileNotFoundException
      */
     public function __construct(string $source, LoaderInterface $loader = null, ProcessorInterface $processor = null)
@@ -42,7 +44,7 @@ class ConfigFile
         if (!isset($loader) && !isset($processor)) {
             // automatic detection of file
             $automatic_mode = true;
-            $handlers = (new FileHandlers($source))->get();
+            $handlers = $this->resolveWithFilesHandlers($source);
             $loader = new $handlers['loader']();
             $processor = new $handlers['processor']();
         }
@@ -68,5 +70,24 @@ class ConfigFile
     public function get(): array
     {
         return $this->processed_content;
+    }
+
+    /**
+     * Resolve source with FilesHandlers when no loader and processor are not specified
+     *
+     * @param $source
+     * @return array
+     * @throws Exceptions\InvalidFileHandlerException
+     * @throws Exceptions\NoFileHandlersException
+     */
+    public function resolveWithFilesHandlers($source)
+    {
+        $extension = strtolower(pathinfo($source, PATHINFO_EXTENSION));
+
+        if (FilesHandlers::isEmpty()) {
+            FilesHandlers::override(DefaultFileHandlers::get());
+        }
+
+        return FilesHandlers::get($extension);
     }
 }
