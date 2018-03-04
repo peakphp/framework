@@ -6,7 +6,6 @@ use Peak\Config\FilesHandlers;
 
 class FilesHandlersTest extends TestCase
 {
-
     /**
      * Test getAll()
      */
@@ -16,4 +15,16 @@ class FilesHandlersTest extends TestCase
         $this->assertTrue(is_array($handlers));
     }
 
+    /**
+     * Test override()
+     * @expectedException \Peak\Config\Exceptions\InvalidFileHandlerException
+     */
+    function testOverride()
+    {
+        FilesHandlers::override([
+            'json' => [
+                'blabla'
+            ]
+        ]);
+    }
 }

@@ -97,5 +97,4 @@ class ConfigFileTest extends TestCase
     {
         $cf = new ConfigFile(FIXTURES_PATH.'/config/unknown.type');
     }
-
 }
