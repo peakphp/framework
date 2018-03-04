@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Config\Exceptions;
 
 class InvalidFileHandlerException extends \Exception
