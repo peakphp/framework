@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Peak\Config;
 
 use Peak\Config\Exceptions\FileNotFoundException;
-use Peak\Config\Loaders\TextLoader;
+use Peak\Config\Loaders\DefaultLoader;
 use Peak\Config\Processors\ArrayProcessor;
 
 class ConfigFile
@@ -18,7 +18,7 @@ class ConfigFile
     /**
      * @var string
      */
-    protected $default_loader = TextLoader::class;
+    protected $default_loader = DefaultLoader::class;
 
     /**
      * @var string
