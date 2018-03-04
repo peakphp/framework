@@ -192,4 +192,17 @@ class ConfigLoaderTest extends TestCase
         $this->assertTrue($col->bar === 'foo');
         $this->assertTrue(is_array($col->widget));
     }
+
+    /**
+     * Test UnknownTypeException exception
+     * @expectedException \Peak\Config\Exceptions\UnknownTypeException
+     */
+    function testIniProcessorException2()
+    {
+        $col = (new ConfigLoader([
+            true,
+        ]))->asCollection();
+    }
+
+
 }
