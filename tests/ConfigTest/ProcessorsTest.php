@@ -7,6 +7,7 @@ use Peak\Config\Processors\ArrayProcessor;
 use Peak\Config\Processors\CallableProcessor;
 use Peak\Config\Processors\CollectionProcessor;
 use Peak\Config\Processors\IniProcessor;
+use Peak\Config\Processors\YamlProcessor;
 
 class ProcessorsTest extends TestCase
 {
@@ -134,6 +135,4 @@ class ProcessorsTest extends TestCase
         $processor = new IniProcessor();
         $processor->process('[all:php]');
     }
-
-
 }

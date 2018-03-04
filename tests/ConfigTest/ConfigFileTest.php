@@ -50,7 +50,7 @@ class ConfigFileTest extends TestCase
     {
         $cf = new ConfigFile(
             FIXTURES_PATH.'/config/jsonfile.json',
-            new DefaultLoader(),
+            null,
             new JsonProcessor()
         );
 
