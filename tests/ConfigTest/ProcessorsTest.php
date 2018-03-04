@@ -59,7 +59,7 @@ class ProcessorsTest extends TestCase
      */
     function testCallableProcessorException()
     {
-        $processor = new ArrayProcessor();
+        $processor = new CallableProcessor();
         $processor->process('data');
     }
 
@@ -69,7 +69,7 @@ class ProcessorsTest extends TestCase
      */
     function testCallableProcessorException2()
     {
-        $processor = new ArrayProcessor();
+        $processor = new CallableProcessor();
         $processor->process(function() {
             $test = 'foo';
         });
