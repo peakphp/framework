@@ -2,14 +2,14 @@
 
 namespace Peak\Config\Loaders;
 
+use Peak\Config\Exceptions\LoaderException;
 use Peak\Config\LoaderInterface;
-use \Exception;
 
 class TextLoader implements LoaderInterface
 {
     /**
      * @param $resource
-     * @throws Exception
+     * @throws LoaderException
      */
     public function load($resource)
     {
@@ -17,7 +17,7 @@ class TextLoader implements LoaderInterface
         $handle = fopen($resource, 'r');
 
         if (!$handle) {
-            throw new Exception(__CLASS__ . ': unable to load ' . $resource);
+            throw new LoaderException(__CLASS__ . ': unable to load ' . $resource);
         }
 
         while (($line = fgets($handle)) !== false) {
