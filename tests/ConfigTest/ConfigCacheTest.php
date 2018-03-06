@@ -247,7 +247,13 @@ class ConfigCacheTest extends TestCase
      */
     public function testCachePathNotWritableException()
     {
-        chmod($this->path, 0000);
-        $cc = new ConfigCache($this->path);
+        $os = php_uname();
+        if(strpos($os, "Win") !== false) {
+            $this->markTestSkipped();
+        } else {
+            chmod($this->path, 0000);
+            $cc = new ConfigCache($this->path);
+        }
+
     }
 }
