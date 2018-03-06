@@ -85,7 +85,7 @@ class ConfigFile
         $extension = strtolower(pathinfo($source, PATHINFO_EXTENSION));
 
         if (FilesHandlers::isEmpty()) {
-            FilesHandlers::override(DefaultFileHandlers::get());
+            FilesHandlers::override(DefaultFilesHandlers::get());
         }
 
         return FilesHandlers::get($extension);

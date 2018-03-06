@@ -70,19 +70,19 @@ Processors are mean to handle how to process configuration data to an array. Pea
 
 For example a php file will use the ```PhpLoader``` and the ```ArrayProcessor```. 
 
-Default handlers are used by default and are stored in ```DefaultFileHandlers```.
-You can add/override file handlers easily with ```FileHandlers::setHandler()``` and ```FileHandlers::setHandlers()```
+Default handlers are used by default and are stored in ```DefaultFilesHandlers```.
+You can add/override file handlers easily with ```FilesHandlers::set()``` and ```FileHandlers::override()```
 
 ```php
 // adding a new handler (if handler already exists, it will be overrided)
-FileHandlers::setHandler(
+FilesHandlers::set(
     'xml',
     MyLoader::class,
     MyProcessor::class,
 );
 
 // adding/replacing multiple handlers
-FileHandlers::setHandlers([
+FilesHandlers::override([
     'xml' => [
         'loader' => MyLoader::class,
         'processor' => MyProcessor::class,
