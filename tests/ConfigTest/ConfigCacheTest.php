@@ -242,7 +242,12 @@ class ConfigCacheTest extends TestCase
         $this->assertTrue($count == 1);
     }
 
-
-
-
+    /**
+     * @expectedException \Peak\Config\Exceptions\CachePathNotWritableException
+     */
+    public function testCachePathNotWritableException()
+    {
+        chmod($this->path, 0600);
+        $cc = new ConfigCache($this->path);
+    }
 }
