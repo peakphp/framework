@@ -215,12 +215,14 @@ class ConfigCacheTest extends TestCase
                 function() {
                     return ['anonym' => 'function'];
                 },
-            ]))->asArray();
+            ]))->asCollection();
 
             $cc->set($cache_id, $data, 300);
-        } else {
-            $data = $cc->get($cache_id);
         }
+
+        $data = $cc->get($cache_id);
+
+        $this->assertTrue($data instanceof Collection);
     }
 
     /**
