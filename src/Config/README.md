@@ -94,6 +94,27 @@ FilesHandlers::override([
 ]);
 ```
 
+## Caching complex configuration
+Processing complex multiple configurations can be costly and if they rarely change, you might want to cache the result instead.
+
+```php
+$cache_id = 'my-configuration-id';
+
+if ($cc->isExpired($cache_id)) {
+    $data = (new \Peak\Config\ConfigLoader([
+        // files and stuff
+    ]))->asCollection();
+    
+    $cc->set(
+        $cache_id, 
+        $data, 
+        3600 // ttl in seconds
+    );
+} else {
+    $data = $cc->get($cache_id);
+}
+```
+
 ## Extends
 
 Create your own configuration loader and processor.
