@@ -247,7 +247,7 @@ class ConfigCacheTest extends TestCase
      */
     public function testCachePathNotWritableException()
     {
-        chmod($this->path, 0600);
+        chmod($this->path, 0000);
         $cc = new ConfigCache($this->path);
     }
 }
