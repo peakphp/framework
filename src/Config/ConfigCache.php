@@ -257,7 +257,7 @@ class ConfigCache implements CacheInterface
      * @param string $key
      * @return mixed
      */
-    protected function getCacheFileContent($key): array
+    protected function getCacheFileContent($key)
     {
         $filepath = $this->getCacheFilePath($key);
 
