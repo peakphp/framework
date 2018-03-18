@@ -2,6 +2,8 @@ VERSION 2.27.0
 --------------
 Release Date: ?
 
+ - placed debug bar windows outside the #pkdebugbar element to fix problem with browser element selecting tool
+
 VERSION 2.26.0
 --------------
 Release Date: 2018-02-24
