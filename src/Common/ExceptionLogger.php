@@ -140,10 +140,10 @@ class ExceptionLogger
      */
     protected function closureContent(): string
     {
-        if (!is_callable($this->custom_closure)) {
+        if (!is_callable($this->custom)) {
             throw new Exception(__CLASS__.': you need to specify a closure when using custom mode');
         }
-        $fn = $this->custom_closure;
+        $fn = $this->custom;
         return $fn($this->exception);
     }
 
