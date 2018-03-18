@@ -5,6 +5,7 @@ var peakDebugBar = (function() {
 
     var bar = document.querySelector("#pkdebugbar");
     var tabs = document.querySelectorAll(".pkdebugbar-tab");
+    var windows = document.querySelector("#pkdebugbar-windows");
 
     // show the bar
     document.addEventListener("DOMContentLoaded", function() {
@@ -16,7 +17,7 @@ var peakDebugBar = (function() {
     }
 
     function targetElFromName(name) {
-        return bar.querySelector(".pkdebugbar-window-" + name);
+        return windows.querySelector(".pkdebugbar-window-" + name);
     }
 
     function targetEl(el) {
@@ -25,7 +26,7 @@ var peakDebugBar = (function() {
 
     function toggleWindow(el) {
         el.classList.toggle('open');
-        var content_el = bar.querySelector('.pkdebugbar-window-' + targetName(el));
+        var content_el = windows.querySelector('.pkdebugbar-window-' + targetName(el));
         content_el.classList.toggle('open');
     }
 

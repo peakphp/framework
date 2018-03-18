@@ -170,19 +170,19 @@ $window-padding: 20px;
 #pkdebugbar {
   background: transparent;
   position: fixed !important;
-  top: 0;
+  //top: 0;
   bottom: 0;
   left: 0;
   right: 0;
   width: 100%;
-  height: 100%;
+  height: $height;
   display:none; //hidden on start to prevent glitch for slow page
   font: 12px/1.4em $font-default;
   z-index: 999999;
   opacity: 1;
   padding: 0;
   margin: 0;
-  overflow: hidden;
+  overflow-y: hidden;
 
   .pkdebugbar-menu-wrapper {
 
@@ -253,178 +253,182 @@ $window-padding: 20px;
       }
     }
   }
+}
 
-  .pkdebugbar-window {
-    display:none;
-    background: $bg-color-1;
-    color: $text-color;
-    position:absolute;
-    top:$window-margin;
-    right: $window-margin;
-    left: $window-margin;
-    bottom: $height+1;
-    padding: $window-padding;
-    z-index: 999998;
-    overflow:auto;
-    font-family: $font-default;
-    line-height:14px;
-    //border:2px solid $border-color;
-    //border-bottom:0;
-    //background: linear-gradient(to top, #000 0, $bg-color-1 30px, $bg-color-1 50%);
+#pkdebugbar-windows {
+  //nothing for the moment
+}
 
-    hr {
-      border-width: 0;
-      border-style: solid;
-      border-color: darken($bg-color-1, 20%);
-      border-top-width: 1px;
-    }
+.pkdebugbar-window {
+  display:none;
+  background: $bg-color-1;
+  color: $text-color;
+  position:absolute;
+  top:$window-margin;
+  right: $window-margin;
+  left: $window-margin;
+  bottom: $height+1;
+  padding: $window-padding;
+  z-index: 999998;
+  overflow:auto;
+  font-family: $font-default;
+  line-height:14px;
+  //border:2px solid $border-color;
+  //border-bottom:0;
+  //background: linear-gradient(to top, #000 0, $bg-color-1 30px, $bg-color-1 50%);
 
-    &.open {
-      display:block;
-    }
+  hr {
+    border-width: 0;
+    border-style: solid;
+    border-color: darken($bg-color-1, 20%);
+    border-top-width: 1px;
+  }
 
-    h1, h2, h3, h4, h5, h6 {
-      margin: 10px 0 10px -8px;
-      padding:0;
-      width:auto;
-      display:block;
-      .h-block {
-        padding: 6px 8px;
-        background: $text-color;
-        color: $bg-color-1;
-        display: inline-block;
-      }
-    }
+  &.open {
+    display:block;
+  }
 
-    & > h1 {
-      &:first-child {
-        background: $text-color;
-        color: $bg-color-1;
-        margin: (-$window-padding) (-$window-padding) 20px (-$window-padding);
-        padding: 18px 15px;
-        display: block;
-        width: auto;
-      }
-    }
-
-
-    table {
-      width: auto;
-      background: lighten($bg-color-1, 5%);
-
-      &.table-full-width {
-        width: 100%;
-      }
-      &.table-border-inside td {
-        border-bottom:1px solid darken($bg-color-1, 5%);
-      }
-
-      th {
-        text-align: left;
-        font-size: 14px;
-        font-weight: bold;
-        color: $text-color;
-        background: transparent;
-        border-bottom:1px solid darken($bg-color-1, 20%);
-        padding:8px 6px;
-      }
-
-      td {
-        font-size: 12px;
-        padding:0 6px;
-        color: $text-color;
-        vertical-align: top;
-
-        &:first-child {
-          font-weight: bold;
-          width:1px;
-        }
-
-        &.width-1 {
-          width:1px;
-        }
-        &.width-100 {
-          width:100px;
-        }
-        &.width-150 {
-          width:150px;
-        }
-        &.width-200 {
-          width:200px;
-        }
-      }
-
-      tr:nth-child(odd) td {
-        background-color: lighten($bg-color-1, 2%);
-      }
-    }
-
-    .pre-block {
-      font-size:12px;
-      font-family: monospace;
-      font-weight: normal;
-      background: lighten($bg-color-1, 5%);
-      padding:8px;
-      color: $text-color;
-      width: auto;
-      overflow:auto;
-      .line:hover {
-        background: lighten($bg-color-1, 8%);
-
-      }
-    }
-
-    .strong-block {
-      font-weight: bold;
-      background: lighten($bg-color-1, 8%);
+  h1, h2, h3, h4, h5, h6 {
+    margin: 10px 0 10px -8px;
+    padding:0;
+    width:auto;
+    display:block;
+    .h-block {
+      padding: 6px 8px;
+      background: $text-color;
+      color: $bg-color-1;
       display: inline-block;
-      padding:6px 8px;
+    }
+  }
+
+  & > h1 {
+    &:first-child {
+      background: $text-color;
+      color: $bg-color-1;
+      margin: (-$window-padding) (-$window-padding) 20px (-$window-padding);
+      padding: 18px 15px;
+      display: block;
+      width: auto;
+    }
+  }
+
+
+  table {
+    width: auto;
+    background: lighten($bg-color-1, 5%);
+
+    &.table-full-width {
+      width: 100%;
+    }
+    &.table-border-inside td {
+      border-bottom:1px solid darken($bg-color-1, 5%);
     }
 
+    th {
+      text-align: left;
+      font-size: 14px;
+      font-weight: bold;
+      color: $text-color;
+      background: transparent;
+      border-bottom:1px solid darken($bg-color-1, 20%);
+      padding:8px 6px;
+    }
 
-    .message {
-      padding:5px 5px;
-      font-size: 13px;
-      margin-bottom:3px;
+    td {
+      font-size: 12px;
+      padding:0 6px;
+      color: $text-color;
+      vertical-align: top;
 
-      .message-level {
-        color: darken($bg-color-1, 20%);
-        float:right;
-      }
-      &.message-emergency {
-        color: #fff;
-        background: #cc0000;
+      &:first-child {
         font-weight: bold;
-        letter-spacing: 1px;
-      }
-      &.message-alert {
-        color: #fff;
-        background: #EF993A;
-        //font-weight: bold;
-      }
-      &.message-critical {
-        color: #ff6666;
-        font-weight: bold;
-        background: #fff;
-      }
-      &.message-error {
-        color: #cc0000;
-        background: #FFF0F0;
-      }
-      &.message-warning {
-        color: #E68213;
-      }
-      &.message-notice {
-        color: #000;
-      }
-      &.message-info {
-        color: #0080C0;
-      }
-      &.message-debug {
-        color: #666;
+        width:1px;
       }
 
+      &.width-1 {
+        width:1px;
+      }
+      &.width-100 {
+        width:100px;
+      }
+      &.width-150 {
+        width:150px;
+      }
+      &.width-200 {
+        width:200px;
+      }
+    }
+
+    tr:nth-child(odd) td {
+      background-color: lighten($bg-color-1, 2%);
+    }
+  }
+
+  .pre-block {
+    font-size:12px;
+    font-family: monospace;
+    font-weight: normal;
+    background: lighten($bg-color-1, 5%);
+    padding:8px;
+    color: $text-color;
+    width: auto;
+    overflow:auto;
+    .line:hover {
+      background: lighten($bg-color-1, 8%);
+
+    }
+  }
+
+  .strong-block {
+    font-weight: bold;
+    background: lighten($bg-color-1, 8%);
+    display: inline-block;
+    padding:6px 8px;
+  }
+
+
+  .message {
+    padding:5px 5px;
+    font-size: 13px;
+    margin-bottom:3px;
+
+    .message-level {
+      color: darken($bg-color-1, 20%);
+      float:right;
+    }
+    &.message-emergency {
+      color: #fff;
+      background: #cc0000;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+    &.message-alert {
+      color: #fff;
+      background: #EF993A;
+      //font-weight: bold;
+    }
+    &.message-critical {
+      color: #ff6666;
+      font-weight: bold;
+      background: #fff;
+    }
+    &.message-error {
+      color: #cc0000;
+      background: #FFF0F0;
+    }
+    &.message-warning {
+      color: #E68213;
+    }
+    &.message-notice {
+      color: #000;
+    }
+    &.message-info {
+      color: #0080C0;
+    }
+    &.message-debug {
+      color: #666;
     }
 
   }
+
 }

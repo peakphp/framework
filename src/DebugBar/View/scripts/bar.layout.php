@@ -9,6 +9,8 @@
             ?>
         </ul>
     </div>
+</div>
+<div id="pkdebugbar-windows">
     <?php echo $content; ?>
 </div>
 <script><?php include __DIR__.'/../assets/script.js'; ?></script>

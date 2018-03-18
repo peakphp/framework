@@ -116,19 +116,18 @@
 #pkdebugbar {
   background: transparent;
   position: fixed !important;
-  top: 0;
   bottom: 0;
   left: 0;
   right: 0;
   width: 100%;
-  height: 100%;
+  height: 42px;
   display: none;
   font: 12px/1.4em -apple-system, "Helvetica Neue", BlinkMacSystemFont, "Open Sans", "Segoe UI", Roboto, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   z-index: 999999;
   opacity: 1;
   padding: 0;
   margin: 0;
-  overflow: hidden; }
+  overflow-y: hidden; }
   #pkdebugbar .pkdebugbar-menu-wrapper {
     position: absolute;
     bottom: 0;
@@ -180,122 +179,123 @@
           fill: #333; }
         #pkdebugbar .pkdebugbar-menu .pkdebugbar-tab .pkdebugbar-logo .pkdebugbar-logo-path2 {
           fill: #333; }
-  #pkdebugbar .pkdebugbar-window {
-    display: none;
-    background: #e5e5e5;
-    color: #222;
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    left: 20px;
-    bottom: 43px;
-    padding: 20px;
-    z-index: 999998;
-    overflow: auto;
-    font-family: -apple-system, "Helvetica Neue", BlinkMacSystemFont, "Open Sans", "Segoe UI", Roboto, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-    line-height: 14px; }
-    #pkdebugbar .pkdebugbar-window hr {
-      border-width: 0;
-      border-style: solid;
-      border-color: #b2b2b2;
-      border-top-width: 1px; }
-    #pkdebugbar .pkdebugbar-window.open {
-      display: block; }
-    #pkdebugbar .pkdebugbar-window h1, #pkdebugbar .pkdebugbar-window h2, #pkdebugbar .pkdebugbar-window h3, #pkdebugbar .pkdebugbar-window h4, #pkdebugbar .pkdebugbar-window h5, #pkdebugbar .pkdebugbar-window h6 {
-      margin: 10px 0 10px -8px;
-      padding: 0;
-      width: auto;
-      display: block; }
-      #pkdebugbar .pkdebugbar-window h1 .h-block, #pkdebugbar .pkdebugbar-window h2 .h-block, #pkdebugbar .pkdebugbar-window h3 .h-block, #pkdebugbar .pkdebugbar-window h4 .h-block, #pkdebugbar .pkdebugbar-window h5 .h-block, #pkdebugbar .pkdebugbar-window h6 .h-block {
-        padding: 6px 8px;
-        background: #222;
-        color: #e5e5e5;
-        display: inline-block; }
-    #pkdebugbar .pkdebugbar-window > h1:first-child {
+
+.pkdebugbar-window {
+  display: none;
+  background: #e5e5e5;
+  color: #222;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  left: 20px;
+  bottom: 43px;
+  padding: 20px;
+  z-index: 999998;
+  overflow: auto;
+  font-family: -apple-system, "Helvetica Neue", BlinkMacSystemFont, "Open Sans", "Segoe UI", Roboto, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  line-height: 14px; }
+  .pkdebugbar-window hr {
+    border-width: 0;
+    border-style: solid;
+    border-color: #b2b2b2;
+    border-top-width: 1px; }
+  .pkdebugbar-window.open {
+    display: block; }
+  .pkdebugbar-window h1, .pkdebugbar-window h2, .pkdebugbar-window h3, .pkdebugbar-window h4, .pkdebugbar-window h5, .pkdebugbar-window h6 {
+    margin: 10px 0 10px -8px;
+    padding: 0;
+    width: auto;
+    display: block; }
+    .pkdebugbar-window h1 .h-block, .pkdebugbar-window h2 .h-block, .pkdebugbar-window h3 .h-block, .pkdebugbar-window h4 .h-block, .pkdebugbar-window h5 .h-block, .pkdebugbar-window h6 .h-block {
+      padding: 6px 8px;
       background: #222;
       color: #e5e5e5;
-      margin: -20px -20px 20px -20px;
-      padding: 18px 15px;
-      display: block;
-      width: auto; }
-    #pkdebugbar .pkdebugbar-window table {
-      width: auto;
-      background: #f2f2f2; }
-      #pkdebugbar .pkdebugbar-window table.table-full-width {
-        width: 100%; }
-      #pkdebugbar .pkdebugbar-window table.table-border-inside td {
-        border-bottom: 1px solid #d8d8d8; }
-      #pkdebugbar .pkdebugbar-window table th {
-        text-align: left;
-        font-size: 14px;
-        font-weight: bold;
-        color: #222;
-        background: transparent;
-        border-bottom: 1px solid #b2b2b2;
-        padding: 8px 6px; }
-      #pkdebugbar .pkdebugbar-window table td {
-        font-size: 12px;
-        padding: 0 6px;
-        color: #222;
-        vertical-align: top; }
-        #pkdebugbar .pkdebugbar-window table td:first-child {
-          font-weight: bold;
-          width: 1px; }
-        #pkdebugbar .pkdebugbar-window table td.width-1 {
-          width: 1px; }
-        #pkdebugbar .pkdebugbar-window table td.width-100 {
-          width: 100px; }
-        #pkdebugbar .pkdebugbar-window table td.width-150 {
-          width: 150px; }
-        #pkdebugbar .pkdebugbar-window table td.width-200 {
-          width: 200px; }
-      #pkdebugbar .pkdebugbar-window table tr:nth-child(odd) td {
-        background-color: #eaeaea; }
-    #pkdebugbar .pkdebugbar-window .pre-block {
-      font-size: 12px;
-      font-family: monospace;
-      font-weight: normal;
-      background: #f2f2f2;
-      padding: 8px;
-      color: #222;
-      width: auto;
-      overflow: auto; }
-      #pkdebugbar .pkdebugbar-window .pre-block .line:hover {
-        background: #f9f9f9; }
-    #pkdebugbar .pkdebugbar-window .strong-block {
+      display: inline-block; }
+  .pkdebugbar-window > h1:first-child {
+    background: #222;
+    color: #e5e5e5;
+    margin: -20px -20px 20px -20px;
+    padding: 18px 15px;
+    display: block;
+    width: auto; }
+  .pkdebugbar-window table {
+    width: auto;
+    background: #f2f2f2; }
+    .pkdebugbar-window table.table-full-width {
+      width: 100%; }
+    .pkdebugbar-window table.table-border-inside td {
+      border-bottom: 1px solid #d8d8d8; }
+    .pkdebugbar-window table th {
+      text-align: left;
+      font-size: 14px;
       font-weight: bold;
-      background: #f9f9f9;
-      display: inline-block;
-      padding: 6px 8px; }
-    #pkdebugbar .pkdebugbar-window .message {
-      padding: 5px 5px;
-      font-size: 13px;
-      margin-bottom: 3px; }
-      #pkdebugbar .pkdebugbar-window .message .message-level {
-        color: #b2b2b2;
-        float: right; }
-      #pkdebugbar .pkdebugbar-window .message.message-emergency {
-        color: #fff;
-        background: #cc0000;
+      color: #222;
+      background: transparent;
+      border-bottom: 1px solid #b2b2b2;
+      padding: 8px 6px; }
+    .pkdebugbar-window table td {
+      font-size: 12px;
+      padding: 0 6px;
+      color: #222;
+      vertical-align: top; }
+      .pkdebugbar-window table td:first-child {
         font-weight: bold;
-        letter-spacing: 1px; }
-      #pkdebugbar .pkdebugbar-window .message.message-alert {
-        color: #fff;
-        background: #EF993A; }
-      #pkdebugbar .pkdebugbar-window .message.message-critical {
-        color: #ff6666;
-        font-weight: bold;
-        background: #fff; }
-      #pkdebugbar .pkdebugbar-window .message.message-error {
-        color: #cc0000;
-        background: #FFF0F0; }
-      #pkdebugbar .pkdebugbar-window .message.message-warning {
-        color: #E68213; }
-      #pkdebugbar .pkdebugbar-window .message.message-notice {
-        color: #000; }
-      #pkdebugbar .pkdebugbar-window .message.message-info {
-        color: #0080C0; }
-      #pkdebugbar .pkdebugbar-window .message.message-debug {
-        color: #666; }
+        width: 1px; }
+      .pkdebugbar-window table td.width-1 {
+        width: 1px; }
+      .pkdebugbar-window table td.width-100 {
+        width: 100px; }
+      .pkdebugbar-window table td.width-150 {
+        width: 150px; }
+      .pkdebugbar-window table td.width-200 {
+        width: 200px; }
+    .pkdebugbar-window table tr:nth-child(odd) td {
+      background-color: #eaeaea; }
+  .pkdebugbar-window .pre-block {
+    font-size: 12px;
+    font-family: monospace;
+    font-weight: normal;
+    background: #f2f2f2;
+    padding: 8px;
+    color: #222;
+    width: auto;
+    overflow: auto; }
+    .pkdebugbar-window .pre-block .line:hover {
+      background: #f9f9f9; }
+  .pkdebugbar-window .strong-block {
+    font-weight: bold;
+    background: #f9f9f9;
+    display: inline-block;
+    padding: 6px 8px; }
+  .pkdebugbar-window .message {
+    padding: 5px 5px;
+    font-size: 13px;
+    margin-bottom: 3px; }
+    .pkdebugbar-window .message .message-level {
+      color: #b2b2b2;
+      float: right; }
+    .pkdebugbar-window .message.message-emergency {
+      color: #fff;
+      background: #cc0000;
+      font-weight: bold;
+      letter-spacing: 1px; }
+    .pkdebugbar-window .message.message-alert {
+      color: #fff;
+      background: #EF993A; }
+    .pkdebugbar-window .message.message-critical {
+      color: #ff6666;
+      font-weight: bold;
+      background: #fff; }
+    .pkdebugbar-window .message.message-error {
+      color: #cc0000;
+      background: #FFF0F0; }
+    .pkdebugbar-window .message.message-warning {
+      color: #E68213; }
+    .pkdebugbar-window .message.message-notice {
+      color: #000; }
+    .pkdebugbar-window .message.message-info {
+      color: #0080C0; }
+    .pkdebugbar-window .message.message-debug {
+      color: #666; }
 
 /*# sourceMappingURL=style.css.map */
