@@ -1,8 +1,8 @@
 {
   "name": "peak/pipelines",
-  "description": "Pipelines component",
+  "description": "Peak Pipelines Component",
   "keywords": ["peak", "pipelines", "pipes"],
-  "license": "BSD-3-Clause",
+  "license": "MIT",
   "homepage": "https://peakframework.com",
   "support": {
     "issues": "https://github.com/peakphp/framework/issues",
@@ -15,7 +15,7 @@
     }
   ],
   "require": {
-    "php": ">=5.6.4",
+    "php": "^7.1.3",
     "psr/container": "^1.0"
   },
   "autoload": {
@@ -25,7 +25,7 @@
   },
   "extra": {
     "branch-alias": {
-      "dev-master": "2.27-dev"
+      "dev-master": "3.0-dev"
     }
   },
   "minimum-stability": "dev",

@@ -9,6 +9,7 @@ class ConfigTest extends TestCase
     function testCreate()
     {
         $config = new Config();
+        $this->markTestSkipped();
     }
 
 }
