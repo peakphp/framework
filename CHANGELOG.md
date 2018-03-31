@@ -3,6 +3,7 @@ VERSION 2.27.0
 Release Date: ?
 
  - placed debug bar windows outside the #pkdebugbar element to fix problem with browser element selecting tool
+ - added collapse feature to Peak\DebugBar
 
 VERSION 2.26.0
 --------------
