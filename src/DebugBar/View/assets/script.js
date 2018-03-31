@@ -4,12 +4,18 @@ var peakDebugBar = (function() {
     "use strict";
 
     var bar = document.querySelector("#pkdebugbar");
+    var bar_toggle = bar.querySelector(".pkdebugbar-toggle");
     var tabs = document.querySelectorAll(".pkdebugbar-tab");
     var windows = document.querySelector("#pkdebugbar-windows");
 
     // show the bar
     document.addEventListener("DOMContentLoaded", function() {
         bar.style.display = "block";
+    });
+
+    // toogle bar visibility
+    bar_toggle.addEventListener("click", function() {
+        bar.classList.toggle('collapse');
     });
 
     function targetName(el) {

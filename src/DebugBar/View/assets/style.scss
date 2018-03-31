@@ -184,6 +184,22 @@ $window-padding: 20px;
   margin: 0;
   overflow-y: hidden;
 
+  &.collapse {
+    width: 42px;
+    overflow:hidden;
+    .pkdebugbar-tab {
+      display: none !important;
+    }
+    .pkdebugbar-toggle {
+      .toggle-open {
+        display:block !important;
+      }
+      .toggle-close {
+        display:none !important;
+      }
+    }
+  }
+
   .pkdebugbar-menu-wrapper {
 
     position: absolute;
@@ -200,7 +216,25 @@ $window-padding: 20px;
     list-style-type: none;
     padding: 0;
     margin: 0;
-    .pkdebugbar-tab {
+    .pkdebugbar-toggle {
+      position:relative;
+      float:left;
+      display: block;
+      height: $height;
+      letter-spacing: 0.05em;
+      line-height: $height;
+      font-family: $font-default;
+      color: $tab-color;
+      width:42px;
+      font-size:34px;
+      padding:0;
+      text-align: center;
+      cursor:pointer;
+      .toggle-open {
+        display:none;
+      }
+    }
+    .pkdebugbar-tab{
       position: relative;
       display: block;
       float:left;
