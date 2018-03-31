@@ -128,6 +128,15 @@
   padding: 0;
   margin: 0;
   overflow-y: hidden; }
+  #pkdebugbar.collapse {
+    width: 42px;
+    overflow: hidden; }
+    #pkdebugbar.collapse .pkdebugbar-tab {
+      display: none !important; }
+    #pkdebugbar.collapse .pkdebugbar-toggle .toggle-open {
+      display: block !important; }
+    #pkdebugbar.collapse .pkdebugbar-toggle .toggle-close {
+      display: none !important; }
   #pkdebugbar .pkdebugbar-menu-wrapper {
     position: absolute;
     bottom: 0;
@@ -141,6 +150,22 @@
     list-style-type: none;
     padding: 0;
     margin: 0; }
+    #pkdebugbar .pkdebugbar-menu .pkdebugbar-toggle {
+      position: relative;
+      float: left;
+      display: block;
+      height: 42px;
+      letter-spacing: 0.05em;
+      line-height: 42px;
+      font-family: -apple-system, "Helvetica Neue", BlinkMacSystemFont, "Open Sans", "Segoe UI", Roboto, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+      color: #222;
+      width: 42px;
+      font-size: 34px;
+      padding: 0;
+      text-align: center;
+      cursor: pointer; }
+      #pkdebugbar .pkdebugbar-menu .pkdebugbar-toggle .toggle-open {
+        display: none; }
     #pkdebugbar .pkdebugbar-menu .pkdebugbar-tab {
       position: relative;
       display: block;
