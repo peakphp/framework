@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Common\Traits;
 
 trait ArrayMergeRecursiveDistinct
@@ -7,9 +9,9 @@ trait ArrayMergeRecursiveDistinct
     /**
      * Merge 2 arrays recursively overwriting the keys in the first array if such key already exists
      *
-     * @param  array $a
-     * @param  array $b
-     * @return array
+     * @param  mixed $a
+     * @param  mixed $b
+     * @return mixed
      */
     protected function arrayMergeRecursiveDistinct($a, $b)
     {

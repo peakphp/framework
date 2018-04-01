@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Common;
 
 use \ReflectionClass;
@@ -28,24 +30,25 @@ class Annotations
     /**
      * Setup a class to use
      *
-     * @param string $classname
+     * @param mixed $class
      */
-    public function __construct($classname)
+    public function __construct($class)
     {
-        $this->setClass($classname);
+        $this->setClass($class);
     }
     
     /**
      * Set the class name we want and load ReflectionClass
      *
-     * @param  string $class
-     * @return $this
+     * @param  mixed $class Class name or class instance
      */
-    protected function setClass($classname)
+    protected function setClass($classname): void
     {
         $this->classname = $classname;
+        if (is_object($classname)) {
+            $this->classname = get_class($classname);
+        }
         $this->class = new ReflectionClass($classname);
-        return $this;
     }
 
     /**
@@ -55,7 +58,7 @@ class Annotations
      * @param  string|array  $tags   Tag(s) to retrieve, by default($tags = '*'), it look for every tags
      * @return array
      */
-    public function getMethod($method_name, $tags = '*')
+    public function getMethod($method_name, $tags = '*'): array
     {
         try {
             $method = new ReflectionMethod($this->classname, $method_name);
@@ -69,10 +72,10 @@ class Annotations
     /**
      * Get all methods annotations tags
      *
-     * @param  string|array  $tags   Tag(s) to retrieve, by default($tags = '*'), it look for every tags
+     * @param  mixed   $tags   Tag(s) to retrieve, by default($tags = '*'), it look for every tags
      * @return array
      */
-    public function getAllMethods($tags = '*')
+    public function getAllMethods($tags = '*'): array
     {
         $a = [];
         
@@ -86,10 +89,10 @@ class Annotations
     /**
      * Get class annotation tags
      *
-     * @param  string|array  $tags   Tag(s) to retrieve, by default($tags = '*'), it look for every tags
+     * @param  mixed  $tags   Tag(s) to retrieve, by default($tags = '*'), it look for every tags
      * @return array
      */
-    public function getClass($tags = '*')
+    public function getClass($tags = '*'): array
     {
         return $this->parse($this->class->getDocComment(), $tags);
     }
@@ -102,7 +105,7 @@ class Annotations
      * @param  string|array  $tags   Tag(s) to retrieve, by default($tags = '*'), it look for every tags
      * @return array
      */
-    public static function parse($string, $tags = '*')
+    public static function parse($string, $tags = '*'): array
     {
         //in case we don't have any tag to detect or an empty doc comment, we skip this method
         if (empty($tags) || empty($string)) {

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Common;
 
 /**
@@ -19,7 +21,7 @@ class DataException extends \Exception
      * @param string $message
      * @param mixed  $data
      */
-    public function __construct($message, $data = null)
+    public function __construct(string $message, $data = null)
     {
         parent::__construct($message);
         $this->data = $data;
@@ -30,7 +32,7 @@ class DataException extends \Exception
      *
      * @return string
      */
-    public function dumpData()
+    public function dumpData(): string
     {
         ob_start();
         var_dump($this->data);

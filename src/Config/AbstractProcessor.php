@@ -2,16 +2,10 @@
 
 namespace Peak\Config;
 
-class Loader implements LoaderInterface
+abstract class AbstractProcessor implements ProcessorInterface
 {
     /**
-     * Config resource
-     * @var string
-     */
-    protected $config;
-
-    /**
-     * Config resource content
+     * Config processed content
      * @var array
      */
     protected $content = [];
@@ -21,7 +15,7 @@ class Loader implements LoaderInterface
      *
      * @return array
      */
-    public function getContent()
+    public function getContent(): array
     {
         return $this->content;
     }

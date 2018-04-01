@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Common;
 
 class TextUtils
@@ -10,7 +12,7 @@ class TextUtils
      * @param  string $text
      * @return integer
      */
-    public static function countWords($text)
+    public static function countWords(string $text): int
     {
         // split text by ' ',\r,\n,\f,\t
         $split_array = preg_split('/\s+/', $text);
@@ -26,7 +28,7 @@ class TextUtils
      * @param  string $text
      * @return integer
      */
-    public static function countParagraphs($text)
+    public static function countParagraphs(string $text): int
     {
         // count \r or \n characters
         return count(preg_split('/[\r\n]+/', $text));
@@ -39,7 +41,7 @@ class TextUtils
      * @param  boolean $include_spaces
      * @return string
      */
-    public static function countChars($text, $include_spaces = false)
+    public static function countChars(string $text, bool $include_spaces = false): int
     {
         if ($include_spaces === false) {
             $text = preg_replace("/[\s]/", '', $text);
@@ -56,10 +58,15 @@ class TextUtils
      * @param  string  $etc
      * @param  bool    $break_words
      * @param  bool    $middle
-     * @return string
+     * @return mixed   return a string if success, or false if substr() fail
      */
-    public static function truncate($string, $length = 80, $etc = '...', $break_words = false, $middle = false)
-    {
+    public static function truncate(
+        string $string,
+        int $length = 80,
+        string $etc = '...',
+        bool $break_words = false,
+        bool $middle = false
+    ) {
         if ($length == 0) {
             return '';
         }
@@ -72,7 +79,8 @@ class TextUtils
             if (!$middle) {
                 return substr($string, 0, $length) . $etc;
             } else {
-                return substr($string, 0, $length/2) . $etc . substr($string, -$length/2);
+                $half_length = (int)round($length/2, 0);
+                return substr($string, 0, $half_length) . $etc . substr($string, -$half_length);
             }
         }
 
@@ -88,7 +96,7 @@ class TextUtils
      * @param  bool    $cut
      * @return string
      */
-    public static function wordwrap($string, $length = 80, $break = "\n", $cut = false)
+    public static function wordwrap(string $string, int $length = 80, string $break = "\n", bool $cut = false): string
     {
         return wordwrap($string, $length, $break, $cut);
     }
