@@ -153,7 +153,8 @@
 $font-default: -apple-system, "Helvetica Neue", BlinkMacSystemFont, "Open Sans",  "Segoe UI", Roboto, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 $font-mono: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 $height: 42px;
-$logo_color: #333;//#EE562F;
+$logo-color: #333;//#EE562F;
+$link-color: #028FCC;
 $bg-color-1: #e5e5e5;
 $bg-color-2: #e5e5e5;
 $text-color: #222;
@@ -201,7 +202,6 @@ $window-padding: 20px;
   }
 
   .pkdebugbar-menu-wrapper {
-
     position: absolute;
     bottom: 0;
     left:0;
@@ -249,8 +249,8 @@ $window-padding: 20px;
       overflow:hidden;
 
       &.open {
-        border-bottom: 4px solid $logo_color;
-        background: linear-gradient(to top, $logo_color 4px, $bg-color-1 0px, $bg-color-1 100%);
+        border-bottom: 4px solid $logo-color;
+        background: linear-gradient(to top, $logo-color 4px, $bg-color-1 0px, $bg-color-1 100%);
       }
 
       &:first-child {
@@ -278,7 +278,7 @@ $window-padding: 20px;
         left: 2px;
         width:36px;
         .pkdebugbar-logo-path1 {
-          fill: $logo_color;
+          fill: $logo-color;
         }
         .pkdebugbar-logo-path2 {
           fill: #333;
@@ -311,6 +311,15 @@ $window-padding: 20px;
   //border-bottom:0;
   //background: linear-gradient(to top, #000 0, $bg-color-1 30px, $bg-color-1 50%);
 
+  a, a:link, a:visited, a:hover {
+    color: $link-color;
+    font-size:12px;
+  }
+
+  pre {
+    font-size: 12px;
+  }
+
   hr {
     border-width: 0;
     border-style: solid;
@@ -323,6 +332,7 @@ $window-padding: 20px;
   }
 
   h1, h2, h3, h4, h5, h6 {
+    font-family: $font-default;
     margin: 10px 0 10px -8px;
     padding:0;
     width:auto;
@@ -359,6 +369,7 @@ $window-padding: 20px;
     }
 
     th {
+      font-family: $font-default;
       text-align: left;
       font-size: 14px;
       font-weight: bold;
@@ -369,7 +380,8 @@ $window-padding: 20px;
     }
 
     td {
-      font-size: 12px;
+      font-family: $font-default;
+      font-size: 11px;
       padding:0 6px;
       color: $text-color;
       vertical-align: top;
@@ -464,5 +476,4 @@ $window-padding: 20px;
     }
 
   }
-
 }

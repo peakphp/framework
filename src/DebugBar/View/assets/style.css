@@ -219,6 +219,11 @@
   overflow: auto;
   font-family: -apple-system, "Helvetica Neue", BlinkMacSystemFont, "Open Sans", "Segoe UI", Roboto, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   line-height: 14px; }
+  .pkdebugbar-window a, .pkdebugbar-window a:link, .pkdebugbar-window a:visited, .pkdebugbar-window a:hover {
+    color: #028FCC;
+    font-size: 12px; }
+  .pkdebugbar-window pre {
+    font-size: 12px; }
   .pkdebugbar-window hr {
     border-width: 0;
     border-style: solid;
@@ -227,6 +232,7 @@
   .pkdebugbar-window.open {
     display: block; }
   .pkdebugbar-window h1, .pkdebugbar-window h2, .pkdebugbar-window h3, .pkdebugbar-window h4, .pkdebugbar-window h5, .pkdebugbar-window h6 {
+    font-family: -apple-system, "Helvetica Neue", BlinkMacSystemFont, "Open Sans", "Segoe UI", Roboto, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     margin: 10px 0 10px -8px;
     padding: 0;
     width: auto;
@@ -251,6 +257,7 @@
     .pkdebugbar-window table.table-border-inside td {
       border-bottom: 1px solid #d8d8d8; }
     .pkdebugbar-window table th {
+      font-family: -apple-system, "Helvetica Neue", BlinkMacSystemFont, "Open Sans", "Segoe UI", Roboto, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
       text-align: left;
       font-size: 14px;
       font-weight: bold;
@@ -259,7 +266,8 @@
       border-bottom: 1px solid #b2b2b2;
       padding: 8px 6px; }
     .pkdebugbar-window table td {
-      font-size: 12px;
+      font-family: -apple-system, "Helvetica Neue", BlinkMacSystemFont, "Open Sans", "Segoe UI", Roboto, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+      font-size: 11px;
       padding: 0 6px;
       color: #222;
       vertical-align: top; }
