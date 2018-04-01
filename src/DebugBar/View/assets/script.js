@@ -15,8 +15,18 @@ var peakDebugBar = (function() {
 
     // toogle bar visibility
     bar_toggle.addEventListener("click", function() {
-        bar.classList.toggle('collapse');
+        toggleBar();
     });
+
+    function toggleBar() {
+        bar.classList.toggle("collapse");
+        if (bar.classList.contains("collapse")) {
+            var windows_el = windows.querySelectorAll(".pkdebugbar-window");
+            Array.prototype.forEach.call(windows_el, function(el, i) {
+                el.classList.remove("open");
+            });
+        }
+    }
 
     function targetName(el) {
         return el.getAttribute("data-target");
@@ -55,6 +65,9 @@ var peakDebugBar = (function() {
     return {
         window: function(name) {
             return targetElFromName(name)
+        },
+        toggle: function() {
+            toggleBar();
         }
     }
 })();
