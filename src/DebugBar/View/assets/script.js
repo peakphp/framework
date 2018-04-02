@@ -18,11 +18,18 @@ var peakDebugBar = (function() {
         toggleBar();
     });
 
+    function forEach(els, callback) {
+        Array.prototype.forEach.call(els, callback);
+    }
+
     function toggleBar() {
         bar.classList.toggle("collapse");
         if (bar.classList.contains("collapse")) {
             var windows_el = windows.querySelectorAll(".pkdebugbar-window");
-            Array.prototype.forEach.call(windows_el, function(el, i) {
+            forEach(windows_el, function(el, i) {
+                el.classList.remove("open");
+            });
+            forEach(tabs, function(el, i) {
                 el.classList.remove("open");
             });
         }
@@ -46,13 +53,14 @@ var peakDebugBar = (function() {
         content_el.classList.toggle('open');
     }
 
-    Array.prototype.forEach.call(tabs, function(el, i) {
+
+
+    forEach(tabs, function(el, i) {
         var current_tab = el;
         var content_el = targetEl(el);
-
         if (content_el != null) {
             el.addEventListener('click', function() {
-                Array.prototype.forEach.call(tabs, function(el, i) {
+                forEach(tabs, function(el, i) {
                     if (el != current_tab && el.classList.contains('open')) {
                         toggleWindow(el);
                     }
