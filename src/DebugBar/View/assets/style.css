@@ -174,6 +174,7 @@
       letter-spacing: 0.05em;
       line-height: 42px;
       font-family: -apple-system, "Helvetica Neue", BlinkMacSystemFont, "Open Sans", "Segoe UI", Roboto, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+      font-size: 11px;
       color: #222;
       border-right: 1px solid #b2b2b2;
       padding: 0 15px;
@@ -218,11 +219,13 @@
   z-index: 999998;
   overflow: auto;
   font-family: -apple-system, "Helvetica Neue", BlinkMacSystemFont, "Open Sans", "Segoe UI", Roboto, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-size: 12px;
   line-height: 14px; }
   .pkdebugbar-window a, .pkdebugbar-window a:link, .pkdebugbar-window a:visited, .pkdebugbar-window a:hover {
     color: #028FCC;
     font-size: 12px; }
   .pkdebugbar-window pre {
+    font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
     font-size: 12px; }
   .pkdebugbar-window hr {
     border-width: 0;
@@ -233,6 +236,8 @@
     display: block; }
   .pkdebugbar-window h1, .pkdebugbar-window h2, .pkdebugbar-window h3, .pkdebugbar-window h4, .pkdebugbar-window h5, .pkdebugbar-window h6 {
     font-family: -apple-system, "Helvetica Neue", BlinkMacSystemFont, "Open Sans", "Segoe UI", Roboto, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    background: none;
+    border: 0;
     margin: 10px 0 10px -8px;
     padding: 0;
     width: auto;
@@ -251,7 +256,8 @@
     width: auto; }
   .pkdebugbar-window table {
     width: auto;
-    background: #f2f2f2; }
+    background: #f2f2f2;
+    font-family: -apple-system, "Helvetica Neue", BlinkMacSystemFont, "Open Sans", "Segoe UI", Roboto, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"; }
     .pkdebugbar-window table.table-full-width {
       width: 100%; }
     .pkdebugbar-window table.table-border-inside td {
@@ -286,7 +292,7 @@
       background-color: #eaeaea; }
   .pkdebugbar-window .pre-block {
     font-size: 12px;
-    font-family: monospace;
+    font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
     font-weight: normal;
     background: #f2f2f2;
     padding: 8px;
@@ -302,8 +308,10 @@
     padding: 6px 8px; }
   .pkdebugbar-window .message {
     padding: 5px 5px;
+    font-family: -apple-system, "Helvetica Neue", BlinkMacSystemFont, "Open Sans", "Segoe UI", Roboto, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     font-size: 13px;
-    margin-bottom: 3px; }
+    margin-bottom: 3px;
+    padding: 0; }
     .pkdebugbar-window .message .message-level {
       color: #b2b2b2;
       float: right; }

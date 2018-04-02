@@ -242,6 +242,7 @@ $window-padding: 20px;
       letter-spacing: 0.05em;
       line-height: $height;
       font-family: $font-default;
+      font-size:11px;
       color: $tab-color;
       border-right: 1px solid darken($bg-color-1, 20%);
       padding: 0 15px;
@@ -306,6 +307,7 @@ $window-padding: 20px;
   z-index: 999998;
   overflow:auto;
   font-family: $font-default;
+  font-size:12px;
   line-height:14px;
   //border:2px solid $border-color;
   //border-bottom:0;
@@ -317,6 +319,7 @@ $window-padding: 20px;
   }
 
   pre {
+    font-family: $font-mono;
     font-size: 12px;
   }
 
@@ -333,6 +336,8 @@ $window-padding: 20px;
 
   h1, h2, h3, h4, h5, h6 {
     font-family: $font-default;
+    background: none;
+    border:0;
     margin: 10px 0 10px -8px;
     padding:0;
     width:auto;
@@ -360,6 +365,7 @@ $window-padding: 20px;
   table {
     width: auto;
     background: lighten($bg-color-1, 5%);
+    font-family: $font-default;
 
     &.table-full-width {
       width: 100%;
@@ -412,7 +418,7 @@ $window-padding: 20px;
 
   .pre-block {
     font-size:12px;
-    font-family: monospace;
+    font-family: $font-mono;
     font-weight: normal;
     background: lighten($bg-color-1, 5%);
     padding:8px;
@@ -435,8 +441,10 @@ $window-padding: 20px;
 
   .message {
     padding:5px 5px;
+    font-family: $font-default;
     font-size: 13px;
     margin-bottom:3px;
+    padding:0;
 
     .message-level {
       color: darken($bg-color-1, 20%);
