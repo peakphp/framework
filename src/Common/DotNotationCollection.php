@@ -1,21 +1,26 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Common;
 
 use \RuntimeException;
 
 class DotNotationCollection extends Collection
 {
+    /**
+     * @const string
+     */
     const SEPARATOR = '/[:\.]/';
 
     /**
      * Return a path value
      *
      * @param string $path
-     * @param string $default
+     * @param mixed $default
      * @return mixed
      */
-    public function get($path, $default = null)
+    public function get(string $path, $default = null)
     {
         $array = $this->items;
 
@@ -38,7 +43,7 @@ class DotNotationCollection extends Collection
      * @param string $path
      * @param mixed $value
      */
-    public function set($path, $value)
+    public function set(string $path, $value): void
     {
         if (!empty($path)) {
             $at = & $this->items;
@@ -69,7 +74,7 @@ class DotNotationCollection extends Collection
      * @param string $path
      * @param array $values
      */
-    public function add($path, array $values)
+    public function add(string $path, array $values): void
     {
         $get = (array)$this->get($path);
         $this->set($path, $this->arrayMergeRecursiveDistinct($get, $values));
@@ -81,7 +86,7 @@ class DotNotationCollection extends Collection
      * @param  string $path
      * @return bool
      */
-    public function has($path)
+    public function has(string $path): bool
     {
         $keys = $this->explode($path);
         $array = $this->items;
@@ -100,7 +105,7 @@ class DotNotationCollection extends Collection
      * @param  string $path
      * @return array
      */
-    protected function explode($path)
+    protected function explode(string $path): array
     {
         return preg_split(self::SEPARATOR, $path);
     }

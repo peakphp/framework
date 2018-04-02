@@ -43,7 +43,7 @@ class ParamsCollection extends Collection
      * @param   string $key
      * @return  bool
      */
-    public function __isset($key)
+    public function __isset($key): bool
     {
         return $this->has($key);
     }

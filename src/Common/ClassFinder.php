@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Common;
 
 class ClassFinder
@@ -10,8 +12,14 @@ class ClassFinder
      */
     protected $namespaces = [];
 
+    /**
+     * @var string
+     */
     protected $prefix;
 
+    /**
+     * @var string
+     */
     protected $suffix;
 
     /**
@@ -27,10 +35,10 @@ class ClassFinder
     /**
      * Add suffix to a class name
      *
-     * @param $suffix
+     * @param string $suffix
      * @return $this
      */
-    public function setSuffix($suffix)
+    public function setSuffix(string $suffix): ClassFinder
     {
         $this->suffix = $suffix;
         return $this;
@@ -39,22 +47,22 @@ class ClassFinder
     /**
      * Add prefix to a class name
      *
-     * @param $prefix
+     * @param string $prefix
      * @return $this
      */
-    public function setPrefix($prefix)
+    public function setPrefix(string $prefix): ClassFinder
     {
         $this->prefix = $prefix;
         return $this;
     }
 
     /**
-     * Return the first classname found or false
+     * Return the first class name found or false
      *
      * @param  string $basename
      * @return string|null
      */
-    public function findFirst($basename)
+    public function findFirst(string $basename): ?string
     {
         $basename = $this->getClassName($basename);
         foreach ($this->namespaces as $ns) {
@@ -66,12 +74,12 @@ class ClassFinder
     }
 
     /**
-     * Return the last classname found or false
+     * Return the last class name found or false
      *
      * @param  string $basename
      * @return string|null
      */
-    public function findLast($basename)
+    public function findLast(string $basename): ?string
     {
         $class = null;
         $basename = $this->getClassName($basename);
@@ -86,10 +94,10 @@ class ClassFinder
     /**
      * Get class name
      *
-     * @param $name
+     * @param string $name
      * @return string
      */
-    protected function getClassName($name)
+    protected function getClassName(string $name): string
     {
         return $this->prefix.$name.$this->suffix;
     }

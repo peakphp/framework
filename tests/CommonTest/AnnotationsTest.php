@@ -22,6 +22,22 @@ class AnnotationsTest extends TestCase
     }
 
     /**
+     * Test getClass from an instance
+     */
+    function testGetClassWithAnInstance()
+    {
+        $myclass = new MyClass();
+        $an = new Annotations($myclass);
+        $tags = $an->getClass();
+        $this->assertTrue(is_array($tags));
+        $this->assertTrue(count($tags) == 2);
+        $this->assertTrue($tags[0]['tag'] == 'author');
+
+        $tags = $an->getClass('unknow_tags');
+        $this->assertTrue(empty($tags));
+    }
+
+    /**
      * Test getClass() with specific tag
      */
     function testGetClass2()

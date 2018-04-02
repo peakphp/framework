@@ -53,8 +53,6 @@ var peakDebugBar = (function() {
         content_el.classList.toggle('open');
     }
 
-
-
     forEach(tabs, function(el, i) {
         var current_tab = el;
         var content_el = targetEl(el);
