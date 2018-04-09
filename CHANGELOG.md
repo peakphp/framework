@@ -1,3 +1,10 @@
+VERSION 2.27.0
+--------------
+Release Date: ?
+
+ - updated Debug Bar style and added new method for toggling it
+ - fixed bug with Peak\Common\ExceptionLogger
+ 
 VERSION 2.26.0
 --------------
 Release Date: 2018-02-24

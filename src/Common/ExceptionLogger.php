@@ -1,4 +1,5 @@
 <?php
+
 namespace Peak\Common;
 
 use \Exception;
@@ -38,7 +39,7 @@ class ExceptionLogger
     /**
      * @var mixed
      */
-    protected $custom_closure;
+    protected $custom;
 
     /**
      * @var array
@@ -129,10 +130,10 @@ class ExceptionLogger
      */
     protected function closureContent()
     {
-        if (!is_callable($this->custom_closure)) {
+        if (!is_callable($this->custom)) {
             throw new Exception(__CLASS__.': you need to specify a closure when using custom mode');
         }
-        $fn = $this->custom_closure;
+        $fn = $this->custom;
         return $fn($this->exception);
     }
 
