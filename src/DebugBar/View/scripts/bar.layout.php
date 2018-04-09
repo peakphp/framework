@@ -7,8 +7,13 @@
                 echo '<li class="pkdebugbar-tab" data-target="'.$tab_name.'">'.$tab_content.'</li>';
             }
             ?>
+            <li class="pkdebugbar-toggle">
+                <span class="toggle-open">&rtrif;</span><span class="toggle-close">&ltrif;</span>
+            </li>
         </ul>
     </div>
+</div>
+<div id="pkdebugbar-windows">
     <?php echo $content; ?>
 </div>
 <script><?php include __DIR__.'/../assets/script.js'; ?></script>
