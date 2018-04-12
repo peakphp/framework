@@ -250,7 +250,7 @@ $window-padding: 20px;
       overflow:hidden;
 
       &.open {
-        border-bottom: 4px solid $logo-color;
+        border-bottom: 2px solid $logo-color;
         background: linear-gradient(to top, $logo-color 4px, $bg-color-1 0px, $bg-color-1 100%);
       }
 
