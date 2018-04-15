@@ -9,9 +9,9 @@
 
 > **Note:** This repository contains the core code of the Peak framework. If you want to build an application using Peak, visit the main [Peak repository](https://github.com/peakphp/peak).
 
-### About Peak Framework v2.x (STABLE)
+### About Peak Framework v2.x (LATEST)
 
-Check [latest 2.x version here](https://github.com/peakphp/framework/tree/2.27.0)
+Check [latest 2.x version here](https://github.com/peakphp/framework/tree/master)
 
 ### About Peak Framework v3.x (NOT STABLE) and currently under development in master branch
 
