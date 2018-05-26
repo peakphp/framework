@@ -2,7 +2,7 @@
 
 namespace Peak\Bedrock\View\Form;
 
-use Peak\Common\Collection;
+use Peak\Common\Collection\Collection;
 use \Exception;
 
 class FormBuilder extends Collection

@@ -6,7 +6,7 @@ use Peak\Bedrock\Application;
 use Peak\Bedrock\Controller\ChildActionController;
 use Peak\Bedrock\Controller\ParentController;
 use Peak\Bedrock\View;
-use Peak\Common\Collection;
+use Peak\Common\Collection\Collection;
 use Peak\Routing\RouteBuilder;
 
 class ChildApplicationControllerTest extends TestCase

@@ -4,7 +4,7 @@ namespace Peak\Bedrock\Application\Bootstrap;
 
 use Peak\Bedrock\Application\Config;
 use Peak\Bedrock\Application\Routing;
-use Peak\Common\Collection;
+use Peak\Common\Collection\Collection;
 use Peak\Common\DataException;
 use Peak\Routing\CustomRouteBuilder;
 

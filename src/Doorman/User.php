@@ -2,7 +2,7 @@
 
 namespace Peak\Doorman;
 
-use Peak\Common\Collection;
+use Peak\Common\Collection\Collection;
 use Peak\Doorman\Ability;
 use Peak\Doorman\AbilityResolver;
 use Peak\Doorman\Group;

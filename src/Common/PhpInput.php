@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Peak\Common;
 
+use Peak\Common\Collection\Collection;
+
 /**
  * Wrapper around php://input
  */

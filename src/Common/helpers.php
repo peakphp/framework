@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Peak\Common\Collection;
+use Peak\Common\Collection\Collection;
 use Peak\Common\PhpInput;
 use Peak\Common\DataException;
 use Peak\Common\TimeExpression;

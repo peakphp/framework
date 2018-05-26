@@ -2,7 +2,7 @@
 
 namespace Peak\Config\Processors;
 
-use Peak\Common\Collection;
+use Peak\Common\Collection\Collection;
 use Peak\Config\AbstractProcessor;
 use Peak\Config\Exceptions\ProcessorException;
 

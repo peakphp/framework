@@ -5,7 +5,7 @@ namespace Peak\Bedrock\View\Helper\DebugBar\Modules\AppConfig;
 use Peak\Bedrock\Application;
 use Peak\Bedrock\Application\Config;
 use Peak\DebugBar\AbstractModule;
-use Peak\Common\CollectionFlattener;
+use Peak\Common\Collection\CollectionFlattener;
 
 class AppConfig extends AbstractModule
 {

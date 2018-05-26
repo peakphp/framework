@@ -2,7 +2,7 @@
 
 use PHPUnit\Framework\TestCase;
 
-use Peak\Common\Collection;
+use Peak\Common\Collection\Collection;
 use Peak\Config\ConfigCache;
 use Peak\Common\TimeExpression;
 

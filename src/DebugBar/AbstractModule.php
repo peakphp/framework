@@ -2,7 +2,7 @@
 
 namespace Peak\DebugBar;
 
-use Peak\Common\Collection;
+use Peak\Common\Collection\Collection;
 use Peak\Common\Interfaces\Initializable;
 use Peak\Common\Interfaces\Renderable;
 use Peak\DebugBar\View\Layout;

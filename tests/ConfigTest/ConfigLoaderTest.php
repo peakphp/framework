@@ -6,8 +6,8 @@ use Peak\Config\ConfigLoader;
 use Peak\Config\ConfigData;
 use Peak\Config\ConfigFile;
 use Peak\Config\Processors\JsonProcessor;
-use Peak\Common\DotNotationCollection;
-use Peak\Common\Collection;
+use Peak\Common\Collection\DotNotationCollection;
+use Peak\Common\Collection\Collection;
 
 class ConfigLoaderTest extends TestCase
 {

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Peak\Common;
 
+use Peak\Common\Collection\DotNotationCollection;
+
 /**
  * Wrap Collection / DotNotation abilities around php $_SESSION
  */

@@ -5,7 +5,7 @@ use Peak\Routing\Request;
 use Peak\Routing\RequestResolver;
 use Peak\Routing\Route;
 use Peak\Routing\CustomRoute;
-use Peak\Common\Collection;
+use Peak\Common\Collection\Collection;
 
 class RequestResolverTest extends TestCase
 {

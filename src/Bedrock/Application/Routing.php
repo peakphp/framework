@@ -3,7 +3,7 @@
 namespace Peak\Bedrock\Application;
 
 use Peak\Bedrock\Application;
-use Peak\Common\Collection;
+use Peak\Common\Collection\Collection;
 use Peak\Routing\Request;
 use Peak\Routing\RequestServerURI;
 use Peak\Routing\RequestResolver;

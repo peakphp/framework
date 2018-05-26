@@ -4,7 +4,7 @@ namespace Peak\Doorman;
 
 use Exception;
 
-use Peak\Common\Collection;
+use Peak\Common\Collection\Collection;
 use Peak\Doorman\Ability;
 use Peak\Doorman\User;
 use Peak\Doorman\UserPolicy;

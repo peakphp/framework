@@ -1,7 +1,7 @@
 <?php
 use PHPUnit\Framework\TestCase;
 
-use Peak\Common\Collection;
+use Peak\Common\Collection\Collection;
 use Peak\Pipelines\Pipeline;
 use Peak\Pipelines\Exceptions\MissingPipeInterfaceException;
 use Peak\Pipelines\Exceptions\InvalidPipeException;

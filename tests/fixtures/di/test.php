@@ -13,7 +13,7 @@ class TestDi1
     public $arg2;
     public $arg3;
     
-    function __construct(Peak\Common\Collection $col, $arg1, array $arg2, $arg3 = [])
+    function __construct(Peak\Common\Collection\Collection $col, $arg1, array $arg2, $arg3 = [])
     {
         $this->col = $col;
         $this->arg1 = $arg1;
@@ -21,7 +21,7 @@ class TestDi1
         $this->arg3 = $arg3;
     }
 
-    function methodA(Peak\Common\Collection $col, $arg1)
+    function methodA(Peak\Common\Collection\Collection $col, $arg1)
     {
         //print_r($col);
         return $arg1;

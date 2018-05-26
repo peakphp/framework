@@ -2,7 +2,7 @@
 
 namespace Peak\Bedrock\Controller;
 
-use Peak\Common\Collection;
+use Peak\Common\Collection\Collection;
 use Peak\Validation\RuleBuilder;
 
 class ParamsCollection extends Collection

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Peak\Config;
 
-use Peak\Common\Collection;
-use Peak\Common\DotNotationCollection;
+use Peak\Common\Collection\Collection;
+use Peak\Common\Collection\DotNotationCollection;
 use Peak\Config\Exceptions\UnknownTypeException;
 use Peak\Config\Processors\ArrayProcessor;
 use Peak\Config\Processors\CallableProcessor;

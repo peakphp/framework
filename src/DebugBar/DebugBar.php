@@ -2,7 +2,7 @@
 
 namespace Peak\DebugBar;
 
-use Peak\Common\Collection;
+use Peak\Common\Collection\Collection;
 use Peak\Common\Interfaces\Renderable;
 use Peak\DebugBar\Exceptions\InvalidModuleException;
 use Peak\DebugBar\Exceptions\ModuleNotFoundException;

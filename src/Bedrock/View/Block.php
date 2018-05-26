@@ -3,7 +3,7 @@
 namespace Peak\Bedrock\View;
 
 use Peak\Bedrock\View;
-use Peak\Common\Collection;
+use Peak\Common\Collection\Collection;
 use Peak\Common\Interfaces\Renderable;
 use Peak\Bedrock\View\Exceptions\BlockNotFoundException;
 

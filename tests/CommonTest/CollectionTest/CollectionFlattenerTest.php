@@ -2,8 +2,8 @@
 
 use PHPUnit\Framework\TestCase;
 
-use Peak\Common\Collection;
-use Peak\Common\CollectionFlattener;
+use Peak\Common\Collection\Collection;
+use Peak\Common\Collection\CollectionFlattener;
 
 class CollectionFlattenerTest extends TestCase
 {
