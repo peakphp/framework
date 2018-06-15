@@ -46,6 +46,8 @@ class ConfigCacheTest extends TestCase
     }
 
     /**
+     * @throws \Peak\Config\Exceptions\CachePathNotFoundException
+     * @throws \Peak\Config\Exceptions\CachePathNotWritableException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      */
     public function testGet()

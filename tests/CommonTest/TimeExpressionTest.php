@@ -127,7 +127,8 @@ class TimeExpressionTest extends TestCase
     {
         // using TimeExpression to add time from a DateTime
         $datetime = new DateTime('2017-08-14 11:00:00');
-        $datetime->add((new TimeExpression('25 mins 15 secs'))->toDateInterval());
+        $dtToAdd = (new TimeExpression('25 mins 15 secs'))->toDateInterval();
+        $datetime->add($dtToAdd);
         $this->assertTrue($datetime->format('Y-m-d H:i:s') === '2017-08-14 11:25:15');
     }
 
@@ -146,6 +147,9 @@ class TimeExpressionTest extends TestCase
     {
         $this->assertTrue(TimeExpression::createFrom('25 mins 15 secs') instanceof TimeExpression);
         $this->assertFalse(TimeExpression::createFrom('asdas'));
+        $this->assertFalse(($ti = TimeExpression::createFrom('asdas')) !== false);
+        echo "\n". TimeExpression::createFrom('2y 2w 35s')->toSeconds()."\n";
+        $this->assertTrue(($ti = TimeExpression::createFrom('2y 2w 7.2 hour ... 35sec ')) !== false);
     }
 
     function testException()

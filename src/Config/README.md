@@ -98,6 +98,8 @@ FilesHandlers::override([
 Processing complex multiple configurations can be costly and if they rarely change, you might want to cache the result instead.
 
 ```php
+$cc = new ConfigCache('/path/to/cache');
+
 $cache_id = 'my-configuration-id';
 
 if ($cc->isExpired($cache_id)) {
