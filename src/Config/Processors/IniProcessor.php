@@ -1,21 +1,29 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Config\Processors;
 
 use Peak\Common\Traits\ArrayMergeRecursiveDistinct;
-use Peak\Config\AbstractProcessor;
 use Peak\Config\Exceptions\ProcessorException;
+use Peak\Config\ProcessorInterface;
 
-class IniProcessor extends AbstractProcessor
+class IniProcessor implements ProcessorInterface
 {
     use ArrayMergeRecursiveDistinct;
 
     /**
+     * @var array
+     */
+    private $content;
+
+    /**
      * @throws ProcessorException
      */
-    public function process($data)
+    public function process($data): array
     {
         $this->load($data);
+        return $this->content;
     }
 
     /**
@@ -29,7 +37,6 @@ class IniProcessor extends AbstractProcessor
      *                                   process_sections is FALSE
      * @param  string $section_name      Specific section name to extract upon processing
      * @throws ProcessorException
-     * @return array|boolean
      */
     public function load($data)
     {

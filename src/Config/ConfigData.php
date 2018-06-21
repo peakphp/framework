@@ -19,8 +19,7 @@ class ConfigData
      */
     public function __construct($data, ProcessorInterface $processor)
     {
-        $processor->process($data);
-        $this->processed_content = $processor->getContent();
+        $this->processed_content = $processor->process($data);
     }
 
     /**

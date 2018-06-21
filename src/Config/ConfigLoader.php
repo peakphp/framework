@@ -160,7 +160,6 @@ class ConfigLoader
      */
     protected function processConfig(ProcessorInterface $processor, $config): array
     {
-        $processor->process($config);
-        return $processor->getContent();
+        return $processor->process($config);
     }
 }

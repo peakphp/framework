@@ -1,24 +1,27 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Config\Processors;
 
-use Peak\Config\AbstractProcessor;
 use Peak\Config\Exceptions\ProcessorException;
+use Peak\Config\ProcessorInterface;
 use Symfony\Component\Yaml\Exception\ParseException;
 use Symfony\Component\Yaml\Yaml;
 
-class YamlProcessor extends AbstractProcessor
+class YamlProcessor implements ProcessorInterface
 {
     /**
      * @param $data
+     * @return array
      * @throws ProcessorException, ParseException
      */
-    public function process($data)
+    public function process($data): array
     {
-        if (!class_exists('Symfony\Component\Yaml\Yaml')) {
+        if (!class_exists(Yaml::class)) {
             throw new ProcessorException(__CLASS__.' require symfony/yaml to work properly');
         }
 
-        $this->content = Yaml::parse($data);
+        return Yaml::parse($data);
     }
 }
