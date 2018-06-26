@@ -18,7 +18,7 @@ class ClassFinderTest extends TestCase
         ]);
 
         $class = $cf->findFirst('JsonProcessor');
-        $this->assertTrue($class === Peak\Config\Processors\JsonProcessor::class);
+        $this->assertTrue($class === Peak\Config\Processor\JsonProcessor::class);
 
         $class = null;
         $class = $cf->findFirst('Test');
@@ -37,7 +37,7 @@ class ClassFinderTest extends TestCase
         ]);
 
         $class = $cf->findLast('JsonProcessor');
-        $this->assertTrue($class === Peak\Config\Processors\JsonProcessor::class);
+        $this->assertTrue($class === Peak\Config\Processor\JsonProcessor::class);
 
         $class = null;
         $class = $cf->findFirst('Test');

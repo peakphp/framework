@@ -29,7 +29,7 @@ class ConfigCacheTest extends TestCase
     }
 
     /**
-     * @expectedException \Peak\Config\Exceptions\CachePathNotFoundException
+     * @expectedException \Peak\Config\Exception\CachePathNotFoundException
      */
     public function testPathNotFoundException()
     {
@@ -37,7 +37,7 @@ class ConfigCacheTest extends TestCase
     }
 
     /**
-     * @expectedException \Peak\Config\Exceptions\InvalidCacheKeyException
+     * @expectedException \Peak\Config\Exception\CacheInvalidKeyException
      */
     public function testInvalidCacheKeyException()
     {
@@ -46,8 +46,8 @@ class ConfigCacheTest extends TestCase
     }
 
     /**
-     * @throws \Peak\Config\Exceptions\CachePathNotFoundException
-     * @throws \Peak\Config\Exceptions\CachePathNotWritableException
+     * @throws \Peak\Config\Exception\CachePathNotFoundException
+     * @throws \Peak\Config\Exception\CachePathNotWritableException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      */
     public function testGet()
@@ -197,7 +197,7 @@ class ConfigCacheTest extends TestCase
     }
 
     /**
-     * @throws \Peak\Config\Exceptions\UnknownTypeException
+     * @throws \Peak\Config\Exception\UnknownTypeException
      */
     public function testWithConfigLoader()
     {
@@ -245,7 +245,7 @@ class ConfigCacheTest extends TestCase
     }
 
     /**
-     * @expectedException \Peak\Config\Exceptions\CachePathNotWritableException
+     * @expectedException \Peak\Config\Exception\CachePathNotWritableException
      */
     public function testCachePathNotWritableException()
     {

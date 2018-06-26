@@ -2,10 +2,10 @@
 
 use PHPUnit\Framework\TestCase;
 
-use Peak\Config\Loaders\DefaultLoader;
-use Peak\Config\Loaders\PhpLoader;
-use Peak\Config\Loaders\TextLoader;
-use Peak\Config\Processors\JsonProcessor;
+use Peak\Config\Loader\DefaultLoader;
+use Peak\Config\Loader\PhpLoader;
+use Peak\Config\Loader\TextLoader;
+use Peak\Config\Processor\JsonProcessor;
 use Peak\Config\ConfigFile;
 
 class ConfigFileTest extends TestCase
@@ -83,7 +83,7 @@ class ConfigFileTest extends TestCase
     }
 
     /**
-     * @expectedException Peak\Config\Exceptions\FileNotFoundException
+     * @expectedException Peak\Config\Exception\FileNotFoundException
      */
     public function testFileNotFoundException()
     {
@@ -91,7 +91,7 @@ class ConfigFileTest extends TestCase
     }
 
     /**
-     * @expectedException Peak\Config\Exceptions\NoFileHandlersException
+     * @expectedException Peak\Config\Exception\NoFileHandlersException
      */
     public function testNoFileHandlersException()
     {
@@ -99,7 +99,7 @@ class ConfigFileTest extends TestCase
     }
 
     /**
-     * @expectedException Peak\Config\Exceptions\LoaderException
+     * @expectedException Peak\Config\Exception\LoaderException
      */
     public function testLoaderException()
     {

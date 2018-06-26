@@ -5,7 +5,7 @@ use PHPUnit\Framework\TestCase;
 use Peak\Config\ConfigLoader;
 use Peak\Config\ConfigData;
 use Peak\Config\ConfigFile;
-use Peak\Config\Processors\JsonProcessor;
+use Peak\Config\Processor\JsonProcessor;
 use Peak\Common\Collection\DotNotationCollection;
 use Peak\Common\Collection\Collection;
 
@@ -130,7 +130,7 @@ class ConfigLoaderTest extends TestCase
     /**
      * Test ini
      *
-     * @throws \Peak\Config\Exceptions\UnknownTypeException
+     * @throws \Peak\Config\Exception\UnknownTypeException
      */
     function testIni()
     {
@@ -146,7 +146,7 @@ class ConfigLoaderTest extends TestCase
     /**
      * Test multiple configuration type together
      *
-     * @throws \Peak\Config\Exceptions\UnknownTypeException
+     * @throws \Peak\Config\Exception\UnknownTypeException
      */
     function testMixedTypeConfigs()
     {
@@ -179,7 +179,7 @@ class ConfigLoaderTest extends TestCase
     /**
      * Test multiple configuration with ConfigFile and ConfigData
      *
-     * @throws \Peak\Config\Exceptions\UnknownTypeException
+     * @throws \Peak\Config\Exception\UnknownTypeException
      */
     function testMixedTypeConfigs2()
     {
@@ -195,7 +195,7 @@ class ConfigLoaderTest extends TestCase
 
     /**
      * Test UnknownTypeException exception
-     * @expectedException \Peak\Config\Exceptions\UnknownTypeException
+     * @expectedException \Peak\Config\Exception\UnknownTypeException
      */
     function testIniProcessorException2()
     {

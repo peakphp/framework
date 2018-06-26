@@ -3,7 +3,7 @@
 use PHPUnit\Framework\TestCase;
 
 use Peak\Config\ConfigData;
-use Peak\Config\Processors\JsonProcessor;
+use Peak\Config\Processor\JsonProcessor;
 
 class ConfigDataTest extends TestCase
 {

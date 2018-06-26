@@ -7,24 +7,13 @@ use Peak\Config\FilesHandlers;
 class FilesHandlersTest extends TestCase
 {
     /**
-     * Test getAll()
+     * @throws \Peak\Config\Exception\NoFileHandlersException
      */
-    function testGetAll()
+    function testDefault()
     {
-        $handlers = FilesHandlers::getAll();
-        $this->assertTrue(is_array($handlers));
+        $fileHandlers = new FilesHandlers();
+        $this->assertTrue($fileHandlers->has('php'));
+        $this->assertTrue($fileHandlers->getProcessor('php'));
     }
 
-    /**
-     * Test override()
-     * @expectedException \Peak\Config\Exceptions\InvalidFileHandlerException
-     */
-    function testOverride()
-    {
-        FilesHandlers::override([
-            'json' => [
-                'blabla'
-            ]
-        ]);
-    }
 }

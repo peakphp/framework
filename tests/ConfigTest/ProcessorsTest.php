@@ -3,11 +3,11 @@
 use PHPUnit\Framework\TestCase;
 
 use Peak\Common\Collection\Collection;
-use Peak\Config\Processors\ArrayProcessor;
-use Peak\Config\Processors\CallableProcessor;
-use Peak\Config\Processors\CollectionProcessor;
-use Peak\Config\Processors\IniProcessor;
-use Peak\Config\Processors\JsonProcessor;
+use Peak\Config\Processor\ArrayProcessor;
+use Peak\Config\Processor\CallableProcessor;
+use Peak\Config\Processor\CollectionProcessor;
+use Peak\Config\Processor\IniProcessor;
+use Peak\Config\Processor\JsonProcessor;
 
 class ProcessorsTest extends TestCase
 {
@@ -26,7 +26,7 @@ class ProcessorsTest extends TestCase
 
     /**
      * Test ArrayProcessor exception
-     * @expectedException \Peak\Config\Exceptions\ProcessorException
+     * @expectedException \Peak\Config\Exception\ProcessorException
      */
     function testArrayProcessorException()
     {
@@ -55,7 +55,7 @@ class ProcessorsTest extends TestCase
 
     /**
      * Test CallableProcessor exception
-     * @expectedException \Peak\Config\Exceptions\ProcessorException
+     * @expectedException \Peak\Config\Exception\ProcessorException
      */
     function testCallableProcessorException()
     {
@@ -65,7 +65,7 @@ class ProcessorsTest extends TestCase
 
     /**
      * Test CallableProcessor exception
-     * @expectedException \Peak\Config\Exceptions\ProcessorException
+     * @expectedException \Peak\Config\Exception\ProcessorException
      */
     function testCallableProcessorException2()
     {
@@ -92,7 +92,7 @@ class ProcessorsTest extends TestCase
 
     /**
      * Test CollectionProcessor exception
-     * @expectedException \Peak\Config\Exceptions\ProcessorException
+     * @expectedException \Peak\Config\Exception\ProcessorException
      */
     function testCollectionProcessorException()
     {
@@ -118,7 +118,7 @@ class ProcessorsTest extends TestCase
 
     /**
      * Test IniProcessor exception
-     * @expectedException \Peak\Config\Exceptions\ProcessorException
+     * @expectedException \Peak\Config\Exception\ProcessorException
      */
     function testIniProcessorException()
     {
@@ -128,7 +128,7 @@ class ProcessorsTest extends TestCase
 
     /**
      * Test IniProcessor exception
-     * @expectedException \Peak\Config\Exceptions\ProcessorException
+     * @expectedException \Peak\Config\Exception\ProcessorException
      */
     function testIniProcessorException2()
     {
@@ -138,7 +138,7 @@ class ProcessorsTest extends TestCase
 
     /**
      * Test JsonProcessor exception
-     * @expectedException \Peak\Config\Exceptions\ProcessorException
+     * @expectedException \Peak\Config\Exception\ProcessorException
      */
     function testJsonProcessorException()
     {
