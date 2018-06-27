@@ -1,0 +1,46 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Peak\Config\Stream;
+
+use Peak\Config\FilesHandlers;
+
+class FileStream implements StreamInterface
+{
+    /**
+     * @var FilesHandlers
+     */
+    protected $handlers;
+
+    /**
+     * @var string
+     */
+    protected $file;
+
+    /**
+     * FileStream constructor.
+     *
+     * @param string $file
+     * @param FilesHandlers $handlers
+     */
+    public function __construct(string $file, FilesHandlers $handlers)
+    {
+        $this->file = $file;
+        $this->handlers = $handlers;
+    }
+
+    /**
+     * @return array
+     * @throws \Peak\Config\Exception\NoFileHandlersException
+     */
+    public function get(): array
+    {
+        $ext = strtolower(pathinfo($this->file, PATHINFO_EXTENSION));
+
+        $loader = $this->handlers->getLoader($ext);
+        $processor = $this->handlers->getProcessor($ext);
+
+        return $processor->process($loader->load($this->file));
+    }
+}

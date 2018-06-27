@@ -37,7 +37,7 @@ class ConfigResolver
      * @param array $config
      * @throws DataException
      * @throws MissingConfigException
-     * @throws \Peak\Config\Exceptions\UnknownTypeException
+     * @throws \Peak\Config\Exception\UnknownTypeException
      */
     public function __construct($config = [])
     {
