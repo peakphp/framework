@@ -11,13 +11,14 @@ use ArrayAccess;
 use ArrayIterator;
 use JsonSerializable;
 use IteratorAggregate;
+use Serializable;
 use \Exception;
 use \Closure;
 
 /**
  * Collection object
  */
-class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSerializable
+class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSerializable, Serializable
 {
     use ArrayMergeRecursiveDistinct;
 
@@ -277,6 +278,22 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
     public function jsonSerialize(int $options = 0, int $depth = 512): string
     {
         return json_encode($this->items, $options, $depth);
+    }
+
+    /**
+     * @return string
+     */
+    public function serialize()
+    {
+        return serialize($this->items);
+    }
+
+    /**
+     * @param string $data
+     */
+    public function unserialize($data)
+    {
+        $this->items = unserialize($data);
     }
 
     /**
