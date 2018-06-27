@@ -9,6 +9,7 @@ use Peak\Config\Exception\UnknownResourceException;
 use Peak\Config\Processor\ArrayProcessor;
 use Peak\Config\Processor\CallableProcessor;
 use Peak\Config\Processor\CollectionProcessor;
+use Peak\Config\Processor\StdClassProcessor;
 use Peak\Config\Stream\DataStream;
 use Peak\Config\Stream\FileStream;
 use Peak\Config\Stream\StreamInterface;
@@ -63,6 +64,8 @@ class ConfigFactory
             return new DataStream($resource, new CollectionProcessor());
         } elseif ($resource instanceof StreamInterface) {
             return $resource;
+        } elseif ($resource instanceof \stdClass) {
+            return new DataStream($resource, new StdClassProcessor());
         } elseif (is_string($resource)) {
             if (!isset($this->filesHandlers)) {
                 $this->setFilesHandlers(new FilesHandlers());
