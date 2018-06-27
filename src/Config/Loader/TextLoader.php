@@ -1,18 +1,26 @@
 <?php
 
-namespace Peak\Config\Loaders;
+declare(strict_types=1);
 
-use Peak\Config\Exceptions\LoaderException;
-use Peak\Config\LoaderInterface;
+namespace Peak\Config\Loader;
+
+use Peak\Config\Exception\FileNotFoundException;
+use Peak\Config\Exception\LoaderException;
 
 class TextLoader implements LoaderInterface
 {
     /**
-     * @param $resource
+     * @param mixed $resource
+     * @return array|mixed
+     * @throws FileNotFoundException
      * @throws LoaderException
      */
     public function load($resource)
     {
+        if (!file_exists($resource)) {
+            throw new FileNotFoundException($resource);
+        }
+
         $content = [];
 
         // we silence error(s) so we can catch them and throw a proper exception after

@@ -4,16 +4,59 @@ declare(strict_types=1);
 
 namespace Peak\Config;
 
-use Peak\Config\Exceptions\InvalidFileHandlerException;
-use Peak\Config\Exceptions\NoFileHandlersException;
+use Peak\Config\Exception\NoFileHandlersException;
+use Peak\Config\Loader\LoaderInterface;
+use Peak\Config\Processor\ProcessorInterface;
 
 class FilesHandlers
 {
     /**
-     * Files handlers
      * @var array
      */
-    protected static $handlers = [];
+    protected $handlers = [];
+
+    /**
+     * @var array
+     */
+    protected $defaultHandlers = [
+        'php' => [
+            'loader' => \Peak\Config\Loader\PhpLoader::class,
+            'processor' => \Peak\Config\Processor\ArrayProcessor::class
+        ],
+        'json' => [
+            'loader' => \Peak\Config\Loader\DefaultLoader::class,
+            'processor' => \Peak\Config\Processor\JsonProcessor::class
+        ],
+        'yml' => [
+            'loader' => \Peak\Config\Loader\DefaultLoader::class,
+            'processor' => \Peak\Config\Processor\YamlProcessor::class
+        ],
+        'ini' => [
+            'loader' => \Peak\Config\Loader\DefaultLoader::class,
+            'processor' => \Peak\Config\Processor\IniProcessor::class
+        ],
+        'txt' => [
+            'loader' => \Peak\Config\Loader\TextLoader::class,
+            'processor' => \Peak\Config\Processor\ArrayProcessor::class
+        ],
+        'log' => [
+            'loader' => \Peak\Config\Loader\TextLoader::class,
+            'processor' => \Peak\Config\Processor\ArrayProcessor::class
+        ],
+    ];
+
+    /**
+     * FilesHandlers constructor.
+     *
+     * @param array $handlers
+     */
+    public function __construct(array $handlers = [])
+    {
+        if (empty($handlers)) {
+            $handlers = $this->defaultHandlers;
+        }
+        $this->handlers = $handlers;
+    }
 
     /**
      * Check if we have a specific file handlers
@@ -21,19 +64,9 @@ class FilesHandlers
      * @param string $name
      * @return bool
      */
-    public static function has(string $name): bool
+    public function has(string $name): bool
     {
-        return array_key_exists($name, self::$handlers);
-    }
-
-    /**
-     * Check if handlers array is empty
-     *
-     * @return bool
-     */
-    public static function isEmpty(): bool
-    {
-        return empty(self::$handlers);
+        return array_key_exists($name, $this->handlers);
     }
 
     /**
@@ -43,13 +76,39 @@ class FilesHandlers
      * @return array
      * @throws NoFileHandlersException
      */
-    public static function get(string $name): array
+    public function get(string $name): array
     {
-        if (!self::has($name)) {
+        if (!$this->has($name)) {
             throw new NoFileHandlersException($name);
         }
 
-        return self::$handlers[$name];
+        return $this->handlers[$name];
+    }
+
+    /**
+     * Get a file loader
+     *
+     * @param string $name
+     * @return LoaderInterface
+     * @throws NoFileHandlersException
+     */
+    public function getLoader(string $name): LoaderInterface
+    {
+        $handlers = $this->get($name);
+        return new $handlers['loader']();
+    }
+
+    /**
+     * Get a file processor
+     *
+     * @param string $name
+     * @return ProcessorInterface
+     * @throws NoFileHandlersException
+     */
+    public function getProcessor(string $name): ProcessorInterface
+    {
+        $handlers = $this->get($name);
+        return new $handlers['processor']();
     }
 
     /**
@@ -57,39 +116,25 @@ class FilesHandlers
      *
      * @return array
      */
-    public static function getAll(): array
+    public function getAll(): array
     {
-        return self::$handlers;
+        return $this->handlers;
     }
 
     /**
      * Add or override a file handlers
      *
-     * @param string $name file extension
-     * @param string $loader file loader
-     * @param string $processor file processor
+     * @param string $name
+     * @param string $loader
+     * @param string $processor
+     * @return FilesHandlers
      */
-    public static function set(string $name, string $loader, string $processor): void
+    public function set(string $name, string $loader, string $processor): FilesHandlers
     {
-        self::$handlers[$name] = [
-            'loader' => $loader,
-            'processor' => $processor,
+        $this->handlers[$name] = [
+            'loader' => new $loader(),
+            'processor' => new $processor(),
         ];
-    }
-
-    /**
-     * Overwrite files handlers definitions
-     *
-     * @param array $handlers
-     * @throws InvalidFileHandlerException
-     */
-    public static function override(array $handlers): void
-    {
-        foreach ($handlers as $name => $definition) {
-            if (!isset($definition['loader']) || !isset($definition['processor'])) {
-                throw new InvalidFileHandlerException($name);
-            }
-            self::set($name, $definition['loader'], $definition['processor']);
-        }
+        return $this;
     }
 }

@@ -1,6 +1,7 @@
 {
   "name": "peak/config",
   "description": "Peak Configuration Component",
+  "type": "library",
   "keywords": ["peak", "config", "configuration", "env", "psr-16"],
   "license": "MIT",
   "homepage": "https://peakframework.com",
@@ -19,16 +20,22 @@
     "psr/simple-cache": "^1.0",
     "peak/common": "^3.0"
   },
+  "suggest": {
+    "symfony/yaml": "To process yaml configuration file"
+  },
   "autoload": {
     "psr-4": {
       "Peak\\Config\\": ""
-    }
+    },
+    "exclude-from-classmap": [
+      "/Tests/"
+    ]
   },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
   "extra": {
     "branch-alias": {
       "dev-master": "3.0-dev"
     }
-  },
-  "minimum-stability": "dev",
-  "prefer-stable": true
+  }
 }

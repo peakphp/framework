@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Peak\Config\Exceptions;
+namespace Peak\Config\Exception;
 
 class NoFileHandlersException extends \Exception
 {

@@ -2,11 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Peak\Config\Processors;
+namespace Peak\Config\Processor;
 
 use Peak\Common\Traits\ArrayMergeRecursiveDistinct;
-use Peak\Config\Exceptions\ProcessorException;
-use Peak\Config\ProcessorInterface;
+use Peak\Config\Exception\ProcessorException;
 
 class IniProcessor implements ProcessorInterface
 {

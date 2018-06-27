@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Peak\Config\Exceptions;
+namespace Peak\Config\Exception;
 
 use Psr\SimpleCache\InvalidArgumentException;
 
-class InvalidCacheKeyException extends \Exception implements InvalidArgumentException
+class CacheInvalidKeyException extends \Exception implements InvalidArgumentException
 {
     /**
      * InvalidCacheKeyException constructor.

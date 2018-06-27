@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Peak\Config;
 
-use Peak\Config\Exceptions\CachePathNotFoundException;
-use Peak\Config\Exceptions\CachePathNotWritableException;
-use Peak\Config\Exceptions\InvalidCacheKeyException;
+use Peak\Config\Exception\CachePathNotFoundException;
+use Peak\Config\Exception\CachePathNotWritableException;
+use Peak\Config\Exception\CacheInvalidKeyException;
 use Psr\SimpleCache\CacheInterface;
 
 class ConfigCache implements CacheInterface
@@ -231,12 +231,12 @@ class ConfigCache implements CacheInterface
      * Check if key is a valid string name
      *
      * @param string $key
-     * @throws InvalidCacheKeyException
+     * @throws CacheInvalidKeyException
      */
     protected function checkKeyName($key): void
     {
         if (!is_string($key) || preg_match("#[{}()/\\@:]#", $key)) {
-            throw new InvalidCacheKeyException();
+            throw new CacheInvalidKeyException();
         }
     }
 

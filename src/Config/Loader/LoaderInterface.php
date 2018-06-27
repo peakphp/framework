@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Peak\Config;
+namespace Peak\Config\Loader;
 
 interface LoaderInterface
 {
