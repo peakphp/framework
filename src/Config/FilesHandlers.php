@@ -43,6 +43,10 @@ class FilesHandlers
             'loader' => \Peak\Config\Loader\TextLoader::class,
             'processor' => \Peak\Config\Processor\ArrayProcessor::class
         ],
+        'xml' => [
+            'loader' => \Peak\Config\Loader\DefaultLoader::class,
+            'processor' => \Peak\Config\Processor\XmlProcessor::class
+        ],
     ];
 
     /**
