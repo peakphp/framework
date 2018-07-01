@@ -104,7 +104,7 @@ class ConfigFactoryTest extends TestCase
         $config = $configFactory->loadResource([
             FIXTURES_PATH.'/config/config.xml',
         ]);
-        print_r($config);
+        $this->assertTrue($config->has('@attributes.bootstrap'));
     }
 
     /**

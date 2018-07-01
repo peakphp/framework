@@ -1,6 +1,6 @@
 # Peak\Config
 #### Manage multiple configuration resources like a pro!
-This component manage configuration of various format and source and merge them recursivly into one configuration collection 
+This component manage configuration of various format and source and merge them recursivly into one configuration collection. 
 
 
 ## Installation outside framework
@@ -9,88 +9,105 @@ This component manage configuration of various format and source and merge them 
 $ composer require peak/config
 ```
 
-## Supported formats
-
- - PHP Array
- - Json
- - Text
- - Ini
- - Yaml
-
-## Load multiple config resource at once
-This the most common and direct way to access to all you configuration resources.
+## Load multiple config resources at once
+```ConfigFactory``` is the most easiest and direct way to access to all you configuration resources. 
 ```php
-$cl = new ConfigLoader([
+$configFactory = new ConfigFactory();
+$config = $configFactory->loadResource([
     'config/app.php',
     'config/app.dev.php',
     'config/database.yml',
     'config/widget.json',
 ]);
-
-// plain array
-$config = $cl->asArray();
-
-// plain stdClass
-$config = $cl->asObject();
-
-// collection
-$config = $cl->asCollection();
-
-// dot notation collection
-$config = $cl->asDotNotationCollection();
-
-// execute a closure on configuration collection to create something else
-$config = $cl->asClosure(function(Collection $coll) {
-    // do something and return something
-});
 ```
 
-## How it works
+All configurations are merged into one. Existing configuration keys are overwritten by later definitions:
+Example: 
+- ```config/app.php``` contains ```array('foo' => 'bar')``` 
+- ```config/app.dev.php``` contain ```array('foo' => 'bar2')```
+- the final value of ```foo``` will be ```bar2```
 
-Each config pass through 1 or 2 handlers, a Loader and a Processor and should terminate by an array.
+Method *loadResources()* accept an array of resources and return an instance of *Peak\Config\Config*. It support types:
 
-Loaders are mean to handle how we retrieve the configuration content which is useful when comes to files. Peak\Config comes with 3 loaders that handle most common cases:
+ - *String*, which are treated like filepath and processed internally by *FileStream*.
+    Extensions supported by default: PHP array, Json, Text, Ini, Yaml, Xml
+ - *Arrays*
+ - *Callable*, like closure or invokable classes
+ - *Collection* instance
+ - *Config* instance
+ - *stdClass* instance
+ - *StreamInterface* instance
+
+## Loading and processing data with Stream.
+
+Under the hood, ```ConfigFactory``` will determine the best way to load and process your config by using Stream underneath. 
+You can also be specific by pushing a stream to *ConfigFactory::loadResource*.
+
+```php
+$configFactory = new ConfigFactory();
+$config = $configFactory->loadResource([
+    new JsonStream('{"foo": "bar"}'),
+    new DataStream(["foo" => "bar2"], new ArrayProcessor()) // same as JsonStream
+    new FileStream('myfile.json', new FileHandlers()),
+    // ...    
+]);
+```
+
+*Loaders* are mean to handle how we retrieve the configuration content which is useful when comes to files. Peak\Config comes with 3 loaders that handle most common cases:
 
  - ```DefaultLoader``` use file_get_contents()
  - ```PhpLoader``` use include(), the file must return an array
  - ```TextLoader``` use fread()
 
-Processors are mean to handle how to process configuration data to an array. Peak\Config comes with 6 processors:
+*Processors* are mean to handle how to process configuration data to an array. Peak\Config comes with 6 processors:
 
  - ```ArrayProcessor```
- - ```CallableProcessor``` closure and callable
+ - ```StdClassProcessor``` 
+ - ```CallableProcessor``` Closure and callable
  - ```CollectionProcessor``` Peak\Common\Collection
- - ```IniProcessor``` Supported advanced ini with dot notation
- - ```JsonProcessor```
- - ```YamlProcessor``` You will need symfony/yaml for this one
+ - ```IniProcessor``` Parse ini data. Support advanced dot notation
+ - ```JsonProcessor``` Parse json data
+ - ```YamlProcessor``` Parse yaml data. symfony/yaml required for this one
+ - ```XmlProcessor```  Parse xml data
+ 
+*Stream* are simply wrapper around loaders and processors. They are used internally by ```ConfigFactory``` to load resources correctly.
+
+ - ```DataStream```
+ - ```FileStream```
+ - ```ConfigStream```
+ - ```JsonStream```
+ - ```XmlStream```
+
+You can also create your own and/or used them directly load anything to an array:
+
+```php
+$dataStream = new DataStream('custom content', new MyCustomProcessor());
+$array = $dataStream->get();
+```
+
  
 ## Adding or changing a file handlers
 
-```ConfigFile``` use the file handlers to determine how to load and process a file based on its extension. 
+```FileHandlers``` determine how to load and process a file based on its extension. 
 
 For example a php file will use the ```PhpLoader``` and the ```ArrayProcessor```. 
 
-Default handlers are used by default and are stored in ```DefaultFilesHandlers```.
-You can add/override file handlers easily with ```FilesHandlers::set()``` and ```FileHandlers::override()```
+You can add/override file handlers easily with by calling by passing definitions into constructor or via method ```set()```
 
 ```php
-// adding a new handler (if handler already exists, it will be overrided)
-FilesHandlers::set(
+// create a file handlers and add a new handler (if handler already exists, it will be overrided)
+$fileHandlers = new FileHandlers();
+$fileHandlers->set(
     'xml',
     MyLoader::class,
     MyProcessor::class,
 );
 
-// adding/replacing multiple handlers
-FilesHandlers::override([
-    'xml' => [
-        'loader' => MyLoader::class,
-        'processor' => MyProcessor::class,
-    ],
-    'json' => [
-        // ...
-    ], 
-    // ...
+// and finally, tell the configuration factory to use your fileHandlers 
+$configFactory = new ConfigFactory();
+$configFactory->setFilesHandlers($fileHandlers);
+$config = $configFactory->loadResource([
+    //...
 ]);
 ```
 
@@ -98,57 +115,25 @@ FilesHandlers::override([
 Processing complex multiple configurations can be costly and if they rarely change, you might want to cache the result instead.
 
 ```php
-$cc = new ConfigCache('/path/to/cache');
+$configCache = new ConfigCache('/path/to/cache');
 
-$cache_id = 'my-configuration-id';
+$cacheId = 'my-configuration-id';
 
-if ($cc->isExpired($cache_id)) {
-    $data = (new \Peak\Config\ConfigLoader([
-        // files and stuff
-    ]))->asCollection();
+if ($configCache->isExpired($cacheId)) {
+    $configFactory = new ConfigFactory();
+    $config = $configFactory->loadResource([
+        'config/app.php',
+        'config/app.dev.php',
+        'config/database.yml',
+        'config/widget.json',
+    ]);
     
-    $cc->set(
-        $cache_id, 
-        $data, 
+    $configCache->set(
+        $cacheId, 
+        $config, 
         3600 // ttl in seconds
     );
 } else {
-    $data = $cc->get($cache_id);
+    $config = $configCache->get($cache_id);
 }
 ```
-
-## Extends
-
-Create your own configuration loader and processor.
-
-To use a custom loader/processor:
-
-```php
-// example 1
-$content = (new ConfigFile(
-    'cumstom.csv', 
-    new DefaultLoader(), 
-    new MyCustomProcessor()
-)->get();
-
-// example 2
-$content = (new ConfigFile(
-    'cumstom.file', 
-    new CustomLoader(), 
-    new ArrayProcessor()
-)->get();
-
-// example 3
-$content = (new ConfigData(
-    '... misc data...', 
-    new MyCustomProcessor()
-)->get();
-
-// example 4 using config loader
-$coll = (new ConfigLoader([
-    'file1.php',
-    new ConfigFile('cumstom.file', new CustomLoader(), new ArrayProcessor())
-]))->asCollection();
-```
-
-
