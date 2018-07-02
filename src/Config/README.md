@@ -134,6 +134,6 @@ if ($configCache->isExpired($cacheId)) {
         3600 // ttl in seconds
     );
 } else {
-    $config = $configCache->get($cache_id);
+    $config = $configCache->get($cacheId);
 }
 ```
