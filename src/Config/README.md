@@ -61,8 +61,8 @@ $config = $configFactory->loadResource([
 
 *Processors* are mean to handle how to process configuration data to an array. Peak\Config comes with 6 processors:
 
- - ```ArrayProcessor```
- - ```StdClassProcessor``` 
+ - ```ArrayProcessor``` When resource is already an array
+ - ```StdClassProcessor``` stdClass instance
  - ```CallableProcessor``` Closure and callable
  - ```CollectionProcessor``` Peak\Common\Collection
  - ```IniProcessor``` Parse ini data. Support advanced dot notation
@@ -92,7 +92,7 @@ $array = $dataStream->get();
 
 For example a php file will use the ```PhpLoader``` and the ```ArrayProcessor```. 
 
-You can add/override file handlers easily with by calling by passing definitions into constructor or via method ```set()```
+You can add/override file handlers easily with by passing definitions to the constructor or via method ```set()```
 
 ```php
 // create a file handlers and add a new handler (if handler already exists, it will be overrided)
