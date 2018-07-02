@@ -2,12 +2,8 @@
 
 use PHPUnit\Framework\TestCase;
 
-use Peak\Common\Collection\Collection;
 use Peak\Config\ConfigCache;
 use Peak\Config\ConfigFactory;
-use Peak\Config\Stream\DataStream;
-use Peak\Config\Stream\JsonStream;
-use Peak\Config\Processor\JsonProcessor;
 
 class ConfigCacheTest extends TestCase
 {
