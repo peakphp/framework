@@ -5,10 +5,9 @@ namespace Peak\Bedrock\Application;
 use Peak\Bedrock\Application\Config as AppConfig;
 use Peak\Bedrock\Application\Config\AppTree;
 use Peak\Bedrock\Application\Exceptions\MissingConfigException;
-use Peak\Common\DataException;
+use Peak\Bedrock\Application\Exceptions\PathNotFoundException;
 use Peak\Config\ConfigFactory;
 use Peak\Config\ConfigInterface;
-use Peak\Config\ConfigLoader;
 
 class ConfigResolver
 {
@@ -38,8 +37,8 @@ class ConfigResolver
      * ConfigResolver constructor.
      *
      * @param array $config
-     * @throws DataException
      * @throws MissingConfigException
+     * @throws PathNotFoundException
      * @throws \Peak\Config\Exception\UnknownResourceException
      */
     public function __construct($config = [])
@@ -89,7 +88,7 @@ class ConfigResolver
      *
      * @param array $config
      * @throws MissingConfigException
-     * @throws DataException
+     * @throws PathNotFoundException
      */
     private function validate($config)
     {
@@ -102,14 +101,14 @@ class ConfigResolver
         }
 
         if (!file_exists($config['path']['public'])) {
-            throw new DataException('Public path not found', $config['path']['public']);
+            throw new PathNotFoundException($config['path']['public'], 'Public path');
         }
 
         if (!isset($config['path']['app'])) {
             throw new MissingConfigException('path.app');
         }
         if (!file_exists($config['path']['app'])) {
-            throw new DataException('Application path not found', $config['path']['app']);
+            throw new PathNotFoundException($config['path']['app'], 'Application path');
         }
     }
 

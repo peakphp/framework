@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 use Peak\Common\Collection\Collection;
 use Peak\Common\PhpInput;
-use Peak\Common\DataException;
 use Peak\Common\TimeExpression;
 
 /*
@@ -137,12 +136,8 @@ if (!function_exists('exceptionTrace')) {
         $content = '['.date('Y-m-d H:i:s')."] ".get_class($exc)."\n";
         $content .= $msg."\n";
 
-        if ($exc instanceof DataException) {
-            $content .= $exc->dumpData();
-            $content .= str_pad('', mb_strlen($exc->dumpData()), '-')."\n";
-        } else {
-            $content .= str_pad('', mb_strlen($msg), '-')."\n";
-        }
+
+        $content .= str_pad('', mb_strlen($msg), '-')."\n";
         $content .= str_replace('#', "#", $exc->getTraceAsString());
 
         return $content;
