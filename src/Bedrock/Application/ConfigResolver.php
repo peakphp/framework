@@ -2,9 +2,12 @@
 
 namespace Peak\Bedrock\Application;
 
+use Peak\Bedrock\Application\Config as AppConfig;
 use Peak\Bedrock\Application\Config\AppTree;
 use Peak\Bedrock\Application\Exceptions\MissingConfigException;
 use Peak\Common\DataException;
+use Peak\Config\ConfigFactory;
+use Peak\Config\ConfigInterface;
 use Peak\Config\ConfigLoader;
 
 class ConfigResolver
@@ -37,7 +40,7 @@ class ConfigResolver
      * @param array $config
      * @throws DataException
      * @throws MissingConfigException
-     * @throws \Peak\Config\Exception\UnknownTypeException
+     * @throws \Peak\Config\Exception\UnknownResourceException
      */
     public function __construct($config = [])
     {
@@ -67,16 +70,14 @@ class ConfigResolver
             }
         }
 
-        // build and store final application config
-        $this->app_config = new Config(
-            (new ConfigLoader($final))->asArray()
-        );
+        $configFactory = new ConfigFactory();
+        $this->app_config = $configFactory->loadResourcesWith($final, new AppConfig());
     }
 
     /**
      * Get app configuration
      *
-     * @return Config
+     * @return ConfigInterface
      */
     public function getMountedConfig()
     {
