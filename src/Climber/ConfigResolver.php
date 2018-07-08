@@ -3,7 +3,7 @@
 namespace Peak\Climber;
 
 use Peak\Bedrock\Application\Config;
-use Peak\Config\ConfigLoader;
+use Peak\Config\ConfigFactory;
 
 class ConfigResolver
 {
@@ -25,15 +25,15 @@ class ConfigResolver
     ];
 
     /**
-     * The final config collection
-     * @var object
+     * @var Config
      */
     protected $config;
 
     /**
-     * Construct
+     * ConfigResolver constructor.
      *
-     * @param array $config user config
+     * @param array $config
+     * @throws \Peak\Config\Exception\UnknownResourceException
      */
     public function __construct(array $config = [])
     {
@@ -52,9 +52,8 @@ class ConfigResolver
             }
         }
 
-        $this->config = new Config(
-            (new ConfigLoader($final))->asArray()
-        );
+        $configFactory = new ConfigFactory();
+        $this->config = $configFactory->loadResourcesWith($final, new Config());
 
         if (!defined('APPLICATION_ENV')) {
             define('APPLICATION_ENV', $this->config->env);
@@ -62,8 +61,6 @@ class ConfigResolver
     }
 
     /**
-     * Get app configuration
-     *
      * @return Config
      */
     public function getMountedConfig()
