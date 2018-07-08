@@ -17,7 +17,7 @@ class ConfigFactoryTest extends TestCase
     function testLoadConfig()
     {
         $configFactory = new ConfigFactory();
-        $config = $configFactory->loadResource([
+        $config = $configFactory->loadResources([
             [
                 'foo' => 'bar',
                 'bar' => 'foo',
@@ -44,7 +44,7 @@ class ConfigFactoryTest extends TestCase
         $stdConf->address->street = 'Foo Boulevard';
 
         $configFactory = new ConfigFactory();
-        $config = $configFactory->loadResource([
+        $config = $configFactory->loadResources([
             // array
             [
                 'foo' => 'bar',
@@ -101,7 +101,7 @@ class ConfigFactoryTest extends TestCase
     public function testXmlProcessor()
     {
         $configFactory = new ConfigFactory();
-        $config = $configFactory->loadResource([
+        $config = $configFactory->loadResources([
             FIXTURES_PATH.'/config/config.xml',
         ]);
         $this->assertTrue($config->has('@attributes.bootstrap'));
@@ -114,7 +114,7 @@ class ConfigFactoryTest extends TestCase
     public function testProcessorException()
     {
         $configFactory = new ConfigFactory();
-        $config = $configFactory->loadResource([
+        $config = $configFactory->loadResources([
             FIXTURES_PATH.'/config/empty.php'
         ]);
     }
@@ -126,7 +126,7 @@ class ConfigFactoryTest extends TestCase
     public function testUnknownResourceException()
     {
         $configFactory = new ConfigFactory();
-        $config = $configFactory->loadResource([
+        $config = $configFactory->loadResources([
             new \PHPUnit\Util\Test()
         ]);
     }
@@ -138,7 +138,7 @@ class ConfigFactoryTest extends TestCase
     public function testNoFileHandlersException()
     {
         $configFactory = new ConfigFactory();
-        $config = $configFactory->loadResource([
+        $config = $configFactory->loadResources([
             FIXTURES_PATH.'/config/unknown.type',
         ]);
     }

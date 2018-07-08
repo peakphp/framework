@@ -10,6 +10,7 @@ use Peak\Config\Processor\ArrayProcessor;
 use Peak\Config\Processor\CallableProcessor;
 use Peak\Config\Processor\CollectionProcessor;
 use Peak\Config\Processor\StdClassProcessor;
+use Peak\Config\Stream\ConfigStream;
 use Peak\Config\Stream\DataStream;
 use Peak\Config\Stream\FileStream;
 use Peak\Config\Stream\StreamInterface;
@@ -47,7 +48,7 @@ class ConfigFactory
      * @return Config
      * @throws UnknownResourceException
      */
-    public function loadResourcesWith(array $resources, Config $customConfig): Config
+    public function loadResourcesWith(array $resources, ConfigInterface $customConfig): Config
     {
         return $this->processResources($resources, $customConfig);
     }
@@ -58,7 +59,7 @@ class ConfigFactory
      * @return Config
      * @throws UnknownResourceException
      */
-    protected function processResources(array $resources, Config $config)
+    protected function processResources(array $resources, ConfigInterface $config)
     {
         foreach ($resources as $resource) {
             $stream = $this->getStreamFrom($resource);
@@ -87,6 +88,8 @@ class ConfigFactory
             return $resource;
         } elseif ($resource instanceof \stdClass) {
             return new DataStream($resource, new StdClassProcessor());
+        } elseif ($resource instanceof ConfigInterface) {
+            return new ConfigStream($resource);
         } elseif (is_string($resource)) {
             if (!isset($this->filesHandlers)) {
                 $this->setFilesHandlers(new FilesHandlers());
