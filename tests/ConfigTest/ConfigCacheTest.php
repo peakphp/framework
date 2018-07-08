@@ -22,7 +22,7 @@ class ConfigCacheTest extends TestCase
         if ($configCache->isExpired($cacheId)) {
             $cached = false;
             $configFactory = new ConfigFactory();
-            $config = $configFactory->loadResource([
+            $config = $configFactory->loadResources([
                 FIXTURES_PATH.'/config/arrayfile1.php',
                 FIXTURES_PATH.'/config/arrayfile2.php',
             ]);
@@ -42,7 +42,7 @@ class ConfigCacheTest extends TestCase
         if ($configCache->isExpired($cacheId)) {
             $cached = false;
             $configFactory = new ConfigFactory();
-            $config = $configFactory->loadResource([
+            $config = $configFactory->loadResources([
                 FIXTURES_PATH.'/config/arrayfile1.php',
                 FIXTURES_PATH.'/config/arrayfile2.php',
             ]);

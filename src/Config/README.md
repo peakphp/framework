@@ -13,7 +13,7 @@ $ composer require peak/config
 ```ConfigFactory``` is the most easiest and direct way to access to all you configuration resources. 
 ```php
 $configFactory = new ConfigFactory();
-$config = $configFactory->loadResource([
+$config = $configFactory->loadResources([
     'config/app.php',
     'config/app.dev.php',
     'config/database.yml',
@@ -45,7 +45,7 @@ You can also be specific by pushing a stream to *ConfigFactory::loadResource*.
 
 ```php
 $configFactory = new ConfigFactory();
-$config = $configFactory->loadResource([
+$config = $configFactory->loadResources([
     new JsonStream('{"foo": "bar"}'),
     new DataStream(["foo" => "bar2"], new ArrayProcessor()) // same as JsonStream
     new FileStream('myfile.json', new FileHandlers()),
@@ -106,7 +106,7 @@ $fileHandlers->set(
 // and finally, tell the configuration factory to use your fileHandlers 
 $configFactory = new ConfigFactory();
 $configFactory->setFilesHandlers($fileHandlers);
-$config = $configFactory->loadResource([
+$config = $configFactory->loadResources([
     //...
 ]);
 ```
@@ -121,7 +121,7 @@ $cacheId = 'my-configuration-id';
 
 if ($configCache->isExpired($cacheId)) {
     $configFactory = new ConfigFactory();
-    $config = $configFactory->loadResource([
+    $config = $configFactory->loadResources([
         'config/app.php',
         'config/app.dev.php',
         'config/database.yml',

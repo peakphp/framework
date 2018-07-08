@@ -36,9 +36,30 @@ class ConfigFactory
      * @return Config
      * @throws UnknownResourceException
      */
-    public function loadResource(array $resources): Config
+    public function loadResources(array $resources): Config
     {
-        $config = new Config();
+        return $this->processResources($resources, new Config());
+    }
+
+    /**
+     * @param array $resources
+     * @param Config $customConfig
+     * @return Config
+     * @throws UnknownResourceException
+     */
+    public function loadResourcesWith(array $resources, Config $customConfig): Config
+    {
+        return $this->processResources($resources, $customConfig);
+    }
+
+    /**
+     * @param array $resources
+     * @param Config $config
+     * @return Config
+     * @throws UnknownResourceException
+     */
+    protected function processResources(array $resources, Config $config)
+    {
         foreach ($resources as $resource) {
             $stream = $this->getStreamFrom($resource);
             $config->mergeRecursiveDistinct($stream->get());
