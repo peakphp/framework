@@ -6,6 +6,10 @@ namespace Peak\Config\Stream;
 
 use Peak\Config\Processor\XmlProcessor;
 
+/**
+ * Class XmlStream
+ * @package Peak\Config\Stream
+ */
 class XmlStream extends DataStream
 {
     /**

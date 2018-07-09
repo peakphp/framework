@@ -7,6 +7,10 @@ namespace Peak\Config\Processor;
 use Peak\Common\Collection\Collection;
 use Peak\Config\Exception\ProcessorException;
 
+/**
+ * Class CollectionProcessor
+ * @package Peak\Config\Processor
+ */
 class CollectionProcessor implements ProcessorInterface
 {
 

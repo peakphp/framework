@@ -6,6 +6,10 @@ namespace Peak\Config\Stream;
 
 use Peak\Config\Processor\JsonProcessor;
 
+/**
+ * Class JsonStream
+ * @package Peak\Config\Stream
+ */
 class JsonStream extends DataStream
 {
     /**

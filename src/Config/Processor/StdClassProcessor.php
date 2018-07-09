@@ -6,6 +6,10 @@ namespace Peak\Config\Processor;
 
 use Peak\Config\Exception\ProcessorException;
 
+/**
+ * Class StdClassProcessor
+ * @package Peak\Config\Processor
+ */
 class StdClassProcessor implements ProcessorInterface
 {
     /**

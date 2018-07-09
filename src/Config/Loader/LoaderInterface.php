@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Peak\Config\Loader;
 
+/**
+ * Interface LoaderInterface
+ * @package Peak\Config\Loader
+ */
 interface LoaderInterface
 {
     /**

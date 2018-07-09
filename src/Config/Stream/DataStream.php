@@ -6,6 +6,10 @@ namespace Peak\Config\Stream;
 
 use Peak\Config\Processor\ProcessorInterface;
 
+/**
+ * Class DataStream
+ * @package Peak\Config\Stream
+ */
 class DataStream implements StreamInterface
 {
     /**

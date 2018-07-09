@@ -6,6 +6,10 @@ namespace Peak\Config\Exception;
 
 use Psr\SimpleCache\InvalidArgumentException;
 
+/**
+ * Class CacheInvalidKeyException
+ * @package Peak\Config\Exception
+ */
 class CacheInvalidKeyException extends \Exception implements InvalidArgumentException
 {
     /**

@@ -8,6 +8,10 @@ use Peak\Config\Exception\NoFileHandlersException;
 use Peak\Config\Loader\LoaderInterface;
 use Peak\Config\Processor\ProcessorInterface;
 
+/**
+ * Class FilesHandlers
+ * @package Peak\Config
+ */
 class FilesHandlers
 {
     /**

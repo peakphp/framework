@@ -6,6 +6,10 @@ namespace Peak\Config\Processor;
 
 use Peak\Config\Exception\ProcessorException;
 
+/**
+ * Class ArrayProcessor
+ * @package Peak\Config\Processor
+ */
 class ArrayProcessor implements ProcessorInterface
 {
     /**

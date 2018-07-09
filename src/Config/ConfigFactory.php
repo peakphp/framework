@@ -15,6 +15,10 @@ use Peak\Config\Stream\DataStream;
 use Peak\Config\Stream\FileStream;
 use Peak\Config\Stream\StreamInterface;
 
+/**
+ * Class ConfigFactory
+ * @package Peak\Config
+ */
 class ConfigFactory
 {
     /**

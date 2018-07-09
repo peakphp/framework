@@ -7,6 +7,10 @@ namespace Peak\Config\Processor;
 use Peak\Common\Traits\ArrayMergeRecursiveDistinct;
 use Peak\Config\Exception\ProcessorException;
 
+/**
+ * Class IniProcessor
+ * @package Peak\Config\Processor
+ */
 class IniProcessor implements ProcessorInterface
 {
     use ArrayMergeRecursiveDistinct;

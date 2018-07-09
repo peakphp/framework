@@ -6,6 +6,10 @@ namespace Peak\Config\Processor;
 
 use Peak\Config\Exception\ProcessorException;
 
+/**
+ * Class JsonProcessor
+ * @package Peak\Config\Processor
+ */
 class JsonProcessor implements ProcessorInterface
 {
 

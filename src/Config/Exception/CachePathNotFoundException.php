@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Peak\Config\Exception;
 
+/**
+ * Class CachePathNotFoundException
+ * @package Peak\Config\Exception
+ */
 class CachePathNotFoundException extends \Exception
 {
     /**

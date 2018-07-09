@@ -7,6 +7,10 @@ namespace Peak\Config\Loader;
 use Peak\Config\Exception\FileNotFoundException;
 use Peak\Config\Exception\LoaderException;
 
+/**
+ * Class TextLoader
+ * @package Peak\Config\Loader
+ */
 class TextLoader implements LoaderInterface
 {
     /**

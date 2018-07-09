@@ -8,6 +8,10 @@ use Peak\Config\Exception\ProcessorException;
 
 use SimpleXMLElement;
 
+/**
+ * Class XmlProcessor
+ * @package Peak\Config\Processor
+ */
 class XmlProcessor implements ProcessorInterface
 {
     /**

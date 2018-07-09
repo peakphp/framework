@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Peak\Config\Exception;
 
+/**
+ * Class ProcessorException
+ * @package Peak\Config\Exception
+ */
 class ProcessorException extends \Exception
 {
     /**

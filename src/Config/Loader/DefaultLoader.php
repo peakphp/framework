@@ -6,6 +6,10 @@ namespace Peak\Config\Loader;
 
 use Peak\Config\Exception\FileNotFoundException;
 
+/**
+ * Class DefaultLoader
+ * @package Peak\Config\Loader
+ */
 class DefaultLoader implements LoaderInterface
 {
     /**

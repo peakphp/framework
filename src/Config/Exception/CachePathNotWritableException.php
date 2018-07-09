@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Peak\Config\Exception;
 
+/**
+ * Class CachePathNotWritableException
+ * @package Peak\Config\Exception
+ */
 class CachePathNotWritableException extends \Exception
 {
     /**

@@ -6,6 +6,10 @@ namespace Peak\Config\Stream;
 
 use Peak\Config\FilesHandlers;
 
+/**
+ * Class FileStream
+ * @package Peak\Config\Stream
+ */
 class FileStream implements StreamInterface
 {
     /**

@@ -6,6 +6,10 @@ namespace Peak\Config\Stream;
 
 use Peak\Config\ConfigInterface;
 
+/**
+ * Class ConfigStream
+ * @package Peak\Config\Stream
+ */
 class ConfigStream implements StreamInterface
 {
     /**

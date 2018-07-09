@@ -8,6 +8,10 @@ use Peak\Config\Exception\ProcessorException;
 use Symfony\Component\Yaml\Exception\ParseException;
 use Symfony\Component\Yaml\Yaml;
 
+/**
+ * Class YamlProcessor
+ * @package Peak\Config\Processor
+ */
 class YamlProcessor implements ProcessorInterface
 {
     /**

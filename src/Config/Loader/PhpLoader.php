@@ -6,6 +6,10 @@ namespace Peak\Config\Loader;
 
 use Peak\Config\Exception\FileNotFoundException;
 
+/**
+ * Class PhpLoader
+ * @package Peak\Config\Loader
+ */
 class PhpLoader implements LoaderInterface
 {
     /**
