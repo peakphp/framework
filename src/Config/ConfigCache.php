@@ -252,7 +252,7 @@ class ConfigCache implements CacheInterface
      */
     protected function getCacheFilePath($key): string
     {
-        return $this->path.'/'.md5($key).'.ser';
+        return $this->path.'/'.sha1($key).'.ser';
     }
 
     /**
