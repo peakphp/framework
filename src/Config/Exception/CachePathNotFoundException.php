@@ -17,6 +17,6 @@ class CachePathNotFoundException extends \Exception
      */
     public function __construct(string $path)
     {
-        parent::__construct('Config cache path "'.$path.'"" not found');
+        parent::__construct('Config cache path "'.$path.'" not found');
     }
 }

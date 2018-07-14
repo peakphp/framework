@@ -11,7 +11,7 @@ namespace Peak\Config\Exception;
 class FileNotFoundException extends \Exception
 {
     /**
-     * UnknownTypeException constructor.
+     * FileNotFoundException constructor.
      *
      * @param string $file
      */

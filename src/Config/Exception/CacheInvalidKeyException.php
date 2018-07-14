@@ -13,7 +13,7 @@ use Psr\SimpleCache\InvalidArgumentException;
 class CacheInvalidKeyException extends \Exception implements InvalidArgumentException
 {
     /**
-     * InvalidCacheKeyException constructor.
+     * CacheInvalidKeyException constructor.
      */
     public function __construct()
     {

@@ -17,6 +17,6 @@ class CachePathNotWritableException extends \Exception
      */
     public function __construct(string $path)
     {
-        parent::__construct('Config cache path "'.$path.'"" not writable');
+        parent::__construct('Config cache path "'.$path.'" not writable');
     }
 }
