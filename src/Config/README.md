@@ -114,6 +114,22 @@ $config = $configFactory->loadResources([
 ## Caching complex configuration
 Processing complex multiple configurations can be costly and if they rarely change, you might want to cache the result instead.
 
+Using ```ConfigCacheFactory``` is the most easy way to handle configuration cache the same way you use ```ConfigFactory```:
+
+```php
+$ccFactory = new ConfigCacheFactory(
+    new ConfigFactory(),
+    new ConfigCache(__DIR__)
+);
+
+// load resources or load a cache version of processed configurations
+$config = $ccFactory->loadResources('my-conf-id', 3600, [
+    'path/to/your/config1.php',
+    'path/to/your/config2.php',
+]);
+```
+Or manually with ConfigCache and ConfigFactory:
+
 ```php
 $configCache = new ConfigCache('/path/to/cache');
 
