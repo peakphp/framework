@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Peak\Config;
+namespace Peak\Config\Cache;
 
 use Peak\Config\Exception\CachePathNotFoundException;
 use Peak\Config\Exception\CachePathNotWritableException;
@@ -10,10 +10,10 @@ use Peak\Config\Exception\CacheInvalidKeyException;
 use Psr\SimpleCache\CacheInterface;
 
 /**
- * Class ConfigCache
- * @package Peak\Config
+ * Class FileCache
+ * @package Peak\Config\Cache
  */
-class ConfigCache implements CacheInterface
+class FileCache implements CacheInterface
 {
     /**
      * Cache absolute path

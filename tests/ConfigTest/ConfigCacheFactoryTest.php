@@ -2,7 +2,7 @@
 
 use PHPUnit\Framework\TestCase;
 
-use Peak\Config\ConfigCache;
+use Peak\Config\Cache\FileCache;
 use Peak\Config\ConfigFactory;
 use Peak\Config\ConfigCacheFactory;
 use Peak\Config\ConfigInterface;
@@ -21,7 +21,7 @@ class ConfigCacheFactoryTest extends TestCase
 
         $configCacheFactory = new ConfigCacheFactory(
             new ConfigFactory(),
-            new ConfigCache(__DIR__)
+            new FileCache(__DIR__)
         );
 
         $config = $configCacheFactory->loadResources('my-conf-id', 3600, [
