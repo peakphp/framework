@@ -119,7 +119,7 @@ Using ```ConfigCacheFactory``` is the most easy way to handle configuration cach
 ```php
 $ccFactory = new ConfigCacheFactory(
     new ConfigFactory(),
-    new ConfigCache(__DIR__)
+    new FileCache(__DIR__)
 );
 
 // load resources or load a cache version of processed configurations
@@ -131,7 +131,7 @@ $config = $ccFactory->loadResources('my-conf-id', 3600, [
 Or manually with ConfigCache and ConfigFactory:
 
 ```php
-$configCache = new ConfigCache('/path/to/cache');
+$configCache = new FileCache('/path/to/cache');
 
 $cacheId = 'my-configuration-id';
 
