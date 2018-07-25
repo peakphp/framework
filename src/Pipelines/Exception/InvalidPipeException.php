@@ -1,7 +1,13 @@
 <?php
 
-namespace Peak\Pipelines\Exceptions;
+declare(strict_types=1);
 
+namespace Peak\Pipelines\Exception;
+
+/**
+ * Class InvalidPipeException
+ * @package Peak\Pipelines\Exception
+ */
 class InvalidPipeException extends \Exception
 {
     /**

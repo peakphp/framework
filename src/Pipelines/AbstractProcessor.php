@@ -1,12 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Pipelines;
 
-use Peak\Pipelines\Exceptions\InvalidPipeException;
-use Peak\Pipelines\Exceptions\MissingPipeInterfaceException;
+use Peak\Pipelines\Exception\InvalidPipeException;
+use Peak\Pipelines\Exception\MissingPipeInterfaceException;
 use Psr\Container\ContainerInterface;
 use \Closure;
 
+/**
+ * Class AbstractProcessor
+ * @package Peak\Pipelines
+ */
 abstract class AbstractProcessor
 {
     /**
@@ -64,7 +70,7 @@ abstract class AbstractProcessor
      * @return mixed
      * @throws MissingPipeInterfaceException
      */
-    protected function processPipeClassName($pipe, $payload)
+    protected function processPipeClassName(string $pipe, $payload)
     {
         if (isset($this->container)) {
             $pinst = $this->container->get($pipe);
@@ -84,7 +90,7 @@ abstract class AbstractProcessor
     /**
      * Process pipe class object
      *
-     * @param object $pipe
+     * @param PipeInterface $pipe
      * @param mixed $payload
      * @return mixed
      * @throws MissingPipeInterfaceException

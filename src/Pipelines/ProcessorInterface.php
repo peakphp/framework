@@ -1,9 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Pipelines;
 
 /**
  * Interface ProcessorInterface
+ * @package Peak\Pipelines
  */
 interface ProcessorInterface
 {

@@ -1,9 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Pipelines;
 
-use Peak\Pipelines\DefaultProcessor;
-
+/**
+ * Class Pipeline
+ * @package Peak\Pipelines
+ */
 class Pipeline
 {
     /**
@@ -21,7 +25,7 @@ class Pipeline
     /**
      * Constructor
      *
-     * @param array                   $pipes
+     * @param array $pipes
      * @param ProcessorInterface|null $processor
      */
     public function __construct(array $pipes = [], ProcessorInterface $processor = null)
@@ -46,8 +50,10 @@ class Pipeline
     /**
      * Process the pipeline
      *
-     * @param  mixed $payload
+     * @param mixed|null $payload
      * @return mixed
+     * @throws Exception\InvalidPipeException
+     * @throws Exception\MissingPipeInterfaceException
      */
     public function process($payload = null)
     {
