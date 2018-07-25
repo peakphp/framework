@@ -2,7 +2,7 @@
 
 use PHPUnit\Framework\TestCase;
 
-use Peak\Config\ConfigCache;
+use Peak\Config\Cache\FileCache;
 use Peak\Config\ConfigFactory;
 
 class ConfigCacheTest extends TestCase
@@ -15,7 +15,7 @@ class ConfigCacheTest extends TestCase
      */
     function testLoadConfig()
     {
-        $configCache = new ConfigCache(__DIR__);
+        $configCache = new FileCache(__DIR__);
         $cached = false;
         $cacheId = 'my-configuration-id';
 

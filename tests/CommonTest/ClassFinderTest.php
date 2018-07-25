@@ -14,7 +14,7 @@ class ClassFinderTest extends TestCase
         // both namespace contains a Json class
         $cf = new ClassFinder([
             'Peak\Bedrock\View\Render',
-            'Peak\Config\Processors'
+            'Peak\Config\Processor'
         ]);
 
         $class = $cf->findFirst('JsonProcessor');
@@ -33,7 +33,7 @@ class ClassFinderTest extends TestCase
         // both namespace contains a Json class
         $cf = new ClassFinder([
             'Peak\Bedrock\View\Render',
-            'Peak\Config\Processors'
+            'Peak\Config\Processor'
         ]);
 
         $class = $cf->findLast('JsonProcessor');
