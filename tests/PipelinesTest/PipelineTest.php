@@ -3,8 +3,8 @@ use PHPUnit\Framework\TestCase;
 
 use Peak\Common\Collection\Collection;
 use Peak\Pipelines\Pipeline;
-use Peak\Pipelines\Exceptions\MissingPipeInterfaceException;
-use Peak\Pipelines\Exceptions\InvalidPipeException;
+use Peak\Pipelines\Exception\MissingPipeInterfaceException;
+use Peak\Pipelines\Exception\InvalidPipeException;
 use Peak\Pipelines\DefaultProcessor;
 use Peak\Pipelines\StrictProcessor;
 
