@@ -1,11 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Bedrock\View\Form\Control;
 
 use Peak\Bedrock\View\Form\FormControl;
 
 /**
- * Select
+ * Class Select
+ * @package Peak\Bedrock\View\Form\Control
  */
 class Select extends FormControl
 {

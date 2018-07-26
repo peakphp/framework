@@ -6,6 +6,10 @@ use Peak\Bedrock\Application\Config;
 use Peak\Bedrock\Application\Routing;
 use Peak\Bedrock\View;
 
+/**
+ * Class RedirectionController
+ * @package Peak\Bedrock\Controller
+ */
 abstract class RedirectionController extends ActionController
 {
     /**
@@ -34,6 +38,8 @@ abstract class RedirectionController extends ActionController
 
     /**
      * Process the redirect
+     *
+     * @throws \Exception
      */
     public function preAction()
     {
@@ -62,6 +68,8 @@ abstract class RedirectionController extends ActionController
 
     /**
      * @param $destination
+     * @return mixed
+     * @throws \Exception
      */
     protected function getRealDestination($destination)
     {

@@ -1,11 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Bedrock\View\Form;
 
 use \Exception;
 
 /**
- * Form helper
+ * Class Form
+ * @package Peak\Bedrock\View\Form
  */
 class Form
 {
@@ -88,10 +91,11 @@ class Form
     /**
      * Load a form control
      *
-     * @param  string $type
-     * @param  string $name
-     * @param  array  $options
-     * @return object
+     * @param $type
+     * @param $name
+     * @param array $options
+     * @return mixed
+     * @throws Exception
      */
     public function control($type, $name, $options = [])
     {

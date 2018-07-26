@@ -1,10 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Bedrock\Controller;
 
 use Peak\Common\Collection\Collection;
 use Peak\Validation\RuleBuilder;
 
+/**
+ * Class ParamsCollection
+ * @package Peak\Bedrock\Controller
+ */
 class ParamsCollection extends Collection
 {
 
@@ -78,7 +84,7 @@ class ParamsCollection extends Collection
      * Get real key value index
      *
      * @param $key
-     * @return int|null|string
+     * @return bool|int|string
      */
     protected function getRealKeyValueIndex($key)
     {
@@ -93,7 +99,8 @@ class ParamsCollection extends Collection
     /**
      * Contains specific value
      *
-     * @param $value
+     * @param $needle
+     * @return bool
      */
     public function contains($needle)
     {

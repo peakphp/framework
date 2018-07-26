@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Bedrock\Controller;
 
 use Peak\Bedrock\Application;
@@ -9,7 +11,8 @@ use Peak\Routing\Route;
 use Peak\Routing\RouteBuilder;
 
 /**
- * Front controller
+ * Class FrontController
+ * @package Peak\Bedrock\Controller
  */
 class FrontController
 {
@@ -50,7 +53,10 @@ class FrontController
     public $allow_internal_modules = true;
 
     /**
-     * class construct
+     * FrontController constructor.
+     *
+     * @throws Application\Exceptions\InstanceNotFoundException
+     * @throws Application\Exceptions\MissingContainerException
      */
     public function __construct()
     {
@@ -104,6 +110,9 @@ class FrontController
 
     /**
      * Call appropriate dispatching methods
+     *
+     * @throws ControllerNotFoundException
+     * @throws NoRouteFoundException
      */
     public function dispatch()
     {
@@ -117,9 +126,11 @@ class FrontController
     /**
      * Set a new request and redispatch the controller
      *
-     * @param string     $ctrl
-     * @param string     $action
-     * @param array/null $params
+     * @param $ctrl
+     * @param string $action
+     * @param null $params
+     * @throws ControllerNotFoundException
+     * @throws NoRouteFoundException
      */
     public function redirect($ctrl, $action = 'index', $params = null)
     {
@@ -135,6 +146,11 @@ class FrontController
 
     /**
      * Dispatch appropriate controller according to the router
+     *
+     * @throws Application\Exceptions\InstanceNotFoundException
+     * @throws Application\Exceptions\MissingContainerException
+     * @throws ControllerNotFoundException
+     * @throws NoRouteFoundException
      */
     protected function dispatchController()
     {
@@ -166,6 +182,8 @@ class FrontController
     
     /**
      * Dispatch action of controller
+     *
+     * @throws \Exception
      */
     protected function dispatchControllerAction()
     {
@@ -189,7 +207,11 @@ class FrontController
     /**
      * Force dispatch of $error_controller
      *
-     * @param object $exception
+     * @param null $exception
+     * @throws Application\Exceptions\InstanceNotFoundException
+     * @throws Application\Exceptions\MissingContainerException
+     * @throws ControllerNotFoundException
+     * @throws NoRouteFoundException
      */
     public function errorDispatch($exception = null)
     {

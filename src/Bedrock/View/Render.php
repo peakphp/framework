@@ -1,13 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Bedrock\View;
 
 use Peak\Bedrock\Application;
 use Peak\Bedrock\View;
-use Peak\Bedrock\View\Cache;
 
 /**
- * Render Engine base
+ * Class Render
+ * @package Peak\Bedrock\View
  */
 abstract class Render
 {
@@ -71,9 +73,10 @@ abstract class Render
     /**
      * Render a block
      *
-     * @param  string $block_file
-     * @param  array $block_data
+     * @param $block_file
+     * @param array $block_data
      * @return string
+     * @throws Exceptions\BlockNotFoundException
      */
     public function renderBlock($block_file, array $block_data = [])
     {
@@ -119,7 +122,9 @@ abstract class Render
      * Call child output method and cache it if cache activated
      * Can be overloaded by engines to customize how the cache data
      *
-     * @param mixed $data
+     * @param $data
+     * @throws Application\Exceptions\InstanceNotFoundException
+     * @throws Application\Exceptions\MissingContainerException
      */
     protected function preOutput($data)
     {
@@ -145,7 +150,9 @@ abstract class Render
     /**
      * Access to cache object
      *
-     * @return object Peak\Bedrock\View\Cache
+     * @return mixed|Cache
+     * @throws Application\Exceptions\InstanceNotFoundException
+     * @throws Application\Exceptions\MissingContainerException
      */
     public function cache()
     {

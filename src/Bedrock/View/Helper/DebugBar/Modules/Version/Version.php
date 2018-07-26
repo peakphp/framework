@@ -1,10 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Bedrock\View\Helper\DebugBar\Modules\Version;
 
 use Peak\Bedrock\Application\Kernel;
 use Peak\DebugBar\AbstractModule;
 
+/**
+ * Class Version
+ * @package Peak\Bedrock\View\Helper\DebugBar\Modules\Version
+ */
 class Version extends AbstractModule
 {
     /**

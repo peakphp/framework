@@ -1,7 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Bedrock\Application\Exceptions;
 
+/**
+ * Class MissingContainerException
+ * @package Peak\Bedrock\Application\Exceptions
+ */
 class MissingContainerException extends \Exception
 {
     /**

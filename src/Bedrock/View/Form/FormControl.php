@@ -1,13 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Bedrock\View\Form;
 
-use Peak\Bedrock\View\Form\Element;
 use Peak\Bedrock\View\Form\Element\Error;
 use Peak\Bedrock\View\Form\Element\Label;
 
 /**
- * Form control base
+ * Class FormControl
+ * @package Peak\Bedrock\View\Form
  */
 abstract class FormControl extends Element
 {
@@ -23,7 +25,7 @@ abstract class FormControl extends Element
     /**
      * Default this method
      *
-     * @return string
+     * @return string|void
      */
     public function error()
     {
@@ -66,7 +68,7 @@ abstract class FormControl extends Element
     /**
      * Render a generic label
      *
-     * @return string
+     * @return string|void
      */
     public function label()
     {

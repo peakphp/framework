@@ -1,10 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Bedrock\View\Helper;
 
 use Peak\Common\TextUtils;
+
 /**
- * Misc useful view helper functions for text
+ * Class Text
+ * @package Peak\Bedrock\View\Helper
  */
 class Text
 {

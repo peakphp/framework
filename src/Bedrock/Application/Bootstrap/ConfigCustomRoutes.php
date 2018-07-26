@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Bedrock\Application\Bootstrap;
 
 use Peak\Bedrock\Application\Config;
@@ -9,7 +11,8 @@ use Peak\Routing\CustomRouteBuilder;
 use Peak\Routing\Exception\InvalidCustomRouteException;
 
 /**
- * Application Bootstrap Customer routes
+ * Class ConfigCustomRoutes
+ * @package Peak\Bedrock\Application\Bootstrap
  */
 class ConfigCustomRoutes
 {

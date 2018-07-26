@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Bedrock;
 
 use Peak\Bedrock\View\Exceptions\EngineNotSetException;
@@ -8,6 +10,10 @@ use Peak\Bedrock\View\Header;
 use Peak\Common\ClassFinder;
 use \Exception;
 
+/**
+ * Class View
+ * @package Peak\Bedrock
+ */
 class View
 {
     /**
@@ -102,9 +108,10 @@ class View
      * So every Rendering Engine Method can be called directly inside Peak\Bedrock\View and
      * every instantiated Peak_View_Helpers
      *
-     * @param  string $method
-     * @param  array  $args
+     * @param $method
+     * @param null $args
      * @return mixed
+     * @throws HelperNotFoundException
      */
     public function __call($method, $args = null)
     {
@@ -181,8 +188,9 @@ class View
     /**
      * Set/Get current view rendering engine object
      *
-     * @param  string $engine_name
-     * @return object Peak_View_Render_*
+     * @param null $engine_name
+     * @return mixed|object
+     * @throws Exception
      */
     public function engine($engine_name = null)
     {

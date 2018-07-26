@@ -1,15 +1,17 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Peak application related functions 
-|--------------------------------------------------------------------------
-*/
+declare(strict_types=1);
 
 use Peak\Bedrock\Application;
 use Peak\Climber\Application as CliApplication;
 use Peak\Common\Language;
 use Peak\Common\Session;
+
+/*
+|--------------------------------------------------------------------------
+| Peak application related functions
+|--------------------------------------------------------------------------
+*/
 
 /**
  * __()

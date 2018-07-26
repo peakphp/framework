@@ -1,17 +1,26 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Bedrock\View\Helper\DebugBar\Modules\ViewVars;
 
 use Peak\Bedrock\Application;
 use Peak\Bedrock\View;
 use Peak\DebugBar\AbstractModule;
 
+/**
+ * Class ViewVars
+ * @package Peak\Bedrock\View\Helper\DebugBar\Modules\ViewVars
+ */
 class ViewVars extends AbstractModule
 {
     protected $use_default_logo = true;
 
     /**
      * Initialize block
+     *
+     * @throws Application\Exceptions\InstanceNotFoundException
+     * @throws Application\Exceptions\MissingContainerException
      */
     public function initialize()
     {

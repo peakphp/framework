@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Bedrock\Controller;
 
 use Peak\Bedrock\Application;
@@ -9,7 +11,8 @@ use Peak\Bedrock\View;
 use \Exception;
 
 /**
- * Action(s) based controller
+ * Class ActionController
+ * @package Peak\Bedrock\Controller
  */
 abstract class ActionController
 {
@@ -50,9 +53,10 @@ abstract class ActionController
     protected $action_prefix = '_';
 
     /**
-     * Constructor
+     * ActionController constructor.
      *
      * @param View $view
+     * @param Config $config
      */
     public function __construct(View $view, Config $config)
     {

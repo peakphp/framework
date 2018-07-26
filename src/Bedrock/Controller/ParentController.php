@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Bedrock\Controller;
 
 use Peak\Bedrock\Application;
@@ -24,10 +26,13 @@ abstract class ParentController extends ActionController
     public $child = null;
 
     /**
-     * Constructor
+     * ParentController constructor.
      *
-     * @param View   $view
-     * @param string $ns if not set, use default app ns (ex: App\Controllers\[controllerTitle]\)
+     * @param View $view
+     * @param Config $config
+     * @param null $ns
+     * @throws Application\Exceptions\InstanceNotFoundException
+     * @throws Application\Exceptions\MissingContainerException
      */
     public function __construct(View $view, Config $config, $ns = null)
     {
@@ -61,9 +66,11 @@ abstract class ParentController extends ActionController
     /**
      * Call an action
      *
-     * @param   string $action
-     * @param   array  $args
-     * @return  mixed
+     * @param string $action
+     * @param array $args
+     * @return mixed|void
+     * @throws Application\Exceptions\InstanceNotFoundException
+     * @throws Application\Exceptions\MissingContainerException
      */
     protected function callAction($action, $args = [])
     {

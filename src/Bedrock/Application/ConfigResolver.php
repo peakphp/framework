@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Bedrock\Application;
 
 use Peak\Bedrock\Application\Config as AppConfig;
@@ -9,6 +11,10 @@ use Peak\Bedrock\Application\Exceptions\PathNotFoundException;
 use Peak\Config\ConfigFactory;
 use Peak\Config\ConfigInterface;
 
+/**
+ * Class ConfigResolver
+ * @package Peak\Bedrock\Application
+ */
 class ConfigResolver
 {
     /**
