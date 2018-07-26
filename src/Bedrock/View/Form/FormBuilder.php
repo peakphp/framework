@@ -32,6 +32,7 @@ class FormBuilder extends Collection
      */
     public function __construct(Form $form = null)
     {
+        parent::__construct();
         $this->form = $form;
         $this->form_validation = new FormValidation($this);
         $this->init();
