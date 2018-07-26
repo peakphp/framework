@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Climber\Cron;
 
 use Peak\Climber\Application;
@@ -10,10 +12,14 @@ use Symfony\Component\Process\Process;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 use \Exception;
 
+/**
+ * Class Executor
+ * @package Peak\Climber\Cron
+ */
 class Executor
 {
     /**
-     * @var null|object
+     * @var mixed
      */
     protected $conn;
 
@@ -29,12 +35,12 @@ class Executor
     protected $default_prefix = 'php climber';
 
     /**
-     * Constructor
-     *
+     * Executor constructor.
      * @param ContainerInterface|null $container
      * @param array $config
      * @throws DatabaseNotFoundException
      * @throws TablesNotFoundException
+     * @throws \Peak\Di\Exception\NotFoundException
      */
     public function __construct(ContainerInterface $container = null, array $config = [])
     {

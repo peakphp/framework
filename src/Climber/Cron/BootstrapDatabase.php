@@ -1,15 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Climber\Cron;
 
-use Doctrine\DBAL\Configuration;
-use Doctrine\DBAL\DriverManager;
 use Peak\Climber\Application;
 
+/**
+ * Class BootstrapDatabase
+ * @package Peak\Climber\Cron
+ */
 class BootstrapDatabase
 {
     /**
-     * Constructor.
+     * BootstrapDatabase constructor.
+     * @param array $database_config
      */
     public function __construct(array $database_config)
     {

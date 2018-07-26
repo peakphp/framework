@@ -1,9 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Climber\Cron;
 
 use Peak\Common\TimeExpression;
 
+/**
+ * Class CronEntity
+ * @package Peak\Climber\Cron
+ */
 class CronEntity
 {
     /**
@@ -70,6 +76,7 @@ class CronEntity
      *
      * @param $data
      * @return string
+     * @throws \Exception
      */
     protected function getInterval($data)
     {

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Climber;
 
 use Peak\Bedrock\Application\Config;
@@ -7,6 +9,10 @@ use Peak\Di\Container;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\Console\Application as ConsoleApplication;
 
+/**
+ * Class Application
+ * @package Peak\Climber
+ */
 class Application
 {
     /**
@@ -42,6 +48,13 @@ class Application
      * @param  string $path
      * @param  mixed  $value
      * @return mixed
+     */
+
+    /**
+     * @param null $path
+     * @param null $value
+     * @return mixed
+     * @throws \Peak\Di\Exception\NotFoundException
      */
     public static function conf($path = null, $value = null)
     {

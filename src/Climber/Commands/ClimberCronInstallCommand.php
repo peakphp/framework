@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Climber\Commands;
 
 use Peak\Climber\Application;
@@ -11,6 +13,10 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
+/**
+ * Class ClimberCronInstallCommand
+ * @package Peak\Climber\Commands
+ */
 class ClimberCronInstallCommand extends CronCommand
 {
     /**
@@ -41,7 +47,10 @@ class ClimberCronInstallCommand extends CronCommand
      *
      * @param InputInterface $input
      * @param OutputInterface $output
-     * @return mixed
+     * @return int|null
+     * @throws \Exception
+     * @throws \Doctrine\DBAL\DBALException
+     * @throws \Peak\Di\Exception\NotFoundException
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {

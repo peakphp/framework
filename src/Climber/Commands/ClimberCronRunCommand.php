@@ -1,16 +1,22 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Climber\Commands;
 
 use Peak\Climber\Cron\CronCommand;
 use Peak\Climber\Cron\Executor;
-use Peak\Config\ConfigLoader;
+use Peak\Config\ConfigFactory;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputDefinition;
 use Symfony\Component\Console\Output\OutputInterface;
 use \Exception;
 
+/**
+ * Class ClimberCronRunCommand
+ * @package Peak\Climber\Commands
+ */
 class ClimberCronRunCommand extends CronCommand
 {
     /**
@@ -47,7 +53,7 @@ class ClimberCronRunCommand extends CronCommand
         $file = $input->getArgument('config');
 
         try {
-            $config = (new ConfigLoader([$file]))->asArray();
+            $config = (new ConfigFactory())->loadResources([$file])->toArray();
         } catch (Exception $e) {
             return $output->writeln($e->getMessage());
         }

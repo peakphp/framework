@@ -1,10 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Climber;
 
 use Peak\Bedrock\Application\Config;
 use Peak\Config\ConfigFactory;
 
+/**
+ * Class ConfigResolver
+ * @package Peak\Climber
+ */
 class ConfigResolver
 {
     /**

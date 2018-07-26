@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Climber\Commands;
 
 use Peak\Climber\Cron\CronEntity;
@@ -11,6 +13,10 @@ use Symfony\Component\Console\Input\InputDefinition;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
+/**
+ * Class ClimberCronListCommand
+ * @package Peak\Climber\Commands
+ */
 class ClimberCronListCommand extends CronCommand
 {
     /**
@@ -46,6 +52,7 @@ class ClimberCronListCommand extends CronCommand
      *
      * @param InputInterface $input
      * @param OutputInterface $output
+     * @return int|null|void
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {

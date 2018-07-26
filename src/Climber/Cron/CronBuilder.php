@@ -1,11 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Climber\Cron;
 
 use Peak\Climber\Cron\Exceptions\CronBuilderException;
 use Peak\Climber\Cron\Exceptions\InvalidDatabaseConfigException;
 use Peak\Common\TimeExpression;
 
+/**
+ * Class CronBuilder
+ * @package Peak\Climber\Cron
+ */
 class CronBuilder
 {
     /**

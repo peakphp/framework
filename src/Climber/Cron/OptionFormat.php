@@ -1,7 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Climber\Cron;
 
+/**
+ * Class OptionFormat
+ * @package Peak\Climber\Cron
+ */
 class OptionFormat
 {
     /**

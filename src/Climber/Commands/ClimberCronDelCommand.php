@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Climber\Commands;
 
 use Peak\Climber\Cron\CronCommand;
@@ -11,6 +13,10 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
+/**
+ * Class ClimberCronDelCommand
+ * @package Peak\Climber\Commands
+ */
 class ClimberCronDelCommand extends CronCommand
 {
     /**
@@ -43,6 +49,10 @@ class ClimberCronDelCommand extends CronCommand
      *
      * @param InputInterface $input
      * @param OutputInterface $output
+     * @return int|null
+     * @throws \Exception
+     * @throws \Doctrine\DBAL\DBALException
+     * @throws \Doctrine\DBAL\Exception\InvalidArgumentException
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
