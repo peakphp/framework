@@ -10,6 +10,9 @@ Release date: ?
 - removed deprecated: 
     Peak\Common\Registry
     Peak\Common\DataException
+    Peak\Doorman
+- switched to strict typing
 - switched framework license to MIT
-- raised PHP minimum version to 7.1.3 and updated dependencies versions
+- raised PHP minimum version to 7.1.3
+- updated dependencies versions
 
