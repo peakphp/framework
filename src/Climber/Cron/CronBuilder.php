@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Peak\Climber\Cron;
 
 use Peak\Climber\Cron\Exceptions\CronBuilderException;
-use Peak\Climber\Cron\Exceptions\InvalidDatabaseConfigException;
+use Peak\Climber\Cron\Exceptions\InvalidOptionFormatException;
 use Peak\Common\TimeExpression;
 
 /**
@@ -52,12 +52,12 @@ class CronBuilder
     /**
      * @param $sys_cmd
      * @return $this
-     * @throws InvalidDatabaseConfigException
+     * @throws InvalidOptionFormatException
      */
     public function sysCmd($sys_cmd)
     {
         if (!OptionFormat::yesNoValid($sys_cmd)) {
-            throw new InvalidDatabaseConfigException('sys_cmd');
+            throw new InvalidOptionFormatException('sys_cmd');
         }
         $this->cron['sys_cmd'] = OptionFormat::yesNo($sys_cmd);
         return $this;
@@ -66,12 +66,12 @@ class CronBuilder
     /**
      * @param $repeat
      * @return $this
-     * @throws InvalidDatabaseConfigException
+     * @throws InvalidOptionFormatException
      */
     public function repeat($repeat)
     {
         if (!OptionFormat::repeatValid($repeat)) {
-            throw new InvalidDatabaseConfigException('repeat');
+            throw new InvalidOptionFormatException('repeat');
         }
         $this->cron['repeat'] = OptionFormat::repeat($repeat);
         return $this;
@@ -80,6 +80,7 @@ class CronBuilder
     /**
      * @param $interval
      * @return $this
+     * @throws \Exception
      */
     public function interval($interval)
     {
@@ -90,21 +91,21 @@ class CronBuilder
     /**
      * @param $enabled
      * @return $this
-     * @throws InvalidDatabaseConfigException
+     * @throws InvalidOptionFormatException
      */
     public function enabled($enabled)
     {
         if (!OptionFormat::yesNoValid($enabled)) {
-            throw new InvalidDatabaseConfigException('enabled');
+            throw new InvalidOptionFormatException('enabled');
         }
         $this->cron['enabled'] = OptionFormat::yesNo($enabled);
         return $this;
     }
 
     /**
-     * @param $enabled
+     * @param $delay
      * @return $this
-     * @throws InvalidDatabaseConfigException
+     * @throws \Exception
      */
     public function delay($delay)
     {
