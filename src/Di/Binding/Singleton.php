@@ -16,6 +16,11 @@ class Singleton extends AbstractBinding
     protected $instantiated = false;
 
     /**
+     * @var ClassInstantiator
+     */
+    private $instantiator;
+
+    /**
      * Constructor
      *
      * @param string $name
