@@ -11,6 +11,7 @@ abstract class AbstractStorage extends Collection
      */
     public function __construct()
     {
+        parent::__construct();
         $this->load();
     }
 
