@@ -140,21 +140,6 @@ class DispatcherTest extends TestCase
         $this->assertTrue($event1->i == 6);
     }
 
-    public function testClassNameObject()
-    {   
-        $d = new Dispatcher();  
-
-        /**
-         * Event classname have no memory
-         */
-        $d->attach('myevent', Event2::class);
-        
-        $d->fire('myevent');
-        $d->fire('myevent');
-        $d->fire('myevent');
-        $d->fire('myevent');
-    }
-
     public function testException()
     {
         try {
