@@ -1,9 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Rbac;
 
-use Peak\Rbac\Permission;
-
+/**
+ * Class CustomPermission
+ * @package Peak\Rbac
+ */
 class CustomPermission
 {
     /**
@@ -34,7 +38,7 @@ class CustomPermission
      * @param Permission $perm
      * @param boolean    $allowed
      */
-    public function __construct(Permission $perm, $allowed)
+    public function __construct(Permission $perm, bool $allowed)
     {
         $this->permission = $perm;
         $this->allowed = $allowed;
@@ -47,7 +51,7 @@ class CustomPermission
      * @param  array  $args
      * @return mixed
      */
-    public function __call($method, $args = null)
+    public function __call(string $method, $args = null)
     {
         return call_user_func_array([$this->permission, $method], $args);
     }
@@ -57,7 +61,7 @@ class CustomPermission
      *
      * @return boolean
      */
-    public function isAllowed()
+    public function isAllowed(): bool
     {
         return $this->allowed;
     }

@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Rbac;
 
-use Peak\Rbac\AbstractHolder;
-use Peak\Rbac\RolesHolder;
-use Peak\Rbac\CustomPermission;
-
+/**
+ * Class User
+ * @package Peak\Rbac
+ */
 class User extends AbstractHolder
 {
     use RolesHolder;
@@ -22,7 +24,7 @@ class User extends AbstractHolder
      * @param  Permission $perm
      * @return bool
      */
-    public function can(Permission $perm)
+    public function can(Permission $perm): bool
     {
         // if a custom permission exists for permission, bypass role checks
         if (isset($this->custom_perms[$perm->getId()])) {
@@ -43,9 +45,9 @@ class User extends AbstractHolder
      * @param  CustomPermission $cperm
      * @return $this
      */
-    public function addCustomPermission(CustomPermission $cperm)
+    public function addCustomPermission(CustomPermission $customPermission)
     {
-        $this->custom_perms[$cperm->getId()] = $cperm;
+        $this->custom_perms[$customPermission->getId()] = $customPermission;
         return $this;
     }
 }

@@ -1,10 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Rbac;
 
-use Peak\Rbac\AbstractHolder;
-use Peak\Rbac\RolesHolder;
-
+/**
+ * Class Permission
+ * @package Peak\Rbac
+ */
 class Permission extends AbstractHolder
 {
     use RolesHolder;

@@ -1,13 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Rbac;
 
-use Peak\Rbac\User;
-use Peak\Rbac\Permission;
-use Peak\Rbac\RolesHolder;
-
 use \Exception;
+use Peak\Rbac\Exception\PermissionNotFoundException;
+use Peak\Rbac\Exception\RoleNotFoundException;
+use Peak\Rbac\Exception\UserNotFoundException;
 
+/**
+ * Class Manager
+ * @package Peak\Rbac
+ */
 class Manager
 {
     use RolesHolder;
@@ -27,10 +32,11 @@ class Manager
     /**
      * Create a user
      *
-     * @param  string $id
+     * @param $id
      * @return User
+     * @throws UserNotFoundException
      */
-    public function createUser($id)
+    public function createUser($id): User
     {
         $this->addUser(new User($id));
         return $this->user($id);
@@ -38,6 +44,7 @@ class Manager
 
     /**
      * Add a user
+     *
      * @param User $user
      */
     public function addUser(User $user)
@@ -52,7 +59,7 @@ class Manager
      * @param  string  $id
      * @return boolean
      */
-    public function hasUser($id)
+    public function hasUser($id): bool
     {
         return isset($this->users[$id]);
     }
@@ -60,13 +67,14 @@ class Manager
     /**
      * Access to a user
      *
-     * @param  string $id
+     * @param string $id
      * @return User
+     * @throws UserNotFoundException
      */
-    public function user($id)
+    public function user($id): User
     {
         if (!isset($this->users[$id])) {
-            throw new Exception(__CLASS__.': User ['.$id.'] not found');
+            throw new UserNotFoundException($id);
         }
         return $this->users[$id];
     }
@@ -74,10 +82,12 @@ class Manager
     /**
      * Create a permissions
      *
-     * @param  string $id
+     * @param $id
+     * @param string $desc
      * @return Permission
+     * @throws Exception
      */
-    public function createPermission($id, $desc = '')
+    public function createPermission($id, $desc = ''): Permission
     {
         $this->addPermission(new Permission($id, $desc));
         return $this->permission($id);
@@ -107,13 +117,14 @@ class Manager
     /**
      * Access to a perms
      *
-     * @param  string $id
-     * @return Permission
+     * @param $id
+     * @return mixed
+     * @throws PermissionNotFoundException
      */
     public function permission($id)
     {
         if (!isset($this->permissions[$id])) {
-            throw new Exception(__CLASS__.': Permission ['.$id.'] not found');
+            throw new PermissionNotFoundException($id);
         }
         return $this->permissions[$id];
     }
@@ -121,8 +132,10 @@ class Manager
     /**
      * Create a roles
      *
-     * @param  string $id
-     * @return Role
+     * @param $id
+     * @param string $desc
+     * @return mixed
+     * @throws RoleNotFoundException
      */
     public function createRole($id, $desc = '')
     {
@@ -133,13 +146,14 @@ class Manager
     /**
      * Access to a role
      *
-     * @param  string $id
-     * @return Role
+     * @param $id
+     * @return mixed
+     * @throws RoleNotFoundException
      */
     public function role($id)
     {
         if (!isset($this->roles[$id])) {
-            throw new Exception(__CLASS__.': Role ['.$id.'] not found');
+            throw new RoleNotFoundException($id);
         }
         return $this->roles[$id];
     }
@@ -147,8 +161,10 @@ class Manager
     /**
      * Add a stored role to a stored user
      *
-     * @param string $role
-     * @param string $user
+     * @param $role
+     * @param $user
+     * @throws RoleNotFoundException
+     * @throws UserNotFoundException
      */
     public function addRoleToUser($role, $user)
     {
@@ -158,8 +174,10 @@ class Manager
     /**
      * Add a stored role to a stored permission
      *
-     * @param string $role
-     * @param string $permission
+     * @param $role
+     * @param $perm
+     * @throws PermissionNotFoundException
+     * @throws RoleNotFoundException
      */
     public function addRoleToPermission($role, $perm)
     {
@@ -172,19 +190,21 @@ class Manager
      *
      * @param  string $user
      * @param  mixed  $perms A permission string or array of permissions string
-     * @return boolean
+     * @return bool
+     * @throws PermissionNotFoundException
+     * @throws UserNotFoundException
      */
-    public function userCan($user, $perms)
+    public function userCan($user, $perms): bool
     {
-        if (is_array($perms)) {
-            foreach ($perms as $perm) {
-                if (!$this->user($user)->can($this->permission($perm))) {
-                    return false;
-                }
-            }
-            return true;
+        if (!is_array($perms)) {
+            $perms = [$perms];
         }
 
-        return $this->user($user)->can($this->permission($perms));
+        foreach ($perms as $perm) {
+            if (!$this->user($user)->can($this->permission($perm))) {
+                return false;
+            }
+        }
+        return true;
     }
 }
