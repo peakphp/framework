@@ -45,7 +45,7 @@ class ExceptionLogger
     /**
      * @var mixed
      */
-    protected $custom_closure;
+    protected $custom;
 
     /**
      * @var array
