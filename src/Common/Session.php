@@ -16,6 +16,7 @@ class Session extends DotNotationCollection
      */
     public function __construct()
     {
+        parent::__construct();
         if (self::isStarted()) {
             $this->items =& $_SESSION;
         }
