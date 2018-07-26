@@ -1,7 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Routing;
 
+/**
+ * Class Route
+ * @package Peak\Routing
+ */
 class Route
 {
     /**

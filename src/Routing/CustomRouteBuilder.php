@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Routing;
 
 use Peak\Routing\Exception\InvalidCustomRouteException;

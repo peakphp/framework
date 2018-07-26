@@ -1,10 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Routing;
 
-use Peak\Routing\Request;
-use Peak\Routing\RequestResolver;
-
+/**
+ * Class RouteBuilder
+ * @package Peak\Routing
+ */
 class RouteBuilder
 {
     /**

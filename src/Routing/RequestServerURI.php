@@ -1,9 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Routing;
 
-use Peak\Routing\Request;
-
+/**
+ * Class RequestServerURI
+ * @package Peak\Routing
+ */
 class RequestServerURI extends Request
 {
     /**

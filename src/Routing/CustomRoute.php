@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Routing;
 
 use Peak\Routing\Regex;
@@ -30,22 +32,18 @@ class CustomRoute
      *
      * @param  Request $request
      */
-    public function __construct($regex, $controller, $action = '')
-    {
-        $this->setRegex($regex);
-
-        $this->controller = trim($controller);
-        $this->action     = trim($action);
-    }
-
     /**
-     * Set a regex
+     * CustomRoute constructor.
      *
      * @param string $regex
+     * @param string $controller
+     * @param string $action
      */
-    public function setRegex($regex)
+    public function __construct(string $regex, string $controller, string $action = '')
     {
         $this->regex = Regex::build($regex);
+        $this->controller = trim($controller);
+        $this->action     = trim($action);
     }
 
     /**
@@ -53,7 +51,7 @@ class CustomRoute
      *
      * @return string
      */
-    public function getRegex()
+    public function getRegex(): string
     {
         return $this->regex;
     }
@@ -74,10 +72,9 @@ class CustomRoute
 
         //we got a positive preg_match
         if (!empty($matches)) {
-            $request->request_uri = $this->controller.Request::$separator.$this->action.$request->request_uri;
+            $request->request_uri = $this->controller . Request::$separator . $this->action . $request->request_uri;
             $request_resolve = new RequestResolver($request);
             $route = $request_resolve->getRoute();
-
             return $route;
         }
 
