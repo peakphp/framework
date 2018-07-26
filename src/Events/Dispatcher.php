@@ -1,9 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Events;
 
-use Exception;
+use Peak\Events\Exception\InvalidCallbackException;
 
+/**
+ * Class Dispatcher
+ * @package Peak\Events
+ */
 class Dispatcher
 {
     /**
@@ -19,7 +25,7 @@ class Dispatcher
      * @param  mixed  $callback
      * @return $this
      */
-    public function attach($name, $callback)
+    public function attach(string $name, $callback)
     {
         if (!isset($this->events[$name])) {
             $this->events[$name] = [];
@@ -32,10 +38,10 @@ class Dispatcher
     /**
      * Has an event
      *
-     * @param  string  $name
+     * @param  string $name
      * @return boolean
      */
-    public function hasEvent($name)
+    public function hasEvent(string $name): bool
     {
         return array_key_exists($name, $this->events);
     }
@@ -76,21 +82,21 @@ class Dispatcher
     /**
      * Trigger one or many events
      *
-     * @param  string|array $ev
-     * @param  mixed $argv
-     * @param  array $data
+     * @param string|array $event
+     * @param mixed $argv
+     * @throws InvalidCallbackException
      */
-    public function fire($ev, $argv = null)
+    public function fire($event, $argv = null)
     {
         if (empty($this->events)) {
             return;
         }
         $events = [];
 
-        if (is_string($ev)) {
-            $events[] = $ev;
-        } elseif (is_array($ev)) {
-            $events = $ev;
+        if (is_string($event)) {
+            $events[] = $event;
+        } elseif (is_array($event)) {
+            $events = $event;
         }
 
         foreach ($events as $event) {
@@ -105,11 +111,13 @@ class Dispatcher
     /**
      * Handle an event callback
      *
-     * @param  string $event
-     * @param  mixed  $callback
-     * @param  mixed  $argv
+     * @param string $event
+     * @param integer $index
+     * @param mixed $callback
+     * @param mixed $argv
+     * @throws InvalidCallbackException
      */
-    protected function handleCallback($event, $index, $callback, $argv = null)
+    protected function handleCallback(string $event, int $index, $callback, $argv = null)
     {
         if (is_callable($callback)) {
             $callback($argv);
@@ -130,11 +138,12 @@ class Dispatcher
     /**
      * Fail to call an event callback
      *
-     * @param  string  $name
-     * @param  integer $index
+     * @param string $name
+     * @param int $index
+     * @throws InvalidCallbackException
      */
-    protected function eventCallbackFail($name, $index)
+    protected function eventCallbackFail(string $name, int $index)
     {
-        throw new Exception('Callback #'.$index.' for event "'.$name.'" is invalid. Only Closure, Classname or Object instance implementing EventInterface are allowed.');
+        throw new InvalidCallbackException($name, $index);
     }
 }
