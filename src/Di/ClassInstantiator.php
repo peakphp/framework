@@ -1,19 +1,24 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Di;
 
 use \ReflectionClass;
 
 /**
- * Dependency Class Instantiator
+ * Class ClassInstantiator
+ * @package Peak\Di
  */
 class ClassInstantiator
 {
     /**
      * Instantiate a class
      *
-     * @param  string $class
+     * @param $class
+     * @param array $args
      * @return object
+     * @throws \ReflectionException
      */
     public function instantiate($class, array $args = [])
     {

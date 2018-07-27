@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Di\Binding;
 
 use Peak\Di\AbstractBinding;
@@ -7,6 +9,10 @@ use Peak\Di\ArrayDefinition;
 use Peak\Di\ClassInstantiator;
 use Psr\Container\ContainerInterface;
 
+/**
+ * Class Prototype
+ * @package Peak\Di\Binding
+ */
 class Prototype extends AbstractBinding
 {
     /**

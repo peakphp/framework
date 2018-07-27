@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Di;
 
 use Psr\Container\ContainerInterface;
 use \Closure;
 
 /**
- * Explicit Dependency declaration Resolver
+ * Class ExplicitResolver
+ * @package Peak\Di
  */
 class ExplicitResolver
 {
@@ -14,8 +17,10 @@ class ExplicitResolver
     /**
      * Resolve class arguments dependencies
      *
-     * @param  string $class
-     * @return object
+     * @param $needle
+     * @param ContainerInterface $container
+     * @param null $explicit
+     * @return mixed|null
      */
     public function resolve($needle, ContainerInterface $container, $explicit = null)
     {

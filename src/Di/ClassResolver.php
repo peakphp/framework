@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Di;
 
 use \Exception;
 use \InvalidArgumentException;
 
 /**
- * Class Dependencies Resolver
+ * Class ClassResolver
+ * @package Peak\Di
  */
 class ClassResolver
 {

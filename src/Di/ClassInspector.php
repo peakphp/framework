@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Di;
 
 use \Exception;
@@ -7,7 +9,8 @@ use \ReflectionClass;
 use \ReflectionException;
 
 /**
- * Dependency Class Inspector
+ * Class ClassInspector
+ * @package Peak\Di
  */
 class ClassInspector
 {
@@ -15,9 +18,10 @@ class ClassInspector
      * Get class dependencies method.
      * By default, method is the constructor itself
      *
-     * @param  string $class
-     * @param  string $method
+     * @param $class
+     * @param string $method
      * @return array
+     * @throws Exception
      */
     public function inspect($class, $method = '__construct')
     {

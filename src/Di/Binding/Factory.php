@@ -1,10 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Di\Binding;
 
 use Peak\Di\AbstractBinding;
 use Psr\Container\ContainerInterface;
 
+/**
+ * Class Factory
+ * @package Peak\Di\Binding
+ */
 class Factory extends AbstractBinding
 {
     /**

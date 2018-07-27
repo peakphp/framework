@@ -1,7 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Di;
 
+/**
+ * Class AbstractBinding
+ * @package Peak\Di
+ */
 abstract class AbstractBinding implements BindingInterface
 {
     /**

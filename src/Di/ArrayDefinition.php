@@ -1,9 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Di;
 
 use Psr\Container\ContainerInterface;
 
+/**
+ * Class ArrayDefinition
+ * @package Peak\Di
+ */
 class ArrayDefinition
 {
     /**

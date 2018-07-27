@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Di;
 
 use Peak\Di\Binding\Factory;
@@ -11,7 +13,8 @@ use \Closure;
 use \InvalidArgumentException;
 
 /**
- * Dependencies Container
+ * Class Container
+ * @package Peak\Di
  */
 class Container implements ContainerInterface
 {
@@ -88,7 +91,8 @@ class Container implements ContainerInterface
      *                           ex: ['myinterface' => function() {
      *                                   return new MyClass(); // myclass implement myinterface
      *                               }]
-     * @return object
+     * @return mixed|object
+     * @throws \ReflectionException
      */
     public function create($class, $args = [], $explicit = null)
     {
@@ -133,7 +137,8 @@ class Container implements ContainerInterface
      * Same as instantiate class but also store it with add
      *
      * @see instantiate() for params
-     * @return object
+     * @return mixed|object
+     * @throws \ReflectionException
      */
     public function createAndStore($class, $args = [], $explicit = [])
     {

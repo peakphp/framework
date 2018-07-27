@@ -1,19 +1,27 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Di;
 
+use Peak\Di\Exception\NotFoundException;
 use \Exception;
 
 /**
- * Dependency Interface Resolver
+ * Class InterfaceResolver
+ * @package Peak\Di
  */
 class InterfaceResolver
 {
     /**
      * Resolve class arguments dependencies
      *
-     * @param  string $class
-     * @return object
+     * @param $interface
+     * @param Container $container
+     * @param array $explicit
+     * @return null|object
+     * @throws NotFoundException
+     * @throws Exception
      */
     public function resolve($interface, Container $container, $explicit = [])
     {
