@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Common;
 
 use Peak\Common\Traits\LoadArrayFiles;
@@ -34,7 +36,7 @@ class Language
      *
      * @param string $lang
      */
-    public function __construct($lang = null)
+    public function __construct(string $lang = null)
     {
         if (isset($lang)) {
             $this->setLang($lang);
@@ -46,7 +48,7 @@ class Language
      *
      * @param string $lang_abbr
      */
-    public function setLang($lang_abbr)
+    public function setLang(string $lang_abbr): Language
     {
         $this->lang = trim(strtolower($lang_abbr));
         return $this;
@@ -57,7 +59,7 @@ class Language
      *
      * @return string
      */
-    public function getLang()
+    public function getLang(): string
     {
         return $this->lang;
     }
@@ -67,8 +69,9 @@ class Language
      *
      * @param array $files
      * @param string|null  file basepath string if needed
+     * @throws \Exception
      */
-    public function addFiles($files, $basepath = null)
+    public function addFiles(array $files, string $basepath = null): void
     {
         foreach ($this->getArrayFilesContent($files, $basepath) as $file) {
             $this->addContent($file);
@@ -80,7 +83,7 @@ class Language
      *
      * @param array $content
      */
-    public function addContent(array $content)
+    public function addContent(array $content): Language
     {
         $this->translations = array_merge($this->translations, $content);
         return $this;
@@ -92,7 +95,7 @@ class Language
      * @param  string  $item translation key name
      * @return boolean
      */
-    public function has($item)
+    public function has(string $item): bool
     {
         return (array_key_exists($item, $this->translations));
     }
@@ -104,7 +107,7 @@ class Language
      * @param  string $replaces text replacements
      * @return string
      */
-    public function translate($item, $replaces = null)
+    public function translate(string $item, $replaces = null): string
     {
         $tr = (isset($this->translations[$item])) ? $this->translations[$item] : $item;
 

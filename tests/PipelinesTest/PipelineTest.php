@@ -126,7 +126,7 @@ class PipelineTest extends TestCase
     /**
      * Create a simple pipeline with class using a default processor 
      */
-    public function testStrictProcessor()
+    public function testStrictProcessorBreaking()
     {   
         $processor = new StrictProcessor(function($payload) {
             return ($payload > 5) ? false : true;
@@ -150,6 +150,34 @@ class PipelineTest extends TestCase
         $payload = $pipeline->process(0);
 
         $this->assertTrue($payload == 6);
+    }
+
+    /**
+     * Create a simple pipeline with class using a default processor
+     */
+    public function testStrictProcessor()
+    {
+        $processor = new StrictProcessor(function($payload) {
+            return ($payload > 100) ? false : true;
+        });
+
+        $pipeline = new Pipeline([
+            function($payload) {
+                $payload += 2;
+                return $payload;
+            },
+            function($payload) {
+                $payload += 4;
+                return $payload;
+            },
+            function($payload) {
+                $payload += 4;
+                return $payload;
+            }
+        ], $processor);
+
+        $payload = $pipeline->process(0);
+        $this->assertTrue($payload == 10);
     }
 
     /**

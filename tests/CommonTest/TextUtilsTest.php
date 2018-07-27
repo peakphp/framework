@@ -47,7 +47,7 @@ class TextUtilsTest extends TestCase
         $this->assertTrue($truncate === 'Lorem i...');
 
         $truncate = TextUtils::truncate($string, 20, '...', true, true);
-        $this->assertTrue($truncate === 'Lorem is...eur sint');
+        $this->assertTrue($truncate === 'Lorem isp...teur sint');
 
         $truncate = TextUtils::truncate('Hello!');
         $this->assertTrue($truncate === 'Hello!');

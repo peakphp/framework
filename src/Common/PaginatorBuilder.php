@@ -1,8 +1,8 @@
 <?php
 
-namespace Peak\Common;
+declare(strict_types=1);
 
-use Peak\Common\Paginator;
+namespace Peak\Common;
 
 /**
  * PaginatorBuilder
@@ -39,7 +39,7 @@ class PaginatorBuilder
      * @param  integer $n
      * @return $this
      */
-    public function itemsPerPage($n)
+    public function itemsPerPage(int $n): PaginatorBuilder
     {
         $this->items_per_page = $n;
         return $this;
@@ -51,7 +51,7 @@ class PaginatorBuilder
      * @param  integer $n
      * @return $this
      */
-    public function itemsCount($n)
+    public function itemsCount(int $n): PaginatorBuilder
     {
         $this->items_count = $n;
         return $this;
@@ -63,7 +63,7 @@ class PaginatorBuilder
      * @param  integer $n
      * @return $this
      */
-    public function currentPage($n)
+    public function currentPage(int $n): PaginatorBuilder
     {
         $this->current_page = $n;
         return $this;
@@ -75,7 +75,7 @@ class PaginatorBuilder
      * @param  integer $n
      * @return $this
      */
-    public function pagesRange($n)
+    public function pagesRange(int $n): PaginatorBuilder
     {
         $this->pages_range = $n;
         return $this;
@@ -84,9 +84,9 @@ class PaginatorBuilder
     /**
      * Build Paginator
      *
-     * @return \Peak\Common\Paginator
+     * @return Paginator
      */
-    public function build()
+    public function build(): Paginator
     {
         return new Paginator(
             $this->items_per_page,

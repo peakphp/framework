@@ -1,9 +1,9 @@
 language: php
 php:
-  - 5.6
-  - 7.0
   - 7.1
+  - 7.2
 install:
+  - composer remove symfony/console #disable the problem php-test-reporter with symfony 4 until it fixed for good
   - composer require codeclimate/php-test-reporter --dev
   - composer install --no-interaction
 before_script:

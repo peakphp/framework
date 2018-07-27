@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Common;
 
-use \DateInterval;
-use \DateTime;
-use \Exception;
+use DateInterval;
+use DateTime;
+use Exception;
 
 /**
  * TimeExpression
@@ -80,7 +82,8 @@ class TimeExpression
     /**
      * Constructor
      *
-     * @param $expression
+     * @param mixed $expression
+     * @throws Exception
      */
     public function __construct($expression)
     {
@@ -93,7 +96,7 @@ class TimeExpression
      *
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         if (empty($this->time)) {
             return '0 second';
@@ -118,7 +121,7 @@ class TimeExpression
      * @param null|string $format a valid DateInterval::format (See http://php.net/manual/en/dateinterval.format.php)
      * @return string
      */
-    public function toString($format = null)
+    public function toString(string $format = null): string
     {
         if (isset($format)) {
             return (new DateTime('@0'))
@@ -130,10 +133,11 @@ class TimeExpression
 
     /**
      * Get time in HH:MM:SS format
-     * @param $truncated If true, hour parts is removed when empty
+     *
+     * @param bool $truncated if true, hour parts is removed when empty
      * @return string
      */
-    public function toClockString($truncated = false)
+    public function toClockString(bool $truncated = false): string
     {
         $clock = [];
         $time = $this->time;
@@ -159,7 +163,7 @@ class TimeExpression
         }
 
         foreach ($clock as $name => $value) {
-            $length = strlen($value);
+            $length = strlen("$value");
             if ($length == 1) {
                 $clock[$name] = '0'.$value;
             }
@@ -173,7 +177,7 @@ class TimeExpression
      *
      * @return integer
      */
-    public function toMicroseconds()
+    public function toMicroseconds(): int
     {
         return $this->time * 1000;
     }
@@ -183,7 +187,7 @@ class TimeExpression
      *
      * @return integer
      */
-    public function toSeconds()
+    public function toSeconds(): int
     {
         return $this->time;
     }
@@ -193,7 +197,7 @@ class TimeExpression
      *
      * @return DateInterval
      */
-    public function toDateInterval()
+    public function toDateInterval(): DateInterval
     {
         return $this->di;
     }
@@ -203,7 +207,7 @@ class TimeExpression
      *
      * @return string
      */
-    public function toIntervalSpec()
+    public function toIntervalSpec(): string
     {
         return self::dateIntervalToIntervalSpec($this->di);
     }
@@ -214,7 +218,7 @@ class TimeExpression
      * @param DateInterval $di
      * @return string
      */
-    public static function dateIntervalToIntervalSpec(DateInterval $di)
+    public static function dateIntervalToIntervalSpec(DateInterval $di): string
     {
         $time_parts = ['h', 'i', 's', 'f'];
         $time_token_set = false;
@@ -243,7 +247,7 @@ class TimeExpression
      * @param $expression
      * @return bool
      */
-    public static function isValid($expression)
+    public static function isValid($expression): bool
     {
         try {
             new self($expression);
@@ -275,7 +279,7 @@ class TimeExpression
      *
      * @throws Exception
      */
-    protected function decode()
+    protected function decode(): void
     {
         $error = false;
 
@@ -318,7 +322,7 @@ class TimeExpression
     /**
      * Decode a DateInterval Interval spec format
      */
-    protected function decodeIntervalSpec()
+    protected function decodeIntervalSpec(): void
     {
         $this->di = new DateInterval($this->expression);
         $this->time = (new DateTime('@0'))
@@ -346,7 +350,7 @@ class TimeExpression
      *
      * @return bool
      */
-    protected function decodeRegexString()
+    protected function decodeRegexString(): bool
     {
         $regex_string = '#([0-9]+)[\s]*('.implode('|', array_keys($this->tokens_values)).'){1}#i';
         $regex_clock_string = '#^(?:(?:([01]?\d|2[0-3]):)?([0-5]?\d):)?([0-5]?\d)$#i';
@@ -377,10 +381,10 @@ class TimeExpression
     /**
      * Transform an integer to a non ISO8601 interval string
      *
-     * @param $time
+     * @param integer $time
      * @return string
      */
-    protected function integerToString($time)
+    protected function integerToString($time): string
     {
         $tokens = array_reverse($this->tokens_values, true);
         $expression = [];

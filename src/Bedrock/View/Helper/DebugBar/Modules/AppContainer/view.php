@@ -6,6 +6,6 @@
     }
 
     foreach ($view->instances as $name => $instance) {
-        echo '<h2><div class="h-block"><a id="'.$name.'">'.$name.'</a></div></h2><br /><pre>'.print_r($instance, true).'</pre>';
+        echo '<h2><div class="h-block"><span id="'.$name.'">'.$name.'</span></div></h2><br /><pre>'.print_r($instance, true).'</pre>';
     }
 ?>

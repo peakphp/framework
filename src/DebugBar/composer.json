@@ -1,8 +1,8 @@
 {
     "name": "peak/debugbar",
-    "description": "PHP Customizable Debug Bar",
+    "description": "PHP Customizable Debug Bar Component",
     "keywords": ["peak", "debug", "debug bar", "debugging", "debugbar"],
-    "license": "BSD-3-Clause",
+    "license": "MIT",
     "homepage": "https://peakframework.com",
     "support": {
         "issues": "https://github.com/peakphp/framework/issues",
@@ -16,7 +16,7 @@
     ],
     "require": {
         "php": ">=5.6.4",
-        "peak/common" : "2.27.0",
+        "peak/common" : "^3.0",
         "psr/container": "^1.0",
         "psr/log": "^1.0"
     },
@@ -27,7 +27,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "2.28-dev"
+            "dev-master": "3.0-dev"
         }
     },
     "minimum-stability": "dev",

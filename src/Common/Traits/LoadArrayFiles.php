@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Common\Traits;
 
 use \Exception;
@@ -17,8 +19,9 @@ trait LoadArrayFiles
      *
      * @param  array $files Files to load as array
      * @return array
+     * @throws Exception
      */
-    protected function getArrayFilesContent($files, $basepath = null)
+    protected function getArrayFilesContent(array $files, string $basepath = null): array
     {
         foreach ($files as $file) {
             $file = (isset($basepath)) ? $basepath.'/'.$file : $file;

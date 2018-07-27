@@ -250,7 +250,7 @@ $window-padding: 20px;
       overflow:hidden;
 
       &.open {
-        border-bottom: 2px solid $logo-color;
+        border-bottom: 4px solid $logo-color;
         background: linear-gradient(to top, $logo-color 4px, $bg-color-1 0px, $bg-color-1 100%);
       }
 
@@ -295,20 +295,20 @@ $window-padding: 20px;
 }
 
 .pkdebugbar-window {
-  display: none;
+  display:none;
   background: $bg-color-1;
   color: $text-color;
-  position: fixed;
-  top: $window-margin;
+  position:absolute;
+  top:$window-margin;
   right: $window-margin;
   left: $window-margin;
   bottom: $height+1;
   padding: $window-padding;
   z-index: 999998;
-  overflow: auto;
+  overflow:auto;
   font-family: $font-default;
-  font-size: 12px;
-  line-height: 14px;
+  font-size:12px;
+  line-height:14px;
   //border:2px solid $border-color;
   //border-bottom:0;
   //background: linear-gradient(to top, #000 0, $bg-color-1 30px, $bg-color-1 50%);
