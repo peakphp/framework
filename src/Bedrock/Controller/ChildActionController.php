@@ -1,9 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Bedrock\Controller;
 
 use Peak\Bedrock\Application;
-use Peak\Bedrock\View;
 use \Exception;
 
 /**
@@ -18,10 +19,11 @@ abstract class ChildActionController
     protected $parent;
 
     /**
-     * Constructor
+     * ChildActionController constructor.
      *
-     * @param View $view
      * @param ParentController $parent
+     * @throws Application\Exceptions\InstanceNotFoundException
+     * @throws Application\Exceptions\MissingContainerException
      */
     public function __construct(ParentController $parent)
     {

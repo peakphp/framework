@@ -1,13 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Bedrock\View\Helper;
 
 use Peak\Bedrock\View\Helper;
 
 /**
- * Table Grid Helper
- *
- * Create table easily
+ * Class Grid
+ * @package Peak\Bedrock\View\Helper
  */
 class Grid extends Helper
 {

@@ -14,10 +14,6 @@ class HelpersTest extends TestCase
     {
         $content1 = exceptionTrace(new \Exception('Message'));
         $this->assertTrue(mb_strlen($content1) > 1);
-
-        $content2 = exceptionTrace(new \Peak\Common\DataException('Message', ['misc_data']));
-        $this->assertTrue(mb_strlen($content2) > 1);
-        $this->assertTrue(mb_strlen($content2) > mb_strlen($content1));
     }
 
     /**
@@ -49,7 +45,7 @@ class HelpersTest extends TestCase
     function testPhpinput()
     {
         $data = phpinput();
-        $this->assertTrue($data instanceof Peak\Common\Collection);
+        $this->assertTrue($data instanceof Peak\Common\Collection\Collection);
     }
 
     /**

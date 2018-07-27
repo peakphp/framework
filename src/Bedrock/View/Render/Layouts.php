@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Bedrock\View\Render;
 
 use Peak\Bedrock\Application;
@@ -7,7 +9,8 @@ use Peak\Bedrock\View\Render;
 use \Exception;
 
 /**
- * Peak View Render Engine: Layouts
+ * Class Layouts
+ * @package Peak\Bedrock\View\Render
  */
 class Layouts extends Render
 {
@@ -32,8 +35,10 @@ class Layouts extends Render
     /**
      * Verify if layout exists
      *
-     * @param  string $name
+     * @param $name
      * @return bool
+     * @throws Application\Exceptions\InstanceNotFoundException
+     * @throws Application\Exceptions\MissingContainerException
      */
     public function isLayout($name)
     {
@@ -52,9 +57,11 @@ class Layouts extends Render
     /**
      * Render view(s)
      *
-     * @param string $file
-     * @param string $path
-     * @return array/string
+     * @param $file
+     * @param null $path
+     * @throws Exception
+     * @throws Application\Exceptions\InstanceNotFoundException
+     * @throws Application\Exceptions\MissingContainerException
      */
     public function render($file, $path = null)
     {

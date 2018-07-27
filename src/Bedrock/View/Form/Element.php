@@ -1,11 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Bedrock\View\Form;
 
-use Peak\Bedrock\View\Form\ElementInterface;
-
 /**
- * Form element base
+ * Class Element
+ * @package Peak\Bedrock\View\Form
  */
 abstract class Element implements ElementInterface
 {

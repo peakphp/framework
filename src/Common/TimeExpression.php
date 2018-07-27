@@ -328,6 +328,7 @@ class TimeExpression
 
     /**
      * Decode DateInterval string format (Uses the normal php date parsers)
+     * @throws Exception
      */
     protected function decodeTimeString()
     {

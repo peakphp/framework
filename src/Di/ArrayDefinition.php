@@ -13,6 +13,11 @@ class ArrayDefinition
     protected $new_instances_only = false;
 
     /**
+     * @var ClassInstantiator
+     */
+    private $instantiator;
+
+    /**
      * Constructor.
      */
     public function __construct()

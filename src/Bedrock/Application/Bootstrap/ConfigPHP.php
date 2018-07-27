@@ -1,11 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Bedrock\Application\Bootstrap;
 
 use Peak\Bedrock\Application\Config;
 
 /**
- * Application php config
+ * Class ConfigPHP
+ * @package Peak\Bedrock\Application\Bootstrap
  */
 class ConfigPHP
 {
@@ -22,10 +25,10 @@ class ConfigPHP
 
         foreach ($config->php as $setting => $val) {
             if (!is_array($val)) {
-                ini_set($setting, $val);
+                ini_set($setting, (string)$val);
             } else {
                 foreach ($val as $k => $v) {
-                    ini_set($setting.'.'.$k, $v);
+                    ini_set($setting.'.'.$k, (string)$v);
                 }
             }
         }

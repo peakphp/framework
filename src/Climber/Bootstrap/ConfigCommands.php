@@ -1,10 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Climber\Bootstrap;
 
 use Peak\Climber\Application;
 use Psr\Container\ContainerInterface;
 
+/**
+ * Class ConfigCommands
+ * @package Peak\Climber\Bootstrap
+ */
 class ConfigCommands
 {
     /**
@@ -13,8 +19,10 @@ class ConfigCommands
     protected $app;
 
     /**
-     * Constructor
+     * ConfigCommands constructor.
+     *
      * @param Application $app
+     * @throws \Peak\Di\Exception\NotFoundException
      */
     public function __construct(Application $app)
     {

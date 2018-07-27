@@ -1,9 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Bedrock\View\Form\Element;
 
 use Peak\Bedrock\View\Form\Element;
 
+/**
+ * Class Label
+ * @package Peak\Bedrock\View\Form\Element
+ */
 class Label extends Element
 {
     /**

@@ -1,10 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Climber\Cron;
 
 use Peak\Climber\Application;
 use Peak\Climber\Cron\Exceptions\InvalidDatabaseConfigException;
 
+/**
+ * Class RegisterCommands
+ * @package Peak\Climber\Cron
+ */
 class RegisterCommands
 {
     /**
@@ -26,8 +32,11 @@ class RegisterCommands
     ];
 
     /**
-     * Constructor
+     * RegisterCommands constructor.
      * @param Application $app
+     * @param string $prefix
+     * @throws InvalidDatabaseConfigException
+     * @throws \Peak\Di\Exception\NotFoundException
      */
     public function __construct(Application $app, $prefix = 'cron')
     {

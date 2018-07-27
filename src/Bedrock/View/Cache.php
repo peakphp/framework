@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Bedrock\View;
 
 use Peak\Bedrock\Application;
@@ -8,9 +10,8 @@ use Peak\Common\TimeExpression;
 use \Exception;
 
 /**
- * View Cache
- *
- * This object manage view cache and it is encapsulated inside Peak\Bedrock\View\Render
+ * Class Cache
+ * @package Peak\Bedrock\View
  */
 class Cache
 {

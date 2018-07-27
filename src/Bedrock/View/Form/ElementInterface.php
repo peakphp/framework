@@ -1,7 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Bedrock\View\Form;
 
+/**
+ * Interface ElementInterface
+ * @package Peak\Bedrock\View\Form
+ */
 interface ElementInterface
 {
     /**

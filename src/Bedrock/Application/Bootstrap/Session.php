@@ -1,18 +1,22 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Bedrock\Application\Bootstrap;
 
 use Peak\Bedrock\Application\Config;
 
 /**
- * Application session
+ * Class Session
+ * @package Peak\Bedrock\Application\Bootstrap
  */
 class Session
 {
     /**
      * Setup and start session
      *
-     * @param \Peak\Bedrock\Application\Config $config
+     * @param Config $config
+     * @throws \Exception
      */
     public function __construct(Config $config)
     {

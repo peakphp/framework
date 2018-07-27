@@ -13,16 +13,6 @@ class PaginatorTest extends TestCase
 	function setUp()
 	{		
 	}
-		 
-	/**
-	 * Create object
-	 */
-	function testCreateObject()
-	{
-		$ipp   = 16;
-		$total = 198;
-		$pagin = new Paginator($ipp, $total, 3);
-	}
 
 	/**
 	 * Test with normal valid infos

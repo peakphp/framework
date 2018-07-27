@@ -29,7 +29,7 @@ class Pipe2 implements PipeInterface
  */
 class Pipe3 implements PipeInterface
 {
-    public function __construct(\Peak\Common\Collection $coll)
+    public function __construct(\Peak\Common\Collection\Collection $coll)
     {
         $this->coll = $coll;
     }

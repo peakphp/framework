@@ -1,10 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Bedrock\View;
+
 use Peak\Common\TimeExpression;
 
 /**
- * View helper - Http header
+ * Class Header
+ * @package Peak\Bedrock\View
  */
 class Header
 {
@@ -246,9 +250,10 @@ class Header
     /**
      * Set cache header
      *
-     * @param mixed $max_age (int of string support by TimeExpression)
+     * @param $max_age
      * @param string $visibility
      * @return $this
+     * @throws \Exception
      */
     public function setCache($max_age, $visibility = 'public')
     {

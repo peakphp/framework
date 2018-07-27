@@ -1,17 +1,21 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Climber\Commands;
 
-use Peak\Bedrock\Application;
 use Peak\Climber\Cron\CronCommand;
 use Peak\Climber\Cron\OptionFormat;
 use Peak\Common\TimeExpression;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputDefinition;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
+/**
+ * Class ClimberCronAddCommand
+ * @package Peak\Climber\Commands
+ */
 class ClimberCronAddCommand extends CronCommand
 {
     /**
@@ -47,6 +51,9 @@ class ClimberCronAddCommand extends CronCommand
      *
      * @param InputInterface $input
      * @param OutputInterface $output
+     * @return int|null
+     * @throws \Exception
+     * @throws \Doctrine\DBAL\DBALException
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {

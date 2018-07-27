@@ -1,9 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Bedrock\Application;
 
-use Peak\Common\DotNotationCollection;
+use Peak\Config\Config as ConfigBase;
 
-class Config extends DotNotationCollection
+/**
+ * Class Config
+ * @package Peak\Bedrock\Application
+ */
+class Config extends ConfigBase
 {
 }

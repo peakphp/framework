@@ -1,8 +1,8 @@
 <?php
 
-namespace Peak\Bedrock\View\Helper;
+declare(strict_types=1);
 
-use Peak\Bedrock\View\Helper;
+namespace Peak\Bedrock\View\Helper;
 
 /**
  * Assets url helpers for files like css/js/img
@@ -39,7 +39,7 @@ class Assets
      * @example ('css',  ['theme/css/myfile1.css', ...]) will call method assetCss() with the file(s) path(s)
      *
      * @param  string $method
-     * @param  string $args
+     * @param  array $args
      * @return string
      */
     public function __call($method, $args)
@@ -113,10 +113,10 @@ class Assets
     /**
      * Process a single or a bunch of assets file
      *
-     * @param  string        $type
-     * @param  array|string  $paths
-     * @param  string|null   $param add url param if specified
-     * @return string
+     * @param $type
+     * @param $paths
+     * @param null $param
+     * @return string|void
      */
     public function process($type, $paths, $param = null)
     {

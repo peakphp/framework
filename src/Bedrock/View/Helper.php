@@ -1,11 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Bedrock\View;
 
 use Peak\Bedrock\View;
 
 /**
- * View Helper Base
+ * Class Helper
+ * @package Peak\Bedrock\View
  */
 abstract class Helper
 {
@@ -14,9 +17,11 @@ abstract class Helper
      * @var \Peak\Bedrock\View
      */
     public $view;
-    
+
     /**
-     * Get view object
+     * Helper constructor.
+     *
+     * @param View $view
      */
     public function __construct(View $view)
     {

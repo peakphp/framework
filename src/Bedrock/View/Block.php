@@ -1,14 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Bedrock\View;
 
 use Peak\Bedrock\View;
-use Peak\Common\Collection;
+use Peak\Common\Collection\Collection;
 use Peak\Common\Interfaces\Renderable;
 use Peak\Bedrock\View\Exceptions\BlockNotFoundException;
 
 /**
- * View renderable block file
+ * Class Block
+ * @package Peak\Bedrock\View
  */
 class Block extends Collection implements Renderable
 {
@@ -23,10 +26,13 @@ class Block extends Collection implements Renderable
      * @var string
      */
     public $block_file;
-
+    
     /**
-     * Get view object
+     * Block constructor.
      *
+     * @param View $view
+     * @param $block_file
+     * @param $block_data
      * @throws BlockNotFoundException
      */
     public function __construct(View $view, $block_file, $block_data)

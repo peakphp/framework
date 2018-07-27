@@ -1,9 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Climber\Commands;
 
 use Peak\Climber\Cron\CronCommand;
-use Peak\Climber\Cron\OptionFormat;
 use Peak\Common\TimeExpression;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;
@@ -50,6 +51,9 @@ class ClimberCronUpdateCommand extends CronCommand
      *
      * @param InputInterface $input
      * @param OutputInterface $output
+     * @return int|null
+     * @throws \Exception
+     * @throws \Doctrine\DBAL\DBALException
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {

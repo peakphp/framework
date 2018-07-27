@@ -1,22 +1,24 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Bedrock\View\Render;
 
 use Peak\Bedrock\View\Render;
 
 /**
- * Peak View Render Engine: Json
- *
- * Output view vars as json
+ * Class Json
+ * @package Peak\Bedrock\View\Render
  */
 class Json extends Render
 {
     /**
      * Render view(s)
      *
-     * @param  string $file
-     * @param  string $path
-     * @return array/string
+     * @param $file
+     * @param null $path
+     * @throws \Peak\Bedrock\Application\Exceptions\InstanceNotFoundException
+     * @throws \Peak\Bedrock\Application\Exceptions\MissingContainerException
      */
     public function render($file, $path = null)
     {

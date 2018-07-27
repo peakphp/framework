@@ -1,17 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Bedrock\Application;
 
 use Peak\Bedrock\Application;
-use Peak\Common\Collection;
+use Peak\Common\Collection\Collection;
 use Peak\Routing\Request;
 use Peak\Routing\RequestServerURI;
 use Peak\Routing\RequestResolver;
-use Peak\Routing\Route;
-use Peak\Routing\CustomRoute;
 
 /**
- * Application Routing
+ * Class Routing
+ * @package Peak\Bedrock\Application
  */
 class Routing
 {
@@ -29,7 +30,7 @@ class Routing
 
     /**
      * Application regex routes collection from app config
-     * @var \Peak\Common\Collection
+     * @var \Peak\Common\Collection\Collection
      */
     public $custom_routes;
 
@@ -38,12 +39,15 @@ class Routing
      * By default, it is set to application public path config
      * @var string
      */
-    //public $base_uri;
+    public $base_uri;
 
     /**
-     * Constructor
+     * Routing constructor.
      *
-     * @param mixed $request
+     * @param null $request
+     * @param null $base_uri
+     * @throws Exceptions\InstanceNotFoundException
+     * @throws Exceptions\MissingContainerException
      */
     public function __construct($request = null, $base_uri = null)
     {
@@ -78,6 +82,8 @@ class Routing
      * Resolve application route
      *
      * @return \Peak\Routing\Route
+     * @throws Exceptions\InstanceNotFoundException
+     * @throws Exceptions\MissingContainerException
      */
     public function getRoute()
     {

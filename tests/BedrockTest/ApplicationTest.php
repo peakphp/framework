@@ -7,7 +7,7 @@ use Peak\Bedrock\Application\Config;
 use Peak\Bedrock\Application\Exceptions\MissingContainerException;
 use Peak\Bedrock\Application\Exceptions\InstanceNotFoundException;
 use Peak\Di\Container;
-use Peak\Common\Collection;
+use Peak\Common\Collection\Collection;
 
 class ApplicationTest extends TestCase
 {

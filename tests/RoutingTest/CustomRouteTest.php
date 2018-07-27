@@ -1,4 +1,5 @@
 <?php
+
 use PHPUnit\Framework\TestCase;
 
 use Peak\Routing\CustomRoute;
@@ -43,8 +44,7 @@ class CustomRouteTest extends TestCase
 
     public function testChangeRegex()
     {   
-        $custom = new CustomRoute(':any', 'admin', 'index');
-        $custom->setRegex(':alpha');
+        $custom = new CustomRoute(':alpha', 'admin', 'index');
         $this->assertTrue($custom->getRegex() === '[a-zA-Z]+');
     }
 }

@@ -1,18 +1,23 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Pipelines;
 
-use Peak\Pipelines\AbstractProcessor;
-use Peak\Pipelines\ProcessorInterface;
-
+/**
+ * Class DefaultProcessor
+ * @package Peak\Pipelines
+ */
 class DefaultProcessor extends AbstractProcessor implements ProcessorInterface
 {
     /**
      * Process pipes
      *
-     * @param  array $pipes
-     * @param  mixed $payload
+     * @param array $pipes
+     * @param mixed $payload
      * @return mixed
+     * @throws Exception\InvalidPipeException
+     * @throws Exception\MissingPipeInterfaceException
      */
     public function process(array $pipes, $payload)
     {

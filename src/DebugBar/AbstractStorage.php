@@ -2,7 +2,7 @@
 
 namespace Peak\DebugBar;
 
-use Peak\Common\Collection;
+use Peak\Common\Collection\Collection;
 
 abstract class AbstractStorage extends Collection
 {
@@ -11,6 +11,7 @@ abstract class AbstractStorage extends Collection
      */
     public function __construct()
     {
+        parent::__construct();
         $this->load();
     }
 

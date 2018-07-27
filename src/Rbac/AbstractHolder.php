@@ -1,7 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Rbac;
 
+/**
+ * Class AbstractHolder
+ * @package Peak\Rbac
+ */
 abstract class AbstractHolder
 {
     /**
@@ -11,22 +17,40 @@ abstract class AbstractHolder
     protected $id;
 
     /**
-     * Constructor
-     *
-     * @param string $id User identifier name
+     * Holder description
+     * @var string
      */
-    public function __construct($id)
+    protected $description;
+
+    /**
+     * AbstractHolder constructor.
+     *
+     * @param string $id
+     * @param string $description
+     */
+    public function __construct($id, string $description = '')
     {
         $this->id = $id;
+        $this->description = $description;
     }
 
     /**
-     * Get role identifier name
+     * Get holder identifier name
      *
      * @return string
      */
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Get holder description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
     }
 }

@@ -1,11 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Bedrock\View\Helper;
 
 use Peak\DebugBar\DebugBar as DebugBarComponent;
 
 /**
- * Wrapper around DebugBar component
+ * Class DebugBar
+ * @package Peak\Bedrock\View\Helper
  */
 class DebugBar
 {

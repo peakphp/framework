@@ -1,10 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Bedrock\View\Form;
 
-use Peak\Common\Collection;
+use Peak\Common\Collection\Collection;
 use \Exception;
 
+/**
+ * Class FormBuilder
+ * @package Peak\Bedrock\View\Form
+ */
 class FormBuilder extends Collection
 {
     /**
@@ -20,12 +26,13 @@ class FormBuilder extends Collection
     protected $form_validation;
 
     /**
-     * Constructor
+     * FormBuilder constructor.
      *
      * @param Form|null $form
      */
     public function __construct(Form $form = null)
     {
+        parent::__construct();
         $this->form = $form;
         $this->form_validation = new FormValidation($this);
         $this->init();
@@ -41,9 +48,10 @@ class FormBuilder extends Collection
     /**
      * Get a html control
      *
-     * @param  object|string $arg1
-     * @param  string $arg2
-     * @return object
+     * @param $arg1
+     * @param null $arg2
+     * @return null|object
+     * @throws Exception
      */
     public function control($arg1, $arg2 = null)
     {
@@ -80,8 +88,9 @@ class FormBuilder extends Collection
     /**
      * Validate the form
      *
-     * @param  array $data
+     * @param null $data
      * @return bool
+     * @throws Exception
      */
     public function validate($data = null)
     {
@@ -96,7 +105,9 @@ class FormBuilder extends Collection
     /**
      * See Form::setData()
      *
+     * @param $data
      * @return $this
+     * @throws Exception
      */
     public function setData($data)
     {
@@ -111,7 +122,9 @@ class FormBuilder extends Collection
     /**
      * See Form::setErrors()
      *
+     * @param $errors
      * @return $this
+     * @throws Exception
      */
     public function setErrors($errors)
     {

@@ -1,7 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Rbac;
 
+/**
+ * Trait RolesHolder
+ * @package Peak\Rbac
+ */
 trait RolesHolder
 {
     /**
@@ -28,7 +34,7 @@ trait RolesHolder
      * @param  mixed $role
      * @return bool
      */
-    public function hasRole($role)
+    public function hasRole($role): bool
     {
         if ($role instanceof Role) {
             return isset($this->roles[$role->getId()]);

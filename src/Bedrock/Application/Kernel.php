@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Bedrock\Application;
 
 use Peak\Bedrock\Application;
 use Peak\Bedrock\Controller\FrontController;
 
 /**
- * Load the framework objects, application bootstrap and front controller.
+ * Class Kernel
+ * @package Peak\Bedrock\Application
  */
 class Kernel
 {
@@ -40,7 +43,12 @@ class Kernel
     protected $config;
 
     /**
-     * Start framework
+     * Kernel constructor.
+     *
+     * @param Config $config
+     * @param Routing $routing
+     * @throws Exceptions\InstanceNotFoundException
+     * @throws Exceptions\MissingContainerException
      */
     public function __construct(Config $config, Routing $routing)
     {
@@ -58,6 +66,8 @@ class Kernel
      * Reload application Bootstrapper and FrontController for a module
      *
      * @return $this
+     * @throws Exceptions\InstanceNotFoundException
+     * @throws Exceptions\MissingContainerException
      */
     public function reload()
     {
@@ -68,6 +78,9 @@ class Kernel
 
     /**
      * Load and store application Bootstrapper
+     *
+     * @throws Exceptions\InstanceNotFoundException
+     * @throws Exceptions\MissingContainerException
      */
     private function loadBootstrap()
     {

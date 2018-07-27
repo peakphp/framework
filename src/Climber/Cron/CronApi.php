@@ -1,10 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Climber\Cron;
 
 use Peak\Climber\Cron\Exceptions\DatabaseNotFoundException;
 use Peak\Climber\Cron\Exceptions\TablesNotFoundException;
 
+/**
+ * Class CronApi
+ * @package Peak\Climber\Cron
+ */
 class CronApi
 {
     /**

@@ -14,11 +14,11 @@ class ClassFinderTest extends TestCase
         // both namespace contains a Json class
         $cf = new ClassFinder([
             'Peak\Bedrock\View\Render',
-            'Peak\Config\Type'
+            'Peak\Config\Processor'
         ]);
 
-        $class = $cf->findFirst('JsonLoader');
-        $this->assertTrue($class === Peak\Config\Type\JsonLoader::class);
+        $class = $cf->findFirst('JsonProcessor');
+        $this->assertTrue($class === Peak\Config\Processor\JsonProcessor::class);
 
         $class = null;
         $class = $cf->findFirst('Test');
@@ -33,11 +33,11 @@ class ClassFinderTest extends TestCase
         // both namespace contains a Json class
         $cf = new ClassFinder([
             'Peak\Bedrock\View\Render',
-            'Peak\Config\Type'
+            'Peak\Config\Processor'
         ]);
 
-        $class = $cf->findLast('JsonLoader');
-        $this->assertTrue($class === Peak\Config\Type\JsonLoader::class);
+        $class = $cf->findLast('JsonProcessor');
+        $this->assertTrue($class === Peak\Config\Processor\JsonProcessor::class);
 
         $class = null;
         $class = $cf->findFirst('Test');

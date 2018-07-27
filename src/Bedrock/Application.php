@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Bedrock;
 
 use Peak\Bedrock\Application\Config;
@@ -9,7 +11,6 @@ use Peak\Bedrock\Application\Exceptions\MissingContainerException;
 use Peak\Bedrock\Application\Kernel;
 use Peak\Bedrock\Application\Routing;
 use Psr\Container\ContainerInterface;
-use \Exception;
 
 /**
  * Application wrapper
@@ -26,6 +27,8 @@ class Application
      * Get application container
      *
      * @return ContainerInterface
+     * @throws InstanceNotFoundException
+     * @throws MissingContainerException
      */
     public static function container()
     {
@@ -58,8 +61,10 @@ class Application
     /**
      * Get container / instance in the container
      *
-     * @param  string $instance
+     * @param $instance
      * @return mixed
+     * @throws InstanceNotFoundException
+     * @throws MissingContainerException
      */
     public static function get($instance)
     {
@@ -70,8 +75,12 @@ class Application
     /**
      * Instantiate a class
      *
-     * @see \Peak\Di\Container for details
+     * @param $class
+     * @param array $args
+     * @param array $explicit
      * @return mixed
+     * @throws InstanceNotFoundException
+     * @throws MissingContainerException
      */
     public static function create($class, $args = [], $explicit = [])
     {
@@ -104,9 +113,11 @@ class Application
     /**
      * Static version of config() use current Application instance in Registry
      *
-     * @param  string $path
-     * @param  mixed  $value
+     * @param null $path
+     * @param null $value
      * @return mixed
+     * @throws InstanceNotFoundException
+     * @throws MissingContainerException
      */
     public static function conf($path = null, $value = null)
     {
@@ -137,8 +148,11 @@ class Application
     /**
      * Build application base
      *
-     * @param  array $config
-     * @return Application
+     * @param ContainerInterface $container
+     * @param array $config
+     * @throws Application\Exceptions\MissingConfigException
+     * @throws Application\Exceptions\PathNotFoundException
+     * @throws \Peak\Config\Exception\UnknownResourceException
      */
     protected function build(ContainerInterface $container, array $config)
     {

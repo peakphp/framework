@@ -1,13 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Bedrock\View\Form;
 
-use Peak\Bedrock\View\Form\FormBuilder;
-use Peak\Bedrock\View\Form\FormDataSet;
-
 /**
- * Form validation wrapper around
- * FormBuilder and FormDataSet
+ * Class FormValidation
+ * @package Peak\Bedrock\View\Form
  */
 class FormValidation
 {

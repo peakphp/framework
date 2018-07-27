@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Climber\Cron;
 
 use Doctrine\DBAL\Configuration;
@@ -7,6 +9,10 @@ use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\DriverManager;
 use \Exception;
 
+/**
+ * Class CronSystem
+ * @package Peak\Climber\Cron
+ */
 class CronSystem
 {
     /**

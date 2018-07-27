@@ -10,6 +10,11 @@ use Psr\Container\ContainerInterface;
 class Prototype extends AbstractBinding
 {
     /**
+     * @var ClassInstantiator
+     */
+    private $instantiator;
+
+    /**
      * Constructor
      *
      * @param string $name

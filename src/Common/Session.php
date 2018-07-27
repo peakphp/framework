@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Common;
 
-use Peak\Common\DotNotationCollection;
+use Peak\Common\Collection\DotNotationCollection;
 
 /**
  * Wrap Collection / DotNotation abilities around php $_SESSION
@@ -14,6 +16,7 @@ class Session extends DotNotationCollection
      */
     public function __construct()
     {
+        parent::__construct();
         if (self::isStarted()) {
             $this->items =& $_SESSION;
         }
@@ -24,7 +27,7 @@ class Session extends DotNotationCollection
      *
      * @return bool
      */
-    public static function isStarted()
+    public static function isStarted(): bool
     {
         return (session_status() == PHP_SESSION_ACTIVE);
     }
@@ -36,7 +39,7 @@ class Session extends DotNotationCollection
      * @param array $options
      * @return Session
      */
-    public static function start($name = null, $options = [])
+    public static function start(string $name = null, array $options = []): Session
     {
         session_name($name);
         session_start($options);
@@ -47,7 +50,7 @@ class Session extends DotNotationCollection
     /**
      * Destroy session
      */
-    public static function destroy()
+    public static function destroy(): void
     {
         if (self::isStarted()) {
             session_destroy();

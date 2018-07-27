@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Bedrock\Application\Bootstrap;
 
 use Peak\Bedrock\Application\Config;
 use Peak\Bedrock\View;
 
 /**
- * Application Bootstrap View
+ * Class ConfigView
+ * @package Peak\Bedrock\Application\Bootstrap
  */
 class ConfigView
 {

@@ -1,23 +1,27 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Bedrock\Application\Bootstrap;
 
 use Peak\Bedrock\Application\Config;
 use Peak\Bedrock\Application\Routing;
-use Peak\Common\Collection;
-use Peak\Common\DataException;
+use Peak\Common\Collection\Collection;
 use Peak\Routing\CustomRouteBuilder;
+use Peak\Routing\Exception\InvalidCustomRouteException;
 
 /**
- * Application Bootstrap Customer routes
+ * Class ConfigCustomRoutes
+ * @package Peak\Bedrock\Application\Bootstrap
  */
 class ConfigCustomRoutes
 {
     /**
      * Configure Application routes based on Application config
      *
-     * @param \Peak\Bedrock\Application\Config  $config
-     * @param \Peak\Bedrock\Application\Routing $routing
+     * @param Config $config
+     * @param Routing $routing
+     * @throws InvalidCustomRouteException
      */
     public function __construct(Config $config, Routing $routing)
     {
@@ -30,7 +34,7 @@ class ConfigCustomRoutes
                 } elseif (is_string($r)) {
                     $collection[] = CustomRouteBuilder::createFromString($r);
                 } else {
-                    throw new DataException('Invalid custom route type in your application config', $r);
+                    throw new InvalidCustomRouteException($r);
                 }
             }
         }

@@ -1,10 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Climber\Cron;
 
 use Doctrine\DBAL\Connection;
 use \Exception;
 
+/**
+ * Class InstallDatabase
+ * @package Peak\Climber\Cron
+ */
 class InstallDatabase
 {
     /**

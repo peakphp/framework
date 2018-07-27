@@ -2,6 +2,8 @@
 
 namespace Peak\Common;
 
+use Peak\Common\Collection\Collection;
+
 /**
  * Wrapper around php://input
  */

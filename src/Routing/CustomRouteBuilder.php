@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Routing;
 
-use Peak\Common\DataException;
+use Peak\Routing\Exception\InvalidCustomRouteException;
 
 class CustomRouteBuilder
 {
@@ -11,12 +13,12 @@ class CustomRouteBuilder
      *
      * @param array $route
      * @return CustomRoute
-     * @throws DataException
+     * @throws InvalidCustomRouteException
      */
     public static function createFromArray(array $route)
     {
         if (!isset($route['route'], $route['controller'], $route['action'])) {
-            throw new DataException('Invalid custom route array expression', $route);
+            throw new InvalidCustomRouteException($route);
         }
 
         return new CustomRoute(
@@ -33,13 +35,13 @@ class CustomRouteBuilder
      *
      * @param string $expression
      * @return CustomRoute
-     * @throws DataException
+     * @throws InvalidCustomRouteException
      */
     public static function createFromString($expression)
     {
         $parts = explode(' | ', $expression);
         if (count($parts) != 2) {
-            throw new DataException('Invalid custom route string expression', $expression);
+            throw new InvalidCustomRouteException($expression);
         }
 
         $ctrl_part = explode(Request::$separator, $parts[1]);

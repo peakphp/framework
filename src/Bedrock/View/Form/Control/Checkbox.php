@@ -1,11 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Bedrock\View\Form\Control;
 
 use Peak\Bedrock\View\Form\FormControl;
 
 /**
- * Checkbox
+ * Class Checkbox
+ * @package Peak\Bedrock\View\Form\Control
  */
 class Checkbox extends FormControl
 {

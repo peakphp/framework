@@ -1,7 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Bedrock\Application\Config;
 
+/**
+ * Class AppTree
+ * @package Peak\Bedrock\Application\Config
+ */
 class AppTree
 {
     /**
@@ -33,7 +39,6 @@ class AppTree
      * Generate application tree
      *
      * @param   string $root
-     * @return  array
      */
     protected function defaultAppTree($root)
     {

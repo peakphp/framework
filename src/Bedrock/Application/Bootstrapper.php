@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Bedrock\Application;
 
 use Psr\Container\ContainerInterface;
@@ -28,7 +30,9 @@ class Bootstrapper
     protected $container = [];
 
     /**
-     * init app bootstrap
+     * Bootstrapper constructor.
+     *
+     * @param ContainerInterface $container
      */
     public function __construct(ContainerInterface $container)
     {

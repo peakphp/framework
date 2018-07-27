@@ -1,11 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Bedrock\Application;
 
+use Peak\Bedrock\Application\Config as AppConfig;
 use Peak\Bedrock\Application\Config\AppTree;
 use Peak\Bedrock\Application\Exceptions\MissingConfigException;
-use Peak\Common\DataException;
+use Peak\Bedrock\Application\Exceptions\PathNotFoundException;
+use Peak\Config\ConfigFactory;
+use Peak\Config\ConfigInterface;
 
+/**
+ * Class ConfigResolver
+ * @package Peak\Bedrock\Application
+ */
 class ConfigResolver
 {
     /**
@@ -15,7 +24,6 @@ class ConfigResolver
     private $default = [
         'ns' => 'App',          //namespace
         'env' => 'prod',        //app environment (dev,prod,staging,testing)
-        'soft_conf' => false,   //indicate we should use soft loader for configs
         'conf' => [],           //config(s) file(s)
         'name' => 'app',        //default application name
         'path' => [             //paths
@@ -32,9 +40,12 @@ class ConfigResolver
     protected $app_config;
 
     /**
-     * Construct
+     * ConfigResolver constructor.
      *
-     * @param array $config user config
+     * @param array $config
+     * @throws MissingConfigException
+     * @throws PathNotFoundException
+     * @throws \Peak\Config\Exception\UnknownResourceException
      */
     public function __construct($config = [])
     {
@@ -64,21 +75,14 @@ class ConfigResolver
             }
         }
 
-        $loader = 'Peak\Config\ConfigLoader';
-        if (isset($config['soft_conf']) && $config['soft_conf'] === true) {
-            $loader = 'Peak\Config\ConfigSoftLoader';
-        }
-
-        // build and store final application config
-        $this->app_config = new Config(
-            (new $loader($final))->asArray()
-        );
+        $configFactory = new ConfigFactory();
+        $this->app_config = $configFactory->loadResourcesWith($final, new AppConfig());
     }
 
     /**
      * Get app configuration
      *
-     * @return Config
+     * @return ConfigInterface
      */
     public function getMountedConfig()
     {
@@ -90,7 +94,7 @@ class ConfigResolver
      *
      * @param array $config
      * @throws MissingConfigException
-     * @throws DataException
+     * @throws PathNotFoundException
      */
     private function validate($config)
     {
@@ -103,14 +107,14 @@ class ConfigResolver
         }
 
         if (!file_exists($config['path']['public'])) {
-            throw new DataException('Public path not found', $config['path']['public']);
+            throw new PathNotFoundException($config['path']['public'], 'Public path');
         }
 
         if (!isset($config['path']['app'])) {
             throw new MissingConfigException('path.app');
         }
         if (!file_exists($config['path']['app'])) {
-            throw new DataException('Application path not found', $config['path']['app']);
+            throw new PathNotFoundException($config['path']['app'], 'Application path');
         }
     }
 

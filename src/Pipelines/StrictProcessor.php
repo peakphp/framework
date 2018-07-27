@@ -1,9 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Pipelines;
 
 use Psr\Container\ContainerInterface;
 
+/**
+ * Class StrictProcessor
+ * @package Peak\Pipelines
+ */
 class StrictProcessor extends AbstractProcessor implements ProcessorInterface
 {
     /**
@@ -15,7 +21,7 @@ class StrictProcessor extends AbstractProcessor implements ProcessorInterface
     /**
      * Constructor
      *
-     * @param callable                $check closure returning a boolean
+     * @param callable $check closure returning a boolean
      * @param ContainerInterface|null $container Di container to resolve pipe class
      */
     public function __construct(callable $check, ContainerInterface $container = null)
@@ -27,9 +33,11 @@ class StrictProcessor extends AbstractProcessor implements ProcessorInterface
     /**
      * Process pipes
      *
-     * @param  array  $pipes
-     * @param  mixed $payload
+     * @param array $pipes
+     * @param mixed $payload
      * @return mixed
+     * @throws Exception\InvalidPipeException
+     * @throws Exception\MissingPipeInterfaceException
      */
     public function process(array $pipes, $payload)
     {

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Climber\Cron;
 
 use Doctrine\DBAL\Connection;
@@ -10,6 +12,10 @@ use Peak\Climber\Cron\Exceptions\TablesNotFoundException;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+/**
+ * Class CronCommand
+ * @package Peak\Climber\Cron
+ */
 abstract class CronCommand extends CommandWithDb
 {
     /**
