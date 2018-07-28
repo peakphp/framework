@@ -1,3 +1,16 @@
+VERSION 2.28.0
+--------------
+Release Date: ?
+
+VERSION 2.27.0
+--------------
+Release Date: 2018-05-20
+
+ - updated Debug Bar style and added new method for toggling it
+ - fixed bug with Peak\Common\ExceptionLogger
+ - added new trait Peak\Common\Traits\UpdateToCamelCase
+ - added in Peak\Common classes PropertiesBag and ImmutablePropertiesBag
+
 VERSION 2.26.0
 --------------
 Release Date: 2018-02-24
