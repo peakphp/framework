@@ -11,7 +11,7 @@
 
 ### About Peak Framework v2.x (LATEST)
 
-Check [latest 2.x version here](https://github.com/peakphp/framework/tree/master)
+Check [latest 2.7 version here](https://github.com/peakphp/framework/releases/tag/v2.27.0)
 
 ### About Peak Framework v3.x (NOT STABLE) and currently under development in master branch
 
@@ -28,6 +28,9 @@ Requirements:
    - [symfony/process](https://github.com/symfony/process)
    - [symfony/yaml](https://github.com/symfony/yaml)
    - [doctrine/dbal](https://github.com/doctrine/dbal)
+   - [psr/container](https://github.com/php-fig/container) (PSR-11)
+   - [psr/log](https://github.com/php-fig/log) (PSR-3)
+   - [psr/simple-cache](https://github.com/php-fig/simple-cache) (PSR-16)
    
 ### Usefull links:
 - [Documentation](https://peak.readthedocs.io) (Work in progress)
