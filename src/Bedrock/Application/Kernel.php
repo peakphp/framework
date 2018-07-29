@@ -105,9 +105,12 @@ class Kernel
     /**
      * Start front dispatching of a request
      *
-     * @param  mixed $request if specified, force the request,
-     *         otherwise, it will use server request uri
+     * @param null $request
      * @return $this
+     * @throws Exceptions\ControllerNotFoundException
+     * @throws Exceptions\InstanceNotFoundException
+     * @throws Exceptions\MissingContainerException
+     * @throws Exceptions\NoRouteFoundException
      */
     public function run($request = null)
     {
