@@ -1,6 +1,6 @@
 VERSION 3.0
 -----------
-Release date: ?
+Release date: 2018-08-11
 
 - rewritten Peak\Config component
 - added:
