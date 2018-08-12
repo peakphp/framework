@@ -9,11 +9,7 @@
 
 > **Note:** This repository contains the core code of the Peak framework. If you want to build an application using Peak, visit the main [Peak repository](https://github.com/peakphp/peak).
 
-### About Peak Framework v2.x (LATEST)
-
-Check [latest 2.7 version here](https://github.com/peakphp/framework/releases/tag/v2.27.0)
-
-### About Peak Framework v3.x (NOT STABLE) and currently under development in master branch
+### About Peak Framework v3.0
 
 Requirements:
 
@@ -44,6 +40,11 @@ There is many ways you can help:
 - Pull requests / bug submissions
 - Documentation
 - Contribute via my Patreon page: [https://www.patreon.com/francoislajoie](https://www.patreon.com/francoislajoie)
+
+#### About Peak Framework v2.x
+
+Check [latest 2.7 version here](https://github.com/peakphp/framework/releases/tag/v2.27.0)
+
 
 
 
