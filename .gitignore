@@ -1,10 +1,9 @@
-# Files to ignore
-
-# Folders to ignore
-/node_modules
-/_test
-/_temp
-/_backup
-/vendor
 /.subsplit
+/_backup
+/_temp
+/_test
+/demo
+/node_modules
+/tests/_reports
 /tmp
+/vendor
