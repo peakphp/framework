@@ -1,3 +1,6 @@
+env:
+  global:
+  - CC_TEST_REPORTER_ID=b2e2b1d897384817a588f5de1249dfd0f28eff80408feddc54b9d8f7effc615c
 language: php
 php:
   - 7.1
@@ -9,13 +12,16 @@ install:
 before_script:
   - composer self-update
   - composer install
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
 notifications:
   email: false
 script: 
   - ./vendor/bin/phpunit
-addons:
-  code_climate:
-    repo_token: b2e2b1d897384817a588f5de1249dfd0f28eff80408feddc54b9d8f7effc615c
+  - bundle exec rspec
+after_script:
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
 after_success:
   - php vendor/bin/coveralls -v
   - vendor/bin/test-reporter
