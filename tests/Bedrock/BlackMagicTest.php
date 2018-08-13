@@ -1,0 +1,79 @@
+<?php
+
+use \PHPUnit\Framework\TestCase;
+use \Peak\Bedrock\Application;
+use \Peak\Bedrock\BlackMagic;
+use \Peak\Bedrock\Http\StackInterface;
+use \Peak\Bedrock\Kernel;
+use \Peak\Bedrock\Http\Request\HandlerResolver;
+use \Psr\Container\ContainerInterface;
+use \Psr\Http\Message\ResponseInterface;
+use \Psr\Http\Message\ServerRequestInterface;
+use \Psr\Http\Server\RequestHandlerInterface;
+
+require_once FIXTURES_PATH.'/application/HandlerA.php';
+require_once FIXTURES_PATH.'/application/MiddlewareA.php';
+
+/**
+ * Class BlackMagicTest
+ */
+class BlackMagicTest extends TestCase
+{
+    public function testCreateApp()
+    {
+        $app = BlackMagic::createApp();
+        $this->assertInstanceOf(Application::class, $app);
+        $this->assertTrue($app->getKernel()->getEnv() === 'dev');
+        $this->assertTrue($app->getVersion() === '1.0');
+
+        $app = BlackMagic::createApp('test', '2.0');
+        $this->assertInstanceOf(Application::class, $app);
+        $this->assertTrue($app->getKernel()->getEnv() === 'test');
+        $this->assertTrue($app->getVersion() === '2.0');
+    }
+
+    public function testCreateAppStack()
+    {
+        $app = BlackMagic::createApp();
+        $stack = BlackMagic::createAppStack($app, [
+            MiddlewareA::class,
+            HandlerA::class,
+        ]);
+        $this->assertInstanceOf(StackInterface::class, $stack);
+    }
+
+    /**
+     * @runInSeparateProcess
+     */
+    public function testEmit()
+    {
+        $response = $this->createMock(ResponseInterface::class);
+        $response->expects($this->once())
+            ->method('getHeaders')
+            ->will($this->returnValue([]));
+        $response->expects($this->exactly(2))
+            ->method('getStatusCode')
+            ->will($this->returnValue(200));
+        $response->expects($this->exactly(2))
+            ->method('getStatusCode')
+            ->will($this->returnValue(200));
+
+        $this->assertTrue(BlackMagic::emit($response));
+    }
+
+    /**
+     * @runInSeparateProcess
+     */
+    public function testRun()
+    {
+        $app = BlackMagic::createApp();
+
+        $app->add(BlackMagic::createAppStack($app, [
+            MiddlewareA::class,
+            HandlerA::class,
+        ]));
+
+        $this->assertTrue(BlackMagic::run($app, $this->createMock(ServerRequestInterface::class)));
+    }
+
+}
