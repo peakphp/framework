@@ -9,8 +9,10 @@
 
 > **Note:** This repository contains the core code of the Peak framework. If you want to build an application using Peak, visit the main [Peak repository](https://github.com/peakphp/peak).
 
-### About Peak Framework v2.x (LATEST)
+### About Peak Framework v4.x
 
-Check [latest 2.7 version here](https://github.com/peakphp/framework/releases/tag/v2.27.0)
+This branch is a "work in progress" of version 4.0 which include drastic change of the core and overall operation of the framework.
 
-This branch is a prototype of Version 4.0
+This version is fully compatible with PSR-7, PSR-11 and PSR-15. We also aim to support draft PSR-17 as well.
+
+Check [latest 3.0 stable version here](https://github.com/peakphp/framework/releases/tag/v3.0)
