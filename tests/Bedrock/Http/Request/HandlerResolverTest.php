@@ -58,6 +58,16 @@ class HandlerResolverTest extends TestCase
         $handlerResolver->resolve("UnknownClass");
     }
 
+    public function testResolverHandlerNotFoundExceptionGetHandler()
+    {
+        $handlerResolver = new HandlerResolver(null);
+        try {
+            $handlerResolver->resolve("UnknownClass");
+        } catch(\Peak\Bedrock\Http\Request\Exception\HandlerNotFoundException $e) {
+            $this->assertTrue("UnknownClass" === $e->getHandler());
+        }
+    }
+
     /**
      * @expectedException \Peak\Bedrock\Http\Request\Exception\UnresolvableHandlerException
      */
@@ -65,5 +75,15 @@ class HandlerResolverTest extends TestCase
     {
         $handlerResolver = new HandlerResolver(null);
         $handlerResolver->resolve(array());
+    }
+
+    public function testResolverUnresolvableHandlerExceptionGetHandler()
+    {
+        $handlerResolver = new HandlerResolver(null);
+        try {
+            $handlerResolver->resolve(array());
+        } catch(\Peak\Bedrock\Http\Request\Exception\UnresolvableHandlerException $e) {
+            $this->assertTrue(is_array($e->getHandler()));
+        }
     }
 }

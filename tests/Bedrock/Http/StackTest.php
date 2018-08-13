@@ -26,4 +26,16 @@ class StackTest extends TestCase
         $stack = new Stack([new \stdClass()], $this->createMock(HandlerResolver::class));
         $stack->handle($this->createMock(ServerRequestInterface::class));
     }
+
+
+    public function testProcessExceptionGetHandler()
+    {
+        $handler = new \stdClass();
+        $stack = new Stack([$handler], $this->createMock(HandlerResolver::class));
+        try {
+            $stack->handle($this->createMock(ServerRequestInterface::class));
+        } catch(\Peak\Bedrock\Http\Request\Exception\InvalidHandlerException $e) {
+            $this->assertInstanceOf(\stdClass::class, $e->getHandler());
+        }
+    }
 }
