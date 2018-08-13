@@ -15,7 +15,16 @@ class StackTest extends TestCase
      */
     public function testCreateException()
     {
-        $stack = new Stack([], $this->createMock(HandlerResolver::class));
+        new Stack([], $this->createMock(HandlerResolver::class));
+    }
+
+    public function testCreateExceptionGetStack()
+    {
+        try {
+            new Stack([], $this->createMock(HandlerResolver::class));
+        } catch(\Peak\Bedrock\Http\Exception\EmptyStackException $e) {
+            $this->assertInstanceOf(Stack::class, $e->getStack());
+        }
     }
 
     /**
