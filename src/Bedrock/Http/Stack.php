@@ -64,6 +64,14 @@ class Stack implements StackInterface
     }
 
     /**
+     * @return StackInterface
+     */
+    public function getParent(): StackInterface
+    {
+        return $this->parentStack;
+    }
+
+    /**
      * Process an incoming server request and return a response, optionally delegating
      * response creation to a handler.
      *

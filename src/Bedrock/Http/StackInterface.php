@@ -14,4 +14,5 @@ use Psr\Http\Server\RequestHandlerInterface;
 interface StackInterface extends RequestHandlerInterface, MiddlewareInterface
 {
     public function setParent(StackInterface $parentStack);
+    public function getParent(): StackInterface;
 }
