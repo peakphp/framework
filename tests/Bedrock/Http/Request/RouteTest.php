@@ -136,4 +136,30 @@ class RouteTest extends TestCase
         $result = $route->match($request);
         $this->assertFalse($result);
     }
+
+    public function testProcess()
+    {
+        $route = new Route(
+            'GET',
+            '/mypath',
+            $this->createMock(StackInterface::class)
+        );
+
+        $request = $this->createMock(ServerRequestInterface::class);
+
+        $request->expects($this->once())
+            ->method('getMethod')
+            ->will($this->returnValue('GET'));
+
+        $uri = $this->createMock(UriInterface::class);
+        $uri->expects(($this->once()))
+            ->method('getPath')
+            ->will($this->returnValue('/mypath'));
+
+        $request->expects($this->once())
+            ->method('getUri')
+            ->will($this->returnValue($uri));
+
+        $result = $route->handle($request);
+    }
 }

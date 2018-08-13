@@ -63,7 +63,7 @@ class ResponseA implements ResponseInterface
     public function getHeaders()
     {
         // TODO: Implement getHeaders() method.
-        return [];
+        return [['key' => 'val']];
     }
 
     /**
