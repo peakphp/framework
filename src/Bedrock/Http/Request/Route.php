@@ -60,20 +60,11 @@ class Route implements StackInterface
     }
 
     /**
-     * Process an incoming server request and return a response, optionally delegating
-     * response creation to a handler.
-     *
-     * @param ServerRequestInterface $request
-     * @param RequestHandlerInterface $handler
-     * @return ResponseInterface
+     * @return StackInterface
      */
-    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
+    public function getParent(): StackInterface
     {
-        if (!$this->match($request)) {
-            return $this->processParent($request, $handler);
-        }
-
-        return $this->stack->process($request, $this->parentStack);
+        return $this->parentStack;
     }
 
     /**
@@ -91,6 +82,23 @@ class Route implements StackInterface
             return false;
         }
         return true;
+    }
+
+    /**
+     * Process an incoming server request and return a response, optionally delegating
+     * response creation to a handler.
+     *
+     * @param ServerRequestInterface $request
+     * @param RequestHandlerInterface $handler
+     * @return ResponseInterface
+     */
+    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
+    {
+        if (!$this->match($request)) {
+            return $this->processParent($request, $handler);
+        }
+
+        return $this->stack->handle($request);
     }
 
     /**
