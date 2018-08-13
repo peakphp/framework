@@ -97,7 +97,7 @@ class Stack implements StackInterface
             return $handlerInstance->handle($request);
         }
 
-        throw new InvalidHandlerException($handlerInstance);
+        throw new InvalidHandlerException($this->nextHandler);
     }
 
     /**
