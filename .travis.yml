@@ -6,8 +6,6 @@ php:
   - 7.1
   - 7.2
 install:
-  - composer remove symfony/console #disable the problem php-test-reporter with symfony 4 until it fixed for good
-  - composer require codeclimate/php-test-reporter --dev
   - composer install --no-interaction
 before_script:
   - composer self-update
@@ -19,9 +17,8 @@ notifications:
   email: false
 script: 
   - ./vendor/bin/phpunit
-  - bundle exec rspec
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
-after_success:
-  - php vendor/bin/coveralls -v
-  - vendor/bin/test-reporter
+#after_success:
+#  - php vendor/bin/coveralls -v
+#  - vendor/bin/test-reporter
