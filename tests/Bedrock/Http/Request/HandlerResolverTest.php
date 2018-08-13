@@ -47,6 +47,18 @@ class HandlerResolverTest extends TestCase
 
         $handlerResolver = new HandlerResolver($container);
         $this->assertInstanceOf(HandlerA::class, $handlerResolver->resolve(HandlerA::class));
+
+        $container->expects($this->once())
+            ->method('has')
+            ->with(HandlerA::class)
+            ->will($this->returnValue(new HandlerA()));
+
+        $container->expects($this->once())
+            ->method('get')
+            ->will($this->returnValue(new HandlerA()));
+
+        $handlerResolver = new HandlerResolver($container);
+        $this->assertInstanceOf(HandlerA::class, $handlerResolver->resolve(HandlerA::class));
     }
 
     /**
