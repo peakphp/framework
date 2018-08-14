@@ -132,6 +132,22 @@ class ConfigFactoryTest extends TestCase
     }
 
     /**
+     * @throws \Peak\Config\Exception\UnknownResourceException
+     */
+    public function testUnknownResourceExceptionGetResource()
+    {
+        try {
+            $configFactory = new ConfigFactory();
+            $config = $configFactory->loadResources([
+                new \PHPUnit\Util\Test()
+            ]);
+        } catch(\Peak\Config\Exception\UnknownResourceException $e) {
+            $this->assertTrue($e->getResource() instanceof \PHPUnit\Util\Test);
+        }
+
+    }
+
+    /**
      * @expectedException \Peak\Config\Exception\NoFileHandlersException
      * @throws \Peak\Config\Exception\UnknownResourceException
      */
