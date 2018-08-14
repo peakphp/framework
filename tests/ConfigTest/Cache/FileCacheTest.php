@@ -6,6 +6,7 @@ use Peak\Config\Cache\FileCache;
 
 class FileCacheTest extends TestCase
 {
+    private $cachePath = __DIR__.'/tmp';
     /**
      * @expectedException \Peak\Config\Exception\CachePathNotFoundException
      */
@@ -29,12 +30,10 @@ class FileCacheTest extends TestCase
 
     public function testDeleteMultiple()
     {
-        $cachePath = __DIR__.'/tmp';
-
         $id1 = 'cache1';
         $id2 = 'cache2';
 
-        $fileCache = new FileCache($cachePath);
+        $fileCache = new FileCache($this->cachePath);
         $this->assertFalse($fileCache->deleteMultiple([$id1, $id2]));
 
         $this->assertTrue($fileCache->set($id1, 'foobar'));
@@ -46,12 +45,10 @@ class FileCacheTest extends TestCase
 
     public function testSetMultiple()
     {
-        $cachePath = __DIR__.'/tmp';
-
         $id1 = 'cache1';
         $id2 = 'cache2';
 
-        $fileCache = new FileCache($cachePath);
+        $fileCache = new FileCache($this->cachePath);
         $this->assertTrue($fileCache->setMultiple([
             $id1 => 'test1',
             $id2 => 'test2'
@@ -60,6 +57,16 @@ class FileCacheTest extends TestCase
         $this->assertTrue($fileCache->has($id2));
         $this->assertTrue($fileCache->isExpired($id1));
         $this->assertTrue($fileCache->isExpired($id2));
+        $this->assertTrue($fileCache->clear());
+    }
+
+
+    public function testGet()
+    {
+        $fileCache = new FileCache($this->cachePath);
+        $this->assertTrue($fileCache->get('cache1', 'bar') === 'bar');
+        $fileCache->set('cache1', 'foo');
+        $this->assertTrue($fileCache->get('cache1', 'bar') === 'foo');
         $this->assertTrue($fileCache->clear());
     }
 
