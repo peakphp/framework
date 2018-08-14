@@ -19,9 +19,6 @@ class JsonProcessor implements ProcessorInterface
      */
     public function process($data): array
     {
-        // remove comments // and /* */
-        $data = preg_replace("#(/\*([^*]|[\r\n]|(\*+([^*/]|[\r\n])))*\*+/)|([\s\t](//).*)#", '', $data);
-
         // decode json
         $content = json_decode($data, true);
 
