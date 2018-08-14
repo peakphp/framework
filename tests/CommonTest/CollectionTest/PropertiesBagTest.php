@@ -17,4 +17,13 @@ class PropertiesBagTest extends TestCase
         $this->assertFalse(isset($propertiesBag->foo));
         $this->assertTrue(count($propertiesBag) == 0);
     }
+
+    /**
+     * @expectedException \Exception
+     */
+    public function testException()
+    {
+        $propertiesBag = new PropertiesBag(['foo' => 'bar']);
+        $propertiesBag->test;
+    }
 }
