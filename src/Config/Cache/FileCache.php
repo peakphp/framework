@@ -114,7 +114,7 @@ class FileCache implements CacheInterface
         foreach ($dir as $file) {
             $extension = pathinfo($file->getFilename(), PATHINFO_EXTENSION);
             if (!$file->isDot() && $extension === 'ser') {
-                if (unlink($this->path.'/'.$file->getFilename())) {
+                if (!@unlink($this->path.'/'.$file->getFilename())) {
                     $result = false;
                 }
             }
