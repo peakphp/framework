@@ -329,4 +329,12 @@ class ContainerBindingTest extends TestCase
         $arm = $container->create(Arm::class);
         $this->assertTrue($arm instanceof Arm);
     }
+
+    public function testBindingObject()
+    {
+        $prototype = new Prototype('myname', 'definition');
+        $this->assertTrue($prototype->getName() === 'myname');
+        $this->assertTrue($prototype->getType() === 2);
+        $this->assertTrue($prototype->getDefinition() === 'definition');
+    }
 }
