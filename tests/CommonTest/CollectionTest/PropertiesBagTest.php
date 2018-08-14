@@ -26,4 +26,22 @@ class PropertiesBagTest extends TestCase
         $propertiesBag = new PropertiesBag(['foo' => 'bar']);
         $propertiesBag->test;
     }
+
+    public function testIterator()
+    {
+        $propertiesBag = new PropertiesBag(['foo' => 'bar']);
+        foreach ($propertiesBag as $key => $val) {
+            $this->assertTrue($key === 'foo');
+            $this->assertTrue($val === 'bar');
+        }
+    }
+
+    public function testSerialize()
+    {
+        $propertiesBag = new PropertiesBag(['foo' => 'bar']);
+        $serialized = serialize($propertiesBag);
+
+        $unserialized = unserialize($serialized);
+        $this->assertInstanceOf(PropertiesBag::class, $unserialized);
+    }
 }
