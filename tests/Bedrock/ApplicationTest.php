@@ -7,6 +7,7 @@ use \Peak\Bedrock\Http\Request\HandlerResolver;
 use \Psr\Container\ContainerInterface;
 use \Psr\Http\Message\ResponseInterface;
 use \Psr\Http\Message\ServerRequestInterface;
+use \Psr\Http\Message\UriInterface;
 use \Psr\Http\Server\RequestHandlerInterface;
 
 require_once FIXTURES_PATH.'/application/HandlerA.php';
@@ -127,5 +128,50 @@ class ApplicationTest extends TestCase
         $app = new Application($kernel, $handlerResolver);
         $app->add([$handlerA]);
         $this->assertInstanceOf(ResponseA::class, $app->handle($request));
+    }
+
+
+    public function testHandleWithRoutes()
+    {
+        $kernel = $this->createMock(Kernel::class);
+
+        $handlerA = new HandlerA();
+
+        $handlerResolver = $this->createMock(HandlerResolver::class);
+        $handlerResolver->expects($this->exactly(1))
+            ->method('resolve')
+            ->will($this->returnValue($handlerA));
+
+        $app = new Application($kernel, $handlerResolver);
+
+        $app->add([
+            $app->get('/mypath', [
+                $handlerA
+            ]),
+            $app->post('/mypath', [
+                $handlerA
+            ]),
+            $app->all('/mypath', [
+                $handlerA
+            ]),
+        ]);
+
+        $request = $this->createMock(ServerRequestInterface::class);
+
+        $request->expects($this->once())
+            ->method('getMethod')
+            ->will($this->returnValue('GET'));
+
+        $uri = $this->createMock(UriInterface::class);
+        $uri->expects(($this->once()))
+            ->method('getPath')
+            ->will($this->returnValue('/mypath'));
+
+        $request->expects($this->once())
+            ->method('getUri')
+            ->will($this->returnValue($uri));
+
+        $result = $app->handle($request);
+        $this->assertInstanceOf(ResponseInterface::class, $result);
     }
 }
