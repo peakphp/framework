@@ -512,4 +512,14 @@ class ContainerTest extends TestCase
         $testdi = $container->create(TestDi15::class);
         $this->assertTrue($testdi->container instanceof \Peak\Di\Container);
     }
+
+    /**
+     * @expectedException \Exception
+     */
+    public function testCreateException()
+    {
+        $container = new Container();
+        $container->disableAutowiring();
+        $container->create('UnknownClass');
+    }
 }
