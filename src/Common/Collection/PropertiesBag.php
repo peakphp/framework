@@ -80,11 +80,7 @@ class PropertiesBag implements ArrayAccess, Countable, IteratorAggregate, Serial
      */
     public function offsetSet($offset, $value)
     {
-        if (is_null($offset)) {
-            $this->properties[] = $value;
-        } else {
-            $this->properties[$offset] = $value;
-        }
+        $this->properties[$offset] = $value;
     }
 
     /**
