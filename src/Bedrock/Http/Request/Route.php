@@ -128,7 +128,7 @@ class Route implements StackInterface
     /**
      * @return string
      */
-    public function getMethod()
+    public function getMethod(): string
     {
         return $this->method;
     }
@@ -136,7 +136,7 @@ class Route implements StackInterface
     /**
      * @return string
      */
-    public function getPath()
+    public function getPath(): string
     {
         return $this->path;
     }
