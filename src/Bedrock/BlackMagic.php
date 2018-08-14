@@ -67,8 +67,8 @@ class BlackMagic
      * Handle And Emit !
      *
      * @param Application $app
-     * @param array $middlewares
      * @param ServerRequestInterface $request
+     * @return mixed
      */
     public static function run(Application $app, ServerRequestInterface $request)
     {
@@ -81,10 +81,11 @@ class BlackMagic
      * @param Application $app
      * @param array $middlewares
      * @param ServerRequestInterface $request
+     * @return mixed
      */
     public static function runThis(Application $app, array $middlewares, ServerRequestInterface $request)
     {
-        $app->set($middlewares)
+        return $app->set($middlewares)
             ->run($request, new Emitter());
     }
 }
