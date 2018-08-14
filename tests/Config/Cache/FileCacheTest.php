@@ -56,6 +56,7 @@ class FileCacheTest extends TestCase
     {
         $id1 = 'cache1';
         $id2 = 'cache2';
+        $id3 = 'cache3';
 
         $fileCache = new FileCache($this->cachePath);
         $this->assertTrue($fileCache->setMultiple([
@@ -66,6 +67,16 @@ class FileCacheTest extends TestCase
         $this->assertTrue($fileCache->has($id2));
         $this->assertTrue($fileCache->isExpired($id1));
         $this->assertTrue($fileCache->isExpired($id2));
+        $this->assertTrue($fileCache->isExpired($id3));
+        $this->assertTrue($fileCache->clear());
+
+        $this->assertTrue($fileCache->setMultiple([
+            $id1 => 'test1',
+            $id2 => 'test2'
+        ], 100));
+
+        $this->assertFalse($fileCache->isExpired($id1));
+        $this->assertFalse($fileCache->isExpired($id2));
         $this->assertTrue($fileCache->clear());
     }
 
