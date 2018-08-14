@@ -76,4 +76,24 @@ class BlackMagicTest extends TestCase
         $this->assertTrue(BlackMagic::run($app, $this->createMock(ServerRequestInterface::class)));
     }
 
+
+    /**
+     * @runInSeparateProcess
+     */
+    public function testRunThis()
+    {
+        $app = BlackMagic::createApp();
+
+        $this->assertTrue(
+            BlackMagic::runThis(
+                $app,
+                [
+                    MiddlewareA::class,
+                    HandlerA::class,
+                ],
+                $this->createMock(ServerRequestInterface::class)
+            )
+        );
+    }
+
 }
