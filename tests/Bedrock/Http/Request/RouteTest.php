@@ -3,6 +3,7 @@
 use \PHPUnit\Framework\TestCase;
 use \Peak\Bedrock\Http\Request\Route;
 use \Peak\Bedrock\Http\StackInterface;
+use \Psr\Http\Message\ResponseInterface;
 use \Psr\Http\Message\ServerRequestInterface;
 use \Psr\Http\Message\UriInterface;
 
@@ -161,5 +162,6 @@ class RouteTest extends TestCase
             ->will($this->returnValue($uri));
 
         $result = $route->handle($request);
+        $this->assertInstanceOf(ResponseInterface::class, $result);
     }
 }
