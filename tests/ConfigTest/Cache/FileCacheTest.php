@@ -7,6 +7,7 @@ use Peak\Config\Cache\FileCache;
 class FileCacheTest extends TestCase
 {
     private $cachePath = __DIR__.'/tmp';
+
     /**
      * @expectedException \Peak\Config\Exception\CachePathNotFoundException
      */
@@ -15,13 +16,21 @@ class FileCacheTest extends TestCase
         new FileCache('unknown/path/a/z/w');
     }
 
+    /**
+     * @expectedException \Peak\Config\Exception\CacheInvalidKeyException
+     */
+    public function testCacheInvalidKeyException()
+    {
+        $fileCache = new FileCache($this->cachePath);
+        $fileCache->get(array());
+    }
+
     public function testClear()
     {
-        $cachePath = __DIR__.'/tmp';
-        $cacheFile = $cachePath.'/myfile.ser';
+        $cacheFile = $this->cachePath.'/myfile.ser';
         file_put_contents($cacheFile, 'foobar');
 
-        $fileCache = new FileCache($cachePath);
+        $fileCache = new FileCache($this->cachePath);
         $this->assertTrue(file_exists($cacheFile));
 
         $this->assertTrue($fileCache->clear());
