@@ -44,12 +44,12 @@ class BlackMagic
      * Create a stack!
      *
      * @param Application $application
-     * @param array $middlewares
+     * @param array $handlers
      * @return Stack
      */
-    public static function createAppStack(Application $application, array $middlewares)
+    public static function createAppStack(Application $application, array $handlers)
     {
-        return new Stack($middlewares, $application->getHandlerResolver());
+        return new Stack($handlers, $application->getHandlerResolver());
     }
 
     /**
@@ -79,13 +79,13 @@ class BlackMagic
      * Handle And Emit !
      *
      * @param Application $app
-     * @param array $middlewares
+     * @param array $handlers
      * @param ServerRequestInterface $request
      * @return mixed
      */
-    public static function runThis(Application $app, array $middlewares, ServerRequestInterface $request)
+    public static function runThis(Application $app, array $handlers, ServerRequestInterface $request)
     {
-        return $app->set($middlewares)
+        return $app->set($handlers)
             ->run($request, new Emitter());
     }
 }
