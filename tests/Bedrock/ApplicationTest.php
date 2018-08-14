@@ -125,7 +125,7 @@ class ApplicationTest extends TestCase
             ->will($this->returnValue($handlerA));
 
         $app = new Application($kernel, $handlerResolver);
-        $app->set($handlerA);
+        $app->add([$handlerA]);
         $this->assertInstanceOf(ResponseA::class, $app->handle($request));
     }
 }
