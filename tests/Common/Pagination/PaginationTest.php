@@ -2,9 +2,9 @@
 
 use PHPUnit\Framework\TestCase;
 
-use Peak\Common\Paginator;
+use Peak\Common\Pagination\Pagination;
 
-class PaginatorTest extends TestCase
+class PaginationTest extends TestCase
 {
 	
 	/**
@@ -14,16 +14,16 @@ class PaginatorTest extends TestCase
 	{		
 	}
 
-	/**
-	 * Test with normal valid infos
-	 */
+    /**
+     * @throws Exception
+     */
 	function testNormalInfos()
 	{
 		$ipp          = 16;
 		$total        = 198;
 		$current_page = 3;
 
-		$pagin = new Paginator($ipp, $total, $current_page);
+		$pagin = new Pagination($ipp, $total, $current_page);
 
 		$this->assertTrue($pagin->current_page === $current_page);
 		$this->assertTrue($pagin->items_count === $total);
@@ -35,6 +35,7 @@ class PaginatorTest extends TestCase
 
 	/**
 	 * Test page change
+     * @throws Exception
 	 */
 	function testChanges()
 	{
@@ -42,7 +43,7 @@ class PaginatorTest extends TestCase
 		$total        = 198;
 		$current_page = 3;
 
-		$pagin = new Paginator($ipp, $total, $current_page);
+		$pagin = new Pagination($ipp, $total, $current_page);
 
 		$this->assertTrue($pagin->current_page === $current_page);
 		$this->assertTrue($pagin->items_count === $total);
@@ -54,6 +55,7 @@ class PaginatorTest extends TestCase
 
 	/**
 	 * Out of range current_page
+     * @throws Exception
 	 */
 	function testNonExistentPages()
 	{
@@ -61,7 +63,7 @@ class PaginatorTest extends TestCase
 			$ipp          = 12;
 			$total        = 198;
 			$current_page = 80;
-			$pagin = new Paginator($ipp, $total, $current_page);
+			$pagin = new Pagination($ipp, $total, $current_page);
 		} catch(Exception $e) {
 			$error1 = true;
 		}
@@ -72,7 +74,7 @@ class PaginatorTest extends TestCase
 			$ipp          = 12;
 			$total        = 198;
 			$current_page = -10;
-			$pagin = new Paginator($ipp, $total, $current_page);
+			$pagin = new Pagination($ipp, $total, $current_page);
 		} catch(Exception $e) {
 			$error2 = true;
 		}
@@ -82,6 +84,7 @@ class PaginatorTest extends TestCase
 
     /**
      * Test set page range
+     * @throws Exception
      */
 	function testPagesRanges()
 	{
@@ -90,7 +93,7 @@ class PaginatorTest extends TestCase
 		$current_page = 15;
 
 		//this page number is too high so we should get the last page instead with a warning
-		$pagin = new Paginator($ipp, $total, $current_page);
+		$pagin = new Pagination($ipp, $total, $current_page);
 
 		$pagin->setPagesRange(3);
 
@@ -100,6 +103,7 @@ class PaginatorTest extends TestCase
 
     /**
      * Test getIterator
+     * @throws Exception
      */
 	function testIterator()
     {
@@ -107,7 +111,7 @@ class PaginatorTest extends TestCase
         $total        = 10;
         $current_page = 1;
 
-        $pagin = new Paginator($ipp, $total, $current_page);
+        $pagin = new Pagination($ipp, $total, $current_page);
 
         $i = 0;
         foreach ($pagin as $page) {
@@ -117,6 +121,9 @@ class PaginatorTest extends TestCase
         $this->assertTrue($i == 5);
     }
 
+    /**
+     * @throws Exception
+     */
     function testException()
     {
         $ipp          = 10;
@@ -124,7 +131,7 @@ class PaginatorTest extends TestCase
         $current_page = 1;
 
         try {
-            $pagin = new Paginator($ipp, $total, $current_page);
+            $pagin = new Pagination($ipp, $total, $current_page);
         } catch (Exception $e) {
             $error = true;
         }

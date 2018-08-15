@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Peak\Common;
+namespace Peak\Common\Pagination;
 
 use IteratorAggregate;
 use ArrayIterator;
 use Exception;
 
 /**
- * Paginator model
+ * Pagination model
  */
-class Paginator implements IteratorAggregate
+class Pagination implements IteratorAggregate
 {
 
     public $items_per_page = 25;
@@ -66,7 +66,7 @@ class Paginator implements IteratorAggregate
      * @param integer $page
      * @throws Exception
      */
-    public function setPage(int $page): Paginator
+    public function setPage(int $page): Pagination
     {
         $this->current_page = $page;
         $this->calculate();
@@ -78,7 +78,7 @@ class Paginator implements IteratorAggregate
      *
      * @throws Exception
      */
-    public function calculate(): Paginator
+    public function calculate(): Pagination
     {
         // calculate how many page
         if ($this->items_count > 0 && $this->items_per_page > 0) {
@@ -134,7 +134,7 @@ class Paginator implements IteratorAggregate
      * @param  integer
      * @return $this
      */
-    public function setPagesRange(int $range = null): Paginator
+    public function setPagesRange(int $range = null): Pagination
     {
         if (!is_null($range) && ($range <= $this->pages_count) && is_array($this->pages)) {
             $pages_range = [];

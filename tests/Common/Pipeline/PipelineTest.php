@@ -1,16 +1,17 @@
 <?php
+
 use PHPUnit\Framework\TestCase;
 
 use Peak\Common\Collection\Collection;
-use Peak\Pipelines\Pipeline;
-use Peak\Pipelines\Exception\MissingPipeInterfaceException;
-use Peak\Pipelines\Exception\InvalidPipeException;
-use Peak\Pipelines\DefaultProcessor;
-use Peak\Pipelines\StrictProcessor;
+use Peak\Common\Pipeline\Pipeline;
+use Peak\Common\Pipeline\Exception\MissingPipeInterfaceException;
+use Peak\Common\Pipeline\Exception\InvalidPipeException;
+use Peak\Common\Pipeline\DefaultProcessor;
+use Peak\Common\Pipeline\StrictProcessor;
 
 use Peak\Di\Container;
 
-require __DIR__.'/../fixtures/pipelines/pipes.php';
+require FIXTURES_PATH . '/pipelines/pipes.php';
 
 class PipelineTest extends TestCase
 {

@@ -1,10 +1,10 @@
 <?php
 use PHPUnit\Framework\TestCase;
 
-use Peak\Common\Paginator;
-use Peak\Common\PaginatorBuilder;
+use Peak\Common\Pagination\Pagination;
+use Peak\Common\Pagination\PaginationBuilder;
 
-class PaginatorBuilderTest extends TestCase
+class PaginationBuilderTest extends TestCase
 {
  
     /**
@@ -12,14 +12,14 @@ class PaginatorBuilderTest extends TestCase
      */
     function testCreateObject()
     {
-        $paginator = (new PaginatorBuilder())
+        $paginator = (new PaginationBuilder())
             ->itemsPerPage(10)
             ->itemsCount(280)
             ->currentPage(15)
             ->pagesRange(3)
             ->build();
 
-        $this->assertInstanceof(Paginator::class, $paginator);
+        $this->assertInstanceof(Pagination::class, $paginator);
         $this->assertTrue($paginator->items_per_page == 10);
         $this->assertTrue($paginator->items_count == 280);
         $this->assertTrue($paginator->current_page == 15);

@@ -1,6 +1,6 @@
 <?php
 
-use Peak\Pipelines\PipeInterface;
+use Peak\Common\Pipeline\PipeInterface;
 
 /**
  * Pipe with invoke
