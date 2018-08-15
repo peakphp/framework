@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Peak\Pipelines\Exception;
+namespace Peak\Common\Pipeline\Exception;
 
 /**
  * Class InvalidPipeException
- * @package Peak\Pipelines\Exception
+ * @package Peak\Common\Pipeline\Exception
  */
 class InvalidPipeException extends \Exception
 {

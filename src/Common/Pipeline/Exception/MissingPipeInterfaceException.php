@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Peak\Pipelines\Exception;
+namespace Peak\Common\Pipeline\Exception;
 
 /**
  * Class MissingPipeInterfaceException
- * @package Peak\Pipelines\Exception
+ * @package Peak\Common\Pipeline\Exception
  */
 class MissingPipeInterfaceException extends \Exception
 {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Peak\Pipelines;
+namespace Peak\Common\Pipeline;
 
 use Psr\Container\ContainerInterface;
 
