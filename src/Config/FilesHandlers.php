@@ -51,6 +51,10 @@ class FilesHandlers
             'loader' => \Peak\Config\Loader\DefaultLoader::class,
             'processor' => \Peak\Config\Processor\XmlProcessor::class
         ],
+        'env' => [
+            'loader' => \Peak\Config\Loader\DefaultLoader::class,
+            'processor' => \Peak\Config\Processor\EnvProcessor::class
+        ],
     ];
 
     /**
