@@ -3,7 +3,7 @@
 use \PHPUnit\Framework\TestCase;
 use \Peak\Bedrock\Application;
 use \Peak\Bedrock\ApplicationFactory;
-use \Peak\Blueprint\Resolvable;
+use \Peak\Blueprint\Common\Resolvable;
 use \Psr\Container\ContainerInterface;
 
 /**

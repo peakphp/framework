@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Peak\Bedrock\Http;
 
-use Peak\Blueprint\Resolvable;
+use Peak\Blueprint\Common\Resolvable;
 
 /**
  * Class StackFactory

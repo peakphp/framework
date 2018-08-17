@@ -7,7 +7,7 @@ namespace Peak\Bedrock\Http;
 use Peak\Bedrock\Http\Exception\EmptyStackException;
 use Peak\Bedrock\Http\Exception\StackEndedWithoutResponseException;
 use Peak\Bedrock\Http\Request\Exception\InvalidHandlerException;
-use Peak\Blueprint\Resolvable;
+use Peak\Blueprint\Common\Resolvable;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

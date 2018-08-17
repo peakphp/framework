@@ -1,6 +1,6 @@
 <?php
 
-namespace Peak\Blueprint;
+namespace Peak\Blueprint\Common;
 
 interface Outputable
 {

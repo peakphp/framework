@@ -7,7 +7,7 @@ namespace Peak\Bedrock;
 use Peak\Bedrock\Http\Stack;
 use Peak\Bedrock\Http\Request\Route;
 use Peak\Bedrock\Http\Response\EmitterInterface;
-use Peak\Blueprint\Resolvable;
+use Peak\Blueprint\Common\Resolvable;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;

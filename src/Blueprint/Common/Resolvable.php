@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Peak\Blueprint;
+namespace Peak\Blueprint\Common;
 
 /**
  * Interface ResolverInterface

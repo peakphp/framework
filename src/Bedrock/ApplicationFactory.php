@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Peak\Bedrock;
 
 use Peak\Bedrock\Http\Request\HandlerResolver;
-use Peak\Blueprint\Resolvable;
+use Peak\Blueprint\Common\Resolvable;
 use Psr\Container\ContainerInterface;
 
 /**
