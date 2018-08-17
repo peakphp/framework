@@ -14,6 +14,7 @@ $ composer require peak/config
 ```php
 $configFactory = new ConfigFactory();
 $config = $configFactory->loadResources([
+    'config/.env',
     'config/app.php',
     'config/app.dev.php',
     'config/database.yml',
