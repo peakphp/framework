@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Peak\Common\Collection\Collection;
+use Peak\Collection\Collection;
 use Peak\Common\PhpInput;
 use Peak\Common\TimeExpression;
 
@@ -78,22 +78,6 @@ if (!function_exists('showAllErrors')) {
     {
         error_reporting(E_ALL);
         ini_set('display_errors', '1');
-    }
-}
-
-/**
- * collection()
- */
-if (!function_exists('collection')) {
-    /**
-     * Create a new Collection
-     *
-     * @param  array|null $items
-     * @return Collection
-     */
-    function collection(array $items = null): Collection
-    {
-        return Collection::make($items);
     }
 }
 

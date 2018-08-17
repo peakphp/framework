@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Peak\Config;
 
-use Peak\Common\Collection\DotNotationCollection;
+use Peak\Collection\DotNotationCollection;
 
 /**
  * Class Config

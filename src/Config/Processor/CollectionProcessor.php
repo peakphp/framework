@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Peak\Config\Processor;
 
-use Peak\Common\Collection\Collection;
+use Peak\Collection\Collection;
 use Peak\Config\Exception\ProcessorException;
 
 /**

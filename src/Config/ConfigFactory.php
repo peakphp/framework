@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Peak\Config;
 
-use Peak\Common\Collection\Collection;
+use Peak\Collection\Collection;
 use Peak\Config\Exception\UnknownResourceException;
 use Peak\Config\Processor\ArrayProcessor;
 use Peak\Config\Processor\CallableProcessor;
