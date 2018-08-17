@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Peak\Bedrock\Http;
 
-use Peak\Bedrock\Http\Request\HandlerResolverInterface;
+use Peak\Blueprint\Resolvable;
 
 /**
  * Class StackFactory
@@ -13,26 +13,26 @@ use Peak\Bedrock\Http\Request\HandlerResolverInterface;
 class StackFactory
 {
     /**
-     * @var HandlerResolverInterface
+     * @var Resolvable
      */
     private $handlerResolver;
 
     /**
      * StackFactory constructor.
      *
-     * @param HandlerResolverInterface $handlerResolver
+     * @param Resolvable $handlerResolver
      */
-    public function __construct(HandlerResolverInterface $handlerResolver)
+    public function __construct(Resolvable $handlerResolver)
     {
         $this->handlerResolver = $handlerResolver;
     }
 
     /**
      * @param array $handlers
-     * @param HandlerResolverInterface|null $handlerResolver
+     * @param Resolvable|null $handlerResolver
      * @return Stack
      */
-    public function create(array $handlers, HandlerResolverInterface $handlerResolver = null)
+    public function create(array $handlers, Resolvable $handlerResolver = null)
     {
         $handlerResolver = $handlerResolver ?? $this->handlerResolver;
         $stack = new Stack($handlers, $handlerResolver);

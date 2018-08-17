@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Peak\Bedrock;
 
 use Peak\Bedrock\Http\Request\HandlerResolver;
-use Peak\Bedrock\Http\Request\HandlerResolverInterface;
+use Peak\Blueprint\Resolvable;
 use Psr\Container\ContainerInterface;
 
 /**
@@ -17,14 +17,14 @@ class ApplicationFactory
     /**
      * @param string $environment
      * @param ContainerInterface $container
-     * @param HandlerResolverInterface $handlerResolver
+     * @param Resolvable $handlerResolver
      * @param string|null $version
      * @return Application
      */
     public function create(
         string $environment,
         ContainerInterface $container,
-        HandlerResolverInterface $handlerResolver = null,
+        Resolvable $handlerResolver = null,
         string $version = '1.0'
     ) {
 
