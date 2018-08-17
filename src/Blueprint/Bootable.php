@@ -1,6 +1,6 @@
 <?php
 
-namespace Peak\Contract;
+namespace Peak\Blueprint;
 
 interface Bootable
 {
