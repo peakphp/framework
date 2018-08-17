@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Peak\Common\Pipeline;
+namespace Peak\Pipeline;
 
 /**
  * Class DefaultProcessor

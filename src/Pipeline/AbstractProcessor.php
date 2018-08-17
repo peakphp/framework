@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Peak\Common\Pipeline;
+namespace Peak\Pipeline;
 
-use Peak\Common\Pipeline\Exception\InvalidPipeException;
-use Peak\Common\Pipeline\Exception\MissingPipeInterfaceException;
+use Peak\Pipeline\Exception\InvalidPipeException;
+use Peak\Pipeline\Exception\MissingPipeInterfaceException;
 use Psr\Container\ContainerInterface;
 use \Closure;
 
