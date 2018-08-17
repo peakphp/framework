@@ -65,7 +65,7 @@ $config = $configFactory->loadResources([
  - ```ArrayProcessor``` When resource is already an array
  - ```StdClassProcessor``` stdClass instance
  - ```CallableProcessor``` Closure and callable
- - ```CollectionProcessor``` Peak\Common\Collection
+ - ```CollectionProcessor``` Peak\Collection\Collection
  - ```IniProcessor``` Parse ini data. Support advanced dot notation
  - ```JsonProcessor``` Parse json data
  - ```YamlProcessor``` Parse yaml data. symfony/yaml required for this one
