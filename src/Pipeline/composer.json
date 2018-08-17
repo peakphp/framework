@@ -20,7 +20,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Peak\\Pipelines\\": ""
+      "Peak\\Pipeline\\": ""
     }
   },
   "extra": {
