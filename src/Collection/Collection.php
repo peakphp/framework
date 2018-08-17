@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Peak\Common\Collection;
+namespace Peak\Collection;
 
 use Peak\Common\Traits\ArrayMergeRecursiveDistinct;
 

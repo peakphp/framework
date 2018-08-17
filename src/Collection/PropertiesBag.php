@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Peak\Common\Collection;
+namespace Peak\Collection;
 
 use Exception;
 
@@ -14,7 +14,7 @@ use Serializable;
 
 /**
  * Class PropertiesBag
- * @package Peak\Common\Collection
+ * @package Peak\Collection
  */
 class PropertiesBag implements ArrayAccess, Countable, IteratorAggregate, Serializable
 {

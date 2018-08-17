@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Peak\Common\Collection;
+namespace Peak\Collection;
 
 use \Exception;
 
 /**
  * Class ImmutablePropertiesBag
- * @package Peak\Common\Collection
+ * @package Peak\Collection
  */
 class ImmutablePropertiesBag extends PropertiesBag
 {
