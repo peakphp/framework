@@ -79,7 +79,7 @@ class ConfigFactoryTest extends TestCase
             FIXTURES_PATH.'/config/simple3.txt',
             FIXTURES_PATH.'/config/cli.yml',
             $stdConf,
-            FIXTURES_PATH.'/config/test.env',
+            FIXTURES_PATH.'/config/.env',
         ]);
 
         $this->assertInstanceOf(Config::class, $config);
