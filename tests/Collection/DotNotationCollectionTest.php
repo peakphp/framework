@@ -1,7 +1,7 @@
 <?php
 use PHPUnit\Framework\TestCase;
 
-use Peak\Common\Collection\DotNotationCollection;
+use Peak\Collection\DotNotationCollection;
 
 class DotNotationCollectionTest extends TestCase
 {

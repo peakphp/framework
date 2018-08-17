@@ -2,7 +2,7 @@
 
 use PHPUnit\Framework\TestCase;
 
-use Peak\Common\Collection\PropertiesBag;
+use Peak\Collection\PropertiesBag;
 
 class PropertiesBagTest extends TestCase
 {

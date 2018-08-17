@@ -2,12 +2,12 @@
 
 use PHPUnit\Framework\TestCase;
 
-use Peak\Common\Collection\Collection;
-use Peak\Common\Pipeline\Pipeline;
-use Peak\Common\Pipeline\Exception\MissingPipeInterfaceException;
-use Peak\Common\Pipeline\Exception\InvalidPipeException;
-use Peak\Common\Pipeline\DefaultProcessor;
-use Peak\Common\Pipeline\StrictProcessor;
+use Peak\Collection\Collection;
+use Peak\Pipeline\Pipeline;
+use Peak\Pipeline\Exception\MissingPipeInterfaceException;
+use Peak\Pipeline\Exception\InvalidPipeException;
+use Peak\Pipeline\DefaultProcessor;
+use Peak\Pipeline\StrictProcessor;
 
 use Peak\Di\Container;
 

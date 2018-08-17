@@ -45,7 +45,7 @@ class HelpersTest extends TestCase
     function testPhpinput()
     {
         $data = phpinput();
-        $this->assertTrue($data instanceof Peak\Common\Collection\Collection);
+        $this->assertTrue($data instanceof Peak\Collection\Collection);
     }
 
     /**

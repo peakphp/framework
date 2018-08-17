@@ -2,6 +2,7 @@
 
 use PHPUnit\Framework\TestCase;
 use Peak\Di\Container;
+use Peak\Collection\Collection;
 
 require __DIR__.'/../fixtures/di/test.php';
 
@@ -22,7 +23,7 @@ class ContainerTest extends TestCase
         ]);
 
         $this->assertTrue($testdi instanceof TestDi1);
-        $this->assertTrue($testdi->col instanceof \Peak\Common\Collection\Collection);
+        $this->assertTrue($testdi->col instanceof Collection);
         $this->assertTrue(isset($testdi->arg1));
         $this->assertTrue(isset($testdi->arg2));
         $this->assertTrue(isset($testdi->arg3));
@@ -45,7 +46,7 @@ class ContainerTest extends TestCase
 
         $this->assertTrue($testdi instanceof TestDi4);
         $this->assertTrue($testdi->testdi1 instanceof TestDi1);
-        $this->assertTrue($testdi->testdi1->col instanceof \Peak\Common\Collection\Collection);
+        $this->assertTrue($testdi->testdi1->col instanceof Collection);
         $this->assertTrue(isset($testdi->testdi1->arg1));
         $this->assertTrue(isset($testdi->testdi1->arg2));
         $this->assertTrue(isset($testdi->testdi1->arg3));
@@ -65,7 +66,7 @@ class ContainerTest extends TestCase
 
         $this->assertTrue($testdi instanceof TestDi5);
         $this->assertTrue($testdi->testdi4 instanceof TestDi4);
-        $this->assertTrue($testdi->testdi4->testdi1->col instanceof \Peak\Common\Collection\Collection);
+        $this->assertTrue($testdi->testdi4->testdi1->col instanceof Collection);
         $this->assertTrue(isset($testdi->testdi4->testdi1->arg1));
         $this->assertTrue(isset($testdi->testdi4->testdi1->arg2));
         $this->assertTrue(isset($testdi->testdi4->testdi1->arg3));
@@ -91,7 +92,7 @@ class ContainerTest extends TestCase
 
         $this->assertTrue($testdi->say === 'foobar10');
         $this->assertTrue($testdi->testdi9->say === 'hello');
-        $this->assertTrue($testdi->testdi9->testdi->col instanceof \Peak\Common\Collection\Collection);
+        $this->assertTrue($testdi->testdi9->testdi->col instanceof Collection);
         $this->assertTrue($testdi->testdi9->testdi->arg1 === 'value');
     }
 
@@ -166,7 +167,7 @@ class ContainerTest extends TestCase
     {
         $container = new Container();
 
-        // $container->add(new \Peak\Common\Collection\Collection(['foo' => 'bar']));
+        // $container->add(new Collection(['foo' => 'bar']));
         $testdi1 = $container->create('TestDi1', [
             'test',
             []
@@ -218,7 +219,7 @@ class ContainerTest extends TestCase
                 'TestDiInterface2' => function() {
                     return new TestDi9(
                         new TestDi1(
-                            new Peak\Common\Collection\Collection(),
+                            new Peak\Collection\Collection(),
                             'Test',
                             ['a', 'b']
                         )
@@ -236,7 +237,7 @@ class ContainerTest extends TestCase
     {
         $container = new Container();
 
-        $container->add(new Peak\Common\Collection\Collection(['foo' => 'barNOTexplicit']));
+        $container->add(new Peak\Collection\Collection(['foo' => 'barNOTexplicit']));
 
         $testdi1 = $container->create(
             'TestDi1', //class
@@ -247,8 +248,8 @@ class ContainerTest extends TestCase
             ],
             [
                 //explicit
-                'Peak\Common\Collection\Collection' => function() {
-                    return new Peak\Common\Collection\Collection(['foo' => 'barexplicit']);
+                'Peak\Collection\Collection' => function() {
+                    return new Peak\Collection\Collection(['foo' => 'barexplicit']);
                 }
             ]
         );

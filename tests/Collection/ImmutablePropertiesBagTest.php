@@ -2,7 +2,7 @@
 
 use PHPUnit\Framework\TestCase;
 
-use Peak\Common\Collection\ImmutablePropertiesBag;
+use Peak\Collection\ImmutablePropertiesBag;
 
 class ImmutablePropertiesBagTest extends TestCase
 {

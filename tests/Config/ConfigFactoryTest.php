@@ -2,7 +2,7 @@
 
 use PHPUnit\Framework\TestCase;
 
-use Peak\Common\Collection\Collection;
+use Peak\Collection\Collection;
 use Peak\Config\Config;
 use Peak\Config\ConfigFactory;
 use Peak\Config\Stream\DataStream;

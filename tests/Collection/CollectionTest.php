@@ -2,7 +2,7 @@
 
 use PHPUnit\Framework\TestCase;
 
-use Peak\Common\Collection\Collection;
+use Peak\Collection\Collection;
 
 class CollectionTest extends TestCase
 {
@@ -258,20 +258,6 @@ class CollectionTest extends TestCase
 
         $this->assertTrue(is_array($unrelated_array));
         $this->assertTrue($unrelated_array['a'] === 'test2');
-    }
-
-    /**
-     * Test collection() function (helpers.php)
-     */
-    public function testCollectionFn()
-    {
-        $collection = collection([
-            'id' => 2135,
-            'first_name' => 'John',
-            'last_name' => 'Doe',
-        ]);
-
-        $this->assertTrue($collection instanceof Collection);
     }
 
     /**
