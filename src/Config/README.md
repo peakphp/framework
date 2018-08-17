@@ -30,7 +30,7 @@ Example:
 Method *loadResources()* accept an array of resources and return an instance of *Peak\Config\Config*. It support types:
 
  - *String*, which are treated like filepath and processed internally by *FileStream*.
-    Extensions supported by default: PHP array, Json, Text, Ini, Yaml, Xml
+    Extensions supported by default: PHP array, Json, Text, Env, Ini, Yaml, Xml
  - *Arrays*
  - *Callable*, like closure or invokable classes
  - *Collection* instance
@@ -69,6 +69,7 @@ $config = $configFactory->loadResources([
  - ```JsonProcessor``` Parse json data
  - ```YamlProcessor``` Parse yaml data. symfony/yaml required for this one
  - ```XmlProcessor```  Parse xml data
+ - ```EnvProcessor```  Parse env data
  
 *Stream* are simply wrapper around loaders and processors. They are used internally by ```ConfigFactory``` to load resources correctly.
 
