@@ -1,6 +1,6 @@
 {
     "name": "peak/di",
-    "description": "Peak Dependency Injection Container package.",
+    "description": "Peak Dependency Injection Container Component",
     "keywords": ["peak", "di", "dependency injection", "container", "psr-11"],
     "license": "MIT",
     "homepage": "https://peakframework.com",
@@ -25,7 +25,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "3.0-dev"
+            "dev-master": "4.0-dev"
         }
     },
     "minimum-stability": "dev",
