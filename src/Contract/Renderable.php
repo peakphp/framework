@@ -1,6 +1,6 @@
 <?php
 
-namespace Peak\Common\Interfaces;
+namespace Peak\Contract;
 
 interface Renderable
 {
