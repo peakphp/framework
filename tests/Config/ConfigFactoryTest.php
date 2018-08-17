@@ -78,7 +78,8 @@ class ConfigFactoryTest extends TestCase
             FIXTURES_PATH.'/config/simple.txt',
             FIXTURES_PATH.'/config/simple3.txt',
             FIXTURES_PATH.'/config/cli.yml',
-            $stdConf
+            $stdConf,
+            FIXTURES_PATH.'/config/test.env',
         ]);
 
         $this->assertInstanceOf(Config::class, $config);
@@ -93,6 +94,8 @@ class ConfigFactoryTest extends TestCase
         $this->assertTrue($config->has('all.php.date.timezone'));
         $this->assertTrue(isset($config[0]));
         $this->assertTrue($config->name === 'bob');
+        $this->assertTrue($config->has('ENV'));
+        $this->assertFALSE($config->has('COMMENTED_STUFF'));
     }
 
     /**
