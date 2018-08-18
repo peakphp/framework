@@ -45,7 +45,8 @@ class BootableResolver implements Resolvable
                 } elseif ($this->container instanceof Container) {
                     $item = $this->container->create($item);
                 }
-            } else {
+            }
+            if (is_string($item)) {
                 $item = new $item();
             }
         } elseif (is_callable($item)) {
