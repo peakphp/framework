@@ -51,7 +51,6 @@ class Bootstrap implements Bootable
         foreach ($this->processes as $process) {
             $processResolved = $this->resolver->resolve($process);
             $processResolved->boot();
-
         }
         return true;
     }
