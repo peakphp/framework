@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Peak\Bedrock\Application;
 
-use Peak\Bedrock\Application;
 use Peak\Bedrock\Bootstrap\BootableResolver;
 use Peak\Blueprint\Common\Bootable;
 use Peak\Di\Container;
