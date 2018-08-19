@@ -51,6 +51,7 @@ class FileCache implements CacheInterface
      */
     public function get($key, $default = null)
     {
+        $this->checkKeyName($key);
         if ($this->isExpired($key)) {
             return $default;
         }
