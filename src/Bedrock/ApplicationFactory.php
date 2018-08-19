@@ -27,12 +27,25 @@ class ApplicationFactory
         Resolvable $handlerResolver = null,
         string $version = '1.0'
     ) {
-
         $handlerResolver = $handlerResolver ?? new HandlerResolver($container);
         return new Application(
             new Kernel($environment, $container),
             $handlerResolver,
             $version
         );
+    }
+
+    /**
+     * @param KernelInterface $kernel
+     * @param Resolvable|null $handlerResolver
+     * @return Application
+     */
+    public function createFromKernel(
+        KernelInterface $kernel,
+        Resolvable $handlerResolver = null,
+        string $version = '1.0'
+    ) {
+        $handlerResolver = $handlerResolver ?? new HandlerResolver($kernel->getContainer());
+        return new Application($kernel, $handlerResolver, $version);
     }
 }
