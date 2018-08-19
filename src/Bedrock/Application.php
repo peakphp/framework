@@ -159,7 +159,7 @@ class Application implements RequestHandlerInterface
      * @param $handlers
      * @return Route
      */
-    public function createRoute(?string $method, string $path, $handlers)
+    public function createRoute(?string $method, string $path, $handlers): Route
     {
         $stack = $handlers;
         if (is_array($handlers)) {
@@ -169,6 +169,7 @@ class Application implements RequestHandlerInterface
     }
 
     /**
+     * Flush current app stack
      *
      * @return $this
      */
@@ -179,6 +180,8 @@ class Application implements RequestHandlerInterface
     }
 
     /**
+     * Overwrite the current app stack
+     *
      * @param mixed $handlers
      * @return $this
      */
@@ -205,6 +208,8 @@ class Application implements RequestHandlerInterface
     }
 
     /**
+     * Handle the request and emit a response
+     *
      * @param ServerRequestInterface $request
      * @param EmitterInterface $emitter
      * @return mixed
