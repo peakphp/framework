@@ -30,14 +30,19 @@ class Application implements RequestHandlerInterface
     private $handlers = [];
 
     /**
+     * @var Resolvable
+     */
+    private $handlerResolver;
+
+    /**
      * @var string
      */
     private $version;
 
     /**
-     * @var Resolvable
+     * @var string
      */
-    private $handlerResolver;
+    private $name;
 
     /**
      * Application constructor.
@@ -89,6 +94,22 @@ class Application implements RequestHandlerInterface
     }
 
     /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     */
+    public function setName(string $name)
+    {
+        $this->name = $name;
+    }
+
+    /**
      * @param mixed $handler
      * @return $this
      */
@@ -109,7 +130,7 @@ class Application implements RequestHandlerInterface
      */
     public function get(string $path, $handlers): Route
     {
-        return $this->addRoute('GET', $path, $handlers);
+        return $this->createRoute('GET', $path, $handlers);
     }
 
     /**
@@ -119,7 +140,7 @@ class Application implements RequestHandlerInterface
      */
     public function post(string $path, $handlers): Route
     {
-        return $this->addRoute('POST', $path, $handlers);
+        return $this->createRoute('POST', $path, $handlers);
     }
 
     /**
@@ -129,7 +150,7 @@ class Application implements RequestHandlerInterface
      */
     public function all(string $path, $handlers): Route
     {
-        return $this->addRoute(null, $path, $handlers);
+        return $this->createRoute(null, $path, $handlers);
     }
 
     /**
@@ -138,7 +159,7 @@ class Application implements RequestHandlerInterface
      * @param $handlers
      * @return Route
      */
-    public function addRoute(?string $method, string $path, $handlers)
+    public function createRoute(?string $method, string $path, $handlers)
     {
         $stack = $handlers;
         if (is_array($handlers)) {
