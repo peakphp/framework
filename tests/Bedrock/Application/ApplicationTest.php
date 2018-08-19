@@ -1,7 +1,7 @@
 <?php
 
 use \PHPUnit\Framework\TestCase;
-use \Peak\Bedrock\Application;
+use \Peak\Bedrock\Application\Application;
 use \Peak\Bedrock\Kernel;
 use \Peak\Bedrock\Http\Request\HandlerResolver;
 use \Psr\Container\ContainerInterface;
@@ -10,8 +10,8 @@ use \Psr\Http\Message\ServerRequestInterface;
 use \Psr\Http\Message\UriInterface;
 use \Psr\Http\Server\RequestHandlerInterface;
 
-require_once FIXTURES_PATH.'/application/HandlerA.php';
-require_once FIXTURES_PATH.'/application/ResponseA.php';
+require_once FIXTURES_PATH . '/application/HandlerA.php';
+require_once FIXTURES_PATH . '/application/ResponseA.php';
 
 /**
  * Class ApplicationTest

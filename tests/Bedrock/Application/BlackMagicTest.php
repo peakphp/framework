@@ -1,18 +1,14 @@
 <?php
 
 use \PHPUnit\Framework\TestCase;
-use \Peak\Bedrock\Application;
-use \Peak\Bedrock\BlackMagic;
+use \Peak\Bedrock\Application\Application;
+use \Peak\Bedrock\Application\BlackMagic;
 use \Peak\Bedrock\Http\StackInterface;
-use \Peak\Bedrock\Kernel;
-use \Peak\Bedrock\Http\Request\HandlerResolver;
-use \Psr\Container\ContainerInterface;
 use \Psr\Http\Message\ResponseInterface;
 use \Psr\Http\Message\ServerRequestInterface;
-use \Psr\Http\Server\RequestHandlerInterface;
 
-require_once FIXTURES_PATH.'/application/HandlerA.php';
-require_once FIXTURES_PATH.'/application/MiddlewareA.php';
+require_once FIXTURES_PATH . '/application/HandlerA.php';
+require_once FIXTURES_PATH . '/application/MiddlewareA.php';
 
 /**
  * Class BlackMagicTest
@@ -75,7 +71,6 @@ class BlackMagicTest extends TestCase
 
         $this->assertTrue(BlackMagic::run($app, $this->createMock(ServerRequestInterface::class)));
     }
-
 
     /**
      * @runInSeparateProcess

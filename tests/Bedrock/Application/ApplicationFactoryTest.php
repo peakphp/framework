@@ -1,8 +1,8 @@
 <?php
 
 use \PHPUnit\Framework\TestCase;
-use \Peak\Bedrock\Application;
-use \Peak\Bedrock\ApplicationFactory;
+use \Peak\Bedrock\Application\Application;
+use \Peak\Bedrock\Application\ApplicationFactory;
 use \Peak\Blueprint\Common\Resolvable;
 use \Psr\Container\ContainerInterface;
 
