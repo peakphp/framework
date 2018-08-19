@@ -2,11 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Peak\Bedrock;
+namespace Peak\Bedrock\Application;
 
 use Peak\Bedrock\Http\Request\HandlerResolver;
 use Peak\Bedrock\Http\Stack;
 use Peak\Bedrock\Http\Response\Emitter;
+use Peak\Bedrock\Kernel;
 use Peak\Di\Container;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;

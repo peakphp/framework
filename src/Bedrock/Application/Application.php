@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Peak\Bedrock;
+namespace Peak\Bedrock\Application;
 
+use Peak\Bedrock\KernelInterface;
 use Peak\Bedrock\Http\Stack;
 use Peak\Bedrock\Http\Request\Route;
 use Peak\Bedrock\Http\Response\EmitterInterface;

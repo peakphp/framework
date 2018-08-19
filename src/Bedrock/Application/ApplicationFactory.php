@@ -2,9 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Peak\Bedrock;
+namespace Peak\Bedrock\Application;
 
 use Peak\Bedrock\Http\Request\HandlerResolver;
+use Peak\Bedrock\Kernel;
+use Peak\Bedrock\KernelInterface;
 use Peak\Blueprint\Common\Resolvable;
 use Psr\Container\ContainerInterface;
 
