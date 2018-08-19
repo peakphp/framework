@@ -15,7 +15,7 @@ class ConfigCacheTest extends TestCase
      */
     function testLoadConfig()
     {
-        $configCache = new FileCache(__DIR__);
+        $configCache = new FileCache(__DIR__.'/tmp');
         $cached = false;
         $cacheId = 'my-configuration-id';
 

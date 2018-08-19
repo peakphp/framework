@@ -73,7 +73,7 @@ class ConfigCacheFactory
     protected function load(string $cacheId, int $ttl, array $resources, ConfigInterface $customConfig = null)
     {
         $config = $this->configCache->get($cacheId);
-        if (!is_null($config)) {
+        if (null !== $config) {
             return $config;
         }
 

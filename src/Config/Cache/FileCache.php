@@ -51,7 +51,7 @@ class FileCache implements CacheInterface
      */
     public function get($key, $default = null)
     {
-        if (!$this->has($key)) {
+        if ($this->isExpired($key)) {
             return $default;
         }
 
@@ -93,10 +93,7 @@ class FileCache implements CacheInterface
         $this->checkKeyName($key);
         $filepath = $this->getCacheFilePath($key);
 
-        if (!file_exists($filepath)) {
-            return false;
-        }
-        if (!@unlink($filepath)) {
+        if (!file_exists($filepath) || !@unlink($filepath)) {
             return false;
         }
         return true;
@@ -222,9 +219,7 @@ class FileCache implements CacheInterface
     {
         $filepath = $this->getCacheFilePath($key);
 
-        if (!$this->has($key) || !file_exists($filepath)) {
-            return true;
-        } elseif (fileatime($filepath) < time()) {
+        if (!file_exists($filepath) || fileatime($filepath) < time()) {
             return true;
         }
 
