@@ -70,7 +70,7 @@ class Singleton extends AbstractBinding
 
         if (isset($instance)) {
             if (!isset($is_explicit)) {
-                $container->add($instance);
+                $container->set($instance);
             }
             return $instance;
         }

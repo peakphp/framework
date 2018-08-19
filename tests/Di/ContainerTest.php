@@ -106,7 +106,7 @@ class ContainerTest extends TestCase
 
         $testdi7 = new TestDi7();
         $testdi7->foobar = 'foobar7';
-        $container->add($testdi7);
+        $container->set($testdi7);
         
         $testdi = $container->create('TestDi6');
 
@@ -120,8 +120,8 @@ class ContainerTest extends TestCase
         $container = new Container();
 
         //both implement the same interface
-        $container->add(new TestDi7()); 
-        $container->add(new TestDi8());
+        $container->set(new TestDi7());
+        $container->set(new TestDi8());
 
         $testdi = $container->create(
             'TestDi6', //classname
@@ -141,8 +141,8 @@ class ContainerTest extends TestCase
         $container = new Container();
 
         //both implement the same interface
-        $container->add(new TestDi7()); 
-        $container->add(new TestDi8());
+        $container->set(new TestDi7());
+        $container->set(new TestDi8());
 
         $testdi = $container->create(
             'TestDi11', //classname
@@ -167,21 +167,21 @@ class ContainerTest extends TestCase
     {
         $container = new Container();
 
-        // $container->add(new Collection(['foo' => 'bar']));
+        // $container->set(new Collection(['foo' => 'bar']));
         $testdi1 = $container->create('TestDi1', [
             'test',
             []
         ]);
 
-        $container->add($testdi1);
+        $container->set($testdi1);
 
         //both implement the same interface (TestDiInterface)
-        $container->add(new TestDi7()); 
-        $container->add(new TestDi8()); 
+        $container->set(new TestDi7());
+        $container->set(new TestDi8());
         
         //TestDiInterface2
         $testdi9 = $container->create('TestDi9', [['FOOBAR!']]);
-        $container->add($testdi9); 
+        $container->set($testdi9);
 
         $testdi13 = $container->create(
             'TestDi13', 
@@ -207,7 +207,7 @@ class ContainerTest extends TestCase
     {
         $container = new Container();
 
-        $container->add(new TestDi7()); 
+        $container->set(new TestDi7());
 
         $testdi13 = $container->create(
             'TestDi13', 
@@ -237,7 +237,7 @@ class ContainerTest extends TestCase
     {
         $container = new Container();
 
-        $container->add(new Peak\Collection\Collection(['foo' => 'barNOTexplicit']));
+        $container->set(new Peak\Collection\Collection(['foo' => 'barNOTexplicit']));
 
         $testdi1 = $container->create(
             'TestDi1', //class
@@ -270,8 +270,8 @@ class ContainerTest extends TestCase
         try {
 
             //both implement the same interface
-            $container->add(new TestDi7()); 
-            $container->add(new TestDi8());
+            $container->set(new TestDi7());
+            $container->set(new TestDi8());
             
             //TestDi6 has an interface as dependency, both TestDi7 and TestDi8 qualify
             //but container doesn't know which one to use so it throw an LogicException 
@@ -325,7 +325,7 @@ class ContainerTest extends TestCase
     function testGetHasInstance()
     {
         $container = new Container();
-        $container->add(new TestDi3());
+        $container->set(new TestDi3());
 
         $this->assertTrue($container->has('TestDi3'));
         $this->assertFalse($container->has('UnknowClass'));
@@ -349,8 +349,8 @@ class ContainerTest extends TestCase
         $container = new Container();
 
         //both implement the same interface
-        $container->add(new TestDi7()); 
-        $container->add(new TestDi8());
+        $container->set(new TestDi7());
+        $container->set(new TestDi8());
 
         $this->assertTrue($container->has('TestDi7') !== null);
 
@@ -367,8 +367,8 @@ class ContainerTest extends TestCase
         $container = new Container();
 
         //both implement the same interface
-        $container->add(new TestDi7()); 
-        $container->add(new TestDi8());
+        $container->set(new TestDi7());
+        $container->set(new TestDi8());
 
         $interfaces = $container->getInterfaces();
         $this->assertTrue(count($interfaces) == 1);
@@ -489,7 +489,7 @@ class ContainerTest extends TestCase
             999
         ]);
 
-        $container->add($testdi, 'MyClassAlias');
+        $container->set($testdi, 'MyClassAlias');
 
         //the normal way
         $testdi = $container->get(TestDi1::class);

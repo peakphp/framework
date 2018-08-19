@@ -143,7 +143,7 @@ class Container implements ContainerInterface
     public function createAndStore($class, $args = [], $explicit = [])
     {
         $object = $this->create($class, $args, $explicit);
-        $this->add($object);
+        $this->set($object);
         return $object;
     }
 
@@ -193,16 +193,16 @@ class Container implements ContainerInterface
     }
 
     /**
-     * Add an object instance. Chainable
+     * Set an object instance. Chainable
      *
-     * @param  string $object
+     * @param  object $object
      * @param  string|null $alias
      * @return $this
      */
-    public function add($object, $alias = null)
+    public function set($object, $alias = null)
     {
         if (!is_object($object)) {
-            throw new InvalidArgumentException(__CLASS__.': add() first argument must be an object.');
+            throw new InvalidArgumentException(__CLASS__.': set() first argument must be an object.');
         }
 
         $class = get_class($object);
@@ -277,7 +277,7 @@ class Container implements ContainerInterface
      */
     public function addItself()
     {
-        return $this->add($this);
+        return $this->set($this);
     }
 
     /**
@@ -350,13 +350,13 @@ class Container implements ContainerInterface
     }
 
     /**
-     * Add class definition
+     * Set class definition
      *
      * @param string $name
      * @param Closure $definition
      * @return $this
      */
-    public function addDefinition($name, $definition)
+    public function setDefinition($name, $definition)
     {
         $this->definitions[$name] = $definition;
         return $this;

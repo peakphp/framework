@@ -68,7 +68,7 @@ class ContainerContextTest extends TestCase
         $c = new C();
         $c->foo = 'bar';
 
-        $container->add($c);
+        $container->set($c);
 
         $hand = $container->create(Hand::class);
 
@@ -89,7 +89,7 @@ class ContainerContextTest extends TestCase
         $c = new C();
         $c->foo = 'bar';
 
-        $container->add($c);
+        $container->set($c);
 
         $hand = $container->create(Hand::class, [], [
             C::class => function(Container $c) {
@@ -146,7 +146,7 @@ class ContainerContextTest extends TestCase
     {
         $container = new Container();
 
-        $container->add(new W); // class W implements InterfaceA
+        $container->set(new W); // class W implements InterfaceA
 
         $arm = $container->create(Arm::class);
 
@@ -162,8 +162,8 @@ class ContainerContextTest extends TestCase
     {
         $container = new Container();
 
-        $container->add(new A); // class A implements InterfaceA
-        $container->add(new W); // class W implements InterfaceA
+        $container->set(new A); // class A implements InterfaceA
+        $container->set(new W); // class W implements InterfaceA
 
         try {
             $arm = $container->create(Arm::class);
@@ -181,8 +181,8 @@ class ContainerContextTest extends TestCase
     {
         $container = new Container();
 
-        $container->add(new A); // class A implements InterfaceA
-        $container->add(new W); // class W implements InterfaceA
+        $container->set(new A); // class A implements InterfaceA
+        $container->set(new W); // class W implements InterfaceA
 
         $arm = $container->create(Arm::class, [], [
             InterfaceA::class => W::class // tell the container to use stored instance W for InterfaceA
@@ -199,8 +199,8 @@ class ContainerContextTest extends TestCase
     {
         $container = new Container();
 
-        $container->add(new A); // class A implements InterfaceA
-        $container->add(new W); // class W implements InterfaceA
+        $container->set(new A); // class A implements InterfaceA
+        $container->set(new W); // class W implements InterfaceA
 
         $arm = $container->create(Arm::class, [], [
             InterfaceA::class => function(Container $c) {
@@ -220,8 +220,8 @@ class ContainerContextTest extends TestCase
     {
         $container = new Container();
 
-        $container->add(new A); // class A implements InterfaceA
-        $container->add(new W); // class W implements InterfaceA
+        $container->set(new A); // class A implements InterfaceA
+        $container->set(new W); // class W implements InterfaceA
 
         $body = $container->create(Body::class, ['foo'], [
             InterfaceA::class => W::class, // take W stored instance in $container

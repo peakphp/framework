@@ -79,7 +79,7 @@ class PipelineTest extends TestCase
     public function testPipeInterfaceAndDi()
     {
         $container = new Container();
-        $container->add(new Pipe3(new Collection(['foo' => 'bar'])));
+        $container->set(new Pipe3(new Collection(['foo' => 'bar'])));
 
         $processor = new DefaultProcessor($container);
         $pipeline = (new Pipeline([
