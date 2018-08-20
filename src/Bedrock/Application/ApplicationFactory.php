@@ -19,8 +19,8 @@ class ApplicationFactory
     /**
      * @param string $environment
      * @param ContainerInterface $container
-     * @param Resolvable $handlerResolver
-     * @param string|null $version
+     * @param Resolvable|null $handlerResolver
+     * @param string $version
      * @return Application
      */
     public function create(

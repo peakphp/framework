@@ -28,7 +28,7 @@ class HandlerResolver implements Resolvable
     /**
      * Resolver constructor.
      *
-     * @param ContainerInterface|null $container
+     * @param null|ContainerInterface $container
      */
     public function __construct(?ContainerInterface $container)
     {
@@ -60,12 +60,11 @@ class HandlerResolver implements Resolvable
     }
 
     /**
-     * @param $handler
+     * @param mixed $handler
      * @return CallableMiddleware
      */
     protected function resolveCallable($handler)
     {
-        // TODO add support of callable request handler too
         return new CallableMiddleware($handler);
     }
 
@@ -81,7 +80,7 @@ class HandlerResolver implements Resolvable
         }
 
         // resolve using a container
-        if (isset($this->container)) {
+        if (null !== $this->container) {
             if ($this->container->has($handler)) { // psr-11
                 return $this->container->get($handler);
             } elseif ($this->container instanceof Container) {

@@ -21,7 +21,8 @@ class BootableResolver implements Resolvable
 
     /**
      * BootableResolver constructor.
-     * @param ContainerInterface|null $container
+     *
+     * @param null|ContainerInterface $container
      */
     public function __construct(?ContainerInterface $container)
     {
@@ -39,7 +40,7 @@ class BootableResolver implements Resolvable
     public function resolve($item): Bootable
     {
         if(is_string($item) && class_exists($item)) {
-            if ($this->container) {
+            if (null !== $this->container) {
                 if ($this->container->has($item)) {
                     $item = $this->container->get($item);
                 } elseif ($this->container instanceof Container) {

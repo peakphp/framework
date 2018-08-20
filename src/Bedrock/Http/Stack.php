@@ -35,7 +35,7 @@ class Stack implements StackInterface
     private $handlerResolver;
 
     /**
-     * @var Stack
+     * @var StackInterface
      */
     private $parentStack = null;
 

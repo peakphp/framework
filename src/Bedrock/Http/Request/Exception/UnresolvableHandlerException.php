@@ -18,7 +18,7 @@ class UnresolvableHandlerException extends \InvalidArgumentException
     /**
      * UnresolvableHandlerException constructor.
      *
-     * @param $handler
+     * @param mixed $handler
      */
     public function __construct($handler)
     {

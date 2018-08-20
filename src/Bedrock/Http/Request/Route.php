@@ -17,7 +17,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 class Route implements StackInterface
 {
     /**
-     * @var string
+     * @var null|string
      */
     private $method;
 

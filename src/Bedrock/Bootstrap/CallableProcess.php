@@ -13,12 +13,13 @@ use Peak\Blueprint\Common\Bootable;
 class CallableProcess implements Bootable
 {
     /**
-     * @var
+     * @var callable
      */
     private $callable;
 
     /**
      * CallableProcess constructor.
+     *
      * @param callable $callable
      */
     public function __construct(callable $callable)

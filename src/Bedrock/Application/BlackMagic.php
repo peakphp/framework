@@ -26,7 +26,7 @@ class BlackMagic
      * Create an app!
      *
      * @param string $environment
-     * @param string|null $version
+     * @param string $version
      * @return Application
      */
     public static function createApp(string $environment = 'dev', string $version = '1.0')

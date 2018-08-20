@@ -126,7 +126,7 @@ class Application implements RequestHandlerInterface
 
     /**
      * @param string $path
-     * @param $handlers
+     * @param mixed $handlers
      * @return Route
      */
     public function get(string $path, $handlers): Route
@@ -136,7 +136,7 @@ class Application implements RequestHandlerInterface
 
     /**
      * @param string $path
-     * @param $handlers
+     * @param mixed $handlers
      * @return Route
      */
     public function post(string $path, $handlers): Route
@@ -146,7 +146,7 @@ class Application implements RequestHandlerInterface
 
     /**
      * @param string $path
-     * @param $handlers
+     * @param mixed $handlers
      * @return Route
      */
     public function all(string $path, $handlers): Route
@@ -155,9 +155,9 @@ class Application implements RequestHandlerInterface
     }
 
     /**
-     * @param string $method
+     * @param null|string $method
      * @param string $path
-     * @param $handlers
+     * @param mixed $handlers
      * @return Route
      */
     public function createRoute(?string $method, string $path, $handlers): Route

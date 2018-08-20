@@ -16,16 +16,16 @@ use Psr\Http\Server\RequestHandlerInterface;
 class CallableMiddleware implements MiddlewareInterface
 {
     /**
-     * @var
+     * @var callable
      */
     private $callable;
 
     /**
      * CallableMiddleware constructor.
      *
-     * @param $callable
+     * @param callable $callable
      */
-    public function __construct($callable)
+    public function __construct(callable $callable)
     {
         $this->callable = $callable;
     }
