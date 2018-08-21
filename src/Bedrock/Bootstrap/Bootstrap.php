@@ -44,7 +44,8 @@ class Bootstrap implements Bootable
      * Boot
      *
      * @return bool|mixed
-     * @throws \Exception
+     * @throws Exception\InvalidBootableProcessException
+     * @throws \ReflectionException
      */
     public function boot()
     {
