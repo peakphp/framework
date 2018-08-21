@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Peak\Bedrock\Application;
 
+use Peak\Bedrock\Bootstrap\Bootstrap;
 use Peak\Bedrock\Http\StackInterface;
 use Peak\Bedrock\KernelInterface;
 use Peak\Bedrock\Http\Stack;
@@ -194,6 +195,17 @@ class Application implements RequestHandlerInterface
         $this->reset();
         $this->add($handlers);
         return $this;
+    }
+
+    /**
+     * @param array $processes
+     * @throws \Peak\Bedrock\Bootstrap\Exception\InvalidBootableProcessException
+     * @throws \ReflectionException
+     */
+    public function bootstrap(array $processes)
+    {
+        $bootstrap = new Bootstrap($processes, $this->getContainer());
+        $bootstrap->boot();
     }
 
     /**
