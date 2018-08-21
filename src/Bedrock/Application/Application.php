@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Peak\Bedrock\Application;
 
+use Peak\Bedrock\Http\StackInterface;
 use Peak\Bedrock\KernelInterface;
 use Peak\Bedrock\Http\Stack;
 use Peak\Bedrock\Http\Request\Route;
@@ -162,11 +163,13 @@ class Application implements RequestHandlerInterface
      */
     public function createRoute(?string $method, string $path, $handlers): Route
     {
-        $stack = $handlers;
-        if (is_array($handlers)) {
-            $stack = new Stack($handlers, $this->handlerResolver);
+        if ($handlers instanceof StackInterface) {
+            return new Route($method, $path, $handlers);
         }
-        return new Route($method, $path, $stack);
+        if (!is_array($handlers)) {
+            $handlers = [$handlers];
+        }
+        return new Route($method, $path, new Stack($handlers, $this->getHandlerResolver()));
     }
 
     /**
