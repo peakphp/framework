@@ -199,6 +199,7 @@ class Application implements RequestHandlerInterface
 
     /**
      * @param array $processes
+     * @return $this
      * @throws \Peak\Bedrock\Bootstrap\Exception\InvalidBootableProcessException
      * @throws \ReflectionException
      */
@@ -206,6 +207,7 @@ class Application implements RequestHandlerInterface
     {
         $bootstrap = new Bootstrap($processes, $this->getContainer());
         $bootstrap->boot();
+        return $this;
     }
 
     /**
