@@ -57,4 +57,12 @@ class Kernel implements KernelInterface
     {
         return $this->environment;
     }
+
+    /**
+     * Initialize the object
+     */
+    public function initialize()
+    {
+        // nothing buy default
+    }
 }
