@@ -6,6 +6,10 @@ namespace Peak\Collection;
 
 use \RuntimeException;
 
+/**
+ * Class DotNotationCollection
+ * @package Peak\Collection
+ */
 class DotNotationCollection extends Collection
 {
     /**
