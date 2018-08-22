@@ -6,19 +6,15 @@ namespace Peak\Collection;
 
 use Peak\Common\Traits\ArrayMergeRecursiveDistinct;
 
-use Countable;
-use ArrayAccess;
-use ArrayIterator;
-use JsonSerializable;
-use IteratorAggregate;
-use Serializable;
-use \Exception;
+use \ArrayIterator;
 use \Closure;
+use \Exception;
+use \JsonSerializable;
 
 /**
  * Collection object
  */
-class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSerializable, Serializable
+class Collection implements \Peak\Blueprint\Collection\Collection, JsonSerializable
 {
     use ArrayMergeRecursiveDistinct;
 
@@ -103,7 +99,7 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
      * @param  string $key
      * @return mixed
      */
-    public function &__get($key)
+    public function &__get(string $key)
     {
         return $this->items[$key];
     }
@@ -114,7 +110,7 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
      * @param string $key
      * @param mixed  $value
      */
-    public function __set($key, $value): void
+    public function __set(string $key, $value): void
     {
         if (!$this->isReadOnly()) {
             $this->items[$key] = $value;
@@ -127,7 +123,7 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
      * @param   string $key
      * @return  bool
      */
-    public function __isset($key): bool
+    public function __isset(string $key): bool
     {
         return isset($this->items[$key]);
     }
@@ -137,7 +133,7 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
      *
      * @param string $key
      */
-    public function __unset($key): void
+    public function __unset(string $key): void
     {
         if (!$this->isReadOnly()) {
             unset($this->items[$key]);
