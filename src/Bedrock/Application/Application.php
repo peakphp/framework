@@ -9,8 +9,8 @@ use Peak\Bedrock\Http\StackInterface;
 use Peak\Bedrock\KernelInterface;
 use Peak\Bedrock\Http\Stack;
 use Peak\Bedrock\Http\Request\Route;
-use Peak\Bedrock\Http\Response\EmitterInterface;
-use Peak\Blueprint\Common\Resolvable;
+use Peak\Blueprint\Common\ResourceResolver;
+use Peak\Blueprint\Http\ResponseEmitter;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -33,7 +33,7 @@ class Application implements RequestHandlerInterface
     private $handlers = [];
 
     /**
-     * @var Resolvable
+     * @var ResourceResolver
      */
     private $handlerResolver;
 
@@ -51,12 +51,12 @@ class Application implements RequestHandlerInterface
      * Application constructor.
      *
      * @param KernelInterface $kernel
-     * @param Resolvable $handlerResolver
+     * @param ResourceResolver $handlerResolver
      * @param string $version
      */
     public function __construct(
         KernelInterface $kernel,
-        Resolvable $handlerResolver,
+        ResourceResolver $handlerResolver,
         string $version = '1.0'
     ) {
         $this->kernel = $kernel;
@@ -65,7 +65,7 @@ class Application implements RequestHandlerInterface
     }
 
     /**
-     * @return Resolvable
+     * @return ResourceResolver
      */
     public function getHandlerResolver()
     {
@@ -231,10 +231,10 @@ class Application implements RequestHandlerInterface
      * Handle the request and emit a response
      *
      * @param ServerRequestInterface $request
-     * @param EmitterInterface $emitter
+     * @param ResponseEmitter $emitter
      * @return mixed
      */
-    public function run(ServerRequestInterface $request, EmitterInterface $emitter)
+    public function run(ServerRequestInterface $request, ResponseEmitter $emitter)
     {
         return $emitter->emit($this->handle($request));
     }

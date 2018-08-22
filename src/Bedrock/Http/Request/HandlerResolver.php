@@ -8,7 +8,7 @@ use Peak\Bedrock\Http\Middleware\CallableMiddleware;
 use Peak\Bedrock\Http\StackInterface;
 use Peak\Bedrock\Http\Request\Exception\HandlerNotFoundException;
 use Peak\Bedrock\Http\Request\Exception\UnresolvableHandlerException;
-use Peak\Blueprint\Common\Resolvable;
+use Peak\Blueprint\Common\ResourceResolver;
 use Peak\Di\Container;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -18,7 +18,7 @@ use Psr\Http\Server\RequestHandlerInterface;
  * Class HandlerResolver
  * @package Peak\Bedrock\Http\Request
  */
-class HandlerResolver implements Resolvable
+class HandlerResolver implements ResourceResolver
 {
     /**
      * @var ContainerInterface

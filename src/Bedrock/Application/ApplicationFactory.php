@@ -7,7 +7,7 @@ namespace Peak\Bedrock\Application;
 use Peak\Bedrock\Http\Request\HandlerResolver;
 use Peak\Bedrock\Kernel;
 use Peak\Bedrock\KernelInterface;
-use Peak\Blueprint\Common\Resolvable;
+use Peak\Blueprint\Common\ResourceResolver;
 use Psr\Container\ContainerInterface;
 
 /**
@@ -19,14 +19,14 @@ class ApplicationFactory
     /**
      * @param string $environment
      * @param ContainerInterface $container
-     * @param Resolvable|null $handlerResolver
+     * @param ResourceResolver|null $handlerResolver
      * @param string $version
      * @return Application
      */
     public function create(
         string $environment,
         ContainerInterface $container,
-        Resolvable $handlerResolver = null,
+        ResourceResolver $handlerResolver = null,
         string $version = '1.0'
     ) {
         $handlerResolver = $handlerResolver ?? new HandlerResolver($container);
@@ -39,12 +39,12 @@ class ApplicationFactory
 
     /**
      * @param KernelInterface $kernel
-     * @param Resolvable|null $handlerResolver
+     * @param ResourceResolver|null $handlerResolver
      * @return Application
      */
     public function createFromKernel(
         KernelInterface $kernel,
-        Resolvable $handlerResolver = null,
+        ResourceResolver $handlerResolver = null,
         string $version = '1.0'
     ) {
         $handlerResolver = $handlerResolver ?? new HandlerResolver($kernel->getContainer());

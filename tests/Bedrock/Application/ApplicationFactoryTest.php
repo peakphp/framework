@@ -3,7 +3,7 @@
 use \PHPUnit\Framework\TestCase;
 use \Peak\Bedrock\Application\Application;
 use \Peak\Bedrock\Application\ApplicationFactory;
-use \Peak\Blueprint\Common\Resolvable;
+use \Peak\Blueprint\Common\ResourceResolver;
 use \Psr\Container\ContainerInterface;
 
 /**
@@ -18,7 +18,7 @@ class ApplicationFactoryTest extends TestCase
         $app = $appFactory->create(
             'dev',
             $this->createMock(ContainerInterface::class),
-            $this->createMock(Resolvable::class),
+            $this->createMock(ResourceResolver::class),
             '2.0'
         );
 

@@ -7,7 +7,7 @@ namespace Peak\Bedrock\Http;
 use Peak\Bedrock\Http\Exception\EmptyStackException;
 use Peak\Bedrock\Http\Exception\StackEndedWithoutResponseException;
 use Peak\Bedrock\Http\Request\Exception\InvalidHandlerException;
-use Peak\Blueprint\Common\Resolvable;
+use Peak\Blueprint\Common\ResourceResolver;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -30,7 +30,7 @@ class Stack implements StackInterface
     private $nextHandler;
 
     /**
-     * @var Resolvable
+     * @var ResourceResolver
      */
     private $handlerResolver;
 
@@ -43,9 +43,9 @@ class Stack implements StackInterface
      * Stack constructor.
      *
      * @param array $handlers
-     * @param Resolvable $handlerResolver
+     * @param ResourceResolver $handlerResolver
      */
-    public function __construct(array $handlers, Resolvable $handlerResolver)
+    public function __construct(array $handlers, ResourceResolver $handlerResolver)
     {
         if (empty($handlers)) {
             throw new EmptyStackException($this);
