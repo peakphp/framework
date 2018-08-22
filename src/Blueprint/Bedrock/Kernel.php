@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Peak\Bedrock;
+namespace Peak\Blueprint\Bedrock;
 
 use Peak\Blueprint\Common\Initializable;
 use Psr\Container\ContainerInterface;
 
 /**
- * Interface KernelInterface
- * @package Peak\Bedrock
+ * Interface Kernel
+ * @package Peak\Blueprint\Bedrock
  */
-interface KernelInterface extends Initializable
+interface Kernel extends Initializable
 {
     /**
      * @return ContainerInterface

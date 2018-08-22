@@ -10,7 +10,7 @@ use Psr\Container\ContainerInterface;
  * Class Kernel
  * @package Peak\Bedrock
  */
-class Kernel implements KernelInterface
+class Kernel implements \Peak\Blueprint\Bedrock\Kernel
 {
     /**
      * Peak version

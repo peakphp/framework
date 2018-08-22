@@ -5,10 +5,9 @@ declare(strict_types=1);
 namespace Peak\Bedrock\Application;
 
 use Peak\Bedrock\Bootstrap\Bootstrap;
-use Peak\Bedrock\Http\StackInterface;
-use Peak\Bedrock\KernelInterface;
 use Peak\Bedrock\Http\Stack;
 use Peak\Bedrock\Http\Request\Route;
+use Peak\Blueprint\Bedrock\Kernel;
 use Peak\Blueprint\Common\ResourceResolver;
 use Peak\Blueprint\Http\ResponseEmitter;
 use Psr\Container\ContainerInterface;
@@ -23,7 +22,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 class Application implements RequestHandlerInterface
 {
     /**
-     * @var KernelInterface
+     * @var Kernel
      */
     private $kernel;
 
@@ -50,12 +49,12 @@ class Application implements RequestHandlerInterface
     /**
      * Application constructor.
      *
-     * @param KernelInterface $kernel
+     * @param Kernel $kernel
      * @param ResourceResolver $handlerResolver
      * @param string $version
      */
     public function __construct(
-        KernelInterface $kernel,
+        Kernel $kernel,
         ResourceResolver $handlerResolver,
         string $version = '1.0'
     ) {
@@ -73,7 +72,7 @@ class Application implements RequestHandlerInterface
     }
 
     /**
-     * @return KernelInterface
+     * @return Kernel
      */
     public function getKernel()
     {
