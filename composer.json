@@ -31,7 +31,7 @@
         "zendframework/zend-diactoros": "^1.8"
     },
     "require-dev": {
-        "phpunit/phpunit": "^7.3",
+        "phpunit/phpunit": "7.2.7",
         "phpstan/phpstan": "^0.10"
     },
     "autoload": {
@@ -39,8 +39,7 @@
             "src/Common/helpers.php"
         ],
         "psr-4": {
-            "Peak\\": "src/",
-            "App\\": "_test/4/app"
+            "Peak\\": "src/"
         }
     },
     "minimum-stability": "dev",
