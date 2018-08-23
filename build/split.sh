@@ -1,4 +1,5 @@
 git subsplit init git@github.com:peakphp/framework.git
+git subsplit publish --heads="master" src/Bedrock:git@github.com:peakphp/bedrock.git
 git subsplit publish --heads="master" src/Blueprint:git@github.com:peakphp/blueprint.git
 git subsplit publish --heads="master" src/Collection:git@github.com:peakphp/collection.git
 git subsplit publish --heads="master" src/Common:git@github.com:peakphp/common.git
