@@ -6,7 +6,7 @@ namespace Peak\Bedrock\Application;
 
 use Peak\Bedrock\Http\Request\HandlerResolver;
 use Peak\Bedrock\Kernel;
-use Peak\Bedrock\KernelInterface;
+use Peak\Blueprint\Bedrock\Kernel as KernelInterface;
 use Peak\Blueprint\Common\ResourceResolver;
 use Psr\Container\ContainerInterface;
 
