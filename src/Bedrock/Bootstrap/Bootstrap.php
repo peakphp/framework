@@ -19,11 +19,6 @@ class Bootstrap implements Bootable
     private $processes;
 
     /**
-     * @var ContainerInterface
-     */
-    private $container;
-
-    /**
      * @var BootableResolver
      */
     private $resolver;
@@ -36,7 +31,6 @@ class Bootstrap implements Bootable
     public function __construct(array $processes, ContainerInterface $container = null)
     {
         $this->processes = $processes;
-        $this->container = $container;
         $this->resolver = new BootableResolver($container);
     }
 
