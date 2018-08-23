@@ -3,7 +3,6 @@
 use \PHPUnit\Framework\TestCase;
 use \Peak\Bedrock\Application\Application;
 use \Peak\Bedrock\Application\BlackMagic;
-use \Peak\Bedrock\Http\StackInterface;
 use \Psr\Http\Message\ResponseInterface;
 use \Psr\Http\Message\ServerRequestInterface;
 
@@ -35,7 +34,7 @@ class BlackMagicTest extends TestCase
             MiddlewareA::class,
             HandlerA::class,
         ]);
-        $this->assertInstanceOf(StackInterface::class, $stack);
+        $this->assertInstanceOf(\Peak\Blueprint\Http\Stack::class, $stack);
     }
 
     /**

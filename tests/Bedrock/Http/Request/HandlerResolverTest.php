@@ -7,7 +7,6 @@ use \Psr\Http\Server\MiddlewareInterface;
 use \Peak\Bedrock\Http\Middleware\CallableMiddleware;
 use \Peak\Bedrock\Http\Request\HandlerResolver;
 use \Peak\Bedrock\Http\Stack;
-use \Peak\Bedrock\Http\StackInterface;
 use \Peak\Di\Container;
 
 require_once FIXTURES_PATH.'/application/HandlerA.php';
@@ -30,7 +29,7 @@ class HandlerResolverTest extends TestCase
         $this->assertInstanceOf(MiddlewareA::class, $handlerResolver->resolve(new MiddlewareA()));
         $this->assertInstanceOf(MiddlewareInterface::class, $handlerResolver->resolve(new MiddlewareA()));
 
-        $this->assertInstanceOf(StackInterface::class, $handlerResolver->resolve(new Stack([MiddlewareA::class], $handlerResolver)));
+        $this->assertInstanceOf(\Peak\Blueprint\Http\Stack::class, $handlerResolver->resolve(new Stack([MiddlewareA::class], $handlerResolver)));
 
         $this->assertInstanceOf(CallableMiddleware::class, $handlerResolver->resolve(function($server, $request) {}));
     }

@@ -2,7 +2,6 @@
 
 use \PHPUnit\Framework\TestCase;
 use \Peak\Bedrock\Http\Request\Route;
-use \Peak\Bedrock\Http\StackInterface;
 use \Psr\Http\Message\ResponseInterface;
 use \Psr\Http\Message\ServerRequestInterface;
 use \Psr\Http\Message\UriInterface;
@@ -17,7 +16,7 @@ class RouteTest extends TestCase
         $route = new Route(
             'GET',
             '/mypath',
-            $this->createMock(StackInterface::class)
+            $this->createMock(\Peak\Blueprint\Http\Stack::class)
         );
 
         $this->assertTrue('GET' === $route->getMethod());
@@ -29,7 +28,7 @@ class RouteTest extends TestCase
         $route = new Route(
             'GET',
             '/mypath',
-            $this->createMock(StackInterface::class)
+            $this->createMock(\Peak\Blueprint\Http\Stack::class)
         );
 
         $request = $this->createMock(ServerRequestInterface::class);
@@ -43,7 +42,7 @@ class RouteTest extends TestCase
         $route = new Route(
             'GET',
             '/mypath',
-            $this->createMock(StackInterface::class)
+            $this->createMock(\Peak\Blueprint\Http\Stack::class)
         );
 
         $request = $this->createMock(ServerRequestInterface::class);
@@ -71,7 +70,7 @@ class RouteTest extends TestCase
         $route = new Route(
             'POST',
             '/mypath',
-            $this->createMock(StackInterface::class)
+            $this->createMock(\Peak\Blueprint\Http\Stack::class)
         );
 
         $request = $this->createMock(ServerRequestInterface::class);
@@ -89,7 +88,7 @@ class RouteTest extends TestCase
         $route = new Route(
             null,
             '/mypath',
-            $this->createMock(StackInterface::class)
+            $this->createMock(\Peak\Blueprint\Http\Stack::class)
         );
 
         $request = $this->createMock(ServerRequestInterface::class);
@@ -116,7 +115,7 @@ class RouteTest extends TestCase
         $route = new Route(
             'GET',
             '/mypath',
-            $this->createMock(StackInterface::class)
+            $this->createMock(\Peak\Blueprint\Http\Stack::class)
         );
 
         $request = $this->createMock(ServerRequestInterface::class);
@@ -143,7 +142,7 @@ class RouteTest extends TestCase
         $route = new Route(
             'GET',
             '/mypath',
-            $this->createMock(StackInterface::class)
+            $this->createMock(\Peak\Blueprint\Http\Stack::class)
         );
 
         $request = $this->createMock(ServerRequestInterface::class);
