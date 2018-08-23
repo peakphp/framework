@@ -4,11 +4,13 @@ use \PHPUnit\Framework\TestCase;
 use \Peak\Bedrock\Application\Application;
 use \Peak\Bedrock\Kernel;
 use \Peak\Bedrock\Http\Request\HandlerResolver;
+use \Peak\Bedrock\Http\Request\Route;
 use \Psr\Container\ContainerInterface;
 use \Psr\Http\Message\ResponseInterface;
 use \Psr\Http\Message\ServerRequestInterface;
 use \Psr\Http\Message\UriInterface;
 use \Psr\Http\Server\RequestHandlerInterface;
+use \Psr\Http\Server\MiddlewareInterface;
 
 require_once FIXTURES_PATH . '/application/HandlerA.php';
 require_once FIXTURES_PATH . '/application/ResponseA.php';
@@ -21,7 +23,7 @@ class ApplicationTest extends TestCase
     /**
      * Test class instantiation
      */
-    public function testInstantiation()
+    public function testGeneral()
     {
         $kernel = $this->createMock(Kernel::class);
         $handlerResolver = $this->createMock(HandlerResolver::class);
@@ -32,6 +34,10 @@ class ApplicationTest extends TestCase
         $this->assertInstanceOf(ContainerInterface::class, $app->getContainer());
         $this->assertInstanceOf(Kernel::class, $app->getKernel());
         $this->assertInstanceOf(HandlerResolver::class, $app->getHandlerResolver());
+
+        $this->assertTrue($app->getName() === '');
+        $app->setName('Myapp');
+        $this->assertTrue($app->getName() === 'Myapp');
     }
 
     public function testHandleRequestWithAdd()
@@ -173,5 +179,40 @@ class ApplicationTest extends TestCase
 
         $result = $app->handle($request);
         $this->assertInstanceOf(ResponseInterface::class, $result);
+    }
+
+    public function testBootstrap()
+    {
+        $app = new Application(
+            $this->createMock(Kernel::class),
+            $this->createMock(HandlerResolver::class),
+            '1.1'
+        );
+
+        $_GET = [];
+        $app->bootstrap([
+            function() {
+                $_GET['test'] = 'foo';
+            }
+        ]);
+
+        $this->assertTrue(isset($_GET['test']));
+        $this->assertTrue($_GET['test'] === 'foo');
+        $_GET = [];
+    }
+
+    public function testCreateRoute()
+    {
+        $app = new Application(
+            $this->createMock(Kernel::class),
+            $this->createMock(HandlerResolver::class),
+            '1.1'
+        );
+
+        $route = $app->createRoute('GET', '/', $this->createMock(\Peak\Blueprint\Http\Stack::class));
+        $this->assertInstanceOf(Route::class, $route);
+
+        $route = $app->createRoute('GET', '/', $this->createMock(MiddlewareInterface::class));
+        $this->assertInstanceOf(Route::class, $route);
     }
 }
