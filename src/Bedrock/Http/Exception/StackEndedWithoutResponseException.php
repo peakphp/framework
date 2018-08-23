@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Peak\Bedrock\Http\Exception;
 
-use Peak\Bedrock\Http\StackInterface;
+use Peak\Blueprint\Http\Stack;
 
 /**
  * Class StackEndedWithoutResponseException
@@ -13,23 +13,23 @@ use Peak\Bedrock\Http\StackInterface;
 class StackEndedWithoutResponseException extends \LogicException
 {
     /**
-     * @var StackInterface
+     * @var Stack
      */
     private $stack;
 
     /**
      * StackEndedWithoutResponseException constructor.
      *
-     * @param StackInterface $stack
+     * @param Stack $stack
      */
-    public function __construct(StackInterface $stack)
+    public function __construct(Stack $stack)
     {
         parent::__construct('Stack ended without returning a response');
         $this->stack = $stack;
     }
 
     /**
-     * @return StackInterface
+     * @return Stack
      */
     public function getStack()
     {

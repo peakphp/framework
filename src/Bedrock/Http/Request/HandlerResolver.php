@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace Peak\Bedrock\Http\Request;
 
 use Peak\Bedrock\Http\Middleware\CallableMiddleware;
-use Peak\Bedrock\Http\StackInterface;
 use Peak\Bedrock\Http\Request\Exception\HandlerNotFoundException;
 use Peak\Bedrock\Http\Request\Exception\UnresolvableHandlerException;
 use Peak\Blueprint\Common\ResourceResolver;
+use Peak\Blueprint\Http\Stack;
 use Peak\Di\Container;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -42,7 +42,7 @@ class HandlerResolver implements ResourceResolver
      */
     public function resolve($handler)
     {
-        if ($handler instanceof StackInterface ||
+        if ($handler instanceof Stack ||
             $handler instanceof MiddlewareInterface ||
             $handler instanceof RequestHandlerInterface) {
             return $handler;

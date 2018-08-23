@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Peak\Bedrock\Http\Request;
 
 use Peak\Bedrock\Http\Exception\StackEndedWithoutResponseException;
-use Peak\Bedrock\Http\StackInterface;
+use Peak\Blueprint\Http\Stack;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
@@ -14,7 +14,7 @@ use Psr\Http\Server\RequestHandlerInterface;
  * Class Route
  * @package Peak\Bedrock\Http\Request
  */
-class Route implements StackInterface
+class Route implements Stack
 {
     /**
      * @var null|string
@@ -27,12 +27,12 @@ class Route implements StackInterface
     private $path;
 
     /**
-     * @var StackInterface
+     * @var Stack
      */
     private $stack;
 
     /**
-     * @var StackInterface
+     * @var Stack
      */
     private $parentStack;
 
@@ -41,9 +41,9 @@ class Route implements StackInterface
      *
      * @param null|string $method
      * @param string $path
-     * @param StackInterface $stack
+     * @param Stack $stack
      */
-    public function __construct(?string $method, string $path, StackInterface $stack)
+    public function __construct(?string $method, string $path, Stack $stack)
     {
         $this->method = $method;
         $this->path = $path;
@@ -51,18 +51,18 @@ class Route implements StackInterface
     }
 
     /**
-     * @param StackInterface $parentStack
+     * @param Stack $parentStack
      */
-    public function setParent(StackInterface $parentStack)
+    public function setParent(Stack $parentStack)
     {
         $this->parentStack = $parentStack;
         $this->stack->setParent($parentStack);
     }
 
     /**
-     * @return StackInterface
+     * @return Stack
      */
-    public function getParent(): StackInterface
+    public function getParent(): Stack
     {
         return $this->parentStack;
     }

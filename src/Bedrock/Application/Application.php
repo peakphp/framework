@@ -44,7 +44,7 @@ class Application implements RequestHandlerInterface
     /**
      * @var string
      */
-    private $name;
+    private $name = '';
 
     /**
      * Application constructor.
@@ -165,7 +165,7 @@ class Application implements RequestHandlerInterface
      */
     public function createRoute(?string $method, string $path, $handlers): Route
     {
-        if ($handlers instanceof Stack) {
+        if ($handlers instanceof \Peak\Blueprint\Http\Stack) {
             return new Route($method, $path, $handlers);
         }
         if (!is_array($handlers)) {

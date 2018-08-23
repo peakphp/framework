@@ -17,7 +17,7 @@ use Psr\Http\Server\RequestHandlerInterface;
  * Class Stack
  * @package Peak\Bedrock\Http
  */
-class Stack implements StackInterface
+class Stack implements \Peak\Blueprint\Http\Stack
 {
     /**
      * @var array
@@ -35,7 +35,7 @@ class Stack implements StackInterface
     private $handlerResolver;
 
     /**
-     * @var StackInterface
+     * @var \Peak\Blueprint\Http\Stack
      */
     private $parentStack = null;
 
@@ -56,17 +56,17 @@ class Stack implements StackInterface
     }
 
     /**
-     * @param StackInterface $parentStack
+     * @param \Peak\Blueprint\Http\Stack $parentStack
      */
-    public function setParent(StackInterface $parentStack)
+    public function setParent(\Peak\Blueprint\Http\Stack $parentStack)
     {
         $this->parentStack = $parentStack;
     }
 
     /**
-     * @return StackInterface
+     * @return \Peak\Blueprint\Http\Stack
      */
-    public function getParent(): StackInterface
+    public function getParent(): \Peak\Blueprint\Http\Stack
     {
         return $this->parentStack;
     }
@@ -83,7 +83,7 @@ class Stack implements StackInterface
     {
         $this->nextHandler = (isset($this->nextHandler)) ? next($this->handlers) : current($this->handlers);
 
-        if ($this->nextHandler instanceof StackInterface) {
+        if ($this->nextHandler instanceof \Peak\Blueprint\Http\Stack) {
             $response = $this->handleStack($this->nextHandler, $request);
             if ($response !== false) {
                 return $response;
@@ -122,11 +122,11 @@ class Stack implements StackInterface
     /**
      * Handle a child stack
      *
-     * @param StackInterface $stack
+     * @param \Peak\Blueprint\Http\Stack $stack
      * @param ServerRequestInterface $request
      * @return ResponseInterface
      */
-    protected function handleStack(StackInterface $stack, ServerRequestInterface $request): ResponseInterface
+    protected function handleStack(\Peak\Blueprint\Http\Stack $stack, ServerRequestInterface $request): ResponseInterface
     {
         $stack->setParent($this);
         return $stack->handle($request);
