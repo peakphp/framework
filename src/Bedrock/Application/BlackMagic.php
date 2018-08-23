@@ -13,7 +13,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
 /**
- * Class Application
+ * Class BlackMagic
  *
  * Useful for quick application prototyping.
  * DO NOT USE FOR A REAL APP IN PRODUCTION UNLESS YOU KNOW WHAT YOU ARE DOING
