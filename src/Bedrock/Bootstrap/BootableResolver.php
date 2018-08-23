@@ -41,11 +41,7 @@ class BootableResolver implements ResourceResolver
     {
         if(is_string($item) && class_exists($item)) {
             if (null !== $this->container) {
-                if ($this->container->has($item)) {
-                    $item = $this->container->get($item);
-                } elseif ($this->container instanceof Container) {
-                    $item = $this->container->create($item);
-                }
+                $item = $this->resolveFromContainer($item);
             }
             if (is_string($item)) {
                 $item = new $item();
@@ -58,6 +54,21 @@ class BootableResolver implements ResourceResolver
             throw new InvalidBootableProcessException($item);
         }
 
+        return $item;
+    }
+
+    /**
+     * @param $item
+     * @return mixed|object
+     * @throws \ReflectionException
+     */
+    private function resolveFromContainer($item)
+    {
+        if ($this->container->has($item)) {
+            return  $this->container->get($item);
+        } elseif ($this->container instanceof Container) {
+            return $this->container->create($item);
+        }
         return $item;
     }
 }
