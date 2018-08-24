@@ -40,6 +40,7 @@ class Kernel implements \Peak\Blueprint\Bedrock\Kernel
     ) {
         $this->environment = $environment;
         $this->container = $container;
+        $this->initialize();
     }
 
     /**
@@ -59,10 +60,10 @@ class Kernel implements \Peak\Blueprint\Bedrock\Kernel
     }
 
     /**
-     * Initialize the object
+     * Initialize kernel
      */
     public function initialize()
     {
-        // nothing buy default
+        // nothing by default
     }
 }
