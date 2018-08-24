@@ -1,6 +1,6 @@
 {
   "name": "peak/blueprint",
-  "description": "Peak Blueprint Component",
+  "description": "Peak Blueprint Interfaces",
   "keywords": ["peak", "blueprint", "interfaces", "contract"],
   "license": "MIT",
   "homepage": "https://peakframework.com",
