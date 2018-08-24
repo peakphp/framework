@@ -14,9 +14,6 @@ use Zend\Diactoros\ServerRequestFactory; // PSR-7
 $appFactory = new ApplicationFactory();
 $app = $appFactory->create('dev', new Container());
 
-// Create StackFactory
-$stackFactory = new StackFactory($app->getHandlerResolver());
-
 // Adding multiple middlewares and route middleware to application stack
 $app->add([
     BootstrapMiddleware::class,
