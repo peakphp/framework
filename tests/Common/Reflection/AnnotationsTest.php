@@ -2,7 +2,7 @@
 
 use PHPUnit\Framework\TestCase;
 
-use Peak\Common\Annotations;
+use Peak\Common\Reflection\Annotations;
 
 class AnnotationsTest extends TestCase
 {

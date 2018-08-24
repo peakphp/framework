@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Peak\Common;
+namespace Peak\Common\Reflection;
 
 use \ReflectionClass;
 use \ReflectionMethod;
@@ -24,7 +24,7 @@ class Annotations
      * Class name to work on
      * @var string
      */
-    protected $classname;
+    protected $className;
     
 
     /**
@@ -41,14 +41,15 @@ class Annotations
      * Set the class name we want and load ReflectionClass
      *
      * @param  mixed $class Class name or class instance
+     * @throws ReflectionException
      */
-    protected function setClass($classname): void
+    protected function setClass($className): void
     {
-        $this->classname = $classname;
-        if (is_object($classname)) {
-            $this->classname = get_class($classname);
+        $this->className = $className;
+        if (is_object($className)) {
+            $this->className = get_class($className);
         }
-        $this->class = new ReflectionClass($classname);
+        $this->class = new ReflectionClass($className);
     }
 
     /**
@@ -61,7 +62,7 @@ class Annotations
     public function getMethod($method_name, $tags = '*'): array
     {
         try {
-            $method = new ReflectionMethod($this->classname, $method_name);
+            $method = new ReflectionMethod($this->className, $method_name);
         } catch (ReflectionException $e) {
             return [];
         }
