@@ -161,14 +161,14 @@ if (!function_exists('printHtmlExceptionTrace')) {
 /**
  * shortClassName()
  */
-if (!function_exists('shortClassName')) {
+if (!function_exists('getClassShortName')) {
     /**
      * Get class name of an object without the namespace
      *
      * @param mixed $obj
      * @return string
      */
-    function shortClassName($obj): string
+    function getClassShortName($obj): string
     {
         return ((new ReflectionClass($obj))->getShortName());
     }
