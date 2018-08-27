@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Peak\Di;
 
 use Peak\Di\Exception\AmbiguousResolutionException;
+use Peak\Di\Exception\InterfaceNotFoundException;
 use Peak\Di\Exception\NotFoundException;
-use \Exception;
 
 /**
  * Class InterfaceResolver
@@ -15,14 +15,13 @@ use \Exception;
 class InterfaceResolver
 {
     /**
-     * Resolve class arguments dependencies
-     *
      * @param $interface
      * @param Container $container
      * @param array $explicit
      * @return null|object
+     * @throws AmbiguousResolutionException
+     * @throws InterfaceNotFoundException
      * @throws NotFoundException
-     * @throws Exception
      */
     public function resolve($interface, Container $container, $explicit = [])
     {
@@ -37,6 +36,6 @@ class InterfaceResolver
             }
             return $container->get($instance);
         }
-        throw new Exception('Could not find an instance that implement interface '.$interface);
+        throw new InterfaceNotFoundException($interface);
     }
 }
