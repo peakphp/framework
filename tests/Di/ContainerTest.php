@@ -211,8 +211,8 @@ class ContainerTest extends TestCase
 
         $testdi13 = $container->create(
             'TestDi13', 
-            [],
-            [
+            [], // construct arguments
+            [ // other interface arguments
                 'TestDiInterface' => function() {
                     return new TestDi7();
                 },
@@ -373,34 +373,6 @@ class ContainerTest extends TestCase
         $result = $container->call([$testdi, 'methodA'], $arguments, $explicits);
 
         $this->assertTrue($result === $arguments[0]);
-    }
-
-    /**
-     * Test container resolve dependencies for object method
-     */
-    function testMethodCall2()
-    {
-//        $container = new Container();
-//
-//        $testdi = $container->create('TestDi1', [
-//            'value',
-//            [12],
-//            999
-//        ]);
-//
-//        $arguments = ['hello'];
-//        $explicits = [];
-//
-//        $result = $container->call(function() {
-//            return [
-//                $testdi,
-//                'methodA'
-//            ];
-//        }, $arguments, $explicits);
-//
-//        //print_r($result);
-//
-//        $this->assertTrue($result === $arguments[0]);
     }
 
     /**
