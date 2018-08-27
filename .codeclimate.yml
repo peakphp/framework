@@ -3,7 +3,7 @@ checks:
   argument-count:
     enabled: true
     config:
-      threshold: 4
+      threshold: 5
   complex-logic:
     enabled: true
     config:
@@ -31,7 +31,7 @@ checks:
   return-statements:
     enabled: true
     config:
-      threshold: 4
+      threshold: 5
   similar-code:
     enabled: true
     config:
