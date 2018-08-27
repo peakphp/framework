@@ -278,42 +278,30 @@ class ContainerTest extends TestCase
     }
 
     /**
-     * test exception with unknow class
-     */  
+     * @expectedException \Exception
+     */
     function testException()
     {
         $container = new Container();
-        try {
-            //$this->expectException(Exception::class);
-            $testdi = $container->create('iDontExists', [
-                'value',
-                [12],
-                999
-            ]);
-        }
-        catch(Exception $e) {}
-
-        $this->assertFalse(isset($testdi));
+        $testdi = $container->create('iDontExists', [
+            'value',
+            [12],
+            999
+        ]);
     }
 
     /**
-     * test exception with class dependencie(s) unknow name(s)
-     */  
+     * @expectedException \Exception
+     */
     function testExceptionDependencies()
     {
         $container = new Container();
-        try {
-            //$this->expectException(Exception::class);
-            $testdi = $container->create('TestDi2');
-        }
-        catch(Exception $e) {}
-
-        $this->assertFalse(isset($testdi));
+        $testdi = $container->create('TestDi2');
     }
 
     /**
-     * test exception with class dependencie(s) unknow name(s)
-     */  
+     * @expectedException \Peak\Di\Exception\NotFoundException
+     */
     function testGetHasInstance()
     {
         $container = new Container();
@@ -326,11 +314,8 @@ class ContainerTest extends TestCase
 
         $this->assertTrue($testdi instanceof TestDi3);
 
-        try {
-            $testdi9999 = $container->get('TestDi9999');
-        } catch(Exception $e) {
-        }
-        $this->assertTrue($e instanceof \Peak\Di\Exception\NotFoundException);
+        // test exception with unknown class name
+        $testdi9999 = $container->get('TestDi9999');
     }
 
     /**
@@ -421,6 +406,9 @@ class ContainerTest extends TestCase
     /**
      * Test call exception
      */
+    /**
+     * @expectedException InvalidArgumentException
+     */
     function testMethodCallException()
     {
         $container = new Container();
@@ -434,14 +422,7 @@ class ContainerTest extends TestCase
         $arguments = ['hello'];
         $explicits = [];
 
-        try {
-            $result = $container->call([$testdi], $arguments, $explicits);
-        } catch(Exception $e) {
-            $error = true;
-            //echo $e->getMessage();
-        }
-
-        $this->assertTrue(isset($error));
+        $result = $container->call([$testdi], $arguments, $explicits);
     }
 
     /**
