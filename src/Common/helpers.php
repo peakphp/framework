@@ -81,24 +81,18 @@ if (!function_exists('showAllErrors')) {
 }
 
 /**
- * phpinput()
+ * phpInput()
  */
-if (!function_exists('phpinput')) {
+if (!function_exists('phpInput')) {
     /**
      * Retrieve a collection object from php://input
      *
-     * @param  Closure $closure
-     * @return PhpInput
+     * @return array
      */
-    function phpinput(Closure $closure = null): PhpInput
+    function phpInput(): array
     {
-        $phpinput = new PhpInput();
-
-        if (isset($closure)) {
-            $phpinput->map($closure);
-        }
-
-        return $phpinput;
+        $raw  = file_get_contents('php://input');
+        return json_decode($raw, true); // for json input
     }
 }
 
