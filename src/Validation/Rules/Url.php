@@ -10,12 +10,6 @@ use Peak\Validation\AbstractRule;
 class Url extends AbstractRule
 {
     /**
-     * Default options
-     * @var array
-     */
-    protected $default_options = [];
-
-    /**
      * Validate
      *
      * @param  mixed $value
