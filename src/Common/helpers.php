@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-use Peak\Common\PhpInput;
 use Peak\Common\TimeExpression;
 
 /*
