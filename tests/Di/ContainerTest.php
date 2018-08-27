@@ -262,27 +262,19 @@ class ContainerTest extends TestCase
     }
 
     /**
-     * test exception with unknow class
-     */  
+     * @expectedException \Peak\Di\Exception\AmbiguousResolutionException
+     */
     function testCreateInstanceWithInterfaceException()
     {
         $container = new Container();
-        try {
 
-            //both implement the same interface
-            $container->set(new TestDi7());
-            $container->set(new TestDi8());
-            
-            //TestDi6 has an interface as dependency, both TestDi7 and TestDi8 qualify
-            //but container doesn't know which one to use so it throw an LogicException 
-            $testdi = $container->create('TestDi6');
-        }
-        catch(Exception $e) {
-            $ename = get_class($e);
-        }
+        //both implement the same interface
+        $container->set(new TestDi7());
+        $container->set(new TestDi8());
 
-        $this->assertTrue(isset($ename));
-        $this->assertTrue($ename === 'Exception');
+        //TestDi6 has an interface as dependency, both TestDi7 and TestDi8 qualify
+        //but container doesn't know which one to use so it throw an LogicException
+        $testdi = $container->create('TestDi6');
     }
 
     /**
