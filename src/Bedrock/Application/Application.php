@@ -13,13 +13,12 @@ use Peak\Blueprint\Http\ResponseEmitter;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Psr\Http\Server\RequestHandlerInterface;
 
 /**
  * Class Application
  * @package Peak\Bedrock
  */
-class Application implements RequestHandlerInterface
+class Application implements \Peak\Blueprint\Http\Application
 {
     /**
      * @var Kernel
