@@ -41,7 +41,7 @@ class TimeExpression
      * Tokens values in seconds
      * @var array
      */
-    protected $tokens_values = [
+    protected $tokensValues = [
         'ms' => 0.001, //milliseconds
         's' => 1, //seconds
         'sec' => 1, //seconds
@@ -75,7 +75,7 @@ class TimeExpression
      * DateTokens
      * @var array
      */
-    protected static $tokens_substitution = [
+    protected static $tokensSubstitution = [
         'i' => 'm',
     ];
 
@@ -143,9 +143,9 @@ class TimeExpression
         $time = $this->time;
 
         $tokens = [
-            'hour' => $this->tokens_values['hour'],
-            'min' => $this->tokens_values['min'],
-            'sec' => $this->tokens_values['sec']
+            'hour' => $this->tokensValues['hour'],
+            'min' => $this->tokensValues['min'],
+            'sec' => $this->tokensValues['sec']
         ];
 
         foreach ($tokens as $token_name => $token) {
@@ -231,8 +231,8 @@ class TimeExpression
             }
             if ($di->$token > 0) {
                 $token_string = $token;
-                if (array_key_exists($token, self::$tokens_substitution)) {
-                    $token_string = self::$tokens_substitution[$token];
+                if (array_key_exists($token, self::$tokensSubstitution)) {
+                    $token_string = self::$tokensSubstitution[$token];
                 }
                 $interval_spec .= $di->$token.strtoupper($token_string);
             }
@@ -352,12 +352,12 @@ class TimeExpression
      */
     protected function decodeRegexString(): bool
     {
-        $regex_string = '#([0-9]+)[\s]*('.implode('|', array_keys($this->tokens_values)).'){1}#i';
+        $regex_string = '#([0-9]+)[\s]*('.implode('|', array_keys($this->tokensValues)).'){1}#i';
         $regex_clock_string = '#^(?:(?:([01]?\d|2[0-3]):)?([0-5]?\d):)?([0-5]?\d)$#i';
 
         if (preg_match_all($regex_string, $this->expression, $matches)) {
             foreach ($matches[1] as $index => $value) {
-                $this->time += $this->tokens_values[$matches[2][$index]] * $value;
+                $this->time += $this->tokensValues[$matches[2][$index]] * $value;
             }
             $this->di = DateInterval::createFromDateString($this->integerToString($this->time));
             return true;
@@ -386,14 +386,14 @@ class TimeExpression
      */
     protected function integerToString($time): string
     {
-        $tokens = array_reverse($this->tokens_values, true);
+        $tokens = array_reverse($this->tokensValues, true);
         $expression = [];
 
         foreach ($tokens as $token => $value) {
             if ($time <= 0) {
                 break;
             }
-            if ($time < $value || !in_array($token, array_keys($this->tokens_values))) {
+            if ($time < $value || !in_array($token, array_keys($this->tokensValues))) {
                 continue;
             }
             $mod = 0;
