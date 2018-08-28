@@ -44,8 +44,8 @@ class HelpersTest extends TestCase
      */
     function testPhpinput()
     {
-        $data = phpinput();
-        $this->assertTrue($data instanceof Peak\Collection\Collection);
+        $data = phpInput();
+        $this->assertTrue(is_array($data));
     }
 
     /**
@@ -68,12 +68,12 @@ class HelpersTest extends TestCase
     }
 
     /**
-     * test relativeBasepath()
+     * test relativeBasePath()
      */
-    function testRelativeBasepath()
+    function testRelativeBasePath()
     {
         $root = 'home/svr';
-        $path = relativeBasepath($root.'/user/bin/test', $root);
+        $path = relativeBasePath($root.'/user/bin/test', $root);
         $this->assertTrue($path === '/user/bin');
     }
 

@@ -11,9 +11,9 @@ use Peak\Common\TimeExpression;
 */
 
 /**
- * relativeBasepath()
+ * relativeBasePath()
  */
-if (!function_exists('relativeBasepath')) {
+if (!function_exists('relativeBasePath')) {
     /**
      * Get relative path of specified dir from the server document root
      *
@@ -21,7 +21,7 @@ if (!function_exists('relativeBasepath')) {
      * @param null|string $doc_root
      * @return string
      */
-    function relativeBasepath(string $dir, string $doc_root = null)
+    function relativeBasePath(string $dir, string $doc_root = null)
     {
         if (!isset($doc_root)) {
             $doc_root = filter_var(getenv('DOCUMENT_ROOT'));
@@ -90,8 +90,9 @@ if (!function_exists('phpInput')) {
      */
     function phpInput(): array
     {
-        $raw  = file_get_contents('php://input');
-        return json_decode($raw, true); // for json input
+        $raw = file_get_contents('php://input');
+        $data = json_decode($raw, true);
+        return $data ?? [];
     }
 }
 
@@ -159,6 +160,7 @@ if (!function_exists('getClassShortName')) {
      *
      * @param mixed $obj
      * @return string
+     * @throws ReflectionException
      */
     function getClassShortName($obj): string
     {
@@ -175,6 +177,7 @@ if (!function_exists('getClassFilePath')) {
      *
      * @param mixed $obj
      * @return string
+     * @throws ReflectionException
      */
     function getClassFilePath($obj): string
     {
@@ -212,8 +215,9 @@ if (!function_exists('fileExpired')) {
      * Check if file is expired
      *
      * @param string $file
-     * @param mixed $expiration_time expiration time, \Peak\Common\TimeExpression expression accepted
+     * @param $expiration_time
      * @return bool
+     * @throws Exception
      */
     function fileExpired(string $file, $expiration_time): bool
     {
