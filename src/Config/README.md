@@ -37,7 +37,7 @@ Method *loadResources()* accept an array of resources and return an instance of 
  - *Collection* instance
  - *Config* instance
  - *stdClass* instance
- - *StreamInterface* instance
+ - *Stream* instance
 
 ## Loading and processing data with Stream.
 
