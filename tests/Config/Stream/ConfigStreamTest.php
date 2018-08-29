@@ -8,7 +8,7 @@ class ConfigStreamTest extends TestCase
 {
     public function testStream()
     {
-        $config = $this->createMock(ConfigInterface::class);
+        $config = $this->createMock(\Peak\Blueprint\Config\Config::class);
         $config->expects($this->once())
             ->method('toArray')
             ->will($this->returnValue([]));

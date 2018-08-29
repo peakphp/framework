@@ -10,6 +10,6 @@ use Peak\Collection\DotNotationCollection;
  * Class Config
  * @package Peak\Config
  */
-class Config extends DotNotationCollection implements ConfigInterface
+class Config extends DotNotationCollection implements \Peak\Blueprint\Config\Config
 {
 }

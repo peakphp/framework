@@ -8,7 +8,7 @@ class FileHandlersTest extends TestCase
 {
     public function testGetSet()
     {
-        $fileHandlers = new FilesHandlers();
+        $fileHandlers = new FilesHandlers(null);
         $fileHandlers->set(
             'foo',
             \Peak\Config\Loader\PhpLoader::class,

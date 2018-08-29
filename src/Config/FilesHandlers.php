@@ -57,14 +57,15 @@ class FilesHandlers
         ],
     ];
 
+
     /**
      * FilesHandlers constructor.
      *
-     * @param array $handlers
+     * @param array|null $handlers if null, $defaultHandlers is used instead
      */
-    public function __construct(array $handlers = [])
+    public function __construct(?array $handlers)
     {
-        if (empty($handlers)) {
+        if (null === $handlers) {
             $handlers = $this->defaultHandlers;
         }
         $this->handlers = $handlers;

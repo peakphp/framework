@@ -1,0 +1,72 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Peak\Config;
+
+use Peak\Blueprint\Collection\Collection;
+use Peak\Blueprint\Common\ResourceResolver;
+use Peak\Config\Exception\UnknownResourceException;
+use Peak\Config\Processor\ArrayProcessor;
+use Peak\Config\Processor\CallableProcessor;
+use Peak\Config\Processor\CollectionProcessor;
+use Peak\Config\Processor\StdClassProcessor;
+use Peak\Config\Stream\ConfigStream;
+use Peak\Config\Stream\DataStream;
+use Peak\Config\Stream\FileStream;
+use Peak\Config\Stream\StreamInterface;
+use \stdClass;
+
+/**
+ * Class ConfigResolver
+ * @package Peak\Config
+ */
+class ConfigResolver implements ResourceResolver
+{
+    /**
+     * @var null|FilesHandlers
+     */
+    private $filesHandlers;
+
+    /**
+     * ConfigResolver constructor.
+     *
+     */
+    public function __construct(?FilesHandlers $filesHandlers)
+    {
+        $this->filesHandlers = $filesHandlers;
+    }
+
+
+    /**
+     * Resolve a config resource to a valid StreamInterface
+     * @param mixed $resource
+     * @return StreamInterface
+     * @throws UnknownResourceException
+     */
+    public function resolve($resource): StreamInterface
+    {
+        // detect best way to load and process configuration content
+        if (is_array($resource)) {
+            return new DataStream($resource, new ArrayProcessor());
+        } elseif (is_callable($resource)) {
+            return new DataStream($resource, new CallableProcessor());
+        } elseif ($resource instanceof Collection) {
+            return new DataStream($resource, new CollectionProcessor());
+        } elseif ($resource instanceof StreamInterface) {
+            return $resource;
+        } elseif ($resource instanceof stdClass) {
+            return new DataStream($resource, new StdClassProcessor());
+        } elseif ($resource instanceof ConfigInterface) {
+            return new ConfigStream($resource);
+        } elseif (is_string($resource)) {
+            $filesHandlers = $this->filesHandlers;
+            if (null === $filesHandlers) {
+                $filesHandlers = new FilesHandlers(null);
+            }
+            return new FileStream($resource, $filesHandlers);
+        }
+
+        throw new UnknownResourceException($resource);
+    }
+}

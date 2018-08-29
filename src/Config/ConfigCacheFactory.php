@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Peak\Config;
 
+use Peak\Blueprint\Config\Config as ConfigBlueprint;
 use Peak\Config\Exception\UnknownResourceException;
 use Psr\SimpleCache\CacheInterface;
 
@@ -38,11 +39,11 @@ class ConfigCacheFactory
      * @param string $cacheId
      * @param int $ttl
      * @param array $resources
-     * @return ConfigInterface
+     * @return ConfigBlueprint
      * @throws UnknownResourceException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      */
-    public function loadResources(string $cacheId, int $ttl, array $resources): ConfigInterface
+    public function loadResources(string $cacheId, int $ttl, array $resources): ConfigBlueprint
     {
         return $this->load($cacheId, $ttl, $resources);
     }
@@ -51,12 +52,12 @@ class ConfigCacheFactory
      * @param string $cacheId
      * @param int $ttl
      * @param array $resources
-     * @param ConfigInterface $customConfig
-     * @return ConfigInterface
+     * @param ConfigBlueprint $customConfig
+     * @return ConfigBlueprint
      * @throws UnknownResourceException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      */
-    public function loadResourcesWith(string $cacheId, int $ttl, array $resources, ConfigInterface $customConfig): ConfigInterface
+    public function loadResourcesWith(string $cacheId, int $ttl, array $resources, ConfigBlueprint $customConfig): ConfigBlueprint
     {
         return $this->load($cacheId, $ttl, $resources, $customConfig);
     }
@@ -65,12 +66,12 @@ class ConfigCacheFactory
      * @param $cacheId
      * @param $ttl
      * @param $resources
-     * @param ConfigInterface|null $customConfig
-     * @return ConfigInterface
+     * @param ConfigBlueprint|null $customConfig
+     * @return ConfigBlueprint
      * @throws UnknownResourceException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      */
-    protected function load(string $cacheId, int $ttl, array $resources, ConfigInterface $customConfig = null)
+    protected function load(string $cacheId, int $ttl, array $resources, ConfigBlueprint $customConfig = null): ConfigBlueprint
     {
         $config = $this->configCache->get($cacheId);
         if (null !== $config) {

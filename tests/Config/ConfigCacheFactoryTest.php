@@ -5,7 +5,6 @@ use PHPUnit\Framework\TestCase;
 use Peak\Config\Cache\FileCache;
 use Peak\Config\ConfigFactory;
 use Peak\Config\ConfigCacheFactory;
-use Peak\Config\ConfigInterface;
 
 class ConfigCacheFactoryTest extends TestCase
 {
@@ -33,7 +32,7 @@ class ConfigCacheFactoryTest extends TestCase
         ]);
 
         $this->assertTrue($config->now === $now);
-        $this->assertTrue($config instanceof ConfigInterface);
+        $this->assertTrue($config instanceof \Peak\Blueprint\Config\Config);
 
         $newNow = 'randomstuff';
 
@@ -46,7 +45,7 @@ class ConfigCacheFactoryTest extends TestCase
         ]);
 
         $this->assertTrue($config->now !== $newNow);
-        $this->assertTrue($config instanceof ConfigInterface);
+        $this->assertTrue($config instanceof \Peak\Blueprint\Config\Config);
 
         // delete cached file(s)
         foreach (glob(__DIR__.'/*.ser') as $file) {

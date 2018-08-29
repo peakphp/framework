@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Peak\Config\Stream;
 
-use Peak\Config\ConfigInterface;
+use Peak\Blueprint\Config\Config;
 
 /**
  * Class ConfigStream
@@ -13,15 +13,15 @@ use Peak\Config\ConfigInterface;
 class ConfigStream implements StreamInterface
 {
     /**
-     * @var ConfigInterface
+     * @var Config
      */
     private $config;
 
     /**
      * ConfigStream constructor.
-     * @param ConfigInterface $config
+     * @param Config $config
      */
-    public function __construct(ConfigInterface $config)
+    public function __construct(Config $config)
     {
         $this->config = $config;
     }
