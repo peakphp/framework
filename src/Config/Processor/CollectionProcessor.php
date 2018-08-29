@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Peak\Config\Processor;
 
+use Peak\Blueprint\Common\ResourceProcessor;
 use Peak\Collection\Collection;
 use Peak\Config\Exception\ProcessorException;
 
@@ -11,7 +12,7 @@ use Peak\Config\Exception\ProcessorException;
  * Class CollectionProcessor
  * @package Peak\Config\Processor
  */
-class CollectionProcessor implements ProcessorInterface
+class CollectionProcessor implements ResourceProcessor
 {
 
     /**

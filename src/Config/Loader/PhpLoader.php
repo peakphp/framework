@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace Peak\Config\Loader;
 
+use Peak\Blueprint\Common\ResourceLoader;
 use Peak\Config\Exception\FileNotFoundException;
 
 /**
  * Class PhpLoader
  * @package Peak\Config\Loader
  */
-class PhpLoader implements LoaderInterface
+class PhpLoader implements ResourceLoader
 {
     /**
      * @param mixed $resource

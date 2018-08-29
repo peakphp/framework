@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace Peak\Config\Processor;
 
+use Peak\Blueprint\Common\ResourceProcessor;
 use Peak\Config\Exception\ProcessorException;
 
 /**
  * Class StdClassProcessor
  * @package Peak\Config\Processor
  */
-class StdClassProcessor implements ProcessorInterface
+class StdClassProcessor implements ResourceProcessor
 {
     /**
      * @param $data

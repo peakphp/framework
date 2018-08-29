@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Peak\Config\Processor;
 
+use Peak\Blueprint\Common\ResourceProcessor;
 use Peak\Config\Exception\ProcessorException;
 
 use SimpleXMLElement;
@@ -12,7 +13,7 @@ use SimpleXMLElement;
  * Class XmlProcessor
  * @package Peak\Config\Processor
  */
-class XmlProcessor implements ProcessorInterface
+class XmlProcessor implements ResourceProcessor
 {
     /**
      * @param $data

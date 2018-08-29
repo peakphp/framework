@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace Peak\Config\Stream;
 
+use Peak\Blueprint\Config\Stream;
 use Peak\Config\FilesHandlers;
 
 /**
  * Class FileStream
  * @package Peak\Config\Stream
  */
-class FileStream implements StreamInterface
+class FileStream implements Stream
 {
     /**
      * @var FilesHandlers

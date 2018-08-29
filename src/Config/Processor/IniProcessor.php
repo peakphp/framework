@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Peak\Config\Processor;
 
+use Peak\Blueprint\Common\ResourceProcessor;
 use Peak\Common\Traits\ArrayMergeRecursiveDistinct;
 use Peak\Config\Exception\ProcessorException;
 
@@ -11,7 +12,7 @@ use Peak\Config\Exception\ProcessorException;
  * Class IniProcessor
  * @package Peak\Config\Processor
  */
-class IniProcessor implements ProcessorInterface
+class IniProcessor implements ResourceProcessor
 {
     use ArrayMergeRecursiveDistinct;
 

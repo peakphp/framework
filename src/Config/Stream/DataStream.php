@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace Peak\Config\Stream;
 
-use Peak\Config\Processor\ProcessorInterface;
+use Peak\Blueprint\Common\ResourceProcessor;
+use Peak\Blueprint\Config\Stream;
 
 /**
  * Class DataStream
  * @package Peak\Config\Stream
  */
-class DataStream implements StreamInterface
+class DataStream implements Stream
 {
     /**
      * @var mixed
@@ -18,7 +19,7 @@ class DataStream implements StreamInterface
     private $data;
 
     /**
-     * @var ProcessorInterface
+     * @var ResourceProcessor
      */
     private $processor;
 
@@ -26,9 +27,9 @@ class DataStream implements StreamInterface
      * DataStream constructor
      *
      * @param mixed $data
-     * @param ProcessorInterface $handlers
+     * @param ResourceProcessor $handlers
      */
-    public function __construct($data, ProcessorInterface $processor)
+    public function __construct($data, ResourceProcessor $processor)
     {
         $this->data = $data;
         $this->processor = $processor;

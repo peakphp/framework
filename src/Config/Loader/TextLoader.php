@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Peak\Config\Loader;
 
+use Peak\Blueprint\Common\ResourceLoader;
 use Peak\Config\Exception\FileNotFoundException;
 use Peak\Config\Exception\LoaderException;
 
@@ -11,7 +12,7 @@ use Peak\Config\Exception\LoaderException;
  * Class TextLoader
  * @package Peak\Config\Loader
  */
-class TextLoader implements LoaderInterface
+class TextLoader implements ResourceLoader
 {
     /**
      * @param mixed $resource

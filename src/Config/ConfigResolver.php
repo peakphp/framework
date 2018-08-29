@@ -7,6 +7,7 @@ namespace Peak\Config;
 use Peak\Blueprint\Config\Config;
 use Peak\Blueprint\Collection\Collection;
 use Peak\Blueprint\Common\ResourceResolver;
+use Peak\Blueprint\Config\Stream;
 use Peak\Config\Exception\UnknownResourceException;
 use Peak\Config\Processor\ArrayProcessor;
 use Peak\Config\Processor\CallableProcessor;
@@ -15,7 +16,6 @@ use Peak\Config\Processor\StdClassProcessor;
 use Peak\Config\Stream\ConfigStream;
 use Peak\Config\Stream\DataStream;
 use Peak\Config\Stream\FileStream;
-use Peak\Config\Stream\StreamInterface;
 use \stdClass;
 
 /**
@@ -42,10 +42,10 @@ class ConfigResolver implements ResourceResolver
      * Resolve a config resource to a valid StreamInterface
      *
      * @param mixed $resource
-     * @return StreamInterface
+     * @return Stream
      * @throws UnknownResourceException
      */
-    public function resolve($resource): StreamInterface
+    public function resolve($resource): Stream
     {
         // detect best way to load and process configuration content
         if (is_array($resource)) {
@@ -54,7 +54,7 @@ class ConfigResolver implements ResourceResolver
             return new DataStream($resource, new CallableProcessor());
         } elseif ($resource instanceof Collection) {
             return new DataStream($resource, new CollectionProcessor());
-        } elseif ($resource instanceof StreamInterface) {
+        } elseif ($resource instanceof Stream) {
             return $resource;
         } elseif ($resource instanceof stdClass) {
             return new DataStream($resource, new StdClassProcessor());

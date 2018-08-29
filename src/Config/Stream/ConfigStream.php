@@ -5,12 +5,13 @@ declare(strict_types=1);
 namespace Peak\Config\Stream;
 
 use Peak\Blueprint\Config\Config;
+use Peak\Blueprint\Config\Stream;
 
 /**
  * Class ConfigStream
  * @package Peak\Config\Stream
  */
-class ConfigStream implements StreamInterface
+class ConfigStream implements Stream
 {
     /**
      * @var Config

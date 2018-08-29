@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace Peak\Config\Processor;
 
+use Peak\Blueprint\Common\ResourceProcessor;
 use Peak\Config\Exception\ProcessorException;
 
 /**
  * Class JsonProcessor
  * @package Peak\Config\Processor
  */
-class JsonProcessor implements ProcessorInterface
+class JsonProcessor implements ResourceProcessor
 {
 
     /**

@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Peak\Config;
 
+use Peak\Blueprint\Common\ResourceLoader;
 use Peak\Config\Exception\NoFileHandlersException;
-use Peak\Config\Loader\LoaderInterface;
-use Peak\Config\Processor\ProcessorInterface;
+use Peak\Blueprint\Common\ResourceProcessor;
 
 /**
  * Class FilesHandlers
@@ -102,10 +102,10 @@ class FilesHandlers
      * Get a file loader
      *
      * @param string $name
-     * @return LoaderInterface
+     * @return ResourceLoader
      * @throws NoFileHandlersException
      */
-    public function getLoader(string $name): LoaderInterface
+    public function getLoader(string $name): ResourceLoader
     {
         $handlers = $this->get($name);
         return new $handlers['loader']();
@@ -115,10 +115,10 @@ class FilesHandlers
      * Get a file processor
      *
      * @param string $name
-     * @return ProcessorInterface
+     * @return ResourceProcessor
      * @throws NoFileHandlersException
      */
-    public function getProcessor(string $name): ProcessorInterface
+    public function getProcessor(string $name): ResourceProcessor
     {
         $handlers = $this->get($name);
         return new $handlers['processor']();

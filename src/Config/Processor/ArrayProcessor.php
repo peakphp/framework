@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace Peak\Config\Processor;
 
+use Peak\Blueprint\Common\ResourceProcessor;
 use Peak\Config\Exception\ProcessorException;
 
 /**
  * Class ArrayProcessor
  * @package Peak\Config\Processor
  */
-class ArrayProcessor implements ProcessorInterface
+class ArrayProcessor implements ResourceProcessor
 {
     /**
      * Array processor

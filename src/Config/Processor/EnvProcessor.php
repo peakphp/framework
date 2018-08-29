@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace Peak\Config\Processor;
 
+use Peak\Blueprint\Common\ResourceProcessor;
 use Peak\Config\Exception\ProcessorException;
 
 /**
  * Class EnvProcessor
  * @package Peak\Config\Processor
  */
-class EnvProcessor implements ProcessorInterface
+class EnvProcessor implements ResourceProcessor
 {
     /**
      * @throws ProcessorException
