@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Peak\Config;
 
+use Peak\Blueprint\Config\Config;
 use Peak\Blueprint\Collection\Collection;
 use Peak\Blueprint\Common\ResourceResolver;
 use Peak\Config\Exception\UnknownResourceException;
@@ -37,9 +38,9 @@ class ConfigResolver implements ResourceResolver
         $this->filesHandlers = $filesHandlers;
     }
 
-
     /**
      * Resolve a config resource to a valid StreamInterface
+     *
      * @param mixed $resource
      * @return StreamInterface
      * @throws UnknownResourceException
@@ -57,7 +58,7 @@ class ConfigResolver implements ResourceResolver
             return $resource;
         } elseif ($resource instanceof stdClass) {
             return new DataStream($resource, new StdClassProcessor());
-        } elseif ($resource instanceof ConfigInterface) {
+        } elseif ($resource instanceof Config) {
             return new ConfigStream($resource);
         } elseif (is_string($resource)) {
             $filesHandlers = $this->filesHandlers;
