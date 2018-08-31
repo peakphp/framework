@@ -1,6 +1,6 @@
 <?php
 
-namespace Peak\Validation\Rules;
+namespace Peak\Validation\Rule;
 
 use Peak\Validation\AbstractRule;
 
@@ -15,7 +15,7 @@ class Url extends AbstractRule
      * @param  mixed $value
      * @return bool
      */
-    public function validate($value)
+    public function validate($value): bool
     {
         $options = $this->getFilterVarOptions();
         if (filter_var($value, FILTER_VALIDATE_URL, $options) !== false) {

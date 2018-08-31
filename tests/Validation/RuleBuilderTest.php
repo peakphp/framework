@@ -12,7 +12,7 @@ class RuleBuilderTest extends TestCase
     {
         $rule = Rule::create('StrLength')->setOptions(['min' => 10]);
             
-        $this->assertTrue($rule->get() instanceof Peak\Validation\Rules\StrLength);
+        $this->assertTrue($rule->get() instanceof Peak\Validation\Rule\StrLength);
 
         $rule = Rule::create('StrLength');
 
@@ -52,7 +52,7 @@ class RuleBuilderTest extends TestCase
 
     function testRuleBuilderEnum()
     {
-        $pass = Rule::create(\Peak\Validation\Rules\Enum::class)
+        $pass = Rule::create(\Peak\Validation\Rule\Enum::class)
             ->setOptions(['allo', 'Hello'])
             ->validate('Hello');
 
@@ -124,7 +124,7 @@ class MatchContextRule extends \Peak\Validation\AbstractRule
      * @param  mixed $value
      * @return bool
      */
-    public function validate($value)
+    public function validate($value): bool
     {
         return ($value === $this->context);
     }

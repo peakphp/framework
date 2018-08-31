@@ -1,16 +1,22 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Validation;
 
-use Peak\Validation\RuleInterface;
+use Peak\Blueprint\Common\Validator;
 
-abstract class AbstractRule implements RuleInterface
+/**
+ * Class AbstractRule
+ * @package Peak\Validation
+ */
+abstract class AbstractRule implements Validator
 {
     /**
      * Default options
      * @var array
      */
-    protected $default_options = [];
+    protected $defaultOptions = [];
 
     /**
      * Options
@@ -39,15 +45,21 @@ abstract class AbstractRule implements RuleInterface
      */
     public function __construct($options = null, $flags = null, $context = null)
     {
-        $this->options = $this->default_options;
+        $this->options = $this->defaultOptions;
 
         if (is_array($options)) {
-            $this->options = array_merge($this->default_options, $options);
+            $this->options = array_merge($this->defaultOptions, $options);
+            // remove null options
+            foreach ($this->options as $key => $value) {
+                if ($value === null) {
+                    unset($this->options[$key]);
+                }
+            }
         }
-        
+
         $this->flags = $flags;
         $this->context = $context;
-        $this->removeNullOptions();
+
         $this->init();
     }
 
@@ -56,18 +68,6 @@ abstract class AbstractRule implements RuleInterface
      */
     public function init()
     {
-    }
-
-    /**
-     * Remove null options
-     */
-    protected function removeNullOptions()
-    {
-        foreach ($this->options as $key => $value) {
-            if ($value === null) {
-                unset($this->options[$key]);
-            }
-        }
     }
 
     /**

@@ -1,19 +1,21 @@
 <?php
 
-namespace Peak\Validation\Rules;
+namespace Peak\Validation\Rule;
 
 use Peak\Validation\AbstractRule;
 
 /**
- * Email rule using FILTER_VALIDATE_EMAIL
+ * Regex rule using FILTER_VALIDATE_REGEXP
  */
-class Email extends AbstractRule
+class Regex extends AbstractRule
 {
     /**
      * Default options
      * @var array
      */
-    protected $default_options = [];
+    protected $defaultOptios = [
+        'regexp' => '',
+    ];
 
     /**
      * Validate
@@ -21,10 +23,10 @@ class Email extends AbstractRule
      * @param  mixed $value
      * @return bool
      */
-    public function validate($value)
+    public function validate($value): bool
     {
         $options = $this->getFilterVarOptions();
-        if (filter_var($value, FILTER_VALIDATE_EMAIL, $options) !== false) {
+        if (filter_var($value, FILTER_VALIDATE_REGEXP, $options) !== false) {
             return true;
         }
         return false;

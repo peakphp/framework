@@ -1,8 +1,6 @@
 <?php
 
-namespace Peak\Validation\Rules;
-
-use Peak\Validation\Rules\Alpha;
+namespace Peak\Validation\Rule;
 
 /**
  * Alpha numeric rule

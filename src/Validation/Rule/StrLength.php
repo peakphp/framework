@@ -1,6 +1,6 @@
 <?php
 
-namespace Peak\Validation\Rules;
+namespace Peak\Validation\Rule;
 
 use Peak\Validation\AbstractRule;
 
@@ -13,7 +13,7 @@ class StrLength extends AbstractRule
      * Default options
      * @var array
      */
-    protected $default_options = [
+    protected $defaultOptios = [
         'min' => 0,
         'max' => null,
     ];
@@ -24,7 +24,7 @@ class StrLength extends AbstractRule
      * @param  mixed $value
      * @return bool
      */
-    public function validate($value)
+    public function validate($value): bool
     {
         $length = mb_strlen($value);
 

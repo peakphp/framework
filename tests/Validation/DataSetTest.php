@@ -89,7 +89,7 @@ class CustomRule extends \Peak\Validation\AbstractRule
      * @param  mixed $value
      * @return bool
      */
-    public function validate($value)
+    public function validate($value): bool
     {
         return ($value === 'custom');
     }

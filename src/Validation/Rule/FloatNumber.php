@@ -1,20 +1,20 @@
 <?php
 
-namespace Peak\Validation\Rules;
+namespace Peak\Validation\Rule;
 
 use Peak\Validation\AbstractRule;
 
 /**
- * Regex rule using FILTER_VALIDATE_REGEXP
+ * Float rule using FILTER_VALIDATE_FLOAT
  */
-class Regex extends AbstractRule
+class FloatNumber extends AbstractRule
 {
     /**
      * Default options
      * @var array
      */
-    protected $default_options = [
-        'regexp' => '',
+    protected $defaultOptios = [
+        'decimal' => '.',
     ];
 
     /**
@@ -23,10 +23,10 @@ class Regex extends AbstractRule
      * @param  mixed $value
      * @return bool
      */
-    public function validate($value)
+    public function validate($value): bool
     {
         $options = $this->getFilterVarOptions();
-        if (filter_var($value, FILTER_VALIDATE_REGEXP, $options) !== false) {
+        if (filter_var($value, FILTER_VALIDATE_FLOAT, $options) !== false) {
             return true;
         }
         return false;

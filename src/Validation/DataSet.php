@@ -2,7 +2,7 @@
 
 namespace Peak\Validation;
 
-use Peak\Validation\RuleDefinition;
+use Peak\Validation\Definition\RuleArrayDefinition;
 
 /**
  * Validation rules for a data set
@@ -92,8 +92,8 @@ abstract class DataSet
             }
 
             // process rule(s) validation on data key value
-            foreach ($val as $def) {
-                if (!is_array($def)) {
+            foreach ($val as $definition) {
+                if (!is_array($definition)) {
                     continue;
                 }
 
@@ -101,16 +101,11 @@ abstract class DataSet
                     $this->errors[$key] = 'Required';
                 }
 
-                $rule_def = new RuleDefinition($def);
+                $rule = new Rule(new RuleArrayDefinition($definition));
 
-                $rule = Rule::create($rule_def->rule)
-                    ->setOptions($rule_def->options)
-                    ->setFlags($rule_def->flags)
-                    ->setContext($data)
-                    ->setError($rule_def->error);
 
                 if (!$rule->validate($data[$key])) {
-                    $this->errors[$key] = $rule->getError();
+                    $this->errors[$key] = $rule->getErrorMessage();
                     break;
                 }
             }
@@ -118,4 +113,7 @@ abstract class DataSet
 
         return (empty($this->errors));
     }
+
+
+
 }

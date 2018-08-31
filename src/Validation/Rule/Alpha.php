@@ -1,6 +1,6 @@
 <?php
 
-namespace Peak\Validation\Rules;
+namespace Peak\Validation\Rule;
 
 use Peak\Validation\AbstractRule;
 
@@ -13,7 +13,7 @@ class Alpha extends AbstractRule
      * Default options
      * @var array
      */
-    protected $default_options = [
+    protected $defaultOptios = [
         'lower'  => true,
         'upper'  => true,
         'space'  => false,
@@ -27,7 +27,7 @@ class Alpha extends AbstractRule
      * @param  mixed $value
      * @return bool
      */
-    public function validate($value)
+    public function validate($value): bool
     {
         $regopt  = $this->buildRegexOpt();
         $regstring = '/^['.implode('', $regopt).']+$/';

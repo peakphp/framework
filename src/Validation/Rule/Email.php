@@ -1,21 +1,19 @@
 <?php
 
-namespace Peak\Validation\Rules;
+namespace Peak\Validation\Rule;
 
 use Peak\Validation\AbstractRule;
 
 /**
- * Float rule using FILTER_VALIDATE_FLOAT
+ * Email rule using FILTER_VALIDATE_EMAIL
  */
-class FloatNumber extends AbstractRule
+class Email extends AbstractRule
 {
     /**
      * Default options
      * @var array
      */
-    protected $default_options = [
-        'decimal' => '.',
-    ];
+    protected $defaultOptios = [];
 
     /**
      * Validate
@@ -23,10 +21,10 @@ class FloatNumber extends AbstractRule
      * @param  mixed $value
      * @return bool
      */
-    public function validate($value)
+    public function validate($value): bool
     {
         $options = $this->getFilterVarOptions();
-        if (filter_var($value, FILTER_VALIDATE_FLOAT, $options) !== false) {
+        if (filter_var($value, FILTER_VALIDATE_EMAIL, $options) !== false) {
             return true;
         }
         return false;

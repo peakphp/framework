@@ -2,46 +2,55 @@
 
 namespace Peak\Validation;
 
-use Peak\Validation\RuleBuilder;
+use Peak\Blueprint\Common\Validator;
+use Peak\Validation\Definition\RuleDefinition;
 
 /**
  * Rule builder facade
  */
-class Rule
+class Rule implements Validator
 {
     /**
-     * Create an instance of RuleBuilder
-     *
-     * @param  string $name rule class name
-     * @return RuleBuilder
+     * @var Validator
      */
-    public static function create($name)
+    private $rule;
+
+    /**
+     * @var RuleDefinition
+     */
+    private $ruleDefinition;
+
+    /**
+     * Rule constructor.
+     *
+     * @param RuleDefinition $ruleDefinition
+     * @throws \Exception
+     */
+    public function __construct(RuleDefinition $ruleDefinition)
     {
-        return new RuleBuilder($name);
+        $this->ruleDefinition = $ruleDefinition;
+        $this->rule = (new RuleBuilder($ruleDefinition->getRuleName()))
+            ->setOptions($ruleDefinition->getOptions())
+            ->setFlags(($ruleDefinition->getFlags()))
+            ->setContext($ruleDefinition->getContext())
+            ->setErrorMessage($ruleDefinition->getErrorMessage())
+            ->build();
     }
 
     /**
-     * Shortcut of create
-     * Rule::[ruleName]($value, [$options [, $flags [, $context ]]]);
-     *
-     * @param  string $method
-     * @param  array  $args
-     * @return boolean
+     * @param mixed $value
+     * @return bool
      */
-    public static function __callStatic($method, $args)
+    public function validate($value): bool
     {
-        $rule = new RuleBuilder(ucfirst($method));
+        return $this->rule->validate($value);
+    }
 
-        if (isset($args[1])) {
-            $rule->setOptions($args[1]);
-        }
-        if (isset($args[2])) {
-            $rule->setFlags($args[2]);
-        }
-        if (isset($args[3])) {
-            $rule->setContext($args[3]);
-        }
-
-        return $rule->validate($args[0]);
+    /**
+     * @return string
+     */
+    public function getErrorMessage(): string
+    {
+        return $this->ruleDefinition->getErrorMessage();
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Peak\Validation;
 
+use Peak\Blueprint\Common\Validator;
 use \Exception;
 
 /**
@@ -13,7 +14,7 @@ class RuleBuilder
      * Rule class name
      * @var string
      */
-    protected $name;
+    protected $ruleName;
 
     /**
      * Rule options
@@ -42,33 +43,23 @@ class RuleBuilder
     /**
      * Constructor
      *
-     * @param string $name rule classname
+     * @param string $ruleName rule class name
      */
-    public function __construct($name)
+    public function __construct(string $ruleName)
     {
-        $this->name = $name;
+        $this->name = $ruleName;
     }
 
     /**
      * Set rule options
      *
-     * @param  string $opts
+     * @param  array $opts
      * @return $this
      */
-    public function setOptions($opts)
+    public function setOptions(?array $opts)
     {
         $this->options = $opts;
         return $this;
-    }
-
-    /**
-     * Get options
-     *
-     * @return array
-     */
-    public function getOptions()
-    {
-        return $this->options;
     }
 
     /**
@@ -77,20 +68,10 @@ class RuleBuilder
      * @param  string $error
      * @return $this
      */
-    public function setError($error)
+    public function setErrorMessage($error)
     {
         $this->error = $error;
         return $this;
-    }
-
-    /**
-     * Get error
-     *
-     * @return string
-     */
-    public function getError()
-    {
-        return $this->error;
     }
 
     /**
@@ -106,16 +87,6 @@ class RuleBuilder
     }
 
     /**
-     * Get flags
-     *
-     * @return integer
-     */
-    public function getFlags()
-    {
-        return $this->flags;
-    }
-
-    /**
      * Set context
      *
      * @param  array $context
@@ -128,43 +99,20 @@ class RuleBuilder
     }
 
     /**
-     * Get context
-     *
      * @return mixed
+     * @throws Exception
      */
-    public function getContext()
+    public function build(): Validator
     {
-        return $this->context;
-    }
-
-    /**
-     * Create and get a rule
-     *
-     * @return object
-     */
-    public function get()
-    {
-        if (class_exists($this->name)) {
-            $rulename = $this->name;
-        } else {
-            $rulename = '\Peak\Validation\Rules\\'.$this->name;
+        $ruleName = $this->ruleName;
+        if (!class_exists($this->ruleName)) {
+            $ruleName = '\Peak\Validation\Rules\\'.$this->ruleName;
         }
 
-        if (!class_exists($rulename)) {
-            throw new Exception('Rule "'.$this->name.'" not found');
+        if (!class_exists($ruleName)) {
+            throw new Exception('Rule "'.$this->ruleName.'" not found');
         }
 
-        return new $rulename($this->options, $this->flags, $this->context);
-    }
-
-    /**
-     * Validate a value
-     *
-     * @param  mixed $value
-     * @return bool
-     */
-    public function validate($value)
-    {
-        return $this->get()->validate($value);
+        return new $ruleName($this->options, $this->flags, $this->context);
     }
 }

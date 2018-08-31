@@ -12,7 +12,7 @@ class RulesTest extends TestCase
      */
     function testIsEmpty()
     {       
-        $rule = new Peak\Validation\Rules\IsEmpty();
+        $rule = new Peak\Validation\Rule\IsEmpty();
 
         $this->assertTrue($rule->validate(''));
         $this->assertFalse($rule->validate('not empty'));
@@ -33,7 +33,7 @@ class RulesTest extends TestCase
      */
     function testIsNotEmpty()
     {       
-        $rule = new Peak\Validation\Rules\IsNotEmpty();
+        $rule = new Peak\Validation\Rule\IsNotEmpty();
 
         $this->assertFalse($rule->validate(''));
         $this->assertTrue($rule->validate('not empty'));
@@ -54,14 +54,14 @@ class RulesTest extends TestCase
      */
     function testStrLength()
     {       
-        $rule = new Peak\Validation\Rules\StrLength();
+        $rule = new Peak\Validation\Rule\StrLength();
 
         $this->assertTrue($rule->validate(''));
         $this->assertTrue($rule->validate(0));
         $this->assertTrue($rule->validate(1));
         $this->assertTrue($rule->validate('random string'));
 
-        $rule = new Peak\Validation\Rules\StrLength([
+        $rule = new Peak\Validation\Rule\StrLength([
             'min' => 3,
         ]);
 
@@ -71,7 +71,7 @@ class RulesTest extends TestCase
         $this->assertTrue($rule->validate('random string'));
 
 
-        $rule = new Peak\Validation\Rules\StrLength([
+        $rule = new Peak\Validation\Rule\StrLength([
             'max' => 10
         ]);
 
@@ -80,7 +80,7 @@ class RulesTest extends TestCase
         $this->assertTrue($rule->validate(1));
         $this->assertFalse($rule->validate('random string'));
 
-        $rule = new Peak\Validation\Rules\StrLength([
+        $rule = new Peak\Validation\Rule\StrLength([
             'min' => 2,
             'max' => 10
         ]);
@@ -92,7 +92,7 @@ class RulesTest extends TestCase
         $this->assertFalse($rule->validate('random string'));
 
 
-        $rule = new Peak\Validation\Rules\StrLength([
+        $rule = new Peak\Validation\Rule\StrLength([
             'min' => null,
             'max' => 10,
         ]);
@@ -107,7 +107,7 @@ class RulesTest extends TestCase
      */
     function testEnum()
     {       
-        $rule = new Peak\Validation\Rules\Enum([
+        $rule = new Peak\Validation\Rule\Enum([
             'foo', 'bar', 'barfoo'
         ]);
 
@@ -122,7 +122,7 @@ class RulesTest extends TestCase
      */
     function testIntegerNumber()
     {       
-        $rule = new Peak\Validation\Rules\IntegerNumber();
+        $rule = new Peak\Validation\Rule\IntegerNumber();
 
         $this->assertTrue($rule->validate(-1554));
         $this->assertTrue($rule->validate(8880));
@@ -133,7 +133,7 @@ class RulesTest extends TestCase
         $this->assertFalse($rule->validate('asdasdasd'));
 
 
-        $rule = new Peak\Validation\Rules\IntegerNumber([
+        $rule = new Peak\Validation\Rule\IntegerNumber([
             'min_range' => 10,
             'max_range' => 20,
         ]);
@@ -141,14 +141,14 @@ class RulesTest extends TestCase
         $this->assertTrue($rule->validate(15));
         $this->assertFalse($rule->validate(25));
 
-        $rule = new Peak\Validation\Rules\IntegerNumber([
+        $rule = new Peak\Validation\Rule\IntegerNumber([
             'min_range' => 10,
         ], FILTER_FLAG_ALLOW_HEX);
 
         $this->assertTrue($rule->validate(15));
         $this->assertTrue($rule->validate("0x0000FF"));
 
-        $rule = new Peak\Validation\Rules\IntegerNumber([
+        $rule = new Peak\Validation\Rule\IntegerNumber([
             'min_range' => 10,
         ]);
 
@@ -162,7 +162,7 @@ class RulesTest extends TestCase
      */
     function testFloatNumber()
     {       
-        $rule = new Peak\Validation\Rules\FloatNumber();
+        $rule = new Peak\Validation\Rule\FloatNumber();
 
         $this->assertTrue($rule->validate(-1554.55));
         $this->assertTrue($rule->validate(8880.97475));
@@ -173,7 +173,7 @@ class RulesTest extends TestCase
         $this->assertFalse($rule->validate('asdasdasd'));
 
 
-        $rule = new Peak\Validation\Rules\FloatNumber(['decimal' => ',']);
+        $rule = new Peak\Validation\Rule\FloatNumber(['decimal' => ',']);
         $this->assertTrue($rule->validate('2,59'));
         $this->assertFalse($rule->validate(1.58));
 
@@ -184,7 +184,7 @@ class RulesTest extends TestCase
      */
     function testEmail()
     {       
-        $rule = new Peak\Validation\Rules\Email();
+        $rule = new Peak\Validation\Rule\Email();
 
         $this->assertTrue($rule->validate("a@a.a"));
         $this->assertFalse($rule->validate("bob@aa"));
@@ -197,7 +197,7 @@ class RulesTest extends TestCase
      */
     function testUrl()
     {       
-        $rule = new Peak\Validation\Rules\Url();
+        $rule = new Peak\Validation\Rule\Url();
 
         $this->assertTrue($rule->validate("http://test.com"));
         $this->assertTrue($rule->validate("http://test"));
@@ -210,7 +210,7 @@ class RulesTest extends TestCase
      */
     function testRegex()
     {       
-        $rule = new Peak\Validation\Rules\Regex(['regexp' => '#^[A-Z]$#']);
+        $rule = new Peak\Validation\Rule\Regex(['regexp' => '#^[A-Z]$#']);
 
         $this->assertTrue($rule->validate("A"));
         $this->assertTrue($rule->validate("B"));
@@ -224,7 +224,7 @@ class RulesTest extends TestCase
      */
     function testAlpha()
     {       
-        $rule = new Peak\Validation\Rules\Alpha();
+        $rule = new Peak\Validation\Rule\Alpha();
 
         $this->assertTrue($rule->validate("A"));
         $this->assertTrue($rule->validate("B"));
@@ -233,7 +233,7 @@ class RulesTest extends TestCase
 
         $this->assertFalse($rule->validate("0A"));
 
-        $rule = new Peak\Validation\Rules\Alpha([
+        $rule = new Peak\Validation\Rule\Alpha([
             'french' => true,
             'space'  => true,
             'punc'   => '.,?'
@@ -242,7 +242,7 @@ class RulesTest extends TestCase
         $this->assertTrue($rule->validate('étoile'));
         $this->assertTrue($rule->validate('Ça va bien, merci. Et toi ?'));
 
-        $rule = new Peak\Validation\Rules\Alpha([
+        $rule = new Peak\Validation\Rule\Alpha([
             'french' => true,
             'space'  => true,
             'punc'   => ['.', ',', '?']
@@ -258,7 +258,7 @@ class RulesTest extends TestCase
      */
     function testAlphaNum()
     {       
-        $rule = new Peak\Validation\Rules\AlphaNum();
+        $rule = new Peak\Validation\Rule\AlphaNum();
 
         $this->assertTrue($rule->validate("A3"));
         $this->assertTrue($rule->validate("B4"));
@@ -274,14 +274,14 @@ class RulesTest extends TestCase
      */
     function testDateTime()
     {       
-        $rule = new Peak\Validation\Rules\DateTime();
+        $rule = new Peak\Validation\Rule\DateTime();
 
         $this->assertTrue($rule->validate("2012-02-28 12:11:20"));
         $this->assertFalse($rule->validate("2012-02-30 11:00:02"));
 
         $this->assertFalse($rule->validate("2012-02-30"));
 
-        $rule = new Peak\Validation\Rules\DateTime([
+        $rule = new Peak\Validation\Rule\DateTime([
             'format' => 'd/m/Y'
         ]);
 
