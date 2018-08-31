@@ -19,7 +19,7 @@ class Factory extends AbstractBinding
      * @param string $name
      * @param callable $definition
      */
-    public function __construct($name, $definition)
+    public function __construct($name, Callable $definition)
     {
         parent::__construct($name, self::FACTORY, $definition);
     }
@@ -33,7 +33,7 @@ class Factory extends AbstractBinding
      * @return mixed|null
      * @throws \Exception
      */
-    public function resolve(ContainerInterface $container, $args = [], $explicit = null)
+    public function resolve(ContainerInterface $container, array $args = [], $explicit = null)
     {
         $definition = $this->definition;
 

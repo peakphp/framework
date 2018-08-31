@@ -47,7 +47,7 @@ class Singleton extends AbstractBinding
      * @return mixed|null
      * @throws \Exception
      */
-    public function resolve(ContainerInterface $container, $args = [], $explicit = null)
+    public function resolve(ContainerInterface $container, array $args = [], $explicit = null)
     {
         $definition = $this->definition;
 

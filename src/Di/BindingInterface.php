@@ -12,17 +12,28 @@ use Psr\Container\ContainerInterface;
  */
 interface BindingInterface
 {
-    public function getName();
-
-    public function getType();
-
-    public function getDefinition();
-
     /**
      * @param ContainerInterface $container
      * @param array $args
-     * @param null $explicit
+     * @param mixed $explicit
      * @return mixed
      */
-    public function resolve(ContainerInterface $container, $args = [], $explicit = null);
+    public function resolve(ContainerInterface $container, array $args = [], $explicit = null);
+
+    /**
+     * @return string
+     */
+    public function getName();
+
+    /**
+     * @return mixed
+     */
+    public function getType();
+
+    /**
+     * @return mixed
+     */
+    public function getDefinition();
+
+
 }
