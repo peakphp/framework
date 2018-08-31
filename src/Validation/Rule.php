@@ -21,7 +21,7 @@ class Rule
     }
 
     /**
-     * Shorcut of create
+     * Shortcut of create
      * Rule::[ruleName]($value, [$options [, $flags [, $context ]]]);
      *
      * @param  string $method
