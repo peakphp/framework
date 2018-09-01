@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Validation\Definition;
 
 class RuleDefinition
@@ -70,15 +72,15 @@ class RuleDefinition
     /**
      * @return int
      */
-    public function getFlags(): int
+    public function getFlags(): ?int
     {
         return $this->flags;
     }
 
     /**
-     * @return array
+     * @return mixed
      */
-    public function getContext(): array
+    public function getContext()
     {
         return $this->context;
     }

@@ -1,9 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Validation\Rule;
 
 /**
- * Alpha numeric rule
+ * Class AlphaNum
+ * @package Peak\Validation\Rule
  */
 class AlphaNum extends Alpha
 {

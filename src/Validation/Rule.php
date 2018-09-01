@@ -1,19 +1,22 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Validation;
 
 use Peak\Blueprint\Common\Validator;
 use Peak\Validation\Definition\RuleDefinition;
 
 /**
- * Rule builder facade
+ * Class Rule
+ * @package Peak\Validation
  */
 class Rule implements Validator
 {
     /**
      * @var Validator
      */
-    private $rule;
+    private $ruleValidator;
 
     /**
      * @var RuleDefinition
@@ -29,7 +32,7 @@ class Rule implements Validator
     public function __construct(RuleDefinition $ruleDefinition)
     {
         $this->ruleDefinition = $ruleDefinition;
-        $this->rule = (new RuleBuilder($ruleDefinition->getRuleName()))
+        $this->ruleValidator = (new RuleBuilder($ruleDefinition->getRuleName()))
             ->setOptions($ruleDefinition->getOptions())
             ->setFlags(($ruleDefinition->getFlags()))
             ->setContext($ruleDefinition->getContext())
@@ -43,7 +46,15 @@ class Rule implements Validator
      */
     public function validate($value): bool
     {
-        return $this->rule->validate($value);
+        return $this->ruleValidator->validate($value);
+    }
+
+    /**
+     * @return AbstractRule
+     */
+    public function getValidator()
+    {
+        return $this->ruleValidator;
     }
 
     /**

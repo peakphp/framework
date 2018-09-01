@@ -1,11 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Validation\Rule;
 
 use Peak\Validation\AbstractRule;
 
 /**
- * Enum match rule
+ * Class Enum
+ * @package Peak\Validation\Rule
  */
 class Enum extends AbstractRule
 {

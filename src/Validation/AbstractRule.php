@@ -32,7 +32,7 @@ abstract class AbstractRule implements Validator
 
     /**
      * Context data
-     * @var array
+     * @var mixed
      */
     protected $context;
 
@@ -41,11 +41,13 @@ abstract class AbstractRule implements Validator
      *
      * @param array   $options rules options array
      * @param integer $flags   rules flags
-     * @param array   $context rules context data
+     * @param mixed   $context rules context data
      */
-    public function __construct($options = null, $flags = null, $context = null)
+    public function __construct(array $options = [], int $flags = null, $context = null)
     {
         $this->options = $this->defaultOptions;
+        $this->flags = $flags;
+        $this->context = $context;
 
         if (is_array($options)) {
             $this->options = array_merge($this->defaultOptions, $options);
@@ -57,9 +59,6 @@ abstract class AbstractRule implements Validator
             }
         }
 
-        $this->flags = $flags;
-        $this->context = $context;
-
         $this->init();
     }
 
@@ -68,6 +67,30 @@ abstract class AbstractRule implements Validator
      */
     public function init()
     {
+    }
+
+    /**
+     * @return array
+     */
+    public function getOptions(): array
+    {
+        return $this->options;
+    }
+
+    /**
+     * @return int
+     */
+    public function getFlags(): ?int
+    {
+        return $this->flags;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getContext()
+    {
+        return $this->context;
     }
 
     /**

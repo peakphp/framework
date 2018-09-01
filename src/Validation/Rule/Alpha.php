@@ -1,11 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Validation\Rule;
 
 use Peak\Validation\AbstractRule;
 
 /**
- * Alpha rule
+ * Class Alpha
+ * @package Peak\Validation\Rule
  */
 class Alpha extends AbstractRule
 {
@@ -13,7 +16,7 @@ class Alpha extends AbstractRule
      * Default options
      * @var array
      */
-    protected $defaultOptios = [
+    protected $defaultOptions = [
         'lower'  => true,
         'upper'  => true,
         'space'  => false,

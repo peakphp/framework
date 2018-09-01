@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Validation;
 
 use Peak\Validation\Definition\RuleArrayDefinition;
@@ -67,8 +69,9 @@ abstract class DataSet
     /**
      * Validate data with current rules
      *
-     * @param  array $data
+     * @param $data
      * @return bool
+     * @throws \Exception
      */
     public function validate($data)
     {
@@ -113,7 +116,4 @@ abstract class DataSet
 
         return (empty($this->errors));
     }
-
-
-
 }

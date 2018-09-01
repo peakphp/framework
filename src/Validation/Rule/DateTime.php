@@ -1,11 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Validation\Rule;
 
 use Peak\Validation\AbstractRule;
 
 /**
- * DateTime rule
+ * Class DateTime
+ * @package Peak\Validation\Rule
  */
 class DateTime extends AbstractRule
 {
@@ -13,7 +16,7 @@ class DateTime extends AbstractRule
      * Default options
      * @var array
      */
-    protected $defaultOptios = [
+    protected $defaultOptions = [
         'format' => 'Y-m-d H:i:s'
     ];
 

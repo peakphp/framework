@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Validation\Definition;
 
 use \InvalidArgumentException;
@@ -17,32 +19,38 @@ class RuleArrayDefinition extends RuleDefinition
      */
     public function __construct(array $definition)
     {
-        if (!isset($definition['ruleName'])) {
-            throw new InvalidArgumentException('Rule array definition must have key "ruleName"');
+        if (!isset($definition['rule'])) {
+            throw new InvalidArgumentException('Rule array definition must have key "rule"');
         }
 
         if (!isset($definition['options'])) {
             $definition['options'] = [];
+        } elseif (!is_array($definition['options'])) {
+            throw new InvalidArgumentException('Rule array definition key "options" must be an array');
         }
 
         if (!isset($definition['flags'])) {
             $definition['flags'] = null;
+        } elseif (!is_integer($definition['flags'])) {
+            throw new InvalidArgumentException('Rule array definition key "flags" must be an integer');
         }
 
         if (!isset($definition['context'])) {
             $definition['context'] = null;
         }
 
-        if (!isset($definition['errorMessage'])) {
-            $definition['errorMessage'] = null;
+        if (!isset($definition['error'])) {
+            $definition['error'] = '';
+        } elseif (!is_string($definition['error'])) {
+            throw new InvalidArgumentException('Rule array definition key "error" must be an string');
         }
 
         parent::__construct(
-            $definition['ruleName'],
+            $definition['rule'],
             $definition['options'],
             $definition['flags'],
             $definition['context'],
-            $definition['errorMessage']
+            $definition['error']
         );
     }
 }

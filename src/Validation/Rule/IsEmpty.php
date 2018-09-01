@@ -1,11 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Validation\Rule;
 
 use Peak\Validation\AbstractRule;
 
 /**
- * Is empty rule
+ * Class IsEmpty
+ * @package Peak\Validation\Rule
  */
 class IsEmpty extends AbstractRule
 {

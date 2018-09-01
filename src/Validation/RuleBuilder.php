@@ -1,9 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Validation;
 
 use Peak\Blueprint\Common\Validator;
 use \Exception;
+use Peak\Validation\Exception\NotFoundException;
 
 /**
  * Rule builder
@@ -30,7 +33,7 @@ class RuleBuilder
 
     /**
      * Rule context data
-     * @var array
+     * @var mixed
      */
     protected $context;
 
@@ -47,7 +50,7 @@ class RuleBuilder
      */
     public function __construct(string $ruleName)
     {
-        $this->name = $ruleName;
+        $this->ruleName = $ruleName;
     }
 
     /**
@@ -56,7 +59,7 @@ class RuleBuilder
      * @param  array $opts
      * @return $this
      */
-    public function setOptions(?array $opts)
+    public function setOptions(array $opts)
     {
         $this->options = $opts;
         return $this;
@@ -68,7 +71,7 @@ class RuleBuilder
      * @param  string $error
      * @return $this
      */
-    public function setErrorMessage($error)
+    public function setErrorMessage(string $error)
     {
         $this->error = $error;
         return $this;
@@ -80,7 +83,7 @@ class RuleBuilder
      * @param  integer $flags
      * @return $this
      */
-    public function setFlags($flags)
+    public function setFlags(?int $flags)
     {
         $this->flags = $flags;
         return $this;
@@ -89,7 +92,7 @@ class RuleBuilder
     /**
      * Set context
      *
-     * @param  array $context
+     * @param  mixed $context
      * @return $this
      */
     public function setContext($context)
@@ -105,12 +108,12 @@ class RuleBuilder
     public function build(): Validator
     {
         $ruleName = $this->ruleName;
-        if (!class_exists($this->ruleName)) {
-            $ruleName = '\Peak\Validation\Rules\\'.$this->ruleName;
+        if (!class_exists($ruleName)) {
+            $ruleName = '\Peak\Validation\Rule\\'.$this->ruleName;
         }
 
         if (!class_exists($ruleName)) {
-            throw new Exception('Rule "'.$this->ruleName.'" not found');
+            throw new NotFoundException($this->ruleName);
         }
 
         return new $ruleName($this->options, $this->flags, $this->context);

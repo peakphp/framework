@@ -1,11 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Validation\Rule;
 
 use Peak\Validation\AbstractRule;
 
 /**
- * Url rule using FILTER_VALIDATE_URL
+ * Class Url
+ * @package Peak\Validation\Rule
  */
 class Url extends AbstractRule
 {

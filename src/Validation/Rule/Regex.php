@@ -1,11 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Validation\Rule;
 
 use Peak\Validation\AbstractRule;
 
 /**
- * Regex rule using FILTER_VALIDATE_REGEXP
+ * Class Regex
+ * @package Peak\Validation\Rule
  */
 class Regex extends AbstractRule
 {
@@ -13,7 +16,7 @@ class Regex extends AbstractRule
      * Default options
      * @var array
      */
-    protected $defaultOptios = [
+    protected $defaultOptions = [
         'regexp' => '',
     ];
 

@@ -1,11 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Validation\Rule;
 
 use Peak\Validation\AbstractRule;
 
 /**
- * Float rule using FILTER_VALIDATE_FLOAT
+ * Class FloatNumber
+ * @package Peak\Validation\Rule
  */
 class FloatNumber extends AbstractRule
 {
@@ -13,7 +16,7 @@ class FloatNumber extends AbstractRule
      * Default options
      * @var array
      */
-    protected $defaultOptios = [
+    protected $defaultOptions = [
         'decimal' => '.',
     ];
 

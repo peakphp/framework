@@ -1,11 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Validation\Rule;
 
 use Peak\Validation\AbstractRule;
 
 /**
- * Email rule using FILTER_VALIDATE_EMAIL
+ * Class Email
+ * @package Peak\Validation\Rule
  */
 class Email extends AbstractRule
 {
@@ -13,7 +16,7 @@ class Email extends AbstractRule
      * Default options
      * @var array
      */
-    protected $defaultOptios = [];
+    protected $defaultOptions = [];
 
     /**
      * Validate

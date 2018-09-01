@@ -1,11 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Validation\Rule;
 
 use Peak\Validation\AbstractRule;
 
 /**
- * Integer rule using FILTER_VALIDATE_INT
+ * Class IntegerNumber
+ * @package Peak\Validation\Rule
  */
 class IntegerNumber extends AbstractRule
 {
@@ -13,7 +16,7 @@ class IntegerNumber extends AbstractRule
      * Default options
      * @var array
      */
-    protected $defaultOptios = [
+    protected $defaultOptions = [
         'min_range' => null,
         'max_range' => null,
     ];
