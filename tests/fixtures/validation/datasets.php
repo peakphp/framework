@@ -1,6 +1,6 @@
 <?php
 
-class DataSetExample1 extends \Peak\Validation\DataSet
+class AbstractDataSetExample1 extends \Peak\Validation\AbstractDataSet
 {
     public function setUp()
     {
@@ -13,7 +13,7 @@ class DataSetExample1 extends \Peak\Validation\DataSet
 }
 
 
-class DataSetExample2 extends \Peak\Validation\DataSet
+class AbstractDataSetExample2 extends \Peak\Validation\AbstractDataSet
 {
     public function setUp()
     {
@@ -26,7 +26,7 @@ class DataSetExample2 extends \Peak\Validation\DataSet
 }
 
 
-class DataSetExample3 extends \Peak\Validation\DataSet
+class AbstractDataSetExample3 extends \Peak\Validation\AbstractDataSet
 {
     public function setUp()
     {
@@ -38,7 +38,7 @@ class DataSetExample3 extends \Peak\Validation\DataSet
     }
 }
 
-class DataSetExample4 extends \Peak\Validation\DataSet
+class AbstractDataSetExample4 extends \Peak\Validation\AbstractDataSet
 {
     public function setUp()
     {
