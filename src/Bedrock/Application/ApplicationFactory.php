@@ -40,6 +40,7 @@ class ApplicationFactory
     /**
      * @param KernelInterface $kernel
      * @param ResourceResolver|null $handlerResolver
+     * @param string $version
      * @return Application
      */
     public function createFromKernel(
