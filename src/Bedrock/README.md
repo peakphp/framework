@@ -5,7 +5,7 @@ Create HTTP Request/Response application compatible PSR-7, PSR-11 and PSR-15.
 Example with Zend\Diactoros: 
 ```php
 use Peak\Di\Container; // PSR-11
-use Peak\Bedrock\ApplicationFactory; // PSR-15
+use Peak\Bedrock\Aplication\ApplicationFactory; // PSR-15
 use Peak\Bedrock\Http\StackFactory; // PSR-15
 use Peak\Bedrock\Http\Response\Emitter;
 use Zend\Diactoros\ServerRequestFactory; // PSR-7
