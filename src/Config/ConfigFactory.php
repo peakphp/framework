@@ -12,7 +12,7 @@ use Peak\Config\Exception\UnknownResourceException;
  * Class ConfigFactory
  * @package Peak\Config
  */
-class ConfigFactory
+class ConfigFactory implements \Peak\Blueprint\Config\ConfigFactory
 {
     /**
      * @var FilesHandlers

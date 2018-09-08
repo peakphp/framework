@@ -19,11 +19,13 @@ class ConfigCacheFactoryTest extends TestCase
         $now = date('Y-m-d H:i:s');
 
         $configCacheFactory = new ConfigCacheFactory(
+            'my-conf-id',
+            3600,
             new ConfigFactory(),
             new FileCache(__DIR__)
         );
 
-        $config = $configCacheFactory->loadResources('my-conf-id', 3600, [
+        $config = $configCacheFactory->loadResources([
             FIXTURES_PATH.'/config/arrayfile1.php',
             FIXTURES_PATH.'/config/arrayfile2.php',
             [
@@ -36,7 +38,7 @@ class ConfigCacheFactoryTest extends TestCase
 
         $newNow = 'randomstuff';
 
-        $config = $configCacheFactory->loadResources('my-conf-id', 3600, [
+        $config = $configCacheFactory->loadResources([
             FIXTURES_PATH.'/config/arrayfile1.php',
             FIXTURES_PATH.'/config/arrayfile2.php',
             [
