@@ -2,8 +2,6 @@
 
 use PHPUnit\Framework\TestCase;
 
-use Peak\Validation\Rule;
-
 require __DIR__.'/../fixtures/validation/datasets.php';
 
 class AbstractDataSetTest extends TestCase
