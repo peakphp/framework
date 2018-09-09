@@ -100,9 +100,27 @@ class AppBuilder
     }
 
     /**
-     * Build
+     * @return Application
      */
     public function build()
+    {
+        return $this->internalBuild();
+    }
+
+    /**
+     * @param string $applicationClass
+     * @return Application
+     */
+    public function buildWith(string $applicationClass)
+    {
+        return $this->internalBuild($applicationClass);
+    }
+
+    /**
+     * @param string|null $applicationClass
+     * @return Application
+     */
+    private function internalBuild(string $applicationClass = null): \Peak\Blueprint\Http\Application
     {
         $kernel = $this->kernel;
         if (!isset($kernel)) {
@@ -120,7 +138,12 @@ class AppBuilder
             }
         }
 
-        $app = new Application(
+        $appClassName = Application::class;
+        if ($applicationClass) {
+            $appClassName  = $applicationClass;
+        }
+
+        $app = new $appClassName(
             $kernel,
             $this->handlerResolver ?? new HandlerResolver($kernel->getContainer()),
             $this->handlerResolver ?? '1.0'
@@ -132,7 +155,6 @@ class AppBuilder
 
         return $app;
     }
-
 
 
 
