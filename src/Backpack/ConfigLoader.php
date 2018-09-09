@@ -7,11 +7,10 @@ use Peak\Blueprint\Config\ConfigFactory;
 use Peak\Config\Cache\FileCache;
 use Peak\Config\ConfigCacheFactory;
 use Psr\SimpleCache\CacheInterface;
-use LogicException;
 
 /**
- * Class Config
- * @package Peak\Backpack\Application
+ * Class ConfigLoader
+ * @package Peak\Backpack
  */
 class ConfigLoader implements ResourceLoader
 {
@@ -110,15 +109,11 @@ class ConfigLoader implements ResourceLoader
             if (!isset($this->cachePath)) {
                 $configFactory = new \Peak\Config\ConfigFactory();
             } else {
-                $cacheDriver = $this->cacheDriver;
-                if (!isset($this->cacheDriver)) {
-                    $cacheDriver = new FileCache($this->cachePath);
-                }
                 $configFactory = new ConfigCacheFactory(
                     $this->cacheId,
                     $this->cacheTtl,
                     new \Peak\Config\ConfigFactory(),
-                    $cacheDriver
+                    $this->cacheDriver ?? new FileCache($this->cachePath)
                 );
             }
         }
