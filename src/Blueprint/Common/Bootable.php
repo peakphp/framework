@@ -5,7 +5,7 @@ namespace Peak\Blueprint\Common;
 interface Bootable
 {
     /**
-     * @return mixed
+     * Boot something!
      */
     public function boot();
 }
