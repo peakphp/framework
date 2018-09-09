@@ -13,7 +13,7 @@ use LogicException;
  * Class Config
  * @package Peak\Backpack\Application
  */
-class ConfigBuilder implements ResourceLoader
+class ConfigLoader implements ResourceLoader
 {
     /**
      * @var \Peak\Blueprint\Config\ConfigFactory
