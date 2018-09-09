@@ -1,6 +1,6 @@
 <?php
 
-namespace Peak\Backpack\Application;
+namespace Peak\Backpack;
 
 use Peak\Blueprint\Common\ResourceLoader;
 use Peak\Blueprint\Config\ConfigFactory;
@@ -13,7 +13,7 @@ use LogicException;
  * Class Config
  * @package Peak\Backpack\Application
  */
-class Config implements ResourceLoader
+class ConfigBuilder implements ResourceLoader
 {
     /**
      * @var \Peak\Blueprint\Config\ConfigFactory
