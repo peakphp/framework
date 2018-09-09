@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <phpunit
         colors="true"
-        bootstrap="./tests/bootstrap.php">
+        bootstrap="./tests/bootstrap.php"
+        convertErrorsToExceptions="true"
+        convertNoticesToExceptions="true"
+        convertWarningsToExceptions="true">
 
     <filter>
         <whitelist>
