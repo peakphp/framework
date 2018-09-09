@@ -87,6 +87,15 @@ class Application implements \Peak\Blueprint\Http\Application
     }
 
     /**
+     * @param string $path
+     * @return mixed
+     */
+    public function getFromContainer(string $path)
+    {
+        return $this->getContainer()->get($path);
+    }
+
+    /**
      * @return string
      */
     public function getVersion()
