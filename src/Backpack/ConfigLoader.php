@@ -47,7 +47,7 @@ class ConfigLoader implements ResourceLoader
     public function setConfigFactory(ConfigFactory $configFactory)
     {
         if (isset($this->cachePath)) {
-            throw new LogicException('You cannot specify config factory if you have set cache configuration');
+            trigger_error('Cache configurations will be ignored because ConfigFactory have been set.');
         }
         $this->configFactory = $configFactory;
         return $this;
@@ -58,13 +58,12 @@ class ConfigLoader implements ResourceLoader
      * @param string $cacheId
      * @param $cacheTtl
      * @param CacheInterface|null $cacheDriver
-     * @throws LogicException
      * @return $this
      */
     public function setCache(string $cachePath, string $cacheId, $cacheTtl, CacheInterface $cacheDriver = null)
     {
         if (isset($this->configFactory)) {
-            throw new LogicException('You cannot specify cache configuration if you already have set a ConfigFactory instance');
+            trigger_error('Cache configurations will be ignored because ConfigFactory have been set.');
         }
         $this->cachePath = $cachePath;
         $this->cacheId = $cacheId;
