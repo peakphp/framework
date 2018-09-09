@@ -36,7 +36,7 @@ class ContainerBindingTest extends TestCase
     public function testBasic()
     {
         $container = new Container();
-        $container->disableAutowiring();
+        $container->disableAutoWiring();
 
         $container->bind(A::class, new A);
 
@@ -51,7 +51,7 @@ class ContainerBindingTest extends TestCase
     public function testBindInstance()
     {
         $container = new Container();
-        $container->disableAutowiring();
+        $container->disableAutoWiring();
 
         $a = new A;
         $a->foo = 'bar';
@@ -68,7 +68,7 @@ class ContainerBindingTest extends TestCase
     public function testBindPrototype()
     {
         $container = new Container();
-        $container->disableAutowiring();
+        $container->disableAutoWiring();
 
         // with arguments stored with the binding
         $container->bindPrototype(Finger::class, [
@@ -106,7 +106,7 @@ class ContainerBindingTest extends TestCase
     public function testArrayDefinition()
     {
         $container = new Container();
-        $container->disableAutowiring();
+        $container->disableAutoWiring();
 
         $container->bind(A::class, function() {
             $a = new A;
@@ -138,7 +138,7 @@ class ContainerBindingTest extends TestCase
     public function testArrayDefinitionWithPrototype()
     {
         $container = new Container();
-        $container->disableAutowiring();
+        $container->disableAutoWiring();
 
         $container->bind(A::class, function() {
             $a = new A;
@@ -170,7 +170,7 @@ class ContainerBindingTest extends TestCase
     public function testBindSingleton()
     {
         $container = new Container();
-        $container->disableAutowiring();
+        $container->disableAutoWiring();
 
         // with arguments stored with the binding
         // when using array definition, the first element represent class
@@ -227,7 +227,7 @@ class ContainerBindingTest extends TestCase
     public function testBindSingleton2()
     {
         $container = new Container();
-        $container->disableAutowiring();
+        $container->disableAutoWiring();
 
         $container->bind(Finger::class, [
             Finger::class,
@@ -254,7 +254,7 @@ class ContainerBindingTest extends TestCase
     public function testBindPrototypeExplicit()
     {
         $container = new Container();
-        $container->disableAutowiring();
+        $container->disableAutoWiring();
 
         $container->bindPrototype(Finger::class, [
             Finger::class,
@@ -280,7 +280,7 @@ class ContainerBindingTest extends TestCase
     public function testBindFactory()
     {
         $container = new Container();
-        $container->disableAutowiring();
+        $container->disableAutoWiring();
 
         $container->bindFactory(Finger::class, function (Container $c, $args) {
             return new Finger(new A, 'factory', 'bar');
@@ -298,7 +298,7 @@ class ContainerBindingTest extends TestCase
     public function testSetDefinitions()
     {
         $container = new Container();
-        $container->disableAutowiring();
+        $container->disableAutoWiring();
 
         // bind a factory for Finger::class
         $container

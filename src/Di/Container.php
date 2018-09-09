@@ -443,7 +443,7 @@ class Container implements ContainerInterface
      *
      * @return $this
      */
-    public function enableAutowiring()
+    public function enableAutoWiring()
     {
         $this->auto_wiring = true;
         return $this;
@@ -454,7 +454,7 @@ class Container implements ContainerInterface
      *
      * @return $this
      */
-    public function disableAutowiring()
+    public function disableAutoWiring()
     {
         $this->auto_wiring = false;
         return $this;

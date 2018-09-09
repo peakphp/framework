@@ -465,8 +465,8 @@ class ContainerTest extends TestCase
     public function testCreateException()
     {
         $container = new Container();
-        $container->enableAutowiring();
-        $container->disableAutowiring();
+        $container->enableAutoWiring();
+        $container->disableAutoWiring();
         $container->create('UnknownClass');
     }
 }
