@@ -9,9 +9,12 @@ use Peak\Blueprint\Common\ResourceResolver;
 use Peak\Di\Container;
 use Psr\Container\ContainerInterface;
 
+/**
+ * Class AppBuilder
+ * @package Peak\Backpack\Application
+ */
 class AppBuilder
 {
-
     /**
      * @var string
      */
@@ -48,6 +51,7 @@ class AppBuilder
     public function setEnv(string $env)
     {
         $this->env = $env;
+        return $this;
     }
 
     /**
