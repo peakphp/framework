@@ -254,9 +254,9 @@ $window-padding: 20px;
         background: linear-gradient(to top, $logo-color 4px, $bg-color-1 0px, $bg-color-1 100%);
       }
 
-      //&:first-child {
-      //  //padding-left:45px;
-      //}
+      &:first-child {
+        min-width: 10px;
+      }
 
       & > svg {
         vertical-align: middle;

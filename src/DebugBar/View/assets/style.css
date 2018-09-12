@@ -183,6 +183,8 @@
       #pkdebugbar .pkdebugbar-menu .pkdebugbar-tab.open {
         border-bottom: 4px solid #333;
         background: linear-gradient(to top, #333 4px, #e5e5e5 0px, #e5e5e5 100%); }
+      #pkdebugbar .pkdebugbar-menu .pkdebugbar-tab:first-child {
+        min-width: 10px; }
       #pkdebugbar .pkdebugbar-menu .pkdebugbar-tab > svg {
         vertical-align: middle;
         padding-right: 2px; }
