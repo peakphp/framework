@@ -1,0 +1,340 @@
+/*! custom css normalize based on github.com/necolas/normalize.css (v.7.0.0) */
+#pkdebugbar {
+  line-height: 1.15;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  margin: 0; }
+  #pkdebugbar article, #pkdebugbar aside, #pkdebugbar footer, #pkdebugbar header, #pkdebugbar nav, #pkdebugbar section {
+    display: block; }
+  #pkdebugbar h1 {
+    font-size: 2em;
+    margin: 0.67em 0; }
+  #pkdebugbar figcaption, #pkdebugbar figure, #pkdebugbar main {
+    display: block; }
+  #pkdebugbar figure {
+    margin: 1em 40px; }
+  #pkdebugbar hr {
+    box-sizing: content-box;
+    height: 0;
+    overflow: visible; }
+  #pkdebugbar pre {
+    font-family: monospace, monospace;
+    font-size: 1em; }
+  #pkdebugbar a {
+    background-color: transparent;
+    -webkit-text-decoration-skip: objects; }
+  #pkdebugbar abbr[title] {
+    border-bottom: none;
+    text-decoration: underline;
+    text-decoration: underline dotted; }
+  #pkdebugbar b, #pkdebugbar strong {
+    font-weight: inherit;
+    font-weight: bolder; }
+  #pkdebugbar code, #pkdebugbar kbd, #pkdebugbar samp {
+    font-family: monospace, monospace;
+    font-size: 1em; }
+  #pkdebugbar dfn {
+    font-style: italic; }
+  #pkdebugbar mark {
+    background-color: #ff0;
+    color: #000; }
+  #pkdebugbar small {
+    font-size: 80%; }
+  #pkdebugbar sub, #pkdebugbar sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline; }
+  #pkdebugbar sub {
+    bottom: -0.25em; }
+  #pkdebugbar sup {
+    top: -0.5em; }
+  #pkdebugbar img {
+    border-style: none; }
+  #pkdebugbar svg:not(:root) {
+    overflow: hidden; }
+  #pkdebugbar button, #pkdebugbar input, #pkdebugbar optgroup, #pkdebugbar select, #pkdebugbar textarea {
+    font-family: sans-serif;
+    font-size: 100%;
+    line-height: 1.15;
+    margin: 0; }
+  #pkdebugbar button, #pkdebugbar input {
+    overflow: visible; }
+  #pkdebugbar button, #pkdebugbar select {
+    text-transform: none; }
+  #pkdebugbar button, #pkdebugbar html [type="button"], #pkdebugbar [type="reset"], #pkdebugbar [type="submit"] {
+    -webkit-appearance: button; }
+  #pkdebugbar button::-moz-focus-inner, #pkdebugbar [type="button"]::-moz-focus-inner, #pkdebugbar [type="reset"]::-moz-focus-inner, #pkdebugbar [type="submit"]::-moz-focus-inner {
+    border-style: none;
+    padding: 0; }
+  #pkdebugbar button:-moz-focusring, #pkdebugbar [type="button"]:-moz-focusring, #pkdebugbar [type="reset"]:-moz-focusring, #pkdebugbar [type="submit"]:-moz-focusring {
+    outline: 1px dotted ButtonText; }
+  #pkdebugbar fieldset {
+    padding: 0.35em 0.75em 0.625em; }
+  #pkdebugbar legend {
+    box-sizing: border-box;
+    color: inherit;
+    display: table;
+    max-width: 100%;
+    padding: 0;
+    white-space: normal; }
+  #pkdebugbar progress {
+    display: inline-block;
+    vertical-align: baseline; }
+  #pkdebugbar textarea {
+    overflow: auto; }
+  #pkdebugbar [type="checkbox"], #pkdebugbar [type="radio"] {
+    box-sizing: border-box;
+    padding: 0; }
+  #pkdebugbar [type="number"]::-webkit-inner-spin-button, #pkdebugbar [type="number"]::-webkit-outer-spin-button {
+    height: auto; }
+  #pkdebugbar [type="search"] {
+    -webkit-appearance: textfield;
+    outline-offset: -2px; }
+  #pkdebugbar [type="search"]::-webkit-search-cancel-button, #pkdebugbar [type="search"]::-webkit-search-decoration {
+    -webkit-appearance: none; }
+  #pkdebugbar ::-webkit-file-upload-button {
+    -webkit-appearance: button;
+    font: inherit; }
+  #pkdebugbar details, #pkdebugbar menu {
+    display: block; }
+  #pkdebugbar summary {
+    display: list-item; }
+  #pkdebugbar canvas {
+    display: inline-block; }
+  #pkdebugbar template {
+    display: none; }
+  #pkdebugbar [hidden] {
+    display: none; }
+
+/**
+  DebugBar variables
+*/
+/**
+  DebugBar actual style
+*/
+#pkdebugbar {
+  background: transparent;
+  position: fixed !important;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 42px;
+  display: none;
+  font: 12px/1.4em -apple-system, "Helvetica Neue", BlinkMacSystemFont, "Open Sans", "Segoe UI", Roboto, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  z-index: 999999;
+  opacity: 1;
+  padding: 0;
+  margin: 0;
+  overflow-y: hidden; }
+  #pkdebugbar.collapse {
+    width: 42px;
+    overflow: hidden; }
+    #pkdebugbar.collapse .pkdebugbar-tab {
+      display: none !important; }
+    #pkdebugbar.collapse .pkdebugbar-toggle .toggle-open {
+      display: block !important; }
+    #pkdebugbar.collapse .pkdebugbar-toggle .toggle-close {
+      display: none !important; }
+  #pkdebugbar .pkdebugbar-menu-wrapper {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 42px;
+    background: linear-gradient(to bottom, #e5e5e5, #e5e5e5);
+    border-top: 1px solid #999;
+    color: #222; }
+  #pkdebugbar .pkdebugbar-menu {
+    list-style-type: none;
+    padding: 0;
+    margin: 0; }
+    #pkdebugbar .pkdebugbar-menu .pkdebugbar-toggle {
+      position: relative;
+      float: left;
+      display: block;
+      height: 42px;
+      letter-spacing: 0.05em;
+      line-height: 42px;
+      font-family: -apple-system, "Helvetica Neue", BlinkMacSystemFont, "Open Sans", "Segoe UI", Roboto, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+      color: #222;
+      width: 42px;
+      font-size: 34px;
+      padding: 0;
+      text-align: center;
+      cursor: pointer; }
+      #pkdebugbar .pkdebugbar-menu .pkdebugbar-toggle .toggle-open {
+        display: none; }
+    #pkdebugbar .pkdebugbar-menu .pkdebugbar-tab {
+      position: relative;
+      display: block;
+      float: left;
+      height: 42px;
+      letter-spacing: 0.05em;
+      line-height: 42px;
+      font-family: -apple-system, "Helvetica Neue", BlinkMacSystemFont, "Open Sans", "Segoe UI", Roboto, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+      font-size: 11px;
+      color: #222;
+      border-right: 1px solid #b2b2b2;
+      padding: 0 15px;
+      cursor: pointer;
+      overflow: hidden; }
+      #pkdebugbar .pkdebugbar-menu .pkdebugbar-tab.open {
+        border-bottom: 4px solid #333;
+        background: linear-gradient(to top, #333 4px, #e5e5e5 0px, #e5e5e5 100%); }
+      #pkdebugbar .pkdebugbar-menu .pkdebugbar-tab > svg {
+        vertical-align: middle;
+        padding-right: 2px; }
+      #pkdebugbar .pkdebugbar-menu .pkdebugbar-tab sup {
+        padding: 1px 5px;
+        border-radius: 12px;
+        font-family: monospace;
+        font-size: 11px;
+        background: #666;
+        color: #e5e5e5; }
+      #pkdebugbar .pkdebugbar-menu .pkdebugbar-tab .pkdebugbar-logo {
+        display: block;
+        position: absolute;
+        top: 0px;
+        left: 2px;
+        width: 36px; }
+        #pkdebugbar .pkdebugbar-menu .pkdebugbar-tab .pkdebugbar-logo .pkdebugbar-logo-path1 {
+          fill: #333; }
+        #pkdebugbar .pkdebugbar-menu .pkdebugbar-tab .pkdebugbar-logo .pkdebugbar-logo-path2 {
+          fill: #333; }
+
+.pkdebugbar-window {
+  display: none;
+  background: #e5e5e5;
+  color: #222;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  left: 20px;
+  bottom: 43px;
+  padding: 20px;
+  z-index: 999998;
+  overflow: auto;
+  font-family: -apple-system, "Helvetica Neue", BlinkMacSystemFont, "Open Sans", "Segoe UI", Roboto, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-size: 12px;
+  line-height: 14px; }
+  .pkdebugbar-window a, .pkdebugbar-window a:link, .pkdebugbar-window a:visited, .pkdebugbar-window a:hover {
+    color: #028FCC;
+    font-size: 12px; }
+  .pkdebugbar-window pre {
+    font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-size: 12px; }
+  .pkdebugbar-window hr {
+    border-width: 0;
+    border-style: solid;
+    border-color: #b2b2b2;
+    border-top-width: 1px; }
+  .pkdebugbar-window.open {
+    display: block; }
+  .pkdebugbar-window h1, .pkdebugbar-window h2, .pkdebugbar-window h3, .pkdebugbar-window h4, .pkdebugbar-window h5, .pkdebugbar-window h6 {
+    font-family: -apple-system, "Helvetica Neue", BlinkMacSystemFont, "Open Sans", "Segoe UI", Roboto, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    background: none;
+    border: 0;
+    margin: 10px 0 10px -8px;
+    padding: 0;
+    width: auto;
+    display: block; }
+    .pkdebugbar-window h1 .h-block, .pkdebugbar-window h2 .h-block, .pkdebugbar-window h3 .h-block, .pkdebugbar-window h4 .h-block, .pkdebugbar-window h5 .h-block, .pkdebugbar-window h6 .h-block {
+      padding: 6px 8px;
+      background: #222;
+      color: #e5e5e5;
+      display: inline-block; }
+  .pkdebugbar-window > h1:first-child {
+    background: #222;
+    color: #e5e5e5;
+    margin: -20px -20px 20px -20px;
+    padding: 18px 15px;
+    display: block;
+    width: auto; }
+  .pkdebugbar-window table {
+    width: auto;
+    background: #f2f2f2;
+    font-family: -apple-system, "Helvetica Neue", BlinkMacSystemFont, "Open Sans", "Segoe UI", Roboto, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"; }
+    .pkdebugbar-window table.table-full-width {
+      width: 100%; }
+    .pkdebugbar-window table.table-border-inside td {
+      border-bottom: 1px solid #d8d8d8; }
+    .pkdebugbar-window table th {
+      font-family: -apple-system, "Helvetica Neue", BlinkMacSystemFont, "Open Sans", "Segoe UI", Roboto, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+      text-align: left;
+      font-size: 14px;
+      font-weight: bold;
+      color: #222;
+      background: transparent;
+      border-bottom: 1px solid #b2b2b2;
+      padding: 8px 6px; }
+    .pkdebugbar-window table td {
+      font-family: -apple-system, "Helvetica Neue", BlinkMacSystemFont, "Open Sans", "Segoe UI", Roboto, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+      font-size: 11px;
+      padding: 0 6px;
+      color: #222;
+      vertical-align: top; }
+      .pkdebugbar-window table td:first-child {
+        font-weight: bold;
+        width: 1px; }
+      .pkdebugbar-window table td.width-1 {
+        width: 1px; }
+      .pkdebugbar-window table td.width-100 {
+        width: 100px; }
+      .pkdebugbar-window table td.width-150 {
+        width: 150px; }
+      .pkdebugbar-window table td.width-200 {
+        width: 200px; }
+    .pkdebugbar-window table tr:nth-child(odd) td {
+      background-color: #eaeaea; }
+  .pkdebugbar-window .pre-block {
+    font-size: 12px;
+    font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-weight: normal;
+    background: #f2f2f2;
+    padding: 8px;
+    color: #222;
+    width: auto;
+    overflow: auto; }
+    .pkdebugbar-window .pre-block .line:hover {
+      background: #f9f9f9; }
+  .pkdebugbar-window .strong-block {
+    font-weight: bold;
+    background: #f9f9f9;
+    display: inline-block;
+    padding: 6px 8px; }
+  .pkdebugbar-window .message {
+    padding: 5px 5px;
+    font-family: -apple-system, "Helvetica Neue", BlinkMacSystemFont, "Open Sans", "Segoe UI", Roboto, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-size: 13px;
+    margin-bottom: 3px;
+    padding: 0; }
+    .pkdebugbar-window .message .message-level {
+      color: #b2b2b2;
+      float: right; }
+    .pkdebugbar-window .message.message-emergency {
+      color: #fff;
+      background: #cc0000;
+      font-weight: bold;
+      letter-spacing: 1px; }
+    .pkdebugbar-window .message.message-alert {
+      color: #fff;
+      background: #EF993A; }
+    .pkdebugbar-window .message.message-critical {
+      color: #ff6666;
+      font-weight: bold;
+      background: #fff; }
+    .pkdebugbar-window .message.message-error {
+      color: #cc0000;
+      background: #FFF0F0; }
+    .pkdebugbar-window .message.message-warning {
+      color: #E68213; }
+    .pkdebugbar-window .message.message-notice {
+      color: #000; }
+    .pkdebugbar-window .message.message-info {
+      color: #0080C0; }
+    .pkdebugbar-window .message.message-debug {
+      color: #666; }
+
+/*# sourceMappingURL=style.css.map */
