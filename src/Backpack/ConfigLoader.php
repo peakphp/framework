@@ -91,6 +91,7 @@ class ConfigLoader implements ResourceLoader
      */
     public function loadWith($resources, \Peak\Blueprint\Config\Config $config)
     {
+        // todo to remove
         return $this->loadConfig($resources, $config);
     }
 
