@@ -40,11 +40,20 @@ class ImmutablePropertiesBag extends PropertiesBag
     }
 
     /**
-     * Item to delete
      * @throws ImmutableException
      */
     final public function offsetUnset($offset)
     {
         throw new ImmutableException('unset');
+    }
+
+    /**
+     * @param string $property
+     * @param $value
+     * @throws ImmutableException
+     */
+    final public function set(string $property, $value)
+    {
+        throw new ImmutableException('modified');
     }
 }

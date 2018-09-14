@@ -8,6 +8,7 @@ use Peak\Bedrock\Bootstrap\Bootstrap;
 use Peak\Bedrock\Http\Stack;
 use Peak\Bedrock\Http\Request\Route;
 use Peak\Blueprint\Bedrock\Kernel;
+use Peak\Blueprint\Collection\Dictionary;
 use Peak\Blueprint\Common\ResourceResolver;
 use Peak\Blueprint\Http\ResponseEmitter;
 use Psr\Container\ContainerInterface;
@@ -36,30 +37,24 @@ class Application implements \Peak\Blueprint\Http\Application
     private $handlerResolver;
 
     /**
-     * @var string
+     * @var Dictionary
      */
-    private $version;
-
-    /**
-     * @var string
-     */
-    private $name = '';
+    private $props;
 
     /**
      * Application constructor.
-     *
      * @param Kernel $kernel
      * @param ResourceResolver $handlerResolver
-     * @param string $version
+     * @param Dictionary|null $props
      */
     public function __construct(
         Kernel $kernel,
         ResourceResolver $handlerResolver,
-        string $version = '1.0'
+        Dictionary $props = null
     ) {
         $this->kernel = $kernel;
         $this->handlerResolver = $handlerResolver;
-        $this->version = $version;
+        $this->props = $props;
     }
 
     /**
@@ -79,6 +74,23 @@ class Application implements \Peak\Blueprint\Http\Application
     }
 
     /**
+     * @param string $property
+     * @return mixed
+     */
+    public function getProp(string $property)
+    {
+        return $this->props[$property];
+    }
+
+    /**
+     * @return Dictionary
+     */
+    public function getProps()
+    {
+        return $this->props;
+    }
+
+    /**
      * @return ContainerInterface
      */
     public function getContainer()
@@ -93,32 +105,6 @@ class Application implements \Peak\Blueprint\Http\Application
     public function getFromContainer(string $path)
     {
         return $this->getContainer()->get($path);
-    }
-
-    /**
-     * @return string
-     */
-    public function getVersion()
-    {
-        return $this->version;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * @param string $name
-     * @return $this
-     */
-    public function setName(string $name)
-    {
-        $this->name = $name;
-        return $this;
     }
 
     /**

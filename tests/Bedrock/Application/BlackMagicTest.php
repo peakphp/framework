@@ -19,12 +19,11 @@ class BlackMagicTest extends TestCase
         $app = BlackMagic::createApp();
         $this->assertInstanceOf(Application::class, $app);
         $this->assertTrue($app->getKernel()->getEnv() === 'dev');
-        $this->assertTrue($app->getVersion() === '1.0');
 
-        $app = BlackMagic::createApp('test', '2.0');
+        $app = BlackMagic::createApp('test', new \Peak\Collection\PropertiesBag(['version' => '2.0']));
         $this->assertInstanceOf(Application::class, $app);
         $this->assertTrue($app->getKernel()->getEnv() === 'test');
-        $this->assertTrue($app->getVersion() === '2.0');
+        $this->assertTrue($app->getProp('version') === '2.0');
     }
 
     public function testCreateAppStack()

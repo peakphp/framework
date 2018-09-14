@@ -5,12 +5,14 @@ use \Peak\Bedrock\Application\Application;
 use \Peak\Bedrock\Kernel;
 use \Peak\Bedrock\Http\Request\HandlerResolver;
 use \Peak\Bedrock\Http\Request\Route;
+use \Peak\Collection\PropertiesBag;
 use \Psr\Container\ContainerInterface;
 use \Psr\Http\Message\ResponseInterface;
 use \Psr\Http\Message\ServerRequestInterface;
 use \Psr\Http\Message\UriInterface;
 use \Psr\Http\Server\RequestHandlerInterface;
 use \Psr\Http\Server\MiddlewareInterface;
+
 
 require_once FIXTURES_PATH . '/application/HandlerA.php';
 require_once FIXTURES_PATH . '/application/ResponseA.php';
@@ -28,16 +30,18 @@ class ApplicationTest extends TestCase
         $kernel = $this->createMock(Kernel::class);
         $handlerResolver = $this->createMock(HandlerResolver::class);
 
-        $app = new Application($kernel, $handlerResolver, '1.1');
+        $app = new Application($kernel, $handlerResolver, new PropertiesBag([
+            'version' => '1.1'
+        ]));
 
-        $this->assertTrue($app->getVersion() === '1.1');
+        $this->assertTrue($app->getProp('version') === '1.1');
         $this->assertInstanceOf(ContainerInterface::class, $app->getContainer());
         $this->assertInstanceOf(Kernel::class, $app->getKernel());
         $this->assertInstanceOf(HandlerResolver::class, $app->getHandlerResolver());
 
-        $this->assertTrue($app->getName() === '');
-        $app->setName('Myapp');
-        $this->assertTrue($app->getName() === 'Myapp');
+        $this->assertTrue($app->getProp('name') === null);
+        $app->getProps()->set('name', 'Myapp');
+        $this->assertTrue($app->getProp('name') === 'Myapp');
     }
 
     public function testHandleRequestWithAdd()
@@ -185,8 +189,7 @@ class ApplicationTest extends TestCase
     {
         $app = new Application(
             $this->createMock(Kernel::class),
-            $this->createMock(HandlerResolver::class),
-            '1.1'
+            $this->createMock(HandlerResolver::class)
         );
 
         $_GET = [];
@@ -205,8 +208,7 @@ class ApplicationTest extends TestCase
     {
         $app = new Application(
             $this->createMock(Kernel::class),
-            $this->createMock(HandlerResolver::class),
-            '1.1'
+            $this->createMock(HandlerResolver::class)
         );
 
         $route = $app->createRoute('GET', '/', $this->createMock(\Peak\Blueprint\Http\Stack::class));

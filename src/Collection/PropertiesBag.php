@@ -4,16 +4,15 @@ declare(strict_types=1);
 
 namespace Peak\Collection;
 
+use Peak\Blueprint\Collection\Dictionary;
 use Exception;
-
-use Peak\Blueprint\Collection\Collection;
 use ArrayIterator;
 
 /**
  * Class PropertiesBag
  * @package Peak\Collection
  */
-class PropertiesBag implements Collection
+class PropertiesBag implements Dictionary
 {
     /**
      * @var array
@@ -27,6 +26,36 @@ class PropertiesBag implements Collection
     public function __construct(array $properties = [])
     {
         $this->properties = $properties;
+    }
+
+    /**
+     * @param string $prop
+     * @param null $default
+     * @return mixed
+     */
+    public function get(string $prop, $default = null)
+    {
+        return $this->properties[$prop] ?? $default;
+    }
+
+    /**
+     * @param string $prop
+     * @param $value
+     * @return mixed
+     */
+    public function set(string $prop, $value)
+    {
+        $this->properties[$prop] = $value;
+        return $this;
+    }
+
+    /**
+     * @param string $prop
+     * @return bool
+     */
+    public function has(string $prop): bool
+    {
+        return array_key_exists($prop, $this->properties);
     }
 
     /**
@@ -163,4 +192,5 @@ class PropertiesBag implements Collection
     {
         return json_encode($this->properties, $options, $depth);
     }
+
 }

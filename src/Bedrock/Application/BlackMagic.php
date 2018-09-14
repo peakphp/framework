@@ -8,6 +8,7 @@ use Peak\Bedrock\Http\Request\HandlerResolver;
 use Peak\Bedrock\Http\Stack;
 use Peak\Bedrock\Http\Response\Emitter;
 use Peak\Bedrock\Kernel;
+use Peak\Blueprint\Collection\Dictionary;
 use Peak\Di\Container;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -26,10 +27,10 @@ class BlackMagic
      * Create an app!
      *
      * @param string $environment
-     * @param string $version
+     * @param Dictionary|null $props
      * @return Application
      */
-    public static function createApp(string $environment = 'dev', string $version = '1.0')
+    public static function createApp(string $environment = 'dev', Dictionary $props = null)
     {
         $container = new Container();
         $kernel = new Kernel($environment, $container);
@@ -37,7 +38,7 @@ class BlackMagic
         return new Application(
             $kernel,
             $handlerResolver,
-            $version
+            $props
         );
     }
 

@@ -7,6 +7,7 @@ namespace Peak\Backpack\Bedrock;
 use Peak\Bedrock\Application\Application;
 use Peak\Bedrock\Http\Request\HandlerResolver;
 use Peak\Blueprint\Bedrock\Kernel;
+use Peak\Blueprint\Collection\Dictionary;
 use Peak\Blueprint\Common\ResourceResolver;
 use Peak\Di\Container;
 use Psr\Container\ContainerInterface;
@@ -21,16 +22,6 @@ class AppBuilder
      * @var string
      */
     private $env;
-
-    /**
-     * @var string
-     */
-    private $name;
-
-    /**
-     * @var string
-     */
-    private $version;
 
     /**
      * @var ContainerInterface
@@ -57,29 +48,21 @@ class AppBuilder
     }
 
     /**
-     * @param string $name
-     */
-    public function setName(string $name)
-    {
-        $this->name = $name;
-        return $this;
-    }
-
-    /**
-     * @param string $version
-     */
-    public function setVersion(string $version)
-    {
-        $this->version = $version;
-        return $this;
-    }
-
-    /**
      * @param ContainerInterface $container
      */
     public function setContainer(ContainerInterface $container)
     {
         $this->container = $container;
+        return $this;
+    }
+
+    /**
+     * @param Dictionary $props
+     * @return $this
+     */
+    public function setProps(Dictionary $props)
+    {
+        $this->props = $props;
         return $this;
     }
 
@@ -148,12 +131,8 @@ class AppBuilder
         $app = new $appClassName(
             $kernel,
             $this->handlerResolver ?? new HandlerResolver($kernel->getContainer()),
-            $this->handlerResolver ?? '1.0'
+            $this->props ?? null
         );
-
-        if (isset($this->name)) {
-            $app->setName($this->name);
-        }
 
         return $app;
     }
