@@ -39,6 +39,11 @@ class AppBuilder
     private $handlerResolver;
 
     /**
+     * @var string
+     */
+    private $class;
+
+    /**
      * @param string $environment
      */
     public function setEnv(string $env)
@@ -85,27 +90,28 @@ class AppBuilder
     }
 
     /**
+     * @param string $className
+     * @return $this
+     */
+    public function setClass(string $className)
+    {
+        $this->class = $className;
+        return $this;
+    }
+
+    /**
      * @return Application
      */
     public function build()
     {
-        return $this->internalBuild();
-    }
-
-    /**
-     * @param string $applicationClass
-     * @return Application
-     */
-    public function buildWith(string $applicationClass)
-    {
-        return $this->internalBuild($applicationClass);
+        return $this->internalBuild($this->class ?? Application::class);
     }
 
     /**
      * @param string|null $applicationClass
      * @return Application
      */
-    private function internalBuild(string $applicationClass = null): \Peak\Blueprint\Http\Application
+    private function internalBuild(string $applicationClass): \Peak\Blueprint\Http\Application
     {
         $kernel = $this->kernel;
         if (!isset($kernel)) {
@@ -123,12 +129,7 @@ class AppBuilder
             }
         }
 
-        $appClassName = Application::class;
-        if ($applicationClass) {
-            $appClassName  = $applicationClass;
-        }
-
-        $app = new $appClassName(
+        $app = new $applicationClass(
             $kernel,
             $this->handlerResolver ?? new HandlerResolver($kernel->getContainer()),
             $this->props ?? null
