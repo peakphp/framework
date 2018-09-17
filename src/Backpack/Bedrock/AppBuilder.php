@@ -11,6 +11,7 @@ use Peak\Blueprint\Collection\Dictionary;
 use Peak\Blueprint\Common\ResourceResolver;
 use Peak\Di\Container;
 use Psr\Container\ContainerInterface;
+use \Closure;
 
 /**
  * Class AppBuilder
@@ -42,6 +43,11 @@ class AppBuilder
      * @var string
      */
     private $class;
+
+    /**
+     * @var Closure
+     */
+    private $afterBuild;
 
     /**
      * @param string $environment
@@ -93,9 +99,19 @@ class AppBuilder
      * @param string $className
      * @return $this
      */
-    public function setClass(string $className)
+    public function setClassName(string $className)
     {
         $this->class = $className;
+        return $this;
+    }
+
+    /**
+     * @param Closure $fn
+     * @return $this
+     */
+    public function setAfterBuild(Closure $fn)
+    {
+        $this->afterBuild = $fn;
         return $this;
     }
 
@@ -119,14 +135,8 @@ class AppBuilder
                 $this->env ?? 'prod',
                 $this->container ?? new Container()
             );
-        } elseif (isset($this->container) || isset($this->environement)) {
-            $msgErrorSuffix = 'setting will be ignored because Kernel have been set.';
-            if (isset($this->container)) {
-                trigger_error('Container '.$msgErrorSuffix);
-            }
-            if (isset($this->env)) {
-                trigger_error('Env '.$msgErrorSuffix);
-            }
+        } elseif (isset($this->container) || isset($this->env)) {
+            $this->triggerKernelError();
         }
 
         $app = new $applicationClass(
@@ -135,9 +145,25 @@ class AppBuilder
             $this->props ?? null
         );
 
+        if (isset($this->afterBuild) && is_callable($this->afterBuild)) {
+            ($this->afterBuild)($app);
+        }
+
         return $app;
     }
 
-
+    /**
+     * Trigger an error with arguments container and env when a kernel has been set previously
+     */
+    private function triggerKernelError()
+    {
+        $msgErrorSuffix = 'setting will be ignored because Kernel had been set previously.';
+        if (isset($this->container)) {
+            trigger_error('Container '.$msgErrorSuffix);
+        }
+        if (isset($this->env)) {
+            trigger_error('Env '.$msgErrorSuffix);
+        }
+    }
 
 }
