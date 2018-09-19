@@ -10,9 +10,14 @@ use Peak\Bedrock\Http\StackFactory; // PSR-15
 use Peak\Bedrock\Http\Response\Emitter;
 use Zend\Diactoros\ServerRequestFactory; // PSR-7
 
-// Create app with factory
-$appFactory = new ApplicationFactory();
-$app = $appFactory->create('dev', new Container());
+$app = new Application(
+    new Kernel('prod', new Container()),
+    new HandlerResolver(),
+    new PropertiesBag([
+        'version' => '1.0', 
+        'name' => 'app'
+    ]) 
+)
 
 // Adding multiple middlewares and route middleware to application stack
 $app->add([
