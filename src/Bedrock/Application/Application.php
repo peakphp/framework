@@ -77,9 +77,18 @@ class Application implements \Peak\Blueprint\Http\Application
      * @param string $property
      * @return mixed
      */
-    public function getProp(string $property)
+    public function getProp(string $property, $default = null)
     {
-        return $this->props[$property];
+        return $this->props->get($property, $default);
+    }
+
+    /**
+     * @param string $property
+     * @return bool
+     */
+    public function hasProp(string $property)
+    {
+        return $this->props->has($property);
     }
 
     /**
