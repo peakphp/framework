@@ -120,7 +120,7 @@ class Application implements \Peak\Blueprint\Bedrock\Application
      * @param mixed $handler
      * @return $this
      */
-    public function add($handler)
+    public function stack($handler)
     {
         if (is_array($handler)) {
             $this->handlers = array_merge($this->handlers, $handler);
@@ -133,37 +133,73 @@ class Application implements \Peak\Blueprint\Bedrock\Application
     /**
      * @param string $path
      * @param mixed $handlers
-     * @return Route
      */
-    public function get(string $path, $handlers): Route
+    public function get(string $path, $handlers)
     {
-        return $this->createRoute('GET', $path, $handlers);
+        $this->stack(
+            $this->createRoute('GET', $path, $handlers)
+        );
     }
 
     /**
      * @param string $path
      * @param mixed $handlers
-     * @return Route
      */
-    public function post(string $path, $handlers): Route
+    public function post(string $path, $handlers)
     {
-        return $this->createRoute('POST', $path, $handlers);
+        $this->stack(
+            $this->createRoute('POST', $path, $handlers)
+        );
+    }
+
+    /**
+     * @param string $path
+     * @param $handlers
+     */
+    public function put(string $path, $handlers)
+    {
+        $this->stack(
+            $this->createRoute('PUT', $path, $handlers)
+        );
+    }
+
+    /**
+     * @param string $path
+     * @param $handlers
+     */
+    public function patch(string $path, $handlers)
+    {
+        $this->stack(
+            $this->createRoute('PATCH', $path, $handlers)
+        );
+    }
+
+    /**
+     * @param string $path
+     * @param $handlers
+     */
+    public function delete(string $path, $handlers)
+    {
+        $this->stack(
+            $this->createRoute('DELETE', $path, $handlers)
+        );
     }
 
     /**
      * @param string $path
      * @param mixed $handlers
-     * @return Route
      */
-    public function all(string $path, $handlers): Route
+    public function all(string $path, $handlers)
     {
-        return $this->createRoute(null, $path, $handlers);
+        $this->stack(
+            $this->createRoute(null, $path, $handlers)
+        );
     }
 
     /**
      * @param null|string $method
      * @param string $path
-     * @param mixed $handlers
+     * @param $handlers
      * @return Route
      */
     public function createRoute(?string $method, string $path, $handlers): Route
@@ -197,7 +233,7 @@ class Application implements \Peak\Blueprint\Bedrock\Application
     public function set($handlers)
     {
         $this->reset();
-        $this->add($handlers);
+        $this->stack($handlers);
         return $this;
     }
 
