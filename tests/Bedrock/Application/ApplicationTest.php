@@ -59,7 +59,7 @@ class ApplicationTest extends TestCase
             ->will($this->returnValue($handlerA));
 
         $app = new Application($kernel, $handlerResolver);
-        $app->add($handlerA);
+        $app->stack($handlerA);
         $this->assertInstanceOf(ResponseInterface::class, $app->handle($request));
     }
 
@@ -136,7 +136,7 @@ class ApplicationTest extends TestCase
             ->will($this->returnValue($handlerA));
 
         $app = new Application($kernel, $handlerResolver);
-        $app->add([$handlerA]);
+        $app->stack([$handlerA]);
         $this->assertInstanceOf(ResponseA::class, $app->handle($request));
     }
 
@@ -154,19 +154,14 @@ class ApplicationTest extends TestCase
 
         $app = new Application($kernel, $handlerResolver);
 
-        $app->add([
-            $app->get('/mypath', [
-                $handlerA
-            ]),
-            $app->post('/mypath', [
-                $handlerA
-            ]),
-            $app->all('/mypath', [
-                $handlerA
-            ]),
-        ]);
 
-        $request = $this->createMock(ServerRequestInterface::class);
+        $app->get('/mypath', $handlerA);
+        $app->post('/mypath', $handlerA);
+        $app->put('/mypath', $handlerA);
+        $app->patch('/mypath', $handlerA);
+        $app->delete('/mypath', $handlerA);
+
+        $app->all('/mypath', $handlerA);$request = $this->createMock(ServerRequestInterface::class);
 
         $request->expects($this->once())
             ->method('getMethod')

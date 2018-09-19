@@ -62,7 +62,7 @@ class BlackMagicTest extends TestCase
     {
         $app = BlackMagic::createApp();
 
-        $app->add(BlackMagic::createAppStack($app, [
+        $app->stack(BlackMagic::createAppStack($app, [
             MiddlewareA::class,
             HandlerA::class,
         ]));
