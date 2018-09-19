@@ -19,38 +19,41 @@ $app = new Application(
     ]) 
 )
 
-// Adding multiple middlewares and route middleware to application stack
-$app->add([
-    BootstrapMiddleware::class,
-    $app->all('/', [
-        CookieMiddleware::class,
-        HomePageHandler::class
-    ]),
-    $app->get('/user/([a-zA-Z0-9]+)', [
-        UserProfileHandler::class
-    ]),
-    $app->post('/userForm/([a-zA-Z0-9]+)', [
-        AuthenticationMiddleware::class,
-        UserFormHandler::class
-    ]),
+$app->stack(BootstrapMiddleware::class);
+
+$app->all('/', [
+    CookieMiddleware::class,
+    HomePageHandler::class,
+    function() {
+        return new Response('Hello');
+    }
+]);
+
+$app->get('/user/([a-zA-Z0-9]+)', [
+    UserProfileHandler::class
+]);
+
+$app->post('/userForm/([a-zA-Z0-9]+)', [
+    AuthenticationMiddleware::class,
+    UserFormHandler::class
+]);
+
+$app->stack([
     LogNotFoundMiddleware::class
     PageNotFoundHandler::class
 ]);
 
 // Execute the app stack
 try {
-    // create response emitter
-    $emitter = new Emitter();
-    
     // create request from globals
     $request = ServerRequestFactory::fromGlobals();
     
     // handle request and emit app stack response
-    $app->run($request, $emitter);
+    $app->run($request, new Emitter());
 } catch(Exception $e) {
     // overwrite app stack with error middleware
     $app->set(new DevExceptionHandler($e))
-        ->run($request, $emitter);
+        ->run($request, new Emitter());
 }
 
 ```
