@@ -127,7 +127,7 @@ class AppBuilder
      * @param string|null $applicationClass
      * @return Application
      */
-    private function internalBuild(string $applicationClass): \Peak\Blueprint\Http\Application
+    private function internalBuild(string $applicationClass): \Peak\Blueprint\Bedrock\Application
     {
         $kernel = $this->kernel;
         if (!isset($kernel)) {

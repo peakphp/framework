@@ -19,7 +19,7 @@ use Psr\Http\Message\ServerRequestInterface;
  * Class Application
  * @package Peak\Bedrock
  */
-class Application implements \Peak\Blueprint\Http\Application
+class Application implements \Peak\Blueprint\Bedrock\Application
 {
     /**
      * @var Kernel
@@ -68,7 +68,7 @@ class Application implements \Peak\Blueprint\Http\Application
     /**
      * @return Kernel
      */
-    public function getKernel()
+    public function getKernel(): Kernel
     {
         return $this->kernel;
     }
@@ -86,7 +86,7 @@ class Application implements \Peak\Blueprint\Http\Application
      * @param string $property
      * @return bool
      */
-    public function hasProp(string $property)
+    public function hasProp(string $property): bool
     {
         return $this->props->has($property);
     }
@@ -94,7 +94,7 @@ class Application implements \Peak\Blueprint\Http\Application
     /**
      * @return Dictionary
      */
-    public function getProps()
+    public function getProps(): Dictionary
     {
         return $this->props;
     }
