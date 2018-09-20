@@ -17,7 +17,7 @@ use Psr\Http\Message\ServerRequestInterface;
 
 /**
  * Class Application
- * @package Peak\Bedrock
+ * @package Peak\Bedrock\Application
  */
 class Application implements \Peak\Blueprint\Bedrock\Application
 {
@@ -43,6 +43,7 @@ class Application implements \Peak\Blueprint\Bedrock\Application
 
     /**
      * Application constructor.
+     *
      * @param Kernel $kernel
      * @param ResourceResolver $handlerResolver
      * @param Dictionary|null $props
@@ -131,72 +132,84 @@ class Application implements \Peak\Blueprint\Bedrock\Application
     }
 
     /**
-     * @param string $path
-     * @param mixed $handlers
+     * Stack a new GET route
+     *
+     * @see stackRoute()
      */
     public function get(string $path, $handlers)
     {
-        $this->stack(
-            $this->createRoute('GET', $path, $handlers)
-        );
+        return $this->stackRoute('GET', $path, $handlers);
     }
 
     /**
-     * @param string $path
-     * @param mixed $handlers
+     * Stack a new POST route
+     *
+     * @see stackRoute()
      */
     public function post(string $path, $handlers)
     {
-        $this->stack(
-            $this->createRoute('POST', $path, $handlers)
-        );
+        return $this->stackRoute('POST', $path, $handlers);
     }
 
     /**
-     * @param string $path
-     * @param $handlers
+     * Stack a new PUT route
+     *
+     * @see stackRoute()
      */
     public function put(string $path, $handlers)
     {
-        $this->stack(
-            $this->createRoute('PUT', $path, $handlers)
-        );
+        return $this->stackRoute('PUT', $path, $handlers);
     }
 
     /**
-     * @param string $path
-     * @param $handlers
+     * Stack a new PATCH route
+     *
+     * @see stackRoute()
      */
     public function patch(string $path, $handlers)
     {
-        $this->stack(
-            $this->createRoute('PATCH', $path, $handlers)
-        );
+        return $this->stackRoute('PATCH', $path, $handlers);
     }
 
     /**
-     * @param string $path
-     * @param $handlers
+     * Stack a new DELETE route
+     *
+     * @see stackRoute()
      */
     public function delete(string $path, $handlers)
     {
-        $this->stack(
-            $this->createRoute('DELETE', $path, $handlers)
-        );
+        return $this->stackRoute('DELETE', $path, $handlers);
     }
 
     /**
-     * @param string $path
-     * @param mixed $handlers
+     * Stack a new method less route
+     *
+     *
+     * @see stackRoute()
      */
     public function all(string $path, $handlers)
     {
-        $this->stack(
+        return $this->stackRoute(null, $path, $handlers);
+    }
+
+    /**
+     * Create and stack a new route
+     *
+     * @param null|string $method
+     * @param string $path
+     * @param $handlers
+     * @return Application
+     */
+    public function stackRoute(?string $method, string $path, $handlers)
+    {
+        return $this->stack(
             $this->createRoute(null, $path, $handlers)
         );
     }
 
     /**
+     * Create a new route
+     *
      * @param null|string $method
      * @param string $path
      * @param $handlers
@@ -238,6 +251,8 @@ class Application implements \Peak\Blueprint\Bedrock\Application
     }
 
     /**
+     * Bootstrap bootable processes
+     *
      * @param array $processes
      * @return $this
      * @throws \Peak\Bedrock\Bootstrap\Exception\InvalidBootableProcessException
