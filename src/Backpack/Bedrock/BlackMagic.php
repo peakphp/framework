@@ -2,13 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Peak\Bedrock\Application;
+namespace Peak\Backpack\Bedrock;
 
 use Peak\Bedrock\Http\Request\HandlerResolver;
 use Peak\Bedrock\Http\Stack;
 use Peak\Bedrock\Http\Response\Emitter;
 use Peak\Bedrock\Kernel;
 use Peak\Blueprint\Collection\Dictionary;
+use Peak\Collection\PropertiesBag;
 use Peak\Di\Container;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -35,6 +36,7 @@ class BlackMagic
         $container = new Container();
         $kernel = new Kernel($environment, $container);
         $handlerResolver = new HandlerResolver($container);
+        $props = $props ?? new PropertiesBag();
         return new Application(
             $kernel,
             $handlerResolver,
