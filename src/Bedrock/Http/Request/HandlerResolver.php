@@ -53,7 +53,11 @@ class HandlerResolver implements ResourceResolver
         }
 
         if (is_string($handler)) {
-            return $this->resolveString($handler);
+            $handler = $this->resolveString($handler);
+            if (is_callable($handler) && !$handler instanceof MiddlewareInterface) {
+                return $this->resolveCallable($handler);
+            }
+            return $handler;
         }
 
         throw new UnresolvableHandlerException($handler);

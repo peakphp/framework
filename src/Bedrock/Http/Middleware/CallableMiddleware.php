@@ -8,6 +8,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+use \Closure;
 
 /**
  * Class CallableMiddleware
@@ -41,6 +42,10 @@ class CallableMiddleware implements MiddlewareInterface
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $fn = $this->callable;
+        if (!$this->callable instanceof Closure) {
+            $fn();
+            return $handler->handle($request);
+        }
         return $fn($request, $handler);
     }
 }
