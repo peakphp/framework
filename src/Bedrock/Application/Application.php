@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Peak\Bedrock\Application;
 
 use Peak\Bedrock\Bootstrap\Bootstrap;
+use Peak\Bedrock\Http\Request\BlankRequest;
 use Peak\Bedrock\Http\Stack;
 use Peak\Bedrock\Http\Request\Route;
 use Peak\Blueprint\Bedrock\Kernel;
@@ -281,7 +282,7 @@ class Application implements \Peak\Blueprint\Bedrock\Application
     }
 
     /**
-     * Handle the request and emit a response
+     * Run the stack with a request and emit the response
      *
      * @param ServerRequestInterface $request
      * @param ResponseEmitter $emitter
@@ -291,4 +292,17 @@ class Application implements \Peak\Blueprint\Bedrock\Application
     {
         return $emitter->emit($this->handle($request));
     }
+
+    /**
+     * Run the stack with a void request.
+     * Useful for running a stack outside server request context
+     *
+     * @param ResponseEmitter $emitter
+     * @return mixed
+     */
+    public function runDry(ResponseEmitter $emitter)
+    {
+        return $this->run(new BlankRequest(), $emitter);
+    }
+
 }
