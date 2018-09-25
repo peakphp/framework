@@ -43,8 +43,13 @@ class CallableMiddleware implements MiddlewareInterface
     {
         $fn = $this->callable;
         if (!$this->callable instanceof Closure) {
-            $fn();
-            return $handler->handle($request);
+            $return = call_user_func_array($fn, [$request, $handler]);
+            if (null === $return) {
+                return $handler->handle($request);
+            } else {
+                return $return;
+            }
+//            $fn();
         }
         return $fn($request, $handler);
     }
