@@ -160,12 +160,9 @@ class ApplicationTest extends TestCase
         $app->put('/mypath', $handlerA);
         $app->patch('/mypath', $handlerA);
         $app->delete('/mypath', $handlerA);
+        //$app->all('/mypath2', $handlerA);
 
-        $app->all('/mypath', $handlerA);$request = $this->createMock(ServerRequestInterface::class);
-
-        $request->expects($this->once())
-            ->method('getMethod')
-            ->will($this->returnValue('GET'));
+        $request = $this->createMock(ServerRequestInterface::class);
 
         $uri = $this->createMock(UriInterface::class);
         $uri->expects(($this->once()))
