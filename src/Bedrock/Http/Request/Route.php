@@ -78,10 +78,7 @@ class Route implements Stack
         }
 
         preg_match('#^'.$this->path.'$#', $request->getUri()->getPath(), $matches);
-        if (empty($matches)) {
-            return false;
-        }
-        return true;
+        return !empty($matches);
     }
 
     /**
