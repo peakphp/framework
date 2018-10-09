@@ -19,4 +19,21 @@ class DebugBarTest extends TestCase
         $this->assertTrue(!empty($content));
     }
 
+    /**
+     * Test container exception
+     *
+     * @runInSeparateProcess
+     * @preserveGlobalState disabled
+     */
+    function testSettingModules()
+    {
+        $debugbar = new DebugBar();
+        $debugbar->setModules([
+            \Peak\DebugBar\Modules\Files\Files::class,
+            \Peak\DebugBar\Modules\Message\Message::class,
+        ]);
+        $content = $debugbar->render();
+        $this->assertTrue(!empty($content));
+    }
+
 }
