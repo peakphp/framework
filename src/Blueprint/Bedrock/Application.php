@@ -35,9 +35,9 @@ interface Application extends RequestHandlerInterface
 
     /**
      * Get application "properties" object
-     * @return Dictionary
+     * @return null|Dictionary
      */
-    public function getProps(): Dictionary;
+    public function getProps(): ?Dictionary;
 
     /**
      * Handle the request and emit a response

@@ -94,9 +94,9 @@ class Application implements \Peak\Blueprint\Bedrock\Application
     }
 
     /**
-     * @return Dictionary
+     * @return null|Dictionary
      */
-    public function getProps(): Dictionary
+    public function getProps(): ?Dictionary
     {
         return $this->props;
     }
