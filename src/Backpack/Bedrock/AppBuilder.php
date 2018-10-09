@@ -109,7 +109,7 @@ class AppBuilder
      * @param Closure $fn
      * @return $this
      */
-    public function setAfterBuild(Closure $fn)
+    public function executeAfterBuild(Closure $fn)
     {
         $this->afterBuild = $fn;
         return $this;
