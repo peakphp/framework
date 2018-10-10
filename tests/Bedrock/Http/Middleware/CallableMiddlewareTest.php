@@ -6,7 +6,8 @@ use \Psr\Http\Message\ServerRequestInterface;
 use \Psr\Http\Server\RequestHandlerInterface;
 
 require_once FIXTURES_PATH.'/application/ResponseA.php';
-require_once FIXTURES_PATH.'/application/InvokableMiddleware.php';
+require_once FIXTURES_PATH.'/application/InvokableMiddlewareA.php';
+require_once FIXTURES_PATH.'/application/InvokableMiddlewareB.php';
 
 /**
  * Class CallableMiddlewareTest
@@ -28,9 +29,9 @@ class CallableMiddlewareTest extends TestCase
         $this->assertInstanceOf(ResponseA::class, $response);
     }
 
-    public function testInvoke()
+    public function testInvoke1()
     {
-        $callableMiddleware = new CallableMiddleware(new InvokableMiddleware());
+        $callableMiddleware = new CallableMiddleware(new InvokableMiddlewareA());
         $response = $callableMiddleware->process(
             $this->createMock(ServerRequestInterface::class),
             $this->createMock(RequestHandlerInterface::class)
@@ -38,5 +39,6 @@ class CallableMiddlewareTest extends TestCase
 
         $this->assertInstanceOf(ResponseA::class, $response);
     }
+
 }
 

@@ -1,7 +1,7 @@
 <?php
 
 
-class InvokableMiddleware
+class InvokableMiddlewareA
 {
     public function __invoke()
     {
