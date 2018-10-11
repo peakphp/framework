@@ -7,7 +7,6 @@ use \Psr\Http\Server\RequestHandlerInterface;
 
 require_once FIXTURES_PATH.'/application/ResponseA.php';
 require_once FIXTURES_PATH.'/application/InvokableMiddlewareA.php';
-require_once FIXTURES_PATH.'/application/InvokableMiddlewareB.php';
 
 /**
  * Class CallableMiddlewareTest
