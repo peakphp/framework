@@ -26,6 +26,6 @@ class YamlProcessor implements ResourceProcessor
             throw new ProcessorException(__CLASS__.' require symfony/yaml to work properly');
         }
 
-        return Yaml::parse($data);
+        return Yaml::parse($data) ?? [];
     }
 }
