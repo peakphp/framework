@@ -22,7 +22,9 @@ class ClassInstantiator
      */
     public function instantiate($class, array $args = [])
     {
-        $reflection = new ReflectionClass($class);
-        return $reflection->newInstanceArgs($args);
+        if (empty($args)) {
+            return new $class();
+        }
+        return (new ReflectionClass($class))->newInstanceArgs($args);
     }
 }
