@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Peak\Collection;
 
+use Peak\Blueprint\Collection\Collection;
+
 use \Exception;
 
 class CollectionFlattener
