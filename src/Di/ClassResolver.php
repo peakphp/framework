@@ -86,19 +86,16 @@ class ClassResolver
                 } elseif ($container->has($name)) {
                     // check if container has a stored instance
                     $class_args[] = $container->get($name);
-                } else {
-                    // otherwise check if we are
-                    // dealing with an interface dependency
-                    if (interface_exists($name)) {
-                        $class_args[] = $this->iresolver->resolve($name, $container, $explicit);
-                    } else {
-                        // or resolve dependency by trying to instantiate object classname string
-                        $child_args = [];
-                        if (array_key_exists($name, $args)) {
-                            $child_args = $args[$name];
-                        }
-                        $class_args[] = $container->create($name, $child_args, $explicit);
+                } elseif (!$d['optional'] && interface_exists($name)) {
+                    // otherwise check if we are dealing with an interface dependency
+                    $class_args[] = $this->iresolver->resolve($name, $container, $explicit);
+                } elseif (!$d['optional']) {
+                    // or resolve dependency by trying to instantiate object class name string
+                    $child_args = [];
+                    if (array_key_exists($name, $args)) {
+                        $child_args = $args[$name];
                     }
+                    $class_args[] = $container->create($name, $child_args, $explicit);
                 }
             } elseif (array_key_exists($i - ($class_count), $args)) {
                 // everything else that is not a type of class or interface
