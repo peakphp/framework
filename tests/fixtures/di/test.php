@@ -150,3 +150,19 @@ class TestDi15
         $this->container = $container;
     }
 }
+
+interface InterfaceTestDi16 {}
+
+abstract class AbstractTestDi16 implements InterfaceTestDi16 {}
+
+class TestDi16FromAbstract extends AbstractTestDi16 {}
+
+class TestDi16
+{
+    public $abstractTestDi;
+
+    function __construct(InterfaceTestDi16 $abstractTestDi = null, Peak\Collection\Collection $coll = null)
+    {
+        $this->abstractTestDi = $abstractTestDi;
+    }
+}

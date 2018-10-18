@@ -469,4 +469,22 @@ class ContainerTest extends TestCase
         $container->disableAutoWiring();
         $container->create('UnknownClass');
     }
+
+    public function testConstructorWithAbstractClassArg1()
+    {
+        $container = new Container();
+        $testId = $container->create(TestDi16::class);
+        $this->assertInstanceOf(TestDi16::class, $testId);
+        $this->assertNull($testId->abstractTestDi);
+    }
+
+    public function testConstructorWithAbstractClassArg2()
+    {
+        $container = new Container();
+        $testId = $container->create(TestDi16::class, [], [
+            InterfaceTestDi16::class => new TestDi16FromAbstract()
+        ]);
+        $this->assertInstanceOf(TestDi16::class, $testId);
+        $this->assertInstanceOf(TestDi16FromAbstract::class, $testId->abstractTestDi);
+    }
 }
