@@ -2,10 +2,9 @@
 
 namespace Peak\DebugBar\Modules\ExecutionTime;
 
-use Peak\DebugBar\AbstractModule;
-use Peak\Common\Session;
+use Peak\DebugBar\AbstractPersistentModule;
 
-class ExecutionTime extends AbstractModule
+class ExecutionTime extends AbstractPersistentModule
 {
     /**
      * @var mixed
@@ -22,7 +21,7 @@ class ExecutionTime extends AbstractModule
      * Default storage data
      * @var array
      */
-    protected $default_storage_data = [
+    protected $defaultStorageData = [
         'requests' => [],
         'requests_avg' => [],
         'nb_requests' => 0,
@@ -39,7 +38,7 @@ class ExecutionTime extends AbstractModule
      */
     public function initialize()
     {
-
+        print_r($this->storage);
         if (isset($_SERVER['REQUEST_TIME_FLOAT'])) {
             $this->time = filter_var($_SERVER['REQUEST_TIME_FLOAT']);
         } elseif (isset($_SERVER['REQUEST_TIME'])) {

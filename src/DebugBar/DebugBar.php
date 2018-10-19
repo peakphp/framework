@@ -7,10 +7,11 @@ use Peak\Blueprint\Common\Renderable;
 use Peak\DebugBar\Exception\InvalidModuleException;
 use Peak\DebugBar\Exception\ModuleNotFoundException;
 use Peak\DebugBar\View\Layout;
-
+use Psr\Container\ContainerInterface;
 
 /**
- * Debug bar
+ * Class DebugBar
+ * @package Peak\DebugBar
  */
 class DebugBar implements Renderable
 {
@@ -18,7 +19,7 @@ class DebugBar implements Renderable
      * Default Modules List
      * @var array
      */
-    protected $modules = [
+    protected $defaultModules = [
         \Peak\DebugBar\Modules\Peak\Peak::class,
         \Peak\DebugBar\Modules\PhpVersion\PhpVersion::class,
         \Peak\DebugBar\Modules\ExecutionTime\ExecutionTime::class,
@@ -34,38 +35,37 @@ class DebugBar implements Renderable
      * Modules object instances
      * @var array
      */
-    protected $modules_instances = [];
+    protected $modulesInstances = [];
 
     /**
-     * Storage handler
-     * @var AbstractStorage|SessionStorage
+     * @var ModuleResolver
      */
-    protected $storage;
+    protected $moduleResolver;
+
+    /**
+     * @var ContainerInterface
+     */
+    protected $container;
 
     /**
      * DebugBar constructor
      */
-    public function __construct(AbstractStorage $storage = null, array $modules = [])
+    public function __construct(ContainerInterface $container = null)
     {
-        if (!isset($storage)) {
-            $storage = new SessionStorage();
-        }
-        $this->storage = $storage;
-
-        if (!empty($modules)) {
-            $this->setModules($modules);
-        }
+        $this->container = $container;
+        $this->moduleResolver = new ModuleResolver($container);
     }
 
     /**
      * Add module
      *
-     * @param string $module
+     * @param mixed $module
      * @return $this
      */
     public function addModule($module)
     {
-        $this->modules[] = $module;
+        $instance = $this->moduleResolver->resolve($module);
+        $this->modulesInstances[get_class($instance)] = $instance;
         return $this;
     }
 
@@ -77,7 +77,18 @@ class DebugBar implements Renderable
      */
     public function addModules(array $modules)
     {
-        $this->modules = array_merge($this->modules, $modules);
+        foreach ($modules as $module) {
+            $this->addModule($module);
+        }
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function addDefaultModules()
+    {
+        $this->setModules($this->defaultModules);
         return $this;
     }
 
@@ -89,7 +100,10 @@ class DebugBar implements Renderable
      */
     public function setModules(array $modules)
     {
-        $this->modules = $modules;
+        $this->modulesInstances = [];
+        foreach ($modules as $module) {
+            $this->addModule($module);
+        }
         return $this;
     }
 
@@ -101,7 +115,7 @@ class DebugBar implements Renderable
      * @throws InvalidModuleException
      * @throws ModuleNotFoundException
      */
-    public function getModule($module)
+    public function getModule(string $module)
     {
         return $this->getModuleInstance($module);
     }
@@ -119,23 +133,20 @@ class DebugBar implements Renderable
         $content = '';
         $tabs = [];
 
-        foreach ($this->modules as $module) {
+        foreach ($this->modulesInstances as $module) {
+            $module->preRender();
 
-            $module_obj = $this->getModuleInstance($module);
-            $module_obj->preRender();
-
-            if ($module_obj->isRenderDisabled()) {
+            if ($module->isRenderDisabled()) {
                 continue;
             }
 
-            $tab = $module_obj->renderTitle();
-            $logo = $module_obj->renderLogo();
+            $tab = $module->renderTitle();
+            $logo = $module->renderLogo();
             if (!empty($tab) && !empty($logo)) {
                 $tab = $logo.' '.$tab;
             }
-            $tabs[$module_obj->getName()] = $tab;
-
-            $content .= $this->renderModule($module_obj);
+            $tabs[$module->getName()] = $tab;
+            $content .= $this->renderModule($module);
         }
 
         $layout_content = new Collection([
@@ -152,25 +163,20 @@ class DebugBar implements Renderable
     /**
      * Get module instance
      *
-     * @param $module
+     * @param string $module
      * @return mixed
      * @throws InvalidModuleException
      * @throws ModuleNotFoundException
+     * @throws \ReflectionException
      */
-    protected function getModuleInstance($module)
+    protected function getModuleInstance(string $module)
     {
-        if (!in_array($module, $this->modules, true)) {
-            throw new ModuleNotFoundException($module);
+        if (!array_key_exists($module, $this->modulesInstances)) {
+            $module = $this->moduleResolver->resolve($module);
+            $this->modulesInstances[get_class($module)] = $module;
         }
 
-        if (!isset($this->modules_instances[$module])) {
-            $this->modules_instances[$module] = new $module($this->storage);
-            if (!$this->modules_instances[$module] instanceof AbstractModule) {
-                throw new InvalidModuleException($module);
-            }
-        }
-
-        return $this->modules_instances[$module];
+        return $this->modulesInstances[$module];
     }
 
     /**

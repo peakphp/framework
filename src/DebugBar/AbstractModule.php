@@ -22,42 +22,30 @@ abstract class AbstractModule implements Renderable, Initializable
     protected $data;
 
     /**
-     * @var SessionStorage
-     */
-    private $storage;
-
-    /**
-     * @var array
-     */
-    protected $default_storage_data = [];
-
-    /**
      * Disable render flag
      * @var bool
      */
-    protected $disable_render = false;
+    protected $disableRender = false;
 
     /**
      * Module absolute path
      * @var string
      */
-    private $module_path;
+    protected $modulePath;
 
     /**
      * Use View/assets/default-logo.svg if true and no module logo.svg file found
      * @var bool
      */
-    protected $use_default_logo = false;
+    protected $useDefaultLogo = false;
 
     /**
      * DebugBarBlock constructor.
      */
-    public function __construct(SessionStorage $storage)
+    public function __construct()
     {
-        $this->module_path = $this->getModulePath();
+        $this->modulePath = $this->getModulePath();
         $this->data = new Collection();
-        $this->storage = $storage;
-        $this->initializeDefaultDataStorage();
         $this->initialize();
     }
 
@@ -68,48 +56,16 @@ abstract class AbstractModule implements Renderable, Initializable
     abstract public function renderTitle();
 
     /**
-     * Initiate module data storage
-     */
-    protected function initializeDefaultDataStorage()
-    {
-        if (!isset($this->storage[$this->getName()]) && !empty($this->default_storage_data)) {
-            $this->saveToStorage($this->default_storage_data);
-        }
-    }
-
-    /**
-     * Get module storage
-     *
-     * @return mixed
-     */
-    protected function getStorage()
-    {
-        return $this->storage[$this->getName()];
-    }
-
-    /**
-     * Save data to module storage
-     *
-     * @param $data
-     */
-    protected function saveToStorage($data)
-    {
-        $this->storage->mergeWith([
-            $this->getName() => $data
-        ])->save();
-    }
-
-    /**
      * Get module absolute path
      *
      * @return string
      */
     protected function getModulePath()
     {
-        if (empty($this->module_path)) {
-            $this->module_path = dirname(getClassFilePath($this));
+        if (empty($this->modulePath)) {
+            $this->modulePath = dirname(getClassFilePath($this));
         }
-        return $this->module_path;
+        return $this->modulePath;
     }
 
     /**
@@ -140,7 +96,7 @@ abstract class AbstractModule implements Renderable, Initializable
      */
     protected function disableRender($bool = true)
     {
-        $this->disable_render = $bool;
+        $this->disableRender = $bool;
         return $this;
     }
 
@@ -151,13 +107,14 @@ abstract class AbstractModule implements Renderable, Initializable
      */
     public function isRenderDisabled()
     {
-        return $this->disable_render;
+        return $this->disableRender;
     }
 
     /**
      * Get module name
      *
      * @return string
+     * @throws \ReflectionException
      */
     public function getName()
     {
@@ -174,7 +131,7 @@ abstract class AbstractModule implements Renderable, Initializable
         $logo_file = $this->getModulePath().'/logo.svg';
         if (file_exists($logo_file)) {
             return file_get_contents($logo_file);
-        } elseif ($this->use_default_logo) {
+        } elseif ($this->useDefaultLogo) {
             return file_get_contents(__DIR__.'/View/assets/default-logo.svg');
         }
         return '';

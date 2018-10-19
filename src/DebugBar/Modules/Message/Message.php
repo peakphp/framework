@@ -2,11 +2,11 @@
 
 namespace Peak\DebugBar\Modules\Message;
 
-use Peak\DebugBar\AbstractModule;
+use Peak\DebugBar\AbstractPersistentModule;
 use Psr\Log\LoggerInterface;
 use Psr\Log\LoggerTrait;
 
-class Message extends AbstractModule implements LoggerInterface
+class Message extends AbstractPersistentModule implements LoggerInterface
 {
     use LoggerTrait;
 
