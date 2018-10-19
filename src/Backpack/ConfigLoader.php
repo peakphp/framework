@@ -55,21 +55,21 @@ class ConfigLoader implements ResourceLoader
     }
 
     /**
-     * @param string $cachePath
-     * @param string $cacheId
-     * @param $cacheTtl
-     * @param CacheInterface|null $cacheDriver
+     * @param string $path
+     * @param string $uid
+     * @param $ttlInSec
+     * @param CacheInterface|null $driver
      * @return $this
      */
-    public function setCache(string $cachePath, string $cacheId, $cacheTtl, CacheInterface $cacheDriver = null)
+    public function setCache(string $path, string $uid, $ttlInSec, CacheInterface $driver = null)
     {
         if (isset($this->configFactory)) {
             trigger_error('Cache configurations will be ignored because ConfigFactory have been set.');
         }
-        $this->cachePath = $cachePath;
-        $this->cacheId = $cacheId;
-        $this->cacheTtl = $cacheTtl;
-        $this->cacheDriver = $cacheDriver;
+        $this->cachePath = $path;
+        $this->cacheId = $uid;
+        $this->cacheTtl = $ttlInSec;
+        $this->cacheDriver = $driver;
         return $this;
     }
 
