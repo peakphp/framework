@@ -38,7 +38,6 @@ class ExecutionTime extends AbstractPersistentModule
      */
     public function initialize()
     {
-        print_r($this->storage);
         if (isset($_SERVER['REQUEST_TIME_FLOAT'])) {
             $this->time = filter_var($_SERVER['REQUEST_TIME_FLOAT']);
         } elseif (isset($_SERVER['REQUEST_TIME'])) {
