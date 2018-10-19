@@ -9,7 +9,7 @@ use Peak\DebugBar\AbstractModule;
 
 /**
  * Class AppContainer
- * @package Peak\Bedrock\View\Helper\DebugBar\Modules\AppContainer
+ * @package Peak\Backpack\Bedrock\DebugBar\AppContainer
  */
 class AppContainer extends AbstractModule
 {

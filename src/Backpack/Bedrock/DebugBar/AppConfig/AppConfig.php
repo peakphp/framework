@@ -11,7 +11,7 @@ use Peak\DebugBar\AbstractStorage;
 
 /**
  * Class AppConfig
- * @package Peak\Bedrock\View\Helper\DebugBar\Modules\AppConfig
+ * @package Peak\Backpack\Bedrock\DebugBar\AppConfig
  */
 class AppConfig extends AbstractModule
 {
