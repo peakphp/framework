@@ -13,7 +13,6 @@ use Peak\Blueprint\Common\Bootable;
  */
 class Session implements Bootable
 {
-
     /**
      * @var Application
      */
