@@ -40,4 +40,46 @@ class RuleDefinitionTest extends TestCase
 
         $this->assertInstanceOf(\Peak\Validation\Rule\StrLength::class, $rule->getValidator());
     }
+
+    /**
+     * @expectedException InvalidArgumentException
+     */
+    function testInvalidArgumentException1()
+    {
+        new RuleArrayDefinition([]);
+    }
+
+    /**
+     * @expectedException InvalidArgumentException
+     */
+    function testInvalidArgumentException2()
+    {
+        new RuleArrayDefinition([
+            'rule' => 'test',
+            'options' => 1,
+        ]);
+    }
+
+    /**
+     * @expectedException InvalidArgumentException
+     */
+    function testInvalidArgumentException3()
+    {
+        new RuleArrayDefinition([
+            'rule' => 'test',
+            'options' => [],
+            'flags' => 'a',
+        ]);
+    }
+
+    /**
+     * @expectedException InvalidArgumentException
+     */
+    function testInvalidArgumentException4()
+    {
+        new RuleArrayDefinition([
+            'rule' => 'test',
+            'error' => []
+        ]);
+    }
 }
