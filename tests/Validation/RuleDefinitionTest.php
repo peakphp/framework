@@ -34,7 +34,6 @@ class RuleDefinitionTest extends TestCase
                 'options' => [],
                 'flags' => null,
                 'context' => [],
-                'error' => 'Oops'
             ])
         );
 
