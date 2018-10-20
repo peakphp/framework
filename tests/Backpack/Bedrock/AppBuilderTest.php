@@ -9,6 +9,8 @@ use \Peak\Bedrock\Http\Request\HandlerResolver;
 use \Peak\Di\Container;
 use \Psr\Container\ContainerInterface;
 
+require FIXTURES_PATH.'/application/CustomKernel.php';
+
 class AppBuilderTest extends TestCase
 {
     public function testDefault()
@@ -81,6 +83,15 @@ class AppBuilderTest extends TestCase
         $this->assertTrue($app->getKernel()->getEnv() === 'foobar');
     }
 
+    public function testSetKernelClass()
+    {
+        $app = (new AppBuilder())
+            ->setKernelClass(CustomKernel::class)
+            ->build();
+
+        $this->assertInstanceOf(CustomKernel::class, $app->getKernel());
+    }
+
     public function testSetProps()
     {
         $app = (new AppBuilder())
@@ -123,6 +134,19 @@ class AppBuilderTest extends TestCase
         $container = $this->createMock(Container::class);
         $app = (new AppBuilder())
             ->setContainer($container)
+            ->setKernel($kernel)
+            ->build();
+    }
+
+    /**
+     * @expectedException \PHPUnit\Framework\Error\Error
+     */
+    public function testTriggerKernelError3()
+    {
+        $kernel = $this->createMock(Kernel::class);
+        $container = $this->createMock(Container::class);
+        $app = (new AppBuilder())
+            ->setKernelClass(Kernel::class)
             ->setKernel($kernel)
             ->build();
     }

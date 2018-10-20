@@ -40,9 +40,16 @@ class AppBuilder
     private $handlerResolver;
 
     /**
+     * Application class
      * @var string
      */
     private $class;
+
+    /**
+     * Kernel class
+     * @var Kernel
+     */
+    private $kernelClass;
 
     /**
      * @var Closure
@@ -83,6 +90,16 @@ class AppBuilder
     public function setKernel(Kernel $kernel)
     {
         $this->kernel = $kernel;
+        return $this;
+    }
+
+    /**
+     * @param string $kernelClass
+     * @return $this
+     */
+    public function setKernelClass(string $kernelClass)
+    {
+        $this->kernelClass = $kernelClass;
         return $this;
     }
 
@@ -131,11 +148,12 @@ class AppBuilder
     {
         $kernel = $this->kernel;
         if (!isset($kernel)) {
-            $kernel = new \Peak\Bedrock\Kernel(
+            $kernelClass = $this->kernelClass ?? \Peak\Bedrock\Kernel::class;
+            $kernel = new $kernelClass(
                 $this->env ?? 'prod',
                 $this->container ?? new Container()
             );
-        } elseif (isset($this->container) || isset($this->env)) {
+        } elseif (isset($this->container) || isset($this->env) || isset($this->kernelClass)) {
             $this->triggerKernelError();
         }
 
@@ -163,6 +181,9 @@ class AppBuilder
         }
         if (isset($this->env)) {
             trigger_error('Env '.$msgErrorSuffix);
+        }
+        if (isset($this->kernelClass)) {
+            trigger_error('Kernel class '.$msgErrorSuffix);
         }
     }
 
