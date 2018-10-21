@@ -19,12 +19,27 @@ class Routing implements Bootable
     private $app;
 
     /**
+     * @var string
+     */
+    private $routesPropName;
+
+    /**
+     * @var string
+     */
+    private $routesPathPrefixPropName;
+
+    /**
      * Routing constructor.
      * @param Application $app
      */
-    public function __construct(Application $app)
-    {
+    public function __construct(
+        Application $app,
+        string $routesPropName = 'routes',
+        string $routesPathPrefixPropName = 'routes_path_prefix'
+    ) {
         $this->app = $app;
+        $this->routesPropName = $routesPropName;
+        $this->routesPathPrefixPropName = $routesPathPrefixPropName;
     }
 
     /**
@@ -34,9 +49,9 @@ class Routing implements Bootable
     public function boot()
     {
         $routes = [];
-        $pathPrefix = $this->app->getProp('routes_path_prefix', '');
+        $pathPrefix = $this->app->getProp($this->routesPathPrefixPropName, '');
 
-        foreach ($this->app->getProp('routes', []) as $route) {
+        foreach ($this->app->getProp($this->routesPropName, []) as $route) {
             $this->validate($route);
             $routes[] = $this->app->createRoute(
                 $route['method'] ?? null,
