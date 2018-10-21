@@ -37,7 +37,7 @@ class Routing implements Bootable
             $routes = [];
             foreach ($this->app->getProp('routes') as $route) {
                 $this->validate($route);
-                $route[] = $this->app->createRoute(
+                $routes[] = $this->app->createRoute(
                     $route['method'] ?? null,
                     $route['path'],
                     $route['stack']
