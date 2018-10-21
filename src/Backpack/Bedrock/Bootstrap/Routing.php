@@ -34,7 +34,7 @@ class Routing implements Bootable
             foreach ($this->app->getProp('routes') as $route) {
                 $this->validate($route);
                 $route[] = $this->app->createRoute(
-                    $route['method'] ?? 'GET',
+                    $route['method'] ?? null,
                     $route['path'],
                     $route['stack']
                 );
