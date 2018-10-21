@@ -16,20 +16,26 @@ class PhpSettings implements Bootable
     private $app;
 
     /**
-     * PhpSettings constructor.
+     * @var string
      */
-    public function __construct(Application $app)
+    private $phpPropName;
+
+    /**
+     * PhpSettings constructor.
+     * @param Application $app
+     * @param string $phpPropName
+     */
+    public function __construct(Application $app, string $phpPropName = 'php')
     {
         $this->app = $app;
+        $this->phpPropName = $phpPropName;
     }
 
     /**
-     * Look for php prop to configure php setting on the fly via ini_set
+     * Configure php setting on the fly via ini_set
      */
     public function boot()
     {
-        if ($this->app->hasProp('php')) {
-            new PhpIni($this->app->getProp('php'));
-        }
+        new PhpIni($this->app->getProp($this->phpPropName, []));
     }
 }

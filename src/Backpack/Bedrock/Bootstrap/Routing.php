@@ -31,6 +31,8 @@ class Routing implements Bootable
     /**
      * Routing constructor.
      * @param Application $app
+     * @param string $routesPropName
+     * @param string $routesPathPrefixPropName
      */
     public function __construct(
         Application $app,
@@ -43,7 +45,7 @@ class Routing implements Bootable
     }
 
     /**
-     * Look for "routes" config in application properties
+     * Look for routes to register in application properties
      * @throws \Exception
      */
     public function boot()

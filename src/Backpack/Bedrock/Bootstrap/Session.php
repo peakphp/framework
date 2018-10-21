@@ -16,16 +16,22 @@ class Session implements Bootable
     /**
      * @var Application
      */
-    private $application;
+    private $app;
+
+    /**
+     * @var string
+     */
+    private $sessionPropName;
 
     /**
      * Session constructor.
-     * @param Application $application
-     * @throws \Exception
+     * @param Application $app
+     * @param string $sessionPropName
      */
-    public function __construct(Application $application)
+    public function __construct(Application $app, string $sessionPropName = 'session')
     {
-        $this->application = $application;
+        $this->app = $app;
+        $this->sessionPropName = $sessionPropName;
     }
     /**
      * Setup and start session from app props
@@ -44,24 +50,24 @@ class Session implements Bootable
         }
 
         // save path
-        if ($this->application->hasProp('session.save_path')) {
-            session_save_path($this->application->getProp('session.save_path'));
+        if ($this->app->hasProp($this->sessionPropName.'.save_path')) {
+            session_save_path($this->app->getProp($this->sessionPropName.'.save_path'));
         }
 
         // save handler class
-        if ($this->application->hasProp('session.save_handler')) {
-            session_set_save_handler($this->application->getProp('session.save_handler'));
+        if ($this->app->hasProp($this->sessionPropName.'.save_handler')) {
+            session_set_save_handler($this->app->getProp($this->sessionPropName.'.save_handler'));
         }
 
         // name the session
-        if ($this->application->hasProp('session.name')) {
-            session_name($this->application->getProp('session.name'));
+        if ($this->app->hasProp($this->sessionPropName.'.name')) {
+            session_name($this->app->getProp($this->sessionPropName.'.name'));
         }
 
         // session options
         $options = [];
-        if ($this->application->hasProp('session.options')) {
-            $options = $this->application->getProp('session.options');
+        if ($this->app->hasProp($this->sessionPropName.'.options')) {
+            $options = $this->app->getProp($this->sessionPropName.'.options');
         }
 
         // start the session
