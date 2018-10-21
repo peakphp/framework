@@ -7,6 +7,10 @@ namespace Peak\Backpack\Bedrock\Bootstrap;
 use Peak\Bedrock\Application\Application;
 use Peak\Blueprint\Common\Bootable;
 
+/**
+ * Class Routing
+ * @package Peak\Backpack\Bedrock\Bootstrap
+ */
 class Routing implements Bootable
 {
     /**
@@ -51,9 +55,9 @@ class Routing implements Bootable
     {
         if (!is_array($route)) {
             throw new \Exception('Route definition must be an array!');
-        } elseif ($route['path']) {
+        } elseif (!isset($route['path'])) {
             throw new \Exception('Route definition must have a path!');
-        } elseif ($route['stack']) {
+        } elseif (!isset($route['stack'])) {
             throw new \Exception('Route definition must have a stack!');
         }
     }
