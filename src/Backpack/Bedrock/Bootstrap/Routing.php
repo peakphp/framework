@@ -33,18 +33,19 @@ class Routing implements Bootable
      */
     public function boot()
     {
-        if ($this->app->hasProp('routes')) {
-            $routes = [];
-            foreach ($this->app->getProp('routes') as $route) {
-                $this->validate($route);
-                $routes[] = $this->app->createRoute(
-                    $route['method'] ?? null,
-                    $route['path'],
-                    $route['stack']
-                );
-            }
-            $this->app->stack($routes);
+        $routes = [];
+        $pathPrefix = $this->app->getProp('routes_path_prefix', '');
+
+        foreach ($this->app->getProp('routes', []) as $route) {
+            $this->validate($route);
+            $routes[] = $this->app->createRoute(
+                $route['method'] ?? null,
+                $pathPrefix.$route['path'],
+                $route['stack']
+            );
         }
+
+        $this->app->stack($routes);
     }
 
     /**
