@@ -46,10 +46,8 @@ class CallableMiddleware implements MiddlewareInterface
             $return = call_user_func_array($fn, [$request, $handler]);
             if (null === $return) {
                 return $handler->handle($request);
-            } else {
-                return $return;
             }
-//            $fn();
+            return $return;
         }
         return $fn($request, $handler);
     }
