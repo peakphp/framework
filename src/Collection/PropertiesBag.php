@@ -63,7 +63,7 @@ class PropertiesBag implements Dictionary
      * @return mixed
      * @throws Exception
      */
-    public function __get(string $property)
+    public function &__get(string $property)
     {
         if (!array_key_exists($property, $this->properties)) {
             throw new Exception('Property '.$property.' not found');
