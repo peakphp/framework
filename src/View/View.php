@@ -2,7 +2,7 @@
 
 namespace Peak\View;
 
-use Peak\Common\Traits\Injectable;
+use Peak\Common\Traits\Macro;
 use Peak\View\Exception\FileNotFoundException;
 
 /**
@@ -11,7 +11,7 @@ use Peak\View\Exception\FileNotFoundException;
  */
 class View
 {
-    use Injectable;
+    use Macro;
 
     /**
      * @var array
@@ -60,6 +60,17 @@ class View
     public function __isset(string $var)
     {
         return array_key_exists($var, $this->vars);
+    }
+
+    /**
+     * Call a macro
+     * @param string $macroName
+     * @param array $args
+     * @return mixed
+     */
+    public function __call(string $macroName, array $args)
+    {
+        return $this->callMacro($macroName, $args);
     }
 
     /**
