@@ -53,13 +53,23 @@ class MacroResolver implements ResourceResolver
      */
     public function resolverString($macro)
     {
+        $macroClosure = $macro;
+
         // resolve using a container
         if (null !== $this->container) {
             if ($this->container->has($macro)) { // psr-11
-                return $this->container->get($macro);
+                $macroClosure = $this->container->get($macro);
             } elseif ($this->container instanceof \Peak\Di\Container) {
-                return $this->container->create($macro);
+                $macroClosure = $this->container->create($macro);
             }
+        } elseif (class_exists($macro)) {
+            $macro = new $macro();
         }
+
+        if (is_object($macroClosure) && is_callable($macroClosure)) {
+            return Closure::fromCallable($macroClosure);
+        }
+
+        return $macroClosure;
     }
 }
