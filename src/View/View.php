@@ -2,7 +2,8 @@
 
 namespace Peak\View;
 
-use \Peak\Common\Traits\Injectable;
+use Peak\Common\Traits\Injectable;
+use Peak\View\Exception\FileNotFoundException;
 
 /**
  * Class View
@@ -15,22 +16,17 @@ class View
     /**
      * @var array
      */
-    private $data;
-
-    /**
-     * @var array
-     */
     private $templateSources;
-
-    /**
-     * @var
-     */
-    private $parent;
 
     /**
      * @var array
      */
     private $vars;
+
+    /**
+     * @var string
+     */
+    private $layoutContent;
 
     /**
      * View constructor.
@@ -87,7 +83,7 @@ class View
             if (is_array($source)) {
                 ob_start();
                 $this->recursiveRender($source);
-                $this->childContent = ob_get_clean();
+                $this->layoutContent = ob_get_clean();
                 $this->renderFile($layout);
                 continue;
             }
@@ -98,12 +94,12 @@ class View
 
     /**
      * @param string $file
-     * @throws \Exception
+     * @throws FileNotFoundException
      */
     private function renderFile(string $file)
     {
         if (!file_exists($file)) {
-            throw new \Exception('View source file "'.$file.'" not found');
+            throw new FileNotFoundException($file);
         }
         include $file;
     }
