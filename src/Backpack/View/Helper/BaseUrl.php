@@ -22,8 +22,8 @@ class BaseUrl
     public function __construct(Application $app)
     {
         $this->server = $s = filter_var_array($_SERVER);
-        if ($app->hasProp('view.base_url')) {
-            $this->publicPath = relativePath($app->getProp('view.base_url'));
+        if ($app->hasProp('routes_path_prefix')) {
+            $this->publicPath = relativePath($app->getProp('routes_path_prefix'));
         }
     }
 
