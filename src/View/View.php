@@ -24,6 +24,11 @@ class View
     private $vars;
 
     /**
+     * @var array
+     */
+    private $helpers = [];
+
+    /**
      * @var string
      */
     private $layoutContent;
@@ -68,9 +73,23 @@ class View
      * @param array $args
      * @return mixed
      */
-    public function __call(string $macroName, array $args)
+    public function __call(string $method, array $args)
     {
-        return $this->callMacro($macroName, $args);
+        if ($this->hasMacro($method)) {
+            return $this->callMacro($method, $args);
+        } elseif(isset($this->helpers[$method])) {
+            return $this->helpers[$method];
+        }
+
+        return new \RuntimeException('No macro or helper found for "'.$method.'"');
+    }
+
+    /**
+     * @param array $helpers
+     */
+    public function setHelpers(array $helpers)
+    {
+        $this->helpers = $helpers;
     }
 
     /**
@@ -90,7 +109,6 @@ class View
     private function recursiveRender(array $templateSources)
     {
         foreach ($templateSources as $layout => $source) {
-
             if (is_array($source)) {
                 ob_start();
                 $this->recursiveRender($source);
