@@ -1,6 +1,6 @@
 <?php
 
-namespace Peak\Backpack;
+namespace Peak\Backpack\View;
 
 use Peak\View\HelperResolver;
 use Peak\View\View;
