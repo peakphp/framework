@@ -23,7 +23,7 @@ class BaseUrl
     {
         $this->server = $s = filter_var_array($_SERVER);
         if ($app->hasProp('routes_path_prefix')) {
-            $this->publicPath = relativePath($app->getProp('routes_path_prefix'));
+            $this->publicPath = $app->getProp('routes_path_prefix');
         }
     }
 
