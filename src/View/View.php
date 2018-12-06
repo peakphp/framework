@@ -68,7 +68,7 @@ class View
     }
 
     /**
-     * Call a macro
+     * Call a macro or helper in that order
      * @param string $macroName
      * @param array $args
      * @return mixed
@@ -78,7 +78,7 @@ class View
         if ($this->hasMacro($method)) {
             return $this->callMacro($method, $args);
         } elseif(isset($this->helpers[$method])) {
-            return $this->helpers[$method];
+            return call_user_func_array($this->helpers[$method], $args);
         }
 
         return new \RuntimeException('No macro or helper found for "'.$method.'"');
