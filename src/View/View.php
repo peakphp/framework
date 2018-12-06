@@ -35,8 +35,8 @@ class View
 
     /**
      * View constructor.
-     * @param $data
-     * @param $sources
+     * @param array $vars
+     * @param array $templateSources
      */
     public function __construct(array $vars, array $templateSources)
     {
