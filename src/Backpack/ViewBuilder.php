@@ -64,12 +64,34 @@ class ViewBuilder
     }
 
     /**
+     * @param string $name
+     * @param $macro
+     * @return $this
+     */
+    public function setMacro(string $name, $macro)
+    {
+        $this->macros[$name] = $macro;
+        return $this;
+    }
+
+    /**
      * @param array $helpers
      * @return $this
      */
     public function setHelpers(array $helpers)
     {
         $this->helpers = $helpers;
+        return $this;
+    }
+
+    /**
+     * @param string $name
+     * @param $helper
+     * @return $this
+     */
+    public function setHelper(string $name, $helper)
+    {
+        $this->helpers[$name] = $helper;
         return $this;
     }
 
