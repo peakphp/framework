@@ -1,7 +1,7 @@
 <?php
 
 use \PHPUnit\Framework\TestCase;
-use \Peak\Backpack\Bedrock\AppBuilder;
+use \Peak\Backpack\AppBuilder;
 use \Peak\Blueprint\Bedrock\Application as ApplicationBlueprint;
 use \Peak\Bedrock\Application\Application;
 use \Peak\Bedrock\Kernel;
@@ -9,7 +9,7 @@ use \Peak\Bedrock\Http\Request\HandlerResolver;
 use \Peak\Di\Container;
 use \Psr\Container\ContainerInterface;
 
-require FIXTURES_PATH.'/application/CustomKernel.php';
+require FIXTURES_PATH . '/application/CustomKernel.php';
 
 class AppBuilderTest extends TestCase
 {
@@ -63,10 +63,10 @@ class AppBuilderTest extends TestCase
     public function testSetAppName()
     {
         $app = (new AppBuilder())
-            ->setClassName(\Peak\Backpack\Bedrock\Application::class)
+            ->setClassName(\Peak\Backpack\Application::class)
             ->build();
 
-        $this->assertInstanceOf(\Peak\Backpack\Bedrock\Application::class, $app);
+        $this->assertInstanceOf(\Peak\Backpack\Application::class, $app);
     }
 
     public function testSetKernel()

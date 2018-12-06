@@ -1,6 +1,6 @@
 <?php
 
-namespace Peak\Backpack\Bedrock;
+namespace Peak\Backpack;
 
 use Peak\Bedrock\Http\StackFactory;
 use Peak\Di\Container;

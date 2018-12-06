@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Peak\Backpack\Bedrock;
+namespace Peak\Backpack;
 
 use Peak\Bedrock\Http\Request\HandlerResolver;
 use Peak\Bedrock\Http\Stack;

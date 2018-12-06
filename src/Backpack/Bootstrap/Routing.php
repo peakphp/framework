@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Peak\Backpack\Bedrock\Bootstrap;
+namespace Peak\Backpack\Bootstrap;
 
 use Peak\Bedrock\Application\Application;
 use Peak\Blueprint\Common\Bootable;

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Peak\Backpack\Bedrock\DebugBar\AppContainer;
+namespace Peak\Backpack\DebugBar\AppContainer;
 
 use Peak\Blueprint\Bedrock\Application;
 use Peak\DebugBar\AbstractModule;

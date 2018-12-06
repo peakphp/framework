@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Peak\Backpack\Bedrock\DebugBar\AppConfig;
+namespace Peak\Backpack\DebugBar\AppConfig;
 
 use Peak\Blueprint\Bedrock\Application;
 use Peak\Collection\CollectionFlattener;
