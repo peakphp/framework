@@ -35,11 +35,11 @@ class HelperResolver implements ResourceResolver
     public function resolve($helper)
     {
         if (is_string($helper)) {
-            $closure = $this->resolverString($helper);
+            $helper = $this->resolverString($helper);
         }
 
         if (!is_object($helper)) {
-            throw new InvalidHelperException($closure);
+            throw new InvalidHelperException($helper);
         }
 
         return $helper;
