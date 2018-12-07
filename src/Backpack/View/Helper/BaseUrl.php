@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Backpack\View\Helper;
 
 use Peak\Blueprint\Bedrock\Application;
