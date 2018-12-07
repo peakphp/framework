@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\View;
 
 use Peak\Common\Traits\Macro;
@@ -21,7 +23,7 @@ class View
     /**
      * @var array
      */
-    private $vars;
+    private $vars = [];
 
     /**
      * @var array
@@ -34,14 +36,21 @@ class View
     private $layoutContent;
 
     /**
+     * @var Presentation
+     */
+    private $presentation;
+
+    /**
      * View constructor.
      * @param array $vars
      * @param array $templateSources
      */
-    public function __construct(array $vars, array $templateSources)
+    public function __construct(?array $vars, Presentation $presentation)
     {
-        $this->vars = $vars;
-        $this->templateSources = $templateSources;
+        if (isset($vars)) {
+            $this->vars = $vars;
+        }
+        $this->presentation = $presentation;
     }
 
     /**
@@ -98,7 +107,7 @@ class View
     public function render()
     {
         ob_start();
-        $this->recursiveRender($this->templateSources);
+        $this->recursiveRender($this->presentation->getSources());
         return ob_get_clean();
     }
 

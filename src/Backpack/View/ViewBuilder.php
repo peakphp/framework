@@ -1,8 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peak\Backpack\View;
 
 use Peak\View\HelperResolver;
+use Peak\View\Presentation;
 use Peak\View\View;
 
 /**
@@ -17,9 +20,9 @@ class ViewBuilder
     private $vars = [];
 
     /**
-     * @var array
+     * @var Presentation
      */
-    private $templatesSources = [];
+    private $presentation;
 
     /**
      * @var array
@@ -46,11 +49,12 @@ class ViewBuilder
     }
 
     /**
-     * @param mixed $templatesSources
+     * @param Presentation $presentation
+     * @return $this
      */
-    public function setTemplatesSources($templatesSources)
+    public function setPresentation(Presentation $presentation)
     {
-        $this->templatesSources = $templatesSources;
+        $this->presentation = $presentation;
         return $this;
     }
 
@@ -111,7 +115,7 @@ class ViewBuilder
      */
     public function build(): View
     {
-        $view = new View($this->vars, $this->templatesSources);
+        $view = new View($this->vars, $this->presentation);
 
         foreach ($this->helpers as $helperName => $helper) {
             if (isset($this->helperResolver)) {
