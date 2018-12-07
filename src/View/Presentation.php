@@ -36,7 +36,7 @@ class Presentation
     }
 
     /**
-     * @param array $templatesSources
+     * @param array $sources
      * @param string $basePath
      * @return array
      */
