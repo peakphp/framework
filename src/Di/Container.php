@@ -7,6 +7,7 @@ namespace Peak\Di;
 use Peak\Di\Binding\Factory;
 use Peak\Di\Binding\Prototype;
 use Peak\Di\Binding\Singleton;
+use Peak\Di\Exception\NoClassDefinitionException;
 use Peak\Di\Exception\NotFoundException;
 use Psr\Container\ContainerInterface;
 use \Closure;
@@ -82,8 +83,8 @@ class Container implements ContainerInterface
      * The generated instance is not stored, but may use stored
      * instance(s) as dependency when needed
      *
-     * @param  string $class     The class name to instantiate
-     * @param  array  $args      Constructor argument(s) for parent and child if any
+     * @param $class
+     * @param array $args
      * @param  mixed  $explicit  Determine which instance should be use for an interface name.
      *                           Required when you have multiple stored instances using the same interface name.
      *                           ex: ['myinterface' => 'myinstance3']
@@ -92,6 +93,7 @@ class Container implements ContainerInterface
      *                                   return new MyClass(); // myclass implement myinterface
      *                               }]
      * @return mixed|object
+     * @throws NoClassDefinitionException
      * @throws \ReflectionException
      */
     public function create($class, $args = [], $explicit = null)
@@ -100,7 +102,7 @@ class Container implements ContainerInterface
         if (!$this->auto_wiring) {
             $def = $this->getDefinition($class);
             if (is_null($def)) {
-                throw new \Exception(__CLASS__.': no definition found for '.$class);
+                throw new NoClassDefinitionException($class);
             }
             return $this->binding_resolver->resolve(
                 $this->getDefinition($class),
@@ -134,10 +136,13 @@ class Container implements ContainerInterface
     }
 
     /**
-     * Same as instantiate class but also store it with add
+     * Same as create() but also store the created object before returning it
      *
-     * @see instantiate() for params
+     * @param $class
+     * @param array $args
+     * @param array $explicit
      * @return mixed|object
+     * @throws NoClassDefinitionException
      * @throws \ReflectionException
      */
     public function createAndStore($class, $args = [], $explicit = [])
@@ -150,15 +155,16 @@ class Container implements ContainerInterface
     /**
      * Resolve a stored definition
      *
-     * @param string $definition
+     * @param $definition
      * @param array $args
-     * @throws \Exception
+     * @return mixed
+     * @throws NoClassDefinitionException
      */
     public function resolve($definition, $args = [])
     {
         $def = $this->getDefinition($definition);
         if (is_null($def)) {
-            throw new \Exception('No definition found for '.$definition);
+            throw new NoClassDefinitionException($definition);
         }
 
         return $this->binding_resolver->resolve($def, $this, $args);
@@ -167,7 +173,8 @@ class Container implements ContainerInterface
     /**
      * Has object instance
      *
-     * @param  string $id
+     * @param string $id
+     * @return bool
      */
     public function has($id)
     {
@@ -178,7 +185,7 @@ class Container implements ContainerInterface
      * Get an instance if exists, otherwise return null
      *
      * @param  string $id
-     * @return object|null
+     * @return object
      * @throws NotFoundException
      */
     public function get($id)
@@ -197,9 +204,9 @@ class Container implements ContainerInterface
      *
      * @param  object $object
      * @param  string|null $alias
-     * @return $this
+     * @return Container
      */
-    public function set($object, $alias = null)
+    public function set($object, string $alias = null)
     {
         if (!is_object($object)) {
             throw new InvalidArgumentException(__CLASS__.': set() first argument must be an object.');
@@ -226,7 +233,7 @@ class Container implements ContainerInterface
      * Delete an instance if exists.
      *
      * @param  string $id
-     * @return $this
+     * @return Container
      */
     public function delete($id)
     {
@@ -361,7 +368,7 @@ class Container implements ContainerInterface
         $this->definitions[$name] = $definition;
         return $this;
     }
-
+«
     /**
      * Set definitions. Use definitions when autowiring is off
      *
