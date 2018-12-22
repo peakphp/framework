@@ -368,7 +368,7 @@ class Container implements ContainerInterface
         $this->definitions[$name] = $definition;
         return $this;
     }
-«
+
     /**
      * Set definitions. Use definitions when autowiring is off
      *
