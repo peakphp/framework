@@ -3,9 +3,6 @@
 use \PHPUnit\Framework\TestCase;
 use \Peak\Backpack\ConfigLoader;
 
-/**
- * Class KernelTest
- */
 class ConfigLoaderTest extends TestCase
 {
     public function testLoad()
