@@ -7,11 +7,7 @@ namespace Peak\View;
 use Peak\Common\Traits\Macro;
 use Peak\View\Exception\FileNotFoundException;
 
-/**
- * Class View
- * @package Peak\View
- */
-class View
+class View implements \Peak\Blueprint\View\View
 {
     use Macro;
 
@@ -42,8 +38,8 @@ class View
 
     /**
      * View constructor.
-     * @param array $vars
-     * @param array $templateSources
+     * @param array|null $vars
+     * @param Presentation $presentation
      */
     public function __construct(?array $vars, Presentation $presentation)
     {
@@ -71,7 +67,7 @@ class View
      * @param string $var
      * @return bool
      */
-    public function __isset(string $var)
+    public function __isset(string $var): bool
     {
         return array_key_exists($var, $this->vars);
     }
@@ -102,9 +98,10 @@ class View
     }
 
     /**
+     * @return string
      * @throws \Exception
      */
-    public function render()
+    public function render(): string
     {
         ob_start();
         $this->recursiveRender($this->presentation->getSources());
