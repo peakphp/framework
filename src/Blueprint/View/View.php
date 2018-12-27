@@ -27,4 +27,9 @@ interface View
      * @return string
      */
     public function render(): string;
+
+    /**
+     * @return array
+     */
+    public function getVars(): array;
 }
