@@ -73,6 +73,21 @@ class View implements \Peak\Blueprint\View\View
     }
 
     /**
+     * @return array
+     */
+    public function getVars(): array
+    {
+        return $this->vars;
+    }
+
+    /**
+     * @return Presentation
+     */
+    public function getPresentation()
+    {
+        return $this->presentation;
+    }
+    /**
      * Call a macro or helper in that order
      * @param string $macroName
      * @param array $args
