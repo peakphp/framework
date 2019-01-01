@@ -3,7 +3,7 @@
 namespace Peak\Common\Traits;
 
 use \Closure;
-use \RunTimeException;
+use \RuntimeException;
 
 /**
  * Trait Macro
@@ -17,9 +17,8 @@ trait Macro
     private $macros = [];
 
     /**
-     * Add a macro
      * @param string $name
-     * @param callable $macroCallable
+     * @param Closure $macroCallable
      * @return $this
      */
     public function addMacro(string $name, Closure $macroCallable)
