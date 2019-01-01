@@ -26,12 +26,11 @@ class ConfigFactory implements \Peak\Blueprint\Config\ConfigFactory
 
     /**
      * ConfigFactory constructor.
-     *
-     * @param FilesHandlers $filesHandlers
+     * @param ResourceResolver|null $configResolver
      */
     public function __construct(ResourceResolver $configResolver = null)
     {
-        $this->resolver = $configResolver;
+        $this->configResolver = $configResolver;
     }
 
 
@@ -57,8 +56,8 @@ class ConfigFactory implements \Peak\Blueprint\Config\ConfigFactory
 
     /**
      * @param array $resources
-     * @param Config $customConfig
-     * @return Config
+     * @param ConfigBlueprint $customConfig
+     * @return ConfigBlueprint
      * @throws UnknownResourceException
      */
     public function loadResourcesWith(array $resources, ConfigBlueprint $customConfig): ConfigBlueprint
@@ -68,8 +67,8 @@ class ConfigFactory implements \Peak\Blueprint\Config\ConfigFactory
 
     /**
      * @param array $resources
-     * @param Config $config
-     * @return Config
+     * @param ConfigBlueprint $config
+     * @return ConfigBlueprint
      * @throws UnknownResourceException
      */
     protected function processResources(array $resources, ConfigBlueprint $config): ConfigBlueprint
