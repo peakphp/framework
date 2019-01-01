@@ -18,6 +18,11 @@ class BaseUrl
     private $publicPath;
 
     /**
+     * @var array|mixed
+     */
+    private $server = [];
+
+    /**
      * BaseUrl constructor.
      * @param Application $app
      */
