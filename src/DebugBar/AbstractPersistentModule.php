@@ -22,7 +22,7 @@ abstract class AbstractPersistentModule extends AbstractModule
      */
     public function __construct(?AbstractStorage $storage = null)
     {
-        $this->module_path = $this->getModulePath();
+        $this->modulePath = $this->getModulePath();
         $this->data = new Collection();
         if ($storage === null) {
             $storage = new SessionStorage();
