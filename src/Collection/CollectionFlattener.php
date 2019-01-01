@@ -27,7 +27,6 @@ class CollectionFlattener
 
     /**
      * Constructor
-     *
      * @param Collection $coll
      */
     public function __construct(Collection $coll)
@@ -37,7 +36,6 @@ class CollectionFlattener
 
     /**
      * Change keys separators
-     *
      * @param string $sep
      * @return $this
      * @throws Exception
@@ -53,7 +51,6 @@ class CollectionFlattener
 
     /**
      * Simply flat all the collection
-     *
      * @return array
      */
     public function flatAll(): array
@@ -64,8 +61,8 @@ class CollectionFlattener
 
     /**
      * Flat key
-     *
-     * @param mixed $prefix
+     * @param $key
+     * @return array
      */
     public function flatKey($key): array
     {
@@ -75,8 +72,8 @@ class CollectionFlattener
 
     /**
      * Flat multiple keys names
-     *
-     * @param mixed $prefix
+     * @param array $keys
+     * @return array
      */
     public function flatKeys(array $keys): array
     {
@@ -86,7 +83,6 @@ class CollectionFlattener
 
     /**
      * Flat collection recursively to one level key,val array
-     *
      * @param array $data
      * @param string|null  $prefix
      * @param array $flat_data
@@ -121,7 +117,6 @@ class CollectionFlattener
 
     /**
      * Detect if search is finishing by a wildcard (.*)
-     *
      * @param string $search
      * @return bool
      */
@@ -132,7 +127,6 @@ class CollectionFlattener
 
     /**
      * Detect if key must be skipped according to $search
-     *
      * @param string $key
      * @return bool
      */
@@ -151,7 +145,6 @@ class CollectionFlattener
             }
             return true;
         }
-
         return false;
     }
 }

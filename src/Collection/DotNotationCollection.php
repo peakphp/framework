@@ -6,10 +6,6 @@ namespace Peak\Collection;
 
 use \RuntimeException;
 
-/**
- * Class DotNotationCollection
- * @package Peak\Collection
- */
 class DotNotationCollection extends Collection
 {
     /**
@@ -19,7 +15,6 @@ class DotNotationCollection extends Collection
 
     /**
      * Return a path value
-     *
      * @param string $path
      * @param mixed $default
      * @return mixed
@@ -43,7 +38,6 @@ class DotNotationCollection extends Collection
 
     /**
      * Add a path
-     *
      * @param string $path
      * @param mixed $value
      */
@@ -74,7 +68,6 @@ class DotNotationCollection extends Collection
 
     /**
      * Merge a path with an array
-     *
      * @param string $path
      * @param array $values
      */
@@ -86,7 +79,6 @@ class DotNotationCollection extends Collection
 
     /**
      * Check if we have path
-     *
      * @param  string $path
      * @return bool
      */
@@ -105,7 +97,6 @@ class DotNotationCollection extends Collection
 
     /**
      * Explode path string
-     *
      * @param  string $path
      * @return array
      */

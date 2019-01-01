@@ -11,9 +11,6 @@ use \Closure;
 use \Exception;
 use \JsonSerializable;
 
-/**
- * Collection object
- */
 class Collection implements \Peak\Blueprint\Collection\Collection, JsonSerializable
 {
     use ArrayMergeRecursiveDistinct;
