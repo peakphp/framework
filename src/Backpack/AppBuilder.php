@@ -40,6 +40,11 @@ class AppBuilder
     private $handlerResolver;
 
     /**
+     * @var Dictionary
+     */
+    private $props;
+
+    /**
      * Application class
      * @var string
      */
@@ -57,7 +62,8 @@ class AppBuilder
     private $afterBuild;
 
     /**
-     * @param string $environment
+     * @param string $env
+     * @return $this
      */
     public function setEnv(string $env)
     {
@@ -67,6 +73,7 @@ class AppBuilder
 
     /**
      * @param ContainerInterface $container
+     * @return $this
      */
     public function setContainer(ContainerInterface $container)
     {
@@ -86,6 +93,7 @@ class AppBuilder
 
     /**
      * @param Kernel $kernel
+     * @return $this
      */
     public function setKernel(Kernel $kernel)
     {
@@ -105,6 +113,7 @@ class AppBuilder
 
     /**
      * @param ResourceResolver $handlerResolver
+     * @return $this
      */
     public function setHandlerResolver(ResourceResolver $handlerResolver)
     {
@@ -186,5 +195,4 @@ class AppBuilder
             trigger_error('Kernel class '.$msgErrorSuffix);
         }
     }
-
 }
