@@ -2,23 +2,25 @@
 
 use \PHPUnit\Framework\TestCase;
 
-require_once FIXTURES_PATH.'/collection/structures.php';
+require_once FIXTURES_PATH . '/collection/structures.php';
 
 class StructureTest extends TestCase
 {
-
+    /**
+     * @throws Exception
+     */
     public function testNormal()
     {
         $entity = new MyStructure1();
         $entity->id = 12;
         $this->assertTrue($entity->id == 12);
-        $this->assertTrue($entity->toArray() === ['id' => 12]);
+        $this->assertTrue($entity->toArray() === ['id' => 12, 'date' => null, 'obj' => null]);
 
         $entity = new MyStructure1();
         $entity->id = null;
 
         $this->assertTrue($entity->id === null);
-        $this->assertTrue($entity->toArray() === ['id' => null]);
+        $this->assertTrue($entity->toArray() === ['id' => null, 'date' => null, 'obj' => null]);
     }
 
     /**
@@ -33,10 +35,10 @@ class StructureTest extends TestCase
     /**
      * @expectedException \Exception
      */
-    public function testTypeError2()
+    public function testGetError()
     {
         $entity = new MyStructure1();
-        $entity->id;
+        $test = $entity->foobar;
     }
 
     /**
@@ -66,8 +68,11 @@ class StructureTest extends TestCase
     {
         $entity = new MyStructure1();
         $entity->date = new \DateTime();
-        $this->assertFalse(isset($entity->id));
+
+        $this->assertTrue(isset($entity->id));
         $this->assertTrue(isset($entity->date));
+        $this->assertTrue(isset($entity->obj));
+        $this->assertFalse(isset($entity->name));
     }
 
     /**
@@ -117,17 +122,13 @@ class StructureTest extends TestCase
     /**
      * @throws Exception
      */
-    public function testFillUndefined()
+    public function testDefault()
     {
-        $entity = new MyStructure1();
-        $entity->date = new \DateTime();
-        $this->assertFalse(isset($entity->id));
-        $this->assertTrue(isset($entity->date));
-
-        $entity->fillUndefinedWith('null');
-        $this->assertTrue(isset($entity->id));
+        $entity = new MyStructure2();
+        $this->assertTrue($entity->obj === null);
+        $this->assertTrue($entity->date === null);
+        $this->assertTrue($entity->name === 'Foo');
     }
 
 }
-
 

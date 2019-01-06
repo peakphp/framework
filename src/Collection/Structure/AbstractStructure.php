@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Peak\Collection;
+namespace Peak\Collection\Structure;
 
 use \ArrayIterator;
 use \IteratorAggregate;
@@ -37,6 +37,8 @@ abstract class AbstractStructure implements IteratorAggregate
                 throw new Exception('Structure expect an array or an object... ' . gettype($data) . ' given');
             }
         }
+
+        $this->fillUndefinedWithDefault();
     }
 
     /**
@@ -71,16 +73,18 @@ abstract class AbstractStructure implements IteratorAggregate
             throw new Exception('Property [' . $name . '] not defined');
         }
 
-        if (!is_array($structure[$name])) {
-            $structure[$name] = [$structure[$name]];
+        if (!$structure[$name] instanceof DataType) {
+            throw new Exception('Structure definition for [' . $name . '] must be an instance of DataType');
         }
 
+        $types = $structure[$name]->getTypes();
         $valueType = strtolower(gettype($value));
-        if ('object' === $valueType && !in_array($valueType, $structure[$name])) {
+
+        if ('object' === $valueType && !in_array($valueType, $types)) {
             $valueType = get_class($value);
         }
-        if (!in_array($valueType, $structure[$name]) && !in_array('any', $structure[$name])) {
-            throw new Exception('Property [' . $name . '] expect a type of (' . implode(' OR ', $structure[$name]) . ') ... ' . $valueType . ' given');
+        if (!in_array($valueType, $types) && !in_array('any', $types)) {
+            throw new Exception('Property [' . $name . '] expect a type of (' . implode(' OR ', $types) . ') ... ' . $valueType . ' given');
         }
 
         $this->data[$name] = $value;
@@ -111,15 +115,14 @@ abstract class AbstractStructure implements IteratorAggregate
     }
 
     /**
-     * @param $defaultValue
      * @return $this
      */
-    public function fillUndefinedWith($defaultValue)
+    protected function fillUndefinedWithDefault()
     {
-        $structure = array_keys($this->getStructure());
-        foreach ($structure as $key) {
+        $structure = $this->getStructure();
+        foreach ($structure as $key => $dataType) {
             if (!array_key_exists($key, $this->data)) {
-                $this->data[$key] = $defaultValue;
+                $this->data[$key] = $dataType->getDefault();
             }
         }
         return $this;
@@ -162,4 +165,78 @@ abstract class AbstractStructure implements IteratorAggregate
     {
         return new ArrayIterator($this->data);
     }
+
+    /**
+     * @return DataType
+     */
+    protected function string(): DataType
+    {
+        return new DataType(['string']);
+    }
+
+    /**
+     * @return DataType
+     */
+    protected function integer(): DataType
+    {
+        return new DataType(['integer']);
+    }
+
+    /**
+     * @return DataType
+     */
+    protected function float(): DataType
+    {
+        return new DataType(['double']);
+    }
+
+    /**
+     * @return DataType
+     */
+    protected function boolean(): DataType
+    {
+        return new DataType(['boolean']);
+    }
+
+    /**
+     * @return DataType
+     */
+    protected function array(): DataType
+    {
+        return new DataType(['array']);
+    }
+
+    /**
+     * @param string $className
+     * @return DataType
+     */
+    protected function object($className = 'object'): DataType
+    {
+        return new DataType([$className]);
+    }
+
+    /**
+     * @return DataType
+     */
+    protected function resource(): DataType
+    {
+        return new DataType(['resource']);
+    }
+
+    /**
+     * @return DataType
+     */
+    protected function null(): DataType
+    {
+        return new DataType(['null']);
+    }
+
+    /**
+     * @return DataType
+     */
+    protected function any(): DataType
+    {
+        return new DataType(['any']);
+    }
+
 }

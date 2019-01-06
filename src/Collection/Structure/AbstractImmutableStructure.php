@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Peak\Collection;
+namespace Peak\Collection\Structure;
 
 use \Exception;
 
