@@ -2,21 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Peak\Bedrock\Http;
+namespace Peak\Http;
 
-use Peak\Bedrock\Http\Exception\EmptyStackException;
-use Peak\Bedrock\Http\Exception\StackEndedWithoutResponseException;
-use Peak\Bedrock\Http\Request\Exception\InvalidHandlerException;
+use Peak\Http\Exception\EmptyStackException;
+use Peak\Http\Exception\StackEndedWithoutResponseException;
+use Peak\Http\Request\Exception\InvalidHandlerException;
 use Peak\Blueprint\Common\ResourceResolver;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-/**
- * Class Stack
- * @package Peak\Bedrock\Http
- */
 class Stack implements \Peak\Blueprint\Http\Stack
 {
     /**

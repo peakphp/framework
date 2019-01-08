@@ -2,7 +2,7 @@
 
 namespace Peak\Backpack;
 
-use Peak\Bedrock\Http\StackFactory;
+use Peak\Http\StackFactory;
 use Peak\Di\Container;
 
 /**
@@ -39,7 +39,7 @@ class Application extends \Peak\Bedrock\Application\Application
 
     /**
      * @param $handlers
-     * @return \Peak\Bedrock\Http\Stack
+     * @return \Peak\Http\Stack
      */
     public function createStack($handlers)
     {

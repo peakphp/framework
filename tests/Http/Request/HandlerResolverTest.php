@@ -4,13 +4,13 @@ use \PHPUnit\Framework\TestCase;
 use \Psr\Container\ContainerInterface;
 use \Psr\Http\Server\RequestHandlerInterface;
 use \Psr\Http\Server\MiddlewareInterface;
-use \Peak\Bedrock\Http\Middleware\CallableMiddleware;
-use \Peak\Bedrock\Http\Request\HandlerResolver;
-use \Peak\Bedrock\Http\Stack;
+use \Peak\Http\Middleware\CallableMiddleware;
+use \Peak\Http\Request\HandlerResolver;
+use \Peak\Http\Stack;
 use \Peak\Di\Container;
 
-require_once FIXTURES_PATH.'/application/HandlerA.php';
-require_once FIXTURES_PATH.'/application/MiddlewareA.php';
+require_once FIXTURES_PATH . '/application/HandlerA.php';
+require_once FIXTURES_PATH . '/application/MiddlewareA.php';
 
 /**
  * Class HandlerResolverTest
@@ -61,7 +61,7 @@ class HandlerResolverTest extends TestCase
     }
 
     /**
-     * @expectedException \Peak\Bedrock\Http\Request\Exception\HandlerNotFoundException
+     * @expectedException \Peak\Http\Request\Exception\HandlerNotFoundException
      */
     public function testResolverHandlerNotFoundException()
     {
@@ -74,13 +74,13 @@ class HandlerResolverTest extends TestCase
         $handlerResolver = new HandlerResolver(null);
         try {
             $handlerResolver->resolve("UnknownClass");
-        } catch(\Peak\Bedrock\Http\Request\Exception\HandlerNotFoundException $e) {
+        } catch(\Peak\Http\Request\Exception\HandlerNotFoundException $e) {
             $this->assertTrue("UnknownClass" === $e->getHandler());
         }
     }
 
     /**
-     * @expectedException \Peak\Bedrock\Http\Request\Exception\UnresolvableHandlerException
+     * @expectedException \Peak\Http\Request\Exception\UnresolvableHandlerException
      */
     public function testResolverUnresolvableHandlerException()
     {
@@ -93,7 +93,7 @@ class HandlerResolverTest extends TestCase
         $handlerResolver = new HandlerResolver(null);
         try {
             $handlerResolver->resolve(array());
-        } catch(\Peak\Bedrock\Http\Request\Exception\UnresolvableHandlerException $e) {
+        } catch(\Peak\Http\Request\Exception\UnresolvableHandlerException $e) {
             $this->assertTrue(is_array($e->getHandler()));
         }
     }

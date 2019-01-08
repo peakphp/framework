@@ -1,8 +1,8 @@
 <?php
 
 use \PHPUnit\Framework\TestCase;
-use \Peak\Bedrock\Http\StackFactory;
-use \Peak\Bedrock\Http\Request\HandlerResolver;
+use \Peak\Http\StackFactory;
+use \Peak\Http\Request\HandlerResolver;
 
 /**
  * Class StackFactoryTest

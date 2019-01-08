@@ -1,12 +1,12 @@
 <?php
 
 use \PHPUnit\Framework\TestCase;
-use \Peak\Bedrock\Http\Middleware\CallableMiddleware;
+use \Peak\Http\Middleware\CallableMiddleware;
 use \Psr\Http\Message\ServerRequestInterface;
 use \Psr\Http\Server\RequestHandlerInterface;
 
-require_once FIXTURES_PATH.'/application/ResponseA.php';
-require_once FIXTURES_PATH.'/application/InvokableMiddlewareA.php';
+require_once FIXTURES_PATH . '/application/ResponseA.php';
+require_once FIXTURES_PATH . '/application/InvokableMiddlewareA.php';
 
 /**
  * Class CallableMiddlewareTest

@@ -6,10 +6,10 @@ Example with Zend\Diactoros:
 ```php
 use Peak\Bedrock\Application\Application;
 use Peak\Bedrock\Kernel;
-use Peak\Bedrock\Http\Request\HandlerResolver;
+use Peak\Http\Request\HandlerResolver;
 use Peak\Collection\PropertiesBag;
 use Peak\Di\Container; // PSR-11
-use Peak\Bedrock\Http\Response\Emitter;
+use Peak\Http\Response\Emitter;
 use Zend\Diactoros\ServerRequestFactory; // PSR-7
 
 $container = new Container();

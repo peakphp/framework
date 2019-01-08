@@ -5,7 +5,7 @@ use \Peak\Backpack\AppBuilder;
 use \Peak\Blueprint\Bedrock\Application as ApplicationBlueprint;
 use \Peak\Bedrock\Application\Application;
 use \Peak\Bedrock\Kernel;
-use \Peak\Bedrock\Http\Request\HandlerResolver;
+use \Peak\Http\Request\HandlerResolver;
 use \Peak\Di\Container;
 use \Psr\Container\ContainerInterface;
 

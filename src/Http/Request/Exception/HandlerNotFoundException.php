@@ -2,13 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Peak\Bedrock\Http\Request\Exception;
+namespace Peak\Http\Request\Exception;
 
-/**
- * Class UnresolvableHandlerException
- * @package Peak\Bedrock\Http\Request\Exception
- */
-class UnresolvableHandlerException extends \InvalidArgumentException
+class HandlerNotFoundException extends \InvalidArgumentException
 {
     /**
      * @var mixed
@@ -16,13 +12,13 @@ class UnresolvableHandlerException extends \InvalidArgumentException
     private $handler;
 
     /**
-     * UnresolvableHandlerException constructor.
+     * HandlerNotFoundException constructor.
      *
      * @param mixed $handler
      */
     public function __construct($handler)
     {
-        parent::__construct('Cannot resolve handler');
+        parent::__construct('Handler '.$handler.' not found');
         $this->handler = $handler;
     }
 

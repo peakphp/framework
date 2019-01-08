@@ -2,15 +2,8 @@
 
 declare(strict_types=1);
 
-namespace Peak\Bedrock\Http\Request\Exception;
+namespace Peak\Http\Request\Exception;
 
-use Psr\Http\Server\MiddlewareInterface;
-use Psr\Http\Server\RequestHandlerInterface;
-
-/**
- * Class InvalidHandlerException
- * @package Peak\Bedrock\Http\Middleware\Exception
- */
 class InvalidHandlerException extends \InvalidArgumentException
 {
     /**

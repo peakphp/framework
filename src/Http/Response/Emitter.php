@@ -2,14 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Peak\Bedrock\Http\Response;
+namespace Peak\Http\Response;
 
 use Peak\Blueprint\Http\ResponseEmitter;
 use Psr\Http\Message\ResponseInterface;
 
 /**
  * Class Emitter - Based on Zend\Diactoros\Response\SapiEmitter
- * @package Peak\Bedrock\Http\Response
  */
 class Emitter implements ResponseEmitter
 {

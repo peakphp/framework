@@ -2,14 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Peak\Bedrock\Http;
+namespace Peak\Http;
 
 use Peak\Blueprint\Common\ResourceResolver;
 
-/**
- * Class StackFactory
- * @package Peak\Bedrock\Http
- */
 class StackFactory
 {
     /**

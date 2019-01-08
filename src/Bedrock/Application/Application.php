@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Peak\Bedrock\Application;
 
 use Peak\Bedrock\Bootstrap\Bootstrap;
-use Peak\Bedrock\Http\Request\BlankRequest;
-use Peak\Bedrock\Http\Stack;
-use Peak\Bedrock\Http\Request\Route;
+use Peak\Http\Request\BlankRequest;
+use Peak\Http\Stack;
+use Peak\Http\Request\Route;
 use Peak\Blueprint\Bedrock\Kernel;
 use Peak\Blueprint\Collection\Dictionary;
 use Peak\Blueprint\Common\ResourceResolver;

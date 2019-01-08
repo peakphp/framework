@@ -1,9 +1,9 @@
 <?php
 
 use \PHPUnit\Framework\TestCase;
-use \Peak\Bedrock\Http\Stack;
+use \Peak\Http\Stack;
 use \Psr\Http\Message\ServerRequestInterface;
-use \Peak\Bedrock\Http\Request\HandlerResolver;
+use \Peak\Http\Request\HandlerResolver;
 
 /**
  * Class StackTest
@@ -11,7 +11,7 @@ use \Peak\Bedrock\Http\Request\HandlerResolver;
 class StackTest extends TestCase
 {
     /**
-     * @expectedException \Peak\Bedrock\Http\Exception\EmptyStackException
+     * @expectedException \Peak\Http\Exception\EmptyStackException
      */
     public function testCreateException()
     {
@@ -22,13 +22,13 @@ class StackTest extends TestCase
     {
         try {
             new Stack([], $this->createMock(HandlerResolver::class));
-        } catch(\Peak\Bedrock\Http\Exception\EmptyStackException $e) {
+        } catch(\Peak\Http\Exception\EmptyStackException $e) {
             $this->assertInstanceOf(Stack::class, $e->getStack());
         }
     }
 
     /**
-     * @expectedException \Peak\Bedrock\Http\Request\Exception\InvalidHandlerException
+     * @expectedException \Peak\Http\Request\Exception\InvalidHandlerException
      */
     public function testProcessException()
     {
@@ -43,7 +43,7 @@ class StackTest extends TestCase
         $stack = new Stack([$handler], $this->createMock(HandlerResolver::class));
         try {
             $stack->handle($this->createMock(ServerRequestInterface::class));
-        } catch(\Peak\Bedrock\Http\Request\Exception\InvalidHandlerException $e) {
+        } catch(\Peak\Http\Request\Exception\InvalidHandlerException $e) {
             $this->assertInstanceOf(\stdClass::class, $e->getHandler());
         }
     }

@@ -50,13 +50,13 @@ class ClassFinderTest extends TestCase
     function testSuffixPrefix()
     {
         $cf = new ClassFinder([
-            'Peak\Bedrock\Http'
+            'Peak\Http'
         ]);
 
         $cf->setPrefix('');
         $cf->setSuffix('Factory');
 
         $class = $cf->findLast('Stack');
-        $this->assertTrue($class === \Peak\Bedrock\Http\StackFactory::class);
+        $this->assertTrue($class === \Peak\Http\StackFactory::class);
     }
 }

@@ -2,18 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Peak\Bedrock\Http\Request;
+namespace Peak\Http\Request;
 
-use Peak\Bedrock\Http\Exception\StackEndedWithoutResponseException;
+use Peak\Http\Exception\StackEndedWithoutResponseException;
 use Peak\Blueprint\Http\Stack;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-/**
- * Class Route
- * @package Peak\Bedrock\Http\Request
- */
 class Route implements Stack
 {
     /**

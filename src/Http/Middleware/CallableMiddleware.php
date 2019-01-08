@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Peak\Bedrock\Http\Middleware;
+namespace Peak\Http\Middleware;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -12,7 +12,7 @@ use \Closure;
 
 /**
  * Class CallableMiddleware
- * @package Peak\Bedrock\Http\Middleware
+ * @package Peak\Http\Middleware
  */
 class CallableMiddleware implements MiddlewareInterface
 {

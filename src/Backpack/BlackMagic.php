@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Peak\Backpack;
 
-use Peak\Bedrock\Http\Request\HandlerResolver;
-use Peak\Bedrock\Http\Stack;
-use Peak\Bedrock\Http\Response\Emitter;
+use Peak\Http\Request\HandlerResolver;
+use Peak\Http\Stack;
+use Peak\Http\Response\Emitter;
 use Peak\Bedrock\Kernel;
 use Peak\Blueprint\Collection\Dictionary;
 use Peak\Collection\PropertiesBag;

@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Peak\Bedrock\Http\Exception;
+namespace Peak\Http\Exception;
 
 use Peak\Blueprint\Http\Stack;
 
 /**
- * Class StackEndedWithoutResponseException
- * @package Peak\Bedrock\Http\Exception
+ * Class EmptyStackException
+ * @package Peak\Http\Exception
  */
-class StackEndedWithoutResponseException extends \LogicException
+class EmptyStackException extends \InvalidArgumentException
 {
     /**
      * @var Stack
@@ -24,7 +24,7 @@ class StackEndedWithoutResponseException extends \LogicException
      */
     public function __construct(Stack $stack)
     {
-        parent::__construct('Stack ended without returning a response');
+        parent::__construct('Stack handlers cannot be empty');
         $this->stack = $stack;
     }
 

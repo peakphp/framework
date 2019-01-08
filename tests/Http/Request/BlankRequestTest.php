@@ -1,7 +1,7 @@
 <?php
 
 use \PHPUnit\Framework\TestCase;
-use \Peak\Bedrock\Http\Request\BlankRequest;
+use \Peak\Http\Request\BlankRequest;
 
 
 class BlankRequestTest extends TestCase

@@ -3,8 +3,8 @@
 use \PHPUnit\Framework\TestCase;
 use \Peak\Bedrock\Application\Application;
 use \Peak\Bedrock\Kernel;
-use \Peak\Bedrock\Http\Request\HandlerResolver;
-use \Peak\Bedrock\Http\Request\Route;
+use \Peak\Http\Request\HandlerResolver;
+use \Peak\Http\Request\Route;
 use \Peak\Collection\PropertiesBag;
 use \Psr\Container\ContainerInterface;
 use \Psr\Http\Message\ResponseInterface;
@@ -83,7 +83,7 @@ class ApplicationTest extends TestCase
     }
 
     /**
-     * @expectedException Peak\Bedrock\Http\Exception\EmptyStackException
+     * @expectedException Peak\Http\Exception\EmptyStackException
      */
     public function testEmptyStackRequest()
     {
@@ -102,7 +102,7 @@ class ApplicationTest extends TestCase
     }
 
     /**
-     * @expectedException Peak\Bedrock\Http\Exception\EmptyStackException
+     * @expectedException Peak\Http\Exception\EmptyStackException
      */
     public function testEmptyStackRequestWithReset()
     {

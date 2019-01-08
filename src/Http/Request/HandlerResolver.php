@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Peak\Bedrock\Http\Request;
+namespace Peak\Http\Request;
 
-use Peak\Bedrock\Http\Middleware\CallableMiddleware;
-use Peak\Bedrock\Http\Request\Exception\HandlerNotFoundException;
-use Peak\Bedrock\Http\Request\Exception\UnresolvableHandlerException;
+use Peak\Http\Middleware\CallableMiddleware;
+use Peak\Http\Request\Exception\HandlerNotFoundException;
+use Peak\Http\Request\Exception\UnresolvableHandlerException;
 use Peak\Blueprint\Common\ResourceResolver;
 use Peak\Blueprint\Http\Stack;
 use Peak\Di\Container;
@@ -16,7 +16,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 /**
  * Class HandlerResolver
- * @package Peak\Bedrock\Http\Request
+ * @package Peak\Http\Request
  */
 class HandlerResolver implements ResourceResolver
 {

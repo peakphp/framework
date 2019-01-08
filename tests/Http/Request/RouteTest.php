@@ -1,7 +1,7 @@
 <?php
 
 use \PHPUnit\Framework\TestCase;
-use \Peak\Bedrock\Http\Request\Route;
+use \Peak\Http\Request\Route;
 use \Peak\Blueprint\Http\Stack;
 use \Psr\Http\Message\ResponseInterface;
 use \Psr\Http\Message\ServerRequestInterface;

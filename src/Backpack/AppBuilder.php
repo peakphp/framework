@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Peak\Backpack;
 
 use Peak\Bedrock\Application\Application;
-use Peak\Bedrock\Http\Request\HandlerResolver;
+use Peak\Http\Request\HandlerResolver;
 use Peak\Blueprint\Bedrock\Kernel;
 use Peak\Blueprint\Collection\Dictionary;
 use Peak\Blueprint\Common\ResourceResolver;

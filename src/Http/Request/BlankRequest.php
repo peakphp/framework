@@ -2,16 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Peak\Bedrock\Http\Request;
+namespace Peak\Http\Request;
 
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\StreamInterface;
 use Psr\Http\Message\UriInterface;
 
-/**
- * Class BlankRequest
- * @package Peak\Bedrock\Http\Request
- */
 class BlankRequest implements ServerRequestInterface
 {
     public function getProtocolVersion()
