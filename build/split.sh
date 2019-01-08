@@ -6,5 +6,6 @@ git subsplit publish --heads="master" src/Common:git@github.com:peakphp/common.g
 git subsplit publish --heads="master" src/Config:git@github.com:peakphp/config.git
 git subsplit publish --heads="master" src/DebugBar:git@github.com:peakphp/debugbar.git
 git subsplit publish --heads="master" src/Di:git@github.com:peakphp/di.git
+git subsplit publish --heads="master" src/Http:git@github.com:peakphp/http.git
 git subsplit publish --heads="master" src/Pipeline:git@github.com:peakphp/pipeline.git
 rm -rf .subsplit/
