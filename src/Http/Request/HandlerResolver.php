@@ -9,15 +9,10 @@ use Peak\Http\Request\Exception\HandlerNotFoundException;
 use Peak\Http\Request\Exception\UnresolvableHandlerException;
 use Peak\Blueprint\Common\ResourceResolver;
 use Peak\Blueprint\Http\Stack;
-use Peak\Di\Container;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-/**
- * Class HandlerResolver
- * @package Peak\Http\Request
- */
 class HandlerResolver implements ResourceResolver
 {
     /**
@@ -26,9 +21,8 @@ class HandlerResolver implements ResourceResolver
     protected $container;
 
     /**
-     * Resolver constructor.
-     *
-     * @param null|ContainerInterface $container
+     * HandlerResolver constructor.
+     * @param ContainerInterface|null $container
      */
     public function __construct(?ContainerInterface $container)
     {
@@ -37,8 +31,7 @@ class HandlerResolver implements ResourceResolver
 
     /**
      * @param mixed $handler
-     * @return mixed|object|CallableMiddleware|MiddlewareInterface|RequestHandlerInterface
-     * @throws \ReflectionException
+     * @return mixed|CallableMiddleware
      */
     public function resolve($handler)
     {
@@ -74,8 +67,7 @@ class HandlerResolver implements ResourceResolver
 
     /**
      * @param string $handler
-     * @return mixed|object
-     * @throws \ReflectionException
+     * @return mixed
      */
     protected function resolveString(string $handler)
     {
@@ -87,12 +79,12 @@ class HandlerResolver implements ResourceResolver
         if (null !== $this->container) {
             if ($this->container->has($handler)) { // psr-11
                 return $this->container->get($handler);
-            } elseif ($this->container instanceof Container) {
+            } elseif (get_class($this->container) === 'Peak\Di\Container') {
                 return $this->container->create($handler);
             }
         }
 
-        // manual instantiation
+        // manual instantiation, work only with empty constructor classes
         return new $handler();
     }
 }

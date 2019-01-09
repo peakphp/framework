@@ -34,19 +34,9 @@ class HandlerResolverTest extends TestCase
         $this->assertInstanceOf(CallableMiddleware::class, $handlerResolver->resolve(function($server, $request) {}));
     }
 
-    public function testResolverWithContainer()
+    public function testResolverWithContainerHasGet()
     {
-        $handlerResolver = new HandlerResolver($this->createMock(ContainerInterface::class));
-        $this->assertInstanceOf(HandlerA::class, $handlerResolver->resolve(HandlerA::class));
-
         $container = $this->createMock(Container::class);
-        $container->expects($this->once())
-            ->method('create')
-            ->will($this->returnValue(new HandlerA()));
-
-        $handlerResolver = new HandlerResolver($container);
-        $this->assertInstanceOf(HandlerA::class, $handlerResolver->resolve(HandlerA::class));
-
         $container->expects($this->once())
             ->method('has')
             ->with(HandlerA::class)
@@ -57,6 +47,12 @@ class HandlerResolverTest extends TestCase
             ->will($this->returnValue(new HandlerA()));
 
         $handlerResolver = new HandlerResolver($container);
+        $this->assertInstanceOf(HandlerA::class, $handlerResolver->resolve(HandlerA::class));
+    }
+
+    public function testResolverWithPeakContainer()
+    {
+        $handlerResolver = new HandlerResolver(new Container());
         $this->assertInstanceOf(HandlerA::class, $handlerResolver->resolve(HandlerA::class));
     }
 

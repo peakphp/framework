@@ -21,7 +21,6 @@
     "psr/http-server-handler": "^1.0",
     "psr/http-server-middleware": "^1.0",
     "peak/blueprint": "^4.0",
-    "peak/di": "^4.0"
   },
   "autoload": {
     "psr-4": {
