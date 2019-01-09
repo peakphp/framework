@@ -13,7 +13,6 @@ class HandlerNotFoundException extends \InvalidArgumentException
 
     /**
      * HandlerNotFoundException constructor.
-     *
      * @param mixed $handler
      */
     public function __construct($handler)

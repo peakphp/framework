@@ -13,6 +13,7 @@ class InvalidHandlerException extends \InvalidArgumentException
 
     /**
      * InvalidHandlerException constructor.
+     * @param $handler
      */
     public function __construct($handler)
     {

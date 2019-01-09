@@ -10,10 +10,6 @@ use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use \Closure;
 
-/**
- * Class CallableMiddleware
- * @package Peak\Http\Middleware
- */
 class CallableMiddleware implements MiddlewareInterface
 {
     /**
@@ -23,7 +19,6 @@ class CallableMiddleware implements MiddlewareInterface
 
     /**
      * CallableMiddleware constructor.
-     *
      * @param callable $callable
      */
     public function __construct(callable $callable)
