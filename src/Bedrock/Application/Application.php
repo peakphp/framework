@@ -34,7 +34,7 @@ class Application implements \Peak\Blueprint\Bedrock\Application
     private $handlerResolver;
 
     /**
-     * @var Dictionary
+     * @var Dictionary|null
      */
     private $props;
 
