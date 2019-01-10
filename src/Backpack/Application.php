@@ -5,10 +5,6 @@ namespace Peak\Backpack;
 use Peak\Http\StackFactory;
 use Peak\Di\Container;
 
-/**
- * Class Application
- * @package Peak\Backpack\Application
- */
 class Application extends \Peak\Bedrock\Application\Application
 {
     /**
