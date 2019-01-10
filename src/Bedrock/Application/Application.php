@@ -16,10 +16,6 @@ use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
-/**
- * Class Application
- * @package Peak\Bedrock\Application
- */
 class Application implements \Peak\Blueprint\Bedrock\Application
 {
     /**
