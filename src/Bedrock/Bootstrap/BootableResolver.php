@@ -8,10 +8,6 @@ use Peak\Blueprint\Common\ResourceResolver;
 use Peak\Di\Container;
 use Psr\Container\ContainerInterface;
 
-/**
- * Class BootableResolver
- * @package Peak\Bedrock\Resolver
- */
 class BootableResolver implements ResourceResolver
 {
     /**
@@ -21,8 +17,7 @@ class BootableResolver implements ResourceResolver
 
     /**
      * BootableResolver constructor.
-     *
-     * @param null|ContainerInterface $container
+     * @param ContainerInterface|null $container
      */
     public function __construct(?ContainerInterface $container)
     {
@@ -60,6 +55,7 @@ class BootableResolver implements ResourceResolver
     /**
      * @param $item
      * @return mixed|object
+     * @throws \Peak\Di\Exception\NoClassDefinitionException
      * @throws \ReflectionException
      */
     private function resolveFromContainer($item)
