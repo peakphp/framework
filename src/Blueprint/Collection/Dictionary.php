@@ -4,10 +4,6 @@ declare(strict_types=1);
 
 namespace Peak\Blueprint\Collection;
 
-/**
- * Interface Dictionary
- * @package Peak\Blueprint\Collection
- */
 interface Dictionary extends Collection
 {
     /**
