@@ -7,10 +7,6 @@ namespace Peak\Backpack\Bootstrap;
 use Peak\Blueprint\Bedrock\Application;
 use Peak\Blueprint\Common\Bootable;
 
-/**
- * Class Session
- * @package Peak\Backpack\Bedrock\Bootstrap
- */
 class Session implements Bootable
 {
     /**
@@ -35,8 +31,6 @@ class Session implements Bootable
     }
     /**
      * Setup and start session from app props
-     *
-     * @param Application $config
      * @throws \Exception
      */
     public function boot()
