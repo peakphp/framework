@@ -97,10 +97,10 @@ class DotNotationCollection extends Collection
 
     /**
      * Explode path string
-     * @param  string $path
-     * @return array
+     * @param string $path
+     * @return array[]|false|string[]
      */
-    protected function explode(string $path): array
+    protected function explode(string $path)
     {
         return preg_split(self::SEPARATOR, $path);
     }
