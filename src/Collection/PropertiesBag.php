@@ -8,10 +8,6 @@ use Peak\Blueprint\Collection\Dictionary;
 use Exception;
 use ArrayIterator;
 
-/**
- * Class PropertiesBag
- * @package Peak\Collection
- */
 class PropertiesBag implements Dictionary
 {
     /**
@@ -73,7 +69,7 @@ class PropertiesBag implements Dictionary
     }
 
     /**
-     * @param string $key
+     * @param string $property
      * @param mixed $val
      */
     public function __set(string $property, $val)
@@ -192,5 +188,4 @@ class PropertiesBag implements Dictionary
     {
         return json_encode($this->properties, $options, $depth);
     }
-
 }
