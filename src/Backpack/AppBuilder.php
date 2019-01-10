@@ -52,7 +52,7 @@ class AppBuilder
 
     /**
      * Kernel class
-     * @var Kernel
+     * @var string
      */
     private $kernelClass;
 
