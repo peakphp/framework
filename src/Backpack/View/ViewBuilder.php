@@ -8,10 +8,6 @@ use Peak\View\HelperResolver;
 use Peak\View\Presentation;
 use Peak\View\View;
 
-/**
- * Class ViewBuilder
- * @package Peak\Backpack
- */
 class ViewBuilder
 {
     /**
@@ -59,7 +55,8 @@ class ViewBuilder
     }
 
     /**
-     * @param mixed $macros
+     * @param array $macros
+     * @return $this
      */
     public function setMacros(array $macros)
     {
@@ -100,7 +97,8 @@ class ViewBuilder
     }
 
     /**
-     * @param mixed $vars
+     * @param $vars
+     * @return $this
      */
     public function setVars($vars)
     {
