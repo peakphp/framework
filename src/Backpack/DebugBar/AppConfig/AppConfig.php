@@ -7,12 +7,7 @@ namespace Peak\Backpack\DebugBar\AppConfig;
 use Peak\Blueprint\Bedrock\Application;
 use Peak\Collection\CollectionFlattener;
 use Peak\DebugBar\AbstractModule;
-use Peak\DebugBar\AbstractStorage;
 
-/**
- * Class AppConfig
- * @package Peak\Backpack\Bedrock\DebugBar\AppConfig
- */
 class AppConfig extends AbstractModule
 {
     /**
@@ -22,9 +17,7 @@ class AppConfig extends AbstractModule
 
     /**
      * AppConfig constructor.
-     *
      * @param Application $application
-     * @param AbstractStorage $storage
      */
     public function __construct(Application $application)
     {
@@ -45,7 +38,6 @@ class AppConfig extends AbstractModule
 
     /**
      * Render tab title
-     *
      * @return string
      */
     public function renderTitle()
