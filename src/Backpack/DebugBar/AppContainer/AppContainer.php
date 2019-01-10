@@ -7,10 +7,6 @@ namespace Peak\Backpack\DebugBar\AppContainer;
 use Peak\Blueprint\Bedrock\Application;
 use Peak\DebugBar\AbstractModule;
 
-/**
- * Class AppContainer
- * @package Peak\Backpack\Bedrock\DebugBar\AppContainer
- */
 class AppContainer extends AbstractModule
 {
     /**
@@ -20,7 +16,6 @@ class AppContainer extends AbstractModule
 
     /**
      * AppConfig constructor.
-     *
      * @param Application $application
      */
     public function __construct(Application $application)
