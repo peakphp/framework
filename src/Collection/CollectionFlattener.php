@@ -60,11 +60,10 @@ class CollectionFlattener
     }
 
     /**
-     * Flat key
-     * @param $key
+     * @param string $key
      * @return array
      */
-    public function flatKey($key): array
+    public function flatKey(string $key): array
     {
         $this->search = [$key];
         return $this->flatCollection($this->collection->toArray());
