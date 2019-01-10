@@ -77,6 +77,7 @@ class Application implements \Peak\Blueprint\Bedrock\Application
 
     /**
      * @param string $property
+     * @param null $default
      * @return mixed
      */
     public function getProp(string $property, $default = null)
