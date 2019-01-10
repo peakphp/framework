@@ -22,7 +22,7 @@ interface Application extends RequestHandlerInterface
 
     /**
      * @param string $property
-     * @param null $default
+     * @param mixed $default
      * @return mixed
      */
     public function getProp(string $property, $default = null);
