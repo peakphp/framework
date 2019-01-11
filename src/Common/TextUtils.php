@@ -8,9 +8,8 @@ class TextUtils
 {
     /**
      * Count the number of words in a text
-     *
-     * @param  string $text
-     * @return integer
+     * @param string $text
+     * @return int
      */
     public static function countWords(string $text): int
     {
@@ -24,7 +23,6 @@ class TextUtils
 
     /**
      * Count the number of paragraphs in a text
-     *
      * @param  string $text
      * @return integer
      */
@@ -36,14 +34,13 @@ class TextUtils
 
     /**
      * Count the number of characters in a text
-     *
-     * @param  string  $text
-     * @param  boolean $include_spaces
-     * @return string
+     * @param string $text
+     * @param bool $includeSpaces
+     * @return int
      */
-    public static function countChars(string $text, bool $include_spaces = false): int
+    public static function countChars(string $text, bool $includeSpaces = false): int
     {
-        if ($include_spaces === false) {
+        if ($includeSpaces === false) {
             $text = preg_replace("/[\s]/", '', $text);
         }
         return mb_strlen($text);
@@ -56,7 +53,7 @@ class TextUtils
      * @param  string  $string
      * @param  integer $length
      * @param  string  $etc
-     * @param  bool    $break_words
+     * @param  bool    $breakWords
      * @param  bool    $middle
      * @return mixed   return a string if success, or false if substr() fail
      */
@@ -64,7 +61,7 @@ class TextUtils
         string $string,
         int $length = 80,
         string $etc = '...',
-        bool $break_words = false,
+        bool $breakWords = false,
         bool $middle = false
     ) {
         if ($length == 0) {
@@ -73,7 +70,7 @@ class TextUtils
 
         if (strlen($string) > $length) {
             $length -= min($length, strlen($etc));
-            if (!$break_words && !$middle) {
+            if (!$breakWords && !$middle) {
                 $string = preg_replace('/\s+?(\S+)?$/', '', substr($string, 0, $length+1));
             }
             if (!$middle) {
