@@ -17,7 +17,7 @@ class RuleDefinition
     protected $options;
 
     /**
-     * @var int
+     * @var int|null
      */
     protected $flags;
 
@@ -27,17 +27,17 @@ class RuleDefinition
     protected $errorMessage;
 
     /**
-     * @var array
+     * @var array|null
      */
     protected $context;
 
     /**
      * RuleDefinition constructor.
-     *
      * @param string $ruleName
-     * @param $options
-     * @param $flags
-     * @param $errorMessage
+     * @param array $options
+     * @param int|null $flags
+     * @param array|null $context
+     * @param string $errorMessage
      */
     public function __construct(
         string $ruleName,
@@ -70,7 +70,7 @@ class RuleDefinition
     }
 
     /**
-     * @return int
+     * @return int|null
      */
     public function getFlags(): ?int
     {
@@ -78,9 +78,9 @@ class RuleDefinition
     }
 
     /**
-     * @return mixed
+     * @return array|null
      */
-    public function getContext()
+    public function getContext(): ?array
     {
         return $this->context;
     }
