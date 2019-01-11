@@ -66,7 +66,7 @@ class Chrono
      * @param string|null $timerName
      * @return bool
      */
-    public static function isOn(string $timerName = null)
+    public static function isOn(string $timerName = null): bool
     {
         if (!isset($timerName)) {
             if ((self::$global['start'] === false) || (self::$global['end'] !== false)) {
@@ -87,7 +87,7 @@ class Chrono
      * @param null $timerName
      * @return bool
      */
-    public static function isCompleted($timerName = null)
+    public static function isCompleted($timerName = null): bool
     {
         if (!isset($timerName)) {
             if ((self::$global['start'] !== false) && (self::$global['end'] !== false)) {
