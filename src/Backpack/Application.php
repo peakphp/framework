@@ -34,7 +34,7 @@ class Application extends \Peak\Bedrock\Application\Application
     }
 
     /**
-     * @param $handlers
+     * @param mixed $handlers
      * @return \Peak\Http\Stack
      */
     public function createStack($handlers)
