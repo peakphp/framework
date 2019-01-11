@@ -11,7 +11,7 @@ use Psr\Container\ContainerInterface;
 class BootableResolver implements ResourceResolver
 {
     /**
-     * @var ContainerInterface
+     * @var ContainerInterface|Null
      */
     private $container;
 
@@ -26,10 +26,10 @@ class BootableResolver implements ResourceResolver
 
     /**
      * Try to return a resolved item or throw an exception
-     *
      * @param mixed $item
      * @return Bootable
      * @throws InvalidBootableProcessException
+     * @throws \Peak\Di\Exception\NoClassDefinitionException
      * @throws \ReflectionException
      */
     public function resolve($item): Bootable
@@ -60,10 +60,12 @@ class BootableResolver implements ResourceResolver
      */
     private function resolveFromContainer($item)
     {
-        if ($this->container->has($item)) {
-            return  $this->container->get($item);
-        } elseif ($this->container instanceof Container) {
-            return $this->container->create($item);
+        if (isset($this->container)) {
+            if ($this->container->has($item)) {
+                return $this->container->get($item);
+            } elseif ($this->container instanceof Container) {
+                return $this->container->create($item);
+            }
         }
         return $item;
     }
