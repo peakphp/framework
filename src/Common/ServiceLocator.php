@@ -6,9 +6,6 @@ namespace Peak\Common;
 
 use Exception;
 
-/**
- * Service Locator
- */
 class ServiceLocator
 {
     /**
@@ -19,7 +16,6 @@ class ServiceLocator
 
     /**
      * shortcut for register()
-     *
      * @param string   $name
      * @param callable $closure
      */
@@ -30,7 +26,6 @@ class ServiceLocator
 
     /**
      * shortcut for getService()
-     *
      * @param string $name
      * @return mixed
      * @throws Exception
@@ -42,7 +37,6 @@ class ServiceLocator
 
     /**
      * Register a service closure
-     *
      * @param  string   $name
      * @param  callable $closure
      * @return $this
@@ -55,7 +49,6 @@ class ServiceLocator
 
     /**
      * Get a service name closure
-     *
      * @param  string $name
      * @return mixed  return the result of executed closure
      * @throws Exception
@@ -71,7 +64,6 @@ class ServiceLocator
 
     /**
      * List services
-     *
      * @return array
      */
     public function listServices(): array
@@ -81,9 +73,8 @@ class ServiceLocator
 
     /**
      * Check if has service name
-     *
-     * @param  $name
-     * @return boolean
+     * @param string $name
+     * @return bool
      */
     public function hasService(string $name): bool
     {
