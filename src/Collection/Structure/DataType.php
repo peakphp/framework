@@ -53,7 +53,7 @@ class DataType
     }
 
     /**
-     * @param $defaultValue
+     * @param mixed $defaultValue
      * @return $this
      */
     public function default($defaultValue)
