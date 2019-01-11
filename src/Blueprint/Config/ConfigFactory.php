@@ -4,10 +4,6 @@ declare(strict_types=1);
 
 namespace Peak\Blueprint\Config;
 
-/**
- * Interface ConfigFactory
- * @package Peak\Blueprint\Config
- */
 interface ConfigFactory
 {
     /**
