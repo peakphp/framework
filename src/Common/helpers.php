@@ -84,9 +84,9 @@ if (!function_exists('showAllErrors')) {
  */
 if (!function_exists('phpInput')) {
     /**
-     * Retrieve a collection object from php://input
+     * Retrieve an object from php://input
      *
-     * @return array
+     * @return mixed
      */
     function phpInput(): array
     {
@@ -176,10 +176,10 @@ if (!function_exists('getClassFilePath')) {
      * Get class complete file path
      *
      * @param mixed $obj
-     * @return string
+     * @return string|false
      * @throws ReflectionException
      */
-    function getClassFilePath($obj): string
+    function getClassFilePath($obj)
     {
         return (new ReflectionClass($obj))->getFileName();
     }
@@ -215,17 +215,17 @@ if (!function_exists('fileExpired')) {
      * Check if file is expired
      *
      * @param string $file
-     * @param $expiration_time
+     * @param mixed $expirationTime
      * @return bool
      * @throws Exception
      */
-    function fileExpired(string $file, $expiration_time): bool
+    function fileExpired(string $file, $expirationTime): bool
     {
-        $expiration_time = (new TimeExpression($expiration_time))->toSeconds();
+        $expirationTime = (new TimeExpression($expirationTime))->toSeconds();
         $file_date = filemtime($file);
         $now = time();
         $delay = $now - $file_date;
-        return ($delay >= $expiration_time) ? true : false;
+        return ($delay >= $expirationTime) ? true : false;
     }
 }
 
@@ -237,7 +237,7 @@ if (!function_exists('catchOutput')) {
      * Catch output with OB Control
      *
      * @param Closure $closure
-     * @return string
+     * @return string|false
      */
     function catchOutput(Closure $closure)
     {
