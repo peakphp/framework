@@ -209,4 +209,30 @@ class ApplicationTest extends TestCase
         $route = $app->createRoute('GET', '/', $this->createMock(MiddlewareInterface::class));
         $this->assertInstanceOf(Route::class, $route);
     }
+
+    /**
+     * @expectedException \Exception
+     */
+    public function testGetPropOnNull()
+    {
+        $app = new Application(
+            $this->createMock(Kernel::class),
+            $this->createMock(HandlerResolver::class)
+        );
+
+        $app->getProp('foo');
+    }
+
+    /**
+     * @expectedException \Exception
+     */
+    public function testHasPropOnNull()
+    {
+        $app = new Application(
+            $this->createMock(Kernel::class),
+            $this->createMock(HandlerResolver::class)
+        );
+
+        $app->hasProp('foo');
+    }
 }
