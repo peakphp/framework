@@ -50,6 +50,10 @@ class Routing implements Bootable
      */
     public function boot()
     {
+        if ($this->app->getProps() === null) {
+            return;
+        }
+
         $routes = [];
         $pathPrefix = $this->app->getProp($this->routesPathPrefixPropName, '');
 
