@@ -87,11 +87,12 @@ class View implements \Peak\Blueprint\View\View
     {
         return $this->presentation;
     }
+
     /**
      * Call a macro or helper in that order
-     * @param string $macroName
+     * @param string $method
      * @param array $args
-     * @return mixed
+     * @return mixed|\RuntimeException
      */
     public function __call(string $method, array $args)
     {
@@ -154,4 +155,3 @@ class View implements \Peak\Blueprint\View\View
         include $file;
     }
 }
-
