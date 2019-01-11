@@ -75,18 +75,26 @@ class Application implements \Peak\Blueprint\Bedrock\Application
      * @param string $property
      * @param null $default
      * @return mixed
+     * @throws \Exception
      */
     public function getProp(string $property, $default = null)
     {
+        if (!isset($this->props)) {
+            throw new \Exception('Application properties is not defined! Cannot use getProp()');
+        }
         return $this->props->get($property, $default);
     }
 
     /**
      * @param string $property
      * @return bool
+     * @throws \Exception
      */
     public function hasProp(string $property): bool
     {
+        if (!isset($this->props)) {
+            throw new \Exception('Application properties is not defined! Cannot use hasProp()');
+        }
         return $this->props->has($property);
     }
 
