@@ -13,51 +13,47 @@ use Peak\Di\Container;
 use Psr\Container\ContainerInterface;
 use \Closure;
 
-/**
- * Class AppBuilder
- * @package Peak\Backpack\Application
- */
 class AppBuilder
 {
     /**
-     * @var string
+     * @var string|null
      */
     private $env;
 
     /**
-     * @var ContainerInterface
+     * @var ContainerInterface|null
      */
     private $container;
 
     /**
-     * @var Kernel
+     * @var Kernel|null
      */
     private $kernel;
 
     /**
-     * @var ResourceResolver
+     * @var ResourceResolver|null
      */
     private $handlerResolver;
 
     /**
-     * @var Dictionary
+     * @var Dictionary|null
      */
     private $props;
 
     /**
      * Application class
-     * @var string
+     * @var string|null
      */
     private $class;
 
     /**
      * Kernel class
-     * @var string
+     * @var string|null
      */
     private $kernelClass;
 
     /**
-     * @var Closure
+     * @var Closure|null
      */
     private $afterBuild;
 
@@ -150,7 +146,7 @@ class AppBuilder
     }
 
     /**
-     * @param string|null $applicationClass
+     * @param string $applicationClass
      * @return Application
      */
     private function internalBuild(string $applicationClass): \Peak\Blueprint\Bedrock\Application
