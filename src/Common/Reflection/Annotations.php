@@ -25,12 +25,11 @@ class Annotations
      * @var string
      */
     protected $className;
-    
 
     /**
-     * Setup a class to use
-     *
+     * Annotations constructor.
      * @param mixed $class
+     * @throws ReflectionException
      */
     public function __construct($class)
     {
@@ -39,8 +38,7 @@ class Annotations
     
     /**
      * Set the class name we want and load ReflectionClass
-     *
-     * @param  mixed $class Class name or class instance
+     * @param $className
      * @throws ReflectionException
      */
     protected function setClass($className): void
@@ -55,14 +53,14 @@ class Annotations
     /**
      * Get a methods annotation tags
      *
-     * @param  string $method_name
+     * @param  string $methodName
      * @param  string|array  $tags   Tag(s) to retrieve, by default($tags = '*'), it look for every tags
      * @return array
      */
-    public function getMethod($method_name, $tags = '*'): array
+    public function getMethod(string $methodName, $tags = '*'): array
     {
         try {
-            $method = new ReflectionMethod($this->className, $method_name);
+            $method = new ReflectionMethod($this->className, $methodName);
         } catch (ReflectionException $e) {
             return [];
         }
