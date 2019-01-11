@@ -23,7 +23,7 @@ abstract class AbstractStructure implements IteratorAggregate
 
     /**
      * AbstractStructure constructor.
-     * @param null $data
+     * @param mixed $data
      * @throws Exception
      */
     final public function __construct($data = null)
@@ -42,7 +42,7 @@ abstract class AbstractStructure implements IteratorAggregate
     }
 
     /**
-     * @param $data
+     * @param mixed $data
      * @return AbstractStructure
      * @throws Exception
      */
@@ -104,7 +104,7 @@ abstract class AbstractStructure implements IteratorAggregate
     }
 
     /**
-     * @param $obj
+     * @param object $obj
      * @return $this
      * @throws Exception
      */
@@ -129,11 +129,11 @@ abstract class AbstractStructure implements IteratorAggregate
     }
 
     /**
-     * @param $name
+     * @param string $name
      * @return mixed
      * @throws Exception
      */
-    public function __get($name)
+    public function __get(string $name)
     {
         if (!$this->__isset($name)) {
             throw new Exception('Property [' . $name . '] not defined');
@@ -142,10 +142,10 @@ abstract class AbstractStructure implements IteratorAggregate
     }
 
     /**
-     * @param $name
+     * @param string $name
      * @return bool
      */
-    public function __isset($name)
+    public function __isset(string $name)
     {
         return array_key_exists($name, $this->data);
     }
