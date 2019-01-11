@@ -64,6 +64,14 @@ class Application implements \Peak\Blueprint\Bedrock\Application
     }
 
     /**
+     * @return array
+     */
+    public function getHandlers(): array
+    {
+        return $this->handlers;
+    }
+
+    /**
      * @return Kernel
      */
     public function getKernel(): Kernel
@@ -209,7 +217,7 @@ class Application implements \Peak\Blueprint\Bedrock\Application
     public function stackRoute(?string $method, string $path, $handlers)
     {
         return $this->stack(
-            $this->createRoute(null, $path, $handlers)
+            $this->createRoute($method, $path, $handlers)
         );
     }
 

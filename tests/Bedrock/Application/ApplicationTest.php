@@ -160,7 +160,7 @@ class ApplicationTest extends TestCase
         $app->put('/mypath', $handlerA);
         $app->patch('/mypath', $handlerA);
         $app->delete('/mypath', $handlerA);
-        //$app->all('/mypath2', $handlerA);
+        $app->all('/mypath2', $handlerA);
 
         $request = $this->createMock(ServerRequestInterface::class);
 
@@ -173,7 +173,12 @@ class ApplicationTest extends TestCase
             ->method('getUri')
             ->will($this->returnValue($uri));
 
+        $request->expects($this->any())
+            ->method('getMethod')
+            ->will($this->returnValue('GET'));
+
         $result = $app->handle($request);
+        print_r($result);
         $this->assertInstanceOf(ResponseInterface::class, $result);
     }
 
@@ -234,5 +239,20 @@ class ApplicationTest extends TestCase
         );
 
         $app->hasProp('foo');
+    }
+
+    public function testStackRoute()
+    {
+        $app = new Application(
+            $this->createMock(Kernel::class),
+            $this->createMock(HandlerResolver::class)
+        );
+
+        $app->stackRoute('post', '/', null);
+
+        $handlers = $app->getHandlers();
+        $this->assertTrue(count($handlers) == 1);
+        $this->assertTrue($handlers[0] instanceof Route);
+        $this->assertTrue($handlers[0]->getMethod() === 'POST');
     }
 }
