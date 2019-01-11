@@ -118,8 +118,9 @@ class TimeExpression
     /**
      * Shortcut of __toString + can overload string format
      *
-     * @param null|string $format a valid DateInterval::format (See http://php.net/manual/en/dateinterval.format.php)
+     * @param string|null $format a valid DateInterval::format (See http://php.net/manual/en/dateinterval.format.php)
      * @return string
+     * @throws Exception
      */
     public function toString(string $format = null): string
     {
