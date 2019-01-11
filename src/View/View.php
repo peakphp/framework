@@ -114,7 +114,7 @@ class View implements \Peak\Blueprint\View\View
 
     /**
      * @return string
-     * @throws \Exception
+     * @throws FileNotFoundException
      */
     public function render(): string
     {
@@ -125,7 +125,7 @@ class View implements \Peak\Blueprint\View\View
 
     /**
      * @param array $templateSources
-     * @throws \Exception
+     * @throws FileNotFoundException
      */
     private function recursiveRender(array $templateSources)
     {

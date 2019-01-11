@@ -31,7 +31,7 @@ class ViewBuilder
     private $helpers = [];
 
     /**
-     * @var HelperResolver
+     * @var HelperResolver|null
      */
     private $helperResolver;
 
@@ -66,7 +66,7 @@ class ViewBuilder
 
     /**
      * @param string $name
-     * @param $macro
+     * @param mixed $macro
      * @return $this
      */
     public function setMacro(string $name, $macro)
@@ -87,7 +87,7 @@ class ViewBuilder
 
     /**
      * @param string $name
-     * @param $helper
+     * @param mixed $helper
      * @return $this
      */
     public function setHelper(string $name, $helper)
@@ -133,6 +133,7 @@ class ViewBuilder
 
     /**
      * @return string
+     * @throws \Peak\View\Exception\FileNotFoundException
      * @throws \Peak\View\Exception\InvalidHelperException
      * @throws \ReflectionException
      */
