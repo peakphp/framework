@@ -20,7 +20,7 @@ class ConfigFactory implements \Peak\Blueprint\Config\ConfigFactory
     protected $filesHandlers;
 
     /**
-     * @var ResourceResolver
+     * @var ResourceResolver|null
      */
     private $configResolver;
 
@@ -46,7 +46,7 @@ class ConfigFactory implements \Peak\Blueprint\Config\ConfigFactory
 
     /**
      * @param array $resources
-     * @return Config
+     * @return ConfigBlueprint
      * @throws UnknownResourceException
      */
     public function loadResources(array $resources): ConfigBlueprint
@@ -85,6 +85,7 @@ class ConfigFactory implements \Peak\Blueprint\Config\ConfigFactory
 
         foreach ($resources as $resource) {
             $stream = $configResolver->resolve($resource);
+            // @todo fix method not in signature
             $config->mergeRecursiveDistinct($stream->get());
         }
         return $config;

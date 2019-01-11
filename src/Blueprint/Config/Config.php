@@ -12,4 +12,5 @@ use Peak\Blueprint\Collection\Dictionary;
  */
 interface Config extends Dictionary
 {
+mergeRecursiveDistinct
 }
