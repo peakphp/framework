@@ -5,12 +5,9 @@ declare(strict_types=1);
 namespace Peak\Validation;
 
 use Peak\Blueprint\Common\Validator;
-use \Exception;
 use Peak\Validation\Exception\NotFoundException;
+use \Exception;
 
-/**
- * Rule builder
- */
 class RuleBuilder
 {
     /**
