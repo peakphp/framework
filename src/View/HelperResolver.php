@@ -8,14 +8,10 @@ use Peak\Blueprint\Common\ResourceResolver;
 use Peak\View\Exception\InvalidHelperException;
 use Psr\Container\ContainerInterface;
 
-/**
- * Class HelperResolver
- * @package Peak\View
- */
 class HelperResolver implements ResourceResolver
 {
     /**
-     * @var ContainerInterface
+     * @var ContainerInterface|null
      */
     private $container;
 

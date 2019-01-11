@@ -17,7 +17,7 @@ class InvalidHelperException extends \Exception
 
     /**
      * InvalidHelperException constructor.
-     * @param $helper
+     * @param mixed $helper
      */
     public function __construct($helper)
     {
