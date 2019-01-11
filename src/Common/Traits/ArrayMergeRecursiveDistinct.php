@@ -8,13 +8,12 @@ trait ArrayMergeRecursiveDistinct
 {
     /**
      * Merge 2 arrays recursively overwriting the keys in the first array if such key already exists
-     *
      * @param array $a
      * @param array $b
-     * @param bool $preserveKeys add instead overwritten when index key is numeric
+     * @param bool $mergeNumericKeys add instead overwritten when index key is numeric
      * @return array
      */
-    protected function arrayMergeRecursiveDistinct(array $a, array $b, $mergeNumericKeys = false): array
+    protected function arrayMergeRecursiveDistinct(array $a, array $b, bool $mergeNumericKeys = false): array
     {
         $merged = $a;
 
