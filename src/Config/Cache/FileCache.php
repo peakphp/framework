@@ -9,10 +9,6 @@ use Peak\Config\Exception\CachePathNotWritableException;
 use Peak\Config\Exception\CacheInvalidKeyException;
 use Psr\SimpleCache\CacheInterface;
 
-/**
- * Class FileCache
- * @package Peak\Config\Cache
- */
 class FileCache implements CacheInterface
 {
     /**
