@@ -70,7 +70,7 @@ class Routing implements Bootable
     }
 
     /**
-     * @param $route
+     * @param mixed $route
      * @throws \Exception
      */
     private function validate($route)
