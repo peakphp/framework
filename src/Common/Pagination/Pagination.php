@@ -8,9 +8,6 @@ use IteratorAggregate;
 use ArrayIterator;
 use Exception;
 
-/**
- * Pagination model
- */
 class Pagination implements IteratorAggregate
 {
 
@@ -29,12 +26,11 @@ class Pagination implements IteratorAggregate
     public $pages_range    = null;
   
     /**
-     * Constructor
-     *
-     * @param integer  $items_per_page
-     * @param integer  $items_count
-     * @param integer  $current_page
-     * @param integer  $range
+     * Pagination constructor.
+     * @param int $items_per_page
+     * @param int $items_count
+     * @param int $current_page
+     * @param int|null $range
      * @throws Exception
      */
     public function __construct(int $items_per_page, int $items_count, int $current_page = 1, int $range = null)
@@ -52,7 +48,6 @@ class Pagination implements IteratorAggregate
 
     /**
      * Get $pages array
-     *
      * @return ArrayIterator
      */
     public function getIterator(): ArrayIterator
@@ -62,8 +57,8 @@ class Pagination implements IteratorAggregate
 
     /**
      * Set page and (re)calculate
-     *
-     * @param integer $page
+     * @param int $page
+     * @return Pagination
      * @throws Exception
      */
     public function setPage(int $page): Pagination
@@ -75,7 +70,6 @@ class Pagination implements IteratorAggregate
 
     /**
      * Calculate stuff for pagination
-     *
      * @throws Exception
      */
     public function calculate(): Pagination
@@ -163,8 +157,7 @@ class Pagination implements IteratorAggregate
     
     /**
      * Check if a page exists
-     *
-     * @param  integer $page_number
+     * @param int $number
      * @return bool
      */
     public function isPage(int $number): bool
