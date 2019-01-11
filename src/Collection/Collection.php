@@ -149,7 +149,7 @@ class Collection implements \Peak\Blueprint\Collection\Collection, JsonSerializa
             return;
         }
 
-        if (is_null($offset)) {
+        if (!isset($this->items[$offset])) {
             $this->items[] = $value;
         } else {
             $this->items[$offset] = $value;
