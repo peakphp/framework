@@ -27,7 +27,7 @@ class View implements \Peak\Blueprint\View\View
     private $helpers = [];
 
     /**
-     * @var string
+     * @var string|false
      */
     private $layoutContent;
 
@@ -114,7 +114,7 @@ class View implements \Peak\Blueprint\View\View
     }
 
     /**
-     * @return string
+     * @return string|false
      * @throws FileNotFoundException
      */
     public function render(): string
