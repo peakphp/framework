@@ -41,7 +41,7 @@ class Route implements Stack
      */
     public function __construct(?string $method, string $path, Stack $stack)
     {
-        $this->method = $method;
+        $this->method = isset($method) ? strtoupper($method) : null;
         $this->path = $path;
         $this->stack = $stack;
     }
