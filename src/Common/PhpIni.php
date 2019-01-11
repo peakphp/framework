@@ -4,15 +4,13 @@ declare(strict_types=1);
 
 namespace Peak\Common;
 
-/**
- * Class PhpIni
- * @package Peak\Common
- */
 class PhpIni
 {
     /**
-     * ConfigPHP constructor.
+     * PhpIni constructor.
      * @param array $definitions
+     * @param bool $strict
+     * @throws \Exception
      */
     public function __construct(array $definitions, bool $strict = false)
     {
