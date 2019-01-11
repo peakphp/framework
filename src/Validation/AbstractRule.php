@@ -26,7 +26,7 @@ abstract class AbstractRule implements Validator
 
     /**
      * Flags for php validate filters
-     * @var integer
+     * @var int|null
      */
     protected $flags;
 
@@ -37,11 +37,10 @@ abstract class AbstractRule implements Validator
     protected $context;
 
     /**
-     * Constructor
-     *
-     * @param array   $options rules options array
-     * @param integer $flags   rules flags
-     * @param mixed   $context rules context data
+     * AbstractRule constructor.
+     * @param array $options
+     * @param int|null $flags
+     * @param null $context
      */
     public function __construct(array $options = [], int $flags = null, $context = null)
     {
@@ -78,7 +77,7 @@ abstract class AbstractRule implements Validator
     }
 
     /**
-     * @return int
+     * @return int|null
      */
     public function getFlags(): ?int
     {
