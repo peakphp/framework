@@ -8,7 +8,7 @@ use Peak\Di\Container;
 class Application extends \Peak\Bedrock\Application\Application
 {
     /**
-     * @param $object
+     * @param mixed $object
      * @param null $alias
      * @return $this
      * @throws \Exception
@@ -49,7 +49,7 @@ class Application extends \Peak\Bedrock\Application\Application
     private function checkIfPeakDi()
     {
         if (!$this->getContainer() instanceof Container) {
-            throw new \Exception('setInContainer() only work with Peak\Di\Container');
+            throw new \Exception('setInContainer() and createWithContainer() only work with Peak\Di\Container');
         }
     }
 }
