@@ -178,7 +178,7 @@ class ApplicationTest extends TestCase
             ->will($this->returnValue('GET'));
 
         $result = $app->handle($request);
-        print_r($result);
+
         $this->assertInstanceOf(ResponseInterface::class, $result);
     }
 
