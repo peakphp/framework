@@ -15,7 +15,7 @@ interface Dictionary extends Collection
 
     /**
      * @param string $item
-     * @param $value
+     * @param mixed $value
      * @return mixed
      */
     public function set(string $item, $value);
