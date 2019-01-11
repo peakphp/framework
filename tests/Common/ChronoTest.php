@@ -14,7 +14,6 @@ class ChronoTest extends TestCase
         Peak\Common\Chrono::start();
         usleep(149992);
         Peak\Common\Chrono::stop();
-        //echo Peak\Common\Chrono::getMs(null,20);
         $this->assertTrue(Peak\Common\Chrono::get() >= 0.10);
     }
     

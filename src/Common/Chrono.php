@@ -53,20 +53,20 @@ class Chrono
 
     /**
      * Check if a timer name exists
-     * @param  string $timerName
+     * @param string|null $timerName
      * @return bool
      */
-    public static function timerExists(string $timerName)
+    public static function timerExists(?string $timerName)
     {
         return array_key_exists($timerName, self::$timers);
     }
 
     /**
      * Check if chrono is started but not ended
-     * @param null $timerName
+     * @param string|null $timerName
      * @return bool
      */
-    public static function isOn($timerName = null)
+    public static function isOn(string $timerName = null)
     {
         if (!isset($timerName)) {
             if ((self::$global['start'] === false) || (self::$global['end'] !== false)) {
