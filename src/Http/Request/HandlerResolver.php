@@ -16,7 +16,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 class HandlerResolver implements ResourceResolver
 {
     /**
-     * @var ContainerInterface
+     * @var ContainerInterface|null
      */
     protected $container;
 
@@ -57,10 +57,10 @@ class HandlerResolver implements ResourceResolver
     }
 
     /**
-     * @param mixed $handler
+     * @param callable $handler
      * @return CallableMiddleware
      */
-    protected function resolveCallable($handler)
+    protected function resolveCallable(callable $handler)
     {
         return new CallableMiddleware($handler);
     }
