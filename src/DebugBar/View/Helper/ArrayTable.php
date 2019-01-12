@@ -121,7 +121,7 @@ class ArrayTable implements Renderable
     /**
      * Format value
      *
-     * @param $val
+     * @param mixed $val
      * @return string
      */
     public function formatVal($val)
