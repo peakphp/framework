@@ -42,7 +42,7 @@ class User extends AbstractHolder
     /**
      * Add a custom permission to bypass a permission
      *
-     * @param  CustomPermission $cperm
+     * @param CustomPermission $customPermission
      * @return $this
      */
     public function addCustomPermission(CustomPermission $customPermission)
