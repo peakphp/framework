@@ -11,9 +11,9 @@ use Peak\View\View;
 class ViewBuilder
 {
     /**
-     * @var array
+     * @var array|null
      */
-    private $vars = [];
+    private $vars = null;
 
     /**
      * @var Presentation
@@ -97,10 +97,10 @@ class ViewBuilder
     }
 
     /**
-     * @param $vars
+     * @param array|null $vars
      * @return $this
      */
-    public function setVars($vars)
+    public function setVars(?array $vars)
     {
         $this->vars = $vars;
         return $this;
@@ -108,6 +108,7 @@ class ViewBuilder
 
     /**
      * @return View
+     * @throws \Peak\Di\Exception\NoClassDefinitionException
      * @throws \Peak\View\Exception\InvalidHelperException
      * @throws \ReflectionException
      */
@@ -133,6 +134,7 @@ class ViewBuilder
 
     /**
      * @return string
+     * @throws \Peak\Di\Exception\NoClassDefinitionException
      * @throws \Peak\View\Exception\FileNotFoundException
      * @throws \Peak\View\Exception\InvalidHelperException
      * @throws \ReflectionException
