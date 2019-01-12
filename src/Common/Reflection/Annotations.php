@@ -43,6 +43,7 @@ class Annotations
      */
     protected function setClass($className): void
     {
+        // @todo fix logic about storing the classname
         $this->className = $className;
         if (is_object($className)) {
             $this->className = get_class($className);
