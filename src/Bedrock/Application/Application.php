@@ -106,7 +106,7 @@ class Application implements \Peak\Blueprint\Bedrock\Application
     }
 
     /**
-     * @return null|Dictionary
+     * @return Dictionary|null
      */
     public function getProps(): ?Dictionary
     {
