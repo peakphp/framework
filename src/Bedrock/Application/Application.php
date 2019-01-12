@@ -80,7 +80,7 @@ class Application implements \Peak\Blueprint\Bedrock\Application
 
     /**
      * @param string $property
-     * @param null $default
+     * @param mixed $default
      * @return mixed
      * @throws \Exception
      */
