@@ -47,7 +47,7 @@ class ClassResolver
      * @param mixed $class
      * @param Container $container
      * @param array $args
-     * @param array $explicit
+     * @param mixed $explicit
      * @return array
      * @throws InvalidArgumentException
      */
