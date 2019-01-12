@@ -15,12 +15,12 @@ class ClassInstantiator
     /**
      * Instantiate a class
      *
-     * @param $class
+     * @param string $class
      * @param array $args
      * @return object
      * @throws \ReflectionException
      */
-    public function instantiate($class, array $args = [])
+    public function instantiate(string $class, array $args = [])
     {
         if (empty($args)) {
             return new $class();
