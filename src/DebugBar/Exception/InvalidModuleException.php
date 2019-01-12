@@ -10,6 +10,7 @@ class InvalidModuleException extends \Exception
      */
     public function __construct($module)
     {
+        // @todo fix potential bug with module not being a string
         parent::__construct(trim(strip_tags($module)).' must be an instance of AbstractModule');
     }
 }
