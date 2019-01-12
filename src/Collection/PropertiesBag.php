@@ -5,10 +5,11 @@ declare(strict_types=1);
 namespace Peak\Collection;
 
 use Peak\Blueprint\Collection\Dictionary;
+use JsonSerializable;
 use Exception;
 use ArrayIterator;
 
-class PropertiesBag implements Dictionary
+class PropertiesBag implements Dictionary, JsonSerializable
 {
     /**
      * @var array
@@ -36,7 +37,7 @@ class PropertiesBag implements Dictionary
 
     /**
      * @param string $prop
-     * @param $value
+     * @param mixed $value
      * @return mixed
      */
     public function set(string $prop, $value)
@@ -182,9 +183,9 @@ class PropertiesBag implements Dictionary
      *
      * @param  integer $options Bitmask (see php.net json_encode)
      * @param  integer $depth   Set the maximum depth. Must be greater than zero.
-     * @return string
+     * @return string|false
      */
-    public function jsonSerialize(int $options = 0, int $depth = 512): string
+    public function jsonSerialize(int $options = 0, int $depth = 512)
     {
         return json_encode($this->properties, $options, $depth);
     }
