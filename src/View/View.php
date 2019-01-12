@@ -90,9 +90,11 @@ class View implements \Peak\Blueprint\View\View
 
     /**
      * Call a macro or helper in that order
+     *
      * @param string $method
      * @param array $args
-     * @return mixed|\RuntimeException
+     * @return mixed
+     * @throw \RuntimeException
      */
     public function __call(string $method, array $args)
     {
@@ -102,7 +104,7 @@ class View implements \Peak\Blueprint\View\View
             return call_user_func_array($this->helpers[$method], $args);
         }
 
-        return new \RuntimeException('No macro or helper found for "'.$method.'"');
+        throw new \RuntimeException('No macro or helper found for "'.$method.'"');
     }
 
     /**

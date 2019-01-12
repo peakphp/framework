@@ -59,6 +59,15 @@ class ViewTest extends TestCase
         $this->assertTrue($view->macro1() === 'foobar');
     }
 
+    /**
+     * @expectedException \RuntimeException
+     */
+    public function testMacroHelperException()
+    {
+        $view = new View([], $this->createMock(Presentation::class));
+        $view->macro();
+    }
+
     public function testHelper()
     {
         $view = new View([], $this->createMock(Presentation::class));
