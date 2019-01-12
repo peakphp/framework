@@ -40,10 +40,10 @@ abstract class AbstractDataSet
      * Add to data one or many rules definitions
      *
      * @param  string $name        data key name
-     * @param  array  $definitions rules definitions
+     * @param  mixed  $definitions rules definitions
      * @return $this
      */
-    public function add($name, ...$definitions)
+    public function add(string $name, ...$definitions)
     {
         if (!array_key_exists($name, $this->rules)) {
             $this->rules[$name] = [];
