@@ -44,8 +44,8 @@ class Manager
 
     /**
      * Add a user
-     *
      * @param User $user
+     * @return $this
      */
     public function addUser(User $user)
     {
@@ -95,7 +95,8 @@ class Manager
 
     /**
      * Add a permission
-     * @param Permission $user
+     * @param Permission $perm
+     * @return $this
      */
     public function addPermission(Permission $perm)
     {
