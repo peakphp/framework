@@ -23,7 +23,7 @@ class StdClassProcessor implements ResourceProcessor
         if (!$data instanceof \stdClass) {
             throw new ProcessorException(__CLASS__.' require an instance of stdClass, '.gettype($data).' received ...');
         }
-
+        // @todo handle possibility of json_* returning false
         return json_decode(json_encode($data), true);
     }
 }
