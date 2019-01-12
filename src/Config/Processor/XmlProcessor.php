@@ -16,9 +16,8 @@ use SimpleXMLElement;
 class XmlProcessor implements ResourceProcessor
 {
     /**
-     * @param $data
+     * @param mixed $data
      * @return array
-     * @throws ProcessorException
      */
     public function process($data): array
     {
