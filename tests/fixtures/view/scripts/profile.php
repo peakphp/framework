@@ -1,0 +1,1 @@
+<h1>Profile of <?php echo $this->name; ?></h1>

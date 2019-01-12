@@ -77,4 +77,14 @@ class ViewTest extends TestCase
 
         $this->assertTrue($view->myHelper('bob') === 'Hello bob!');
     }
+
+    public function testRender()
+    {
+        $view = new View(
+            ['name' => 'foo'],
+            new Presentation(['/layout.php' => ['/profile.php']], FIXTURES_PATH.'/view/scripts')
+        );
+        $content = $view->render();
+        $this->assertTrue($content === '<div class="content"><h1>Profile of foo</h1></div>');
+    }
 }
