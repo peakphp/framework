@@ -99,8 +99,8 @@ class RuleBuilder
     }
 
     /**
-     * @return mixed
-     * @throws Exception
+     * @return Validator
+     * @throws NotFoundException
      */
     public function build(): Validator
     {
