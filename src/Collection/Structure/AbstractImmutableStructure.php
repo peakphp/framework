@@ -10,7 +10,7 @@ abstract class AbstractImmutableStructure extends AbstractStructure
 {
     /**
      * @param string $name
-     * @param $value
+     * @param mixed $value
      * @throws Exception
      */
     public function __set(string $name, $value)
