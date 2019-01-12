@@ -4,10 +4,6 @@ declare(strict_types=1);
 
 namespace Peak\View;
 
-/**
- * Class Presentation
- * @package Peak\View
- */
 class Presentation
 {
     /**
@@ -18,6 +14,7 @@ class Presentation
     /**
      * Presentation constructor.
      * @param array $sources
+     * @param string|null $basePath
      */
     public function __construct(array $sources, string $basePath = null)
     {
@@ -30,7 +27,7 @@ class Presentation
     /**
      * @return array
      */
-    public function getSources()
+    public function getSources(): array
     {
         return $this->sources;
     }
@@ -40,7 +37,7 @@ class Presentation
      * @param string $basePath
      * @return array
      */
-    private function addBasePath(array $sources, string $basePath)
+    private function addBasePath(array $sources, string $basePath): array
     {
         foreach ($sources as $i => $source) {
             if (is_array($source)) {
