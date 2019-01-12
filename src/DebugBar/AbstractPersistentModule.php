@@ -45,8 +45,8 @@ abstract class AbstractPersistentModule extends AbstractModule
 
     /**
      * Get module storage
-     *
      * @return mixed
+     * @throws \ReflectionException
      */
     protected function getStorage()
     {
@@ -55,8 +55,8 @@ abstract class AbstractPersistentModule extends AbstractModule
 
     /**
      * Save data to module storage
-     *
-     * @param $data
+     * @param mixed $data
+     * @throws \ReflectionException
      */
     protected function saveToStorage($data)
     {
