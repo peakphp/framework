@@ -264,10 +264,10 @@ class FileCache implements CacheInterface
      *
      * @param $key
      * @param $content
-     * @param int $ttl
+     * @param null|int|\DateInterval $ttl
      * @return bool
      */
-    protected function setCacheFileContent($key, $content, int $ttl = 0)
+    protected function setCacheFileContent($key, $content, $ttl = 0)
     {
         $result = true;
         $filepath = $this->getCacheFilePath($key);
