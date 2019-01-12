@@ -14,7 +14,7 @@ class XmlStream extends DataStream
 {
     /**
      * XmlStream constructor.
-     * @param $xml
+     * @param mixed $xml
      */
     public function __construct($xml)
     {
