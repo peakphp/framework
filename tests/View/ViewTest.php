@@ -36,4 +36,15 @@ class ViewTest extends TestCase
         $this->assertTrue(isset($view->test));
         $this->assertFalse(isset($view->test2));
     }
+
+    public function testAddMacro()
+    {
+        $view = new View(['name' => 'foobar'], $this->createMock(Presentation::class));
+        $view->addMacro('macro1', function() {
+            return $this->name;
+        });
+        $this->assertTrue($view->hasMacro('macro1'));
+        $this->assertFalse($view->hasMacro('macro2'));
+        $this->assertTrue($view->macro1() === 'foobar');
+    }
 }
