@@ -210,7 +210,6 @@ class FileCache implements CacheInterface
     /**
      * @param $key
      * @return bool
-     * @throws \Psr\SimpleCache\InvalidArgumentException
      */
     public function isExpired($key)
     {
