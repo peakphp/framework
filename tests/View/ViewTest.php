@@ -5,6 +5,8 @@ use \PHPUnit\Framework\TestCase;
 use Peak\View\View;
 use Peak\View\Presentation;
 
+require_once FIXTURES_PATH.'/view/helpers/ViewHelperA.php';
+
 class ViewTest extends TestCase
 {
     public function testBasic()
@@ -46,5 +48,15 @@ class ViewTest extends TestCase
         $this->assertTrue($view->hasMacro('macro1'));
         $this->assertFalse($view->hasMacro('macro2'));
         $this->assertTrue($view->macro1() === 'foobar');
+    }
+
+    public function testHelper()
+    {
+        $view = new View([], $this->createMock(Presentation::class));
+        $view->setHelpers([
+            'myHelper' => new ViewHelperA(),
+        ]);
+
+        $this->assertTrue($view->myHelper('bob') === 'Hello bob!');
     }
 }
