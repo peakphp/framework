@@ -7,15 +7,11 @@ namespace Peak\Config\Processor;
 use Peak\Blueprint\Common\ResourceProcessor;
 use Peak\Config\Exception\ProcessorException;
 
-/**
- * Class JsonProcessor
- * @package Peak\Config\Processor
- */
 class JsonProcessor implements ResourceProcessor
 {
-
     /**
-     * @param $data
+     * @param mixed $data
+     * @return array
      * @throws ProcessorException
      */
     public function process($data): array
