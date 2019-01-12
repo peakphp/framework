@@ -69,7 +69,7 @@ abstract class AbstractDataSet
     /**
      * Validate data with current rules
      *
-     * @param $data
+     * @param mixed $data
      * @return bool
      * @throws \Exception
      */
