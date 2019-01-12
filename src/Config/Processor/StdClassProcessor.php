@@ -14,7 +14,7 @@ use Peak\Config\Exception\ProcessorException;
 class StdClassProcessor implements ResourceProcessor
 {
     /**
-     * @param $data
+     * @param \stdClass $data
      * @return array
      * @throws ProcessorException
      */
