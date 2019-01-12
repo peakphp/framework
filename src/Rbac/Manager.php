@@ -4,15 +4,11 @@ declare(strict_types=1);
 
 namespace Peak\Rbac;
 
-use \Exception;
 use Peak\Rbac\Exception\PermissionNotFoundException;
 use Peak\Rbac\Exception\RoleNotFoundException;
 use Peak\Rbac\Exception\UserNotFoundException;
+use \Exception;
 
-/**
- * Class Manager
- * @package Peak\Rbac
- */
 class Manager
 {
     use RolesHolder;
@@ -32,11 +28,11 @@ class Manager
     /**
      * Create a user
      *
-     * @param $id
+     * @param string $id
      * @return User
      * @throws UserNotFoundException
      */
-    public function createUser($id): User
+    public function createUser(string $id): User
     {
         $this->addUser(new User($id));
         return $this->user($id);
@@ -56,10 +52,10 @@ class Manager
     /**
      * Has user
      *
-     * @param  string  $id
+     * @param  string $id
      * @return boolean
      */
-    public function hasUser($id): bool
+    public function hasUser(string $id): bool
     {
         return isset($this->users[$id]);
     }
@@ -71,7 +67,7 @@ class Manager
      * @return User
      * @throws UserNotFoundException
      */
-    public function user($id): User
+    public function user(string $id): User
     {
         if (!isset($this->users[$id])) {
             throw new UserNotFoundException($id);
@@ -82,12 +78,12 @@ class Manager
     /**
      * Create a permissions
      *
-     * @param $id
+     * @param string $id
      * @param string $desc
      * @return Permission
      * @throws Exception
      */
-    public function createPermission($id, $desc = ''): Permission
+    public function createPermission(string $id, string $desc = ''): Permission
     {
         $this->addPermission(new Permission($id, $desc));
         return $this->permission($id);
@@ -133,12 +129,12 @@ class Manager
     /**
      * Create a roles
      *
-     * @param $id
+     * @param string $id
      * @param string $desc
      * @return mixed
      * @throws RoleNotFoundException
      */
-    public function createRole($id, $desc = '')
+    public function createRole(string $id, string $desc = '')
     {
         $this->addRole(new Role($id, $desc));
         return $this->role($id);
@@ -147,11 +143,11 @@ class Manager
     /**
      * Access to a role
      *
-     * @param $id
+     * @param string $id
      * @return mixed
      * @throws RoleNotFoundException
      */
-    public function role($id)
+    public function role(string $id)
     {
         if (!isset($this->roles[$id])) {
             throw new RoleNotFoundException($id);
@@ -162,12 +158,12 @@ class Manager
     /**
      * Add a stored role to a stored user
      *
-     * @param $role
-     * @param $user
+     * @param string $role
+     * @param string $user
      * @throws RoleNotFoundException
      * @throws UserNotFoundException
      */
-    public function addRoleToUser($role, $user)
+    public function addRoleToUser(string $role, string $user)
     {
         $this->user($user)->addRole($this->role($role));
     }
@@ -175,12 +171,12 @@ class Manager
     /**
      * Add a stored role to a stored permission
      *
-     * @param $role
-     * @param $perm
+     * @param string $role
+     * @param string $perm
      * @throws PermissionNotFoundException
      * @throws RoleNotFoundException
      */
-    public function addRoleToPermission($role, $perm)
+    public function addRoleToPermission(string $role, string $perm)
     {
         $this->permission($perm)->addRole($this->role($role));
     }
@@ -195,7 +191,7 @@ class Manager
      * @throws PermissionNotFoundException
      * @throws UserNotFoundException
      */
-    public function userCan($user, $perms): bool
+    public function userCan(string $user, $perms): bool
     {
         if (!is_array($perms)) {
             $perms = [$perms];
