@@ -53,7 +53,7 @@ class BootableResolver implements ResourceResolver
     }
 
     /**
-     * @param $item
+     * @param mixed $item
      * @return mixed|object
      * @throws \Peak\Di\Exception\NoClassDefinitionException
      * @throws \ReflectionException
