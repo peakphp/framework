@@ -78,7 +78,7 @@ class Annotations
     public function getAllMethods($tags = '*'): array
     {
         $a = [];
-        
+        /** @var ReflectionMethod $m */
         foreach ($this->class->getMethods() as $m) {
             $comment = $m->getDocComment();
             $a = array_merge($a, [$m->name => $this->parse($comment, $tags)]);
