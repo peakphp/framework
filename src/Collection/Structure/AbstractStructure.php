@@ -53,7 +53,7 @@ abstract class AbstractStructure implements IteratorAggregate
 
     /**
      * @param string $name
-     * @param $value
+     * @param mixed $value
      * @throws Exception
      */
     public function __set(string $name, $value)
@@ -63,7 +63,7 @@ abstract class AbstractStructure implements IteratorAggregate
 
     /**
      * @param string $name
-     * @param $value
+     * @param mixed $value
      * @throws Exception
      */
     protected function set(string $name, $value)
