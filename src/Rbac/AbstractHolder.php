@@ -28,7 +28,7 @@ abstract class AbstractHolder
      * @param string $id
      * @param string $description
      */
-    public function __construct($id, string $description = '')
+    public function __construct(string $id, string $description = '')
     {
         $this->id = $id;
         $this->description = $description;
@@ -39,7 +39,7 @@ abstract class AbstractHolder
      *
      * @return string
      */
-    public function getId()
+    public function getId(): string
     {
         return $this->id;
     }
@@ -49,7 +49,7 @@ abstract class AbstractHolder
      *
      * @return string
      */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
     }
