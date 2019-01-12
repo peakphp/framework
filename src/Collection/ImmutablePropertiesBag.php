@@ -50,7 +50,7 @@ class ImmutablePropertiesBag extends PropertiesBag
 
     /**
      * @param string $property
-     * @param $value
+     * @param mixed $value
      * @throws ImmutableException
      */
     final public function set(string $property, $value)
