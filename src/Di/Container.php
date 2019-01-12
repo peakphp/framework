@@ -83,7 +83,7 @@ class Container implements ContainerInterface
      * The generated instance is not stored, but may use stored
      * instance(s) as dependency when needed
      *
-     * @param $class
+     * @param string $class
      * @param array $args
      * @param  mixed  $explicit  Determine which instance should be use for an interface name.
      *                           Required when you have multiple stored instances using the same interface name.
@@ -96,7 +96,7 @@ class Container implements ContainerInterface
      * @throws NoClassDefinitionException
      * @throws \ReflectionException
      */
-    public function create($class, $args = [], $explicit = null)
+    public function create(string $class, $args = [], $explicit = null)
     {
         // if false, don't use reflection, use $definitions binding instead to resolve a class
         if (!$this->auto_wiring) {
@@ -127,7 +127,7 @@ class Container implements ContainerInterface
      * @param  mixed  $explicit @see instantiate
      * @return mixed  the method call return if any
      */
-    public function call(array $callback, $args = [], $explicit = null)
+    public function call(array $callback, array $args = [], $explicit = null)
     {
         // process class dependencies
         $args = $this->resolver->resolve($callback, $this, $args, $explicit);
@@ -138,14 +138,14 @@ class Container implements ContainerInterface
     /**
      * Same as create() but also store the created object before returning it
      *
-     * @param $class
+     * @param string $class
      * @param array $args
-     * @param array $explicit
+     * @param mixed $explicit
      * @return mixed|object
      * @throws NoClassDefinitionException
      * @throws \ReflectionException
      */
-    public function createAndStore($class, $args = [], $explicit = [])
+    public function createAndStore(string $class, array $args = [], $explicit = null)
     {
         $object = $this->create($class, $args, $explicit);
         $this->set($object);
@@ -160,7 +160,7 @@ class Container implements ContainerInterface
      * @return mixed
      * @throws NoClassDefinitionException
      */
-    public function resolve($definition, $args = [])
+    public function resolve($definition, array $args = [])
     {
         $def = $this->getDefinition($definition);
         if (is_null($def)) {
