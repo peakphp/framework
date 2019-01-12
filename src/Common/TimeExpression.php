@@ -21,7 +21,7 @@ class TimeExpression
 {
     /**
      * Time string expression
-     * @var string
+     * @var mixed
      */
     protected $expression;
 
@@ -245,7 +245,7 @@ class TimeExpression
     /**
      * Check if expression is valid
      *
-     * @param $expression
+     * @param mixed $expression
      * @return bool
      */
     public static function isValid($expression): bool
@@ -262,7 +262,7 @@ class TimeExpression
      * Try to create a TimeExpression.
      * If fail, false is returned instead of throwing an exception
      *
-     * @param $expression
+     * @param mixed $expression
      * @return mixed
      */
     public static function createFrom($expression)
