@@ -51,6 +51,7 @@ class Singleton extends AbstractBinding
     {
         $definition = $this->definition;
 
+        $is_explicit = false;
         if (!is_null($explicit) && !empty($explicit)) {
             $definition = $explicit;
             $is_explicit = true;
