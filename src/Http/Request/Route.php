@@ -13,7 +13,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 class Route implements Stack
 {
     /**
-     * @var null|string
+     * @var string|null
      */
     private $method;
 
@@ -34,8 +34,7 @@ class Route implements Stack
 
     /**
      * Route constructor.
-     *
-     * @param null|string $method
+     * @param string|null $method
      * @param string $path
      * @param Stack $stack
      */
@@ -119,9 +118,9 @@ class Route implements Stack
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getMethod(): string
+    public function getMethod(): ?string
     {
         return $this->method;
     }
