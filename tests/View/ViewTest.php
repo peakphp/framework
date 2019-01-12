@@ -32,6 +32,15 @@ class ViewTest extends TestCase
         $this->assertTrue($view->test === 'foobar');
     }
 
+    /**
+     * @expectedException \Exception
+     */
+    public function testVarGetterException()
+    {
+        $view = new View([], $this->createMock(Presentation::class));
+        $view->test;
+    }
+
     public function testVarIsset()
     {
         $view = new View(['test' => 'foobar'], $this->createMock(Presentation::class));
