@@ -8,10 +8,6 @@ use Peak\Blueprint\Common\ResourceProcessor;
 use Peak\Common\Traits\ArrayMergeRecursiveDistinct;
 use Peak\Config\Exception\ProcessorException;
 
-/**
- * Class IniProcessor
- * @package Peak\Config\Processor
- */
 class IniProcessor implements ResourceProcessor
 {
     use ArrayMergeRecursiveDistinct;
@@ -22,6 +18,8 @@ class IniProcessor implements ResourceProcessor
     private $content;
 
     /**
+     * @param mixed $data
+     * @return array
      * @throws ProcessorException
      */
     public function process($data): array
@@ -33,16 +31,10 @@ class IniProcessor implements ResourceProcessor
     /**
      * Loads in the ini file specified in filename, and returns the settings in
      * it as an associative multi-dimensional array
-     *
-     * @param  string  $data             Parsed content by php function parse_ini_*
-     * @param  boolean $process_sections By setting the process_sections parameter to TRUE,
-     *                                   you get a multidimensional array, with the section
-     *                                   names and settings included. The default for
-     *                                   process_sections is FALSE
-     * @param  string $section_name      Specific section name to extract upon processing
+     * @param string $data
      * @throws ProcessorException
      */
-    public function load($data)
+    public function load(string $data)
     {
         // we silence error(s) so we can catch them and throw a proper exception after
         $data = @parse_ini_string($data, true);
@@ -69,7 +61,7 @@ class IniProcessor implements ResourceProcessor
      * @param  array $contents Section contents
      * @throws ProcessorException
      */
-    private function processSection($section, array $contents)
+    private function processSection(string $section, array $contents)
     {
         // the section does not extend another section
         if (stripos($section, ':') === false) {
