@@ -26,7 +26,7 @@ interface BindingInterface
     public function getName();
 
     /**
-     * @return mixed
+     * @return int
      */
     public function getType();
 

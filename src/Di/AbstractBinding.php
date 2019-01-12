@@ -25,7 +25,7 @@ abstract class AbstractBinding implements BindingInterface
 
     /**
      * Binding type
-     * @var integer
+     * @var int
      */
     protected $type;
 
@@ -38,10 +38,10 @@ abstract class AbstractBinding implements BindingInterface
     /**
      * Constructor
      * @param string $name
-     * @param integer $type
+     * @param int $type
      * @param mixed $definition
      */
-    public function __construct($name, $type, $definition)
+    public function __construct(string $name, int $type, $definition)
     {
         $this->name = $name;
         $this->type = $type;
@@ -59,9 +59,7 @@ abstract class AbstractBinding implements BindingInterface
     }
 
     /**
-     * Get type
-     *
-     * @return string
+     * @return int|mixed
      */
     public function getType()
     {
