@@ -20,7 +20,7 @@ class ExplicitResolver
      * @param $needle
      * @param ContainerInterface $container
      * @param null $explicit
-     * @return mixed|null
+     * @return mixed
      */
     public function resolve($needle, ContainerInterface $container, $explicit = null)
     {
