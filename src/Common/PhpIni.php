@@ -31,7 +31,7 @@ class PhpIni
 
     /**
      * @param string $option
-     * @param $value
+     * @param mixed $value
      * @param bool $strict
      * @throws \Exception
      */
