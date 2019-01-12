@@ -40,7 +40,6 @@ class Application implements \Peak\Blueprint\Bedrock\Application
 
     /**
      * Application constructor.
-     *
      * @param Kernel $kernel
      * @param ResourceResolver $handlerResolver
      * @param Dictionary|null $props
@@ -147,7 +146,6 @@ class Application implements \Peak\Blueprint\Bedrock\Application
 
     /**
      * Stack a new GET route
-     *
      * @see stackRoute()
      */
     public function get(string $path, $handlers)
@@ -157,7 +155,6 @@ class Application implements \Peak\Blueprint\Bedrock\Application
 
     /**
      * Stack a new POST route
-     *
      * @see stackRoute()
      */
     public function post(string $path, $handlers)
@@ -167,7 +164,6 @@ class Application implements \Peak\Blueprint\Bedrock\Application
 
     /**
      * Stack a new PUT route
-     *
      * @see stackRoute()
      */
     public function put(string $path, $handlers)
@@ -177,7 +173,6 @@ class Application implements \Peak\Blueprint\Bedrock\Application
 
     /**
      * Stack a new PATCH route
-     *
      * @see stackRoute()
      */
     public function patch(string $path, $handlers)
@@ -187,7 +182,6 @@ class Application implements \Peak\Blueprint\Bedrock\Application
 
     /**
      * Stack a new DELETE route
-     *
      * @see stackRoute()
      */
     public function delete(string $path, $handlers)
@@ -197,8 +191,6 @@ class Application implements \Peak\Blueprint\Bedrock\Application
 
     /**
      * Stack a new method less route
-     *
-     *
      * @see stackRoute()
      */
     public function all(string $path, $handlers)
@@ -208,8 +200,7 @@ class Application implements \Peak\Blueprint\Bedrock\Application
 
     /**
      * Create and stack a new route
-     *
-     * @param null|string $method
+     * @param string|null $method
      * @param string $path
      * @param $handlers
      * @return Application
@@ -223,7 +214,6 @@ class Application implements \Peak\Blueprint\Bedrock\Application
 
     /**
      * Create a new route
-     *
      * @param null|string $method
      * @param string $path
      * @param $handlers
@@ -242,7 +232,6 @@ class Application implements \Peak\Blueprint\Bedrock\Application
 
     /**
      * Flush current app stack
-     *
      * @return $this
      */
     public function reset()
@@ -253,7 +242,6 @@ class Application implements \Peak\Blueprint\Bedrock\Application
 
     /**
      * Overwrite the current app stack
-     *
      * @param mixed $handlers
      * @return $this
      */
@@ -266,7 +254,6 @@ class Application implements \Peak\Blueprint\Bedrock\Application
 
     /**
      * Bootstrap bootable processes
-     *
      * @param array $processes
      * @return $this
      * @throws \Peak\Bedrock\Bootstrap\Exception\InvalidBootableProcessException
@@ -281,7 +268,6 @@ class Application implements \Peak\Blueprint\Bedrock\Application
 
     /**
      * Handle the request and return a response.
-     *
      * @param ServerRequestInterface $request
      * @return ResponseInterface
      */
@@ -296,7 +282,6 @@ class Application implements \Peak\Blueprint\Bedrock\Application
 
     /**
      * Run the stack with a request and emit the response
-     *
      * @param ServerRequestInterface $request
      * @param ResponseEmitter $emitter
      * @return mixed
@@ -317,5 +302,4 @@ class Application implements \Peak\Blueprint\Bedrock\Application
     {
         return $this->run(new BlankRequest(), $emitter);
     }
-
 }
