@@ -45,12 +45,12 @@ class HelperResolver implements ResourceResolver
     }
 
     /**
-     * @param $helper
+     * @param string $helper
      * @return mixed|object
      * @throws \Peak\Di\Exception\NoClassDefinitionException
      * @throws \ReflectionException
      */
-    public function resolverString($helper)
+    public function resolverString(string $helper)
     {
         $helperInstance = $helper;
 
