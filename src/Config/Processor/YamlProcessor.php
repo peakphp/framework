@@ -16,7 +16,7 @@ use Symfony\Component\Yaml\Yaml;
 class YamlProcessor implements ResourceProcessor
 {
     /**
-     * @param $data
+     * @param string $data
      * @return array
      * @throws ProcessorException, ParseException
      */
