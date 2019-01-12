@@ -8,10 +8,10 @@ class ViewNotFoundException extends Exception
 {
     /**
      * ViewNotFoundException constructor.
-     * @param $view_file
+     * @param string $viewFile
      */
-    public function __construct($view_file)
+    public function __construct(string $viewFile)
     {
-        parent::__construct('View file '.trim($view_file).' not found.');
+        parent::__construct('View file '.trim($viewFile).' not found.');
     }
 }
