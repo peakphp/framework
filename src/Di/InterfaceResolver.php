@@ -15,7 +15,7 @@ use Peak\Di\Exception\NotFoundException;
 class InterfaceResolver
 {
     /**
-     * @param $interface
+     * @param mixed $interface
      * @param Container $container
      * @param array $explicit
      * @return null|object
