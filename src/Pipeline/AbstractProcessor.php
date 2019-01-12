@@ -17,13 +17,13 @@ abstract class AbstractProcessor
 {
     /**
      * Di container if any
-     * @var ContainerInterface or null
+     * @var ContainerInterface|null
      */
     protected $container = null;
 
     /**
-     * Constructor
-     * @param ContainerInterface|null $container Di container to resolve pipe class
+     * AbstractProcessor constructor.
+     * @param ContainerInterface|null $container
      */
     public function __construct(ContainerInterface $container = null)
     {
