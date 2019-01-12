@@ -109,11 +109,11 @@ class DebugBar implements Renderable
 
     /**
      * Get module
-     *
-     * @param $module
+     * @param string $module
      * @return mixed
      * @throws InvalidModuleException
      * @throws ModuleNotFoundException
+     * @throws \ReflectionException
      */
     public function getModule(string $module)
     {
@@ -121,12 +121,7 @@ class DebugBar implements Renderable
     }
 
     /**
-     * Render debug bar modules
-     *
-     * @return null|string
-     * @throws View\ViewNotFoundException
-     * @throws InvalidModuleException
-     * @throws ModuleNotFoundException
+     * Render
      */
     public function render()
     {
