@@ -263,10 +263,12 @@ class FileCache implements CacheInterface
     /**
      * Save cache key file content
      *
-     * @param string $key
+     * @param $key
      * @param $content
+     * @param int $ttl
+     * @return bool
      */
-    protected function setCacheFileContent($key, $content, $ttl = null)
+    protected function setCacheFileContent($key, $content, int $ttl = 0)
     {
         $result = true;
         $filepath = $this->getCacheFilePath($key);
