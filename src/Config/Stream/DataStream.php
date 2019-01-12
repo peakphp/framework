@@ -24,10 +24,9 @@ class DataStream implements Stream
     private $processor;
 
     /**
-     * DataStream constructor
-     *
-     * @param mixed $data
-     * @param ResourceProcessor $handlers
+     * DataStream constructor.
+     * @param $data
+     * @param ResourceProcessor $processor
      */
     public function __construct($data, ResourceProcessor $processor)
     {
@@ -36,7 +35,6 @@ class DataStream implements Stream
     }
 
     /**
-     * @param mixed $data
      * @return array
      */
     public function get(): array
