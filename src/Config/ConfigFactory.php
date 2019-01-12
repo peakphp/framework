@@ -15,7 +15,7 @@ use Peak\Config\Exception\UnknownResourceException;
 class ConfigFactory implements \Peak\Blueprint\Config\ConfigFactory
 {
     /**
-     * @var FilesHandlers
+     * @var FilesHandlers|null
      */
     protected $filesHandlers;
 
@@ -33,9 +33,8 @@ class ConfigFactory implements \Peak\Blueprint\Config\ConfigFactory
         $this->configResolver = $configResolver;
     }
 
-
     /**
-     * @param FilesHandlers $filesHandlers
+     * @param FilesHandlers|null $filesHandlers
      * @return $this
      */
     public function setFilesHandlers(?FilesHandlers $filesHandlers)
