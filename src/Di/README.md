@@ -1,11 +1,15 @@
-# Peak\Di
-### PSR-11 Dependency Injection Container
-This component allows you to standardize and centralize the way objects are constructed in your application.
+# Peak/Di
 
-## Installation outside framework
+##### PSR-11 Dependency Injection Container
+
+This package allows you to standardize and centralize the way objects are constructed in your application.
+
+### Installation
 
 ```
 $ composer require peak/di
 ```
 
-See [documentation](https://peak.readthedocs.io/en/latest/components/di/introduction/) for more infos
+### Documentation
+
+See https://peakphp.github.io/docs/di
