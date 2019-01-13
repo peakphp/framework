@@ -37,6 +37,11 @@ class View implements \Peak\Blueprint\View\View
     private $presentation;
 
     /**
+     * @var int
+     */
+    private $obN = 0;
+
+    /**
      * View constructor.
      * @param array|null $vars
      * @param Presentation $presentation
@@ -57,7 +62,7 @@ class View implements \Peak\Blueprint\View\View
     public function &__get(string $var)
     {
         if (!array_key_exists($var, $this->vars)) {
-            throw new \Exception('variable '.$var.' not found');
+            throw new \Exception('variable ['.$var.'] not found');
         }
 
         return $this->vars[$var];
@@ -121,8 +126,10 @@ class View implements \Peak\Blueprint\View\View
      */
     public function render(): string
     {
+        $this->obN++;
         ob_start();
         $this->recursiveRender($this->presentation->getSources());
+        $this->obN--;
         return ob_get_clean();
     }
 
@@ -134,8 +141,10 @@ class View implements \Peak\Blueprint\View\View
     {
         foreach ($templateSources as $layout => $source) {
             if (is_array($source)) {
+                $this->obN++;
                 ob_start();
                 $this->recursiveRender($source);
+                $this->obN--;
                 $this->layoutContent = ob_get_clean();
                 $this->renderFile($layout);
                 continue;
@@ -152,6 +161,11 @@ class View implements \Peak\Blueprint\View\View
     private function renderFile(string $file)
     {
         if (!file_exists($file)) {
+            // make sure we close all out
+            while ($this->obN > 0) {
+                ob_end_clean();
+                $this->obN--;
+            }
             throw new FileNotFoundException($file);
         }
         include $file;

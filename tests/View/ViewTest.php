@@ -87,4 +87,15 @@ class ViewTest extends TestCase
         $content = $view->render();
         $this->assertTrue($content === '<div class="content"><h1>Profile of foo</h1></div>');
     }
+
+    /**
+     * @expectedException \Peak\View\Exception\FileNotFoundException
+     */
+    public function testRenderFail()
+    {
+        $view = new View([],
+            new Presentation(['/layout.php' => ['/unknown.php']], FIXTURES_PATH . '/view/scripts')
+        );
+        $view->render();
+    }
 }
