@@ -14,8 +14,11 @@ class UserConstants extends AbstractModule
      */
     public function initialize()
     {
+        $this->data->constants = [];
         $constants = get_defined_constants(true);
-        $this->data->constants = $constants['user'];
+        if (isset($constants['user'])) {
+            $this->data->constants = $constants['user'];
+        }
     }
 
     /**
