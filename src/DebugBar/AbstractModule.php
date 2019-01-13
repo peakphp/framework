@@ -57,8 +57,8 @@ abstract class AbstractModule implements Renderable, Initializable
 
     /**
      * Get module absolute path
-     *
-     * @return string
+     * @return mixed|string
+     * @throws \ReflectionException
      */
     protected function getModulePath()
     {
@@ -69,9 +69,8 @@ abstract class AbstractModule implements Renderable, Initializable
     }
 
     /**
-     * Get module view file path
-     *
      * @return string
+     * @throws \ReflectionException
      */
     protected function getModuleView()
     {
