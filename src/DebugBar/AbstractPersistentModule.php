@@ -19,6 +19,7 @@ abstract class AbstractPersistentModule extends AbstractModule
     /**
      * AbstractPersistentModule constructor.
      * @param AbstractStorage|null $storage
+     * @throws \ReflectionException
      */
     public function __construct(?AbstractStorage $storage = null)
     {
