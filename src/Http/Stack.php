@@ -95,20 +95,20 @@ class Stack implements \Peak\Blueprint\Http\Stack
             throw new StackEndedWithoutResponseException($this);
         }
 
-        // resolve nextHandler if not already a MiddlewareInterface or RequestHandlerInterface
+        // resolve nextHandler if not already a object
         $handlerInstance = $this->nextHandler;
-        if (!$this->nextHandler instanceof MiddlewareInterface &&
-            !$this->nextHandler instanceof RequestHandlerInterface) {
+        if (!is_object($handlerInstance)) {
             $handlerInstance = $this->handlerResolver->resolve($this->nextHandler);
         }
 
-        // how to call the handlers
+        // how to call the handler (MiddlewareInterface or RequestHandlerInterface)
         if ($handlerInstance instanceof MiddlewareInterface) {
             return $handlerInstance->process($request, $this);
         } elseif($handlerInstance instanceof RequestHandlerInterface) {
             return $handlerInstance->handle($request);
         }
 
+        // at this point, the handler is not good
         throw new InvalidHandlerException($this->nextHandler);
     }
 
