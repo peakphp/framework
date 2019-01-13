@@ -79,6 +79,7 @@ class Stack implements \Peak\Blueprint\Http\Stack
     {
         $this->nextHandler = (isset($this->nextHandler)) ? next($this->handlers) : current($this->handlers);
 
+        // nextHandler is a stack
         if ($this->nextHandler instanceof \Peak\Blueprint\Http\Stack) {
             $response = $this->handleStack($this->nextHandler, $request);
             if ($response !== false) {
@@ -87,14 +88,21 @@ class Stack implements \Peak\Blueprint\Http\Stack
             $this->nextHandler = next($this->handlers);
         }
 
+        // no more handlers, look for parent
         if ($this->nextHandler === false && isset($this->parentStack)) {
             return $this->parentStack->process($request, $this->parentStack);
         } elseif ($this->nextHandler === false) {
             throw new StackEndedWithoutResponseException($this);
         }
 
-        $handlerInstance = $this->handlerResolver->resolve($this->nextHandler);
+        // resolve nextHandler if not already a MiddlewareInterface or RequestHandlerInterface
+        $handlerInstance = $this->nextHandler;
+        if (!$this->nextHandler instanceof MiddlewareInterface &&
+            !$this->nextHandler instanceof RequestHandlerInterface) {
+            $handlerInstance = $this->handlerResolver->resolve($this->nextHandler);
+        }
 
+        // how to call the handlers
         if ($handlerInstance instanceof MiddlewareInterface) {
             return $handlerInstance->process($request, $this);
         } elseif($handlerInstance instanceof RequestHandlerInterface) {

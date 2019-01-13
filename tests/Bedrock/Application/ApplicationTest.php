@@ -54,9 +54,6 @@ class ApplicationTest extends TestCase
         $handlerA = $this->createMock(RequestHandlerInterface::class);
         // handler resolver
         $handlerResolver = $this->createMock(HandlerResolver::class);
-        $handlerResolver->expects($this->exactly(1))
-            ->method('resolve')
-            ->will($this->returnValue($handlerA));
 
         $app = new Application($kernel, $handlerResolver);
         $app->stack($handlerA);
@@ -73,9 +70,6 @@ class ApplicationTest extends TestCase
         $handlerA = $this->createMock(RequestHandlerInterface::class);
         // handler resolver
         $handlerResolver = $this->createMock(HandlerResolver::class);
-        $handlerResolver->expects($this->exactly(1))
-            ->method('resolve')
-            ->will($this->returnValue($handlerA));
 
         $app = new Application($kernel, $handlerResolver);
         $app->set($handlerA);
@@ -131,9 +125,6 @@ class ApplicationTest extends TestCase
         $handlerA = new HandlerA();
 
         $handlerResolver = $this->createMock(HandlerResolver::class);
-        $handlerResolver->expects($this->exactly(1))
-            ->method('resolve')
-            ->will($this->returnValue($handlerA));
 
         $app = new Application($kernel, $handlerResolver);
         $app->stack([$handlerA]);
@@ -148,9 +139,6 @@ class ApplicationTest extends TestCase
         $handlerA = new HandlerA();
 
         $handlerResolver = $this->createMock(HandlerResolver::class);
-        $handlerResolver->expects($this->exactly(1))
-            ->method('resolve')
-            ->will($this->returnValue($handlerA));
 
         $app = new Application($kernel, $handlerResolver);
 

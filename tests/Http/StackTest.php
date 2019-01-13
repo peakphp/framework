@@ -5,9 +5,8 @@ use \Peak\Http\Stack;
 use \Psr\Http\Message\ServerRequestInterface;
 use \Peak\Http\Request\HandlerResolver;
 
-/**
- * Class StackTest
- */
+require_once FIXTURES_PATH . '/application/MiddlewareA.php';
+
 class StackTest extends TestCase
 {
     /**
@@ -47,4 +46,15 @@ class StackTest extends TestCase
             $this->assertInstanceOf(\stdClass::class, $e->getHandler());
         }
     }
+
+    /**
+     * @expectedException \Peak\Http\Exception\StackEndedWithoutResponseException
+     */
+    public function testEndWithoutResponse()
+    {
+        $stack = new Stack([new MiddlewareA()], $this->createMock(HandlerResolver::class));
+        $stack->handle($this->createMock(ServerRequestInterface::class));
+    }
+
+
 }
