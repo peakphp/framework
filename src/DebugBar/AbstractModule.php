@@ -122,8 +122,8 @@ abstract class AbstractModule implements Renderable, Initializable
 
     /**
      * Render SVG logo if file exists
-     *
-     * @return bool|string
+     * @return false|string
+     * @throws \ReflectionException
      */
     public function renderLogo()
     {
@@ -146,9 +146,9 @@ abstract class AbstractModule implements Renderable, Initializable
 
     /**
      * Render the module with DebugBar window layout
-     *
-     * @return string
+     * @return string|null
      * @throws ViewNotFoundException
+     * @throws \ReflectionException
      */
     public function render()
     {
