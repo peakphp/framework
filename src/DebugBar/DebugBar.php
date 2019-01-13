@@ -57,10 +57,11 @@ class DebugBar implements Renderable
     }
 
     /**
-     * Add module
-     *
-     * @param mixed $module
+     * @param $module
      * @return $this
+     * @throws InvalidModuleException
+     * @throws ModuleNotFoundException
+     * @throws \ReflectionException
      */
     public function addModule($module)
     {
@@ -70,10 +71,11 @@ class DebugBar implements Renderable
     }
 
     /**
-     * Add modules
-     *
      * @param array $modules
      * @return $this
+     * @throws InvalidModuleException
+     * @throws ModuleNotFoundException
+     * @throws \ReflectionException
      */
     public function addModules(array $modules)
     {
@@ -85,6 +87,9 @@ class DebugBar implements Renderable
 
     /**
      * @return $this
+     * @throws InvalidModuleException
+     * @throws ModuleNotFoundException
+     * @throws \ReflectionException
      */
     public function addDefaultModules()
     {
@@ -94,9 +99,11 @@ class DebugBar implements Renderable
 
     /**
      * Overwrite modules
-     *
      * @param array $modules
      * @return $this
+     * @throws InvalidModuleException
+     * @throws ModuleNotFoundException
+     * @throws \ReflectionException
      */
     public function setModules(array $modules)
     {
