@@ -40,7 +40,7 @@ abstract class AbstractDataSet
      * Add to data one or many rules definitions
      *
      * @param  string $name        data key name
-     * @param  mixed  $definitions rules definitions
+     * @param  mixed  ...$definitions rules definitions
      * @return $this
      */
     public function add(string $name, ...$definitions)
