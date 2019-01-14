@@ -37,7 +37,7 @@ class ConfigLoader implements ResourceLoader
     protected $cacheTtl = null;
 
     /**
-     * @var CacheInterface
+     * @var CacheInterface|null
      */
     protected $cacheDriver = null;
 
@@ -76,7 +76,10 @@ class ConfigLoader implements ResourceLoader
     /**
      * @param mixed $resources
      * @return mixed|\Peak\Blueprint\Config\Config|\Peak\Config\Config
-     * @throws {inherit}
+     * @throws \Peak\Config\Exception\CachePathNotFoundException
+     * @throws \Peak\Config\Exception\CachePathNotWritableException
+     * @throws \Peak\Config\Exception\UnknownResourceException
+     * @throws \Psr\SimpleCache\InvalidArgumentException
      */
     public function load($resources)
     {
@@ -87,7 +90,10 @@ class ConfigLoader implements ResourceLoader
      * @param $resources
      * @param \Peak\Blueprint\Config\Config $config
      * @return \Peak\Blueprint\Config\Config|\Peak\Config\Config
-     * @throws {inherit}
+     * @throws \Peak\Config\Exception\CachePathNotFoundException
+     * @throws \Peak\Config\Exception\CachePathNotWritableException
+     * @throws \Peak\Config\Exception\UnknownResourceException
+     * @throws \Psr\SimpleCache\InvalidArgumentException
      */
     public function loadWith($resources, \Peak\Blueprint\Config\Config $config)
     {
