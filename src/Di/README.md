@@ -1,4 +1,4 @@
-# Peak/Di
+# <img src="https://raw.githubusercontent.com/peakphp/art/master/logo-clean-50x50.png" alt="Peak"> Peak/Di
 
 ##### PSR-11 Dependency Injection Container
 
