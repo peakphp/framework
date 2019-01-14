@@ -18,7 +18,7 @@ class ClassInspector
      * Get class dependencies method.
      * By default, method is the constructor itself
      *
-     * @param $class
+     * @param mixed $class
      * @param string $method
      * @return array
      * @throws Exception
