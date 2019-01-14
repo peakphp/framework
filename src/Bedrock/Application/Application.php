@@ -202,7 +202,7 @@ class Application implements \Peak\Blueprint\Bedrock\Application
      * Create and stack a new route
      * @param string|null $method
      * @param string $path
-     * @param $handlers
+     * @param mixed $handlers
      * @return Application
      */
     public function stackRoute(?string $method, string $path, $handlers)
@@ -216,7 +216,7 @@ class Application implements \Peak\Blueprint\Bedrock\Application
      * Create a new route
      * @param null|string $method
      * @param string $path
-     * @param $handlers
+     * @param mixed $handlers
      * @return Route
      */
     public function createRoute(?string $method, string $path, $handlers): Route
