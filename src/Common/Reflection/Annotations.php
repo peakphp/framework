@@ -38,17 +38,17 @@ class Annotations
     
     /**
      * Set the class name we want and load ReflectionClass
-     * @param $className
+     * @param mixed $class
      * @throws ReflectionException
      */
-    protected function setClass($className): void
+    protected function setClass($class): void
     {
         // @todo fix logic about storing the classname
-        $this->className = $className;
-        if (is_object($className)) {
-            $this->className = get_class($className);
+        $this->className = $class;
+        if (is_object($class)) {
+            $this->className = get_class($class);
         }
-        $this->class = new ReflectionClass($className);
+        $this->class = new ReflectionClass($class);
     }
 
     /**
