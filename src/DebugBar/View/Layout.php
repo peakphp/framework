@@ -16,10 +16,10 @@ class Layout extends View implements Renderable
     protected $content;
 
     /**
-     * Layout constructor
-     *
-     * @param string $file
-     * @param array $view_data
+     * Layout constructor.
+     * @param $file
+     * @param Collection|null $view_data
+     * @param null $content
      * @throws \Exception
      */
     public function __construct($file, Collection $view_data = null, $content = null)

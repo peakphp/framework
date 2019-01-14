@@ -25,7 +25,7 @@ class DataStream implements Stream
 
     /**
      * DataStream constructor.
-     * @param $data
+     * @param mixed $data
      * @param ResourceProcessor $processor
      */
     public function __construct($data, ResourceProcessor $processor)

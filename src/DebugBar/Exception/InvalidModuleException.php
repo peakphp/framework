@@ -6,7 +6,7 @@ class InvalidModuleException extends \Exception
 {
     /**
      * InvalidModuleException constructor.
-     * @param $module
+     * @param mixed $module
      */
     public function __construct($module)
     {
