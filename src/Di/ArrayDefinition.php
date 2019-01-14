@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Peak\Di;
 
-use Psr\Container\ContainerInterface;
-
 /**
  * Class ArrayDefinition
  * @package Peak\Di
@@ -33,13 +31,15 @@ class ArrayDefinition
 
     /**
      * Resolve an array definition recursively
-     *
      * @param array $definition
-     * @param ContainerInterface $container
+     * @param Container $container
      * @param array $args
      * @return object
+     * @throws Exception\NoClassDefinitionException
+     * @throws Exception\NotFoundException
+     * @throws \ReflectionException
      */
-    public function resolve(array $definition, ContainerInterface $container, array $args = [])
+    public function resolve(array $definition, Container $container, array $args = [])
     {
         $final_args = $definition;
         if (!empty($args)) { // add create argument at the end

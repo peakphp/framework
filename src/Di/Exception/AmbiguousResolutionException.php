@@ -6,15 +6,10 @@ namespace Peak\Di\Exception;
 
 use \Exception;
 
-/**
- * Class AmbiguousResolutionException
- * @package Peak\Di\Exception
- */
 class AmbiguousResolutionException extends Exception
 {
     /**
      * AmbiguousResolutionException constructor.
-     *
      * @param string $interface
      * @param array $instance
      */

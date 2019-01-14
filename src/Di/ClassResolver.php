@@ -7,10 +7,6 @@ namespace Peak\Di;
 use \Exception;
 use \InvalidArgumentException;
 
-/**
- * Class ClassResolver
- * @package Peak\Di
- */
 class ClassResolver
 {
     /**
@@ -50,6 +46,18 @@ class ClassResolver
      * @param mixed $explicit
      * @return array
      * @throws InvalidArgumentException
+     */
+    /**
+     * @param $class
+     * @param Container $container
+     * @param array $args
+     * @param null $explicit
+     * @return array
+     * @throws Exception\AmbiguousResolutionException
+     * @throws Exception\InterfaceNotFoundException
+     * @throws Exception\NoClassDefinitionException
+     * @throws Exception\NotFoundException
+     * @throws \ReflectionException
      */
     public function resolve($class, Container $container, array $args = [], $explicit = null)
     {

@@ -7,7 +7,7 @@ namespace Peak\Di\Binding;
 use Peak\Di\AbstractBinding;
 use Peak\Di\ArrayDefinition;
 use Peak\Di\ClassInstantiator;
-use Psr\Container\ContainerInterface;
+use Peak\Di\Container;
 
 /**
  * Class Singleton
@@ -41,13 +41,15 @@ class Singleton extends AbstractBinding
     /**
      * Resolve the binding
      *
-     * @param ContainerInterface $container
+     * @param Container $container
      * @param array $args
-     * @param mixed $explicit
-     * @return mixed|null
-     * @throws \Exception
+     * @param null $explicit
+     * @return mixed|object|null
+     * @throws \Peak\Di\Exception\NoClassDefinitionException
+     * @throws \Peak\Di\Exception\NotFoundException
+     * @throws \ReflectionException
      */
-    public function resolve(ContainerInterface $container, array $args = [], $explicit = null)
+    public function resolve(Container $container, array $args = [], $explicit = null)
     {
         $definition = $this->definition;
 

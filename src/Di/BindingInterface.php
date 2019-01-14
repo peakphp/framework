@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Peak\Di;
 
-use Psr\Container\ContainerInterface;
-
 /**
  * Interface BindingInterface
  * @package Peak\Di
@@ -13,12 +11,12 @@ use Psr\Container\ContainerInterface;
 interface BindingInterface
 {
     /**
-     * @param ContainerInterface $container
+     * @param Container $container
      * @param array $args
      * @param mixed $explicit
      * @return mixed
      */
-    public function resolve(ContainerInterface $container, array $args = [], $explicit = null);
+    public function resolve(Container $container, array $args = [], $explicit = null);
 
     /**
      * @return string

@@ -7,7 +7,7 @@ namespace Peak\Di\Binding;
 use Peak\Di\AbstractBinding;
 use Peak\Di\ArrayDefinition;
 use Peak\Di\ClassInstantiator;
-use Psr\Container\ContainerInterface;
+use Peak\Di\Container;
 
 /**
  * Class Prototype
@@ -35,13 +35,13 @@ class Prototype extends AbstractBinding
     /**
      * Resolve the binding
      *
-     * @param ContainerInterface $container
+     * @param Container $container
      * @param array $args
      * @param callable|null $explicit
      * @return mixed|null
      * @throws \Exception
      */
-    public function resolve(ContainerInterface $container, array $args = [], $explicit = null)
+    public function resolve(Container $container, array $args = [], $explicit = null)
     {
         $definition = $this->definition;
 

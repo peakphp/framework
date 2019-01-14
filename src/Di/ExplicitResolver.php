@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Peak\Di;
 
-use Psr\Container\ContainerInterface;
 use \Closure;
 
 /**
@@ -18,11 +17,11 @@ class ExplicitResolver
      * Resolve class arguments dependencies
      *
      * @param $needle
-     * @param ContainerInterface $container
+     * @param Container $container
      * @param null $explicit
-     * @return mixed
+     * @return mixed|null
      */
-    public function resolve($needle, ContainerInterface $container, $explicit = null)
+    public function resolve($needle, Container $container, $explicit = null)
     {
         // Check for explicit dependency closure or object instance
         if (is_array($explicit) && array_key_exists($needle, $explicit)) {
