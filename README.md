@@ -13,6 +13,15 @@
 
 This branch is a "work in progress" of version 4.0 which include drastic change of the core and overall operation of the framework.
 
-This version is fully compatible with PSR-7, PSR-11 and PSR-15. We also aim to support draft PSR-17 as well.
+### Installation 
 
-Check [latest 3.0 stable version here](https://github.com/peakphp/framework/releases/tag/v3.0)
+``$ composer require peak/framework``
+
+### Quick start project
+
+Check https://github.com/peakphp/peak for a quick start project
+
+### Documentation
+
+Check https://github.com/peakphp/docs (work in progress)
+
