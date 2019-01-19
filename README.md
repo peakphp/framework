@@ -23,5 +23,5 @@ Check https://github.com/peakphp/peak for a quick start project
 
 ### Documentation
 
-Check https://github.com/peakphp/docs (work in progress)
+Check https://peakphp.github.io/docs (work in progress)
 
