@@ -1,7 +1,7 @@
 {
     "name": "peak/view",
-    "description": "Peak View package for PSR-7 Response",
-    "keywords": ["peak", "view", "psr-7"],
+    "description": "Peak View package",
+    "keywords": ["peak", "view", "templating", "fast", "engine"],
     "license": "MIT",
     "homepage": "https://peakframework.com",
     "support": {

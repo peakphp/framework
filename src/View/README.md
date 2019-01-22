@@ -1,6 +1,6 @@
 # Peak/View
 
-Simple but powerful PSR-7 view template engine.
+Fast and minimalist view template engine with macro and helpers.
 
 ### Installation
 
