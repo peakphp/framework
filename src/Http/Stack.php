@@ -97,7 +97,7 @@ class Stack implements \Peak\Blueprint\Http\Stack
 
         // resolve nextHandler if not already a object
         $handlerInstance = $this->nextHandler;
-        if (!is_object($handlerInstance)) {
+        if (is_callable($handlerInstance) || !is_object($handlerInstance)) {
             $handlerInstance = $this->handlerResolver->resolve($this->nextHandler);
         }
 
