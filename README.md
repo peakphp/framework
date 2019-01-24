@@ -1,5 +1,5 @@
-<p align="center"><img src="http://francoislajoie.com/assets/img/peaklogo.jpg" alt="Peak"></p>
-<p align="center">
+# <img src="https://raw.githubusercontent.com/peakphp/art/master/logo-clean-50x50.png" alt="Peak"> Peak
+<p align="">
 <a href="https://travis-ci.org/peakphp/framework"><img src="https://travis-ci.org/peakphp/framework.svg" alt="Build status"></a>
 <a href="https://packagist.org/packages/peak/framework"><img src="https://poser.pugx.org/peak/framework/version" alt="version"></a>
 <a href="https://codeclimate.com/github/peakphp/framework"><img src="https://codeclimate.com/github/peakphp/framework/badges/gpa.svg" /></a>
