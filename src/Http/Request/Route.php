@@ -10,7 +10,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-class Route implements Stack
+class Route implements \Peak\Blueprint\Http\Route, Stack
 {
     /**
      * @var string|null
