@@ -122,10 +122,11 @@ class Container implements ContainerInterface
     /**
      * Similar to instantiate(), it call a method on specified object
      *
-     * @param  array  $callback The callable to be called
-     * @param  array  $args     The parameters to be passed to the callback, as an indexed array
-     * @param  mixed  $explicit @see instantiate
-     * @return mixed  the method call return if any
+     * @param array $callback
+     * @param array $args
+     * @param null $explicit
+     * @return mixed
+     * @throws \ReflectionException
      */
     public function call(array $callback, array $args = [], $explicit = null)
     {
