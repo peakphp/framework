@@ -48,24 +48,10 @@ class BootstrapTest extends TestCase
         $_GET = [];
     }
 
-    public function testBootWithPeakContainer()
-    {
-        $container = $this->createMock(Container::class);
-        $container->expects($this->once())
-            ->method('create')
-            ->will($this->returnValue(new BootstrapProcess2(new Collection())));
-
-        $bootstrap = new Bootstrap([BootstrapProcess2::class], $container);
-        $this->assertTrue($bootstrap->boot());
-    }
-
     public function testBootWithPSRContainer()
     {
         $container = $this->createMock(ContainerInterface::class);
 
-        $container->expects($this->once())
-            ->method('has')
-            ->will($this->returnValue(true));
         $container->expects($this->once())
             ->method('get')
             ->will($this->returnValue(new BootstrapProcess2(new Collection())));

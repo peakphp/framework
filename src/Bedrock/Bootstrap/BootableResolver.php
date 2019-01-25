@@ -29,8 +29,6 @@ class BootableResolver implements ResourceResolver
      * @param mixed $item
      * @return Bootable
      * @throws InvalidBootableProcessException
-     * @throws \Peak\Di\Exception\NoClassDefinitionException
-     * @throws \ReflectionException
      */
     public function resolve($item): Bootable
     {
@@ -53,19 +51,13 @@ class BootableResolver implements ResourceResolver
     }
 
     /**
-     * @param mixed $item
-     * @return mixed|object
-     * @throws \Peak\Di\Exception\NoClassDefinitionException
-     * @throws \ReflectionException
+     * @param $item
+     * @return mixed
      */
     private function resolveFromContainer($item)
     {
         if (isset($this->container)) {
-            if ($this->container->has($item)) {
-                return $this->container->get($item);
-            } elseif ($this->container instanceof Container) {
-                return $this->container->create($item);
-            }
+            return $this->container->get($item);
         }
         return $item;
     }
