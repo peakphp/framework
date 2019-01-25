@@ -38,11 +38,6 @@ class HandlerResolverTest extends TestCase
     {
         $container = $this->createMock(Container::class);
         $container->expects($this->once())
-            ->method('has')
-            ->with(HandlerA::class)
-            ->will($this->returnValue(new HandlerA()));
-
-        $container->expects($this->once())
             ->method('get')
             ->will($this->returnValue(new HandlerA()));
 

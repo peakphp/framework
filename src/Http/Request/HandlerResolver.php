@@ -77,11 +77,7 @@ class HandlerResolver implements ResourceResolver
 
         // resolve using a container
         if (null !== $this->container) {
-            if ($this->container->has($handler)) { // psr-11
-                return $this->container->get($handler);
-            } elseif (get_class($this->container) === 'Peak\Di\Container') {
-                return $this->container->create($handler);
-            }
+            return $this->container->get($handler);
         }
 
         // manual instantiation, work only with empty constructor classes
