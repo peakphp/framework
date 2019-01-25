@@ -459,6 +459,23 @@ class ContainerTest extends TestCase
         $this->assertTrue($testdi->container instanceof \Peak\Di\Container);
     }
 
+    function testGetWithAutowiringEnabled()
+    {
+        $container = new Container();
+        $testdi = $container->get(TestDi17::class);
+        $this->assertTrue($testdi instanceof TestDi17);
+    }
+
+    /**
+     * @expectedException \Peak\Di\Exception\NotFoundException
+     */
+    function testGetWithAutowiringDisabled()
+    {
+        $container = new Container();
+        $container->disableAutoWiring();
+        $testdi = $container->get(TestDi17::class);
+    }
+
     /**
      * @expectedException \Exception
      */

@@ -183,10 +183,10 @@ class Container implements ContainerInterface
     }
 
     /**
-     * Get an instance if exists, otherwise return null
+     * Get an instance if exists, otherwise try to create it return null
      *
-     * @param  string $id
-     * @return object
+     * @param string $id
+     * @return mixed|object
      * @throws NotFoundException
      */
     public function get($id)
@@ -196,6 +196,11 @@ class Container implements ContainerInterface
         } elseif ($this->hasAlias($id) && $this->has($this->aliases[$id])) {
             return $this->instances[$this->aliases[$id]];
         }
+
+        try {
+            $instance = $this->create($id);
+            return $instance;
+        } catch (\Exception $e) {}
 
         throw new NotFoundException($id);
     }

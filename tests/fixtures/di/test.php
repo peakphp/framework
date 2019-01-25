@@ -142,7 +142,6 @@ class TestDi14
     }
 }
 
-
 class TestDi15
 {
     function __construct(\Peak\Di\Container $container)
@@ -161,8 +160,16 @@ class TestDi16
 {
     public $abstractTestDi;
 
-    function __construct(InterfaceTestDi16 $abstractTestDi = null, Peak\Collection\Collection $coll = null)
+    function __construct(InterfaceTestDi16 $abstractTestDi = null, Collection $coll = null)
     {
         $this->abstractTestDi = $abstractTestDi;
+    }
+}
+
+class TestDi17
+{
+    function __construct(Collection $collection)
+    {
+        $this->collection = $collection;
     }
 }

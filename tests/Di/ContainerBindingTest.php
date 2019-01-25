@@ -45,6 +45,35 @@ class ContainerBindingTest extends TestCase
         $this->assertTrue($class instanceof A);
     }
 
+    public function testBasicWithGet()
+    {
+        $container = new Container();
+        $container->disableAutoWiring();
+        $container->bind(A::class, new A);
+        $class = $container->get(A::class);
+        $this->assertTrue($class instanceof A);
+    }
+
+    /**
+     * @expectedException \Peak\Di\Exception\NoClassDefinitionException
+     */
+    public function testExceptionWithCreate()
+    {
+        $container = new Container();
+        $container->disableAutoWiring();
+        $class = $container->create(A::class);
+    }
+
+    /**
+     * @expectedException \Peak\Di\Exception\NotFoundException
+     */
+    public function testExceptionWithGet()
+    {
+        $container = new Container();
+        $container->disableAutoWiring();
+        $class = $container->get(A::class);
+    }
+
     /**
      * Bind instance
      */
