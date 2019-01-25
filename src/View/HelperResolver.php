@@ -26,10 +26,8 @@ class HelperResolver implements ResourceResolver
 
     /**
      * @param mixed $helper
-     * @return mixed|object
+     * @return mixed|string
      * @throws InvalidHelperException
-     * @throws \Peak\Di\Exception\NoClassDefinitionException
-     * @throws \ReflectionException
      */
     public function resolve($helper)
     {
@@ -46,21 +44,15 @@ class HelperResolver implements ResourceResolver
 
     /**
      * @param string $helper
-     * @return mixed|object
-     * @throws \Peak\Di\Exception\NoClassDefinitionException
-     * @throws \ReflectionException
+     * @return mixed|string
      */
     public function resolverString(string $helper)
     {
         $helperInstance = $helper;
 
         // resolve using a container
-        if (null !== $this->container) {
-            if ($this->container->has($helper)) { // psr-11
-                $helperInstance = $this->container->get($helper);
-            } elseif ($this->container instanceof \Peak\Di\Container) {
-                $helperInstance = $this->container->create($helper);
-            }
+        if (isset($this->container)) {
+            $helperInstance = $this->container->get($helper);
         } elseif (class_exists($helper)) {
             $helperInstance = new $helper();
         }
