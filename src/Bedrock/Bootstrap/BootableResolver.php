@@ -5,7 +5,6 @@ namespace Peak\Bedrock\Bootstrap;
 use Peak\Bedrock\Bootstrap\Exception\InvalidBootableProcessException;
 use Peak\Blueprint\Common\Bootable;
 use Peak\Blueprint\Common\ResourceResolver;
-use Peak\Di\Container;
 use Psr\Container\ContainerInterface;
 
 class BootableResolver implements ResourceResolver
