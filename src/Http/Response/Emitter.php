@@ -19,6 +19,7 @@ class Emitter implements ResponseEmitter
      * body content via the output buffer.
      *
      * @param ResponseInterface $response
+     * @return bool|mixed
      */
     public function emit(ResponseInterface $response)
     {
@@ -56,9 +57,11 @@ class Emitter implements ResponseEmitter
             throw new \RuntimeException('Unable to emit response; headers already sent');
         }
 
-//        if (ob_get_level() > 0 && ob_get_length() > 0) {
-//            //throw new \RuntimeException('Output has been emitted previously; cannot emit response');
-//        }
+        /*
+        if (ob_get_level() > 0 && ob_get_length() > 0) {
+            throw new \RuntimeException('Output has been emitted previously; cannot emit response');
+        }
+        */
     }
 
     /**
