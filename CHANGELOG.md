@@ -1,10 +1,10 @@
-VERSION 4.0-BETA-2
+VERSION 4.0-BETA2
 -----------
 Release date: ?
 
  - removed deprecated component Validation and Rbac
 
-VERSION 4.0-BETA-1
+VERSION 4.0-BETA1
 -----------
 Release date: 2019-01-24
 
