@@ -130,6 +130,9 @@ class StructureTest extends TestCase
         $this->assertTrue($entity->name === 'Foo');
     }
 
+    /**
+     * @throws Exception
+     */
     public function testMultiple()
     {
         $entity = new MyStructure3();
@@ -139,6 +142,26 @@ class StructureTest extends TestCase
         $this->assertTrue($entity->multiple === 'foobar');
         $entity->multiple = null;
         $this->assertTrue($entity->multiple === null);
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function testTypes()
+    {
+        $entity = new MyStructure4();
+        $entity->array = [];
+        $this->assertTrue(is_array($entity->array));
+        $entity->float = 10.02;
+        $this->assertTrue(gettype($entity->float) === 'double');
+        $entity->boolean = false;
+        $this->assertTrue(gettype($entity->boolean) === 'boolean');
+        $entity->resource = fopen(__FILE__, 'r');
+        $this->assertTrue(gettype($entity->resource) === 'resource');
+        $entity->null = null;
+        $this->assertTrue(gettype($entity->null) === 'NULL');
+        $entity->any = 'test';
+        $this->assertTrue(gettype($entity->any) === 'string');
     }
 
 }

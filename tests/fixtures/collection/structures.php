@@ -39,3 +39,18 @@ class MyStructure3 extends AbstractStructure
         ];
     }
 }
+
+class MyStructure4 extends AbstractStructure
+{
+    public function getStructure(): array
+    {
+        return [
+            'array' => $this->array(),
+            'float' => $this->float(),
+            'boolean' => $this->boolean(),
+            'resource' => $this->resource(),
+            'null' => $this->null(),
+            'any' => $this->any(),
+        ];
+    }
+}

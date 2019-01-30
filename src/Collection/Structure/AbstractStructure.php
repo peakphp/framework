@@ -171,7 +171,7 @@ abstract class AbstractStructure implements IteratorAggregate
      */
     protected function string(): DataType
     {
-        return new DataType(['string']);
+        return new DataType([DataType::STRING]);
     }
 
     /**
@@ -179,7 +179,7 @@ abstract class AbstractStructure implements IteratorAggregate
      */
     protected function integer(): DataType
     {
-        return new DataType(['integer']);
+        return new DataType([DataType::INT]);
     }
 
     /**
@@ -187,7 +187,7 @@ abstract class AbstractStructure implements IteratorAggregate
      */
     protected function float(): DataType
     {
-        return new DataType(['double']);
+        return new DataType([DataType::FLOAT]);
     }
 
     /**
@@ -195,7 +195,7 @@ abstract class AbstractStructure implements IteratorAggregate
      */
     protected function boolean(): DataType
     {
-        return new DataType(['boolean']);
+        return new DataType([DataType::BOOL]);
     }
 
     /**
@@ -203,7 +203,7 @@ abstract class AbstractStructure implements IteratorAggregate
      */
     protected function array(): DataType
     {
-        return new DataType(['array']);
+        return new DataType([DataType::ARRAY]);
     }
 
     /**
@@ -220,7 +220,7 @@ abstract class AbstractStructure implements IteratorAggregate
      */
     protected function resource(): DataType
     {
-        return new DataType(['resource']);
+        return new DataType([DataType::RESOURCE]);
     }
 
     /**
@@ -228,7 +228,7 @@ abstract class AbstractStructure implements IteratorAggregate
      */
     protected function null(): DataType
     {
-        return new DataType(['null']);
+        return new DataType([DataType::NIL]);
     }
 
     /**
@@ -236,7 +236,7 @@ abstract class AbstractStructure implements IteratorAggregate
      */
     protected function any(): DataType
     {
-        return new DataType(['any']);
+        return new DataType([DataType::ANY]);
     }
 
 }
