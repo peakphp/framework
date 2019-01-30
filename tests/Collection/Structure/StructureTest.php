@@ -130,5 +130,16 @@ class StructureTest extends TestCase
         $this->assertTrue($entity->name === 'Foo');
     }
 
+    public function testMultiple()
+    {
+        $entity = new MyStructure3();
+        $entity->multiple = 123;
+        $this->assertTrue($entity->multiple === 123);
+        $entity->multiple = 'foobar';
+        $this->assertTrue($entity->multiple === 'foobar');
+        $entity->multiple = null;
+        $this->assertTrue($entity->multiple === null);
+    }
+
 }
 
