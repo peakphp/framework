@@ -15,6 +15,6 @@ class InterfaceNotFoundException extends Exception implements NotFoundExceptionI
      */
     public function __construct(string $interface)
     {
-        parent::__construct('Could not find an instance that implement interface'.$interface);
+        parent::__construct('Could not find an instance that implement interface "'.$interface.'"');
     }
 }
