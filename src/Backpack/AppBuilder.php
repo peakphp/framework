@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Peak\Backpack;
 
 use Peak\Bedrock\Application\Application;
+use Peak\Collection\PropertiesBag;
 use Peak\Http\Request\HandlerResolver;
 use Peak\Blueprint\Bedrock\Kernel;
 use Peak\Blueprint\Collection\Dictionary;
@@ -89,11 +90,17 @@ class AppBuilder
     }
 
     /**
-     * @param Dictionary $props
+     * @param Dictionary|array $props
      * @return $this
      */
-    public function setProps(Dictionary $props)
+    public function setProps($props)
     {
+        if (!is_array($props) && !$props instanceof Dictionary) {
+            throw new Exception('Props must be an array or an instance of Peak\Blueprint\Collection\Dictionary. '.gettype($props).' given ...');
+        } elseif (is_array($props)) {
+            $props = new PropertiesBag($props);
+        }
+
         $this->props = $props;
         return $this;
     }
