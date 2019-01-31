@@ -7,6 +7,7 @@ Release date: ?
  - added addToContainerAfterBuild() to Backpack\AppBuilder
  - added multiple set type methods in Collection\Structure\DataType
  - setProps() of Backpack\AppBuilder now accept an array or an instance of Blueprint\Collection\Dictionary
+ - added Dictionary Blueprint to class Collection\DotNotationCollection
 
 VERSION 4.0-BETA1
 -----------
