@@ -54,3 +54,14 @@ class MyStructure4 extends AbstractStructure
         ];
     }
 }
+
+class MyStructure5 extends AbstractStructure
+{
+    public function getStructure(): array
+    {
+        return [
+            'multipleTypes1' => $this->array()->string(),
+            'multipleTypes2' => $this->integer()->nullable()->string(),
+        ];
+    }
+}

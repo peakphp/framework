@@ -164,5 +164,24 @@ class StructureTest extends TestCase
         $this->assertTrue(gettype($entity->any) === 'string');
     }
 
+    /**
+     * @throws Exception
+     */
+    public function testDataTypeChainingMultipleType()
+    {
+        $entity = new MyStructure5();
+        $entity->multipleTypes1 = ['test'];
+        $this->assertTrue(is_array($entity->multipleTypes1));
+        $entity->multipleTypes1 = 'test';
+        $this->assertTrue(is_string($entity->multipleTypes1));
+
+        $entity->multipleTypes2 = 'test';
+        $this->assertTrue(is_string($entity->multipleTypes2));
+        $entity->multipleTypes2 = 10;
+        $this->assertTrue(is_int($entity->multipleTypes2));
+        $entity->multipleTypes2 = null;
+        $this->assertTrue(is_null($entity->multipleTypes2));
+    }
+
 }
 
