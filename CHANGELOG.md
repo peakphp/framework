@@ -5,6 +5,7 @@ Release date: ?
  - removed deprecated packages Validation and Rbac
  - refactored exceptions in Di
  - added addToContainerAfterBuild() to Backpack\AppBuilder
+ - added multiple set type methods in Collection\Structure\DataType
 
 VERSION 4.0-BETA1
 -----------
