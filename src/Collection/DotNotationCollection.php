@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace Peak\Collection;
 
+use Peak\Blueprint\Collection\Dictionary;
 use \RuntimeException;
 
-class DotNotationCollection extends Collection
+class DotNotationCollection extends Collection implements Dictionary
 {
     /**
      * @const string
