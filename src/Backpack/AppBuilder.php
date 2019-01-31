@@ -12,6 +12,7 @@ use Peak\Blueprint\Common\ResourceResolver;
 use Peak\Di\Container;
 use Psr\Container\ContainerInterface;
 use \Closure;
+use \Exception;
 
 class AppBuilder
 {
@@ -56,6 +57,16 @@ class AppBuilder
      * @var Closure|null
      */
     private $afterBuild;
+
+    /**
+     * @var bool
+     */
+    private $addToContainerAfterBuild = false;
+
+    /**
+     * @var string|null
+     */
+    private $aliasContainer = null;
 
     /**
      * @param string $env
@@ -138,7 +149,19 @@ class AppBuilder
     }
 
     /**
-     * @return Application
+     * @param string|null $alias
+     * @return $this
+     */
+    public function addToContainerAfterBuild(string $alias = null)
+    {
+        $this->addToContainerAfterBuild = true;
+        $this->aliasContainer = $alias;
+        return $this;
+    }
+
+    /**
+     * @return \Peak\Blueprint\Bedrock\Application
+     * @throws Exception
      */
     public function build()
     {
@@ -147,7 +170,8 @@ class AppBuilder
 
     /**
      * @param string $applicationClass
-     * @return Application
+     * @return \Peak\Blueprint\Bedrock\Application
+     * @throws \Exception
      */
     private function internalBuild(string $applicationClass): \Peak\Blueprint\Bedrock\Application
     {
@@ -167,6 +191,10 @@ class AppBuilder
             $this->handlerResolver ?? new HandlerResolver($kernel->getContainer()),
             $this->props ?? null
         );
+
+        if ($this->addToContainerAfterBuild) {
+            $this->addToContainer($app);
+        }
 
         if (isset($this->afterBuild) && is_callable($this->afterBuild)) {
             ($this->afterBuild)($app);
@@ -190,5 +218,18 @@ class AppBuilder
         if (isset($this->kernelClass)) {
             trigger_error('Kernel class '.$msgErrorSuffix);
         }
+    }
+
+    /**
+     * @param \Peak\Blueprint\Bedrock\Application $app
+     * @throws \Exception
+     */
+    private function addToContainer(\Peak\Blueprint\Bedrock\Application $app)
+    {
+        $container = $app->getKernel()->getContainer();
+        if (!$container instanceof Container) {
+            throw new Exception('Cannot add application instance to the container');
+        }
+        $container->set($app);
     }
 }
