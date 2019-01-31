@@ -45,7 +45,7 @@ class Singleton extends AbstractBinding
      * @param array $args
      * @param null $explicit
      * @return mixed|object|null
-     * @throws \Peak\Di\Exception\NoClassDefinitionException
+     * @throws \Peak\Di\Exception\ClassDefinitionNotFoundException
      * @throws \Peak\Di\Exception\NotFoundException
      * @throws \ReflectionException
      */

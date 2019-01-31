@@ -108,7 +108,7 @@ class ViewBuilder
 
     /**
      * @return View
-     * @throws \Peak\Di\Exception\NoClassDefinitionException
+     * @throws \Peak\Di\Exception\ClassDefinitionNotFoundException
      * @throws \Peak\View\Exception\InvalidHelperException
      * @throws \ReflectionException
      */
@@ -134,7 +134,7 @@ class ViewBuilder
 
     /**
      * @return string
-     * @throws \Peak\Di\Exception\NoClassDefinitionException
+     * @throws \Peak\Di\Exception\ClassDefinitionNotFoundException
      * @throws \Peak\View\Exception\FileNotFoundException
      * @throws \Peak\View\Exception\InvalidHelperException
      * @throws \ReflectionException

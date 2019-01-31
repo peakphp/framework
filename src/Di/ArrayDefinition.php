@@ -35,7 +35,7 @@ class ArrayDefinition
      * @param Container $container
      * @param array $args
      * @return object
-     * @throws Exception\NoClassDefinitionException
+     * @throws Exception\ClassDefinitionNotFoundException
      * @throws Exception\NotFoundException
      * @throws \ReflectionException
      */

@@ -36,7 +36,7 @@ class ModuleResolver implements ResourceResolver
      * @return mixed|object
      * @throws InvalidModuleException
      * @throws ModuleNotFoundException
-     * @throws \Peak\Di\Exception\NoClassDefinitionException
+     * @throws \Peak\Di\Exception\ClassDefinitionNotFoundException
      * @throws \ReflectionException
      */
     public function resolve($module)
@@ -56,7 +56,7 @@ class ModuleResolver implements ResourceResolver
      * @param string $module
      * @return mixed|object
      * @throws ModuleNotFoundException
-     * @throws \Peak\Di\Exception\NoClassDefinitionException
+     * @throws \Peak\Di\Exception\ClassDefinitionNotFoundException
      * @throws \ReflectionException
      */
     protected function resolveString(string $module)
