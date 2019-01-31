@@ -150,4 +150,31 @@ class AppBuilderTest extends TestCase
             ->setKernel($kernel)
             ->build();
     }
+
+    public function testAddToContainerAfterBuild()
+    {
+        $app = (new AppBuilder())
+            ->setContainer(new Container())
+            ->addToContainerAfterBuild()
+            ->build();
+
+        $this->assertTrue($app->getContainer()->has(get_class($app)));
+
+        $app = (new AppBuilder())
+            ->setContainer(new Container())
+            ->build();
+
+        $this->assertFalse($app->getContainer()->has(get_class($app)));
+    }
+
+    /**
+     * @expectedException Exception
+     */
+    public function testAddToContainerAfterBuildException()
+    {
+        $app = (new AppBuilder())
+            ->setContainer($this->createMock(ContainerInterface::class))
+            ->addToContainerAfterBuild()
+            ->build();
+    }
 }

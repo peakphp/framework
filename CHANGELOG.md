@@ -4,6 +4,7 @@ Release date: ?
 
  - removed deprecated component Validation and Rbac
  - refactored exceptions in Peak\Di
+ - added addToContainerAfterBuild() to Backpack\AppBuilder
 
 VERSION 4.0-BETA1
 -----------
