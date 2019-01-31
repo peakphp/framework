@@ -70,4 +70,68 @@ class DataType
         $this->types[] = self::NIL;
         return $this;
     }
+
+    /**
+     * @return DataType
+     */
+    public function string(): DataType
+    {
+        $this->types[] = self::STRING;
+        return $this;
+    }
+
+    /**
+     * @return DataType
+     */
+    public function integer(): DataType
+    {
+        $this->types[] = self::INT;
+        return $this;
+    }
+
+    /**
+     * @return DataType
+     */
+    public function float(): DataType
+    {
+        $this->types[] = self::FLOAT;
+        return $this;
+    }
+
+    /**
+     * @return DataType
+     */
+    public function boolean(): DataType
+    {
+        $this->types[] = self::BOOL;
+        return $this;
+    }
+
+    /**
+     * @return DataType
+     */
+    public function array(): DataType
+    {
+        $this->types[] = self::ARRAY;
+        return $this;
+    }
+
+    /**
+     * @param string $className
+     * @return DataType
+     */
+    public function object($className = 'object'): DataType
+    {
+        $this->types[] = $className;
+        return $this;
+    }
+
+    /**
+     * @return DataType
+     */
+    public function resource(): DataType
+    {
+        $this->types[] = self::RESOURCE;
+        return $this;
+    }
 }
