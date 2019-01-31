@@ -55,7 +55,7 @@ class ContainerBindingTest extends TestCase
     }
 
     /**
-     * @expectedException \Peak\Di\Exception\NoClassDefinitionException
+     * @expectedException \Peak\Di\Exception\ClassDefinitionNotFoundException
      */
     public function testExceptionWithCreate()
     {
@@ -65,7 +65,7 @@ class ContainerBindingTest extends TestCase
     }
 
     /**
-     * @expectedException \Peak\Di\Exception\NotFoundException
+     * @expectedException \Psr\Container\NotFoundExceptionInterface
      */
     public function testExceptionWithGet()
     {

@@ -300,7 +300,7 @@ class ContainerTest extends TestCase
     }
 
     /**
-     * @expectedException \Peak\Di\Exception\NotFoundException
+     * @expectedException \Exception
      */
     function testGetHasInstance()
     {
@@ -467,7 +467,7 @@ class ContainerTest extends TestCase
     }
 
     /**
-     * @expectedException \Peak\Di\Exception\NotFoundException
+     * @expectedException \Psr\Container\NotFoundExceptionInterface
      */
     function testGetWithAutowiringDisabled()
     {
