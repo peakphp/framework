@@ -7,9 +7,9 @@ namespace Peak\Di;
 use Peak\Di\Binding\Factory;
 use Peak\Di\Binding\Prototype;
 use Peak\Di\Binding\Singleton;
-use Peak\Di\Exception\NoClassDefinitionException;
-use Peak\Di\Exception\NotFoundException;
+use Peak\Di\Exception\ClassDefinitionNotFoundException;
 use Psr\Container\ContainerInterface;
+use Psr\Container\NotFoundExceptionInterface;
 use \Closure;
 use \InvalidArgumentException;
 
@@ -93,7 +93,7 @@ class Container implements ContainerInterface
      *                                   return new MyClass(); // myclass implement myinterface
      *                               }]
      * @return mixed|object
-     * @throws NoClassDefinitionException
+     * @throws ClassDefinitionNotFoundException
      * @throws \ReflectionException
      */
     public function create(string $class, $args = [], $explicit = null)
@@ -102,7 +102,7 @@ class Container implements ContainerInterface
         if (!$this->auto_wiring) {
             $def = $this->getDefinition($class);
             if (is_null($def)) {
-                throw new NoClassDefinitionException($class);
+                throw new ClassDefinitionNotFoundException($class);
             }
             return $this->binding_resolver->resolve(
                 $this->getDefinition($class),
@@ -143,7 +143,7 @@ class Container implements ContainerInterface
      * @param array $args
      * @param mixed $explicit
      * @return mixed|object
-     * @throws NoClassDefinitionException
+     * @throws ClassDefinitionNotFoundException
      * @throws \ReflectionException
      */
     public function createAndStore(string $class, array $args = [], $explicit = null)
@@ -159,13 +159,13 @@ class Container implements ContainerInterface
      * @param $definition
      * @param array $args
      * @return mixed
-     * @throws NoClassDefinitionException
+     * @throws ClassDefinitionNotFoundException
      */
     public function resolve($definition, array $args = [])
     {
         $def = $this->getDefinition($definition);
         if (is_null($def)) {
-            throw new NoClassDefinitionException($definition);
+            throw new ClassDefinitionNotFoundException($definition);
         }
 
         return $this->binding_resolver->resolve($def, $this, $args);
@@ -187,7 +187,8 @@ class Container implements ContainerInterface
      *
      * @param string $id
      * @return mixed|object
-     * @throws NotFoundException
+     * @throws NotFoundExceptionInterface
+     * @throws \ReflectionException
      */
     public function get($id)
     {
@@ -197,12 +198,7 @@ class Container implements ContainerInterface
             return $this->instances[$this->aliases[$id]];
         }
 
-        try {
-            $instance = $this->create($id);
-            return $instance;
-        } catch (\Exception $e) {}
-
-        throw new NotFoundException($id);
+        return $this->create($id);
     }
 
     /**
