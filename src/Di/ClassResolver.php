@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Peak\Di;
 
+use Peak\Di\Exception\AmbiguousResolutionException;
+use Peak\Di\Exception\InterfaceNotFoundException;
+use Peak\Di\Exception\ClassDefinitionNotFoundException;
+use Peak\Di\Exception\NotFoundException;
 use \Exception;
 use \InvalidArgumentException;
 
@@ -53,10 +57,10 @@ class ClassResolver
      * @param array $args
      * @param null $explicit
      * @return array
-     * @throws Exception\AmbiguousResolutionException
-     * @throws Exception\InterfaceNotFoundException
-     * @throws Exception\NoClassDefinitionException
-     * @throws Exception\NotFoundException
+     * @throws AmbiguousResolutionException
+     * @throws InterfaceNotFoundException
+     * @throws ClassDefinitionNotFoundException
+     * @throws NotFoundException
      * @throws \ReflectionException
      */
     public function resolve($class, Container $container, array $args = [], $explicit = null)
