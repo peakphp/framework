@@ -90,7 +90,7 @@ class AppBuilder
     }
 
     /**
-     * @param Dictionary|array $props
+     * @param mixed $props
      * @return $this
      */
     public function setProps($props)
