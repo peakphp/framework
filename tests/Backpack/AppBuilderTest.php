@@ -101,6 +101,25 @@ class AppBuilderTest extends TestCase
         $this->assertTrue($app->hasProp('test'));
     }
 
+    public function testSetPropsArray()
+    {
+        $app = (new AppBuilder())
+            ->setProps(['test' => 'foobar'])
+            ->build();
+
+        $this->assertTrue($app->hasProp('test'));
+    }
+
+    /**
+     * @expectedException Exception
+     */
+    public function testSetPropsException()
+    {
+        $app = (new AppBuilder())
+            ->setProps('test')
+            ->build();
+    }
+
     public function testExecuteAfterBuild()
     {
         $app = (new AppBuilder())
