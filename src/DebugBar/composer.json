@@ -15,7 +15,7 @@
         }
     ],
     "require": {
-        "php": "^7.1.3",
+        "php": ">=7.2",
         "peak/blueprint" : "^4.0",
         "psr/container": "^1.0",
         "psr/log": "^1.0"
