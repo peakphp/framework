@@ -4,6 +4,7 @@ Release date: ?
 
  - raised minimum php version to 7.2
  - removed deprecated packages Validation and Rbac
+ - removed package DebugBar
  - refactored exceptions in Di
  - added addToContainerAfterBuild() to Backpack\AppBuilder
  - added multiple set type methods in Collection\Structure\DataType
