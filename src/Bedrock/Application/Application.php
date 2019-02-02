@@ -131,6 +131,7 @@ class Application implements \Peak\Blueprint\Bedrock\Application
     }
 
     /**
+     * Add something to application stack
      * @param mixed $handler
      * @return $this
      */
@@ -140,6 +141,20 @@ class Application implements \Peak\Blueprint\Bedrock\Application
             $this->handlers = array_merge($this->handlers, $handler);
         } else {
             $this->handlers[] = $handler;
+        }
+        return $this;
+    }
+
+    /**
+     * Conditional stacking
+     * @param bool $condition
+     * @param $handler
+     * @return $this
+     */
+    public function stackIfTrue(bool $condition, $handler)
+    {
+        if ($condition) {
+            $this->stack($handler);
         }
         return $this;
     }
