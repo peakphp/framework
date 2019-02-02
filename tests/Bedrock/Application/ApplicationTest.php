@@ -22,15 +22,21 @@ require_once FIXTURES_PATH . '/application/ResponseA.php';
  */
 class ApplicationTest extends TestCase
 {
+    protected function createApp($kernel = null, $handlerResolver = null, $props = null)
+    {
+        return new Application(
+            $kernel ?? $this->createMock(Kernel::class),
+            $handlerResolver ?? $this->createMock(HandlerResolver::class),
+            $props ?? null
+        );
+    }
+
     /**
      * Test class instantiation
      */
     public function testGeneral()
     {
-        $kernel = $this->createMock(Kernel::class);
-        $handlerResolver = $this->createMock(HandlerResolver::class);
-
-        $app = new Application($kernel, $handlerResolver, new PropertiesBag([
+        $app = $this->createApp(null, null, new PropertiesBag([
             'version' => '1.1'
         ]));
 
@@ -46,32 +52,24 @@ class ApplicationTest extends TestCase
 
     public function testHandleRequestWithAdd()
     {
-        // app kernel
-        $kernel = $this->createMock(Kernel::class);
         // request
         $request = $this->createMock(ServerRequestInterface::class);
         // request handler
         $handlerA = $this->createMock(RequestHandlerInterface::class);
-        // handler resolver
-        $handlerResolver = $this->createMock(HandlerResolver::class);
 
-        $app = new Application($kernel, $handlerResolver);
+        $app = $this->createApp();
         $app->stack($handlerA);
         $this->assertInstanceOf(ResponseInterface::class, $app->handle($request));
     }
 
     public function testHandleRequestWithSet()
     {
-        // app kernel
-        $kernel = $this->createMock(Kernel::class);
         // request
         $request = $this->createMock(ServerRequestInterface::class);
         // request handler
         $handlerA = $this->createMock(RequestHandlerInterface::class);
-        // handler resolver
-        $handlerResolver = $this->createMock(HandlerResolver::class);
 
-        $app = new Application($kernel, $handlerResolver);
+        $app = $this->createApp();
         $app->set($handlerA);
         $this->assertInstanceOf(ResponseInterface::class, $app->handle($request));
     }
@@ -81,16 +79,10 @@ class ApplicationTest extends TestCase
      */
     public function testEmptyStackRequest()
     {
-        // app kernel
-        $kernel = $this->createMock(Kernel::class);
         // request
         $request = $this->createMock(ServerRequestInterface::class);
-        // request handler
-        $handlerA = $this->createMock(RequestHandlerInterface::class);
-        // handler resolver
-        $handlerResolver = $this->createMock(HandlerResolver::class);
 
-        $app = new Application($kernel, $handlerResolver);
+        $app = $this->createApp();
         $returnedResponse = $app->handle($request);
         $this->assertInstanceOf(ResponseInterface::class, $returnedResponse);
     }
@@ -100,16 +92,12 @@ class ApplicationTest extends TestCase
      */
     public function testEmptyStackRequestWithReset()
     {
-        // app kernel
-        $kernel = $this->createMock(Kernel::class);
         // request
         $request = $this->createMock(ServerRequestInterface::class);
         // request handler
         $handlerA = $this->createMock(RequestHandlerInterface::class);
-        // handler resolver
-        $handlerResolver = $this->createMock(HandlerResolver::class);
 
-        $app = new Application($kernel, $handlerResolver);
+        $app = $this->createApp();
 
         $app->set($handlerA);
         $app->reset();
@@ -119,14 +107,11 @@ class ApplicationTest extends TestCase
 
     public function testHandleRequestWithRealHandler()
     {
-        $kernel = $this->createMock(Kernel::class);
         $request = $this->createMock(ServerRequestInterface::class);
 
         $handlerA = new HandlerA();
 
-        $handlerResolver = $this->createMock(HandlerResolver::class);
-
-        $app = new Application($kernel, $handlerResolver);
+        $app = $this->createApp();
         $app->stack([$handlerA]);
         $this->assertInstanceOf(ResponseA::class, $app->handle($request));
     }
@@ -134,13 +119,9 @@ class ApplicationTest extends TestCase
 
     public function testHandleWithRoutes()
     {
-        $kernel = $this->createMock(Kernel::class);
-
         $handlerA = new HandlerA();
 
-        $handlerResolver = $this->createMock(HandlerResolver::class);
-
-        $app = new Application($kernel, $handlerResolver);
+        $app = $this->createApp();
 
 
         $app->get('/mypath', $handlerA);
@@ -172,10 +153,7 @@ class ApplicationTest extends TestCase
 
     public function testBootstrap()
     {
-        $app = new Application(
-            $this->createMock(Kernel::class),
-            $this->createMock(HandlerResolver::class)
-        );
+        $app = $this->createApp();
 
         $_GET = [];
         $app->bootstrap([
@@ -191,10 +169,7 @@ class ApplicationTest extends TestCase
 
     public function testCreateRoute()
     {
-        $app = new Application(
-            $this->createMock(Kernel::class),
-            $this->createMock(HandlerResolver::class)
-        );
+        $app = $this->createApp();
 
         $route = $app->createRoute('GET', '/', $this->createMock(\Peak\Blueprint\Http\Stack::class));
         $this->assertInstanceOf(Route::class, $route);
@@ -208,10 +183,7 @@ class ApplicationTest extends TestCase
      */
     public function testGetPropOnNull()
     {
-        $app = new Application(
-            $this->createMock(Kernel::class),
-            $this->createMock(HandlerResolver::class)
-        );
+        $app = $this->createApp();
 
         $app->getProp('foo');
     }
@@ -221,20 +193,14 @@ class ApplicationTest extends TestCase
      */
     public function testHasPropOnNull()
     {
-        $app = new Application(
-            $this->createMock(Kernel::class),
-            $this->createMock(HandlerResolver::class)
-        );
+        $app = $this->createApp();
 
         $app->hasProp('foo');
     }
 
     public function testStackRoute()
     {
-        $app = new Application(
-            $this->createMock(Kernel::class),
-            $this->createMock(HandlerResolver::class)
-        );
+        $app = $this->createApp();
 
         $app->stackRoute('post', '/', null);
 
@@ -242,5 +208,18 @@ class ApplicationTest extends TestCase
         $this->assertTrue(count($handlers) == 1);
         $this->assertTrue($handlers[0] instanceof Route);
         $this->assertTrue($handlers[0]->getMethod() === 'POST');
+    }
+
+    public function testStackIfTrue()
+    {
+        $app = $this->createApp();
+        $app->stackIfTrue(true, function(){});
+        $handlers = $app->getHandlers();
+        $this->assertTrue(count($handlers) == 1);
+
+        $app = $this->createApp();
+        $app->stackIfTrue(false, function(){});
+        $handlers = $app->getHandlers();
+        $this->assertTrue(count($handlers) == 0);
     }
 }
