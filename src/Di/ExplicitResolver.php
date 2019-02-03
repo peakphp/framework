@@ -6,22 +6,17 @@ namespace Peak\Di;
 
 use \Closure;
 
-/**
- * Class ExplicitResolver
- * @package Peak\Di
- */
 class ExplicitResolver
 {
-
     /**
      * Resolve class arguments dependencies
      *
-     * @param $needle
+     * @param string $needle
      * @param Container $container
      * @param null $explicit
      * @return mixed|null
      */
-    public function resolve($needle, Container $container, $explicit = null)
+    public function resolve(string $needle, Container $container, $explicit = null)
     {
         // Check for explicit dependency closure or object instance
         if (is_array($explicit) && array_key_exists($needle, $explicit)) {
