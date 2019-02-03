@@ -13,7 +13,7 @@ class ExplicitResolver
      *
      * @param string $needle
      * @param Container $container
-     * @param null $explicit
+     * @param mixed $explicit
      * @return mixed|null
      */
     public function resolve(string $needle, Container $container, $explicit = null)
