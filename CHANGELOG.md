@@ -11,6 +11,7 @@ Release date: ?
  - setProps() of Backpack\AppBuilder now accept an array or an instance of Blueprint\Collection\Dictionary
  - added Dictionary Blueprint to class Collection\DotNotationCollection
  - added method stackIfTrue() for conditional stacking in Bedrock\Application\Application 
+ - removed render() return type, since the method could return a string or false in Blueprint\View\View
 
 VERSION 4.0-BETA1
 -----------
