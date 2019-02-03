@@ -208,7 +208,7 @@ class FileCache implements CacheInterface
     }
 
     /**
-     * @param $key
+     * @param string $key
      * @return bool
      */
     public function isExpired($key)
@@ -262,8 +262,8 @@ class FileCache implements CacheInterface
     /**
      * Save cache key file content
      *
-     * @param $key
-     * @param $content
+     * @param mixed $key
+     * @param mixed $content
      * @param null|int|\DateInterval $ttl
      * @return bool
      */
