@@ -49,14 +49,6 @@ class ClassResolver
      * @param array $args
      * @param mixed $explicit
      * @return array
-     * @throws InvalidArgumentException
-     */
-    /**
-     * @param $class
-     * @param Container $container
-     * @param array $args
-     * @param null $explicit
-     * @return array
      * @throws AmbiguousResolutionException
      * @throws InterfaceNotFoundException
      * @throws ClassDefinitionNotFoundException
