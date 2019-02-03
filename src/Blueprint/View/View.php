@@ -24,9 +24,9 @@ interface View
     public function __isset(string $var): bool;
 
     /**
-     * @return string
+     * @return string|false
      */
-    public function render(): string;
+    public function render();
 
     /**
      * @return array

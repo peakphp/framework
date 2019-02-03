@@ -121,10 +121,10 @@ class View implements \Peak\Blueprint\View\View
     }
 
     /**
-     * @return string
+     * @return string|false
      * @throws FileNotFoundException
      */
-    public function render(): string
+    public function render()
     {
         $this->obN++;
         ob_start();
