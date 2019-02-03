@@ -260,7 +260,7 @@ class Container implements ContainerInterface
      * Add a class alias
      *
      * @param  string $name
-     * @param  string $class
+     * @param  string $className
      * @return $this
      */
     public function addAlias(string $name, string $className)
