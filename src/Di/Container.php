@@ -85,15 +85,12 @@ class Container implements ContainerInterface
      *
      * @param string $class
      * @param array $args
-     * @param  mixed  $explicit  Determine which instance should be use for an interface name.
-     *                           Required when you have multiple stored instances using the same interface name.
-     *                           ex: ['myinterface' => 'myinstance3']
-     *                           This support also custom closure
-     *                           ex: ['myinterface' => function() {
-     *                                   return new MyClass(); // myclass implement myinterface
-     *                               }]
-     * @return mixed|object
+     * @param mixed $explicit Determine which instance should be use for an interface name.
+     * @return mixed
      * @throws ClassDefinitionNotFoundException
+     * @throws Exception\AmbiguousResolutionException
+     * @throws Exception\InterfaceNotFoundException
+     * @throws Exception\NotFoundException
      * @throws \ReflectionException
      */
     public function create(string $class, $args = [], $explicit = null)
@@ -124,8 +121,12 @@ class Container implements ContainerInterface
      *
      * @param array $callback
      * @param array $args
-     * @param mixed $explicit
+     * @param null $explicit
      * @return mixed
+     * @throws ClassDefinitionNotFoundException
+     * @throws Exception\AmbiguousResolutionException
+     * @throws Exception\InterfaceNotFoundException
+     * @throws Exception\NotFoundException
      * @throws \ReflectionException
      */
     public function call(array $callback, array $args = [], $explicit = null)
