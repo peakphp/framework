@@ -148,7 +148,7 @@ class Application implements \Peak\Blueprint\Bedrock\Application
     /**
      * Conditional stacking
      * @param bool $condition
-     * @param $handler
+     * @param mixed $handler
      * @return $this
      */
     public function stackIfTrue(bool $condition, $handler)
