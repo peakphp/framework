@@ -124,7 +124,7 @@ class Container implements ContainerInterface
      *
      * @param array $callback
      * @param array $args
-     * @param null $explicit
+     * @param mixed $explicit
      * @return mixed
      * @throws \ReflectionException
      */
@@ -156,12 +156,12 @@ class Container implements ContainerInterface
     /**
      * Resolve a stored definition
      *
-     * @param $definition
+     * @param string $definition
      * @param array $args
      * @return mixed
      * @throws ClassDefinitionNotFoundException
      */
-    public function resolve($definition, array $args = [])
+    public function resolve(string $definition, array $args = [])
     {
         $def = $this->getDefinition($definition);
         if (is_null($def)) {
@@ -208,7 +208,7 @@ class Container implements ContainerInterface
      * @param  string|null $alias
      * @return Container
      */
-    public function set($object, string $alias = null)
+    public function set(object $object, string $alias = null)
     {
         if (!is_object($object)) {
             throw new InvalidArgumentException(__CLASS__.': set() first argument must be an object.');
@@ -262,9 +262,9 @@ class Container implements ContainerInterface
      * @param  string $class
      * @return $this
      */
-    public function addAlias($name, $class)
+    public function addAlias(string $name, string $className)
     {
-        $this->aliases[$name] = $class;
+        $this->aliases[$name] = $className;
         return $this;
     }
 
@@ -274,7 +274,7 @@ class Container implements ContainerInterface
      * @param  string $name
      * @return boolean
      */
-    public function hasAlias($name)
+    public function hasAlias(string $name)
     {
         return isset($this->aliases[$name]);
     }
@@ -305,7 +305,7 @@ class Container implements ContainerInterface
      * @param string $name
      * @param string $class
      */
-    protected function addInterface($name, $class)
+    protected function addInterface(string $name, $class)
     {
         if (!$this->hasInterface($name)) {
             $this->interfaces[$name] = $class;
@@ -329,7 +329,7 @@ class Container implements ContainerInterface
      * @param  string $name
      * @return bool
      */
-    public function hasInterface($name)
+    public function hasInterface(string $name)
     {
         return isset($this->interfaces[$name]);
     }
@@ -340,7 +340,7 @@ class Container implements ContainerInterface
      * @param   string $name
      * @return  array|string instance(s) matching interface name
      */
-    public function getInterface($name)
+    public function getInterface(string $name)
     {
         if ($this->hasInterface($name)) {
             return $this->interfaces[$name];
@@ -365,7 +365,7 @@ class Container implements ContainerInterface
      * @param Closure $definition
      * @return $this
      */
-    public function setDefinition($name, $definition)
+    public function setDefinition(string $name, $definition)
     {
         $this->definitions[$name] = $definition;
         return $this;
@@ -389,7 +389,7 @@ class Container implements ContainerInterface
      * @param  string $name
      * @return bool
      */
-    public function hasDefinition($name)
+    public function hasDefinition(string $name)
     {
         return isset($this->definitions[$name]);
     }
@@ -400,7 +400,7 @@ class Container implements ContainerInterface
      * @param   string $name
      * @return  mixed
      */
-    public function getDefinition($name)
+    public function getDefinition(string $name)
     {
         if ($this->hasDefinition($name)) {
             return $this->definitions[$name];
@@ -415,7 +415,7 @@ class Container implements ContainerInterface
      * @param mixed $definition
      * @return $this
      */
-    public function bind($name, $definition)
+    public function bind(string $name, $definition)
     {
         $this->definitions[$name] = new Singleton($name, $definition);
         return $this;
@@ -428,7 +428,7 @@ class Container implements ContainerInterface
      * @param mixed $definition
      * @return $this
      */
-    public function bindPrototype($name, $definition)
+    public function bindPrototype(string $name, $definition)
     {
         $this->definitions[$name] = new Prototype($name, $definition);
         return $this;
@@ -437,11 +437,11 @@ class Container implements ContainerInterface
     /**
      * Add a factory definition
      *
-     * @param $name
-     * @param $definition
+     * @param string $name
+     * @param mixed $definition
      * @return $this
      */
-    public function bindFactory($name, $definition)
+    public function bindFactory(string $name, $definition)
     {
         $this->definitions[$name] = new Factory($name, $definition);
         return $this;
