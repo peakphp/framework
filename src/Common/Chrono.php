@@ -84,10 +84,10 @@ class Chrono
 
     /**
      * Check if a timer is completed (started and ended)
-     * @param null $timerName
+     * @param string|null $timerName
      * @return bool
      */
-    public static function isCompleted($timerName = null): bool
+    public static function isCompleted(string $timerName = null): bool
     {
         if (!isset($timerName)) {
             if ((self::$global['start'] !== false) && (self::$global['end'] !== false)) {
@@ -139,10 +139,10 @@ class Chrono
     /**
      * Same as get() but return timer in milliseconds
      * @param int $decimalPrecision
-     * @param null $timerName
+     * @param string|null $timerName
      * @return bool|float|int
      */
-    public static function getMS(int $decimalPrecision = 4, $timerName = null)
+    public static function getMS(int $decimalPrecision = 4, string $timerName = null)
     {
         $sec = self::get($decimalPrecision, $timerName);
         if ($sec === false) {
@@ -154,9 +154,9 @@ class Chrono
 
     /**
      * Reset global timer or a specific timer
-     * @param null $timerName
+     * @param string|null $timerName
      */
-    public static function reset($timerName = null)
+    public static function reset(string $timerName = null)
     {
         if (isset($timerName)) {
             if (self::timerExists($timerName)) {

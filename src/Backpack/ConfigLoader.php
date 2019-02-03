@@ -75,7 +75,7 @@ class ConfigLoader implements ResourceLoader
     }
 
     /**
-     * @param array $resources
+     * @param mixed $resources
      * @return mixed|Config|\Peak\Config\Config
      * @throws \Peak\Config\Exception\CachePathNotFoundException
      * @throws \Peak\Config\Exception\CachePathNotWritableException
@@ -89,8 +89,8 @@ class ConfigLoader implements ResourceLoader
 
     /**
      * @param array $resources
-     * @param \Peak\Blueprint\Config\Config $config
-     * @return \Peak\Blueprint\Config\Config|\Peak\Config\Config
+     * @param Config $config
+     * @return Config|\Peak\Config\Config
      * @throws \Peak\Config\Exception\CachePathNotFoundException
      * @throws \Peak\Config\Exception\CachePathNotWritableException
      * @throws \Peak\Config\Exception\UnknownResourceException
@@ -104,8 +104,8 @@ class ConfigLoader implements ResourceLoader
 
     /**
      * @param array $resources
-     * @param \Peak\Blueprint\Config\Config|null $config
-     * @return \Peak\Blueprint\Config\Config|\Peak\Config\Config
+     * @param Config|null $config
+     * @return Config
      * @throws \Peak\Config\Exception\CachePathNotFoundException
      * @throws \Peak\Config\Exception\CachePathNotWritableException
      * @throws \Peak\Config\Exception\UnknownResourceException
@@ -120,8 +120,8 @@ class ConfigLoader implements ResourceLoader
                 $configFactory = new \Peak\Config\ConfigFactory();
             } else {
                 $configFactory = new ConfigCacheFactory(
-                    $this->cacheId,
-                    $this->cacheTtl,
+                    (string) $this->cacheId,
+                    (int) $this->cacheTtl,
                     new \Peak\Config\ConfigFactory(),
                     $this->cacheDriver ?? new FileCache($this->cachePath)
                 );
