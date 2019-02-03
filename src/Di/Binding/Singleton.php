@@ -8,6 +8,7 @@ use Peak\Di\AbstractBinding;
 use Peak\Di\ArrayDefinition;
 use Peak\Di\ClassInstantiator;
 use Peak\Di\Container;
+use Peak\Di\Exception\InvalidDefinitionException;
 
 /**
  * Class Singleton
@@ -32,7 +33,7 @@ class Singleton extends AbstractBinding
      * @param string $name
      * @param mixed $definition
      */
-    public function __construct($name, $definition)
+    public function __construct(string $name, $definition)
     {
         $this->instantiator = new ClassInstantiator();
         parent::__construct($name, self::SINGLETON, $definition);
@@ -43,8 +44,9 @@ class Singleton extends AbstractBinding
      *
      * @param Container $container
      * @param array $args
-     * @param null $explicit
+     * @param mixed $explicit
      * @return mixed|object|null
+     * @throws InvalidDefinitionException
      * @throws \Peak\Di\Exception\ClassDefinitionNotFoundException
      * @throws \Peak\Di\Exception\NotFoundException
      * @throws \ReflectionException
@@ -78,6 +80,6 @@ class Singleton extends AbstractBinding
             return $instance;
         }
 
-        throw new \Exception(__CLASS__.': Invalid definition for '.$this->name);
+        throw new InvalidDefinitionException($this->name);
     }
 }
