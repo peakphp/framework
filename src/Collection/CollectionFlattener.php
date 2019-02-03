@@ -99,7 +99,7 @@ class CollectionFlattener
             if (is_array($val)) {
                 $flat_data = array_merge(
                     $flat_data,
-                    $this->flatCollection($val, $key)
+                    $this->flatCollection($val, (string) $key)
                 );
                 continue;
             }
