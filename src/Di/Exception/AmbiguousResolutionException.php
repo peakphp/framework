@@ -12,7 +12,7 @@ class AmbiguousResolutionException extends Exception implements ContainerExcepti
     /**
      * AmbiguousResolutionException constructor.
      * @param string $interface
-     * @param array $instance
+     * @param array $instances
      */
     public function __construct(string $interface, array $instances)
     {
