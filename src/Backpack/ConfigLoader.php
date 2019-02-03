@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Peak\Backpack;
 
 use Peak\Blueprint\Common\ResourceLoader;
+use Peak\Blueprint\Config\Config;
 use Peak\Blueprint\Config\ConfigFactory;
 use Peak\Config\Cache\FileCache;
 use Peak\Config\ConfigCacheFactory;
@@ -17,22 +18,22 @@ use Psr\SimpleCache\CacheInterface;
 class ConfigLoader implements ResourceLoader
 {
     /**
-     * @var \Peak\Blueprint\Config\ConfigFactory
+     * @var ConfigFactory|null
      */
     protected $configFactory = null;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $cachePath = null;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $cacheId = null;
 
     /**
-     * @var integer
+     * @var integer|null
      */
     protected $cacheTtl = null;
 
@@ -42,7 +43,7 @@ class ConfigLoader implements ResourceLoader
     protected $cacheDriver = null;
 
     /**
-     * @param \Peak\Blueprint\Config\ConfigFactory $configFactory
+     * @param ConfigFactory $configFactory
      * @return $this
      */
     public function setConfigFactory(ConfigFactory $configFactory)
@@ -74,8 +75,8 @@ class ConfigLoader implements ResourceLoader
     }
 
     /**
-     * @param mixed $resources
-     * @return mixed|\Peak\Blueprint\Config\Config|\Peak\Config\Config
+     * @param array $resources
+     * @return mixed|Config|\Peak\Config\Config
      * @throws \Peak\Config\Exception\CachePathNotFoundException
      * @throws \Peak\Config\Exception\CachePathNotWritableException
      * @throws \Peak\Config\Exception\UnknownResourceException
@@ -87,7 +88,7 @@ class ConfigLoader implements ResourceLoader
     }
 
     /**
-     * @param $resources
+     * @param array $resources
      * @param \Peak\Blueprint\Config\Config $config
      * @return \Peak\Blueprint\Config\Config|\Peak\Config\Config
      * @throws \Peak\Config\Exception\CachePathNotFoundException
@@ -95,14 +96,14 @@ class ConfigLoader implements ResourceLoader
      * @throws \Peak\Config\Exception\UnknownResourceException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      */
-    public function loadWith($resources, \Peak\Blueprint\Config\Config $config)
+    public function loadWith(array $resources, Config $config)
     {
         // todo to remove
         return $this->loadConfig($resources, $config);
     }
 
     /**
-     * @param $resources
+     * @param array $resources
      * @param \Peak\Blueprint\Config\Config|null $config
      * @return \Peak\Blueprint\Config\Config|\Peak\Config\Config
      * @throws \Peak\Config\Exception\CachePathNotFoundException
@@ -110,7 +111,7 @@ class ConfigLoader implements ResourceLoader
      * @throws \Peak\Config\Exception\UnknownResourceException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      */
-    private function loadConfig($resources, \Peak\Blueprint\Config\Config $config = null)
+    private function loadConfig(array $resources, \Peak\Blueprint\Config\Config $config = null)
     {
         $configFactory = $this->configFactory;
 
