@@ -50,10 +50,10 @@ class BootableResolver implements ResourceResolver
     }
 
     /**
-     * @param $item
+     * @param string $item
      * @return mixed
      */
-    private function resolveFromContainer($item)
+    private function resolveFromContainer(string $item)
     {
         if (isset($this->container)) {
             return $this->container->get($item);
