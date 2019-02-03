@@ -90,12 +90,12 @@ abstract class AbstractProcessor
     /**
      * Process pipe class object
      *
-     * @param PipeInterface $pipe
+     * @param object $pipe
      * @param mixed $payload
      * @return mixed
      * @throws MissingPipeInterfaceException
      */
-    protected function processPipeObject($pipe, $payload)
+    protected function processPipeObject(object $pipe, $payload)
     {
         if (!$pipe instanceof PipeInterface) {
             throw new MissingPipeInterfaceException(get_class($pipe));
