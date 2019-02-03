@@ -121,7 +121,7 @@ class View implements \Peak\Blueprint\View\View
     }
 
     /**
-     * @return string|false
+     * @return string
      * @throws FileNotFoundException
      */
     public function render(): string
