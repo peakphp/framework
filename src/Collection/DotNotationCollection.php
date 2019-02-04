@@ -12,7 +12,7 @@ class DotNotationCollection extends Collection implements Dictionary
     /**
      * @const string
      */
-    const SEPARATOR = '/[:\.]/';
+    const SEPARATOR = '.';
 
     /**
      * Return a path value
@@ -99,10 +99,10 @@ class DotNotationCollection extends Collection implements Dictionary
     /**
      * Explode path string
      * @param string $path
-     * @return array[]|false|string[]
+     * @return mixed
      */
     protected function explode(string $path)
     {
-        return preg_split(self::SEPARATOR, $path);
+        return explode(self::SEPARATOR, $path);
     }
 }
