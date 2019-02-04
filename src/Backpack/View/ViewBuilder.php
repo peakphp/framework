@@ -133,13 +133,13 @@ class ViewBuilder
     }
 
     /**
-     * @return string
+     * @return false|string
      * @throws \Peak\Di\Exception\ClassDefinitionNotFoundException
      * @throws \Peak\View\Exception\FileNotFoundException
      * @throws \Peak\View\Exception\InvalidHelperException
      * @throws \ReflectionException
      */
-    public function render(): string
+    public function render()
     {
         return $this->build()->render();
     }
