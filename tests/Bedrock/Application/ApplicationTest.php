@@ -222,4 +222,21 @@ class ApplicationTest extends TestCase
         $handlers = $app->getHandlers();
         $this->assertTrue(count($handlers) == 0);
     }
+
+    public function testCreateStack()
+    {
+        $app = $this->createApp(null, new HandlerResolver(null));
+        $handlers = $app->getHandlers();
+
+        $stack = $app->createStack(function() {
+            return $this->createMock(ResponseInterface::class);
+        });
+        $this->assertTrue(count($handlers) == 0);
+
+        // request
+        $request = $this->createMock(ServerRequestInterface::class);
+        $response = $stack->handle($request);
+        $this->assertTrue($response instanceof ResponseInterface);
+
+    }
 }
