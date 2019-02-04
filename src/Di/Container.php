@@ -338,8 +338,8 @@ class Container implements ContainerInterface
     /**
      * Get an interface
      *
-     * @param   string $name
-     * @return  array|string instance(s) matching interface name
+     * @param string $name
+     * @return mixed|null
      */
     public function getInterface(string $name)
     {
