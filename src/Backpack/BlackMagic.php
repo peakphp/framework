@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Peak\Backpack;
 
+use Peak\Bedrock\Application\Application;
 use Peak\Http\Request\HandlerResolver;
 use Peak\Http\Stack;
 use Peak\Http\Response\Emitter;
