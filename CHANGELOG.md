@@ -12,7 +12,8 @@ Release date: ?
  - added Dictionary Blueprint to class Collection\DotNotationCollection
  - added method stackIfTrue() for conditional stacking in Bedrock\Application\Application 
  - removed render() return type, since the method could return a string or false in Blueprint\View\View
- - added method createStack() in Bedrock\Application\ApplicationG
+ - added method createStack() in Bedrock\Application\Application
+ - removed deprecated Backpack\Application
 
 VERSION 4.0-BETA1
 -----------
