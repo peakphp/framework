@@ -132,15 +132,15 @@ class Application implements \Peak\Blueprint\Bedrock\Application
 
     /**
      * Add something to application stack
-     * @param mixed $handler
+     * @param mixed $handlers
      * @return $this
      */
-    public function stack($handler)
+    public function stack($handlers)
     {
-        if (is_array($handler)) {
-            $this->handlers = array_merge($this->handlers, $handler);
+        if (is_array($handlers)) {
+            $this->handlers = array_merge($this->handlers, $handlers);
         } else {
-            $this->handlers[] = $handler;
+            $this->handlers[] = $handlers;
         }
         return $this;
     }
@@ -151,10 +151,10 @@ class Application implements \Peak\Blueprint\Bedrock\Application
      * @param mixed $handler
      * @return $this
      */
-    public function stackIfTrue(bool $condition, $handler)
+    public function stackIfTrue(bool $condition, $handlers)
     {
         if ($condition) {
-            $this->stack($handler);
+            $this->stack($handlers);
         }
         return $this;
     }
@@ -244,6 +244,23 @@ class Application implements \Peak\Blueprint\Bedrock\Application
         }
         return new Route($method, $path, new Stack($handlers, $this->getHandlerResolver()));
     }
+
+    /**
+     * Create a stack with the current app handlerResolver
+     * @param mixed $handlers
+     * @return Stack
+     */
+    public function createStack($handlers): Stack
+    {
+        if (!is_array($handlers)) {
+            $handlers = [$handlers];
+        }
+        return new Stack(
+            $handlers,
+            $this->handlerResolver
+        );
+    }
+
 
     /**
      * Flush current app stack
