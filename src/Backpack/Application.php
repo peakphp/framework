@@ -34,16 +34,6 @@ class Application extends \Peak\Bedrock\Application\Application
     }
 
     /**
-     * @param mixed $handlers
-     * @return \Peak\Http\Stack
-     */
-    public function createStack($handlers)
-    {
-        return (new StackFactory($this->getHandlerResolver()))
-            ->create($handlers);
-    }
-
-    /**
      * @throws \Exception
      */
     private function checkIfPeakDi()
