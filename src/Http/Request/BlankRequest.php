@@ -12,47 +12,47 @@ class BlankRequest implements ServerRequestInterface
 {
     public function getProtocolVersion()
     {
-        return null;
+        return '';
     }
 
     public function withProtocolVersion($version)
     {
-        return null;
+        return $this;
     }
 
     public function getHeaders()
     {
-        return null;
+        return [];
     }
 
     public function hasHeader($name)
     {
-        return null;
+        return false;
     }
 
     public function getHeader($name)
     {
-        return null;
+        return [];
     }
 
     public function getHeaderLine($name)
     {
-        return null;
+        return '';
     }
 
     public function withHeader($name, $value)
     {
-        return null;
+        return $this;
     }
 
     public function withAddedHeader($name, $value)
     {
-        return null;
+        return $this;
     }
 
     public function withoutHeader($name)
     {
-        return null;
+        return $this;
     }
 
     public function getBody()
@@ -62,27 +62,27 @@ class BlankRequest implements ServerRequestInterface
 
     public function withBody(StreamInterface $body)
     {
-        return null;
+        return $this;
     }
 
     public function getRequestTarget()
     {
-        return null;
+        return '';
     }
 
     public function withRequestTarget($requestTarget)
     {
-        return null;
+        return $this;
     }
 
     public function getMethod()
     {
-        return null;
+        return '';
     }
 
     public function withMethod($method)
     {
-        return null;
+        return $this;
     }
 
     public function getUri()
@@ -92,42 +92,42 @@ class BlankRequest implements ServerRequestInterface
 
     public function withUri(UriInterface $uri, $preserveHost = false)
     {
-        return null;
+        return $this;
     }
 
     public function getServerParams()
     {
-        return null;
+        return [];
     }
 
     public function getCookieParams()
     {
-        return null;
+        return [];
     }
 
     public function withCookieParams(array $cookies)
     {
-        return null;
+        return $this;
     }
 
     public function getQueryParams()
     {
-        return null;
+        return [];
     }
 
     public function withQueryParams(array $query)
     {
-        return null;
+        return $this;
     }
 
     public function getUploadedFiles()
     {
-        return null;
+        return [];
     }
 
     public function withUploadedFiles(array $uploadedFiles)
     {
-        return null;
+        return $this;
     }
 
     public function getParsedBody()
@@ -137,12 +137,12 @@ class BlankRequest implements ServerRequestInterface
 
     public function withParsedBody($data)
     {
-        return null;
+        return $this;
     }
 
     public function getAttributes()
     {
-        return null;
+        return [];
     }
 
     public function getAttribute($name, $default = null)
@@ -152,11 +152,11 @@ class BlankRequest implements ServerRequestInterface
 
     public function withAttribute($name, $value)
     {
-        return null;
+        return $this;
     }
 
     public function withoutAttribute($name)
     {
-        return null;
+        return $this;
     }
 }
