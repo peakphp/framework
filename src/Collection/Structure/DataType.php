@@ -120,7 +120,7 @@ class DataType
      * @param string $className
      * @return DataType
      */
-    public function object($className = 'object'): DataType
+    public function object(string $className = 'object'): DataType
     {
         $this->types[] = $className;
         return $this;
