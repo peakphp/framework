@@ -92,13 +92,10 @@ class PaginationTest extends TestCase
 		$total        = 198;
 		$current_page = 15;
 
-		//this page number is too high so we should get the last page instead with a warning
 		$pagin = new Pagination($ipp, $total, $current_page);
 
 		$pagin->setPagesRange(3);
-
-		// print_r($pagin);
-
+		$this->assertTrue($pagin->pages === [0 => 12, 1 => 13, 2 => 14, 3 => 15, 4 => 16, 5 => 17, 6 => 18]);
 	}
 
     /**
