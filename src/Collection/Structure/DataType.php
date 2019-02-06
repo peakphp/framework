@@ -65,7 +65,7 @@ class DataType
     /**
      * @return $this
      */
-    public function nullable()
+    public function null()
     {
         $this->types[] = self::NIL;
         return $this;
