@@ -1,6 +1,6 @@
 VERSION 4.0-BETA2
 -----------
-Release date: ?
+Release date: 2019-02-05
 
  - raised minimum php version to 7.2
  - removed deprecated packages Validation and Rbac
