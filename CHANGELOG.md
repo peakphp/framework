@@ -14,6 +14,7 @@ Release date: ?
  - removed render() return type, since the method could return a string or false in Blueprint\View\View
  - added method createStack() in Bedrock\Application\Application
  - removed deprecated Backpack\Application
+ - renamed nullable() to null() for consistency in Collection\Structure\DataType
 
 VERSION 4.0-BETA1
 -----------

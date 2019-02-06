@@ -9,7 +9,7 @@ class MyStructure1 extends AbstractStructure
     public function getStructure(): array
     {
         return [
-            'id' => $this->integer()->nullable(),
+            'id' => $this->integer()->null(),
             'date' => $this->object(\DateTime::class),
             'obj' => $this->object(),
         ];
@@ -21,7 +21,7 @@ class MyStructure2 extends AbstractImmutableStructure
     public function getStructure(): array
     {
         return [
-            'id' => $this->integer()->nullable(),
+            'id' => $this->integer()->null(),
             'date' => $this->object(\DateTime::class),
             'obj' => $this->object(),
             'name' => $this->string()->default('Foo')
@@ -61,7 +61,7 @@ class MyStructure5 extends AbstractStructure
     {
         return [
             'multipleTypes1' => $this->array()->string(),
-            'multipleTypes2' => $this->integer()->nullable()->string(),
+            'multipleTypes2' => $this->integer()->null()->string(),
         ];
     }
 }
