@@ -2,6 +2,14 @@ VERSION 4.0-BETA2
 -----------
 Release date: 2019-02-05
 
+ - removed trailing slash on request path in Http\Request\Route 
+ - adding support of curly braces syntax for route parameters in Http\Request\Route 
+ - added Http\Request\RouteParameter and updated Http\Request\Route to use it
+
+VERSION 4.0-BETA2
+-----------
+Release date: 2019-02-05
+
  - raised minimum php version to 7.2
  - removed deprecated packages Validation and Rbac
  - removed package DebugBar
