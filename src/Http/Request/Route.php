@@ -33,6 +33,11 @@ class Route implements \Peak\Blueprint\Http\Route, Stack
     private $parentStack;
 
     /**
+     * @var array
+     */
+    private $matches = [];
+
+    /**
      * Route constructor.
      * @param string|null $method
      * @param string $path
@@ -72,8 +77,18 @@ class Route implements \Peak\Blueprint\Http\Route, Stack
             return false;
         }
 
-        preg_match('#^'.$this->path.'$#', $request->getUri()->getPath(), $matches);
-        return !empty($matches);
+        // replace pseudo {param} syntax to valid regex
+        $routePath = preg_replace('#\{([a-zA-Z_]+)\}#', '(?P<$1>[^\/]+)', $this->path);
+
+        // remove trailing slash /
+        $requestPath = $request->getUri()->getPath();
+        if (substr($requestPath, -1) === '/') {
+            $requestPath = substr($requestPath, 0, -1);
+        }
+
+        // look to math the route
+        preg_match('#^'.$routePath.'$#', $requestPath, $this->matches );
+        return !empty($this->matches);
     }
 
     /**
@@ -86,10 +101,14 @@ class Route implements \Peak\Blueprint\Http\Route, Stack
      */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        if (!$this->match($request)) {
+        $isMatching = $this->match($request);
+
+        // add regex matches to the request
+        $request->param = new RouteParameter($this->matches);
+
+        if (!$isMatching) {
             return $this->processParent($request, $handler);
         }
-
         return $this->stack->handle($request);
     }
 
