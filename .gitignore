@@ -9,3 +9,5 @@
 /tests/_reports
 /tmp
 /vendor
+phpstan.log
+psalm.log
