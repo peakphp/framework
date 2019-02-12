@@ -15,7 +15,6 @@ interface Stack extends RequestHandlerInterface, MiddlewareInterface
 {
     /**
      * @param Stack $parentStack
-     * @return mixed
      */
     public function setParent(Stack $parentStack);
 
