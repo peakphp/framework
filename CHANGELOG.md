@@ -5,6 +5,7 @@ Release date: ?
  - removed trailing slash on request path in Http\Request\Route 
  - adding support of curly braces syntax for route parameters in Http\Request\Route 
  - added Http\Request\RouteParameter and updated Http\Request\Route to use it
+ - added Http\Request\RouteServerRequest
 
 VERSION 4.0-BETA2
 -----------
