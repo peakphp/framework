@@ -1,103 +1,63 @@
 <?php
+
 use PHPUnit\Framework\TestCase;
+
+use \Peak\Common\Chrono\Chrono;
 
 /**
  * @package    Peak\Common\Chrono
  */
 class ChronoTest extends TestCase
 {
-	/**
-     * test global chrono start and stop
-     */
-    function testGlobalChrono()
-    {   	
-        Peak\Common\Chrono::start();
-        usleep(149992);
-        Peak\Common\Chrono::stop();
-        $this->assertTrue(Peak\Common\Chrono::get() >= 0.10);
-    }
-    
-    /**
-     * test global chrono start() and get()
-     */
-    function testGlobalChrono2()
-    {   	
-        Peak\Common\Chrono::start();
-        usleep(149992);
-        $this->assertTrue(Peak\Common\Chrono::get() >= 0.10);
-        //previous get() should have stop the global timer
-        $this->assertTrue(Peak\Common\Chrono::isCompleted());
-    }
-    
-    /**
-     * test global chrono verifications
-     */
-    function testGlobalChronoChecks()
+	public function testName()
     {
-        $this->assertFalse(Peak\Common\Chrono::isOn());
-        $this->assertTrue(Peak\Common\Chrono::isCompleted());
-        
-        Peak\Common\Chrono::start();
-        $this->assertTrue(Peak\Common\Chrono::isOn());
-        $this->assertFalse(Peak\Common\Chrono::isCompleted());
-        
-        Peak\Common\Chrono::resetAll();
-        $this->assertFalse(Peak\Common\Chrono::isOn());
-        $this->assertFalse(Peak\Common\Chrono::isCompleted());
-        
-        Peak\Common\Chrono::start();
-        Peak\Common\Chrono::stop();
-        $this->assertTrue(Peak\Common\Chrono::isCompleted());
-        $this->assertFalse(Peak\Common\Chrono::isOn()); 
-        
-        Peak\Common\Chrono::start();
-        $time = Peak\Common\Chrono::get();
-        $this->assertTrue(Peak\Common\Chrono::isCompleted());
-        $this->assertFalse(Peak\Common\Chrono::isOn());        
+        $chrono = new Chrono();
+        $this->assertTrue(empty($chrono->getName()));
+
+        $chrono = new Chrono('mychrono');
+        $this->assertTrue($chrono->getName() === 'mychrono');
     }
-    
-    /**
-     * test custom chrono start() and stop()
-     */
-    function testCustomChrono2()
+
+    public function testStop()
     {
-        Peak\Common\Chrono::start('timer1');
-        usleep(190000);
-        Peak\Common\Chrono::stop('timer1');
-        $this->assertTrue(Peak\Common\Chrono::get(2,'timer1') >= 0.10);
-        $this->assertTrue(Peak\Common\Chrono::isCompleted('timer1'));     
+        $chrono = new Chrono();
+        $this->assertFalse($chrono->isStopped());
+        $chrono->stop();
+        $this->assertTrue($chrono->isStopped());
     }
-    
-    /**
-     * test custom chrono start() and get()
-     */
-    function testCustomChrono()
+
+    public function testGetSec()
     {
-        Peak\Common\Chrono::start('timer1');
-        usleep(100000);
-        $this->assertTrue(Peak\Common\Chrono::get(2,'timer1') >= 0.10);
-        $this->assertTrue(Peak\Common\Chrono::isCompleted('timer1'));    
+        $epsilon = 0.00001;
+        $chrono = new Chrono();
+        usleep(100);
+
+        $sec = $chrono->getSec(4);
+        $this->assertTrue($sec < 1);
+        $this->assertTrue(abs($sec) > $epsilon);
     }
-    
-    /**
-     * test custom chrono verifications
-     */
-    function testCustomChronoChecks()
+
+    public function testGetMs()
     {
-        $this->assertFalse(Peak\Common\Chrono::isOn('timser1'));
-        $this->assertTrue(Peak\Common\Chrono::isCompleted('timer1'));
-        
-        Peak\Common\Chrono::start('timer1');
-        $this->assertTrue(Peak\Common\Chrono::isOn('timer1'));
-        $this->assertFalse(Peak\Common\Chrono::isCompleted('timer1'));
-        
-        Peak\Common\Chrono::resetAll();
-        $this->assertFalse(Peak\Common\Chrono::isOn('timer1'));
-        $this->assertFalse(Peak\Common\Chrono::isCompleted('timer1'));
-        
-        Peak\Common\Chrono::start('timer1');
-        Peak\Common\Chrono::stop('timer1');
-        $this->assertTrue(Peak\Common\Chrono::isCompleted('timer1'));
+        $epsilon = 0.00001;
+        $chrono = new Chrono();
+        usleep(100);
+
+        $ms = $chrono->getMs(4);
+        $this->assertTrue($ms < 1000);
+        $this->assertTrue(abs($ms) > $epsilon);
     }
-    	  
+
+    public function testMarkStep()
+    {
+        $chrono = new Chrono();
+        usleep(2);
+        $chrono->markStep('first-step');
+        $chrono->markStep('second-step');
+        usleep(50);
+        $chrono->markStep('third-step');
+        $steps = $chrono->getSteps();
+        $this->assertTrue(count($steps) == 3);
+        $this->assertTrue($steps[1]->getSec() == 0);
+    }
 }
