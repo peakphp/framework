@@ -8,6 +8,7 @@ Release date: ?
  - added Http\Request\RouteServerRequest
  - added Common\Trait\MicroTime
  - refactored Common\Chrono
+ - removed deprecated Common\ServiceLocator
 
 VERSION 4.0-BETA2
 -----------
