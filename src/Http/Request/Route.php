@@ -77,8 +77,8 @@ class Route implements \Peak\Blueprint\Http\Route, Stack
             return false;
         }
 
-        // replace pseudo {param} syntax to valid regex
-        $routePath = preg_replace('#\{([a-zA-Z_]+)\}#', '(?P<$1>[^\/]+)', $this->path);
+        // compile pseudo route syntax {param} and {param}:type into valid regex
+        $routeRegex = (new RouteExpression($this->path))->getRegex();
 
         // remove trailing slash /
         $requestPath = $request->getUri()->getPath();
@@ -87,7 +87,7 @@ class Route implements \Peak\Blueprint\Http\Route, Stack
         }
 
         // look to math the route
-        preg_match('#^'.$routePath.'$#', $requestPath, $this->matches );
+        preg_match('#^'.$routeRegex.'$#', $requestPath, $this->matches );
         return !empty($this->matches);
     }
 
