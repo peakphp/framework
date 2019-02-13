@@ -2,6 +2,8 @@ VERSION 4.0-BETA4
 -----------
 Release date: ?
 
+ - added Http\Request\RouteExpression and updated Http\Request\Route to use it
+
 VERSION 4.0-BETA3
 -----------
 Release date: 2019-02-12
