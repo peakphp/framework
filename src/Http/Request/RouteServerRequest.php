@@ -52,12 +52,13 @@ class RouteServerRequest implements ServerRequestInterface
 
     /**
      * @param string $name
-     * @return mixed
+     * @param mixed $default
+     * @return mixed|null
      */
-    public function getParam(string $name)
+    public function getParam(string $name, $default = null)
     {
-        if (!isset($this->routeParam)) {
-            return null;
+        if (!isset($this->routeParam) || !$this->hasParam($name)) {
+            return $default;
         }
         return $this->routeParam->$name;
     }
