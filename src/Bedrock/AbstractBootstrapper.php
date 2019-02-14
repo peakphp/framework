@@ -7,7 +7,6 @@ namespace Peak\Bedrock;
 use Peak\Bedrock\Bootstrap\BootableResolver;
 use Peak\Blueprint\Bedrock\Application;
 use Peak\Blueprint\Common\Bootable;
-use Peak\Di\Container;
 
 /**
  * Class AbstractBootstrapper
