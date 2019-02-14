@@ -16,7 +16,9 @@
   ],
   "require": {
     "php": ">=7.2",
-    "peak/http": "^4.0"
+    "peak/http": "^4.0",
+    "symfony/console": "^4.2",
+    "symfony/process": "^4.2"
   },
   "autoload": {
     "psr-4": {
