@@ -129,7 +129,7 @@ class ConfigLoader implements ResourceLoader
         }
 
         if (!isset($config)) {
-            $config = new \Peak\Bedrock\Application\Config();
+            $config = new \Peak\Config\Config();
         }
 
         return $configFactory->loadResourcesWith($resources, $config);
