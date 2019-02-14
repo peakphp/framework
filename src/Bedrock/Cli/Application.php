@@ -134,11 +134,11 @@ class Application implements CliApplication
     /**
      * @param InputInterface|null $input
      * @param OutputInterface|null $output
-     * @return mixed|void
+     * @return mixed
      * @throws \Exception
      */
     public function run(InputInterface $input = null, OutputInterface $output = null)
     {
-        $this->console->run($input, $output);
+        return $this->console->run($input, $output);
     }
 }
