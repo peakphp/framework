@@ -20,9 +20,9 @@ class ConfigLoaderTest extends TestCase
         $config = (new ConfigLoader())
             ->loadWith([
                 ['foo' => 'bar']
-            ], new \Peak\Bedrock\Application\Config());
+            ], new CustomConfig());
 
-        $this->assertInstanceOf(\Peak\Bedrock\Application\Config::class, $config);
+        $this->assertInstanceOf(CustomConfig::class, $config);
     }
 
     public function testLoadWithCache()
@@ -62,6 +62,7 @@ class ConfigLoaderTest extends TestCase
     }
 }
 
+class CustomConfig extends \Peak\Config\Config {}
 
 function customeErrorHandler($errno, $errstr, $errfile, $errline) {
     echo implode('-', [$errno, $errfile, $errline]);
