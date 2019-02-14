@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Peak\Bedrock\Application;
+namespace Peak\Bedrock;
 
 use Peak\Bedrock\Bootstrap\BootableResolver;
+use Peak\Blueprint\Bedrock\Application;
 use Peak\Blueprint\Common\Bootable;
 use Peak\Di\Container;
 
@@ -86,7 +87,7 @@ abstract class AbstractBootstrapper implements Bootable
     private function call(string $method)
     {
         if (method_exists($this, $method)) {
-            if ($this->application->getContainer() instanceof Container) {
+            if ('Peak\Di\Container' === get_class($this->application->getContainer())) {
                 $this->application->getContainer()->call([$this, $method]);
             } else {
                 $this->$method();
