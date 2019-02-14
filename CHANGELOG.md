@@ -4,6 +4,13 @@ Release date: ?
 
  - added Http\Request\RouteExpression and updated Http\Request\Route to use it
  - added default param to Http\Request\RouteServerRequest::getParam()
+ - refactored Blueprint\Bedrock\Application into 3 new interfaces: 
+   Blueprint\Bedrock\Application, Blueprint\Bedrock\HttpApplication and Blueprint\Bedrock\CliApplication
+ - removed deprecated Bedrock\Application\Config
+ - moved Bedrock\Application\Application to Bedrock\Http\Application
+ - moved Bedrock\Application\AbstractBootstrapper to Bedrock\AbstractBootstrapper
+ - added Bedrock\Cli\Application
+ - added symfony/console and symfony/process to composer.json
 
 VERSION 4.0-BETA3
 -----------
