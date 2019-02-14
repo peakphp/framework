@@ -4,30 +4,20 @@ declare(strict_types=1);
 
 namespace Peak\Bedrock\Cli;
 
+use Peak\Bedrock\AbstractApplication;
 use Peak\Blueprint\Bedrock\CliApplication;
 use Peak\Blueprint\Bedrock\Kernel;
 use Peak\Blueprint\Collection\Dictionary;
-use Psr\Container\ContainerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class Application implements CliApplication
+class Application extends AbstractApplication implements CliApplication
 {
-    /**
-     * @var Kernel
-     */
-    private $kernel;
-
     /**
      * @var \Symfony\Component\Console\Application
      */
     private $console;
-
-    /**
-     * @var Dictionary|null
-     */
-    private $props;
 
     /**
      * Application constructor.
@@ -48,57 +38,6 @@ class Application implements CliApplication
         }
 
         $this->console = new \Symfony\Component\Console\Application($name, $version);
-    }
-
-    /**
-     * @return Kernel
-     */
-    public function getKernel(): Kernel
-    {
-        return $this->kernel;
-    }
-
-    /**
-     * @return ContainerInterface
-     */
-    public function getContainer(): ContainerInterface
-    {
-        return $this->kernel->getContainer();
-    }
-
-    /**
-     * @param string $property
-     * @param mixed $default
-     * @return mixed
-     * @throws \Exception
-     */
-    public function getProp(string $property, $default = null)
-    {
-        if (!isset($this->props)) {
-            throw new \Exception('Application properties is not defined! Cannot use getProp()');
-        }
-        return $this->props->get($property, $default);
-    }
-
-    /**
-     * @param string $property
-     * @return bool
-     * @throws \Exception
-     */
-    public function hasProp(string $property): bool
-    {
-        if (!isset($this->props)) {
-            throw new \Exception('Application properties is not defined! Cannot use hasProp()');
-        }
-        return $this->props->has($property);
-    }
-
-    /**
-     * @return Dictionary|null
-     */
-    public function getProps(): ?Dictionary
-    {
-        return $this->props;
     }
 
     /**

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Peak\Bedrock\Http;
 
-use Peak\Bedrock\Bootstrap\Bootstrap;
+use Peak\Bedrock\AbstractApplication;
 use Peak\Blueprint\Bedrock\HttpApplication;
 use Peak\Http\Request\BlankRequest;
 use Peak\Http\Stack;
@@ -13,17 +13,11 @@ use Peak\Blueprint\Bedrock\Kernel;
 use Peak\Blueprint\Collection\Dictionary;
 use Peak\Blueprint\Common\ResourceResolver;
 use Peak\Blueprint\Http\ResponseEmitter;
-use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
-class Application implements HttpApplication
+class Application extends AbstractApplication implements HttpApplication
 {
-    /**
-     * @var Kernel
-     */
-    private $kernel;
-
     /**
      * @var array
      */
@@ -33,11 +27,6 @@ class Application implements HttpApplication
      * @var ResourceResolver
      */
     private $handlerResolver;
-
-    /**
-     * @var Dictionary|null
-     */
-    private $props;
 
     /**
      * Application constructor.
@@ -69,57 +58,6 @@ class Application implements HttpApplication
     public function getHandlers(): array
     {
         return $this->handlers;
-    }
-
-    /**
-     * @return Kernel
-     */
-    public function getKernel(): Kernel
-    {
-        return $this->kernel;
-    }
-
-    /**
-     * @return ContainerInterface
-     */
-    public function getContainer(): ContainerInterface
-    {
-        return $this->kernel->getContainer();
-    }
-
-    /**
-     * @param string $property
-     * @param mixed $default
-     * @return mixed
-     * @throws \Exception
-     */
-    public function getProp(string $property, $default = null)
-    {
-        if (!isset($this->props)) {
-            throw new \Exception('Application properties is not defined! Cannot use getProp()');
-        }
-        return $this->props->get($property, $default);
-    }
-
-    /**
-     * @param string $property
-     * @return bool
-     * @throws \Exception
-     */
-    public function hasProp(string $property): bool
-    {
-        if (!isset($this->props)) {
-            throw new \Exception('Application properties is not defined! Cannot use hasProp()');
-        }
-        return $this->props->has($property);
-    }
-
-    /**
-     * @return Dictionary|null
-     */
-    public function getProps(): ?Dictionary
-    {
-        return $this->props;
     }
 
     /**
@@ -262,7 +200,6 @@ class Application implements HttpApplication
         );
     }
 
-
     /**
      * Flush current app stack
      * @return $this
@@ -282,20 +219,6 @@ class Application implements HttpApplication
     {
         $this->reset();
         $this->stack($handlers);
-        return $this;
-    }
-
-    /**
-     * Bootstrap bootable processes
-     * @param array $processes
-     * @return $this
-     * @throws \Peak\Bedrock\Bootstrap\Exception\InvalidBootableProcessException
-     * @throws \ReflectionException
-     */
-    public function bootstrap(array $processes)
-    {
-        $bootstrap = new Bootstrap($processes, $this->getContainer());
-        $bootstrap->boot();
         return $this;
     }
 
