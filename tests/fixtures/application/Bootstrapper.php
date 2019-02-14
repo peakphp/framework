@@ -1,6 +1,6 @@
 <?php
 
-use \Peak\Bedrock\Application\AbstractBootstrapper;
+use \Peak\Bedrock\AbstractBootstrapper;
 
 class Bootstrapper extends AbstractBootstrapper
 {
