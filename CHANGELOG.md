@@ -1,3 +1,7 @@
+VERSION 4.0-BETA5
+-----------
+Release date: ?
+
 VERSION 4.0-BETA4
 -----------
 Release date: 2019-02-14
