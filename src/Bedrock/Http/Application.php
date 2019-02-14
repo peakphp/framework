@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Peak\Bedrock\Application;
+namespace Peak\Bedrock\Http;
 
 use Peak\Bedrock\Bootstrap\Bootstrap;
+use Peak\Blueprint\Bedrock\HttpApplication;
 use Peak\Http\Request\BlankRequest;
 use Peak\Http\Stack;
 use Peak\Http\Request\Route;
@@ -16,7 +17,7 @@ use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
-class Application implements \Peak\Blueprint\Bedrock\Application
+class Application implements HttpApplication
 {
     /**
      * @var Kernel
@@ -79,6 +80,14 @@ class Application implements \Peak\Blueprint\Bedrock\Application
     }
 
     /**
+     * @return ContainerInterface
+     */
+    public function getContainer(): ContainerInterface
+    {
+        return $this->kernel->getContainer();
+    }
+
+    /**
      * @param string $property
      * @param mixed $default
      * @return mixed
@@ -111,14 +120,6 @@ class Application implements \Peak\Blueprint\Bedrock\Application
     public function getProps(): ?Dictionary
     {
         return $this->props;
-    }
-
-    /**
-     * @return ContainerInterface
-     */
-    public function getContainer()
-    {
-        return $this->kernel->getContainer();
     }
 
     /**
