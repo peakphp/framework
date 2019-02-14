@@ -1,6 +1,6 @@
 VERSION 4.0-BETA4
 -----------
-Release date: ?
+Release date: 2019-02-14
 
  - added Http\Request\RouteExpression and updated Http\Request\Route to use it
  - added default param to Http\Request\RouteServerRequest::getParam()
