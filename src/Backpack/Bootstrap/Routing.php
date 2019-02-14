@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Peak\Backpack\Bootstrap;
 
-use Peak\Bedrock\Application\Application;
+use Peak\Bedrock\Http\Application;
 use Peak\Blueprint\Common\Bootable;
 
 /**

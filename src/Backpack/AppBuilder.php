@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Peak\Backpack;
 
-use Peak\Bedrock\Application\Application;
+use Peak\Bedrock\Http\Application;
 use Peak\Collection\PropertiesBag;
 use Peak\Http\Request\HandlerResolver;
 use Peak\Blueprint\Bedrock\Kernel;
@@ -167,7 +167,7 @@ class AppBuilder
     }
 
     /**
-     * @return \Peak\Blueprint\Bedrock\Application
+     * @return \Peak\Blueprint\Bedrock\HttpApplication
      * @throws Exception
      */
     public function build()
@@ -177,10 +177,10 @@ class AppBuilder
 
     /**
      * @param string $applicationClass
-     * @return \Peak\Blueprint\Bedrock\Application
+     * @return \Peak\Blueprint\Bedrock\HttpApplication
      * @throws \Exception
      */
-    private function internalBuild(string $applicationClass): \Peak\Blueprint\Bedrock\Application
+    private function internalBuild(string $applicationClass): \Peak\Blueprint\Bedrock\HttpApplication
     {
         $kernel = $this->kernel;
         if (!isset($kernel)) {
@@ -228,10 +228,10 @@ class AppBuilder
     }
 
     /**
-     * @param \Peak\Blueprint\Bedrock\Application $app
+     * @param \Peak\Blueprint\Bedrock\HttpApplication $app
      * @throws \Exception
      */
-    private function addToContainer(\Peak\Blueprint\Bedrock\Application $app)
+    private function addToContainer(\Peak\Blueprint\Bedrock\HttpApplication $app)
     {
         $container = $app->getKernel()->getContainer();
         if (!$container instanceof Container) {

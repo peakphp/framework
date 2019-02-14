@@ -2,7 +2,7 @@
 
 use \PHPUnit\Framework\TestCase;
 use \Peak\Bedrock\Kernel;
-use \Peak\Bedrock\Application\Application;
+use \Peak\Bedrock\Http\Application;
 use \Peak\Di\Container;
 use \Peak\Http\Request\HandlerResolver;
 

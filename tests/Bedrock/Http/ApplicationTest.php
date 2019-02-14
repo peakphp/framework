@@ -1,7 +1,7 @@
 <?php
 
 use \PHPUnit\Framework\TestCase;
-use \Peak\Bedrock\Application\Application;
+use \Peak\Bedrock\Http\Application;
 use \Peak\Bedrock\Kernel;
 use \Peak\Http\Request\HandlerResolver;
 use \Peak\Http\Request\Route;
