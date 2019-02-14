@@ -1,7 +1,7 @@
 {
   "name": "peak/bedrock",
   "description": "Peak Bedrock Component",
-  "keywords": ["peak", "bedrock", "http", "middleware", "psr-7", "psr-15"],
+  "keywords": ["peak", "bedrock", "http", "cli" ,"middleware", "psr-7", "psr-15", "application"],
   "license": "MIT",
   "homepage": "https://peakframework.com",
   "support": {
