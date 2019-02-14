@@ -5,20 +5,19 @@ declare(strict_types=1);
 namespace Peak\Blueprint\Bedrock;
 
 use Peak\Blueprint\Collection\Dictionary;
-use Peak\Blueprint\Http\ResponseEmitter;
-use Psr\Http\Message\ServerRequestInterface;
-use Psr\Http\Server\RequestHandlerInterface;
+use Psr\Container\ContainerInterface;
 
-/**
- * Interface Application
- * @package Peak\Blueprint\Bedrock
- */
-interface Application extends RequestHandlerInterface
+interface Application
 {
     /**
      * @return Kernel
      */
     public function getKernel(): Kernel;
+
+    /**
+     * @return ContainerInterface
+     */
+    public function getContainer(): ContainerInterface;
 
     /**
      * @param string $property
@@ -38,13 +37,4 @@ interface Application extends RequestHandlerInterface
      * @return null|Dictionary
      */
     public function getProps(): ?Dictionary;
-
-    /**
-     * Handle the request and emit a response
-     *
-     * @param ServerRequestInterface $request
-     * @param ResponseEmitter $emitter
-     * @return mixed
-     */
-    public function run(ServerRequestInterface $request, ResponseEmitter $emitter);
 }
