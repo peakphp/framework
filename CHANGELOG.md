@@ -11,6 +11,7 @@ Release date: ?
  - moved Bedrock\Application\AbstractBootstrapper to Bedrock\AbstractBootstrapper
  - added Bedrock\Cli\Application
  - added symfony/console and symfony/process to composer.json
+ - added Bedrock\AbstractApplication to reduce repetitive code in Bedrock\Http\Application and Bedrock\Cli\Application
 
 VERSION 4.0-BETA3
 -----------
