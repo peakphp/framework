@@ -82,7 +82,7 @@ class Route implements \Peak\Blueprint\Http\Route, Stack
 
         // remove trailing slash /
         $requestPath = $request->getUri()->getPath();
-        if (strlen($requestPath) > 1 && substr($requestPath, -1) === '/') {
+        if ($requestPath !== '/' && substr($requestPath, -1) === '/') {
             $requestPath = substr($requestPath, 0, -1);
         }
 
