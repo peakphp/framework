@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Peak\Backpack;
 
 use Peak\Bedrock\Http\Application;
-use Peak\Collection\PropertiesBag;
+use Peak\Collection\DotNotationCollection;
 use Peak\Http\Request\HandlerResolver;
 use Peak\Blueprint\Bedrock\Kernel;
 use Peak\Blueprint\Collection\Dictionary;
@@ -98,7 +98,7 @@ class AppBuilder
         if (!is_array($props) && !$props instanceof Dictionary) {
             throw new Exception('Props must be an array or an instance of Peak\Blueprint\Collection\Dictionary. '.gettype($props).' given ...');
         } elseif (is_array($props)) {
-            $props = new PropertiesBag($props);
+            $props = new DotNotationCollection($props);
         }
 
         $this->props = $props;
