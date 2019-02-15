@@ -2,6 +2,7 @@ VERSION 4.0-BETA5
 -----------
 Release date: ?
 
+ - Backpack\AppBuilder::setProps() will create a DotNotationCollection instead of PropertiesBag if array submitted.
  - fixed bug with trailing slashes for route "/"
 
 VERSION 4.0-BETA4
