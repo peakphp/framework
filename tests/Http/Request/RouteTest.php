@@ -33,7 +33,6 @@ class RouteTest extends TestCase
         );
 
         $request = $this->createMock(ServerRequestInterface::class);
-
         $result = $route->match($request);
         $this->assertFalse($result);
     }
@@ -46,21 +45,7 @@ class RouteTest extends TestCase
             $this->createMock(Stack::class)
         );
 
-        $request = $this->createMock(ServerRequestInterface::class);
-
-        $request->expects($this->once())
-            ->method('getMethod')
-            ->will($this->returnValue('GET'));
-
-        $uri = $this->createMock(UriInterface::class);
-        $uri->expects(($this->once()))
-            ->method('getPath')
-            ->will($this->returnValue('/mypath'));
-
-        $request->expects($this->once())
-            ->method('getUri')
-            ->will($this->returnValue($uri));
-
+        $request = $this->createRequest('GET', '/mypath');
         $result = $route->match($request);
         $this->assertTrue($result);
     }
@@ -74,12 +59,7 @@ class RouteTest extends TestCase
             $this->createMock(Stack::class)
         );
 
-        $request = $this->createMock(ServerRequestInterface::class);
-
-        $request->expects($this->once())
-            ->method('getMethod')
-            ->will($this->returnValue('GET'));
-
+        $request = $this->createRequest('GET', '/mypath');
         $result = $route->match($request);
         $this->assertFalse($result);
     }
@@ -92,21 +72,7 @@ class RouteTest extends TestCase
             $this->createMock(Stack::class)
         );
 
-        $request = $this->createMock(ServerRequestInterface::class);
-
-        $request->expects($this->never())
-            ->method('getMethod')
-            ->will($this->returnValue('GET'));
-
-        $uri = $this->createMock(UriInterface::class);
-        $uri->expects(($this->once()))
-            ->method('getPath')
-            ->will($this->returnValue('/mypath'));
-
-        $request->expects($this->once())
-            ->method('getUri')
-            ->will($this->returnValue($uri));
-
+        $request = $this->createRequest('GET', '/mypath');
         $result = $route->match($request);
         $this->assertTrue($result);
     }
@@ -119,21 +85,7 @@ class RouteTest extends TestCase
             $this->createMock(Stack::class)
         );
 
-        $request = $this->createMock(ServerRequestInterface::class);
-
-        $request->expects($this->once())
-            ->method('getMethod')
-            ->will($this->returnValue('GET'));
-
-        $uri = $this->createMock(UriInterface::class);
-        $uri->expects(($this->once()))
-            ->method('getPath')
-            ->will($this->returnValue('/mypath2'));
-
-        $request->expects($this->once())
-            ->method('getUri')
-            ->will($this->returnValue($uri));
-
+        $request = $this->createRequest('GET', '/mypath2');
         $result = $route->match($request);
         $this->assertFalse($result);
     }
@@ -146,21 +98,24 @@ class RouteTest extends TestCase
             $this->createMock(Stack::class)
         );
 
-        $request = $this->createMock(ServerRequestInterface::class);
+        $request = $this->createRequest('GET', '/mypath/01');
+        $result = $route->match($request);
+        $this->assertTrue($result);
+    }
 
-        $request->expects($this->once())
-            ->method('getMethod')
-            ->will($this->returnValue('GET'));
+    public function testMatch6()
+    {
+        $route = new Route(
+            'GET',
+            '/',
+            $this->createMock(Stack::class)
+        );
 
-        $uri = $this->createMock(UriInterface::class);
-        $uri->expects(($this->once()))
-            ->method('getPath')
-            ->will($this->returnValue('/mypath/01'));
+        $request = $this->createRequest('GET', '/');
+        $result = $route->match($request);
+        $this->assertTrue($result);
 
-        $request->expects($this->once())
-            ->method('getUri')
-            ->will($this->returnValue($uri));
-
+        $request = $this->createRequest('GET', '//');
         $result = $route->match($request);
         $this->assertTrue($result);
     }
@@ -173,22 +128,26 @@ class RouteTest extends TestCase
             $this->createMock(Stack::class)
         );
 
-        $request = $this->createMock(ServerRequestInterface::class);
-
-        $request->expects($this->once())
-            ->method('getMethod')
-            ->will($this->returnValue('GET'));
-
-        $uri = $this->createMock(UriInterface::class);
-        $uri->expects(($this->once()))
-            ->method('getPath')
-            ->will($this->returnValue('/mypath'));
-
-        $request->expects($this->once())
-            ->method('getUri')
-            ->will($this->returnValue($uri));
-
+        $request = $this->createRequest('GET', '/mypath');
         $result = $route->handle($request);
         $this->assertInstanceOf(ResponseInterface::class, $result);
+    }
+
+
+    private function createRequest($method, $path)
+    {
+        $request = $this->createMock(ServerRequestInterface::class);
+
+        $request->method('getMethod')
+            ->will($this->returnValue($method));
+
+        $uri = $this->createMock(UriInterface::class);
+        $uri->method('getPath')
+            ->will($this->returnValue($path));
+
+        $request->method('getUri')
+            ->will($this->returnValue($uri));
+
+        return $request;
     }
 }
