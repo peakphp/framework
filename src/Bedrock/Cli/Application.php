@@ -49,8 +49,8 @@ class Application extends AbstractApplication implements CliApplication
     }
 
     /**
-     * @param mixed|array<mixed> $commands
-     * @return mixed|void
+     * @param $commands
+     * @return $this|mixed
      * @throws \Exception
      */
     public function add($commands)
@@ -68,6 +68,7 @@ class Application extends AbstractApplication implements CliApplication
             }
             $this->console->add($command);
         }
+        return $this;
     }
 
     /**
