@@ -33,19 +33,19 @@ class RouteParameter
     }
 
     /**
-     * @param $name
+     * @param string $name
      * @return mixed
      */
-    public function __get($name)
+    public function __get(string $name)
     {
         return $this->params[$name];
     }
 
     /**
-     * @param $name
+     * @param string $name
      * @return bool
      */
-    public function __isset($name)
+    public function __isset(string $name)
     {
         return isset($this->params[$name]);
     }
