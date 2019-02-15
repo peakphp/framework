@@ -110,7 +110,7 @@ class Chrono
     }
 
     /**
-     * @return int
+     * @return float
      */
     private function getElapsed(): float
     {
