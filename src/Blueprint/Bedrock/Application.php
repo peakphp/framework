@@ -37,4 +37,11 @@ interface Application
      * @return null|Dictionary
      */
     public function getProps(): ?Dictionary;
+
+    /**
+     * Boot stuff
+     * @param array $processes
+     * @return mixed
+     */
+    public function bootstrap(array $processes);
 }
