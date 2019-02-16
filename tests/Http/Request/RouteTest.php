@@ -115,7 +115,30 @@ class RouteTest extends TestCase
         $result = $route->match($request);
         $this->assertTrue($result);
 
-        $request = $this->createRequest('GET', '//');
+        $route = new Route(
+            'GET',
+            '',
+            $this->createMock(Stack::class)
+        );
+
+        $request = $this->createRequest('GET', '/');
+        $result = $route->match($request);
+        $this->assertTrue($result);
+    }
+
+    public function testMatch7()
+    {
+        $route = new Route(
+            'GET',
+            '/my/path',
+            $this->createMock(Stack::class)
+        );
+
+        $request = $this->createRequest('GET', '/my/path/');
+        $result = $route->match($request);
+        $this->assertTrue($result);
+
+        $request = $this->createRequest('GET', '/my/path');
         $result = $route->match($request);
         $this->assertTrue($result);
     }
