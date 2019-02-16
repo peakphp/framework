@@ -275,4 +275,13 @@ class CollectionTest extends TestCase
         $this->assertTrue($collection[1] === 'bar');
     }
 
+    public function testStrip()
+    {
+        $array = ['test' => 'foobar'];
+        $collection = new Collection($array);
+        $this->assertTrue($collection->toArray() === $array);
+        $collection->strip();
+        $this->assertTrue($collection->toArray() === []);
+    }
+
 }
