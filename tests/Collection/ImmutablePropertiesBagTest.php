@@ -36,6 +36,15 @@ class ImmutablePropertiesBagTest extends TestCase
     /**
      * @expectedException \Exception
      */
+    public function testSetSetException()
+    {
+        $propertiesBag = new ImmutablePropertiesBag(['foo' => 'bar']);
+        $propertiesBag->set('foo','bar2');
+    }
+
+    /**
+     * @expectedException \Exception
+     */
     public function testOffsetUnsetException()
     {
         $propertiesBag = new ImmutablePropertiesBag(['foo' => 'bar']);
