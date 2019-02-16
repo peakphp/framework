@@ -83,5 +83,10 @@ class RouteExpression
         if (strpos($this->regex, '}') !== false) {
             $this->regex = preg_replace('#\{([a-zA-Z_]+)\}#', '(?P<$1>[^\/]+)', $this->regex);
         }
+
+        // allow optional trailing slash at the end
+        if (substr($this->regex, -1) !== '/') {
+            $this->regex .= '[\/]?';
+        }
     }
 }

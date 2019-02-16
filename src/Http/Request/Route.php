@@ -80,14 +80,8 @@ class Route implements \Peak\Blueprint\Http\Route, Stack
         // compile pseudo route syntax {param} and {param}:type into valid regex
         $routeRegex = (new RouteExpression($this->path))->getRegex();
 
-        // remove trailing slash /
-        $requestPath = $request->getUri()->getPath();
-        if ($requestPath !== '/' && substr($requestPath, -1) === '/') {
-            $requestPath = substr($requestPath, 0, -1);
-        }
-
         // look to math the route
-        preg_match('#^'.$routeRegex.'$#', $requestPath, $this->matches );
+        preg_match('#^'.$routeRegex.'$#', $request->getUri()->getPath(), $this->matches );
         return !empty($this->matches);
     }
 
