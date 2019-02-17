@@ -83,14 +83,14 @@ class Stack implements \Peak\Blueprint\Http\Stack
         if ($this->nextHandler instanceof \Peak\Blueprint\Http\Stack) {
             $response = $this->handleStack($this->nextHandler, $request);
             if ($response !== false) {
-                return $response;
+                return $this->returnResponse($response);
             }
             $this->nextHandler = next($this->handlers);
         }
 
         // no more handlers, look for parent
         if ($this->nextHandler === false && isset($this->parentStack)) {
-            return $this->parentStack->process($request, $this->parentStack);
+            return $this->returnResponse($this->parentStack->process($request, $this->parentStack));
         } elseif ($this->nextHandler === false) {
             throw new StackEndedWithoutResponseException($this);
         }
@@ -103,9 +103,9 @@ class Stack implements \Peak\Blueprint\Http\Stack
 
         // how to call the handler (MiddlewareInterface or RequestHandlerInterface)
         if ($handlerInstance instanceof MiddlewareInterface) {
-            return $handlerInstance->process($request, $this);
+            return $this->returnResponse($handlerInstance->process($request, $this));
         } elseif($handlerInstance instanceof RequestHandlerInterface) {
-            return $handlerInstance->handle($request);
+            return $this->returnResponse($handlerInstance->handle($request));
         }
 
         // at this point, the handler is not good
@@ -134,5 +134,18 @@ class Stack implements \Peak\Blueprint\Http\Stack
     {
         $stack->setParent($this);
         return $stack->handle($request);
+    }
+
+    /**
+     * Reset the stack before returning the response,
+     * This allow the stack to be re-handle without throwing exception
+     * @param ResponseInterface $response
+     * @return ResponseInterface
+     */
+    protected function returnResponse(ResponseInterface $response): ResponseInterface
+    {
+        $this->nextHandler = null;
+        reset($this->handlers);
+        return $response;
     }
 }
