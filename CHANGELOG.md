@@ -2,6 +2,7 @@ VERSION 4.0-BETA5
 -----------
 Release date: ?
 
+ - added method returnResponse() to Http\Stack tp allow re-handling the stack multiple times
  - Backpack\AppBuilder::setProps() will create a DotNotationCollection instead of PropertiesBag if array submitted.
  - fixed bug with trailing slashes for route "/"
  - added method bootstrap() to Blueprint\Application

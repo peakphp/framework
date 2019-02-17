@@ -57,4 +57,15 @@ class StackTest extends TestCase
     }
 
 
+    public function testMultipleHandler()
+    {
+        $request = $this->createMock(ServerRequestInterface::class);
+        $stack = new Stack([new HandlerA()], $this->createMock(HandlerResolver::class));
+        $response = $stack->handle($request);
+        $response = $stack->handle($request);
+        $response = $stack->handle($request);
+
+        $this->assertTrue(isset($response));
+    }
+
 }
