@@ -1,4 +1,4 @@
-VERSION 4.0-BETA5
+VERSION 4.0.0-BETA5
 -----------
 Release date: 2019-02-20
 
@@ -7,7 +7,7 @@ Release date: 2019-02-20
  - fixed bug with trailing slashes for route "/"
  - added method bootstrap() to Blueprint\Application
 
-VERSION 4.0-BETA4
+VERSION 4.0.0-BETA4
 -----------
 Release date: 2019-02-14
 
@@ -22,7 +22,7 @@ Release date: 2019-02-14
  - added symfony/console and symfony/process to composer.json
  - added Bedrock\AbstractApplication to reduce repetitive code in Bedrock\Http\Application and Bedrock\Cli\Application
 
-VERSION 4.0-BETA3
+VERSION 4.0.0-BETA3
 -----------
 Release date: 2019-02-12
 
@@ -34,7 +34,7 @@ Release date: 2019-02-12
  - refactored Common\Chrono
  - removed deprecated Common\ServiceLocator
 
-VERSION 4.0-BETA2
+VERSION 4.0.0-BETA2
 -----------
 Release date: 2019-02-05
 
@@ -52,7 +52,7 @@ Release date: 2019-02-05
  - removed deprecated Backpack\Application
  - renamed nullable() to null() for consistency in Collection\Structure\DataType
 
-VERSION 4.0-BETA1
+VERSION 4.0.0-BETA1
 -----------
 Release date: 2019-01-24
 
