@@ -1,3 +1,9 @@
+VERSION 4.0.0-RC1
+-----------
+Release date: ?
+
+ - Http\Request\Exception\InvalidHandlerException return a more meaningful error message
+
 VERSION 4.0.0-BETA5
 -----------
 Release date: 2019-02-20
