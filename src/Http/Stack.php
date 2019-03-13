@@ -109,7 +109,7 @@ class Stack implements \Peak\Blueprint\Http\Stack
         }
 
         // at this point, the handler is not good
-        throw new InvalidHandlerException($this->nextHandler);
+        throw new InvalidHandlerException($handlerInstance);
     }
 
     /**

@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Peak\Http\Request\Exception;
 
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Server\MiddlewareInterface;
+
 class InvalidHandlerException extends \InvalidArgumentException
 {
     /**
@@ -17,7 +20,17 @@ class InvalidHandlerException extends \InvalidArgumentException
      */
     public function __construct($handler)
     {
-        parent::__construct('Invalid server request handler');
+        $msg = 'Invalid server request handler';
+
+        if (is_string($handler)) {
+            $msg = '['.$handler.'] is an invalid server request handler';
+        } elseif (is_object($handler) &&
+            !$handler instanceof ServerRequestInterface &&
+            !$handler instanceof MiddlewareInterface
+        ) {
+            $msg = '['.get_class($handler).'] handler must implements ServerRequestInterface or MiddlewareInterface';
+        }
+        parent::__construct($msg);
         $this->handler = $handler;
     }
 
