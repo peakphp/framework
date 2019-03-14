@@ -7,10 +7,6 @@ namespace Peak\Bedrock\Bootstrap;
 use Peak\Blueprint\Common\Bootable;
 use Psr\Container\ContainerInterface;
 
-/**
- * Class Bootstrap
- * @package Peak\Bedrock\Bootstap
- */
 class Bootstrap implements Bootable
 {
     /**
