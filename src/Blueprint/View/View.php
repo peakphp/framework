@@ -4,10 +4,6 @@ declare(strict_types=1);
 
 namespace Peak\Blueprint\View;
 
-/**
- * Interface View
- * @package Peak\Blueprint\Http
- */
 interface View
 {
     /**

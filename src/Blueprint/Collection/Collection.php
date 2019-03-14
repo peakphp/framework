@@ -10,10 +10,6 @@ use \Countable;
 use \IteratorAggregate;
 use \Serializable;
 
-/**
- * Interface Collection
- * @package Peak\Blueprint\Collection
- */
 interface Collection extends ObjectAccess, ArrayAccess, Arrayable, Countable, IteratorAggregate, Serializable
 {
 }

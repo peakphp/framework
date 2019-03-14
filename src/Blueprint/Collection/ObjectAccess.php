@@ -4,10 +4,6 @@ declare(strict_types=1);
 
 namespace Peak\Blueprint\Collection;
 
-/**
- * Interface ObjectAccess
- * @package Peak\Blueprint\Collection
- */
 interface ObjectAccess
 {
     /**

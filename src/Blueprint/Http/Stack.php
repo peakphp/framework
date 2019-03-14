@@ -7,10 +7,6 @@ namespace Peak\Blueprint\Http;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-/**
- * Interface Stack
- * @package Peak\Blueprint\Http
- */
 interface Stack extends RequestHandlerInterface, MiddlewareInterface
 {
     /**

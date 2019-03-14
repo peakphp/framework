@@ -4,10 +4,6 @@ declare(strict_types=1);
 
 namespace Peak\Blueprint\Common;
 
-/**
- * Interface ResourceLoader
- * @package Peak\Blueprint\Common
- */
 interface ResourceLoader
 {
     /**

@@ -6,10 +6,6 @@ namespace Peak\Blueprint\Http;
 
 use Psr\Http\Message\ResponseInterface;
 
-/**
- * Interface ResponseEmitter
- * @package Peak\Blueprint\Http
- */
 interface ResponseEmitter
 {
     /**

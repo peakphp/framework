@@ -4,10 +4,6 @@ declare(strict_types=1);
 
 namespace Peak\Blueprint\Common;
 
-/**
- * Interface ResourceResolver
- * @package Peak\Blueprint\Common
- */
 interface ResourceResolver
 {
     /**

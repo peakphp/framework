@@ -6,10 +6,6 @@ namespace Peak\Blueprint\Http;
 
 use Psr\Http\Message\ResponseInterface;
 
-/**
- * Interface ResponseMiddleware
- * @package Peak\Blueprint\Http
- */
 interface ResponseMiddleware
 {
     /**
