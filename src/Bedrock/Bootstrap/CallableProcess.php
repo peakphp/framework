@@ -6,10 +6,6 @@ namespace Peak\Bedrock\Bootstrap;
 
 use Peak\Blueprint\Common\Bootable;
 
-/**
- * Class CallableProcess
- * @package Peak\Bedrock\Bootstrap
- */
 class CallableProcess implements Bootable
 {
     /**
@@ -19,7 +15,6 @@ class CallableProcess implements Bootable
 
     /**
      * CallableProcess constructor.
-     *
      * @param callable $callable
      */
     public function __construct(callable $callable)
