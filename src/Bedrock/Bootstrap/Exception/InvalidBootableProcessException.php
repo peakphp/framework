@@ -4,10 +4,6 @@ declare(strict_types=1);
 
 namespace Peak\Bedrock\Bootstrap\Exception;
 
-/**
- * Class InvalidBootableProcessException
- * @package Peak\Bedrock\Bootstrap\Exception
- */
 class InvalidBootableProcessException extends \Exception
 {
     /**
