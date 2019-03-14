@@ -7,6 +7,7 @@ namespace Peak\Backpack\Bootstrap;
 use Peak\Blueprint\Common\Bootable;
 use Peak\Blueprint\Bedrock\Application;
 use Peak\Common\PhpIni;
+use \Exception;
 
 class PhpSettings implements Bootable
 {
@@ -33,6 +34,7 @@ class PhpSettings implements Bootable
 
     /**
      * Configure php setting on the fly via ini_set
+     * @throws Exception
      */
     public function boot()
     {
