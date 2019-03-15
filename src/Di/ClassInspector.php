@@ -9,10 +9,9 @@ use Peak\Di\Exception\MethodNotFoundException;
 use \Exception;
 use \ReflectionClass;
 
-/**
- * Class ClassInspector
- * @package Peak\Di
- */
+use function class_exists;
+use function is_string;
+
 class ClassInspector
 {
     /**

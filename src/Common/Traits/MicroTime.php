@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Peak\Common\Traits;
 
+use function microtime;
+use function round;
+
 trait MicroTime
 {
     /**

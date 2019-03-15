@@ -7,6 +7,14 @@ namespace Peak\View;
 use Peak\Common\Traits\Macro;
 use Peak\View\Exception\FileNotFoundException;
 
+use function array_key_exists;
+use function call_user_func_array;
+use function file_exists;
+use function is_array;
+use function ob_end_clean;
+use function ob_start;
+use function ob_get_clean;
+
 class View implements \Peak\Blueprint\View\View
 {
     use Macro;

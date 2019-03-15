@@ -10,6 +10,8 @@ use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use \Closure;
 
+use function call_user_func_array;
+
 class CallableMiddleware implements MiddlewareInterface
 {
     /**

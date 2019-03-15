@@ -7,10 +7,9 @@ namespace Peak\Config\Stream;
 use Peak\Blueprint\Config\Stream;
 use Peak\Config\FilesHandlers;
 
-/**
- * Class FileStream
- * @package Peak\Config\Stream
- */
+use function pathinfo;
+use function strtolower;
+
 class FileStream implements Stream
 {
     /**

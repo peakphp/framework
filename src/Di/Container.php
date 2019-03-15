@@ -13,10 +13,14 @@ use Psr\Container\NotFoundExceptionInterface;
 use \Closure;
 use \InvalidArgumentException;
 
-/**
- * Class Container
- * @package Peak\Di
- */
+use function array_search;
+use function call_user_func_array;
+use function class_implements;
+use function get_class;
+use function is_array;
+use function is_null;
+use function is_object;
+
 class Container implements ContainerInterface
 {
     /**

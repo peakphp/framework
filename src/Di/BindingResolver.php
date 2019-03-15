@@ -4,10 +4,6 @@ declare(strict_types=1);
 
 namespace Peak\Di;
 
-/**
- * Class BindingResolver
- * @package Peak\Di
- */
 class BindingResolver
 {
     /**

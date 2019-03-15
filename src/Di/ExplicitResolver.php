@@ -6,6 +6,10 @@ namespace Peak\Di;
 
 use \Closure;
 
+use function array_key_exists;
+use function is_array;
+use function is_object;
+
 class ExplicitResolver
 {
     /**

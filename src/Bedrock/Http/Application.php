@@ -16,6 +16,9 @@ use Peak\Blueprint\Http\ResponseEmitter;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
+use function array_merge;
+use function is_array;
+
 class Application extends AbstractApplication implements HttpApplication
 {
     /**

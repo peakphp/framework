@@ -10,6 +10,10 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
+use function preg_match;
+use function strtoupper;
+use function trim;
+
 class Route implements \Peak\Blueprint\Http\Route, Stack
 {
     /**

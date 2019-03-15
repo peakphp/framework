@@ -9,6 +9,20 @@ use Peak\Config\Exception\CachePathNotWritableException;
 use Peak\Config\Exception\CacheInvalidKeyException;
 use Psr\SimpleCache\CacheInterface;
 
+use function file_exists;
+use function file_get_contents;
+use function file_put_contents;
+use function fileatime;
+use function is_string;
+use function is_writable;
+use function pathinfo;
+use function preg_match;
+use function sha1;
+use function time;
+use function touch;
+use function unlink;
+use function unserialize;
+
 class FileCache implements CacheInterface
 {
     /**

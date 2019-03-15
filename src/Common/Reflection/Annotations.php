@@ -8,10 +8,14 @@ use \ReflectionClass;
 use \ReflectionMethod;
 use \ReflectionException;
 
-/**
- * Annotations
- * Parse DocBlock tags of classes and methods
- */
+use function array_merge;
+use function get_class;
+use function implode;
+use function is_array;
+use function is_object;
+use function preg_match_all;
+use function trim;
+
 class Annotations
 {
     /**

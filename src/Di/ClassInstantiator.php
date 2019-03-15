@@ -6,10 +6,6 @@ namespace Peak\Di;
 
 use \ReflectionClass;
 
-/**
- * Class ClassInstantiator
- * @package Peak\Di
- */
 class ClassInstantiator
 {
     /**

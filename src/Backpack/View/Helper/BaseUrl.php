@@ -6,10 +6,10 @@ namespace Peak\Backpack\View\Helper;
 
 use Peak\Blueprint\Bedrock\Application;
 
-/**
- * Class BaseUrl
- * @package Peak\Backpack\View\Helper
- */
+use function filter_var_array;
+use function str_ireplace;
+use function strtolower;
+
 class BaseUrl
 {
     /**

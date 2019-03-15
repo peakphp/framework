@@ -4,10 +4,6 @@ declare(strict_types=1);
 
 namespace Peak\View\Exception;
 
-/**
- * Class FileNotFoundException
- * @package Peak\View\Exception
- */
 class FileNotFoundException extends \Exception
 {
     /**

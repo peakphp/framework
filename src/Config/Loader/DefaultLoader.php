@@ -7,6 +7,9 @@ namespace Peak\Config\Loader;
 use Peak\Blueprint\Common\ResourceLoader;
 use Peak\Config\Exception\FileNotFoundException;
 
+use function file_exists;
+use function file_get_contents;
+
 /**
  * Class DefaultLoader
  * @package Peak\Config\Loader

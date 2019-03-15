@@ -13,6 +13,12 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
+use function current;
+use function is_callable;
+use function is_object;
+use function next;
+use function reset;
+
 class Stack implements \Peak\Blueprint\Http\Stack
 {
     /**

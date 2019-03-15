@@ -7,10 +7,9 @@ namespace Peak\Config\Processor;
 use Peak\Blueprint\Common\ResourceProcessor;
 use Peak\Config\Exception\ProcessorException;
 
-/**
- * Class ArrayProcessor
- * @package Peak\Config\Processor
- */
+use function is_array;
+use function gettype;
+
 class ArrayProcessor implements ResourceProcessor
 {
     /**

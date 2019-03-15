@@ -7,10 +7,9 @@ namespace Peak\Config\Processor;
 use Peak\Blueprint\Common\ResourceProcessor;
 use Peak\Config\Exception\ProcessorException;
 
-/**
- * Class EnvProcessor
- * @package Peak\Config\Processor
- */
+use function error_get_last;
+use function parse_ini_string;
+
 class EnvProcessor implements ResourceProcessor
 {
     /**

@@ -4,10 +4,6 @@ declare(strict_types=1);
 
 namespace Peak\Pipeline;
 
-/**
- * Interface ProcessorInterface
- * @package Peak\Pipelines
- */
 interface ProcessorInterface
 {
     /**

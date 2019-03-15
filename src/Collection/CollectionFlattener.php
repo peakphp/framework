@@ -5,8 +5,12 @@ declare(strict_types=1);
 namespace Peak\Collection;
 
 use Peak\Blueprint\Collection\Collection;
-
 use \Exception;
+
+use function array_merge;
+use function is_array;
+use function mb_strlen;
+use function substr;
 
 class CollectionFlattener
 {

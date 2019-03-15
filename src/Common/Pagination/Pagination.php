@@ -8,6 +8,12 @@ use IteratorAggregate;
 use ArrayIterator;
 use Exception;
 
+use function ceil;
+use function range;
+use function in_array;
+use function is_null;
+use function is_array;
+
 class Pagination implements IteratorAggregate
 {
 

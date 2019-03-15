@@ -6,6 +6,8 @@ namespace Peak\Common\Chrono;
 
 use Peak\Common\Traits\MicroTime;
 
+use function count;
+
 class Chrono
 {
     use MicroTime;

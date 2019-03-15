@@ -7,6 +7,12 @@ namespace Peak\Collection;
 use Peak\Blueprint\Collection\Dictionary;
 use \RuntimeException;
 
+use function array_key_exists;
+use function array_shift;
+use function count;
+use function explode;
+use function is_array;
+
 class DotNotationCollection extends Collection implements Dictionary
 {
     /**

@@ -9,6 +9,12 @@ use JsonSerializable;
 use Exception;
 use ArrayIterator;
 
+use function array_key_exists;
+use function count;
+use function json_encode;
+use function serialize;
+use function unserialize;
+
 class PropertiesBag implements Dictionary, JsonSerializable
 {
     /**

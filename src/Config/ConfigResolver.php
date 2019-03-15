@@ -18,10 +18,10 @@ use Peak\Config\Stream\DataStream;
 use Peak\Config\Stream\FileStream;
 use \stdClass;
 
-/**
- * Class ConfigResolver
- * @package Peak\Config
- */
+use function is_array;
+use function is_callable;
+use function is_string;
+
 class ConfigResolver implements ResourceResolver
 {
     /**

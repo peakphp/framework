@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Peak\Common;
 
+use function class_exists;
+
 class ClassFinder
 {
     /**

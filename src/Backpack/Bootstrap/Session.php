@@ -6,6 +6,15 @@ namespace Peak\Backpack\Bootstrap;
 
 use Peak\Blueprint\Bedrock\Application;
 use Peak\Blueprint\Common\Bootable;
+use \Exception;
+
+use function defined;
+use function php_sapi_name;
+use function session_name;
+use function session_save_path;
+use function session_set_save_handler;
+use function session_start;
+use function session_status;
 
 class Session implements Bootable
 {
@@ -31,7 +40,7 @@ class Session implements Bootable
     }
     /**
      * Setup and start session from app props
-     * @throws \Exception
+     * @throws Exception
      */
     public function boot()
     {
@@ -40,7 +49,7 @@ class Session implements Bootable
         }
 
         if (session_status() == PHP_SESSION_ACTIVE) {
-            throw new \Exception('Session is already started');
+            throw new Exception('Session is already started');
         }
 
         // save path

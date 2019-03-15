@@ -8,10 +8,8 @@ use Peak\Blueprint\Common\ResourceLoader;
 use Peak\Config\Exception\NoFileHandlersException;
 use Peak\Blueprint\Common\ResourceProcessor;
 
-/**
- * Class FilesHandlers
- * @package Peak\Config
- */
+use function array_key_exists;
+
 class FilesHandlers
 {
     /**

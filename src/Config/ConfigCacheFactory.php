@@ -8,10 +8,6 @@ use Peak\Blueprint\Config\ConfigFactory;
 use Peak\Blueprint\Config\Config as ConfigBlueprint;
 use Psr\SimpleCache\CacheInterface;
 
-/**
- * Class ConfigCacheFactory
- * @package Peak\Config
- */
 class ConfigCacheFactory implements ConfigFactory
 {
     /**

@@ -9,10 +9,10 @@ use Peak\Di\ArrayDefinition;
 use Peak\Di\ClassInstantiator;
 use Peak\Di\Container;
 
-/**
- * Class Prototype
- * @package Peak\Di\Binding
- */
+use function is_array;
+use function is_null;
+use function is_string;
+
 class Prototype extends AbstractBinding
 {
     /**

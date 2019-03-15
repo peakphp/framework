@@ -10,10 +10,12 @@ use Peak\Di\ClassInstantiator;
 use Peak\Di\Container;
 use Peak\Di\Exception\InvalidDefinitionException;
 
-/**
- * Class Singleton
- * @package Peak\Di\Binding
- */
+use function is_array;
+use function is_callable;
+use function is_null;
+use function is_object;
+use function is_string;
+
 class Singleton extends AbstractBinding
 {
     /**

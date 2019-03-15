@@ -7,6 +7,10 @@ use Peak\Blueprint\Common\Bootable;
 use Peak\Blueprint\Common\ResourceResolver;
 use Psr\Container\ContainerInterface;
 
+use function class_exists;
+use function is_callable;
+use function is_string;
+
 class BootableResolver implements ResourceResolver
 {
     /**

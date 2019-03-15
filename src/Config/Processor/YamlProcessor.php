@@ -6,13 +6,10 @@ namespace Peak\Config\Processor;
 
 use Peak\Blueprint\Common\ResourceProcessor;
 use Peak\Config\Exception\ProcessorException;
-use Symfony\Component\Yaml\Exception\ParseException;
 use Symfony\Component\Yaml\Yaml;
 
-/**
- * Class YamlProcessor
- * @package Peak\Config\Processor
- */
+use function class_exists;
+
 class YamlProcessor implements ResourceProcessor
 {
     /**

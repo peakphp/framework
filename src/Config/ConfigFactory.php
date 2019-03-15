@@ -8,10 +8,6 @@ use Peak\Blueprint\Config\Config as ConfigBlueprint;
 use Peak\Blueprint\Common\ResourceResolver;
 use Peak\Config\Exception\UnknownResourceException;
 
-/**
- * Class ConfigFactory
- * @package Peak\Config
- */
 class ConfigFactory implements \Peak\Blueprint\Config\ConfigFactory
 {
     /**

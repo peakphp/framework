@@ -7,6 +7,8 @@ namespace Peak\Config\Loader;
 use Peak\Blueprint\Common\ResourceLoader;
 use Peak\Config\Exception\FileNotFoundException;
 
+use function file_exists;
+
 /**
  * Class PhpLoader
  * @package Peak\Config\Loader

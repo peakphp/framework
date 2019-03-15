@@ -8,6 +8,12 @@ use Peak\Blueprint\Common\ResourceLoader;
 use Peak\Config\Exception\FileNotFoundException;
 use Peak\Config\Exception\LoaderException;
 
+use function fclose;
+use function fgets;
+use function file_exists;
+use function fopen;
+use function trim;
+
 /**
  * Class TextLoader
  * @package Peak\Config\Loader

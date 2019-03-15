@@ -4,10 +4,6 @@ declare(strict_types=1);
 
 namespace Peak\Pipeline;
 
-/**
- * Class Pipeline
- * @package Peak\Pipelines
- */
 class Pipeline
 {
     /**

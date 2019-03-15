@@ -7,10 +7,10 @@ namespace Peak\Config\Processor;
 use Peak\Blueprint\Common\ResourceProcessor;
 use Peak\Config\Exception\ProcessorException;
 
-/**
- * Class CallableProcessor
- * @package Peak\Config\Processor
- */
+use function gettype;
+use function is_array;
+use function is_callable;
+
 class CallableProcessor implements ResourceProcessor
 {
     /**

@@ -4,10 +4,6 @@ declare(strict_types=1);
 
 namespace Peak\Pipeline;
 
-/**
- * Class DefaultProcessor
- * @package Peak\Pipelines
- */
 class DefaultProcessor extends AbstractProcessor implements ProcessorInterface
 {
     /**

@@ -4,6 +4,16 @@ declare(strict_types=1);
 
 namespace Peak\Common;
 
+use function count;
+use function mb_strlen;
+use function min;
+use function preg_grep;
+use function preg_replace;
+use function preg_split;
+use function strlen;
+use function substr;
+use function wordwrap;
+
 class TextUtils
 {
     /**

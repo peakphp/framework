@@ -7,6 +7,12 @@ namespace Peak\Http\Response;
 use Peak\Blueprint\Http\ResponseEmitter;
 use Psr\Http\Message\ResponseInterface;
 
+use function header;
+use function headers_sent;
+use function sprintf;
+use function str_replace;
+use function ucwords;
+
 /**
  * Class Emitter - Based on Zend\Diactoros\Response\SapiEmitter
  */

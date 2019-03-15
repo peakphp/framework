@@ -6,10 +6,6 @@ namespace Peak\Http\Exception;
 
 use Peak\Blueprint\Http\Stack;
 
-/**
- * Class EmptyStackException
- * @package Peak\Http\Exception
- */
 class EmptyStackException extends \InvalidArgumentException
 {
     /**

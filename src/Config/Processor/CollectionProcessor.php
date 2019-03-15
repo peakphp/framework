@@ -8,10 +8,8 @@ use Peak\Blueprint\Common\ResourceProcessor;
 use Peak\Collection\Collection;
 use Peak\Config\Exception\ProcessorException;
 
-/**
- * Class CollectionProcessor
- * @package Peak\Config\Processor
- */
+use function gettype;
+
 class CollectionProcessor implements ResourceProcessor
 {
 

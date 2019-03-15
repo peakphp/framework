@@ -2,10 +2,10 @@
 
 namespace Peak\Common\Traits;
 
-/**
- * Trait UpdateToCamelCase
- * @package Peak\Common\Traits
- */
+use function lcfirst;
+use function str_replace;
+use function ucwords;
+
 trait UpdateToCamelCase
 {
     /**

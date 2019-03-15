@@ -7,10 +7,10 @@ namespace Peak\Config\Processor;
 use Peak\Blueprint\Common\ResourceProcessor;
 use SimpleXMLElement;
 
-/**
- * Class XmlProcessor
- * @package Peak\Config\Processor
- */
+use function simplexml_load_string;
+use function json_decode;
+use function json_encode;
+
 class XmlProcessor implements ResourceProcessor
 {
     /**

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Peak\View;
 
+use function is_array;
+
 class Presentation
 {
     /**

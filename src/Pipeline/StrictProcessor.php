@@ -6,10 +6,8 @@ namespace Peak\Pipeline;
 
 use Psr\Container\ContainerInterface;
 
-/**
- * Class StrictProcessor
- * @package Peak\Pipelines
- */
+use function call_user_func;
+
 class StrictProcessor extends AbstractProcessor implements ProcessorInterface
 {
     /**

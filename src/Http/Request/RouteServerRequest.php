@@ -8,6 +8,8 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\StreamInterface;
 use Psr\Http\Message\UriInterface;
 
+use function gettype;
+
 class RouteServerRequest implements ServerRequestInterface
 {
     /**

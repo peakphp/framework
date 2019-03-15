@@ -15,6 +15,10 @@ use Psr\Container\ContainerInterface;
 use \Closure;
 use \Exception;
 
+use function is_array;
+use function is_callable;
+use function trigger_error;
+
 class AppBuilder
 {
     /**

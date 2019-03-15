@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Peak\Common\Traits;
 
+use function array_key_exists;
+use function is_array;
+use function is_numeric;
+
 trait ArrayMergeRecursiveDistinct
 {
     /**

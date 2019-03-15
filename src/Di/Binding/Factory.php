@@ -7,10 +7,9 @@ namespace Peak\Di\Binding;
 use Peak\Di\AbstractBinding;
 use Peak\Di\Container;
 
-/**
- * Class Factory
- * @package Peak\Di\Binding
- */
+use function is_callable;
+use function is_null;
+
 class Factory extends AbstractBinding
 {
     /**

@@ -4,10 +4,6 @@ declare(strict_types=1);
 
 namespace Peak\View\Exception;
 
-/**
- * Class InvalidHelperException
- * @package Peak\View\Exception
- */
 class InvalidHelperException extends \Exception
 {
     /**

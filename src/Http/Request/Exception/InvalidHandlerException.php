@@ -7,6 +7,10 @@ namespace Peak\Http\Request\Exception;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 
+use function get_class;
+use function is_object;
+use function is_string;
+
 class InvalidHandlerException extends \InvalidArgumentException
 {
     /**

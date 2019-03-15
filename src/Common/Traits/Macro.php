@@ -5,10 +5,9 @@ namespace Peak\Common\Traits;
 use \Closure;
 use \RuntimeException;
 
-/**
- * Trait Macro
- * @package Peak\Common\Traits
- */
+use function call_user_func_array;
+use function get_class;
+
 trait Macro
 {
     /**

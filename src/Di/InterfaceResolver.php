@@ -8,10 +8,9 @@ use Peak\Di\Exception\AmbiguousResolutionException;
 use Peak\Di\Exception\InterfaceNotFoundException;
 use Peak\Di\Exception\NotFoundException;
 
-/**
- * Class InterfaceResolver
- * @package Peak\Di
- */
+use function array_key_exists;
+use function is_array;
+
 class InterfaceResolver
 {
     /**

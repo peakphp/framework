@@ -7,6 +7,8 @@ namespace Peak\Di\Exception;
 use Psr\Container\ContainerExceptionInterface;
 use \Exception;
 
+use function count;
+
 class AmbiguousResolutionException extends Exception implements ContainerExceptionInterface
 {
     /**

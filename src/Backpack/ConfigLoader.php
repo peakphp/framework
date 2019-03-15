@@ -11,10 +11,8 @@ use Peak\Config\Cache\FileCache;
 use Peak\Config\ConfigCacheFactory;
 use Psr\SimpleCache\CacheInterface;
 
-/**
- * Class ConfigLoader
- * @package Peak\Backpack
- */
+use function trigger_error;
+
 class ConfigLoader implements ResourceLoader
 {
     /**

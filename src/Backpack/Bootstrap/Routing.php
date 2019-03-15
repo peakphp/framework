@@ -7,10 +7,8 @@ namespace Peak\Backpack\Bootstrap;
 use Peak\Bedrock\Http\Application;
 use Peak\Blueprint\Common\Bootable;
 
-/**
- * Class Routing
- * @package Peak\Backpack\Bedrock\Bootstrap
- */
+use function is_array;
+
 class Routing implements Bootable
 {
     /**

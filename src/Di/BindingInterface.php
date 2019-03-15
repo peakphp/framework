@@ -4,10 +4,6 @@ declare(strict_types=1);
 
 namespace Peak\Di;
 
-/**
- * Interface BindingInterface
- * @package Peak\Di
- */
 interface BindingInterface
 {
     /**

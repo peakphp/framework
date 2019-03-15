@@ -7,10 +7,6 @@ namespace Peak\Config\Stream;
 use Peak\Blueprint\Common\ResourceProcessor;
 use Peak\Blueprint\Config\Stream;
 
-/**
- * Class DataStream
- * @package Peak\Config\Stream
- */
 class DataStream implements Stream
 {
     /**

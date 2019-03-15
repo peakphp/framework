@@ -4,6 +4,13 @@ declare(strict_types=1);
 
 namespace Peak\Http\Request;
 
+use function array_keys;
+use function array_values;
+use function preg_replace;
+use function str_replace;
+use function strpos;
+use function substr;
+
 class RouteExpression
 {
     /**

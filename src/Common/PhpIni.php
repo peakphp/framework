@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Peak\Common;
 
+use function ini_set;
+use function is_array;
+use function print_r;
+
 class PhpIni
 {
     /**

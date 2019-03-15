@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace Peak\Di;
 
-/**
- * Class ArrayDefinition
- * @package Peak\Di
- */
+use function array_shift;
+use function class_exists;
+use function is_array;
+use function is_callable;
+use function is_object;
+
 class ArrayDefinition
 {
     /**

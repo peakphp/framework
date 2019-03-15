@@ -8,6 +8,16 @@ use \ArrayIterator;
 use \IteratorAggregate;
 use \Exception;
 
+use function array_key_exists;
+use function get_class;
+use function get_object_vars;
+use function gettype;
+use function implode;
+use function in_array;
+use function is_array;
+use function is_object;
+use function strtolower;
+
 abstract class AbstractStructure implements IteratorAggregate
 {
     /**

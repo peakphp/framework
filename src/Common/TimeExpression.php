@@ -8,6 +8,22 @@ use DateInterval;
 use DateTime;
 use Exception;
 
+use function array_key_exists;
+use function array_keys;
+use function array_reverse;
+use function count;
+use function fmod;
+use function implode;
+use function in_array;
+use function is_numeric;
+use function trim;
+use function preg_match_all;
+use function round;
+use function sprintf;
+use function strlen;
+use function strtoupper;
+use function substr;
+
 /**
  * TimeExpression
  *
@@ -322,6 +338,7 @@ class TimeExpression
 
     /**
      * Decode a DateInterval Interval spec format
+     * @throws Exception
      */
     protected function decodeIntervalSpec(): void
     {

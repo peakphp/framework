@@ -11,6 +11,11 @@ use Peak\Di\Exception\NotFoundException;
 use \Exception;
 use \InvalidArgumentException;
 
+use function array_key_exists;
+use function count;
+use function interface_exists;
+use function is_array;
+
 class ClassResolver
 {
     /**

@@ -9,10 +9,13 @@ use Peak\Pipeline\Exception\MissingPipeInterfaceException;
 use Psr\Container\ContainerInterface;
 use \Closure;
 
-/**
- * Class AbstractProcessor
- * @package Peak\Pipelines
- */
+use function call_user_func;
+use function class_exists;
+use function get_class;
+use function is_callable;
+use function is_object;
+use function is_string;
+
 abstract class AbstractProcessor
 {
     /**

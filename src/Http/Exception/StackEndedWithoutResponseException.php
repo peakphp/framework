@@ -6,10 +6,6 @@ namespace Peak\Http\Exception;
 
 use Peak\Blueprint\Http\Stack;
 
-/**
- * Class StackEndedWithoutResponseException
- * @package Peak\Http\Exception
- */
 class StackEndedWithoutResponseException extends \LogicException
 {
     /**

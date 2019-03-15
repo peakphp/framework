@@ -7,10 +7,10 @@ namespace Peak\Config\Processor;
 use Peak\Blueprint\Common\ResourceProcessor;
 use Peak\Config\Exception\ProcessorException;
 
-/**
- * Class StdClassProcessor
- * @package Peak\Config\Processor
- */
+use function gettype;
+use function json_decode;
+use function json_encode;
+
 class StdClassProcessor implements ResourceProcessor
 {
     /**

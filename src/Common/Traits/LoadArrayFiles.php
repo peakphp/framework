@@ -6,6 +6,9 @@ namespace Peak\Common\Traits;
 
 use \Exception;
 
+use function is_array;
+use function file_exists;
+
 trait LoadArrayFiles
 {
     /**

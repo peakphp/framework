@@ -8,10 +8,14 @@ use Peak\Bedrock\Bootstrap\BootableResolver;
 use Peak\Blueprint\Bedrock\Application;
 use Peak\Blueprint\Common\Bootable;
 
-/**
- * Class AbstractBootstrapper
- * @package Peak\Bedrock\Application
- */
+use function get_class;
+use function get_class_methods;
+use function method_exists;
+use function strlen;
+use function strtolower;
+use function substr;
+use function ucfirst;
+
 abstract class AbstractBootstrapper implements Bootable
 {
     /**

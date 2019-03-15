@@ -7,10 +7,6 @@ namespace Peak\Config\Stream;
 use Peak\Blueprint\Config\Config;
 use Peak\Blueprint\Config\Stream;
 
-/**
- * Class ConfigStream
- * @package Peak\Config\Stream
- */
 class ConfigStream implements Stream
 {
     /**
