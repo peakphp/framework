@@ -13,10 +13,10 @@ class ImmutableException extends \Exception
     /**
      * ImmutableException constructor.
      *
-     * @param string $type
+     * @param string $action
      */
-    public function __construct(string $type)
+    public function __construct(string $action)
     {
-        parent::__construct('properties of immutable object cannot be '.$type);
+        parent::__construct('properties of immutable object cannot be '.$action);
     }
 }
