@@ -51,7 +51,7 @@ class ViewTest extends TestCase
     public function testAddMacro()
     {
         $view = new View(['name' => 'foobar'], $this->createMock(Presentation::class));
-        $view->addMacro('macro1', function() {
+        $view->setMacro('macro1', function() {
             return $this->name;
         });
         $this->assertTrue($view->hasMacro('macro1'));

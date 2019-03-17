@@ -7,7 +7,7 @@ class MacroTest extends TestCase
     public function testAddMacro()
     {
         $a = new MacroTestA();
-        $a->addMacro('myFunc', function() {
+        $a->setMacro('myFunc', function() {
             return $this->name;
         });
         $this->assertTrue($a->myFunc() === 'bob');
@@ -16,7 +16,7 @@ class MacroTest extends TestCase
     public function testHasMacro()
     {
         $a = new MacroTestA();
-        $a->addMacro('myFunc', function() {
+        $a->setMacro('myFunc', function() {
             return $this->name;
         });
         $this->assertTrue($a->hasMacro('myFunc'));
@@ -29,7 +29,7 @@ class MacroTest extends TestCase
     public function testUnknownMacro()
     {
         $a = new MacroTestA();
-        $a->addMacro('myFunc', function() {
+        $a->setMacro('myFunc', function() {
             return $this->name;
         });
         $this->assertTrue($a->myFunc2() === 'bob');

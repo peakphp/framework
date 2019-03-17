@@ -9,7 +9,7 @@ use \Peak\Http\Request\HandlerResolver;
 use \Peak\Di\Container;
 use \Psr\Container\ContainerInterface;
 
-require FIXTURES_PATH . '/application/CustomKernel.php';
+require_once FIXTURES_PATH . '/application/CustomKernel.php';
 
 class AppBuilderTest extends TestCase
 {
