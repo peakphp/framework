@@ -20,7 +20,7 @@ trait Macro
      * @param Closure $macroCallable
      * @return $this
      */
-    public function addMacro(string $name, Closure $macroCallable)
+    public function setMacro(string $name, Closure $macroCallable)
     {
         $this->macros[$name] = Closure::bind($macroCallable, $this, get_class());
         return $this;
