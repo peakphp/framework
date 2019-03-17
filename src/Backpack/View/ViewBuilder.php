@@ -108,12 +108,15 @@ class ViewBuilder
 
     /**
      * @return View
-     * @throws \Peak\Di\Exception\ClassDefinitionNotFoundException
      * @throws \Peak\View\Exception\InvalidHelperException
-     * @throws \ReflectionException
+     * @throws \Exception
      */
     public function build(): View
     {
+        if (!isset($this->presentation)) {
+            throw new \Exception('A presentation is required in order to create a view');
+        }
+
         $view = new View($this->vars, $this->presentation);
 
         foreach ($this->helpers as $helperName => $helper) {
@@ -126,7 +129,7 @@ class ViewBuilder
         $view->setHelpers($this->helpers);
 
         foreach ($this->macros as $macroName => $macro) {
-            $view->addMacro($macroName, $macro);
+            $view->setMacro($macroName, $macro);
         }
 
         return $view;
