@@ -4,6 +4,8 @@ Release date: ?
 
  - Http\Request\Exception\InvalidHandlerException return a more meaningful error message
  - updated namespace for functions
+ - Backpack\View\ViewBuilder will throw an exception if Presentation is missing when building the view
+ - renamed addMacro to setMacro in Common\Traits\Macro for consistency
 
 VERSION 4.0.0-BETA5
 -----------
