@@ -13,12 +13,9 @@
 
 This branch is a "work in progress" of version 4.0 which include drastic change of the core and overall operation of the framework.
 
-||||
-| --- | --- | --- |
-| Latest | [4.0.0-BETA5](https://github.com/peakphp/framework/releases/tag/4.0.0-BETA5) | [changelog](https://github.com/peakphp/framework/blob/4.0.0-BETA5/CHANGELOG.md) |
-| --- | --- | --- |
-| 4.0.0-RC1 | not yet |
-| 4.0.0-BETA5 | 2019-02-20 |
+| 4.0.0-RC1 (master) | in dev  |
+| --- | --- |
+| [4.0.0-BETA5](https://github.com/peakphp/framework/releases/tag/4.0.0-BETA5) | 2019-02-20<br>([changelog](https://github.com/peakphp/framework/blob/4.0.0-BETA5/CHANGELOG.md)) |
 | 4.0.0-BETA4 | 2019-02-14 |
 | 4.0.0-BETA3 | 2019-02-12 |
 | 4.0.0-BETA2 | 2019-02-05 |
