@@ -25,5 +25,29 @@ class RequestTest extends TestCase
             ->method('getMethod')
             ->will($this->returnValue('GET'));
         $this->assertTrue(Request::isGet($request));
+
+        $request = $this->createServerRequest();
+        $request
+            ->method('getMethod')
+            ->will($this->returnValue('POST'));
+        $this->assertTrue(Request::isPost($request));
+
+        $request = $this->createServerRequest();
+        $request
+            ->method('getMethod')
+            ->will($this->returnValue('PUT'));
+        $this->assertTrue(Request::isPut($request));
+
+        $request = $this->createServerRequest();
+        $request
+            ->method('getMethod')
+            ->will($this->returnValue('PATCH'));
+        $this->assertTrue(Request::isPatch($request));
+
+        $request = $this->createServerRequest();
+        $request
+            ->method('getMethod')
+            ->will($this->returnValue('DELETE'));
+        $this->assertTrue(Request::isDelete($request));
     }
 }
