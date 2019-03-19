@@ -7,6 +7,7 @@ Release date: ?
  - Backpack\View\ViewBuilder will throw an exception if Presentation is missing when building the view
  - renamed addMacro to setMacro in Common\Traits\Macro for consistency
  - updated project to phpunit 8.x
+ - moved Backpack\View\Helper\BaseUrl to View\Helper\BaseUrl
 
 VERSION 4.0.0-BETA5
 -----------
