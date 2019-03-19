@@ -32,11 +32,9 @@ class ViewBuilderTest extends TestCase
         $this->assertInstanceOf(View::class, $view);
     }
 
-    /**
-     * @expectedException \Exception
-     */
     public function testBuildPresentationException()
     {
+        $this->expectException(\Exception::class);
         $viewBuilder = new ViewBuilder();
         $viewBuilder->build();
     }

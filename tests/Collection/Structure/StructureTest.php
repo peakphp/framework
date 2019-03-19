@@ -23,20 +23,16 @@ class StructureTest extends TestCase
         $this->assertTrue($entity->toArray() === ['id' => null, 'date' => null, 'obj' => null]);
     }
 
-    /**
-     * @expectedException \Exception
-     */
     public function testTypeError()
     {
+        $this->expectException(\Exception::class);
         $entity = new MyStructure1();
         $entity->id = 'test';
     }
 
-    /**
-     * @expectedException \Exception
-     */
     public function testGetError()
     {
+        $this->expectException(\Exception::class);
         $entity = new MyStructure1();
         $test = $entity->foobar;
     }

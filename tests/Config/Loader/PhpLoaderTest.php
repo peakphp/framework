@@ -6,11 +6,9 @@ use Peak\Config\Loader\PhpLoader ;
 
 class PhpLoaderTest extends TestCase
 {
-    /**
-     * @expectedException \Peak\Config\Exception\FileNotFoundException
-     */
     public function testFileNotFoundException()
     {
+        $this->expectException(\Peak\Config\Exception\FileNotFoundException::class);
         $callableProcessor = new PhpLoader();
         $callableProcessor->load('unknownfile');
     }

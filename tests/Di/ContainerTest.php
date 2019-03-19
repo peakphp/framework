@@ -261,11 +261,9 @@ class ContainerTest extends TestCase
 
     }
 
-    /**
-     * @expectedException \Peak\Di\Exception\AmbiguousResolutionException
-     */
     function testCreateInstanceWithInterfaceException()
     {
+        $this->expectException(\Peak\Di\Exception\AmbiguousResolutionException::class);
         $container = new Container();
 
         //both implement the same interface
@@ -277,11 +275,9 @@ class ContainerTest extends TestCase
         $testdi = $container->create('TestDi6');
     }
 
-    /**
-     * @expectedException \Exception
-     */
     function testException()
     {
+        $this->expectException(\Exception::class);
         $container = new Container();
         $testdi = $container->create('iDontExists', [
             'value',
@@ -290,20 +286,16 @@ class ContainerTest extends TestCase
         ]);
     }
 
-    /**
-     * @expectedException \Exception
-     */
     function testExceptionDependencies()
     {
+        $this->expectException(\Exception::class);
         $container = new Container();
         $testdi = $container->create('TestDi2');
     }
 
-    /**
-     * @expectedException \Exception
-     */
     function testGetHasInstance()
     {
+        $this->expectException(\Exception::class);
         $container = new Container();
         $container->set(new TestDi3());
 
@@ -375,14 +367,9 @@ class ContainerTest extends TestCase
         $this->assertTrue($result === $arguments[0]);
     }
 
-    /**
-     * Test call exception
-     */
-    /**
-     * @expectedException InvalidArgumentException
-     */
     function testMethodCallException()
     {
+        $this->expectException(\InvalidArgumentException::class);
         $container = new Container();
 
         $testdi = $container->create('TestDi1', [
@@ -466,21 +453,17 @@ class ContainerTest extends TestCase
         $this->assertTrue($testdi instanceof TestDi17);
     }
 
-    /**
-     * @expectedException \Psr\Container\NotFoundExceptionInterface
-     */
     function testGetWithAutowiringDisabled()
     {
+        $this->expectException(\Psr\Container\NotFoundExceptionInterface::class);
         $container = new Container();
         $container->disableAutoWiring();
         $testdi = $container->get(TestDi17::class);
     }
 
-    /**
-     * @expectedException \Exception
-     */
     public function testCreateException()
     {
+        $this->expectException(\Exception::class);
         $container = new Container();
         $container->enableAutoWiring();
         $container->disableAutoWiring();

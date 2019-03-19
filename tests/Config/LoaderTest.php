@@ -6,11 +6,9 @@ use \Peak\Config\Loader\TextLoader;
 
 class LoaderTest extends TestCase
 {
-    /**
-     * @expectedException \Peak\Config\Exception\FileNotFoundException
-     */
     public function testFileNotFoundException()
     {
+        $this->expectException(\Peak\Config\Exception\FileNotFoundException::class);
         $textLoader = new TextLoader();
         $textLoader->load('unknown.file');
     }

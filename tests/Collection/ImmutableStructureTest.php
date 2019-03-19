@@ -18,11 +18,9 @@ class ImmutableStructureTest extends TestCase
         $this->assertTrue($entity->date instanceof \DateTime);
     }
 
-    /**
-     * @expectedException \Exception
-     */
     public function testSet()
     {
+        $this->expectException(\Exception::class);
         $entity = new MyStructure2([
             'id' => 34,
             'date' => new \DateTime()

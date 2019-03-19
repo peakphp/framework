@@ -61,11 +61,9 @@ class BootstrapTest extends TestCase
         $this->assertTrue($bootstrap->boot());
     }
 
-    /**
-     * @expectedException \Peak\Bedrock\Bootstrap\Exception\InvalidBootableProcessException
-     */
     public function testInvalidBootableProcessException()
     {
+        $this->expectException(\Peak\Bedrock\Bootstrap\Exception\InvalidBootableProcessException::class);
         $bootstrap = new Bootstrap(['foobar']);
         $bootstrap->boot();
     }

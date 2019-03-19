@@ -6,11 +6,9 @@ use Peak\Config\Processor\CollectionProcessor;
 
 class CollectionProcessorTest extends TestCase
 {
-    /**
-     * @expectedException \Peak\Config\Exception\ProcessorException
-     */
     public function testException1()
     {
+        $this->expectException(\Peak\Config\Exception\ProcessorException::class);
         $callableProcessor = new CollectionProcessor();
         $callableProcessor->process([]);
     }

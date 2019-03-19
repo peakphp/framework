@@ -8,19 +8,15 @@ class FileCacheTest extends TestCase
 {
     private $cachePath = __DIR__.'/tmp';
 
-    /**
-     * @expectedException \Peak\Config\Exception\CachePathNotFoundException
-     */
     public function testCachePathNotFoundException()
     {
+        $this->expectException(\Peak\Config\Exception\CachePathNotFoundException::class);
         new FileCache('unknown/path/a/z/w');
     }
 
-    /**
-     * @expectedException \Peak\Config\Exception\CacheInvalidKeyException
-     */
     public function testCacheInvalidKeyException()
     {
+        $this->expectException(\Peak\Config\Exception\CacheInvalidKeyException::class);
         $fileCache = new FileCache($this->cachePath);
         $fileCache->get(array());
     }

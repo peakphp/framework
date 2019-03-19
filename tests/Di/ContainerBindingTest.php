@@ -54,21 +54,17 @@ class ContainerBindingTest extends TestCase
         $this->assertTrue($class instanceof A);
     }
 
-    /**
-     * @expectedException \Peak\Di\Exception\ClassDefinitionNotFoundException
-     */
     public function testExceptionWithCreate()
     {
+        $this->expectException(\Peak\Di\Exception\ClassDefinitionNotFoundException::class);
         $container = new Container();
         $container->disableAutoWiring();
         $class = $container->create(A::class);
     }
 
-    /**
-     * @expectedException \Psr\Container\NotFoundExceptionInterface
-     */
     public function testExceptionWithGet()
     {
+        $this->expectException(\Psr\Container\NotFoundExceptionInterface::class);
         $container = new Container();
         $container->disableAutoWiring();
         $class = $container->get(A::class);

@@ -111,11 +111,11 @@ class ConfigFactoryTest extends TestCase
     }
 
     /**
-     * @expectedException \Peak\Config\Exception\ProcessorException
      * @throws \Peak\Config\Exception\UnknownResourceException
      */
     public function testProcessorException()
     {
+        $this->expectException(\Peak\Config\Exception\ProcessorException::class);
         $configFactory = new ConfigFactory();
         $config = $configFactory->loadResources([
             FIXTURES_PATH.'/config/empty.php'
@@ -123,11 +123,11 @@ class ConfigFactoryTest extends TestCase
     }
 
     /**
-     * @expectedException \Peak\Config\Exception\UnknownResourceException
      * @throws \Peak\Config\Exception\UnknownResourceException
      */
     public function testUnknownResourceException()
     {
+        $this->expectException(\Peak\Config\Exception\UnknownResourceException::class);
         $configFactory = new ConfigFactory();
         $config = $configFactory->loadResources([
             new \PHPUnit\Util\Test()
@@ -151,11 +151,11 @@ class ConfigFactoryTest extends TestCase
     }
 
     /**
-     * @expectedException \Peak\Config\Exception\NoFileHandlersException
      * @throws \Peak\Config\Exception\UnknownResourceException
      */
     public function testNoFileHandlersException()
     {
+        $this->expectException(\Peak\Config\Exception\NoFileHandlersException::class);
         $configFactory = new ConfigFactory();
         $config = $configFactory->loadResources([
             FIXTURES_PATH.'/config/unknown.type',

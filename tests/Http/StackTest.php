@@ -9,11 +9,9 @@ require_once FIXTURES_PATH . '/application/MiddlewareA.php';
 
 class StackTest extends TestCase
 {
-    /**
-     * @expectedException \Peak\Http\Exception\EmptyStackException
-     */
     public function testCreateException()
     {
+        $this->expectException(\Peak\Http\Exception\EmptyStackException::class);
         new Stack([], $this->createMock(HandlerResolver::class));
     }
 
@@ -26,11 +24,9 @@ class StackTest extends TestCase
         }
     }
 
-    /**
-     * @expectedException \Peak\Http\Request\Exception\InvalidHandlerException
-     */
     public function testProcessException()
     {
+        $this->expectException(\Peak\Http\Request\Exception\InvalidHandlerException::class);
         $stack = new Stack([new \stdClass()], $this->createMock(HandlerResolver::class));
         $stack->handle($this->createMock(ServerRequestInterface::class));
     }
@@ -47,11 +43,9 @@ class StackTest extends TestCase
         }
     }
 
-    /**
-     * @expectedException \Peak\Http\Exception\StackEndedWithoutResponseException
-     */
     public function testEndWithoutResponse()
     {
+        $this->expectException(\Peak\Http\Exception\StackEndedWithoutResponseException::class);
         $stack = new Stack([new MiddlewareA()], $this->createMock(HandlerResolver::class));
         $stack->handle($this->createMock(ServerRequestInterface::class));
     }

@@ -74,11 +74,9 @@ class ApplicationTest extends TestCase
         $this->assertInstanceOf(ResponseInterface::class, $app->handle($request));
     }
 
-    /**
-     * @expectedException Peak\Http\Exception\EmptyStackException
-     */
     public function testEmptyStackRequest()
     {
+        $this->expectException(Peak\Http\Exception\EmptyStackException::class);
         // request
         $request = $this->createMock(ServerRequestInterface::class);
 
@@ -87,11 +85,9 @@ class ApplicationTest extends TestCase
         $this->assertInstanceOf(ResponseInterface::class, $returnedResponse);
     }
 
-    /**
-     * @expectedException Peak\Http\Exception\EmptyStackException
-     */
     public function testEmptyStackRequestWithReset()
     {
+        $this->expectException(Peak\Http\Exception\EmptyStackException::class);
         // request
         $request = $this->createMock(ServerRequestInterface::class);
         // request handler
@@ -178,21 +174,17 @@ class ApplicationTest extends TestCase
         $this->assertInstanceOf(Route::class, $route);
     }
 
-    /**
-     * @expectedException \Exception
-     */
     public function testGetPropOnNull()
     {
+        $this->expectException(Exception::class);
         $app = $this->createApp();
 
         $app->getProp('foo');
     }
 
-    /**
-     * @expectedException \Exception
-     */
     public function testHasPropOnNull()
     {
+        $this->expectException(Exception::class);
         $app = $this->createApp();
 
         $app->hasProp('foo');

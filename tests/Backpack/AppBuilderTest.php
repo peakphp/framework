@@ -110,11 +110,9 @@ class AppBuilderTest extends TestCase
         $this->assertTrue($app->hasProp('test'));
     }
 
-    /**
-     * @expectedException Exception
-     */
     public function testSetPropsException()
     {
+        $this->expectException(Exception::class);
         $app = (new AppBuilder())
             ->setProps('test')
             ->build();
@@ -131,11 +129,9 @@ class AppBuilderTest extends TestCase
         $this->assertTrue($app->test === 'foobar');
     }
 
-    /**
-     * @expectedException \PHPUnit\Framework\Error\Error
-     */
     public function testTriggerKernelError1()
     {
+        $this->expectException(\PHPUnit\Framework\Error\Error::class);
         $kernel = $this->createMock(Kernel::class);
 
         $app = (new AppBuilder())
@@ -144,11 +140,9 @@ class AppBuilderTest extends TestCase
             ->build();
     }
 
-    /**
-     * @expectedException \PHPUnit\Framework\Error\Error
-     */
     public function testTriggerKernelError2()
     {
+        $this->expectException(\PHPUnit\Framework\Error\Error::class);
         $kernel = $this->createMock(Kernel::class);
         $container = $this->createMock(Container::class);
         $app = (new AppBuilder())
@@ -157,11 +151,9 @@ class AppBuilderTest extends TestCase
             ->build();
     }
 
-    /**
-     * @expectedException \PHPUnit\Framework\Error\Error
-     */
     public function testTriggerKernelError3()
     {
+        $this->expectException(\PHPUnit\Framework\Error\Error::class);
         $kernel = $this->createMock(Kernel::class);
         $container = $this->createMock(Container::class);
         $app = (new AppBuilder())
@@ -186,11 +178,9 @@ class AppBuilderTest extends TestCase
         $this->assertFalse($app->getContainer()->has(get_class($app)));
     }
 
-    /**
-     * @expectedException Exception
-     */
     public function testAddToContainerAfterBuildException()
     {
+        $this->expectException(\Exception::class);
         $app = (new AppBuilder())
             ->setContainer($this->createMock(ContainerInterface::class))
             ->addToContainerAfterBuild()

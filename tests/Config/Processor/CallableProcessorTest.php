@@ -6,20 +6,16 @@ use Peak\Config\Processor\CallableProcessor ;
 
 class CallableProcessorTest extends TestCase
 {
-    /**
-     * @expectedException \Peak\Config\Exception\ProcessorException
-     */
     public function testException1()
     {
+        $this->expectException(\Peak\Config\Exception\ProcessorException::class);
         $callableProcessor = new CallableProcessor();
         $callableProcessor->process(array());
     }
 
-    /**
-     * @expectedException \Peak\Config\Exception\ProcessorException
-     */
     public function testException2()
     {
+        $this->expectException(\Peak\Config\Exception\ProcessorException::class);
         $callableProcessor = new CallableProcessor();
         $callableProcessor->process(function() {
             return null;

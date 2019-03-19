@@ -28,11 +28,10 @@ class PropertiesBagTest extends TestCase
         $this->assertFalse(isset($propertiesBag['foo']));
     }
 
-    /**
-     * @expectedException \Exception
-     */
+
     public function testException()
     {
+        $this->expectException(\Exception::class);
         $propertiesBag = new PropertiesBag(['foo' => 'bar']);
         $propertiesBag->test;
     }

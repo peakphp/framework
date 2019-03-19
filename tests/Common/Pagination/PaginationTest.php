@@ -6,13 +6,6 @@ use Peak\Common\Pagination\Pagination;
 
 class PaginationTest extends TestCase
 {
-	
-	/**
-	 * instantiate class for tests
-	 */
-	function setUp()
-	{		
-	}
 
     /**
      * @throws Exception

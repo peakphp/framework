@@ -23,11 +23,9 @@ class MacroTest extends TestCase
         $this->assertFalse($a->hasMacro('myFunc2'));
     }
 
-    /**
-     * @expectedException \RuntimeException
-     */
     public function testUnknownMacro()
     {
+        $this->expectException(\RuntimeException::class);
         $a = new MacroTestA();
         $a->setMacro('myFunc', function() {
             return $this->name;

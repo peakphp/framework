@@ -51,11 +51,9 @@ class HandlerResolverTest extends TestCase
         $this->assertInstanceOf(HandlerA::class, $handlerResolver->resolve(HandlerA::class));
     }
 
-    /**
-     * @expectedException \Peak\Http\Request\Exception\HandlerNotFoundException
-     */
     public function testResolverHandlerNotFoundException()
     {
+        $this->expectException(\Peak\Http\Request\Exception\HandlerNotFoundException::class);
         $handlerResolver = new HandlerResolver(null);
         $handlerResolver->resolve("UnknownClass");
     }
@@ -70,11 +68,9 @@ class HandlerResolverTest extends TestCase
         }
     }
 
-    /**
-     * @expectedException \Peak\Http\Request\Exception\UnresolvableHandlerException
-     */
     public function testResolverUnresolvableHandlerException()
     {
+        $this->expectException(\Peak\Http\Request\Exception\UnresolvableHandlerException::class);
         $handlerResolver = new HandlerResolver(null);
         $handlerResolver->resolve(array());
     }

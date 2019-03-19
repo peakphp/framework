@@ -6,11 +6,9 @@ use Peak\Config\Loader\DefaultLoader;
 
 class DefaultLoaderTest extends TestCase
 {
-    /**
-     * @expectedException \Peak\Config\Exception\FileNotFoundException
-     */
     public function testFileNotFoundException()
     {
+        $this->expectException(\Peak\Config\Exception\FileNotFoundException::class);
         $callableProcessor = new DefaultLoader();
         $callableProcessor->load('unknownfile');
     }

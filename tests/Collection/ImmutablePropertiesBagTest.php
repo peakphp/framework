@@ -6,47 +6,37 @@ use Peak\Collection\ImmutablePropertiesBag;
 
 class ImmutablePropertiesBagTest extends TestCase
 {
-    /**
-     * @expectedException \Exception
-     */
     public function testSetException()
     {
+        $this->expectException(\Exception::class);
         $propertiesBag = new ImmutablePropertiesBag(['foo' => 'bar']);
         $propertiesBag->foo = 'bar2';
     }
 
-    /**
-     * @expectedException \Exception
-     */
     public function testUnsetException()
     {
+        $this->expectException(\Peak\Collection\Exception\ImmutableException::class);
         $propertiesBag = new ImmutablePropertiesBag(['foo' => 'bar']);
         unset($propertiesBag->foo);
     }
 
-    /**
-     * @expectedException \Exception
-     */
     public function testOffsetSetException()
     {
+        $this->expectException(\Peak\Collection\Exception\ImmutableException::class);
         $propertiesBag = new ImmutablePropertiesBag(['foo' => 'bar']);
         $propertiesBag['foo'] = 'bar2';
     }
 
-    /**
-     * @expectedException \Exception
-     */
     public function testSetSetException()
     {
+        $this->expectException(\Peak\Collection\Exception\ImmutableException::class);
         $propertiesBag = new ImmutablePropertiesBag(['foo' => 'bar']);
         $propertiesBag->set('foo','bar2');
     }
 
-    /**
-     * @expectedException \Exception
-     */
     public function testOffsetUnsetException()
     {
+        $this->expectException(\Peak\Collection\Exception\ImmutableException::class);
         $propertiesBag = new ImmutablePropertiesBag(['foo' => 'bar']);
         unset($propertiesBag['foo']);
     }
