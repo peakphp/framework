@@ -12,4 +12,12 @@ class PhpIniTest extends TestCase
 
         $this->assertTrue(ini_get('memory_limit') === '129M');
     }
+
+    public function testStrictException()
+    {
+        $this->expectException(\Exception::class);
+        $phpIni = new \Peak\Common\PhpIni([
+            'a' => 'a'
+        ], true);
+    }
 }
