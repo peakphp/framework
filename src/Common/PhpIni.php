@@ -27,7 +27,7 @@ class PhpIni
                 $this->set($setting, $val, $strict);
             } else {
                 foreach ($val as $k => $v) {
-                    $this->set($setting, $val, $strict);
+                    $this->set($setting.'.'.$k, $v, $strict);
                 }
             }
         }
@@ -41,7 +41,7 @@ class PhpIni
      */
     private function set(string $option, $value, bool $strict = false)
     {
-        $result = ini_set($option, (string)$value);
+        $result = @ini_set($option, (string)$value);
         if ($strict && $result === false) {
             throw new \Exception('Fail to set php option '.$option.' to "'.print_r($value, true).'"');
         }
