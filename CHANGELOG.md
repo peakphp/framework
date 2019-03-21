@@ -10,6 +10,7 @@ Release date: ?
  - moved Backpack\View\Helper\BaseUrl to View\Helper\BaseUrl
  - fix bug where MethodNotFoundException was not created correctly in Di\ClassInspector
  - renamed method, fixed methods visibilities and refined the word detection in Common\Traits\UpdateToCamelCase
+ - fixed nested array settings key name in Common\PhpIni
 
 VERSION 4.0.0-BETA5
 -----------
