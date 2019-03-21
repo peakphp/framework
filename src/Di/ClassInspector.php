@@ -36,7 +36,7 @@ class ClassInspector
             if ($method === '__construct') {
                 return $dependencies;
             }
-            throw new MethodNotFoundException($class, $method);
+            throw new MethodNotFoundException($r->getName(), $method);
         }
 
         $rp = $r->getMethod($method)->getParameters();
