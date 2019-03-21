@@ -6,7 +6,6 @@ namespace Peak\Di;
 
 use Peak\Di\Exception\AmbiguousResolutionException;
 use Peak\Di\Exception\InterfaceNotFoundException;
-use Peak\Di\Exception\NotFoundException;
 
 use function array_key_exists;
 use function is_array;
@@ -14,13 +13,13 @@ use function is_array;
 class InterfaceResolver
 {
     /**
-     * @param mixed $interface
+     * @param $interface
      * @param Container $container
      * @param array $explicit
-     * @return null|object
+     * @return mixed|object
      * @throws AmbiguousResolutionException
      * @throws InterfaceNotFoundException
-     * @throws NotFoundException
+     * @throws \ReflectionException
      */
     public function resolve($interface, Container $container, $explicit = [])
     {
