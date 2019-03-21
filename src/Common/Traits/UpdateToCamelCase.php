@@ -12,11 +12,11 @@ trait UpdateToCamelCase
      * @param array $data
      * @return array
      */
-    private function updateArrayToCamelCase(array $data): array
+    protected function updateArrayToCamelCase(array $data): array
     {
         $newData = [];
         foreach ($data as $k => $v) {
-            $k = $this->updateToCamelCase($k);
+            $k = $this->updateStringToCamelCase($k);
             $newData[$k] = $v;
         }
         return $newData;
@@ -26,8 +26,8 @@ trait UpdateToCamelCase
      * @param string $string
      * @return string
      */
-    private function updateToCamelCase(string $text): string
+    protected function updateStringToCamelCase(string $text): string
     {
-        return str_replace('_','', lcfirst(ucwords($text, '_')));
+        return lcfirst(str_replace(['_', '-', ' '],'', lcfirst(ucwords(strtolower($text), '_- '))));
     }
 }
