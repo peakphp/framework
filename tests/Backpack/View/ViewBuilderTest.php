@@ -39,6 +39,15 @@ class ViewBuilderTest extends TestCase
         $viewBuilder->build();
     }
 
+    public function testHelperResolverContainer()
+    {
+        $viewBuilder = new ViewBuilder(new \Peak\View\HelperResolver(new \Peak\Di\Container()));
+        $viewBuilder->setHelper('myHelperFn', ViewHelperA::class);
+        $viewBuilder->setPresentation($this->createMock(Presentation::class));
+        $view = $viewBuilder->build();
+        $this->assertInstanceOf(View::class, $view);
+    }
+
     public function testHelperException()
     {
         $this->expectException(\Peak\View\Exception\InvalidHelperException::class);
