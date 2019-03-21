@@ -8,6 +8,7 @@ Release date: ?
  - renamed addMacro to setMacro in Common\Traits\Macro for consistency
  - updated project to phpunit 8.x
  - moved Backpack\View\Helper\BaseUrl to View\Helper\BaseUrl
+ - fix bug where MethodNotFoundException was not created correctly in Di\ClassInspector
 
 VERSION 4.0.0-BETA5
 -----------

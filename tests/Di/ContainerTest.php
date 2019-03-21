@@ -487,4 +487,20 @@ class ContainerTest extends TestCase
         $this->assertInstanceOf(TestDi16::class, $testId);
         $this->assertInstanceOf(TestDi16FromAbstract::class, $testId->abstractTestDi);
     }
+
+    public function testInvalidDefinition()
+    {
+        $this->expectException(\Peak\Di\Exception\InvalidDefinitionException::class);
+        $container = new Container();
+        $container->disableAutoWiring();
+        $container->bind('test', 21343);
+        $container->get('test');
+    }
+
+    public function testMethodNotFound()
+    {
+        $this->expectException(\Peak\Di\Exception\MethodNotFoundException::class);
+        $container = new Container();
+        $container->call([$container, 'unknownMethod']);
+    }
 }
