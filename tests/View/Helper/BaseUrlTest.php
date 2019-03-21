@@ -72,4 +72,18 @@ class BaseUrlTest extends TestCase
         $baseUrl->ignorePort(true);
         $this->assertTrue($baseUrl() === '//example.com');
     }
+
+    public function testUseForward()
+    {
+        $server = [
+            'SERVER_NAME' => 'example.com',
+            'HTTP_HOST' => 'example.net',
+            'HTTP_X_FORWARDED_HOST' => 'example.org'
+        ];
+
+        $baseUrl = new BaseUrl($server);
+        $baseUrl->useForwardedHostByDefault(true);
+
+        $this->assertTrue($baseUrl() === '//example.org');
+    }
 }
