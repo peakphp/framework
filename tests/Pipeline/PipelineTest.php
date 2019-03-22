@@ -194,24 +194,31 @@ class PipelineTest extends TestCase
         $this->assertTrue($payload == 1);
     }
 
+    public function testMissingPipeInterfaceException()
+    {
+        $this->expectException(MissingPipeInterfaceException::class);
+        $pipeline = new Pipeline([
+            'Pipe14'
+        ]);
+        $payload = $pipeline->process(1);
+        $this->assertTrue(true);
+    }
+
+    public function testMissingPipeInterfaceException2()
+    {
+        $this->expectException(MissingPipeInterfaceException::class);
+        $pipeline = new Pipeline([
+            new Pipe14
+        ]);
+        $payload = $pipeline->process(1);
+        $this->assertTrue(true);
+    }
+
     /**
      * Exceptions tests
      */
     public function testExceptions()
     {
-        $error1 = false;
-        try {
-            $pipeline = new Pipeline([
-                new Pipe14
-            ]);
-
-            $payload = $pipeline->process(1);
-        } catch(MissingPipeInterfaceException $e) {
-            $error1 = true;
-        }
-
-        $this->assertTrue($error1);
-
 
         $error2 = false;
         try {

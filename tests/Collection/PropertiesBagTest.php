@@ -52,5 +52,9 @@ class PropertiesBagTest extends TestCase
 
         $unserialized = unserialize($serialized);
         $this->assertInstanceOf(PropertiesBag::class, $unserialized);
+
+        $array = ['foo' => 'bar'];
+        $propertiesBag = new PropertiesBag($array);
+        $this->assertTrue(json_encode($array) === json_encode($propertiesBag));
     }
 }

@@ -231,16 +231,13 @@ class CollectionTest extends TestCase
      */
 	function testJsonSerialize()
     {
-        $collection = Collection::make([
+        $array = [
             'id' => 2135,
             'first_name' => 'John',
             'last_name' => 'Doe',
-        ]);
-
-        $json = $collection->jsonSerialize();
-
-        $this->asserttrue(is_string($json));
-        $this->assertTrue(is_array(json_decode($json, true)));
+        ];
+        $collection = Collection::make($array);
+        $this->assertTrue(json_encode($array) === json_encode($collection));
     }
 
     /**

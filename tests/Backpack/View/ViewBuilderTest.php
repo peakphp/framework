@@ -56,4 +56,18 @@ class ViewBuilderTest extends TestCase
         $viewBuilder->setPresentation($this->createMock(Presentation::class));
         $viewBuilder->build();
     }
+
+    public function testHelperExceptionGetHelper()
+    {
+        try {
+            $viewBuilder = new ViewBuilder();
+            $viewBuilder->setHelper('myHelperFn', 12222);
+            $viewBuilder->setPresentation($this->createMock(Presentation::class));
+            $viewBuilder->build();
+        } catch (\Peak\View\Exception\InvalidHelperException $e) {
+            $value = $e->getHelper();
+            $this->assertTrue($value == 12222);
+        }
+
+    }
 }

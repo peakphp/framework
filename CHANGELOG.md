@@ -11,6 +11,7 @@ Release date: ?
  - fix bug where MethodNotFoundException was not created correctly in Di\ClassInspector
  - renamed method, fixed methods visibilities and refined the word detection in Common\Traits\UpdateToCamelCase
  - fixed nested array settings key name in Common\PhpIni
+ - fixed wrong implementation of JsonSerializable in Collection\PropertiesBag and Collection\Collection
 
 VERSION 4.0.0-BETA5
 -----------

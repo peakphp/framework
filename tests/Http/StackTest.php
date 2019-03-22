@@ -50,6 +50,16 @@ class StackTest extends TestCase
         $stack->handle($this->createMock(ServerRequestInterface::class));
     }
 
+    public function testEndWithoutResponseGetStack()
+    {
+        $stack = new Stack([new MiddlewareA()], $this->createMock(HandlerResolver::class));
+        try {
+            $stack->handle($this->createMock(ServerRequestInterface::class));
+        } catch(\Peak\Http\Exception\StackEndedWithoutResponseException $e) {
+            $this->assertTrue($e->getStack() === $stack);
+        }
+    }
+
 
     public function testMultipleHandler()
     {
@@ -60,6 +70,43 @@ class StackTest extends TestCase
         $response = $stack->handle($request);
 
         $this->assertTrue(isset($response));
+    }
+
+    public function testGetParent()
+    {
+        $stack1 = new Stack([new HandlerA()], $this->createMock(HandlerResolver::class));
+        $stack2 = new Stack([new HandlerA()], $this->createMock(HandlerResolver::class));
+
+        $stack2->setParent($stack1);
+        $this->assertTrue($stack1 === $stack2->getParent());
+    }
+
+    public function testProcessChildStack()
+    {
+        $stack1 = new Stack([new HandlerA()], $this->createMock(HandlerResolver::class));
+        $stack2 = new Stack([$stack1], $this->createMock(HandlerResolver::class));
+
+        $response = $stack2->handle($this->createMock(ServerRequestInterface::class));
+        $this->assertTrue(true);
+    }
+
+    public function testProcessChildStack2()
+    {
+        $handler = new HandlerResolver(null);
+        $stack1 = new Stack([
+            new MiddlewareA()
+        ], $handler);
+        $stack2 = new Stack([
+            $stack1,
+            new MiddlewareA(),
+            function($req, $next) {
+                return $next->handle($req);
+            },
+            new HandlerA()
+        ],$handler);
+
+        $response = $stack2->handle($this->createMock(ServerRequestInterface::class));
+        $this->assertTrue(true);
     }
 
 }
