@@ -44,6 +44,16 @@ class DotNotationCollectionTest extends TestCase
         $jade = $dn->get('foo.jade.profile.new');
         $this->assertTrue(is_array($jade));
         $this->assertTrue($jade['test']['of'] === 'path');
+
+        $dn->set('', 'test');
+        $this->assertTrue($dn[0] === 'test');
+    }
+
+    function testSetException()
+    {
+        $this->expectException(\RuntimeException::class);
+        $dn = new DotNotationCollection($this->_array_test_1);
+        $dn->set('foo.bar.test', ['bob']);
     }
 
     function testHavePath()
