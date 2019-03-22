@@ -271,15 +271,11 @@ class Collection implements \Peak\Blueprint\Collection\Collection, JsonSerializa
     }
 
     /**
-     * Json serialize
-     *
-     * @param  integer $options Bitmask (see php.net json_encode)
-     * @param  integer $depth   Set the maximum depth. Must be greater than zero.
-     * @return string|false
+     * @return array|mixed
      */
-    public function jsonSerialize(int $options = 0, int $depth = 512)
+    public function jsonSerialize()
     {
-        return json_encode($this->items, $options, $depth);
+        return $this->items;
     }
 
     /**
