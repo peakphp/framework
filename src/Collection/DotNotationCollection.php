@@ -69,7 +69,7 @@ class DotNotationCollection extends Collection implements Dictionary
                 }
             }
         } else {
-            $this->items = $value;
+            $this->items = [$value];
         }
     }
 
