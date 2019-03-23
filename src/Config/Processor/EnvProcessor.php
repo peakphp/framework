@@ -13,6 +13,8 @@ use function parse_ini_string;
 class EnvProcessor implements ResourceProcessor
 {
     /**
+     * @param mixed $data
+     * @return array
      * @throws ProcessorException
      */
     public function process($data): array

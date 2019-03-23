@@ -9,7 +9,7 @@ class StdClassProcessorTest extends TestCase
     public function testException1()
     {
         $this->expectException(\Peak\Config\Exception\ProcessorException::class);
-        $callableProcessor = new StdClassProcessor();
-        $callableProcessor->process([]);
+        $processor = new StdClassProcessor();
+        $processor->process([]);
     }
 }

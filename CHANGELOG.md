@@ -14,6 +14,9 @@ Release date: ?
  - fixed wrong implementation of JsonSerializable in Collection\PropertiesBag and Collection\Collection
  - fixed setting empty key behavior in Common\DotNotationCollection
  - fixed unreachable call_user_func() in Collection\Collection:__call 
+ - added Config\Exception\ProcessorTypeException and Config\Processor\ConfigProcessor
+ - removed Config\Stream\ConfigStream
+ - fixed wrong condition order in Config\ConfigResolver
 
 VERSION 4.0.0-BETA5
 -----------

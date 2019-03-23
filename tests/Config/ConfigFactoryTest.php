@@ -8,6 +8,7 @@ use Peak\Config\ConfigFactory;
 use Peak\Config\Stream\DataStream;
 use Peak\Config\Stream\JsonStream;
 use Peak\Config\Processor\JsonProcessor;
+use Peak\Config\FilesHandlers;
 
 class ConfigFactoryTest extends TestCase
 {
@@ -17,6 +18,7 @@ class ConfigFactoryTest extends TestCase
     function testLoadConfig()
     {
         $configFactory = new ConfigFactory();
+        $configFactory->setFilesHandlers(new FilesHandlers(null));
         $config = $configFactory->loadResources([
             [
                 'foo' => 'bar',
@@ -80,6 +82,8 @@ class ConfigFactoryTest extends TestCase
             FIXTURES_PATH.'/config/cli.yml',
             $stdConf,
             FIXTURES_PATH.'/config/.env',
+            new Config(),
+            FIXTURES_PATH.'/config/config.xml',
         ]);
 
         $this->assertInstanceOf(Config::class, $config);
@@ -161,5 +165,4 @@ class ConfigFactoryTest extends TestCase
             FIXTURES_PATH.'/config/unknown.type',
         ]);
     }
-
 }
