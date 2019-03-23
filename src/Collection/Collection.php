@@ -93,7 +93,7 @@ class Collection implements \Peak\Blueprint\Collection\Collection, JsonSerializa
         if (is_callable('array_'.$func)) {
             return call_user_func('array_'.$func, $this->items, ...$argv);
         }
-        if (!is_callable($func) || substr($func, 0, 6) !== 'array_') {
+        if (!is_callable($func)) {
             throw new Exception(__CLASS__.': method ['.$func.'] is unknown');
         }
         return call_user_func($func, $this->items, ...$argv);
