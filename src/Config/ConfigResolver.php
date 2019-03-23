@@ -12,6 +12,7 @@ use Peak\Config\Exception\UnknownResourceException;
 use Peak\Config\Processor\ArrayProcessor;
 use Peak\Config\Processor\CallableProcessor;
 use Peak\Config\Processor\CollectionProcessor;
+use Peak\Config\Processor\ConfigProcessor;
 use Peak\Config\Processor\StdClassProcessor;
 use Peak\Config\Stream\ConfigStream;
 use Peak\Config\Stream\DataStream;
@@ -52,14 +53,14 @@ class ConfigResolver implements ResourceResolver
             return new DataStream($resource, new ArrayProcessor());
         } elseif (is_callable($resource)) {
             return new DataStream($resource, new CallableProcessor());
+        } elseif ($resource instanceof Config) {
+            return new DataStream($resource, new ConfigProcessor());
         } elseif ($resource instanceof Collection) {
             return new DataStream($resource, new CollectionProcessor());
         } elseif ($resource instanceof Stream) {
             return $resource;
         } elseif ($resource instanceof stdClass) {
             return new DataStream($resource, new StdClassProcessor());
-        } elseif ($resource instanceof Config) {
-            return new ConfigStream($resource);
         } elseif (is_string($resource)) {
             $filesHandlers = $this->filesHandlers;
             if (null === $filesHandlers) {
