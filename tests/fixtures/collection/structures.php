@@ -65,3 +65,13 @@ class MyStructure5 extends AbstractStructure
         ];
     }
 }
+
+class MyStructure6 extends AbstractStructure
+{
+    public function getStructure(): array
+    {
+        return [
+            'wrongDefinition' => 'foobar',
+        ];
+    }
+}

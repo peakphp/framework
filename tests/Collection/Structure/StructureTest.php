@@ -179,5 +179,46 @@ class StructureTest extends TestCase
         $this->assertTrue(is_null($entity->multipleTypes2));
     }
 
-}
+    /**
+     * @throws Exception
+     */
+    public function testSetException()
+    {
+        $this->expectException(Exception::class);
+        $entity = new MyStructure1([
+            'id' => 34,
+        ]);
+        $entity->name = 'bob';
+    }
 
+    /**
+     * @throws Exception
+     */
+    public function testSetException2()
+    {
+        $this->expectException(Exception::class);
+        $entity = new MyStructure6([
+            'wrongDefinition' => 'test',
+        ]);
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function testConstructException()
+    {
+        $this->expectException(Exception::class);
+        $entity = new MyStructure6('foobar');
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function testIterator()
+    {
+        $entity = new MyStructure1([
+            'id' => 34,
+        ]);
+        $this->assertInstanceOf(ArrayIterator::class, $entity->getIterator());
+    }
+}

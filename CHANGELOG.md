@@ -8,11 +8,12 @@ Release date: ?
  - renamed addMacro to setMacro in Common\Traits\Macro for consistency
  - updated project to phpunit 8.x
  - moved Backpack\View\Helper\BaseUrl to View\Helper\BaseUrl
- - fix bug where MethodNotFoundException was not created correctly in Di\ClassInspector
+ - fixed bug where MethodNotFoundException was not created correctly in Di\ClassInspector
  - renamed method, fixed methods visibilities and refined the word detection in Common\Traits\UpdateToCamelCase
  - fixed nested array settings key name in Common\PhpIni
  - fixed wrong implementation of JsonSerializable in Collection\PropertiesBag and Collection\Collection
  - fixed setting empty key behavior in Common\DotNotationCollection
+ - fixed unreachable call_user_func() in Collection\Collection:__call 
 
 VERSION 4.0.0-BETA5
 -----------

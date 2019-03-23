@@ -77,6 +77,9 @@ class CollectionTest extends TestCase
 		$this->assertFalse(isset($collection->name));
 		$this->assertTrue(isset($collection->nick));
 
+		$collection->name = 'Bob';
+        $this->assertTrue(isset($collection->name));
+
 		$collection[] = 'test';
 
 		$this->assertTrue(isset($collection[0]));
@@ -139,6 +142,9 @@ class CollectionTest extends TestCase
 		);
 		$this->assertTrue(count($columns) == 4);
 		$this->assertTrue($columns[1] === 'Sally');
+
+		$data = $collection->print_r(true);
+		$this->assertTrue(is_string($data));
 	}
 
     /**
@@ -226,6 +232,16 @@ class CollectionTest extends TestCase
 		$this->assertTrue($collection->id == 2135);
 	}
 
+	function testSerialize()
+    {
+        $collection = Collection::make([
+            'id' => 2135,
+        ]);
+        $serialized = serialize($collection);
+        $newColl = unserialize($serialized);
+        $this->assertInstanceOf(Collection::class, $newColl);
+    }
+
     /**
      * Test jsonSerialize()
      */
@@ -255,6 +271,18 @@ class CollectionTest extends TestCase
 
         $this->assertTrue(is_array($unrelated_array));
         $this->assertTrue($unrelated_array['a'] === 'test2');
+    }
+
+    public function testMerge2()
+    {
+        $collection = Collection::make([
+            'id' => 2135,
+            'first_name' => 'John',
+            'last_name' => 'Doe',
+        ]);
+
+        $collection->mergeRecursiveDistinct(['a' => 'test2']);
+        $this->assertTrue($collection['a'] === 'test2');
     }
 
     /**
