@@ -20,9 +20,15 @@ class YamlProcessor implements ResourceProcessor
     public function process($data): array
     {
         if (!class_exists(Yaml::class)) {
-            throw new ProcessorException(__CLASS__.' require symfony/yaml to work properly');
+            throw new ProcessorException(__CLASS__.' require PHP extension symfony/yaml component to work properly');
         }
 
-        return Yaml::parse($data) ?? [];
+        $yamlParsedData = Yaml::parse($data);
+
+        if ($yamlParsedData === false || !is_array($yamlParsedData)) {
+            throw new ProcessorException(__CLASS__.' fail to parse yaml data');
+        }
+
+        return $yamlParsedData;
     }
 }
