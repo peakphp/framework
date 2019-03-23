@@ -17,6 +17,7 @@ Release date: ?
  - added Config\Exception\ProcessorTypeException and Config\Processor\ConfigProcessor
  - removed Config\Stream\ConfigStream
  - fixed wrong condition order in Config\ConfigResolver
+ - updated Config\Processor\YamlProcessor to handle edge case where yaml parse return a string
 
 VERSION 4.0.0-BETA5
 -----------
