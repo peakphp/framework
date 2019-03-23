@@ -5,23 +5,22 @@ declare(strict_types=1);
 namespace Peak\Config\Processor;
 
 use Peak\Blueprint\Common\ResourceProcessor;
-use Peak\Config\Exception\ProcessorException;
+use Peak\Config\Exception\ProcessorTypeException;
 
 use function is_array;
-use function gettype;
 
 class ArrayProcessor implements ResourceProcessor
 {
     /**
-     * Array processor
-     * @throws ProcessorException
+     * @param mixed $data
+     * @return array
+     * @throws ProcessorTypeException
      */
     public function process($data): array
     {
         if (!is_array($data)) {
-            throw new ProcessorException(__CLASS__.' expects data to be an array. '.gettype($data).' given.');
+            throw new ProcessorTypeException(__CLASS__, 'array', $data);
         }
-
         return $data;
     }
 }
