@@ -132,6 +132,49 @@ class ContainerTest extends TestCase
         $this->assertTrue(isset($testdi->testdi->foobar));
     }
 
+    function testCreateInstanceWithInterfaceAndExplicitClosureTest()
+    {
+        $container = new Container();
+
+        //both implement the same interface (TestDiInterface)
+        $container->set(new TestDi7());
+        $container->set(new TestDi8());
+
+        $testdi = $container->create(
+            'TestDi6', //classname
+            [''], //arguments.... here none
+            function($container) {
+                return $container->get('TestDi8');
+            }
+        );
+
+        $this->assertInstanceOf(TestDi8::class, $testdi->testdi);
+    }
+
+    function testCreateInstanceWithInterfaceAndExplicitClosureTest2()
+    {
+        $container = new Container();
+
+        //both implement the same interface (TestDiInterface)
+        $container->set(new TestDi7());
+        $container->set(new TestDi8());
+
+        $testdi = $container->create(
+            'TestDi18', //classname
+            [''], //arguments.... here none
+            function($container, $needle) {
+                if ($needle === 'TestDiInterface') {
+                    return $container->get('TestDi8');
+                } elseif ($needle === 'TestDiInterface3') {
+                    return $container->get('TestDi3');
+                }
+            }
+        );
+
+        $this->assertInstanceOf(TestDi8::class, $testdi->testdi1);
+        $this->assertInstanceOf(TestDi3::class, $testdi->testdi2);
+    }
+
     /**
      * test new instance
      */  
@@ -158,7 +201,7 @@ class ContainerTest extends TestCase
                 ]
             ],
             ['TestDiInterface' => 'TestDi8'] //explicit declaration for interface
-        ); 
+        );
 
         $this->assertTrue($testdi->say === 'foobar10');
     }

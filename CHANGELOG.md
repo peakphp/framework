@@ -18,6 +18,7 @@ Release date: ?
  - removed Config\Stream\ConfigStream
  - fixed wrong condition order in Config\ConfigResolver
  - updated Config\Processor\YamlProcessor to handle edge case where yaml parse return a string
+ - added $needle parameter for Di\ExplicitResolver closure
 
 VERSION 4.0.0-BETA5
 -----------

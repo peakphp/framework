@@ -8,6 +8,8 @@ interface TestDiInterface2 {
     public function __construct(TestDi1 $testdi, array $args = []);
 }
 
+interface TestDiInterface3 {}
+
 class TestDi1
 {
     public $col;
@@ -25,7 +27,6 @@ class TestDi1
 
     function methodA(Collection $col, $arg1)
     {
-        //print_r($col);
         return $arg1;
     }
 }
@@ -35,7 +36,7 @@ class TestDi2
     function __construct(\I\Dont\Exists\Collection $col) {}
 }
 
-class TestDi3
+class TestDi3 implements TestDiInterface3
 {    
     function __construct() {}
 }
@@ -171,5 +172,18 @@ class TestDi17
     function __construct(Collection $collection)
     {
         $this->collection = $collection;
+    }
+}
+
+
+class TestDi18
+{
+    public $testdi1;
+    public $testdi2;
+
+    function __construct(TestDiInterface $di1, TestDiInterface3 $di2)
+    {
+        $this->testdi1 = $di1;
+        $this->testdi2 = $di2;
     }
 }
