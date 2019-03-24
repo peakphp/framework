@@ -214,10 +214,6 @@ class Container implements ContainerInterface
      */
     public function set(object $object, string $alias = null)
     {
-        if (!is_object($object)) {
-            throw new InvalidArgumentException(__CLASS__.': set() first argument must be an object.');
-        }
-
         $class = get_class($object);
         $this->instances[$class] = $object;
 
