@@ -18,7 +18,6 @@ use function call_user_func_array;
 use function class_implements;
 use function get_class;
 use function is_array;
-use function is_null;
 use function is_object;
 
 class Container implements ContainerInterface
@@ -102,7 +101,7 @@ class Container implements ContainerInterface
         // if false, don't use reflection, use $definitions binding instead to resolve a class
         if (!$this->auto_wiring) {
             $def = $this->getDefinition($class);
-            if (is_null($def)) {
+            if ($def === null) {
                 throw new ClassDefinitionNotFoundException($class);
             }
             return $this->binding_resolver->resolve(
@@ -169,7 +168,7 @@ class Container implements ContainerInterface
     public function resolve(string $definition, array $args = [])
     {
         $def = $this->getDefinition($definition);
-        if (is_null($def)) {
+        if ($def === null) {
             throw new ClassDefinitionNotFoundException($definition);
         }
 
