@@ -30,7 +30,7 @@ class ExplicitResolver
                 return $explicit[$needle];
             }
         } elseif ($explicit instanceof Closure) {
-            return $explicit($container);
+            return $explicit($container, $needle);
         }
         return null;
     }
