@@ -19,6 +19,8 @@ Release date: ?
  - fixed wrong condition order in Config\ConfigResolver
  - updated Config\Processor\YamlProcessor to handle edge case where yaml parse return a string
  - added $needle parameter for Di\ExplicitResolver closure
+ - removed useless verification since $definition is typed in constructor in Di\Binding\Factory
+ - removed useless verification since $object is in method typed in Di\Container::set()
 
 VERSION 4.0.0-BETA5
 -----------

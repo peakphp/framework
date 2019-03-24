@@ -546,4 +546,18 @@ class ContainerTest extends TestCase
         $container = new Container();
         $container->call([$container, 'unknownMethod']);
     }
+
+    public function testResolveDefinition()
+    {
+        $container = new Container();
+        $container->bind(TestDi3::class, new TestDi3());
+        $this->assertInstanceOf(TestDi3::class, $container->resolve(TestDi3::class));
+    }
+
+    public function testResolveDefinitionException()
+    {
+        $this->expectException(\Peak\Di\Exception\ClassDefinitionNotFoundException::class);
+        $container = new Container();
+        $container->resolve(TestDi1::class);
+    }
 }

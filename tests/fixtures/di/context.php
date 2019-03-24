@@ -3,9 +3,11 @@
 namespace Di;
 
 interface InterfaceA {}
+interface InterfaceAA extends InterfaceA {}
 interface InterfaceB {}
 
 class A implements InterfaceA {}
+class AA implements InterfaceAA {}
 class B implements InterfaceB {}
 class C {}
 

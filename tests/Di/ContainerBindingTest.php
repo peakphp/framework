@@ -4,7 +4,6 @@ require_once FIXTURES_PATH.'/di/context.php';
 
 use PHPUnit\Framework\TestCase;
 use Peak\Di\Container;
-use Peak\Di\Binding\Instance;
 use Peak\Di\Binding\Prototype;
 use Peak\Di\Binding\Factory;
 use Peak\Di\Binding\Singleton;
@@ -13,6 +12,7 @@ use Di\InterfaceA;
 use Di\InterfaceB;
 
 use Di\A;
+use Di\AA;
 use Di\B;
 use Di\C;
 use Di\W;
@@ -160,6 +160,38 @@ class ContainerBindingTest extends TestCase
     /**
      * Test complex array definition
      */
+    public function testArrayDefinition2()
+    {
+        $container = new Container();
+        $container->disableAutoWiring();
+
+        $container->bind(A::class, function() {
+            $a = new A;
+            $a->name = 'foobar';
+            return  $a;
+        });
+
+        // with arguments stored with the binding
+        $container->bind(Chest::class, [
+            Chest::class,
+            Arm::class => [
+                Arm::class,
+                A::class, // will use A::class previously definition
+                new stdClass(),
+            ],
+            'bar'
+        ]);
+
+        $chest = $container->create(Chest::class);
+        $this->assertTrue($chest instanceof Chest);
+        $this->assertInstanceOf(stdClass::class, $chest->arm->argv);
+        $this->assertTrue($chest->argv === 'bar');
+        $this->assertTrue($chest->arm->a->name === 'foobar');
+    }
+
+    /**
+     * Test complex array definition
+     */
     public function testArrayDefinitionWithPrototype()
     {
         $container = new Container();
@@ -268,10 +300,19 @@ class ContainerBindingTest extends TestCase
 
         $other_finger = $container->create(Finger::class);
         $this->assertTrue($other_finger->arg1 === 'foobar');
-
-
     }
 
+//    public function testBindSingleton3()
+//    {
+//        $container = new Container();
+//        $container->disableAutoWiring();
+//
+//        $container->bind(A::class, A::class);
+//        $container->bind(Finger::class, Finger::class);
+//
+//        $finger = $container->create(A::class);
+//
+//    }
 
     /**
      * Test bypassing definition binding
@@ -308,14 +349,56 @@ class ContainerBindingTest extends TestCase
         $container->disableAutoWiring();
 
         $container->bindFactory(Finger::class, function (Container $c, $args) {
-            return new Finger(new A, 'factory', 'bar');
+            return new Finger(new A, 'factory', $args[0] ?? 'bar');
         });
 
         $finger = $container->create(Finger::class, ['pass argument to closure']);
 
         $this->assertTrue($finger instanceof Finger);
         $this->assertTrue($finger->arg1 === 'factory');
+        $this->assertTrue($finger->arg2 === 'pass argument to closure');
+
+        $finger = $container->create(Finger::class);
+
+        $this->assertTrue($finger instanceof Finger);
+        $this->assertTrue($finger->arg1 === 'factory');
+        $this->assertTrue($finger->arg2 === 'bar');
+
+        $finger = $container->create(Finger::class, [], function() {
+            return new Finger(new A, 'explicit', 'factory');
+        });
+
+        $this->assertTrue($finger instanceof Finger);
+        $this->assertTrue($finger->arg1 === 'explicit');
+        $this->assertTrue($finger->arg2 === 'factory');
     }
+
+    public function testBindPrototypeException()
+    {
+        $this->expectException(Exception::class);
+        $container = new Container();
+        $container->disableAutoWiring();
+
+        $container->bindPrototype(Finger::class, null);
+        $finger = $container->create(Finger::class);
+    }
+
+//    public function testBindFactoryExplicit()
+//    {
+//        $container = new Container();
+//        $container->disableAutoWiring();
+//
+//        $container->bindFactory(Finger::class, function (Container $c, $args) {
+//            return new Finger(new A, 'factory', 'bar');
+//        });
+//
+//        $finger = $container->create(Finger::class, ['pass argument to closure'], function($container) {
+//            new Finger(new A, 'factory2', 'bar2');
+//        });
+//
+//        $this->assertTrue($finger instanceof Finger);
+//        $this->assertTrue($finger->arg1 === 'factory2');
+//    }
 
     /**
      * Test bypassing definition binding
