@@ -40,10 +40,6 @@ class Factory extends AbstractBinding
             $definition = $explicit;
         }
 
-        if (!is_callable($definition)) {
-            throw new \Exception(__CLASS__.': Definition for '.$this->name.' is not a Closure');
-        }
-
         return $definition($container, $args);
     }
 }
