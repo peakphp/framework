@@ -305,21 +305,21 @@ class Container implements ContainerInterface
      * @param string $name
      * @param string $class
      */
-    protected function addInterface(string $name, $class)
+    protected function addInterface(string $name, string $class)
     {
         if (!$this->hasInterface($name)) {
             $this->interfaces[$name] = $class;
-        } else {
-            $interface = $this->getInterface($name);
-            if (is_array($interface)) {
-                $interface[] = $class;
-                $this->interfaces[$name] = $interface;
-            } else {
-                $this->interfaces[$name] = [
-                    $this->interfaces[$name],
-                    $class
-                ];
-            }
+            return;
+        }
+        $interfaces = $this->getInterface($name);
+
+        if (!is_array($interfaces)) {
+            $interfaces = [$interfaces];
+        }
+
+        if (!in_array($class, $interfaces)) {
+            $interfaces[] = $class;
+            $this->interfaces[$name] = $interfaces;
         }
     }
 
@@ -362,7 +362,7 @@ class Container implements ContainerInterface
      * Set class definition
      *
      * @param string $name
-     * @param Closure $definition
+     * @param mixed $definition
      * @return $this
      */
     public function setDefinition(string $name, $definition)
@@ -406,6 +406,14 @@ class Container implements ContainerInterface
             return $this->definitions[$name];
         }
         return null;
+    }
+
+    /**
+     * @return array
+     */
+    public function getDefinitions(): array
+    {
+        return $this->definitions;
     }
 
     /**
