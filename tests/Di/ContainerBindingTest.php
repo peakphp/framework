@@ -356,17 +356,37 @@ class ContainerBindingTest extends TestCase
         $this->assertTrue($other_finger->arg1 === 'foobar');
     }
 
-//    public function testBindSingleton3()
-//    {
-//        $container = new Container();
-//        $container->disableAutoWiring();
-//
-//        $container->bind(A::class, A::class);
-//        $container->bind(Finger::class, Finger::class);
-//
-//        $finger = $container->create(A::class);
-//
-//    }
+    public function testBindSingleton3()
+    {
+        $container = new Container();
+        $container->disableAutoWiring();
+        $container->bind(Finger::class, [
+            Finger::class,
+            A::class,
+        ]);
+        $finger = $container->create(Finger::class, ['bar', 'foo']);
+        $this->assertInstanceOf(Finger::class, $finger);
+        $this->assertTrue($finger->arg1 === 'bar');
+        $this->assertTrue($finger->arg2 === 'foo');
+    }
+
+    public function testBindSingleton4()
+    {
+        $container = new Container();
+        $container->disableAutoWiring();
+        $container->bind(A::class, A::class);
+        $a = $container->create(A::class);
+        $this->assertInstanceOf(A::class, $a);
+    }
+
+    public function testBindSingletonRandomName()
+    {
+        $container = new Container();
+        $container->disableAutoWiring();
+        $container->bind('FooBar32', A::class);
+        $a = $container->create('FooBar32');
+        $this->assertInstanceOf(A::class, $a);
+    }
 
     /**
      * Test bypassing definition binding
