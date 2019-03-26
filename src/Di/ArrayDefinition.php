@@ -54,10 +54,10 @@ class ArrayDefinition
         foreach ($final_args as $index => $arg) {
             if (is_array($arg)) {
                 $final_args[$index] = $this->resolve($arg, $container);
+            } elseif (is_callable($arg)) {
+                $final_args[$index] = $arg($container);
             } elseif (is_object($arg)) {
                 $final_args[$index] = $arg;
-            } elseif (is_callable($index)) {
-                $final_args[$index] = $arg($container);
             } elseif (class_exists($arg) && $this->new_instances_only) {
                 $final_args[$index] = $this->instantiator->instantiate($arg);
             } elseif (class_exists($arg) && !$this->new_instances_only) {
