@@ -217,6 +217,32 @@ class ContainerBindingTest extends TestCase
         $this->assertTrue($chest->arm->a->name === 'foobar');
     }
 
+    public function testArrayDefinition4()
+    {
+        $container = new Container();
+        $container->disableAutoWiring();
+
+        $a = new A();
+        $a->name = 'foobar';
+
+        $container->set($a);
+
+        // with arguments stored with the binding
+        $container->bind(Chest::class, [
+            Chest::class,
+            function() use ($a) {
+                return new Arm($a, 'barvar');
+            },
+            'bar',
+        ]);
+
+        $chest = $container->create(Chest::class);
+        $this->assertTrue($chest instanceof Chest);
+        $this->assertTrue('barvar' === $chest->arm->argv);
+        $this->assertTrue($chest->argv === 'bar');
+        $this->assertTrue($chest->arm->a->name === 'foobar');
+    }
+
     /**
      * Test complex array definition
      */

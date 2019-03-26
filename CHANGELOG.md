@@ -21,6 +21,7 @@ Release date: ?
  - added $needle parameter for Di\ExplicitResolver closure
  - removed useless verification since $definition is typed in constructor in Di\Binding\Factory
  - removed useless verification since $object is in method typed in Di\Container::set()
+ - fixed wrong condition order in Di\ArrayDefinition
 
 VERSION 4.0.0-BETA5
 -----------
