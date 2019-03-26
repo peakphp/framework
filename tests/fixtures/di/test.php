@@ -187,3 +187,7 @@ class TestDi18
         $this->testdi2 = $di2;
     }
 }
+
+class TestDi19 implements TestDiInterface
+{
+}

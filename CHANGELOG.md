@@ -22,6 +22,8 @@ Release date: ?
  - removed useless verification since $definition is typed in constructor in Di\Binding\Factory
  - removed useless verification since $object is in method typed in Di\Container::set()
  - fixed wrong condition order in Di\ArrayDefinition
+ - added method getDefinitions() to Di\Container
+ - prevent duplicate interfaces in Di\Container::addInterface()
 
 VERSION 4.0.0-BETA5
 -----------

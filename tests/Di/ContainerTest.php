@@ -560,4 +560,26 @@ class ContainerTest extends TestCase
         $container = new Container();
         $container->resolve(TestDi1::class);
     }
+
+    public function testInterfaces()
+    {
+        $container = new Container();
+        $container->set(new TestDi7());
+        $container->set(new TestDi8());
+        $container->set(new TestDi7());
+        $this->assertTrue($container->getInterface('UnknownInterface') === null);
+    }
+
+    public function testSetDefinitions()
+    {
+        $container = new Container();
+        $container->disableAutoWiring();
+        $container->setDefinition(TestDi1::class, TestDi1::class);
+        $this->assertTrue($container->getDefinition(TestDi1::class) === TestDi1::class);
+        $container->setDefinitions([
+            TestDi1::class => TestDi1::class
+        ]);
+        $this->assertTrue($container->getDefinition(TestDi1::class) === TestDi1::class);
+        $this->assertTrue($container->getDefinitions() === [TestDi1::class => TestDi1::class]);
+    }
 }
