@@ -24,6 +24,7 @@ Release date: ?
  - fixed wrong condition order in Di\ArrayDefinition
  - added method getDefinitions() to Di\Container
  - prevent duplicate interfaces in Di\Container::addInterface()
+ - remove unused Di\Exception\NotFoundException class
 
 VERSION 4.0.0-BETA5
 -----------
