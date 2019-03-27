@@ -46,11 +46,10 @@ class Singleton extends AbstractBinding
      *
      * @param Container $container
      * @param array $args
-     * @param mixed $explicit
+     * @param null $explicit
      * @return mixed|object|null
      * @throws InvalidDefinitionException
      * @throws \Peak\Di\Exception\ClassDefinitionNotFoundException
-     * @throws \Peak\Di\Exception\NotFoundException
      * @throws \ReflectionException
      */
     public function resolve(Container $container, array $args = [], $explicit = null)
