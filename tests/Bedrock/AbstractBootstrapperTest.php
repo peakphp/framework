@@ -32,4 +32,16 @@ class AbstractBootstrapperTest extends TestCase
         $this->assertTrue(isset($_GET['BootstrapProcess']));
         $_GET = [];
     }
+
+    public function testNoContainer()
+    {
+        $container = $this->createMock(\Psr\Container\ContainerInterface::class);
+        $container->method('get')->willReturn(new BootstrapProcess());
+        $kernel = new Kernel('dev', $container);
+        $handlerResolver = $this->createMock(HandlerResolver::class);
+        $app = new Application($kernel, $handlerResolver);
+        $bootstrapper = new Bootstrapper($app);
+        $bootstrapper->boot();
+        $this->assertTrue($bootstrapper->i === 1);
+    }
 }
