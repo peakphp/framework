@@ -16,6 +16,7 @@ class BootstrapTest extends TestCase
 {
     public function testBootWithClassName()
     {
+        $_GET = [];
         $this->assertFalse(isset($_GET['BootstrapProcess']));
         $bootstrap = new Bootstrap([BootstrapProcess::class]);
         $this->assertTrue($bootstrap->boot());
@@ -26,6 +27,7 @@ class BootstrapTest extends TestCase
 
     public function testBootWithBootableInstance()
     {
+        $_GET = [];
         $this->assertFalse(isset($_GET['BootstrapProcess']));
         $bootstrap = new Bootstrap([new BootstrapProcess()]);
         $this->assertTrue($bootstrap->boot());
@@ -36,6 +38,7 @@ class BootstrapTest extends TestCase
 
     public function testBootWithClosure()
     {
+        $_GET = [];
         $this->assertFalse(isset($_GET['CallableTest']));
         $bootstrap = new Bootstrap([
             function() {

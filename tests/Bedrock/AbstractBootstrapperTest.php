@@ -42,6 +42,6 @@ class AbstractBootstrapperTest extends TestCase
         $app = new Application($kernel, $handlerResolver);
         $bootstrapper = new Bootstrapper($app);
         $bootstrapper->boot();
-        $this->assertTrue($bootstrapper->i === 1);
+        $this->assertTrue($bootstrapper->j == 1);
     }
 }
