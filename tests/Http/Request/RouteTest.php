@@ -156,6 +156,50 @@ class RouteTest extends TestCase
         $this->assertInstanceOf(ResponseInterface::class, $result);
     }
 
+    public function testSetGetParent()
+    {
+        $route = new Route(
+            'GET',
+            '/mypath',
+            $this->createMock(Stack::class)
+        );
+
+        $stack = $this->createMock(\Peak\Http\Stack::class);
+        $route->setParent($stack);
+        $this->assertInstanceOf(\Peak\Http\Stack::class, $route->getParent());
+    }
+
+
+    public function testProcessParent()
+    {
+        $route = new Route(
+            'GET',
+            '/mypath',
+            $this->createMock(Stack::class)
+        );
+
+        $stack = $this->createMock(\Peak\Http\Stack::class);
+        $route->setParent($stack);
+
+        $request = $this->createRequest('GET', '/mypath2');
+        $response = $route->handle($request);
+        $this->assertTrue(true);
+    }
+
+    public function testProcessNoResponseException()
+    {
+        $this->expectException(Peak\Http\Exception\StackEndedWithoutResponseException::class);
+        $route = new Route(
+            'GET',
+            '/mypath',
+            $this->createMock(Stack::class)
+        );
+
+
+        $request = $this->createRequest('GET', '/mypath2');
+        $response = $route->handle($request);
+    }
+
 
     private function createRequest($method, $path)
     {
