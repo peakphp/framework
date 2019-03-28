@@ -87,11 +87,7 @@ class Stack implements \Peak\Blueprint\Http\Stack
 
         // nextHandler is a stack
         if ($this->nextHandler instanceof \Peak\Blueprint\Http\Stack) {
-            $response = $this->handleStack($this->nextHandler, $request);
-            if ($response !== false) {
-                return $this->returnResponse($response);
-            }
-            $this->nextHandler = next($this->handlers);
+            return $this->returnResponse($this->handleStack($this->nextHandler, $request));
         }
 
         // no more handlers, look for parent
