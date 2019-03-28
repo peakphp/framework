@@ -6,6 +6,9 @@ use \Psr\Http\Message\ServerRequestInterface;
 use \Peak\Http\Request\HandlerResolver;
 
 require_once FIXTURES_PATH . '/application/MiddlewareA.php';
+require_once FIXTURES_PATH . '/application/HandlerA.php';
+require_once FIXTURES_PATH . '/application/HandlerB.php';
+require_once FIXTURES_PATH . '/application/HandlerC.php';
 
 class StackTest extends TestCase
 {
@@ -107,6 +110,45 @@ class StackTest extends TestCase
 
         $response = $stack2->handle($this->createMock(ServerRequestInterface::class));
         $this->assertTrue(true);
+    }
+
+    public function testCheckResponse()
+    {
+        $handlerResolver = new HandlerResolver(null);
+        $stack1 = new Stack([ new MiddlewareA()], $handlerResolver);
+        $stack2 = new Stack([
+            $stack1,  $stack1,
+            new Stack([new MiddlewareA()], $handlerResolver),
+            new HandlerA()
+        ], $handlerResolver);
+        $response = $stack2->handle($this->createMock(ServerRequestInterface::class));
+        $this->assertTrue($response->getMsg() === 'ResponseA');
+    }
+
+    public function testCheckResponse2()
+    {
+        $handlerResolver = new HandlerResolver(null);
+        $stack1 = new Stack([ new MiddlewareA()], $handlerResolver);
+        $stack2 = new Stack([
+            $stack1,  $stack1,
+            new Stack([new MiddlewareA(), new HandlerB()], $handlerResolver),
+            new HandlerA()
+        ], $handlerResolver);
+        $response = $stack2->handle($this->createMock(ServerRequestInterface::class));
+        $this->assertTrue($response->getMsg() === 'ResponseB');
+    }
+
+    public function testCheckResponse3()
+    {
+        $handlerResolver = new HandlerResolver(null);
+        $stack1 = new Stack([ new MiddlewareA()], $handlerResolver);
+        $stack2 = new Stack([
+            $stack1,  new HandlerC(), $stack1,
+            new Stack([new MiddlewareA(), new HandlerB()], $handlerResolver),
+            new HandlerA()
+        ], $handlerResolver);
+        $response = $stack2->handle($this->createMock(ServerRequestInterface::class));
+        $this->assertTrue($response->getMsg() === 'ResponseC');
     }
 
 }

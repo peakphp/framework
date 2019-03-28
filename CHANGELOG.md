@@ -25,6 +25,7 @@ Release date: ?
  - added method getDefinitions() to Di\Container
  - prevent duplicate interfaces in Di\Container::addInterface()
  - remove unused Di\Exception\NotFoundException class
+ - removed an always true condition in Http\Stack::process()
 
 VERSION 4.0.0-BETA5
 -----------

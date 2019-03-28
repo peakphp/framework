@@ -4,6 +4,27 @@ use \Psr\Http\Message\ResponseInterface;
 
 class ResponseA implements ResponseInterface
 {
+    /**
+     * @var string
+     */
+    private $msg;
+
+    /**
+     * ResponseA constructor.
+     * @param string $msg
+     */
+    public function __construct(string $msg = '')
+    {
+        $this->msg = $msg;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMsg()
+    {
+        return $this->msg;
+    }
 
     /**
      * Retrieves the HTTP protocol version as a string.
