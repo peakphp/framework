@@ -24,6 +24,7 @@ class BlankRequestTest extends TestCase
         $this->assertTrue(is_array($blankRequest->getServerParams()));
         $this->assertTrue(is_array($blankRequest->getUploadedFiles()));
         $this->assertTrue(is_null($blankRequest->getUri()));
+        $this->assertFalse($blankRequest->hasHeader('test'));
         $this->assertTrue($blankRequest->withRequestTarget('test') instanceof BlankRequest);
         $this->assertTrue($blankRequest->withHeader('test', 'test') instanceof BlankRequest);
         $this->assertTrue($blankRequest->withAddedHeader('test', 'test') instanceof BlankRequest);
@@ -31,6 +32,13 @@ class BlankRequestTest extends TestCase
         $this->assertTrue($blankRequest->withAttribute('test', 'test') instanceof BlankRequest);
         $this->assertTrue($blankRequest->withoutAttribute('test') instanceof BlankRequest);
         $this->assertTrue($blankRequest->withParsedBody('test') instanceof BlankRequest);
+        $this->assertTrue($blankRequest->withCookieParams([]) instanceof BlankRequest);
+        $this->assertTrue($blankRequest->withProtocolVersion('') instanceof BlankRequest);
+        $this->assertTrue($blankRequest->withBody($this->createMock(\Psr\Http\Message\StreamInterface::class)) instanceof BlankRequest);
+        $this->assertTrue($blankRequest->withMethod('method') instanceof BlankRequest);
+        $this->assertTrue($blankRequest->withUri($this->createMock(\Psr\Http\Message\UriInterface::class)) instanceof BlankRequest);
+        $this->assertTrue($blankRequest->withQueryParams([]) instanceof BlankRequest);
+        $this->assertTrue($blankRequest->withUploadedFiles([]) instanceof BlankRequest);
     }
 
 }
