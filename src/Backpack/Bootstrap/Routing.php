@@ -54,6 +54,11 @@ class Routing implements Bootable
 
         $routes = [];
         $pathPrefix = $this->app->getProp($this->routesPathPrefixPropName, '');
+        $propRoutes = $this->app->getProp($this->routesPropName, []);
+
+        if (!is_array($propRoutes)) {
+            throw new \Exception('Routes definitions must be an array!');
+        }
 
         foreach ($this->app->getProp($this->routesPropName, []) as $route) {
             $this->validate($route);
