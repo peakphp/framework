@@ -71,6 +71,8 @@ class FileCacheTest extends TestCase
             $id2 => 'test2'
         ], 100));
 
+        $this->assertTrue(is_array($fileCache->getMultiple([$id1, $id2])));
+
         $this->assertFalse($fileCache->isExpired($id1));
         $this->assertFalse($fileCache->isExpired($id2));
         $this->assertTrue($fileCache->clear());

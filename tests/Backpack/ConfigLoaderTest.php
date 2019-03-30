@@ -60,6 +60,18 @@ class ConfigLoaderTest extends TestCase
 
         $this->assertInstanceOf(\Peak\Config\Config::class, $config);
     }
+
+    public function testSetCacheTrigger()
+    {
+        PHPUnit\Framework\Error\Notice::$enabled = false;
+        $config = @(new ConfigLoader())
+            ->setConfigFactory(new \Peak\Config\ConfigFactory())
+            ->setCache(__DIR__, 'my-conf', 0)
+            ->load([
+                ['foo' => 'bar']
+            ]);
+        $this->assertInstanceOf(\Peak\Config\Config::class, $config);
+    }
 }
 
 class CustomConfig extends \Peak\Config\Config {}
