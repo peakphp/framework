@@ -11,6 +11,7 @@ use \Peak\Di\Container;
 
 require_once FIXTURES_PATH . '/application/HandlerA.php';
 require_once FIXTURES_PATH . '/application/MiddlewareA.php';
+require_once FIXTURES_PATH . '/application/InvokableMiddlewareA.php';
 
 /**
  * Class HandlerResolverTest
@@ -73,6 +74,13 @@ class HandlerResolverTest extends TestCase
         $this->expectException(\Peak\Http\Request\Exception\UnresolvableHandlerException::class);
         $handlerResolver = new HandlerResolver(null);
         $handlerResolver->resolve(array());
+    }
+
+    public function testResolverCallableFromString()
+    {
+        $handlerResolver = new HandlerResolver(null);
+        $handler = $handlerResolver->resolve(InvokableMiddlewareA::class);
+        $this->assertInstanceOf(CallableMiddleware::class, $handler);
     }
 
     public function testResolverUnresolvableHandlerExceptionGetHandler()
