@@ -24,6 +24,7 @@ class ChronoTest extends TestCase
         $this->assertFalse($chrono->isStopped());
         $chrono->stop();
         $this->assertTrue($chrono->isStopped());
+        $chrono->stop();
     }
 
     public function testGetSec()
