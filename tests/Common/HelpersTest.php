@@ -131,7 +131,7 @@ class HelpersTest extends TestCase
 
     function testFileExpired()
     {
-        $this->assertTrue(fileExpired(getClassFilePath(\Peak\Collection\Collection::class), '2 day'));
+        $this->assertTrue(is_bool(fileExpired(getClassFilePath(\Peak\Collection\Collection::class), '2 day')));
     }
 
     function testCatchOutput()
