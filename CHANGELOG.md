@@ -1,6 +1,6 @@
 VERSION 4.0.0-RC1
 -----------
-Release date: ?
+Release date: 2019-03-30
 
  - Http\Request\Exception\InvalidHandlerException return a more meaningful error message
  - updated namespace for functions
