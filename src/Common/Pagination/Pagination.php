@@ -81,12 +81,11 @@ class Pagination implements IteratorAggregate
     public function calculate(): Pagination
     {
         // calculate how many page
+        $this->pages_count = 1;
         if ($this->items_count > 0 && $this->items_per_page > 0) {
             $this->pages_count = ceil(($this->items_count / $this->items_per_page));
         } elseif ($this->items_count == 0) {
             $this->pages_count = 0;
-        } else {
-            $this->pages_count = 1;
         }
         
         // generate pages array
