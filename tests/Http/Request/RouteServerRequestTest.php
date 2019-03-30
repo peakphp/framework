@@ -41,37 +41,51 @@ class RouteServerRequestTest extends TestCase
         $request = $this->createMock(ServerRequestInterface::class);
         $rsr = new RouteServerRequest($request);
 
+        $request = $this->populateRequestMethods($request);
+
         $rsr->getProtocolVersion();
-        //$rsr->withProtocolVersion("");
+        $rsr->withProtocolVersion("");
         $rsr->getHeaders();
         $rsr->hasHeader("");
         $rsr->getHeader("");
         $rsr->getHeaderLine("");
-        //$rsr->withHeader("", "");
-        //$rsr->withAddedHeader("", "");
-        //$rsr->withoutHeader("");
+        $rsr->withHeader("", "");
+        $rsr->withAddedHeader("", "");
+        $rsr->withoutHeader("");
         $rsr->getBody();
-        //$rsr->withBody($this->createMock(\Psr\Http\Message\StreamInterface::class));
+        $rsr->withBody($this->createMock(\Psr\Http\Message\StreamInterface::class));
         $rsr->getRequestTarget();
-        //$rsr->withRequestTarget("");
+        $rsr->withRequestTarget("");
         $rsr->getMethod();
-        //$rsr->withMethod("");
+        $rsr->withMethod("");
         $rsr->getUri();
-        //$rsr->withUri($this->createMock(\Psr\Http\Message\UriInterface::class));
+        $rsr->withUri($this->createMock(\Psr\Http\Message\UriInterface::class));
         $rsr->getServerParams();
         $rsr->getCookieParams();
-        //$rsr->withCookieParams([]);
+        $rsr->withCookieParams([]);
         $rsr->getQueryParams();
-        //$rsr->withQueryParams([]);
+        $rsr->withQueryParams([]);
         $rsr->getUploadedFiles();
-        //$rsr->withUploadedFiles([]);
+        $rsr->withUploadedFiles([]);
         $rsr->getParsedBody();
-        //$rsr->withParsedBody("");
+        $rsr->withParsedBody("");
         $rsr->getAttributes();
         $rsr->getAttribute("", null);
-        //$rsr->withAttribute("", "");
-        //$rsr->withoutAttribute("");
+        $rsr->withAttribute("", "");
+        $rsr->withoutAttribute("");
         $this->assertInstanceOf(ServerRequestInterface::class, $rsr);
 
+    }
+
+    private function populateRequestMethods($request)
+    {
+        $methods = [
+            'withProtocolVersion', 'withHeader', 'withAddedHeader', 'withoutHeader', 'withBody', 'withRequestTarget', 'withMethod', 'withUri',
+            'withCookieParams', 'withQueryParams', 'withUploadedFiles', 'withParsedBody', 'withAttribute', 'withoutAttribute'
+        ];
+        foreach ($methods as $method) {
+            $request->method($method)->willReturn($this->createMock(ServerRequestInterface::class));
+        }
+        return $request;
     }
 }
