@@ -75,6 +75,7 @@ class HelpersTest extends TestCase
         $root = 'home/svr';
         $path = relativeBasePath($root.'/user/bin/test', $root);
         $this->assertTrue($path === '/user/bin');
+        $this->assertTrue(relativeBasePath($root.'/user/bin/test') === 'home/svr/user/bin');
     }
 
     /**
@@ -85,6 +86,7 @@ class HelpersTest extends TestCase
         $root = 'home/svr';
         $path = relativePath($root.'/user/bin/test', $root);
         $this->assertTrue($path === '/user/bin/test');
+        $this->assertTrue(empty(relativePath($root.'/user/bin/test')));
     }
 
     /**
