@@ -118,4 +118,27 @@ class HelpersTest extends TestCase
 
         $this->assertTrue($final === 'User FOOBAR created');
     }
+
+    function testGetClassShortName()
+    {
+        $this->assertTrue(getClassShortName(\Peak\Collection\Collection::class) === 'Collection');
+    }
+
+    function testGetClassFilePath()
+    {
+        $this->assertTrue(!empty(getClassFilePath(\Peak\Collection\Collection::class)));
+    }
+
+    function testFileExpired()
+    {
+        $this->assertTrue(fileExpired(getClassFilePath(\Peak\Collection\Collection::class), '2 day'));
+    }
+
+    function testCatchOutput()
+    {
+        $content = catchOutput(function() {
+            echo 'test';
+        });
+        $this->assertTrue($content === 'test');
+    }
 }

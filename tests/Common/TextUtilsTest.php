@@ -54,6 +54,9 @@ class TextUtilsTest extends TestCase
 
         $truncate = TextUtils::truncate('');
         $this->assertTrue($truncate === '');
+
+        $truncate = TextUtils::truncate('asas', 0);
+        $this->assertTrue(empty($truncate));
     }
 
     function testWordwrap()
