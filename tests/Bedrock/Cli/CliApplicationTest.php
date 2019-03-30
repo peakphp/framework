@@ -43,4 +43,16 @@ class CliApplicationTest extends TestCase
         $this->assertInstanceOf(\Symfony\Component\Console\Application::class, $app->console());
     }
 
+    public function testAddCommand()
+    {
+        $app = $this->createApp(null, new PropertiesBag([
+            'version' => '1.1'
+        ]));
+        $this->assertTrue($app->getProp('version') === '1.1');
+        $app->add($this->createMock(\Symfony\Component\Console\Command\Command::class));
+        $app->add([$this->createMock(\Symfony\Component\Console\Command\Command::class)]);
+    }
+
 }
+
+class TestCliCommand extends \Symfony\Component\Console\Command\Command {}
