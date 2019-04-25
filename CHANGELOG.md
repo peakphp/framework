@@ -3,6 +3,7 @@ VERSION 4.0.0-RC2
 Release date: ?
 
  - added Http\Middleware\JsonBodyParserMiddleware and Http\Exception\BodyParserException
+ - allow empty argument in Collection\Structure\AbstractStructure::create()
 
 VERSION 4.0.0-RC1
 -----------
