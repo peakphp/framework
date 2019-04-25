@@ -56,7 +56,7 @@ abstract class AbstractStructure implements IteratorAggregate
      * @return AbstractStructure
      * @throws Exception
      */
-    public static function create($data)
+    public static function create($data = null)
     {
         return new static($data);
     }
@@ -248,5 +248,4 @@ abstract class AbstractStructure implements IteratorAggregate
     {
         return new DataType([DataType::ANY]);
     }
-
 }
