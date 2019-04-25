@@ -1,3 +1,8 @@
+VERSION 4.0.0-RC2
+Release date: ?
+
+ - added Http\Middleware\JsonBodyParserMiddleware and Http\Exception\BodyParserException
+
 VERSION 4.0.0-RC1
 -----------
 Release date: 2019-03-30
