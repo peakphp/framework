@@ -5,6 +5,7 @@ Release date: ?
  - added Http\Middleware\JsonBodyParserMiddleware and Http\Exception\BodyParserException
  - allow empty argument in Collection\Structure\AbstractStructure::create()
  - added Blueprint\Collection\Structure
+ - added method getKeys() to Collection\Structure\AbstractStructure
 
 VERSION 4.0.0-RC1
 -----------

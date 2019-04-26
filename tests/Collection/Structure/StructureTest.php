@@ -221,4 +221,13 @@ class StructureTest extends TestCase
         ]);
         $this->assertInstanceOf(ArrayIterator::class, $entity->getIterator());
     }
+
+    /**
+     * @throws Exception
+     */
+    public function testGetKeys()
+    {
+        $entity = MyStructure1::create();
+        $this->assertTrue($entity->getKeys() === ['id', 'date', 'obj']);
+    }
 }
