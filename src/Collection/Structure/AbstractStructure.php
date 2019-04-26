@@ -56,6 +56,15 @@ abstract class AbstractStructure implements Structure
     }
 
     /**
+     * @return array
+     * @throws Exception
+     */
+    public static function keys(): array
+    {
+        return self::create()->getKeys();
+    }
+
+    /**
      * @param string $name
      * @param mixed $value
      * @throws Exception
