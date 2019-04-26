@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Peak\Collection\Structure;
 
+use Peak\Blueprint\Collection\Structure;
 use \ArrayIterator;
-use \IteratorAggregate;
 use \Exception;
 
 use function array_key_exists;
@@ -18,18 +18,12 @@ use function is_array;
 use function is_object;
 use function strtolower;
 
-abstract class AbstractStructure implements IteratorAggregate
+abstract class AbstractStructure implements Structure
 {
     /**
      * @var array
      */
     protected $data = [];
-
-    /**
-     * Define structure properties
-     * @return array
-     */
-    abstract public function getStructure(): array;
 
     /**
      * AbstractStructure constructor.
