@@ -171,6 +171,15 @@ abstract class AbstractStructure implements Structure
     }
 
     /**
+     * @return array
+     */
+    public function getKeys(): array
+    {
+        return array_keys($this->getStructure());
+
+    }
+
+    /**
      * @return DataType
      */
     protected function string(): DataType
