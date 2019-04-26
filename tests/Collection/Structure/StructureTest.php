@@ -230,4 +230,12 @@ class StructureTest extends TestCase
         $entity = MyStructure1::create();
         $this->assertTrue($entity->getKeys() === ['id', 'date', 'obj']);
     }
+
+    /**
+     * @throws Exception
+     */
+    public function testStaticGetKeys()
+    {
+        $this->assertTrue(MyStructure1::keys() === ['id', 'date', 'obj']);
+    }
 }
