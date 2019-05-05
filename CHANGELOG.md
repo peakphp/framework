@@ -11,6 +11,7 @@ Release date: ?
  - allow resolution of interfaces dependencies via bindings in Di\InterfaceResolver
  - prevent infinite recursive string resolution in Di\Binding\Singleton, Di\Binding\Prototype and Di\ArrayDefinition
  - added Di\Exception\InfiniteLoopResolutionException
+ - moved Di\AbstractBinding and Di\BindingInterface under Di\Binding folder
 
 VERSION 4.0.0-RC1
 -----------
