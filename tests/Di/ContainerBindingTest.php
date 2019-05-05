@@ -536,4 +536,24 @@ class ContainerBindingTest extends TestCase
         $this->assertTrue($prototype->getType() === 2);
         $this->assertTrue($prototype->getDefinition() === 'definition');
     }
+
+    public function testBindForInterfaceWithAutoWiring()
+    {
+        $container = new Container();
+        $container->bind(TestDiInterface::class, TestDi7::class);
+        $testdi = $container->create(TestDiInterface::class);
+        $this->assertInstanceOf(TestDiInterface::class, $testdi);
+        $testdi->test = 'test';
+        $testdi2 = $container->get(TestDiInterface::class);
+        $this->assertTrue($testdi2->test === 'test');
+    }
+
+    public function testBindForInterfaceResolving()
+    {
+        $container = new Container();
+        $container->bind(TestDiInterface::class, TestDi7::class);
+        $testdi = $container->create(TestDi6::class);
+        $this->assertInstanceOf(TestDi6::class, $testdi);
+        $this->assertInstanceOf(TestDi7::class, $testdi->testdi);
+    }
 }

@@ -582,16 +582,4 @@ class ContainerTest extends TestCase
         $this->assertTrue($container->getDefinition(TestDi1::class) === TestDi1::class);
         $this->assertTrue($container->getDefinitions() === [TestDi1::class => TestDi1::class]);
     }
-
-    public function testBindForInterfaceWithAutoWiring()
-    {
-        $container = new Container();
-        $container->bind(TestDiInterface::class, TestDi7::class);
-        $testdi = $container->create(TestDiInterface::class);
-        $this->assertInstanceOf(TestDiInterface::class, $testdi);
-        $testdi->test = 'test';
-        $testdi2 = $container->get(TestDiInterface::class);
-        $this->assertTrue($testdi2->test === 'test');
-
-    }
 }
