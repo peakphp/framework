@@ -10,15 +10,12 @@ use Peak\Di\Binding\Singleton;
 use Peak\Di\Exception\ClassDefinitionNotFoundException;
 use Psr\Container\ContainerInterface;
 use Psr\Container\NotFoundExceptionInterface;
-use \Closure;
-use \InvalidArgumentException;
 
 use function array_search;
 use function call_user_func_array;
 use function class_implements;
 use function get_class;
 use function is_array;
-use function is_object;
 
 class Container implements ContainerInterface
 {
@@ -88,22 +85,20 @@ class Container implements ContainerInterface
      *
      * @param string $class
      * @param array $args
-     * @param mixed $explicit Determine which instance should be use for an interface name.
-     * @return mixed
+     * @param null $explicit
+     * @return mixed|object
      * @throws ClassDefinitionNotFoundException
      * @throws Exception\AmbiguousResolutionException
      * @throws Exception\InterfaceNotFoundException
-     * @throws Exception\NotFoundException
      * @throws \ReflectionException
      */
     public function create(string $class, $args = [], $explicit = null)
     {
-        // if false, don't use reflection, use $definitions binding instead to resolve a class
-        if (!$this->auto_wiring) {
-            $def = $this->getDefinition($class);
-            if ($def === null) {
-                throw new ClassDefinitionNotFoundException($class);
-            }
+        // check first for definition even if auto wiring is on
+        $def = $this->getDefinition($class);
+        if ($def === null && !$this->auto_wiring) {
+            throw new ClassDefinitionNotFoundException($class);
+        } elseif ($def !== null) {
             return $this->binding_resolver->resolve(
                 $this->getDefinition($class),
                 $this,
@@ -129,7 +124,6 @@ class Container implements ContainerInterface
      * @throws ClassDefinitionNotFoundException
      * @throws Exception\AmbiguousResolutionException
      * @throws Exception\InterfaceNotFoundException
-     * @throws Exception\NotFoundException
      * @throws \ReflectionException
      */
     public function call(array $callback, array $args = [], $explicit = null)
@@ -249,6 +243,14 @@ class Container implements ContainerInterface
                 if ($key !== false) {
                     unset($classes[$key]);
                     $this->interfaces[$int] = $classes;
+                }
+            }
+
+            //remove instance from singleton binding
+            if ($this->hasDefinition($id)) {
+                $definition = $this->getDefinition($id);
+                if ($definition instanceof Singleton) {
+                    $definition->deleteStoredInstance();
                 }
             }
         }
