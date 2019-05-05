@@ -4,16 +4,15 @@ declare(strict_types=1);
 
 namespace Peak\Di\Binding;
 
-use Peak\Di\AbstractBinding;
 use Peak\Di\ArrayDefinition;
 use Peak\Di\ClassInstantiator;
 use Peak\Di\ClassResolver;
 use Peak\Di\Container;
+use Peak\Di\Exception\InfiniteLoopResolutionException;
 
 use function is_array;
 use function is_null;
 use function is_string;
-use Peak\Di\Exception\InfiniteLoopResolutionException;
 
 class Prototype extends AbstractBinding
 {

@@ -139,9 +139,11 @@ class Container implements ContainerInterface
      *
      * @param string $class
      * @param array $args
-     * @param mixed $explicit
+     * @param null $explicit
      * @return mixed|object
      * @throws ClassDefinitionNotFoundException
+     * @throws Exception\AmbiguousResolutionException
+     * @throws Exception\InterfaceNotFoundException
      * @throws \ReflectionException
      */
     public function createAndStore(string $class, array $args = [], $explicit = null)
@@ -185,7 +187,9 @@ class Container implements ContainerInterface
      *
      * @param string $id
      * @return mixed|object
-     * @throws NotFoundExceptionInterface
+     * @throws ClassDefinitionNotFoundException
+     * @throws Exception\AmbiguousResolutionException
+     * @throws Exception\InterfaceNotFoundException
      * @throws \ReflectionException
      */
     public function get($id)

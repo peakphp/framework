@@ -2,7 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Peak\Di;
+namespace Peak\Di\Binding;
+
+use Peak\Di\Container;
 
 interface BindingInterface
 {

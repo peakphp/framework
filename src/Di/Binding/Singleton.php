@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace Peak\Di\Binding;
 
-use Peak\Di\AbstractBinding;
 use Peak\Di\ArrayDefinition;
-use Peak\Di\ClassInspector;
 use Peak\Di\ClassInstantiator;
 use Peak\Di\ClassResolver;
 use Peak\Di\Container;

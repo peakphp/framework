@@ -4,10 +4,8 @@ declare(strict_types=1);
 
 namespace Peak\Di\Binding;
 
-use Peak\Di\AbstractBinding;
 use Peak\Di\Container;
 
-use function is_callable;
 use function is_null;
 
 class Factory extends AbstractBinding

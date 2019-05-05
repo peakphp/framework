@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Peak\Di;
+namespace Peak\Di\Binding;
 
 abstract class AbstractBinding implements BindingInterface
 {
