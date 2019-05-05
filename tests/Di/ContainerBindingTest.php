@@ -88,6 +88,23 @@ class ContainerBindingTest extends TestCase
     }
 
     /**
+     * Bind instance
+     */
+    public function testBindInstanceWithString()
+    {
+        $container = new Container();
+        $container->disableAutoWiring();
+
+        $container->bind(A::class, A::class);
+        $a = $container->get(A::class);
+        $a->foo = 'bar';
+
+        $aa = $container->create(A::class);
+        $this->assertTrue($aa instanceof A);
+        $this->assertTrue($aa->foo === 'bar');
+    }
+
+    /**
      * Bind a definition that create a new instance each time
      */
     public function testBindPrototype()

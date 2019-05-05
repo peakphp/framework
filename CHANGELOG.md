@@ -6,6 +6,8 @@ Release date: ?
  - allow empty argument in Collection\Structure\AbstractStructure::create()
  - added Blueprint\Collection\Structure
  - added method getKeys() and static keys() to Collection\Structure\AbstractStructure
+ - fixed edge case where singleton binding as string were not used properly in Di\Container and Di\Binding\Singleton
+ - allow the usage of binding when autoWiring is on in Di\Container
 
 VERSION 4.0.0-RC1
 -----------
