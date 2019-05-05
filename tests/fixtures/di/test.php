@@ -191,3 +191,44 @@ class TestDi18
 class TestDi19 implements TestDiInterface
 {
 }
+
+class TestDi20 implements TestDiInterface
+{
+    /**
+     * @var Collection
+     */
+    public $coll;
+
+    public function __construct(Collection $coll)
+    {
+        $this->coll = $coll;
+    }
+}
+
+class TestDi21 implements TestDiInterface
+{
+    /**
+     * @var TestDiInterface3
+     */
+    public $testdi;
+
+    public function __construct(TestDiInterface3 $testdi)
+    {
+        $this->testdi = $testdi;
+    }
+}
+
+// this class interface should be unresolvable since it has a dependency on the same interface name in the constructor
+class TestDi22 implements TestDiInterface
+{
+    /**
+     * @var TestDiInterface
+     */
+    public $testdi;
+
+    public function __construct(TestDiInterface $testdi)
+    {
+        $this->testdi = $testdi;
+    }
+}
+

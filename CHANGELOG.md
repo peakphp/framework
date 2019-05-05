@@ -9,6 +9,8 @@ Release date: ?
  - fixed edge case where singleton binding as string were not used properly in Di\Container and Di\Binding\Singleton
  - allow the usage of binding when autoWiring is on in Di\Container
  - allow resolution of interfaces dependencies via bindings in Di\InterfaceResolver
+ - prevent infinite recursive string resolution in Di\Binding\Singleton, Di\Binding\Prototype and Di\ArrayDefinition
+ - added Di\Exception\InfiniteLoopResolutionException
 
 VERSION 4.0.0-RC1
 -----------
