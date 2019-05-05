@@ -6,8 +6,11 @@ namespace Peak\Di\Binding;
 
 use Peak\Di\AbstractBinding;
 use Peak\Di\ArrayDefinition;
+use Peak\Di\ClassInspector;
 use Peak\Di\ClassInstantiator;
+use Peak\Di\ClassResolver;
 use Peak\Di\Container;
+use Peak\Di\Exception\InfiniteLoopResolutionException;
 use Peak\Di\Exception\InvalidDefinitionException;
 
 use function is_array;
@@ -29,6 +32,21 @@ class Singleton extends AbstractBinding
     private $instantiator;
 
     /**
+     * @var ArrayDefinition
+     */
+    private $arrayDefinition;
+
+    /**
+     * @var ClassResolver
+     */
+    private $classResolver;
+
+    /**
+     * @var int
+     */
+    private $n = 0;
+
+    /**
      * Constructor
      *
      * @param string $name
@@ -37,18 +55,21 @@ class Singleton extends AbstractBinding
     public function __construct(string $name, $definition)
     {
         $this->instantiator = new ClassInstantiator();
+        $this->arrayDefinition = new ArrayDefinition();
+        $this->classResolver = new ClassResolver();
         parent::__construct($name, self::SINGLETON, $definition);
     }
 
     /**
-     * Resolve the binding
-     *
      * @param Container $container
      * @param array $args
      * @param null $explicit
      * @return mixed|object|null
+     * @throws InfiniteLoopResolutionException
      * @throws InvalidDefinitionException
+     * @throws \Peak\Di\Exception\AmbiguousResolutionException
      * @throws \Peak\Di\Exception\ClassDefinitionNotFoundException
+     * @throws \Peak\Di\Exception\InterfaceNotFoundException
      * @throws \ReflectionException
      */
     public function resolve(Container $container, array $args = [], $explicit = null)
@@ -74,9 +95,16 @@ class Singleton extends AbstractBinding
         } elseif (is_object($definition)) {
             $instance = $definition;
         } elseif(is_string($definition)) {
+            // a string should be resolved once only, if more than one, it mean that the class behind the
+            // string have also dependency on itself and may go on infinite loop
+            $this->n++;
+            if ($this->n > 1) {
+                throw new InfiniteLoopResolutionException($definition);
+            }
+            $args = $this->classResolver->resolve($definition, $container, $args, $explicit);
             $instance = $this->instantiator->instantiate($definition, $args);
         } elseif (is_array($definition)) {
-            $instance = (new ArrayDefinition())->resolve($definition, $container, $args);
+            $instance = $this->arrayDefinition->resolve($definition, $container, $args);
         }
 
         if (isset($instance)) {

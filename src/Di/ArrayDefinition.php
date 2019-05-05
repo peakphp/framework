@@ -9,6 +9,7 @@ use function class_exists;
 use function is_array;
 use function is_callable;
 use function is_object;
+use Peak\Di\Exception\InfiniteLoopResolutionException;
 
 class ArrayDefinition
 {
@@ -16,7 +17,7 @@ class ArrayDefinition
      * If true, check in the container before create a new instance of an object
      * @var bool
      */
-    protected $new_instances_only = false;
+    private $newInstanceOnly = false;
 
     /**
      * @var ClassInstantiator
@@ -24,21 +25,33 @@ class ArrayDefinition
     private $instantiator;
 
     /**
+     * @var ClassResolver
+     */
+    private $classResolver;
+
+    /**
+     * @var int
+     */
+    private $n = 0;
+
+    /**
      * Constructor.
      */
     public function __construct()
     {
         $this->instantiator = new ClassInstantiator();
+        $this->classResolver = new ClassResolver();
     }
 
     /**
-     * Resolve an array definition recursively
      * @param array $definition
      * @param Container $container
      * @param array $args
      * @return object
+     * @throws Exception\AmbiguousResolutionException
      * @throws Exception\ClassDefinitionNotFoundException
-     * @throws Exception\NotFoundException
+     * @throws Exception\InterfaceNotFoundException
+     * @throws InfiniteLoopResolutionException
      * @throws \ReflectionException
      */
     public function resolve(array $definition, Container $container, array $args = [])
@@ -58,15 +71,25 @@ class ArrayDefinition
                 $final_args[$index] = $arg($container);
             } elseif (is_object($arg)) {
                 $final_args[$index] = $arg;
-            } elseif (class_exists($arg) && $this->new_instances_only) {
-                $final_args[$index] = $this->instantiator->instantiate($arg);
-            } elseif (class_exists($arg) && !$this->new_instances_only) {
+            } elseif (class_exists($arg) && $this->newInstanceOnly) {
+                $this->n++;
+                if ($this->n > 1) {
+                    throw new InfiniteLoopResolutionException($definition);
+                }
+                $subArg = $this->classResolver->resolve($arg, $container, $args);
+                $final_args[$index] = $this->instantiator->instantiate($arg, $subArg);
+            } elseif (class_exists($arg) && !$this->newInstanceOnly) {
                 if ($container->has($arg)) {
                     $final_args[$index] =  $container->get($arg);
                 } elseif ($container->hasDefinition($arg)) {
                     $final_args[$index] = $container->resolve($arg);
                 } else {
-                    $final_args[$index] = $this->instantiator->instantiate($arg);
+                    $this->n++;
+                    if ($this->n > 1) {
+                        throw new InfiniteLoopResolutionException($definition);
+                    }
+                    $subArg = $this->classResolver->resolve($arg, $container, $args);
+                    $final_args[$index] = $this->instantiator->instantiate($arg, $subArg);
                 }
             }
         }
@@ -81,7 +104,7 @@ class ArrayDefinition
      */
     public function newInstancesOnly()
     {
-        $this->new_instances_only = true;
+        $this->newInstanceOnly = true;
         return $this;
     }
 }
