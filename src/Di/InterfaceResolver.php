@@ -12,6 +12,20 @@ use function is_array;
 
 class InterfaceResolver
 {
+
+    /**
+     * @var BindingResolver
+     */
+    private $bindingResolver;
+
+    /**
+     * InterfaceResolver constructor.
+     */
+    public function __construct()
+    {
+        $this->bindingResolver = new BindingResolver();
+    }
+
     /**
      * @param $interface
      * @param Container $container
@@ -21,9 +35,9 @@ class InterfaceResolver
      * @throws InterfaceNotFoundException
      * @throws \ReflectionException
      */
-    public function resolve($interface, Container $container, $explicit = [])
+    public function resolve(string $interface, Container $container, $explicit = [])
     {
-        // Try to find a match in the container for a class or an interface
+        // try to find a match in the container for a class or an interface
         if ($container->hasInterface($interface)) {
             $instance = $container->getInterface($interface);
             if (is_array($instance)) {
@@ -34,6 +48,13 @@ class InterfaceResolver
             }
             return $container->get($instance);
         }
+
+        // try to find a match in container definition
+        if ($container->hasDefinition($interface)) {
+            $definition = $container->getDefinition($interface);
+            return $this->bindingResolver->resolve($definition, $container, [], $explicit);
+        }
+
         throw new InterfaceNotFoundException($interface);
     }
 }
