@@ -19,10 +19,9 @@ use function is_string;
 class Singleton extends AbstractBinding
 {
     /**
-     * Singleton status
-     * @var bool
+     * @var mixed
      */
-    protected $instantiated = false;
+    private $storedInstance = null;
 
     /**
      * @var ClassInstantiator
@@ -56,6 +55,10 @@ class Singleton extends AbstractBinding
     {
         $definition = $this->definition;
 
+        if (null !== $this->storedInstance) {
+            $definition = $this->storedInstance;
+        }
+
         $is_explicit = false;
         if (!is_null($explicit) && !empty($explicit)) {
             $definition = $explicit;
@@ -78,11 +81,20 @@ class Singleton extends AbstractBinding
 
         if (isset($instance)) {
             if (!$is_explicit) {
+                $this->storedInstance = $instance;
                 $container->set($instance);
             }
             return $instance;
         }
 
         throw new InvalidDefinitionException($this->name);
+    }
+
+    /**
+     * Removed stored instance
+     */
+    public function deleteStoredInstance()
+    {
+        $this->storedInstance = null;
     }
 }
