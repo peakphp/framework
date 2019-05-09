@@ -61,7 +61,7 @@ abstract class AbstractStructure implements Structure
      */
     public static function keys(): array
     {
-        return self::create()->getKeys();
+        return self::create()->getStructureKeys();
     }
 
     /**
@@ -183,7 +183,7 @@ abstract class AbstractStructure implements Structure
     /**
      * @return array
      */
-    public function getKeys(): array
+    public function getStructureKeys(): array
     {
         return array_keys($this->getStructure());
 
