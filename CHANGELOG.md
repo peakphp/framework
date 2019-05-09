@@ -12,6 +12,7 @@ Release date: ?
  - prevent infinite recursive string resolution in Di\Binding\Singleton, Di\Binding\Prototype and Di\ArrayDefinition
  - added Di\Exception\InfiniteLoopResolutionException
  - moved Di\AbstractBinding and Di\BindingInterface under Di\Binding folder
+ - renamed method getKeys() to getStructureKeys() in Collection\Structure\AbstractStructure to be consistent
 
 VERSION 4.0.0-RC1
 -----------
