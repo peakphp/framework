@@ -81,6 +81,7 @@ abstract class AbstractStructure implements Structure
      */
     protected function set(string $name, $value)
     {
+        /** @var array<DataType> $structure */
         $structure = $this->getStructure();
         if (!isset($structure[$name])) {
             throw new Exception('Property [' . $name . '] not defined');
