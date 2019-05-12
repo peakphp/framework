@@ -231,4 +231,10 @@ class ApplicationTest extends TestCase
         $this->assertTrue($response instanceof ResponseInterface);
 
     }
+
+    public function testGetFromContainer()
+    {
+        $app = $this->createApp(new Kernel('dev', new \Peak\Di\Container()));
+        $this->assertInstanceOf(PropertiesBag::class, $app->getFromContainer(PropertiesBag::class));
+    }
 }
