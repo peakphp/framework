@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-use Peak\Common\TimeExpression;
-
 /*
 |--------------------------------------------------------------------------
 | General helper functions
@@ -215,13 +213,12 @@ if (!function_exists('fileExpired')) {
      * Check if file is expired
      *
      * @param string $file
-     * @param mixed $expirationTime
+     * @param int $expirationTime
      * @return bool
      * @throws Exception
      */
-    function fileExpired(string $file, $expirationTime): bool
+    function fileExpired(string $file, int $expirationTime): bool
     {
-        $expirationTime = (new TimeExpression($expirationTime))->toSeconds();
         $file_date = filemtime($file);
         $now = time();
         $delay = $now - $file_date;
