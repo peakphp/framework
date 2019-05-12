@@ -84,6 +84,14 @@ class StackTest extends TestCase
         $this->assertTrue($stack1 === $stack2->getParent());
     }
 
+    public function testGetHandlers()
+    {
+        $stack = new Stack([new HandlerA(), new HandlerB()], $this->createMock(HandlerResolver::class));
+
+        $this->assertTrue(count($stack->getHandlers()) == 2);
+    }
+
+
     public function testProcessChildStack()
     {
         $stack1 = new Stack([new HandlerA()], $this->createMock(HandlerResolver::class));
