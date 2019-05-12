@@ -18,4 +18,9 @@ interface Stack extends RequestHandlerInterface, MiddlewareInterface
      * @return Stack
      */
     public function getParent(): Stack;
+
+    /**
+     * @return array
+     */
+    public function getHandlers(): array;
 }

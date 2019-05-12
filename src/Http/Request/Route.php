@@ -149,4 +149,12 @@ class Route implements \Peak\Blueprint\Http\Route, Stack
     {
         return $this->path;
     }
+
+    /**
+     * @return array
+     */
+    public function getHandlers(): array
+    {
+        return $this->stack->getHandlers();
+    }
 }

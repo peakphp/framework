@@ -74,6 +74,14 @@ class Stack implements \Peak\Blueprint\Http\Stack
     }
 
     /**
+     * @return array
+     */
+    public function getHandlers(): array
+    {
+        return $this->handlers;
+    }
+
+    /**
      * Process an incoming server request and return a response, optionally delegating
      * response creation to a handler.
      *
