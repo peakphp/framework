@@ -64,12 +64,12 @@ class Application extends AbstractApplication implements HttpApplication
     }
 
     /**
-     * @param string $path
+     * @param string $id
      * @return mixed
      */
-    public function getFromContainer(string $path)
+    public function getFromContainer(string $id)
     {
-        return $this->getContainer()->get($path);
+        return $this->getContainer()->get($id);
     }
 
     /**
