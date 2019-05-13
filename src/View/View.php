@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Peak\View;
 
+use Peak\Blueprint\View\Presentation;
 use Peak\Common\Traits\Macro;
 use Peak\View\Exception\FileNotFoundException;
 

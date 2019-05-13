@@ -6,7 +6,7 @@ namespace Peak\View;
 
 use function is_array;
 
-class Presentation
+class Presentation implements \Peak\Blueprint\View\Presentation
 {
     /**
      * @var array
