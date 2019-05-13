@@ -1,6 +1,6 @@
 VERSION 4.0.0-RC2
 -----------
-Release date: ?
+Release date: 2019-05-12
 
  - added Http\Middleware\JsonBodyParserMiddleware and Http\Exception\BodyParserException
  - allow empty argument in Collection\Structure\AbstractStructure::create()
@@ -15,6 +15,7 @@ Release date: ?
  - renamed method getKeys() to getStructureKeys() in Collection\Structure\AbstractStructure to be consistent
  - added method getHandlers() to Blueprint\Http\Stack and update Http\Stack and Http\Request\Route
  - removed deprecated components in Common: Reflection, Pagination, ClassFinder, TextUtils and TimeExpression
+ - added Blueprint\View\Presentation
  
 VERSION 4.0.0-RC1
 -----------
