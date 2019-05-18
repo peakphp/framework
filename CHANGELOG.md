@@ -17,6 +17,7 @@ Release date: 2019-05-12
  - removed deprecated components in Common: Reflection, Pagination, ClassFinder, TextUtils and TimeExpression
  - removed deprecated Backpack\BlackMagic
  - added Blueprint\View\Presentation
+ - added Backpack\AppRoutesMapper
  
 VERSION 4.0.0-RC1
 -----------
