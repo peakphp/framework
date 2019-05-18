@@ -15,6 +15,7 @@ Release date: 2019-05-12
  - renamed method getKeys() to getStructureKeys() in Collection\Structure\AbstractStructure to be consistent
  - added method getHandlers() to Blueprint\Http\Stack and update Http\Stack and Http\Request\Route
  - removed deprecated components in Common: Reflection, Pagination, ClassFinder, TextUtils and TimeExpression
+ - removed deprecated Backpack\BlackMagic
  - added Blueprint\View\Presentation
  
 VERSION 4.0.0-RC1
