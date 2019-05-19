@@ -63,7 +63,7 @@ class AppBuilderTest extends TestCase
     public function testSetAppName()
     {
         $app = (new AppBuilder())
-            ->setClassName(Application::class)
+            ->setAppClass(Application::class)
             ->build();
 
         $this->assertInstanceOf(Application::class, $app);
