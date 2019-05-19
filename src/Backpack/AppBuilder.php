@@ -50,7 +50,7 @@ class AppBuilder
      * Application class
      * @var string|null
      */
-    private $class;
+    private $appClass;
 
     /**
      * Kernel class
@@ -94,8 +94,9 @@ class AppBuilder
     }
 
     /**
-     * @param mixed $props
+     * @param $props
      * @return $this
+     * @throws Exception
      */
     public function setProps($props)
     {
@@ -140,12 +141,12 @@ class AppBuilder
     }
 
     /**
-     * @param string $className
+     * @param string $appClass
      * @return $this
      */
-    public function setClassName(string $className)
+    public function setAppClass(string $appClass)
     {
-        $this->class = $className;
+        $this->appClass = $appClass;
         return $this;
     }
 
@@ -176,7 +177,7 @@ class AppBuilder
      */
     public function build()
     {
-        return $this->internalBuild($this->class ?? Application::class);
+        return $this->internalBuild($this->appClass ?? Application::class);
     }
 
     /**

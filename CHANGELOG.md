@@ -1,6 +1,6 @@
 VERSION 4.0.0-RC2
 -----------
-Release date: 2019-05-12
+Release date: ?
 
  - added Http\Middleware\JsonBodyParserMiddleware and Http\Exception\BodyParserException
  - allow empty argument in Collection\Structure\AbstractStructure::create()
@@ -18,6 +18,7 @@ Release date: 2019-05-12
  - removed deprecated Backpack\BlackMagic
  - added Blueprint\View\Presentation
  - added Backpack\AppRoutesMapper
+ - renamed method setClassName() to setAppClass() in Backpack\AppBuilder to be consistent
  
 VERSION 4.0.0-RC1
 -----------
