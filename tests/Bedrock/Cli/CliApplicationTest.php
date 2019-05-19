@@ -3,16 +3,11 @@
 use \PHPUnit\Framework\TestCase;
 use \Peak\Bedrock\Cli\Application;
 use \Peak\Bedrock\Kernel;
-use \Peak\Http\Request\HandlerResolver;
-use \Peak\Http\Request\Route;
 use \Peak\Collection\PropertiesBag;
 use \Psr\Container\ContainerInterface;
-use \Psr\Http\Message\ResponseInterface;
-use \Psr\Http\Message\ServerRequestInterface;
-use \Psr\Http\Message\UriInterface;
-use \Psr\Http\Server\RequestHandlerInterface;
-use \Psr\Http\Server\MiddlewareInterface;
-
+use \Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputDefinition;
+use Symfony\Component\Console\Input\InputOption;
 
 class CliApplicationTest extends TestCase
 {
@@ -45,14 +40,46 @@ class CliApplicationTest extends TestCase
 
     public function testAddCommand()
     {
-        $app = $this->createApp(null, new PropertiesBag([
+        $app = $this->createApp(new Kernel('dev', new \Peak\Di\Container()), new PropertiesBag([
             'version' => '1.1'
         ]));
+        $app->add(TestCliCommand::class);
+        $app->add($this->createMock(TestCliCommand::class));
+        $app->add([$this->createMock(TestCliCommand::class)]);
         $this->assertTrue($app->getProp('version') === '1.1');
-        $app->add($this->createMock(\Symfony\Component\Console\Command\Command::class));
-        $app->add([$this->createMock(\Symfony\Component\Console\Command\Command::class)]);
     }
+
+    public function testAddCommandException()
+    {
+        $this->expectException(Exception::class);
+        $app = $this->createApp(new Kernel('dev', new \Peak\Di\Container()));
+        $app->add($this->createMock(InvalidTestCliCommand::class));
+    }
+
+//    public function testRun()
+//    {
+//        $app = $this->createApp();
+//        $result = $app->run(
+//            $this->createMock(\Symfony\Component\Console\Input\InputInterface::class),
+//            $this->createMock(\Symfony\Component\Console\Output\OutputInterface::class)
+//        );
+//        $this->assertTrue($result);
+//    }
 
 }
 
-class TestCliCommand extends \Symfony\Component\Console\Command\Command {}
+class TestCliCommand extends \Symfony\Component\Console\Command\Command
+{
+    protected function configure()
+    {
+        $this
+            ->setName('example')
+            ->setDescription('example command')
+            ->setHelp('example help')
+            ->setDefinition(new InputDefinition([
+                    new InputOption('test', 't', InputOption::VALUE_NONE, 'test mode'),
+                ])
+            );
+    }
+}
+class InvalidTestCliCommand {}
