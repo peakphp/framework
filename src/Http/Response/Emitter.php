@@ -29,10 +29,14 @@ class Emitter implements ResponseEmitter
      */
     public function emit(ResponseInterface $response)
     {
-        $this->assertNoPreviousOutput();
+        $isCli = (php_sapi_name() === 'cli' || defined('STDIN'));
 
-        $this->emitHeaders($response);
-        $this->emitStatusLine($response);
+        if (!$isCli) {
+            $this->assertNoPreviousOutput();
+            $this->emitHeaders($response);
+            $this->emitStatusLine($response);
+        }
+
         $this->emitBody($response);
 
         return true;
