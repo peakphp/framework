@@ -36,7 +36,7 @@ class HelperResolver implements ResourceResolver
     public function resolve($helper)
     {
         if (is_string($helper)) {
-            $helper = $this->resolverString($helper);
+            $helper = $this->resolveString($helper);
         }
 
         if (!is_object($helper)) {
@@ -50,7 +50,7 @@ class HelperResolver implements ResourceResolver
      * @param string $helper
      * @return mixed|string
      */
-    public function resolverString(string $helper)
+    private function resolveString(string $helper)
     {
         $helperInstance = $helper;
 
