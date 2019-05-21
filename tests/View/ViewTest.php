@@ -3,7 +3,7 @@
 use \PHPUnit\Framework\TestCase;
 
 use Peak\View\View;
-use Peak\View\Presentation;
+use Peak\Blueprint\View\Presentation;
 
 require_once FIXTURES_PATH.'/view/helpers/ViewHelperA.php';
 
@@ -78,7 +78,7 @@ class ViewTest extends TestCase
     {
         $view = new View(
             ['name' => 'foo'],
-            new Presentation(['/layout.php' => ['/profile.php']], FIXTURES_PATH.'/view/scripts')
+            new \Peak\View\Presentation(['/layout.php' => ['/profile.php']], FIXTURES_PATH.'/view/scripts')
         );
         $content = $view->render();
         $this->assertTrue($content === '<div class="content"><h1>Profile of foo</h1></div>');
@@ -88,7 +88,7 @@ class ViewTest extends TestCase
     {
         $this->expectException(\Peak\View\Exception\FileNotFoundException::class);
         $view = new View([],
-            new Presentation(['/layout.php' => ['/unknown.php']], FIXTURES_PATH . '/view/scripts')
+            new \Peak\View\Presentation(['/layout.php' => ['/unknown.php']], FIXTURES_PATH . '/view/scripts')
         );
         $view->render();
     }
