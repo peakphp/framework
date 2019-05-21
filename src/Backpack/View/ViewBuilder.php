@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace Peak\Backpack\View;
 
+use Closure;
+use Peak\Blueprint\Common\ResourceResolver;
+use Peak\Blueprint\View\Presentation;
 use Peak\View\HelperResolver;
-use Peak\View\Presentation;
 use Peak\View\View;
 
 class ViewBuilder
@@ -37,9 +39,9 @@ class ViewBuilder
 
     /**
      * ViewBuilder constructor.
-     * @param HelperResolver|null $helperResolver
+     * @param ResourceResolver|null $helperResolver
      */
-    public function __construct(HelperResolver $helperResolver = null)
+    public function __construct(ResourceResolver $helperResolver = null)
     {
         $this->helperResolver = $helperResolver ?? new HelperResolver(null);
     }
@@ -66,10 +68,10 @@ class ViewBuilder
 
     /**
      * @param string $name
-     * @param mixed $macro
+     * @param Closure $macro
      * @return $this
      */
-    public function setMacro(string $name, $macro)
+    public function setMacro(string $name, Closure $macro)
     {
         $this->macros[$name] = $macro;
         return $this;
@@ -103,6 +105,20 @@ class ViewBuilder
     public function setVars(?array $vars)
     {
         $this->vars = $vars;
+        return $this;
+    }
+
+    /**
+     * @param array $vars
+     * @return $this
+     */
+    public function addVars(array $vars)
+    {
+        if (!is_array($this->vars)) {
+            $this->vars = [];
+        }
+
+        $this->vars = array_merge($this->vars, $vars);
         return $this;
     }
 
