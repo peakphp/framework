@@ -15,27 +15,27 @@ class ViewBuilder
     /**
      * @var array|null
      */
-    private $vars = null;
+    protected $vars = null;
 
     /**
      * @var Presentation
      */
-    private $presentation;
+    protected $presentation;
 
     /**
      * @var array
      */
-    private $macros = [];
+    protected $macros = [];
 
     /**
      * @var array
      */
-    private $helpers = [];
+    protected $helpers = [];
 
     /**
      * @var HelperResolver|null
      */
-    private $helperResolver;
+    protected $helperResolver;
 
     /**
      * ViewBuilder constructor.
