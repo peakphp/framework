@@ -23,11 +23,6 @@ class View implements \Peak\Blueprint\View\View
     /**
      * @var array
      */
-    private $templateSources;
-
-    /**
-     * @var array
-     */
     private $vars = [];
 
     /**
