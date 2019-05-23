@@ -23,27 +23,27 @@ class View implements \Peak\Blueprint\View\View
     /**
      * @var array
      */
-    private $vars = [];
+    protected $vars = [];
 
     /**
      * @var array
      */
-    private $helpers = [];
+    protected $helpers = [];
 
     /**
      * @var string|false
      */
-    private $layoutContent;
+    protected $layoutContent;
 
     /**
      * @var Presentation
      */
-    private $presentation;
+    protected $presentation;
 
     /**
      * @var int
      */
-    private $obN = 0;
+    protected $obN = 0;
 
     /**
      * View constructor.
@@ -141,7 +141,7 @@ class View implements \Peak\Blueprint\View\View
      * @param array $templateSources
      * @throws FileNotFoundException
      */
-    private function recursiveRender(array $templateSources)
+    protected function recursiveRender(array $templateSources)
     {
         foreach ($templateSources as $layout => $source) {
             if (is_array($source)) {
@@ -162,7 +162,7 @@ class View implements \Peak\Blueprint\View\View
      * @param string $file
      * @throws FileNotFoundException
      */
-    private function renderFile(string $file)
+    protected function renderFile(string $file)
     {
         if (!file_exists($file)) {
             // make sure we close all out
