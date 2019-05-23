@@ -1,7 +1,7 @@
 <?php
 
-use Peak\Backpack\AppBuilder;
-use Peak\Backpack\AppRoutesMapper;
+use Peak\Backpack\Bedrock\HttpAppBuilder;
+use Peak\Backpack\Bedrock\AppRoutesMapper;
 use \PHPUnit\Framework\TestCase;
 
 require_once FIXTURES_PATH . '/application/HandlerA.php';
@@ -11,7 +11,7 @@ class AppRoutesMapperTest extends TestCase
     public function testCreateApp()
     {
         /** @var \Peak\Bedrock\Http\Application $app */
-        $app = $app = (new AppBuilder())->build();
+        $app = (new HttpAppBuilder())->build();
 
         $app->get('/test1', HandlerA::class);
         $app->post('/test2', [
