@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Peak\Backpack;
+namespace Peak\Backpack\Bedrock;
 
 use Peak\Bedrock\Http\Application;
 use Peak\Blueprint\Http\Route;
