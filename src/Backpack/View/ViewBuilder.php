@@ -38,6 +38,11 @@ class ViewBuilder
     protected $helperResolver;
 
     /**
+     * @var string
+     */
+    protected $viewClass;
+
+    /**
      * ViewBuilder constructor.
      * @param ResourceResolver|null $helperResolver
      */
@@ -123,6 +128,16 @@ class ViewBuilder
     }
 
     /**
+     * @param string $viewClass
+     * @return $this
+     */
+    public function setViewClass(string $viewClass)
+    {
+        $this->viewClass = $viewClass;
+        return $this;
+    }
+
+    /**
      * @return View
      * @throws \Peak\View\Exception\InvalidHelperException
      * @throws \Exception
@@ -133,7 +148,9 @@ class ViewBuilder
             throw new \Exception('A presentation is required in order to create a view');
         }
 
-        $view = new View($this->vars, $this->presentation);
+        $viewClass = $this->viewClass ?? View::class;
+
+        $view = new $viewClass($this->vars, $this->presentation);
 
         foreach ($this->helpers as $helperName => $helper) {
             if (isset($this->helperResolver)) {
