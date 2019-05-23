@@ -70,4 +70,16 @@ class ViewBuilderTest extends TestCase
         }
 
     }
+
+    public function testViewClass()
+    {
+        $viewBuilder = new ViewBuilder();
+        $viewBuilder->setPresentation($this->createMock(Presentation::class));
+        $viewBuilder->setViewClass(MyViewClass::class);
+        $view = $viewBuilder->build();
+        $this->assertInstanceOf(MyViewClass::class, $view);
+    }
 }
+
+class MyViewClass extends View
+{}
