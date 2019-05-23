@@ -16,6 +16,7 @@ This branch is a "work in progress" of version 4.0 which include drastic change 
 
 | | |
 | --- | --- |
+| 4.0.0-RC2 | master (not released) |
 | [4.0.0-RC1](https://github.com/peakphp/framework/releases/tag/4.0.0-RC1) | 2019-03-30<br>([changelog](https://github.com/peakphp/framework/blob/4.0.0-RC1/CHANGELOG.md)) |
 | 4.0.0-BETA5 | 2019-02-20 |
 | 4.0.0-BETA4 | 2019-02-14 |
