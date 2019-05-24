@@ -7,6 +7,7 @@ namespace Peak\View;
 use Peak\Blueprint\View\Presentation;
 use Peak\Common\Traits\Macro;
 use Peak\View\Exception\FileNotFoundException;
+use Peak\View\Exception\VarNotFoundException;
 
 use function array_key_exists;
 use function call_user_func_array;
@@ -15,6 +16,7 @@ use function is_array;
 use function ob_end_clean;
 use function ob_start;
 use function ob_get_clean;
+
 
 class View implements \Peak\Blueprint\View\View
 {
@@ -66,7 +68,7 @@ class View implements \Peak\Blueprint\View\View
     public function &__get(string $var)
     {
         if (!array_key_exists($var, $this->vars)) {
-            throw new \Exception('variable ['.$var.'] not found');
+            throw new VarNotFoundException($var);
         }
 
         return $this->vars[$var];
