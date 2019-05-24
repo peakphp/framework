@@ -1,3 +1,9 @@
+VERSION 4.0.0-RC3
+-----------
+Release date: ?
+
+ - added View\Exception\VarNotFoundException;
+
 VERSION 4.0.0-RC2
 -----------
 Release date: 2019-05-24
