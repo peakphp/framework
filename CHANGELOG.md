@@ -19,6 +19,11 @@ Release date: ?
  - added Blueprint\View\Presentation
  - added Backpack\AppRoutesMapper
  - renamed method setClassName() to setAppClass() in Backpack\AppBuilder to be consistent
+ - renamed Backpack\AppBuilder to Backpack\Bedrock\HttpAppBuilder. Kept Backpack\AppBuilder as class alias 
+   for backward compatibility
+ - renamed Backpack\ConfigLoader to Backpack\Config\HttpConfigLoader. Kept Backpack\ConfigLoader as class alias 
+   for backward compatibility
+ - added method addVars() and setViewClass() to Backpack\View\ViewBuilder
  
 VERSION 4.0.0-RC1
 -----------

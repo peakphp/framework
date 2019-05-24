@@ -1,6 +1,7 @@
 <?php
 
 use \PHPUnit\Framework\TestCase;
+//use \Peak\Backpack\Bedrock\HttpAppBuilder as AppBuilder;
 use \Peak\Backpack\AppBuilder;
 use \Peak\Blueprint\Bedrock\Application as ApplicationBlueprint;
 use \Peak\Bedrock\Http\Application;
