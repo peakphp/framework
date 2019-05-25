@@ -84,6 +84,23 @@ class ViewTest extends TestCase
         $this->assertTrue($content === '<div class="content"><h1>Profile of foo</h1></div>');
     }
 
+    public function testRenderSingleViewScript()
+    {
+        $view = new View(
+            ['name' => 'foo'],
+            new \Peak\View\Presentation(['/profile.php'], FIXTURES_PATH.'/view/scripts')
+        );
+        $content = $view->render();
+        $this->assertTrue($content === '<h1>Profile of foo</h1>');
+
+        $view = new View(
+            ['name' => 'foo'],
+            new \Peak\View\Presentation([FIXTURES_PATH.'/view/scripts/profile.php'])
+        );
+        $content = $view->render();
+        $this->assertTrue($content === '<h1>Profile of foo</h1>');
+    }
+
     public function testRenderFail()
     {
         $this->expectException(\Peak\View\Exception\FileNotFoundException::class);
