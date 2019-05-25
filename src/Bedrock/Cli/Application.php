@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Peak\Bedrock\Cli;
 
 use Peak\Bedrock\AbstractApplication;
+use Peak\Bedrock\Cli\Exception\InvalidCommandException;
 use Peak\Blueprint\Bedrock\CliApplication;
 use Peak\Blueprint\Bedrock\Kernel;
 use Peak\Blueprint\Collection\Dictionary;
@@ -67,7 +68,7 @@ class Application extends AbstractApplication implements CliApplication
                 $command = $this->getContainer()->get($command);
             }
             if (!$command instanceof Command) {
-                throw new \Exception('Invalid command');
+                throw new InvalidCommandException();
             }
             $this->console->add($command);
         }
