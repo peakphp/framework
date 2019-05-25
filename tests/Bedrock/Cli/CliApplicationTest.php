@@ -51,7 +51,7 @@ class CliApplicationTest extends TestCase
 
     public function testAddCommandException()
     {
-        $this->expectException(Exception::class);
+        $this->expectException(\Peak\Bedrock\Cli\Exception\InvalidCommandException::class);
         $app = $this->createApp(new Kernel('dev', new \Peak\Di\Container()));
         $app->add($this->createMock(InvalidTestCliCommand::class));
     }
