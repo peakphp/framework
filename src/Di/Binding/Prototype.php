@@ -9,6 +9,7 @@ use Peak\Di\ClassInstantiator;
 use Peak\Di\ClassResolver;
 use Peak\Di\Container;
 use Peak\Di\Exception\InfiniteLoopResolutionException;
+use Peak\Di\Exception\InvalidDefinitionException;
 
 use function is_array;
 use function is_null;
@@ -86,6 +87,6 @@ class Prototype extends AbstractBinding
                 ->resolve($definition, $container, $args);
         }
 
-        throw new \Exception(__CLASS__.': Invalid definition for '.$this->name);
+        throw new InvalidDefinitionException($this->name);
     }
 }
