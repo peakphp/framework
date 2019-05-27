@@ -8,7 +8,6 @@ interface Validator
 {
     /**
      * Valid a mixed $value
-     *
      * @param mixed $value
      * @return bool
      */
