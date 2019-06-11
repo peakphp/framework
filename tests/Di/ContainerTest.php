@@ -536,7 +536,7 @@ class ContainerTest extends TestCase
         $this->expectException(\Peak\Di\Exception\InvalidDefinitionException::class);
         $container = new Container();
         $container->disableAutoWiring();
-        $container->bind('test', 21343);
+        $container->bindSingleton('test', 21343);
         $container->get('test');
     }
 
@@ -550,7 +550,7 @@ class ContainerTest extends TestCase
     public function testResolveDefinition()
     {
         $container = new Container();
-        $container->bind(TestDi3::class, new TestDi3());
+        $container->bindSingleton(TestDi3::class, new TestDi3());
         $this->assertInstanceOf(TestDi3::class, $container->resolve(TestDi3::class));
     }
 

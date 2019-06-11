@@ -93,21 +93,23 @@ class ContainerBindingPrototypeTest extends TestCase
         $container = new Container();
         $container->disableAutoWiring();
 
-        $container->bind(A::class, function() {
+        $container->bindSingleton(A::class, function() {
             $a = new A;
             $a->name = 'foobar';
             return  $a;
         });
 
         // with arguments stored with the binding
-        $container->bindPrototype(Chest::class, [
-            Chest::class,
-            Arm::class => [
-                Arm::class,
-                A::class, // will use A::class previously definition
-                'foo',
-            ],
-            'bar',
+        $container->bindPrototypes([
+            Chest::class => [
+                Chest::class,
+                Arm::class => [
+                    Arm::class,
+                    A::class, // will use A::class previously definition
+                    'foo',
+                ],
+                'bar',
+            ]
         ]);
 
         $chest = $container->create(Chest::class);
@@ -146,7 +148,7 @@ class ContainerBindingPrototypeTest extends TestCase
     public function testBindingPrototypeInterfaceWithNestedDependencies()
     {
         $container = new Container();
-        $container->bind(TestDiInterface3::class, TestDi3::class);
+        $container->bindSingleton(TestDiInterface3::class, TestDi3::class);
         $container->bindPrototype(TestDiInterface::class, TestDi21::class);
         $testdi = $container->get(TestDiInterface::class);
         $testdi2 = $container->get(TestDiInterface::class);

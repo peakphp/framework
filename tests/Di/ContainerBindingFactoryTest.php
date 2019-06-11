@@ -35,9 +35,11 @@ class ContainerBindingFactoryTest extends TestCase
         $container = new Container();
         $container->disableAutoWiring();
 
-        $container->bindFactory(Finger::class, function (Container $c, $args) {
-            return new Finger(new A, 'factory', $args[0] ?? 'bar');
-        });
+        $container->bindFactories([
+            Finger::class => function (Container $c, $args) {
+                return new Finger(new A, 'factory', $args[0] ?? 'bar');
+            }
+        ]);
 
         $finger = $container->create(Finger::class, ['pass argument to closure']);
 

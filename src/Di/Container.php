@@ -429,9 +429,23 @@ class Container implements ContainerInterface
      * @param mixed $definition
      * @return $this
      */
-    public function bind(string $name, $definition)
+    public function bindSingleton(string $name, $definition)
     {
         $this->definitions[$name] = new Singleton($name, $definition);
+        return $this;
+    }
+
+    /**
+     * Add a groups of singletons definitions
+     *
+     * @param array<string, mixed> $singletons
+     * @return $this
+     */
+    public function bindSingletons(array $singletons)
+    {
+        foreach ($singletons as $name => $definition) {
+            $this->bindSingleton($name, $definition);
+        }
         return $this;
     }
 
@@ -449,6 +463,20 @@ class Container implements ContainerInterface
     }
 
     /**
+     * Add a groups of prototypes definitions
+     *
+     * @param array<string, mixed> $prototypes
+     * @return $this
+     */
+    public function bindPrototypes(array $prototypes)
+    {
+        foreach ($prototypes as $name => $definition) {
+            $this->bindPrototype($name, $definition);
+        }
+        return $this;
+    }
+
+    /**
      * Add a factory definition
      *
      * @param string $name
@@ -458,6 +486,20 @@ class Container implements ContainerInterface
     public function bindFactory(string $name, $definition)
     {
         $this->definitions[$name] = new Factory($name, $definition);
+        return $this;
+    }
+
+    /**
+     * Add a groups of factories definitions
+     *
+     * @param array<string, mixed> $factories
+     * @return $this
+     */
+    public function bindFactories(array $factories)
+    {
+        foreach ($factories as $name => $definition) {
+            $this->bindFactory($name, $definition);
+        }
         return $this;
     }
 

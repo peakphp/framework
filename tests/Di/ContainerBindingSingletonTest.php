@@ -33,10 +33,20 @@ class ContainerBindingSingletonTest extends TestCase
         $container = new Container();
         $container->disableAutoWiring();
 
-        $container->bind(A::class, new A);
-
+        $container->bindSingleton(A::class, new A);
         $class = $container->create(A::class);
+        $this->assertTrue($class instanceof A);
+    }
 
+    public function testBasicWithArray()
+    {
+        $container = new Container();
+        $container->disableAutoWiring();
+
+        $container->bindSingletons([
+            A::class => A::class
+        ]);
+        $class = $container->create(A::class);
         $this->assertTrue($class instanceof A);
     }
 
@@ -44,7 +54,7 @@ class ContainerBindingSingletonTest extends TestCase
     {
         $container = new Container();
         $container->disableAutoWiring();
-        $container->bind(A::class, new A);
+        $container->bindSingleton(A::class, new A);
         $class = $container->get(A::class);
         $this->assertTrue($class instanceof A);
     }
@@ -56,7 +66,7 @@ class ContainerBindingSingletonTest extends TestCase
 
         $a = new A;
         $a->foo = 'bar';
-        $container->bind(A::class, $a);
+        $container->bindSingleton(A::class, $a);
 
         $a = $container->create(A::class);
         $this->assertTrue($a instanceof A);
@@ -68,7 +78,7 @@ class ContainerBindingSingletonTest extends TestCase
         $container = new Container();
         $container->disableAutoWiring();
 
-        $container->bind(A::class, A::class);
+        $container->bindSingleton(A::class, A::class);
         $a = $container->get(A::class);
         $a->foo = 'bar';
 
@@ -85,14 +95,14 @@ class ContainerBindingSingletonTest extends TestCase
         $container = new Container();
         $container->disableAutoWiring();
 
-        $container->bind(A::class, function() {
+        $container->bindSingleton(A::class, function() {
             $a = new A;
             $a->name = 'foobar';
             return  $a;
         });
 
         // with arguments stored with the binding
-        $container->bind(Chest::class, [
+        $container->bindSingleton(Chest::class, [
             Chest::class,
             Arm::class => [
                 Arm::class,
@@ -117,14 +127,14 @@ class ContainerBindingSingletonTest extends TestCase
         $container = new Container();
         $container->disableAutoWiring();
 
-        $container->bind(A::class, function() {
+        $container->bindSingleton(A::class, function() {
             $a = new A;
             $a->name = 'foobar';
             return  $a;
         });
 
         // with arguments stored with the binding
-        $container->bind(Chest::class, [
+        $container->bindSingleton(Chest::class, [
             Chest::class,
             Arm::class => [
                 Arm::class,
@@ -152,7 +162,7 @@ class ContainerBindingSingletonTest extends TestCase
         $container->set($a);
 
         // with arguments stored with the binding
-        $container->bind(Chest::class, [
+        $container->bindSingleton(Chest::class, [
             Chest::class,
             Arm::class => [
                 Arm::class,
@@ -180,7 +190,7 @@ class ContainerBindingSingletonTest extends TestCase
         $container->set($a);
 
         // with arguments stored with the binding
-        $container->bind(Chest::class, [
+        $container->bindSingleton(Chest::class, [
             Chest::class,
             function() use ($a) {
                 return new Arm($a, 'barvar');
@@ -206,7 +216,7 @@ class ContainerBindingSingletonTest extends TestCase
         // with arguments stored with the binding
         // when using array definition, the first element represent class
         // we want instantiate and others elements represent class constructor arguments
-        $container->bind(Finger::class, [
+        $container->bindSingleton(Finger::class, [
             Finger::class,
             A::class,
             'bar',
@@ -260,7 +270,7 @@ class ContainerBindingSingletonTest extends TestCase
         $container = new Container();
         $container->disableAutoWiring();
 
-        $container->bind(Finger::class, [
+        $container->bindSingleton(Finger::class, [
             Finger::class,
             A::class,
             'bar',
@@ -280,7 +290,7 @@ class ContainerBindingSingletonTest extends TestCase
     {
         $container = new Container();
         $container->disableAutoWiring();
-        $container->bind(Finger::class, [
+        $container->bindSingleton(Finger::class, [
             Finger::class,
             A::class,
         ]);
@@ -294,7 +304,7 @@ class ContainerBindingSingletonTest extends TestCase
     {
         $container = new Container();
         $container->disableAutoWiring();
-        $container->bind(A::class, A::class);
+        $container->bindSingleton(A::class, A::class);
         $a = $container->create(A::class);
         $this->assertInstanceOf(A::class, $a);
     }
@@ -303,7 +313,7 @@ class ContainerBindingSingletonTest extends TestCase
     {
         $container = new Container();
         $container->disableAutoWiring();
-        $container->bind('FooBar32', A::class);
+        $container->bindSingleton('FooBar32', A::class);
         $a = $container->create('FooBar32');
         $this->assertInstanceOf(A::class, $a);
     }
@@ -311,7 +321,7 @@ class ContainerBindingSingletonTest extends TestCase
     public function testBindForInterfaceWithAutoWiring()
     {
         $container = new Container();
-        $container->bind(TestDiInterface::class, TestDi7::class);
+        $container->bindSingleton(TestDiInterface::class, TestDi7::class);
         $testdi = $container->create(TestDiInterface::class);
         $this->assertInstanceOf(TestDiInterface::class, $testdi);
         $testdi->test = 'test';
@@ -322,7 +332,7 @@ class ContainerBindingSingletonTest extends TestCase
     public function testBindForInterfaceResolving()
     {
         $container = new Container();
-        $container->bind(TestDiInterface::class, TestDi7::class);
+        $container->bindSingleton(TestDiInterface::class, TestDi7::class);
         $testdi = $container->create(TestDi6::class);
         $this->assertInstanceOf(TestDi6::class, $testdi);
         $this->assertInstanceOf(TestDi7::class, $testdi->testdi);
@@ -331,13 +341,13 @@ class ContainerBindingSingletonTest extends TestCase
     public function testBindingSingletonInterfaceWithNestedDependencies()
     {
         $container = new Container();
-        $container->bind(TestDiInterface::class, TestDi20::class);
+        $container->bindSingleton(TestDiInterface::class, TestDi20::class);
         $testdi = $container->get(TestDiInterface::class);
         $this->assertInstanceOf(TestDi20::class, $testdi);
 
         $container = new Container();
-        $container->bind(TestDiInterface3::class, TestDi3::class);
-        $container->bind(TestDiInterface::class, TestDi21::class);
+        $container->bindSingleton(TestDiInterface3::class, TestDi3::class);
+        $container->bindSingleton(TestDiInterface::class, TestDi21::class);
         $testdi = $container->get(TestDiInterface::class);
         $this->assertInstanceOf(TestDi21::class, $testdi);
     }
@@ -346,7 +356,7 @@ class ContainerBindingSingletonTest extends TestCase
     {
         $this->expectException(\Peak\Di\Exception\InfiniteLoopResolutionException::class);
         $container = new Container();
-        $container->bind(TestDiInterface::class, TestDi22::class);
+        $container->bindSingleton(TestDiInterface::class, TestDi22::class);
         $testdi = $container->get(TestDiInterface::class);
     }
 
@@ -354,7 +364,7 @@ class ContainerBindingSingletonTest extends TestCase
     {
         $this->expectException(\Peak\Di\Exception\InfiniteLoopResolutionException::class);
         $container = new Container();
-        $container->bind(TestDiInterface::class, [
+        $container->bindSingleton(TestDiInterface::class, [
             TestDiInterface::class,
             TestDi22::class
         ]);

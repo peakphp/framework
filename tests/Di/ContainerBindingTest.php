@@ -61,7 +61,7 @@ class ContainerBindingTest extends TestCase
                 return new Finger(new A, 'factory', 'bar');
             })
 
-            ->bind(A::class, new A)
+            ->bindSingleton(A::class, new A)
 
             ->bindFactory(Finger::class, function (Container $c) {
                 return new Finger(new A, 'factory', 'bar');
