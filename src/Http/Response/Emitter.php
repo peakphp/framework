@@ -63,6 +63,9 @@ class Emitter implements ResponseEmitter
      */
     private function assertNoPreviousOutput()
     {
+        // headers_sent() will return false, even if you sent something to the ouptut using print() or header(),
+        // if output_buffering is different from Off in you php.ini, and the length of what you sent does not
+        // exceed the size of output_buffering.
         if (headers_sent()) {
             throw new \RuntimeException('Unable to emit response; headers already sent');
         }
