@@ -6,6 +6,7 @@ Release date: ?
  - added Bedrock\Cli\Exception\InvalidCommandException
  - renamed method bind() to bindSingleton() in Di\Container for consistency and clarity
  - added methods bindSingletons(), bindPrototypes() and bindFactories() to Di\Container
+ - moved Peak\View component outside the framework
 
 VERSION 4.0.0-RC2
 -----------
