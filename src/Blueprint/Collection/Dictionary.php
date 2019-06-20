@@ -8,7 +8,7 @@ interface Dictionary extends Collection
 {
     /**
      * @param string $item
-     * @param null $default
+     * @param mixed|null $default
      * @return mixed
      */
     public function get(string $item, $default = null);

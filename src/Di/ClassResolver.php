@@ -48,7 +48,7 @@ class ClassResolver
     /**
      * Resolve class arguments dependencies
      *
-     * @param $class
+     * @param mixed $class
      * @param Container $container
      * @param array $args
      * @param null $explicit
