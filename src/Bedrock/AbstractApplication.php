@@ -23,7 +23,7 @@ abstract class AbstractApplication implements Application
     protected $props;
 
     /**
-     * @return
+     * @return Kernel
      */
     public function getKernel(): Kernel
     {
