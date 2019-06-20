@@ -27,11 +27,12 @@ class InterfaceResolver
     }
 
     /**
-     * @param $interface
+     * @param string $interface
      * @param Container $container
      * @param array $explicit
      * @return mixed|object
      * @throws AmbiguousResolutionException
+     * @throws Exception\ClassDefinitionNotFoundException
      * @throws InterfaceNotFoundException
      * @throws \ReflectionException
      */
