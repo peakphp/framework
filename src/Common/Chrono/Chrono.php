@@ -34,8 +34,7 @@ class Chrono
 
     /**
      * Chrono constructor.
-     * @param string|null $name
-     * @param bool $autostart
+     * @param string $name
      */
     public function __construct(string $name = '')
     {
