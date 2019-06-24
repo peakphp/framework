@@ -12,7 +12,7 @@ class KernelTest extends TestCase
 {
     public function testVersion()
     {
-        $this->assertTrue(Kernel::VERSION === '4.0');
+        $this->assertTrue(Kernel::VERSION === '4.0.0');
     }
 
     public function testInstantiation()

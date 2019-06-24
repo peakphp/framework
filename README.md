@@ -8,22 +8,11 @@
 <a href="https://github.com/peakphp/framework/blob/master/LICENSE.md"><img src="https://poser.pugx.org/peak/framework/license" alt="License"></a>
 </p>
 
-> **Note:** This repository contains the core code of the Peak framework. If you want to build an application using Peak, visit the main [Peak repository](https://github.com/peakphp/peak).
+> **Note:** This repository contains the core code of the Peak framework. If you want an example on how to build an application using Peak, visit the main [Peak repository](https://github.com/peakphp/peak).
 
-### About Peak Framework v4.x
+### Peak Framework v4.0
 
-This branch is a "work in progress" of version 4.0 which include drastic change of the core and overall operation of the framework.
-
-| | |
-| --- | --- |
-| 4.0.0-RC3 | master |
-| [4.0.0-RC2](https://github.com/peakphp/framework/releases/tag/4.0.0-RC2) | 2019-05-24<br>([changelog](https://github.com/peakphp/framework/blob/4.0.0-RC1/CHANGELOG.md)) |
-| 4.0.0-RC1 | 2019-03-30 |
-| 4.0.0-BETA5 | 2019-02-20 |
-| 4.0.0-BETA4 | 2019-02-14 |
-| 4.0.0-BETA3 | 2019-02-12 |
-| 4.0.0-BETA2 | 2019-02-05 |
-| 4.0.0-BETA1 | 2019-01-24 |
+Fast, unopinionated and minimalist web framework based on PHP.
 
 ### Installation 
 
