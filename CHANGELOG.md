@@ -1,6 +1,6 @@
-VERSION 4.0.0-RC3
+VERSION 4.0.0
 -----------
-Release date: ?
+Release date: 2019-06-24
 
  - added View\Exception\VarNotFoundException
  - added Bedrock\Cli\Exception\InvalidCommandException
