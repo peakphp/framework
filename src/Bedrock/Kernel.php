@@ -6,17 +6,13 @@ namespace Peak\Bedrock;
 
 use Psr\Container\ContainerInterface;
 
-/**
- * Class Kernel
- * @package Peak\Bedrock
- */
 class Kernel implements \Peak\Blueprint\Bedrock\Kernel
 {
     /**
-     * Peak version
+     * Peak kernel version
      * @var string
      */
-    const VERSION = '4.0';
+    const VERSION = '4.0.0';
 
     /**
      * @var ContainerInterface
