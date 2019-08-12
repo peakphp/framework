@@ -49,8 +49,6 @@ class ConfigLoaderTest extends TestCase
 
     public function testLoadConfigFactoryError()
     {
-        PHPUnit\Framework\Error\Notice::$enabled = false;
-
         $config = @(new ConfigLoader())
             ->setCache(__DIR__, 'my-conf', 0)
             ->setConfigFactory(new \Peak\Config\ConfigFactory())
@@ -63,7 +61,6 @@ class ConfigLoaderTest extends TestCase
 
     public function testSetCacheTrigger()
     {
-        PHPUnit\Framework\Error\Notice::$enabled = false;
         $config = @(new ConfigLoader())
             ->setConfigFactory(new \Peak\Config\ConfigFactory())
             ->setCache(__DIR__, 'my-conf', 0)

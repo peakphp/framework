@@ -60,7 +60,7 @@ class ChronoTest extends TestCase
         $steps = $chrono->getSteps();
         $this->assertTrue(count($steps) == 3);
         $this->assertTrue($steps[1]->getSec() == 0);
-        $this->assertTrue($steps[1]->getMs() > 0);
+        $this->assertTrue($steps[1]->getMs(4) > 0);
         $this->assertTrue($steps[1]->getId() === 'second-step');
         $this->assertTrue($steps[1]->getDescription() === '');
     }
