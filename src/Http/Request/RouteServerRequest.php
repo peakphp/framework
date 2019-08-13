@@ -18,9 +18,9 @@ class RouteServerRequest implements ServerRequestInterface
     private $request;
 
     /**
-     * @var RouteParameter
+     * @var RouteArgs
      */
-    private $routeParam;
+    private $routeArgs;
 
     /**
      * ServerRequestWrapper constructor.
@@ -29,9 +29,21 @@ class RouteServerRequest implements ServerRequestInterface
     public function __construct(ServerRequestInterface $request)
     {
         $this->request = $request;
-        if (isset($request->param)) {
-            $this->routeParam = $request->param;
+        if (isset($request->args)) {
+            $this->routeArgs = $request->args;
         }
+    }
+
+    /**
+     * @deprecated
+     * @param string $name
+     * @param string|null $type
+     * @return bool
+     */
+    public function hasParam(string $name, string $type = null): bool
+    {
+        trigger_error('hasParam() is deprecated and will be remove in 4.1.0. Use hasArg() instead.', E_USER_NOTICE );
+        return $this->hasArg($name, $type);
     }
 
     /**
@@ -39,17 +51,29 @@ class RouteServerRequest implements ServerRequestInterface
      * @param string|null $type
      * @return bool
      */
-    public function hasParam(string $name, string $type = null): bool
+    public function hasArg(string $name, string $type = null): bool
     {
-        if (!isset($this->routeParam)) {
+        if (!isset($this->routeArgs)) {
             return false;
         }
-        $exists = isset($this->routeParam->$name);
+        $exists = isset($this->routeArgs->$name);
         if (!$exists || !isset($type)) {
             return $exists;
         }
 
-        return (gettype($this->routeParam->$name) === $type) ? true : false;
+        return (gettype($this->routeArgs->$name) === $type) ? true : false;
+    }
+
+    /**
+     * @deprecated (will be remove in 4.1.0)
+     * @param string $name
+     * @param null $default
+     * @return mixed|null
+     */
+    public function getParam(string $name, $default = null)
+    {
+        trigger_error('getParam() is deprecated and will be remove in 4.1.0. Use getArg() instead.', E_USER_NOTICE);
+        return $this->getArg($name, $default);
     }
 
     /**
@@ -57,12 +81,12 @@ class RouteServerRequest implements ServerRequestInterface
      * @param mixed $default
      * @return mixed|null
      */
-    public function getParam(string $name, $default = null)
+    public function getArg(string $name, $default = null)
     {
-        if (!isset($this->routeParam) || !$this->hasParam($name)) {
+        if (!isset($this->routeArgs) || !$this->hasArg($name)) {
             return $default;
         }
-        return $this->routeParam->$name;
+        return $this->routeArgs->$name;
     }
 
     /**
