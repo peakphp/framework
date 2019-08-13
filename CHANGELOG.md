@@ -1,6 +1,13 @@
 VERSION 4.0.1
 -----------
-Release date: ?
+Release date: 2019-08-13
+
+ - renamed class Http\Request\RouteParameter to RouteArgs.
+ - request arguments are now stored in the Request object under property $args.
+   $param property from route request is still usable but will be remove in version 4.1.0 in favor of $args.
+ - methods Http\Request\RouteServerRequest getParam() and hasParam() renamed to getArg() and hasArg().
+   methods getParam() and hasParam() still can be used but will throw a user notice and will be remove
+   in version 4.1.0 in favor of getArg() and hasArg()
 
 VERSION 4.0.0
 -----------
