@@ -1,7 +1,7 @@
 <?php
 
 use \PHPUnit\Framework\TestCase;
-use \Peak\Http\Request\RouteParameter;
+use \Peak\Http\Request\RouteArgs;
 use \Peak\Http\Request\RouteServerRequest;
 use \Psr\Http\Message\ServerRequestInterface;
 
@@ -10,14 +10,14 @@ class RouteServerRequestTest extends TestCase
     public function testGeneral()
     {
         $request = $this->createMock(ServerRequestInterface::class);
-        $request->param = new RouteParameter(['test' => 123]);
+        $request->args = new RouteArgs(['test' => 123]);
         $rsr = new RouteServerRequest($request);
 
-        $this->assertTrue($rsr->hasParam('test'));
-        $this->assertFalse($rsr->hasParam('foobar'));
+        $this->assertTrue($rsr->hasArg('test'));
+        $this->assertFalse($rsr->hasArg('foobar'));
 
         $this->assertTrue($rsr->getParam('test') == 123);
-        $this->assertTrue($rsr->getParam('foobar', 'test') === 'test');
+        $this->assertTrue($rsr->getArg('foobar', 'test') === 'test');
     }
 
     public function testHasWithNoRouteParam()
@@ -25,15 +25,15 @@ class RouteServerRequestTest extends TestCase
         $request = $this->createMock(ServerRequestInterface::class);
         $rsr = new RouteServerRequest($request);
 
-        $this->assertFalse($rsr->hasParam('foobar'));
+        $this->assertFalse($rsr->hasArg('foobar'));
     }
 
     public function testHasStrict()
     {
         $request = $this->createMock(ServerRequestInterface::class);
-        $request->param = new RouteParameter(['test' => 123]);
+        $request->args = new RouteArgs(['test' => 123]);
         $rsr = new RouteServerRequest($request);
-        $this->assertFalse($rsr->hasParam('test', 'string'));
+        $this->assertFalse($rsr->hasArg('test', 'string'));
     }
 
     public function testInterfaceSignature()
