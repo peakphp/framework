@@ -16,7 +16,7 @@ class RouteServerRequestTest extends TestCase
         $this->assertTrue($rsr->hasArg('test'));
         $this->assertFalse($rsr->hasArg('foobar'));
 
-        $this->assertTrue($rsr->getParam('test') == 123);
+        $this->assertTrue($rsr->getArg('test') == 123);
         $this->assertTrue($rsr->getArg('foobar', 'test') === 'test');
     }
 
