@@ -101,8 +101,11 @@ class Route implements \Peak\Blueprint\Http\Route, Stack
     {
         $isMatching = $this->match($request);
 
-        // add regex matches to the request
-        $request->param = new RouteParameter($this->matches);
+        // add regex matches(aka route arguments) to the request
+        $request->args = new RouteArgs($this->matches);
+
+        // @deprecated - will be remove in 4.1.0
+        $request->param = $request->args;
 
         if (!$isMatching) {
             return $this->processParent($request, $handler);
