@@ -35,7 +35,7 @@ class RouteServerRequest implements ServerRequestInterface
     }
 
     /**
-     * @deprecated
+     * @deprecated (will be remove in 4.1.0)
      * @param string $name
      * @param string|null $type
      * @return bool
