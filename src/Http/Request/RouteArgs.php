@@ -4,24 +4,20 @@ declare(strict_types=1);
 
 namespace Peak\Http\Request;
 
-class RouteParameter
+class RouteArgs
 {
     /**
      * @var array
      */
-    private $params;
+    private $args;
 
     /**
-     * RouteFragments constructor.
-     * @param array $params
+     * RouteArgs constructor.
+     * @param array $args
      */
-    /**
-     * RouteParameter constructor.
-     * @param array $params
-     */
-    public function __construct(array $params)
+    public function __construct(array $args)
     {
-        $this->params = $params;
+        $this->args = $args;
     }
 
     /**
@@ -29,7 +25,7 @@ class RouteParameter
      */
     public function raw()
     {
-        return $this->params;
+        return $this->args;
     }
 
     /**
@@ -38,7 +34,7 @@ class RouteParameter
      */
     public function __get(string $name)
     {
-        return $this->params[$name];
+        return $this->args[$name];
     }
 
     /**
@@ -47,6 +43,6 @@ class RouteParameter
      */
     public function __isset(string $name)
     {
-        return isset($this->params[$name]);
+        return isset($this->args[$name]);
     }
 }
