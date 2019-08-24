@@ -210,7 +210,7 @@ class ResponseA implements ResponseInterface
      */
     public function getBody()
     {
-        // TODO: Implement getBody() method.
+        return $this->msg;
     }
 
     /**
