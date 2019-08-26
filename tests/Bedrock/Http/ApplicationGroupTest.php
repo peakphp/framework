@@ -46,6 +46,18 @@ class ApplicationGroupTest extends TestCase
                     ->delete('/mypath3', new HandlerA())
                     ->all('/mypath3', new HandlerA());
 
+                $app
+                    ->group('/users', function() use ($app) {
+                        $app->get('/mypath1', new HandlerA());
+                        $app->group('/users', function() use ($app) {
+                            $app->group('/users', function() use ($app) {
+                                $app->group('/users', function() use ($app) {
+                                    $app->get('/mypath1', new HandlerB());
+                                });
+                            });
+                        });
+                    });
+
             })
             ->group('/products', function() use ($app) {
                 $app
@@ -70,6 +82,8 @@ class ApplicationGroupTest extends TestCase
         $this->assertRequestBody($app, 'GET', '/users/3/profile', 'ResponseB');
         $this->assertRequestBody($app, 'GET', '/users/234234/profile', 'ResponseB');
         $this->assertRequestBody($app, 'GET', '/users/sdfsdfsdfsd/profile', 'ResponseC');
+        $this->assertRequestBody($app, 'GET', '/users/users/mypath1', 'ResponseA');
+        $this->assertRequestBody($app, 'GET', '/users/users/users/users/users/mypath1', 'ResponseB');
 
     }
 
