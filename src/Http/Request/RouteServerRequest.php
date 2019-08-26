@@ -35,18 +35,6 @@ class RouteServerRequest implements ServerRequestInterface
     }
 
     /**
-     * @deprecated (will be remove in 4.1.0)
-     * @param string $name
-     * @param string|null $type
-     * @return bool
-     */
-    public function hasParam(string $name, string $type = null): bool
-    {
-        trigger_error('hasParam() is deprecated and will be remove in 4.1.0. Use hasArg() instead.', E_USER_NOTICE );
-        return $this->hasArg($name, $type);
-    }
-
-    /**
      * @param string $name
      * @param string|null $type
      * @return bool
@@ -62,18 +50,6 @@ class RouteServerRequest implements ServerRequestInterface
         }
 
         return (gettype($this->routeArgs->$name) === $type) ? true : false;
-    }
-
-    /**
-     * @deprecated (will be remove in 4.1.0)
-     * @param string $name
-     * @param null $default
-     * @return mixed|null
-     */
-    public function getParam(string $name, $default = null)
-    {
-        trigger_error('getParam() is deprecated and will be remove in 4.1.0. Use getArg() instead.', E_USER_NOTICE);
-        return $this->getArg($name, $default);
     }
 
     /**
