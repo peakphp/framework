@@ -84,8 +84,8 @@ class Route implements \Peak\Blueprint\Http\Route, Stack
         // compile pseudo route syntax {param} and {param}:type into valid regex
         $routeRegex = (new RouteExpression($this->path))->getRegex();
 
-        // look to math the route
-        preg_match('#^'.$routeRegex.'$#', $request->getUri()->getPath(), $this->matches );
+        // look to match the route
+        $this->pregMatch('#^'.$routeRegex.'$#', $request->getUri()->getPath());
         return !empty($this->matches);
     }
 
@@ -103,9 +103,6 @@ class Route implements \Peak\Blueprint\Http\Route, Stack
 
         // add regex matches(aka route arguments) to the request
         $request->args = new RouteArgs($this->matches);
-
-        // @deprecated - will be remove in 4.1.0
-        $request->param = $request->args;
 
         if (!$isMatching) {
             return $this->processParent($request, $handler);
@@ -159,5 +156,24 @@ class Route implements \Peak\Blueprint\Http\Route, Stack
     public function getHandlers(): array
     {
         return $this->stack->getHandlers();
+    }
+
+    /**
+     * @return array
+     */
+    protected function getMatches(): array
+    {
+        return $this->matches;
+    }
+
+    /**
+     * @param string $pattern
+     * @param string $path
+     * @return array
+     */
+    protected function pregMatch(string $pattern, string $path): array
+    {
+        preg_match($pattern, $path, $this->matches);
+        return $this->matches;
     }
 }
