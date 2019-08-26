@@ -1,5 +1,16 @@
+VERSION 4.1.0
+-------------
+Release date: ?
+
+ - added group feature for pre-routing in to Bedrock\Http\Application
+ - added Bedrock\Http\GroupManager and Http\Request\PreRoute
+ - added methods getMatches() and pregMatch() to Http\Request\Route
+ - removed deprecated methods Http\Request\RouteServerRequest getParam() and hasParam() in
+   favor of getArg() and hasArg()
+ - removed deprecated $param property for Request in favor of $args property
+ 
 VERSION 4.0.1
------------
+-------------
 Release date: 2019-08-13
 
  - renamed class Http\Request\RouteParameter to RouteArgs.
@@ -10,7 +21,7 @@ Release date: 2019-08-13
    in version 4.1.0 in favor of getArg() and hasArg()
 
 VERSION 4.0.0
------------
+-------------
 Release date: 2019-06-24
 
  - added View\Exception\VarNotFoundException
@@ -21,7 +32,7 @@ Release date: 2019-06-24
  - moved Peak\Pipeline component outside the framework
 
 VERSION 4.0.0-RC2
------------
+-----------------
 Release date: 2019-05-24
 
  - added Http\Middleware\JsonBodyParserMiddleware and Http\Exception\BodyParserException
@@ -48,7 +59,7 @@ Release date: 2019-05-24
  - added method addVars() and setViewClass() to Backpack\View\ViewBuilder
  
 VERSION 4.0.0-RC1
------------
+-----------------
 Release date: 2019-03-30
 
  - Http\Request\Exception\InvalidHandlerException return a more meaningful error message
@@ -77,7 +88,7 @@ Release date: 2019-03-30
  - removed an always true condition in Http\Stack::process()
 
 VERSION 4.0.0-BETA5
------------
+-------------------
 Release date: 2019-02-20
 
  - added method returnResponse() to Http\Stack to allow re-handling the stack multiple times
@@ -86,7 +97,7 @@ Release date: 2019-02-20
  - added method bootstrap() to Blueprint\Application
 
 VERSION 4.0.0-BETA4
------------
+-------------------
 Release date: 2019-02-14
 
  - added Http\Request\RouteExpression and updated Http\Request\Route to use it
@@ -101,7 +112,7 @@ Release date: 2019-02-14
  - added Bedrock\AbstractApplication to reduce repetitive code in Bedrock\Http\Application and Bedrock\Cli\Application
 
 VERSION 4.0.0-BETA3
------------
+-------------------
 Release date: 2019-02-12
 
  - removed trailing slash on request path in Http\Request\Route 
@@ -113,7 +124,7 @@ Release date: 2019-02-12
  - removed deprecated Common\ServiceLocator
 
 VERSION 4.0.0-BETA2
------------
+---------------------------
 Release date: 2019-02-05
 
  - raised minimum php version to 7.2
@@ -131,7 +142,7 @@ Release date: 2019-02-05
  - renamed nullable() to null() for consistency in Collection\Structure\DataType
 
 VERSION 4.0.0-BETA1
------------
+-------------------
 Release date: 2019-01-24
 
  - first draft of v4
