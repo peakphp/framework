@@ -10,6 +10,7 @@
 /tests/_reports
 /tmp
 /vendor
+.phpunit.result.cache
 phpstan.log
 psalm.log
 docker-compose.yml
