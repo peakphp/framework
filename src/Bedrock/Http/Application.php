@@ -120,14 +120,14 @@ class Application extends AbstractApplication implements HttpApplication
     public function group(string $path, Callable $fn): self
     {
         $fullPath = $this->groupManager->getFullPathFor($path);
+
         $this->groupManager->startGroup($path);
         $fn();
-        $stack = $this->createStack(
-            $this->groupManager->getHandlers($fullPath)
-        );
+        $stack = $this->createStack($this->groupManager->getHandlers($fullPath));
         $this->groupManager->releaseHandlers($fullPath);
         $this->groupManager->stopGroup($path);
-        $this->handlers[] = new PreRoute(null, $fullPath, $stack);
+
+        $this->stack(new PreRoute($fullPath, $stack));
         return $this;
     }
 
