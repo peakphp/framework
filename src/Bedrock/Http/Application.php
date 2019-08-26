@@ -7,6 +7,7 @@ namespace Peak\Bedrock\Http;
 use Peak\Bedrock\AbstractApplication;
 use Peak\Blueprint\Bedrock\HttpApplication;
 use Peak\Http\Request\BlankRequest;
+use Peak\Http\Request\PreRoute;
 use Peak\Http\Stack;
 use Peak\Http\Request\Route;
 use Peak\Blueprint\Bedrock\Kernel;
@@ -32,6 +33,11 @@ class Application extends AbstractApplication implements HttpApplication
     private $handlerResolver;
 
     /**
+     * @var GroupManager
+     */
+    private $groupManager;
+
+    /**
      * Application constructor.
      * @param Kernel $kernel
      * @param ResourceResolver $handlerResolver
@@ -45,12 +51,13 @@ class Application extends AbstractApplication implements HttpApplication
         $this->kernel = $kernel;
         $this->handlerResolver = $handlerResolver;
         $this->props = $props;
+        $this->groupManager = new GroupManager();
     }
 
     /**
      * @return ResourceResolver
      */
-    public function getHandlerResolver()
+    public function getHandlerResolver(): ResourceResolver
     {
         return $this->handlerResolver;
     }
@@ -74,26 +81,30 @@ class Application extends AbstractApplication implements HttpApplication
 
     /**
      * Add something to application stack
-     * @param mixed $handlers
-     * @return $this
+     * @param $handlers
+     * @return Application
      */
-    public function stack($handlers)
+    public function stack($handlers): self
     {
-        if (is_array($handlers)) {
-            $this->handlers = array_merge($this->handlers, $handlers);
-        } else {
-            $this->handlers[] = $handlers;
-        }
+        $handlersToAdd = [];
+        (is_array($handlers))
+            ? $handlersToAdd = $handlers
+            : $handlersToAdd[] = $handlers;
+
+        ($this->groupManager->currentlyInAGroup())
+            ? $this->groupManager->holdHandlers($handlersToAdd)
+            : $this->handlers = array_merge($this->handlers, $handlersToAdd);
+
         return $this;
     }
 
     /**
      * Conditional stacking
      * @param bool $condition
-     * @param mixed $handlers
-     * @return $this
+     * @param $handlers
+     * @return Application
      */
-    public function stackIfTrue(bool $condition, $handlers)
+    public function stackIfTrue(bool $condition, $handlers): self
     {
         if ($condition) {
             $this->stack($handlers);
@@ -102,10 +113,29 @@ class Application extends AbstractApplication implements HttpApplication
     }
 
     /**
-     * Stack a new GET route
-     * @see stackRoute()
+     * @param string $path
+     * @param callable $fn
+     * @return Application
      */
-    public function get(string $path, $handlers)
+    public function group(string $path, Callable $fn): self
+    {
+        $fullPath = $this->groupManager->getFullPathFor($path);
+        $this->groupManager->startGroup($path);
+        $fn();
+        $stack = $this->createStack(
+            $this->groupManager->getHandlers($fullPath)
+        );
+        $this->groupManager->releaseHandlers($fullPath);
+        $this->groupManager->stopGroup($path);
+        $this->handlers[] = new PreRoute(null, $fullPath, $stack);
+        return $this;
+    }
+
+    /**
+     * Stack a new GET route
+     * @see stackRoute
+     */
+    public function get(string $path, $handlers): self
     {
         return $this->stackRoute('GET', $path, $handlers);
     }
@@ -114,7 +144,7 @@ class Application extends AbstractApplication implements HttpApplication
      * Stack a new POST route
      * @see stackRoute()
      */
-    public function post(string $path, $handlers)
+    public function post(string $path, $handlers): self
     {
         return $this->stackRoute('POST', $path, $handlers);
     }
@@ -123,7 +153,7 @@ class Application extends AbstractApplication implements HttpApplication
      * Stack a new PUT route
      * @see stackRoute()
      */
-    public function put(string $path, $handlers)
+    public function put(string $path, $handlers): self
     {
         return $this->stackRoute('PUT', $path, $handlers);
     }
@@ -132,7 +162,7 @@ class Application extends AbstractApplication implements HttpApplication
      * Stack a new PATCH route
      * @see stackRoute()
      */
-    public function patch(string $path, $handlers)
+    public function patch(string $path, $handlers): self
     {
         return $this->stackRoute('PATCH', $path, $handlers);
     }
@@ -141,7 +171,7 @@ class Application extends AbstractApplication implements HttpApplication
      * Stack a new DELETE route
      * @see stackRoute()
      */
-    public function delete(string $path, $handlers)
+    public function delete(string $path, $handlers): self
     {
         return $this->stackRoute('DELETE', $path, $handlers);
     }
@@ -150,7 +180,7 @@ class Application extends AbstractApplication implements HttpApplication
      * Stack a new method less route
      * @see stackRoute()
      */
-    public function all(string $path, $handlers)
+    public function all(string $path, $handlers): self
     {
         return $this->stackRoute(null, $path, $handlers);
     }
@@ -162,7 +192,7 @@ class Application extends AbstractApplication implements HttpApplication
      * @param mixed $handlers
      * @return Application
      */
-    public function stackRoute(?string $method, string $path, $handlers)
+    public function stackRoute(?string $method, string $path, $handlers): self
     {
         return $this->stack(
             $this->createRoute($method, $path, $handlers)
@@ -178,13 +208,13 @@ class Application extends AbstractApplication implements HttpApplication
      */
     public function createRoute(?string $method, string $path, $handlers): Route
     {
+        if ($this->groupManager->currentlyInAGroup()) {
+            $path = $this->groupManager->getFullPathFor($path);
+        }
         if ($handlers instanceof \Peak\Blueprint\Http\Stack) {
             return new Route($method, $path, $handlers);
         }
-        if (!is_array($handlers)) {
-            $handlers = [$handlers];
-        }
-        return new Route($method, $path, new Stack($handlers, $this->getHandlerResolver()));
+        return new Route($method, $path, $this->createStack($handlers));
     }
 
     /**
@@ -205,9 +235,9 @@ class Application extends AbstractApplication implements HttpApplication
 
     /**
      * Flush current app stack
-     * @return $this
+     * @return Application
      */
-    public function reset()
+    public function reset(): self
     {
         $this->handlers = [];
         return $this;
@@ -216,9 +246,9 @@ class Application extends AbstractApplication implements HttpApplication
     /**
      * Overwrite the current app stack
      * @param mixed $handlers
-     * @return $this
+     * @return Application
      */
-    public function set($handlers)
+    public function set($handlers): self
     {
         $this->reset();
         $this->stack($handlers);
