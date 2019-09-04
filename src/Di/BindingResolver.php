@@ -14,7 +14,7 @@ class BindingResolver
      * @param BindingInterface $binding
      * @param Container $container
      * @param array $args
-     * @param null $explicit
+     * @param array|null $explicit
      * @return mixed
      */
     public function resolve(BindingInterface $binding, Container $container, $args = [], $explicit = null)
