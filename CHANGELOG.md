@@ -8,6 +8,8 @@ Release date: ?
  - removed deprecated methods Http\Request\RouteServerRequest getParam() and hasParam() in
    favor of getArg() and hasArg()
  - removed deprecated $param property for Request in favor of $args property
+ - implemented interfaces ArrayAccess and Peak\Blueprint\Common\Arrayable in Http\Request\RouteArgs
+ - deprecated method raw() of Http\Request\RouteArgs in favor of method toArray()
  
 VERSION 4.0.1
 -------------

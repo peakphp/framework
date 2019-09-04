@@ -12,5 +12,8 @@ class RouteArgsTest extends TestCase
         $this->assertTrue(isset($routeArgs->test));
         $this->assertTrue($routeArgs->test === 'bar');
         $this->assertFalse(isset($routeArgs->bar));
+        $this->assertTrue(isset($routeArgs['test']));
+        $this->assertTrue($routeArgs['test'] === 'bar');
+        $this->assertFalse(isset($routeArgs[1]));
     }
 }
