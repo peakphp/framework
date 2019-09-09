@@ -10,9 +10,9 @@
 
 > **Note:** This repository contains the core code of the Peak framework. If you want an example on how to build an application using Peak, visit the main [Peak repository](https://github.com/peakphp/peak).
 
-### Peak Framework v4.0
+### What is Peak?
 
-Fast, unopinionated and minimalist web framework based on PHP.
+Peak is a powerful, minimalist and flexible micro-framework, middleware centric based on PSR-7, PSR-11 and PSR-15
 
 ### Installation 
 
@@ -22,7 +22,7 @@ Fast, unopinionated and minimalist web framework based on PHP.
 
 Check https://github.com/peakphp/peak for a quick start project
 
-### Documentation
+### Documentation & Site
 
-Check https://peakphp.github.io/docs (work in progress)
+Check https://peakframework.com
 
