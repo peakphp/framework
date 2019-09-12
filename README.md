@@ -12,7 +12,7 @@
 
 ### What is Peak?
 
-Peak is a powerful, minimalist and flexible micro-framework, middleware centric based on PSR-7, PSR-11 and PSR-15
+Peak is a powerful, minimalist and flexible micro-framework, middleware centric based on PSR-7, PSR-11 and PSR-15.
 
 ### Installation 
 
@@ -20,7 +20,7 @@ Peak is a powerful, minimalist and flexible micro-framework, middleware centric 
 
 ### Quick start project
 
-Check https://github.com/peakphp/peak for a quick start project
+Check https://github.com/peakphp/peak for a quick start project structure.
 
 ### Documentation & Site
 
