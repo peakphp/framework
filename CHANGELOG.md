@@ -1,6 +1,6 @@
 VERSION 4.1.0
 -------------
-Release date: ?
+Release date: 2019-09-12
 
  - added group feature for pre-routing in to Bedrock\Http\Application
  - added Bedrock\Http\GroupManager and Http\Request\PreRoute
