@@ -1,3 +1,9 @@
+VERSION 4.1.1
+-------------
+Release date: ?
+
+ - Update Kernel::VERSION number
+
 VERSION 4.1.0
 -------------
 Release date: 2019-09-12
