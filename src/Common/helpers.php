@@ -84,7 +84,7 @@ if (!function_exists('phpInput')) {
     /**
      * Retrieve an object from php://input
      *
-     * @return mixed
+     * @return array
      */
     function phpInput(): array
     {

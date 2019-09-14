@@ -12,7 +12,7 @@ interface CliApplication extends Application
     public function console(): \Symfony\Component\Console\Application;
 
     /**
-     * @param $command
+     * @param mixed $command
      * @return mixed
      */
     public function add($command);
