@@ -1,8 +1,9 @@
 VERSION 4.1.1
 -------------
-Release date: ?
+Release date: 2019-10-28
 
- - Update Kernel::VERSION number
+ - improved exceptions for Collection\Structure
+ - updated Kernel::VERSION number
 
 VERSION 4.1.0
 -------------
