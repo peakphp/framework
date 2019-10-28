@@ -5,6 +5,10 @@ declare(strict_types=1);
 namespace Peak\Collection\Structure;
 
 use Peak\Blueprint\Collection\Structure;
+use Peak\Collection\Structure\Exception\InvalidPropertyDefinitionException;
+use Peak\Collection\Structure\Exception\InvalidPropertyTypeException;
+use Peak\Collection\Structure\Exception\InvalidStructureException;
+use Peak\Collection\Structure\Exception\UndefinedPropertyException;
 use \ArrayIterator;
 use \Exception;
 
@@ -12,7 +16,6 @@ use function array_key_exists;
 use function get_class;
 use function get_object_vars;
 use function gettype;
-use function implode;
 use function in_array;
 use function is_array;
 use function is_object;
@@ -27,8 +30,11 @@ abstract class AbstractStructure implements Structure
 
     /**
      * AbstractStructure constructor.
-     * @param mixed $data
-     * @throws Exception
+     * @param null $data
+     * @throws InvalidPropertyDefinitionException
+     * @throws InvalidPropertyTypeException
+     * @throws InvalidStructureException
+     * @throws UndefinedPropertyException
      */
     final public function __construct($data = null)
     {
@@ -38,7 +44,7 @@ abstract class AbstractStructure implements Structure
             } elseif (is_object($data)) {
                 $this->fromObject($data);
             } else {
-                throw new Exception('Structure expect an array or an object... ' . gettype($data) . ' given');
+                throw new InvalidStructureException(get_class($this), gettype($data));
             }
         }
 
@@ -46,9 +52,12 @@ abstract class AbstractStructure implements Structure
     }
 
     /**
-     * @param mixed $data
-     * @return AbstractStructure
-     * @throws Exception
+     * @param null $data
+     * @return static
+     * @throws InvalidPropertyDefinitionException
+     * @throws InvalidPropertyTypeException
+     * @throws InvalidStructureException
+     * @throws UndefinedPropertyException
      */
     public static function create($data = null)
     {
@@ -76,19 +85,21 @@ abstract class AbstractStructure implements Structure
 
     /**
      * @param string $name
-     * @param mixed $value
-     * @throws Exception
+     * @param $value
+     * @throws InvalidPropertyDefinitionException
+     * @throws InvalidPropertyTypeException
+     * @throws UndefinedPropertyException
      */
     protected function set(string $name, $value)
     {
         /** @var array<DataType> $structure */
         $structure = $this->getStructure();
         if (!isset($structure[$name])) {
-            throw new Exception('Property [' . $name . '] not defined');
+            throw new UndefinedPropertyException($name, get_class($this));
         }
 
         if (!$structure[$name] instanceof DataType) {
-            throw new Exception('Structure definition for [' . $name . '] must be an instance of DataType');
+            throw new InvalidPropertyDefinitionException($name);
         }
 
         $types = $structure[$name]->getTypes();
@@ -98,7 +109,7 @@ abstract class AbstractStructure implements Structure
             $valueType = get_class($value);
         }
         if (!in_array($valueType, $types) && !in_array('any', $types)) {
-            throw new Exception('Property [' . $name . '] expect a type of (' . implode(' OR ', $types) . ') ... ' . $valueType . ' given');
+            throw new InvalidPropertyTypeException($name, $types, $valueType);
         }
 
         $this->data[$name] = $value;
@@ -107,7 +118,9 @@ abstract class AbstractStructure implements Structure
     /**
      * @param array $data
      * @return $this
-     * @throws Exception
+     * @throws InvalidPropertyDefinitionException
+     * @throws InvalidPropertyTypeException
+     * @throws UndefinedPropertyException
      */
     protected function fromArray(array $data)
     {
@@ -118,9 +131,11 @@ abstract class AbstractStructure implements Structure
     }
 
     /**
-     * @param object $obj
+     * @param $obj
      * @return $this
-     * @throws Exception
+     * @throws InvalidPropertyDefinitionException
+     * @throws InvalidPropertyTypeException
+     * @throws UndefinedPropertyException
      */
     protected function fromObject($obj)
     {
@@ -130,12 +145,16 @@ abstract class AbstractStructure implements Structure
 
     /**
      * @return $this
+     * @throws InvalidPropertyDefinitionException
      */
     protected function fillUndefinedWithDefault()
     {
         $structure = $this->getStructure();
         foreach ($structure as $key => $dataType) {
             if (!array_key_exists($key, $this->data)) {
+                if (!$dataType instanceof DataType) {
+                    throw new InvalidPropertyDefinitionException($key);
+                }
                 $this->data[$key] = $dataType->getDefault();
             }
         }
@@ -145,12 +164,12 @@ abstract class AbstractStructure implements Structure
     /**
      * @param string $name
      * @return mixed
-     * @throws Exception
+     * @throws UndefinedPropertyException
      */
     public function __get(string $name)
     {
         if (!$this->__isset($name)) {
-            throw new Exception('Property [' . $name . '] not defined');
+            throw new UndefinedPropertyException($name, get_class($this));
         }
         return $this->data[$name];
     }

@@ -1,5 +1,7 @@
 <?php
 
+use Peak\Collection\Structure\Exception\InvalidPropertyTypeException;
+use Peak\Collection\Structure\Exception\UndefinedPropertyException;
 use \PHPUnit\Framework\TestCase;
 
 require_once FIXTURES_PATH . '/collection/structures.php';
@@ -23,11 +25,24 @@ class StructureTest extends TestCase
         $this->assertTrue($entity->toArray() === ['id' => null, 'date' => null, 'obj' => null]);
     }
 
-    public function testTypeError()
+    public function testUndefinedPropertyException()
     {
-        $this->expectException(\Exception::class);
+        $this->expectException(UndefinedPropertyException::class);
+        $entity = new MyStructure1();
+        $entity->unknown = 'test';
+    }
+
+    public function testPropertyTypeException()
+    {
+        $this->expectException(InvalidPropertyTypeException::class);
         $entity = new MyStructure1();
         $entity->id = 'test';
+    }
+
+    public function testPropertyInvalidDefinitionException()
+    {
+        $this->expectException(\Peak\Collection\Structure\Exception\InvalidPropertyDefinitionException::class);
+        $entity = new MyStructure6([]);
     }
 
     public function testGetError()
@@ -36,6 +51,7 @@ class StructureTest extends TestCase
         $entity = new MyStructure1();
         $test = $entity->foobar;
     }
+
 
     /**
      * @throws Exception
