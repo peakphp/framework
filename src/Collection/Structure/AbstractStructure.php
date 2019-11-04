@@ -10,7 +10,6 @@ use Peak\Collection\Structure\Exception\InvalidPropertyTypeException;
 use Peak\Collection\Structure\Exception\InvalidStructureException;
 use Peak\Collection\Structure\Exception\UndefinedPropertyException;
 use \ArrayIterator;
-use \Exception;
 
 use function array_key_exists;
 use function get_class;
@@ -66,7 +65,10 @@ abstract class AbstractStructure implements Structure
 
     /**
      * @return array
-     * @throws Exception
+     * @throws InvalidPropertyDefinitionException
+     * @throws InvalidPropertyTypeException
+     * @throws InvalidStructureException
+     * @throws UndefinedPropertyException
      */
     public static function keys(): array
     {
@@ -75,8 +77,10 @@ abstract class AbstractStructure implements Structure
 
     /**
      * @param string $name
-     * @param mixed $value
-     * @throws Exception
+     * @param $value
+     * @throws InvalidPropertyDefinitionException
+     * @throws InvalidPropertyTypeException
+     * @throws UndefinedPropertyException
      */
     public function __set(string $name, $value)
     {
