@@ -4,6 +4,7 @@ Release date: 2019-10-28
 
  - improved exceptions for Collection\Structure
  - updated Kernel::VERSION number
+ - refactored function getShortClassName() from Common\helpers.php
 
 VERSION 4.1.0
 -------------
