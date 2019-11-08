@@ -7,12 +7,40 @@ namespace Peak\Collection\Structure\Exception;
 class UndefinedPropertyException extends \Exception
 {
     /**
-     * UndefinedPropertyException constructor.
-     * @param string $propertyName
-     * @param string $class
+     * @var string
      */
-    public function __construct(string $propertyName, string $class)
+    private $propertyName;
+
+    /**
+     * @var string
+     */
+    private $class;
+
+    /**
+     * UndefinedPropertyException constructor.
+     * @param object $class
+     * @param string $propertyName
+     */
+    public function __construct(object $class, string $propertyName)
     {
-        parent::__construct('Property [' . $propertyName . '] is undefined in the structure of '.$class);
+        $this->class = get_class($class);
+        $this->propertyName = $propertyName;
+        parent::__construct(getClassShortName($this->class).' - Property [' . $propertyName . '] is undefined in the structure');
+    }
+
+    /**
+     * @return string
+     */
+    public function getPropertyName(): string
+    {
+        return $this->propertyName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getClass(): string
+    {
+        return $this->class;
     }
 }

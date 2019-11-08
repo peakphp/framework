@@ -15,9 +15,7 @@ use function array_map;
 use function call_user_func;
 use function count;
 use function is_callable;
-use function json_encode;
 use function serialize;
-use function substr;
 use function unserialize;
 
 class Collection implements \Peak\Blueprint\Collection\Collection, JsonSerializable

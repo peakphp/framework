@@ -99,11 +99,11 @@ abstract class AbstractStructure implements Structure
         /** @var array<DataType> $structure */
         $structure = $this->getStructure();
         if (!isset($structure[$name])) {
-            throw new UndefinedPropertyException($name, get_class($this));
+            throw new UndefinedPropertyException($this, $name);
         }
 
         if (!$structure[$name] instanceof DataType) {
-            throw new InvalidPropertyDefinitionException($name);
+            throw new InvalidPropertyDefinitionException($this, $name);
         }
 
         $types = $structure[$name]->getTypes();
@@ -113,7 +113,7 @@ abstract class AbstractStructure implements Structure
             $valueType = get_class($value);
         }
         if (!in_array($valueType, $types) && !in_array('any', $types)) {
-            throw new InvalidPropertyTypeException($name, $types, $valueType);
+            throw new InvalidPropertyTypeException($this, $name, $types, $valueType);
         }
 
         $this->data[$name] = $value;
@@ -157,7 +157,7 @@ abstract class AbstractStructure implements Structure
         foreach ($structure as $key => $dataType) {
             if (!array_key_exists($key, $this->data)) {
                 if (!$dataType instanceof DataType) {
-                    throw new InvalidPropertyDefinitionException($key);
+                    throw new InvalidPropertyDefinitionException($this, $key);
                 }
                 $this->data[$key] = $dataType->getDefault();
             }
@@ -173,7 +173,7 @@ abstract class AbstractStructure implements Structure
     public function __get(string $name)
     {
         if (!$this->__isset($name)) {
-            throw new UndefinedPropertyException($name, get_class($this));
+            throw new UndefinedPropertyException($this, $name);
         }
         return $this->data[$name];
     }
