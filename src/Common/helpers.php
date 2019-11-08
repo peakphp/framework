@@ -156,13 +156,16 @@ if (!function_exists('getClassShortName')) {
     /**
      * Get class name of an object without the namespace
      *
-     * @param mixed $obj
+     * @param string|object $class
      * @return string
-     * @throws ReflectionException
      */
-    function getClassShortName($obj): string
+    function getClassShortName($class): string
     {
-        return ((new ReflectionClass($obj))->getShortName());
+        $className = (is_object($class)) ? get_class($class) : $class;
+        if ($pos = strrpos($className, '\\')) {
+            return substr($className, $pos + 1);
+        }
+        return $className;
     }
 }
 
