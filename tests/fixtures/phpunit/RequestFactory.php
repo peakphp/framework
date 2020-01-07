@@ -10,12 +10,15 @@ trait RequestFactory
     {
         $request = $this->createMock(ServerRequestInterface::class);
 
+        $request->method('withAttribute')
+            ->willReturn($request);
+
         $uri = $this->createMock(UriInterface::class);
-        $uri->expects(($this->atLeastOnce()))
+        $uri->expects(($this->any()))
             ->method('getPath')
             ->willReturn($path);
 
-        $request->expects($this->atLeastOnce())
+        $request->expects($this->any())
             ->method('getUri')
             ->willReturn($uri);
 

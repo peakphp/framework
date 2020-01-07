@@ -4,6 +4,7 @@ Release date: ?
 
  - improved exceptions for Collection\Structure
  - refactored function getShortClassName() from Common\helpers.php
+ - Http\Request\Route will now also pass route arguments to PSR-7 request attributes
 
 VERSION 4.1.1
 -------------

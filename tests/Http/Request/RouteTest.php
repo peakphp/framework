@@ -7,11 +7,16 @@ use \Psr\Http\Message\ResponseInterface;
 use \Psr\Http\Message\ServerRequestInterface;
 use \Psr\Http\Message\UriInterface;
 
+require_once FIXTURES_PATH . '/phpunit/RequestFactory.php';
+
 /**
  * Class RouteTest
  */
 class RouteTest extends TestCase
 {
+
+    use RequestFactory;
+
     public function testCreate()
     {
         $route = new Route(
@@ -198,23 +203,5 @@ class RouteTest extends TestCase
 
         $request = $this->createRequest('GET', '/mypath2');
         $response = $route->handle($request);
-    }
-
-
-    private function createRequest($method, $path)
-    {
-        $request = $this->createMock(ServerRequestInterface::class);
-
-        $request->method('getMethod')
-            ->will($this->returnValue($method));
-
-        $uri = $this->createMock(UriInterface::class);
-        $uri->method('getPath')
-            ->will($this->returnValue($path));
-
-        $request->method('getUri')
-            ->will($this->returnValue($uri));
-
-        return $request;
     }
 }

@@ -9,11 +9,10 @@ use \Peak\Collection\PropertiesBag;
 use \Psr\Container\ContainerInterface;
 use \Psr\Http\Message\ResponseInterface;
 use \Psr\Http\Message\ServerRequestInterface;
-use \Psr\Http\Message\UriInterface;
 use \Psr\Http\Server\RequestHandlerInterface;
 use \Psr\Http\Server\MiddlewareInterface;
 
-
+require_once FIXTURES_PATH . '/phpunit/RequestFactory.php';
 require_once FIXTURES_PATH . '/application/HandlerA.php';
 require_once FIXTURES_PATH . '/application/ResponseA.php';
 
@@ -22,6 +21,9 @@ require_once FIXTURES_PATH . '/application/ResponseA.php';
  */
 class ApplicationTest extends TestCase
 {
+
+    use RequestFactory;
+
     protected function createApp($kernel = null, $handlerResolver = null, $props = null)
     {
         return new Application(
@@ -29,26 +31,6 @@ class ApplicationTest extends TestCase
             $handlerResolver ?? $this->createMock(HandlerResolver::class),
             $props ?? null
         );
-    }
-
-    protected function createRouteRequest(?string $method, string $path)
-    {
-        $request = $this->createMock(ServerRequestInterface::class);
-
-        $uri = $this->createMock(UriInterface::class);
-        $uri->expects(($this->atLeastOnce()))
-            ->method('getPath')
-            ->willReturn($path);
-
-        $request->expects($this->atLeastOnce())
-            ->method('getUri')
-            ->willReturn($uri);
-
-        $request->expects($this->any())
-            ->method('getMethod')
-            ->willReturn($method);
-
-        return $request;
     }
 
     /**
@@ -147,20 +129,7 @@ class ApplicationTest extends TestCase
         $app->delete('/mypath', $handlerA);
         $app->all('/mypath2', $handlerA);
 
-        $request = $this->createMock(ServerRequestInterface::class);
-
-        $uri = $this->createMock(UriInterface::class);
-        $uri->expects(($this->once()))
-            ->method('getPath')
-            ->will($this->returnValue('/mypath'));
-
-        $request->expects($this->once())
-            ->method('getUri')
-            ->will($this->returnValue($uri));
-
-        $request->expects($this->any())
-            ->method('getMethod')
-            ->will($this->returnValue('GET'));
+        $request = $this->createRequest('GET', '/mypath');
 
         $result = $app->handle($request);
 
