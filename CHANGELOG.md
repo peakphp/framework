@@ -1,6 +1,6 @@
 VERSION 4.1.2
 -------------
-Release date: ?
+Release date: 2020-01-06
 
  - improved exceptions for Collection\Structure
  - refactored function getShortClassName() from Common\helpers.php
