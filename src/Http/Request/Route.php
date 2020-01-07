@@ -101,8 +101,14 @@ class Route implements \Peak\Blueprint\Http\Route, Stack
     {
         $isMatching = $this->match($request);
 
-        // add regex matches(aka route arguments) to the request
-        $request->args = new RouteArgs($this->matches);
+        // add regex matches(aka route arguments) to the request.
+        $routeArgs = new RouteArgs($this->matches);
+        foreach ($routeArgs->toArray() as $name => $value) {
+            $request = $request->withAttribute($name, $value);
+        }
+        // $request->args works but "pollute" the request object and will be removed in the next major version.
+        // use the PSR-7 method $request->getAttribute() instead for retrieving an route argument
+        $request->args = $routeArgs;
 
         if (!$isMatching) {
             return $this->processParent($request, $handler);
