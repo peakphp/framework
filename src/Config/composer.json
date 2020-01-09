@@ -22,7 +22,7 @@
     "peak/collection": "^4.0"
   },
   "suggest": {
-    "symfony/yaml": "To process yaml configuration file"
+    "symfony/yaml": "Required to parse yaml file with Peak\\Config (^4.3)."
   },
   "autoload": {
     "psr-4": {
