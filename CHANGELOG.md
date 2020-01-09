@@ -1,3 +1,10 @@
+VERSION 4.2.0
+-------------
+Release date: 2020-01-09
+
+ - removed hard dependencies of symfony/console, symfony/process and symfony/yaml in composer.json and 
+   moved them to suggest section
+
 VERSION 4.1.2
 -------------
 Release date: 2020-01-06
