@@ -21,7 +21,7 @@
   },
   "suggest": {
     "symfony/console": "Required to use Peak\\Bedrock\\Cli\\Application (^4.3).",
-    "symfony/process": "Required to use Peak\\Bedrock\\Cli\\Application (^4.3).",
+    "symfony/process": "Required to use Peak\\Bedrock\\Cli\\Application (^4.3)."
   },
   "autoload": {
     "psr-4": {
