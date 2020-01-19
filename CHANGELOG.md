@@ -1,3 +1,10 @@
+VERSION 4.2.1
+-------------
+Release date: ?
+
+ - fixed bug in Collection\DotNotationCollection with methods get() and has() when the path end 
+   with string instead array key name
+
 VERSION 4.2.0
 -------------
 Release date: 2020-01-09
