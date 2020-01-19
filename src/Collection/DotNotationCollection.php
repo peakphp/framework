@@ -33,7 +33,7 @@ class DotNotationCollection extends Collection implements Dictionary
         if (!empty($path)) {
             $keys = $this->explode($path);
             foreach ($keys as $key) {
-                if (!array_key_exists($key, $array)) {
+                if (!is_array($array) || !array_key_exists($key, $array)) {
                     return $default;
                 }
                 $array = $array[$key];
@@ -94,7 +94,7 @@ class DotNotationCollection extends Collection implements Dictionary
         $keys = $this->explode($path);
         $array = $this->items;
         foreach ($keys as $key) {
-            if (!array_key_exists($key, $array)) {
+            if (!is_array($array) || !array_key_exists($key, $array)) {
                 return false;
             }
             $array = $array[$key];
