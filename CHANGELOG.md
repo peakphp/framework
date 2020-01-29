@@ -4,6 +4,7 @@ Release date: ?
 
  - fixed bug in Collection\DotNotationCollection with methods get() and has() when the path end 
    with string instead array key name
+ - fixed Backpack\Bedrock\AppRoutesMapper to ignore route group (Http\Request\PreRoute)
 
 VERSION 4.2.0
 -------------
