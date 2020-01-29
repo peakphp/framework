@@ -7,6 +7,7 @@ namespace Peak\Backpack\Bedrock;
 use Peak\Bedrock\Http\Application;
 use Peak\Blueprint\Http\Route;
 use Peak\Blueprint\Http\Stack;
+use Peak\Http\Request\PreRoute;
 
 class AppRoutesMapper
 {
@@ -28,7 +29,7 @@ class AppRoutesMapper
         $routes = [];
         foreach ($handlers as $handler) {
             $subRoutes = [];
-            if ($handler instanceof Route) {
+            if ($handler instanceof Route && !($handler instanceof PreRoute)) {
                 $routes[] = [
                     'method' => $handler->getMethod(),
                     'path' => $handler->getPath(),
