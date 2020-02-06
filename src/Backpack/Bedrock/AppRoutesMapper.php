@@ -30,10 +30,20 @@ class AppRoutesMapper
         foreach ($handlers as $handler) {
             $subRoutes = [];
             if ($handler instanceof Route && !($handler instanceof PreRoute)) {
-                $routes[] = [
+                $route = [
                     'method' => $handler->getMethod(),
                     'path' => $handler->getPath(),
+                    'stack' => [],
                 ];
+                $handlers = $handler->getHandlers();
+                foreach ($handlers as $h) {
+                    if (is_string($h)) {
+                        $route['stack'][] = $h;
+                    } elseif (is_object($h)) {
+                        $route['stack'][] = get_class($h);
+                    }
+                }
+                $routes[] = $route;
                 $subRoutes = $this->inspectRecursive($handler->getHandlers());
             } elseif (is_array($handler)) {
                 $subRoutes = $this->inspectRecursive($handler);
