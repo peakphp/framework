@@ -1,6 +1,6 @@
 VERSION 4.2.1
 -------------
-Release date: ?
+Release date: 2020-02-06
 
  - fixed bug in Collection\DotNotationCollection with methods get() and has() when the path end 
    with string instead array key name
