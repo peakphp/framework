@@ -1,6 +1,6 @@
 VERSION 4.2.2
 -------------
-Release date: ?
+Release date: 2020-02-08
 
  - added Http\Exception\JsonBodyParserException and updated Http\Middleware\JsonBodyParserMiddleware to use it
 
