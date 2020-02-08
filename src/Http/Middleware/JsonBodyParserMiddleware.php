@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Peak\Http\Middleware;
 
-use Peak\Http\Exception\BodyParserException;
+use Peak\Http\Exception\JsonBodyParserException;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface as Handler;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -25,7 +25,7 @@ class JsonBodyParserMiddleware implements MiddlewareInterface
 
             $json = json_decode((string)$request->getBody(), true);
             if (json_last_error() !== 0) {
-                throw new BodyParserException(lcfirst(json_last_error_msg()));
+                throw new JsonBodyParserException(lcfirst(json_last_error_msg()));
             }
             $request = $request->withParsedBody($json);
         }
