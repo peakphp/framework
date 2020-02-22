@@ -5,6 +5,7 @@ Release date: ?
  - added method getConfigFile() to Config\Exception\FileNotFoundException and Config\Exception\FileNotReadableException
  - added method getPath() to Config\Exception\CachePathNotFoundException and Config\Exception\CachePathNotWritableException
  - added Blueprint\ConfigException and updated all Config exceptions accordingly
+ - changed Backpack\Bedrock\AppRoutesMappers to sort alphabetically the routes by path name
  
 VERSION 4.2.2
 -------------
