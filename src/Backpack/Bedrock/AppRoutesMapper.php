@@ -55,6 +55,9 @@ class AppRoutesMapper
                 $routes = array_merge($subRoutes, $routes);
             }
         }
+
+        //reorder routes by path
+        array_multisort (array_column($routes, 'path'), SORT_ASC, $routes);
         return $routes;
     }
 }
