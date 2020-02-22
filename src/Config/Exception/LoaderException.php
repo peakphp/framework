@@ -4,11 +4,9 @@ declare(strict_types=1);
 
 namespace Peak\Config\Exception;
 
-/**
- * Class LoaderException
- * @package Peak\Config\Exception
- */
-class LoaderException extends \Exception
+use Peak\Blueprint\Config\ConfigException;
+
+class LoaderException extends \Exception implements ConfigException
 {
     /**
      * LoaderException constructor.

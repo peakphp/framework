@@ -4,13 +4,10 @@ declare(strict_types=1);
 
 namespace Peak\Config\Exception;
 
+use Peak\Blueprint\Config\ConfigException;
 use Psr\SimpleCache\InvalidArgumentException;
 
-/**
- * Class CacheInvalidKeyException
- * @package Peak\Config\Exception
- */
-class CacheInvalidKeyException extends \Exception implements InvalidArgumentException
+class CacheInvalidKeyException extends \Exception implements InvalidArgumentException, ConfigException
 {
     /**
      * CacheInvalidKeyException constructor.

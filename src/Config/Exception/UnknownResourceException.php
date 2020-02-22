@@ -4,11 +4,9 @@ declare(strict_types=1);
 
 namespace Peak\Config\Exception;
 
-/**
- * Class UnknownResourceException
- * @package Peak\Config\Exception
- */
-class UnknownResourceException extends \Exception
+use Peak\Blueprint\Config\ConfigException;
+
+class UnknownResourceException extends \Exception  implements ConfigException
 {
     /**
      * @var mixed

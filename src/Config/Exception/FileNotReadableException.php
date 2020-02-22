@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Peak\Config\Exception;
 
-class FileNotReadableException extends \Exception
+use Peak\Blueprint\Config\ConfigException;
+
+class FileNotReadableException extends \Exception implements ConfigException
 {
     /**
      * @var string

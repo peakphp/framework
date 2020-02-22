@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Peak\Config\Exception;
 
-class CachePathNotFoundException extends \Exception
+use Peak\Blueprint\Config\ConfigException;
+
+class CachePathNotFoundException extends \Exception implements ConfigException
 {
     /**
      * @var string

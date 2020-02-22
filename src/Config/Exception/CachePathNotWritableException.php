@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Peak\Config\Exception;
 
-class CachePathNotWritableException extends \Exception
+use Peak\Blueprint\Config\ConfigException;
+
+class CachePathNotWritableException extends \Exception implements ConfigException
 {
     /**
      * @var string

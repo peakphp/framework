@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Peak\Config\Exception;
 
-class ProcessorTypeException extends ProcessorException
+use Peak\Blueprint\Config\ConfigException;
+
+class ProcessorTypeException extends ProcessorException implements ConfigException
 {
     /**
      * ProcessorTypeException constructor.

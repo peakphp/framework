@@ -4,11 +4,9 @@ declare(strict_types=1);
 
 namespace Peak\Config\Exception;
 
-/**
- * Class NoFileHandlersException
- * @package Peak\Config\Exception
- */
-class NoFileHandlersException extends \Exception
+use Peak\Blueprint\Config\ConfigException;
+
+class NoFileHandlersException extends \Exception implements ConfigException
 {
     /**
      * NoFileHandlersException constructor.
