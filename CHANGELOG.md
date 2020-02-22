@@ -3,6 +3,7 @@ VERSION 4.2.3
 Release date: ?
 
  - added method getConfigFile() to Config\Exception\FileNotFoundException and Config\Exception\FileNotReadableException
+ - added method getPath() to Config\Exception\CachePathNotFoundException and Config\Exception\CachePathNotWritableException
 
 VERSION 4.2.2
 -------------
