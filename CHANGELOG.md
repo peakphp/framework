@@ -1,3 +1,9 @@
+VERSION 4.2.3
+-------------
+Release date: ?
+
+ - added method getConfigFile() to Config\Exception\FileNotFoundException and Config\Exception\FileNotReadableException
+
 VERSION 4.2.2
 -------------
 Release date: 2020-02-08
