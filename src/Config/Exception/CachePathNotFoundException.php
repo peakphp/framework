@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace Peak\Config\Exception;
 
-/**
- * Class CachePathNotFoundException
- * @package Peak\Config\Exception
- */
 class CachePathNotFoundException extends \Exception
 {
+    /**
+     * @var string
+     */
+    private $path;
+
     /**
      * CachePathNotFoundException constructor.
      *
@@ -18,5 +19,14 @@ class CachePathNotFoundException extends \Exception
     public function __construct(string $path)
     {
         parent::__construct('Config cache path "'.$path.'" not found');
+        $this->path = $path;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPath(): string
+    {
+        return $this->path;
     }
 }
