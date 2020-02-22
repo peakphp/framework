@@ -4,19 +4,29 @@ declare(strict_types=1);
 
 namespace Peak\Config\Exception;
 
-/**
- * Class FileNotReadableException
- * @package Peak\Config\Exception
- */
 class FileNotReadableException extends \Exception
 {
     /**
-     * FileNotReadableException constructor.
-     *
-     * @param string $file
+     * @var string
      */
-    public function __construct(string $file)
+    private $configFile;
+
+    /**
+     * FileNotReadableException constructor.
+     * @param string $configFile
+     */
+    public function __construct(string $configFile)
     {
-        parent::__construct('Config file '.$file.' is not readable');
+        parent::__construct('Config file '.$configFile.' is not readable');
+        $this->configFile = $configFile;
     }
+
+    /**
+     * @return string
+     */
+    public function getConfigFile(): string
+    {
+        return $this->configFile;
+    }
+
 }
