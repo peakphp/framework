@@ -12,7 +12,7 @@ class Kernel implements \Peak\Blueprint\Bedrock\Kernel
      * Peak kernel version
      * @var string
      */
-    const VERSION = '4.2.2';
+    const VERSION = '4.2.3';
 
     /**
      * @var ContainerInterface
