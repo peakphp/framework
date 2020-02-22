@@ -4,7 +4,8 @@ Release date: ?
 
  - added method getConfigFile() to Config\Exception\FileNotFoundException and Config\Exception\FileNotReadableException
  - added method getPath() to Config\Exception\CachePathNotFoundException and Config\Exception\CachePathNotWritableException
-
+ - added Blueprint\ConfigException and updated all Config exceptions accordingly
+ 
 VERSION 4.2.2
 -------------
 Release date: 2020-02-08
