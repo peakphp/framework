@@ -31,9 +31,9 @@
         "symfony/yaml": "^4.4"
     },
     "suggest": {
-        "symfony/console": "Required to use Peak\\Bedrock\\Cli\\Application (^4.3).",
-        "symfony/process": "Required to use Peak\\Bedrock\\Cli\\Application (^4.3).",
-        "symfony/yaml": "Required to parse yaml file with Peak\\Config (^4.3)."
+        "symfony/console": "Required to use Peak\\Bedrock\\Cli\\Application (^4.4).",
+        "symfony/process": "Required to use Peak\\Bedrock\\Cli\\Application (^4.4).",
+        "symfony/yaml": "Required to parse yaml file with Peak\\Config (^4.4)."
     },
     "autoload": {
         "files": [
