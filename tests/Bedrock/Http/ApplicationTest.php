@@ -165,18 +165,15 @@ class ApplicationTest extends TestCase
 
     public function testGetPropOnNull()
     {
-        $this->expectException(Exception::class);
         $app = $this->createApp();
-
-        $app->getProp('foo');
+        $value = $app->getProp('foo', null);
+        $this->assertNull($value);
     }
 
     public function testHasPropOnNull()
     {
-        $this->expectException(Exception::class);
         $app = $this->createApp();
-
-        $app->hasProp('foo');
+        $this->assertFalse($app->hasProp('foo'));
     }
 
     public function testStackRoute()

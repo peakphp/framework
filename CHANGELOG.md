@@ -2,6 +2,7 @@ VERSION 4.3.0
 -------------
 Release date: ?
 
+ - removed exception throwing in AbstractApplication::getProp() and hasProp()
 
 VERSION 4.2.3
 -------------
