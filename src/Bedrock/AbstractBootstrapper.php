@@ -53,7 +53,6 @@ abstract class AbstractBootstrapper implements Bootable
 
     /**
      * Boot
-     *
      * @return bool|mixed
      * @throws \Exception
      */

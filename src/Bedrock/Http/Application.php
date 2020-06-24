@@ -6,17 +6,16 @@ namespace Peak\Bedrock\Http;
 
 use Peak\Bedrock\AbstractApplication;
 use Peak\Blueprint\Bedrock\HttpApplication;
-use Peak\Http\Request\BlankRequest;
-use Peak\Http\Request\PreRoute;
-use Peak\Http\Stack;
-use Peak\Http\Request\Route;
 use Peak\Blueprint\Bedrock\Kernel;
 use Peak\Blueprint\Collection\Dictionary;
 use Peak\Blueprint\Common\ResourceResolver;
 use Peak\Blueprint\Http\ResponseEmitter;
+use Peak\Http\Request\BlankRequest;
+use Peak\Http\Request\PreRoute;
+use Peak\Http\Request\Route;
+use Peak\Http\Stack;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-
 use function array_merge;
 use function is_array;
 

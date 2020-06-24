@@ -35,7 +35,6 @@ class Bootstrap implements Bootable
      *
      * @return bool|mixed
      * @throws Exception\InvalidBootableProcessException
-     * @throws \ReflectionException
      */
     public function boot()
     {

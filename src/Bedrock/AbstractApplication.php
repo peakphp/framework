@@ -5,9 +5,10 @@ declare(strict_types=1);
 namespace Peak\Bedrock;
 
 use Peak\Bedrock\Bootstrap\Bootstrap;
+use Peak\Bedrock\Bootstrap\Exception\InvalidBootableProcessException;
 use Peak\Blueprint\Bedrock\Application;
-use Peak\Blueprint\Collection\Dictionary;
 use Peak\Blueprint\Bedrock\Kernel;
+use Peak\Blueprint\Collection\Dictionary;
 use Psr\Container\ContainerInterface;
 
 abstract class AbstractApplication implements Application
@@ -75,8 +76,7 @@ abstract class AbstractApplication implements Application
      * Bootstrap bootable processes
      * @param array $processes
      * @return $this
-     * @throws \Peak\Bedrock\Bootstrap\Exception\InvalidBootableProcessException
-     * @throws \ReflectionException
+     * @throws InvalidBootableProcessException
      */
     public function bootstrap(array $processes)
     {
