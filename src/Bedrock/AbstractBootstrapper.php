@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Peak\Bedrock;
 
+use Exception;
 use Peak\Bedrock\Bootstrap\BootableResolver;
 use Peak\Blueprint\Bedrock\Application;
 use Peak\Blueprint\Common\Bootable;
-
 use function get_class;
 use function get_class_methods;
 use function method_exists;
@@ -18,31 +18,16 @@ use function ucfirst;
 
 abstract class AbstractBootstrapper implements Bootable
 {
-    /**
-     * Prefix of methods to call on boot
-     * @var string
-     */
-    protected $bootMethodsPrefix = 'init';
+    protected string $bootMethodsPrefix = 'init';
 
-    /**
-     * @var Application
-     */
-    protected $application;
+    protected Application $application;
 
-    /**
-     * Bootable processes
-     * @var array
-     */
-    protected $processes = [];
+    protected array $processes = [];
 
-    /**
-     * @var BootableResolver
-     */
-    protected $resolver;
+    protected BootableResolver $resolver;
 
     /**
      * AbstractBootstrapper constructor.
-     *
      * @param Application $application
      */
     public function __construct(Application $application)
@@ -54,7 +39,7 @@ abstract class AbstractBootstrapper implements Bootable
     /**
      * Boot
      * @return bool|mixed
-     * @throws \Exception
+     * @throws Exception
      */
     public function boot()
     {

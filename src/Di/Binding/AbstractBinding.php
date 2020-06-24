@@ -7,28 +7,16 @@ namespace Peak\Di\Binding;
 abstract class AbstractBinding implements BindingInterface
 {
     /**
-     * Type available
+     * Types available
      */
     const SINGLETON = 1;
     const PROTOTYPE = 2;
     const FACTORY = 3;
 
-    /**
-     * Binding name
-     * @var string
-     */
-    protected $name;
+    protected string $name;
 
-    /**
-     * Binding type
-     * @var int
-     */
-    protected $type;
+    protected int $type;
 
-    /**
-     * Binding definition
-     * @var mixed
-     */
     protected $definition;
 
     /**
@@ -49,15 +37,15 @@ abstract class AbstractBinding implements BindingInterface
      *
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
     /**
-     * @return int|mixed
+     * @return int
      */
-    public function getType()
+    public function getType(): int
     {
         return $this->type;
     }
@@ -65,7 +53,7 @@ abstract class AbstractBinding implements BindingInterface
     /**
      * Get definition
      *
-     * @return string
+     * @return mixed
      */
     public function getDefinition()
     {

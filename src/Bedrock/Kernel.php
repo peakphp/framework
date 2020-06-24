@@ -8,21 +8,11 @@ use Psr\Container\ContainerInterface;
 
 class Kernel implements \Peak\Blueprint\Bedrock\Kernel
 {
-    /**
-     * Peak kernel version
-     * @var string
-     */
-    const VERSION = '4.2.3';
+    const VERSION = '5.0.0';
 
-    /**
-     * @var ContainerInterface
-     */
-    private $container;
+    private ContainerInterface $container;
 
-    /**
-     * @var string
-     */
-    private $environment;
+    private string $environment;
 
     /**
      * Kernel constructor.

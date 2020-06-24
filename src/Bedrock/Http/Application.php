@@ -21,20 +21,11 @@ use function is_array;
 
 class Application extends AbstractApplication implements HttpApplication
 {
-    /**
-     * @var array
-     */
-    private $handlers = [];
+    private array $handlers = [];
 
-    /**
-     * @var ResourceResolver
-     */
-    private $handlerResolver;
+    private ResourceResolver $handlerResolver;
 
-    /**
-     * @var GroupManager
-     */
-    private $groupManager;
+    private GroupManager $groupManager;
 
     /**
      * Application constructor.

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Peak\Di\Exception;
 
+use Exception;
 use Psr\Container\NotFoundExceptionInterface;
-use \Exception;
 
 class ClassNotFoundException extends Exception implements NotFoundExceptionInterface
 {

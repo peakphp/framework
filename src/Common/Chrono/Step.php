@@ -8,28 +8,15 @@ use Peak\Common\Traits\MicroTime;
 
 class Step
 {
-
     use MicroTime;
 
-    /**
-     * @var float
-     */
-    private $start;
+    private float $start;
 
-    /**
-     * @var float
-     */
-    private $duration;
+    private float $duration;
 
-    /**
-     * @var string
-     */
-    private $id;
+    private string $id;
 
-    /**
-     * @var string
-     */
-    private $description;
+    private string $description;
 
     /**
      * Step constructor.

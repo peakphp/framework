@@ -6,29 +6,20 @@ use Peak\Bedrock\Bootstrap\Exception\InvalidBootableProcessException;
 use Peak\Blueprint\Common\Bootable;
 use Peak\Blueprint\Common\ResourceResolver;
 use Psr\Container\ContainerInterface;
-
 use function class_exists;
 use function is_callable;
 use function is_string;
 
 class BootableResolver implements ResourceResolver
 {
-    /**
-     * @var ContainerInterface|Null
-     */
-    private $container;
+    private ?ContainerInterface $container;
 
-    /**
-     * BootableResolver constructor.
-     * @param ContainerInterface|null $container
-     */
     public function __construct(?ContainerInterface $container)
     {
         $this->container = $container;
     }
 
     /**
-     * Try to return a resolved item or throw an exception
      * @param mixed $item
      * @return Bootable
      * @throws InvalidBootableProcessException

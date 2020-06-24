@@ -4,21 +4,15 @@ declare(strict_types=1);
 
 namespace Peak\Config;
 
-use Peak\Blueprint\Config\Config as ConfigBlueprint;
 use Peak\Blueprint\Common\ResourceResolver;
+use Peak\Blueprint\Config\Config as ConfigBlueprint;
 use Peak\Config\Exception\UnknownResourceException;
 
 class ConfigFactory implements \Peak\Blueprint\Config\ConfigFactory
 {
-    /**
-     * @var FilesHandlers|null
-     */
-    protected $filesHandlers;
+    protected ?FilesHandlers $filesHandlers = null;
 
-    /**
-     * @var ResourceResolver|null
-     */
-    private $configResolver;
+    private ?ResourceResolver $configResolver = null;
 
     /**
      * ConfigFactory constructor.

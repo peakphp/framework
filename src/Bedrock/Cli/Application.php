@@ -9,19 +9,16 @@ use Peak\Bedrock\Cli\Exception\InvalidCommandException;
 use Peak\Blueprint\Bedrock\CliApplication;
 use Peak\Blueprint\Bedrock\Kernel;
 use Peak\Blueprint\Collection\Dictionary;
+use Symfony\Component\Console\Application as ConsoleApplication;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-
 use function is_array;
 use function is_string;
 
 class Application extends AbstractApplication implements CliApplication
 {
-    /**
-     * @var \Symfony\Component\Console\Application
-     */
-    private $console;
+    private ConsoleApplication $console;
 
     /**
      * Application constructor.
@@ -41,13 +38,13 @@ class Application extends AbstractApplication implements CliApplication
             $version = $props->get('version', $version);
         }
 
-        $this->console = new \Symfony\Component\Console\Application($name, $version);
+        $this->console = new ConsoleApplication($name, $version);
     }
 
     /**
-     * @return \Symfony\Component\Console\Application
+     * @return ConsoleApplication
      */
-    public function console(): \Symfony\Component\Console\Application
+    public function console(): ConsoleApplication
     {
         return $this->console;
     }

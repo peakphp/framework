@@ -23,7 +23,7 @@ trait UpdateToCamelCase
     }
 
     /**
-     * @param string $string
+     * @param string $text
      * @return string
      */
     protected function updateStringToCamelCase(string $text): string

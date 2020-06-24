@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Peak\Collection\Structure;
 
-use \Exception;
+use Exception;
 
 abstract class AbstractImmutableStructure extends AbstractStructure
 {

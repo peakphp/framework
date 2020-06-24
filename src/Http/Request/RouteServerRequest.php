@@ -7,20 +7,13 @@ namespace Peak\Http\Request;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\StreamInterface;
 use Psr\Http\Message\UriInterface;
-
 use function gettype;
 
 class RouteServerRequest implements ServerRequestInterface
 {
-    /**
-     * @var ServerRequestInterface
-     */
-    private $request;
+    private ServerRequestInterface $request;
 
-    /**
-     * @var RouteArgs
-     */
-    private $routeArgs;
+    private RouteArgs $routeArgs;
 
     /**
      * ServerRequestWrapper constructor.
@@ -49,7 +42,7 @@ class RouteServerRequest implements ServerRequestInterface
             return $exists;
         }
 
-        return (gettype($this->routeArgs->$name) === $type) ? true : false;
+        return gettype($this->routeArgs->$name) === $type;
     }
 
     /**

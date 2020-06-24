@@ -4,13 +4,12 @@ declare(strict_types=1);
 
 namespace Peak\Collection\Structure;
 
+use ArrayIterator;
 use Peak\Blueprint\Collection\Structure;
 use Peak\Collection\Structure\Exception\InvalidPropertyDefinitionException;
 use Peak\Collection\Structure\Exception\InvalidPropertyTypeException;
 use Peak\Collection\Structure\Exception\InvalidStructureException;
 use Peak\Collection\Structure\Exception\UndefinedPropertyException;
-use \ArrayIterator;
-
 use function array_key_exists;
 use function get_class;
 use function get_object_vars;
@@ -22,10 +21,7 @@ use function strtolower;
 
 abstract class AbstractStructure implements Structure
 {
-    /**
-     * @var array
-     */
-    protected $data = [];
+    protected array $data = [];
 
     /**
      * AbstractStructure constructor.

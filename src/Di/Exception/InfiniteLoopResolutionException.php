@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Peak\Di\Exception;
 
-use \Exception;
+use Exception;
 
 class InfiniteLoopResolutionException extends Exception
 {

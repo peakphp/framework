@@ -4,32 +4,23 @@ declare(strict_types=1);
 
 namespace Peak\Backpack\Bedrock;
 
+use Exception;
 use Peak\Bedrock\Http\Application;
+use Peak\Bedrock\Kernel;
 use Peak\Blueprint\Bedrock\HttpApplication;
-use Peak\Http\Request\HandlerResolver;
 use Peak\Blueprint\Common\ResourceResolver;
 use Peak\Di\Container;
-use \Exception;
-
+use Peak\Http\Request\HandlerResolver;
 use function is_callable;
 use function trigger_error;
 
 class HttpAppBuilder extends AbstractAppBuilder implements \Peak\Blueprint\Backpack\HttpAppBuilder
 {
-    /**
-     * @var ResourceResolver|null
-     */
-    private $handlerResolver;
+    private ?ResourceResolver $handlerResolver;
 
-    /**
-     * @var bool
-     */
-    private $addToContainerAfterBuild = false;
+    private bool $addToContainerAfterBuild = false;
 
-    /**
-     * @var string|null
-     */
-    private $aliasContainer = null;
+    private ?string $aliasContainer = null;
 
     /**
      * @param ResourceResolver $handlerResolver
@@ -63,14 +54,14 @@ class HttpAppBuilder extends AbstractAppBuilder implements \Peak\Blueprint\Backp
 
     /**
      * @param string $applicationClass
-     * @return \Peak\Blueprint\Bedrock\HttpApplication
-     * @throws \Exception
+     * @return HttpApplication
+     * @throws Exception
      */
-    private function internalBuild(string $applicationClass): \Peak\Blueprint\Bedrock\HttpApplication
+    private function internalBuild(string $applicationClass): HttpApplication
     {
         $kernel = $this->kernel;
         if (!isset($kernel)) {
-            $kernelClass = $this->kernelClass ?? \Peak\Bedrock\Kernel::class;
+            $kernelClass = $this->kernelClass ?? Kernel::class;
             $kernel = new $kernelClass(
                 $this->env ?? 'prod',
                 $this->container ?? new Container()
@@ -114,15 +105,15 @@ class HttpAppBuilder extends AbstractAppBuilder implements \Peak\Blueprint\Backp
     }
 
     /**
-     * @param \Peak\Blueprint\Bedrock\HttpApplication $app
-     * @throws \Exception
+     * @param HttpApplication $app
+     * @throws Exception
      */
-    private function addToContainer(\Peak\Blueprint\Bedrock\HttpApplication $app)
+    private function addToContainer(HttpApplication $app)
     {
         $container = $app->getKernel()->getContainer();
         if (!$container instanceof Container) {
             throw new Exception('Cannot add application instance to the container');
         }
-        $container->set($app);
+        $container->set($app, $this->aliasContainer ?? 'HttpApp');
     }
 }

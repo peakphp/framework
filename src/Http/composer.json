@@ -16,11 +16,11 @@
     }
   ],
   "require": {
-    "php": ">=7.2",
+    "php": ">=7.4",
     "psr/http-message": "^1.0",
     "psr/http-server-handler": "^1.0",
     "psr/http-server-middleware": "^1.0",
-    "peak/blueprint": "^4.0"
+    "peak/blueprint": "^5.0"
   },
   "autoload": {
     "psr-4": {
@@ -34,7 +34,7 @@
   "prefer-stable": true,
   "extra": {
     "branch-alias": {
-      "dev-master": "4.0-dev"
+      "dev-master": "5.0-dev"
     }
   }
 }

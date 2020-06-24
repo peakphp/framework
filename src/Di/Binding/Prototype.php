@@ -4,38 +4,26 @@ declare(strict_types=1);
 
 namespace Peak\Di\Binding;
 
+use Exception;
 use Peak\Di\ArrayDefinition;
 use Peak\Di\ClassInstantiator;
 use Peak\Di\ClassResolver;
 use Peak\Di\Container;
 use Peak\Di\Exception\InfiniteLoopResolutionException;
 use Peak\Di\Exception\InvalidDefinitionException;
-
 use function is_array;
 use function is_null;
 use function is_string;
 
 class Prototype extends AbstractBinding
 {
-    /**
-     * @var ClassInstantiator
-     */
-    private $instantiator;
+    private ClassInstantiator $instantiator;
 
-    /**
-     * @var ArrayDefinition
-     */
-    private $arrayDefinition;
+    private ArrayDefinition $arrayDefinition;
 
-    /**
-     * @var ClassResolver
-     */
-    private $classResolver;
+    private ClassResolver $classResolver;
 
-    /**
-     * @var int
-     */
-    private $n = 0;
+    private int $n = 0;
 
     /**
      * Constructor
@@ -58,7 +46,7 @@ class Prototype extends AbstractBinding
      * @param array $args
      * @param callable|null $explicit
      * @return mixed|null
-     * @throws \Exception
+     * @throws Exception
      */
     public function resolve(Container $container, array $args = [], $explicit = null)
     {

@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace Peak\Di;
 
+use Peak\Di\Exception\InfiniteLoopResolutionException;
+use ReflectionException;
 use function array_shift;
 use function class_exists;
 use function is_array;
 use function is_callable;
 use function is_object;
-use Peak\Di\Exception\InfiniteLoopResolutionException;
 
 class ArrayDefinition
 {
@@ -17,22 +18,13 @@ class ArrayDefinition
      * If true, check in the container before create a new instance of an object
      * @var bool
      */
-    private $newInstanceOnly = false;
+    private bool $newInstanceOnly = false;
 
-    /**
-     * @var ClassInstantiator
-     */
-    private $instantiator;
+    private ClassInstantiator $instantiator;
 
-    /**
-     * @var ClassResolver
-     */
-    private $classResolver;
+    private ClassResolver $classResolver;
 
-    /**
-     * @var int
-     */
-    private $n = 0;
+    private int $n = 0;
 
     /**
      * Constructor.
@@ -52,7 +44,7 @@ class ArrayDefinition
      * @throws Exception\ClassDefinitionNotFoundException
      * @throws Exception\InterfaceNotFoundException
      * @throws InfiniteLoopResolutionException
-     * @throws \ReflectionException
+     * @throws ReflectionException
      */
     public function resolve(array $definition, Container $container, array $args = [])
     {

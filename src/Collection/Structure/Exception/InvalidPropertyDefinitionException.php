@@ -4,17 +4,13 @@ declare(strict_types=1);
 
 namespace Peak\Collection\Structure\Exception;
 
-class InvalidPropertyDefinitionException extends \Exception
-{
-    /**
-     * @var object
-     */
-    private $class;
+use Exception;
 
-    /**
-     * @var string
-     */
-    private $propertyName;
+class InvalidPropertyDefinitionException extends Exception
+{
+    private string $class;
+
+    private string $propertyName;
 
     /**
      * InvalidPropertyDefinitionException constructor.
@@ -29,9 +25,9 @@ class InvalidPropertyDefinitionException extends \Exception
     }
 
     /**
-     * @return object
+     * @return string
      */
-    public function getClass(): object
+    public function getClass(): string
     {
         return $this->class;
     }

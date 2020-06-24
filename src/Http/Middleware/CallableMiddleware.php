@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace Peak\Http\Middleware;
 
+use Closure;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use \Closure;
-
 use function call_user_func_array;
 
 class CallableMiddleware implements MiddlewareInterface

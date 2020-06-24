@@ -6,7 +6,7 @@ namespace Peak\Http\Response;
 
 use Peak\Blueprint\Http\ResponseEmitter;
 use Psr\Http\Message\ResponseInterface;
-
+use RuntimeException;
 use function header;
 use function headers_sent;
 use function sprintf;
@@ -14,7 +14,7 @@ use function str_replace;
 use function ucwords;
 
 /**
- * Class Emitter - Based on Zend\Diactoros\Response\SapiEmitter
+ * Based on Zend\Diactoros\Response\SapiEmitter
  */
 class Emitter implements ResponseEmitter
 {
@@ -58,8 +58,8 @@ class Emitter implements ResponseEmitter
      * If either headers have been sent or the output buffer contains content,
      * raises an exception.
      *
-     * @throws \RuntimeException if headers have already been sent.
-     * @throws \RuntimeException if output is present in the output buffer.
+     * @throws RuntimeException if headers have already been sent.
+     * @throws RuntimeException if output is present in the output buffer.
      */
     private function assertNoPreviousOutput()
     {
@@ -67,7 +67,7 @@ class Emitter implements ResponseEmitter
         // if output_buffering is different from Off in you php.ini, and the length of what you sent does not
         // exceed the size of output_buffering.
         if (headers_sent()) {
-            throw new \RuntimeException('Unable to emit response; headers already sent');
+            throw new RuntimeException('Unable to emit response; headers already sent');
         }
 
         /*
@@ -89,7 +89,7 @@ class Emitter implements ResponseEmitter
      *
      * @param ResponseInterface $response
      *
-     * @see \Zend\Diactoros\Response\SapiEmitterTrait::emitHeaders()
+     * @see emitHeaders()
      */
     private function emitStatusLine(ResponseInterface $response)
     {

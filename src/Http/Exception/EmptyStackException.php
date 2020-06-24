@@ -8,10 +8,7 @@ use Peak\Blueprint\Http\Stack;
 
 class EmptyStackException extends \InvalidArgumentException
 {
-    /**
-     * @var Stack
-     */
-    private $stack;
+    private Stack $stack;
 
     /**
      * StackEndedWithoutResponseException constructor.

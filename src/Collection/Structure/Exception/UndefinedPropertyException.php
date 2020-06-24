@@ -6,15 +6,9 @@ namespace Peak\Collection\Structure\Exception;
 
 class UndefinedPropertyException extends \Exception
 {
-    /**
-     * @var string
-     */
-    private $propertyName;
+    private string $propertyName;
 
-    /**
-     * @var string
-     */
-    private $class;
+    private string $class;
 
     /**
      * UndefinedPropertyException constructor.

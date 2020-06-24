@@ -4,13 +4,11 @@ declare(strict_types=1);
 
 namespace Peak\Collection;
 
+use ArrayIterator;
+use Closure;
+use Exception;
+use JsonSerializable;
 use Peak\Common\Traits\ArrayMergeRecursiveDistinct;
-
-use \ArrayIterator;
-use \Closure;
-use \Exception;
-use \JsonSerializable;
-
 use function array_map;
 use function call_user_func;
 use function count;
@@ -22,17 +20,9 @@ class Collection implements \Peak\Blueprint\Collection\Collection, JsonSerializa
 {
     use ArrayMergeRecursiveDistinct;
 
-    /**
-     * Collection items
-     * @var array
-     */
-    protected $items = [];
+    protected ?array $items = [];
 
-    /**
-     * Lock write
-     * @var boolean
-     */
-    protected $read_only = false;
+    protected bool $read_only = false;
 
     /**
      * Create a new collection

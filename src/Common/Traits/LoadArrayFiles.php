@@ -4,23 +4,17 @@ declare(strict_types=1);
 
 namespace Peak\Common\Traits;
 
-use \Exception;
-
-use function is_array;
+use Exception;
 use function file_exists;
+use function is_array;
 
 trait LoadArrayFiles
 {
-    /**
-     * The content of php array files
-     * @var array
-     */
-    protected $array_files_content = [];
+    protected array $array_files_content = [];
 
     /**
-     * Load php array file(s)
-     *
-     * @param  array $files Files to load as array
+     * @param array $files
+     * @param string|null $basepath
      * @return array
      * @throws Exception
      */

@@ -6,7 +6,7 @@ interface Renderable
 {
     /**
      * Render the object contents and return it
-     * @return string
+     * @return mixed
      */
     public function render();
 }

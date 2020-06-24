@@ -13,15 +13,9 @@ use Psr\Container\ContainerInterface;
 
 abstract class AbstractApplication implements Application
 {
-    /**
-     * @var Kernel
-     */
-    protected $kernel;
+    protected Kernel $kernel;
 
-    /**
-     * @var Dictionary|null
-     */
-    protected $props;
+    protected ?Dictionary $props;
 
     /**
      * @return Kernel

@@ -9,42 +9,27 @@ use Peak\Blueprint\Config\Config;
 use Peak\Blueprint\Config\ConfigFactory;
 use Peak\Config\Cache\FileCache;
 use Peak\Config\ConfigCacheFactory;
+use Peak\Config\Exception\CachePathNotFoundException;
+use Peak\Config\Exception\CachePathNotWritableException;
+use Peak\Config\Exception\UnknownResourceException;
 use Psr\SimpleCache\CacheInterface;
-
+use Psr\SimpleCache\InvalidArgumentException;
 use function trigger_error;
 
 class ConfigLoader implements ResourceLoader
 {
-    /**
-     * @var ConfigFactory|null
-     */
-    protected $configFactory = null;
 
-    /**
-     * @var string|null
-     */
-    protected $cachePath = null;
+    protected ?ConfigFactory $configFactory = null;
 
-    /**
-     * @var string|null
-     */
-    protected $cacheId = null;
+    protected ?string $cachePath = null;
 
-    /**
-     * @var integer|null
-     */
-    protected $cacheTtl = null;
+    protected ?string $cacheId = null;
 
-    /**
-     * @var CacheInterface|null
-     */
-    protected $cacheDriver = null;
+    protected ?int $cacheTtl = null;
 
-    /**
-     * @param ConfigFactory $configFactory
-     * @return $this
-     */
-    public function setConfigFactory(ConfigFactory $configFactory)
+    protected ?CacheInterface $cacheDriver = null;
+
+    public function setConfigFactory(ConfigFactory $configFactory): ConfigLoader
     {
         if (isset($this->cachePath)) {
             trigger_error('Cache configurations will be ignored because ConfigFactory have been set.');
@@ -53,13 +38,6 @@ class ConfigLoader implements ResourceLoader
         return $this;
     }
 
-    /**
-     * @param string $path
-     * @param string $uid
-     * @param int $ttlInSec
-     * @param CacheInterface|null $driver
-     * @return $this
-     */
     public function setCache(string $path, string $uid, int $ttlInSec, CacheInterface $driver = null)
     {
         if (isset($this->configFactory)) {
@@ -75,10 +53,10 @@ class ConfigLoader implements ResourceLoader
     /**
      * @param mixed $resources
      * @return mixed|Config|\Peak\Config\Config
-     * @throws \Peak\Config\Exception\CachePathNotFoundException
-     * @throws \Peak\Config\Exception\CachePathNotWritableException
-     * @throws \Peak\Config\Exception\UnknownResourceException
-     * @throws \Psr\SimpleCache\InvalidArgumentException
+     * @throws CachePathNotFoundException
+     * @throws CachePathNotWritableException
+     * @throws UnknownResourceException
+     * @throws InvalidArgumentException
      */
     public function load($resources)
     {
@@ -89,10 +67,10 @@ class ConfigLoader implements ResourceLoader
      * @param array $resources
      * @param Config $config
      * @return Config|\Peak\Config\Config
-     * @throws \Peak\Config\Exception\CachePathNotFoundException
-     * @throws \Peak\Config\Exception\CachePathNotWritableException
-     * @throws \Peak\Config\Exception\UnknownResourceException
-     * @throws \Psr\SimpleCache\InvalidArgumentException
+     * @throws CachePathNotFoundException
+     * @throws CachePathNotWritableException
+     * @throws UnknownResourceException
+     * @throws InvalidArgumentException
      */
     public function loadWith(array $resources, Config $config)
     {
@@ -104,12 +82,12 @@ class ConfigLoader implements ResourceLoader
      * @param array $resources
      * @param Config|null $config
      * @return Config
-     * @throws \Peak\Config\Exception\CachePathNotFoundException
-     * @throws \Peak\Config\Exception\CachePathNotWritableException
-     * @throws \Peak\Config\Exception\UnknownResourceException
-     * @throws \Psr\SimpleCache\InvalidArgumentException
+     * @throws CachePathNotFoundException
+     * @throws CachePathNotWritableException
+     * @throws UnknownResourceException
+     * @throws InvalidArgumentException
      */
-    private function loadConfig(array $resources, \Peak\Blueprint\Config\Config $config = null)
+    private function loadConfig(array $resources, Config $config = null)
     {
         $configFactory = $this->configFactory;
 

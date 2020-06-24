@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Peak\Config;
 
-use Peak\Blueprint\Config\Config;
 use Peak\Blueprint\Collection\Collection;
 use Peak\Blueprint\Common\ResourceResolver;
+use Peak\Blueprint\Config\Config;
 use Peak\Blueprint\Config\Stream;
 use Peak\Config\Exception\UnknownResourceException;
 use Peak\Config\Processor\ArrayProcessor;
@@ -14,26 +14,17 @@ use Peak\Config\Processor\CallableProcessor;
 use Peak\Config\Processor\CollectionProcessor;
 use Peak\Config\Processor\ConfigProcessor;
 use Peak\Config\Processor\StdClassProcessor;
-use Peak\Config\Stream\ConfigStream;
 use Peak\Config\Stream\DataStream;
 use Peak\Config\Stream\FileStream;
-use \stdClass;
-
+use stdClass;
 use function is_array;
 use function is_callable;
 use function is_string;
 
 class ConfigResolver implements ResourceResolver
 {
-    /**
-     * @var null|FilesHandlers
-     */
-    private $filesHandlers;
+    private ?FilesHandlers $filesHandlers;
 
-    /**
-     * ConfigResolver constructor.
-     *
-     */
     public function __construct(?FilesHandlers $filesHandlers)
     {
         $this->filesHandlers = $filesHandlers;

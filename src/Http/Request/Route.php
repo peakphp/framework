@@ -4,42 +4,26 @@ declare(strict_types=1);
 
 namespace Peak\Http\Request;
 
-use Peak\Http\Exception\StackEndedWithoutResponseException;
 use Peak\Blueprint\Http\Stack;
+use Peak\Http\Exception\StackEndedWithoutResponseException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-
 use function preg_match;
 use function strtoupper;
 use function trim;
 
 class Route implements \Peak\Blueprint\Http\Route, Stack
 {
-    /**
-     * @var string|null
-     */
-    private $method;
+    private ?string $method;
 
-    /**
-     * @var string
-     */
-    private $path;
+    private string $path;
 
-    /**
-     * @var Stack
-     */
-    private $stack;
+    private Stack $stack;
 
-    /**
-     * @var Stack
-     */
-    private $parentStack;
+    private Stack $parentStack;
 
-    /**
-     * @var array
-     */
-    private $matches = [];
+    private array $matches = [];
 
     /**
      * Route constructor.

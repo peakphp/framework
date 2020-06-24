@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace Peak\Di;
 
+use Exception;
 use Peak\Di\Exception\ClassNotFoundException;
 use Peak\Di\Exception\MethodNotFoundException;
-use \Exception;
-use \ReflectionClass;
-
+use ReflectionClass;
 use function class_exists;
 use function is_string;
 

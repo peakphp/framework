@@ -16,13 +16,15 @@
     }
   ],
   "require": {
-    "php": ">=7.2",
+    "php": ">=7.4",
+    "ext-json": "*",
+    "ext-simplexml": "*",
     "psr/simple-cache": "^1.0",
-    "peak/blueprint": "^4.0",
-    "peak/collection": "^4.0"
+    "peak/blueprint": "^5.0",
+    "peak/collection": "^5.0"
   },
   "suggest": {
-    "symfony/yaml": "Required to parse yaml file with Peak\\Config (^4.3)."
+    "symfony/yaml": "Required to parse yaml file with Peak\\Config (^5.1)."
   },
   "autoload": {
     "psr-4": {
@@ -36,7 +38,7 @@
   "prefer-stable": true,
   "extra": {
     "branch-alias": {
-      "dev-master": "4.0-dev"
+      "dev-master": "5.0-dev"
     }
   }
 }

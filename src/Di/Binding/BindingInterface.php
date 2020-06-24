@@ -19,12 +19,12 @@ interface BindingInterface
     /**
      * @return string
      */
-    public function getName();
+    public function getName(): string;
 
     /**
      * @return int
      */
-    public function getType();
+    public function getType(): int;
 
     /**
      * @return mixed

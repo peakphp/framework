@@ -6,9 +6,6 @@ namespace Peak\Http\Request\Exception;
 
 class HandlerNotFoundException extends \InvalidArgumentException
 {
-    /**
-     * @var mixed
-     */
     private $handler;
 
     /**

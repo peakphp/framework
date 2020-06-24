@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Peak\Http\Middleware;
 
+use Exception;
 use Peak\Http\Exception\JsonBodyParserException;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface as Handler;
@@ -16,7 +17,7 @@ class JsonBodyParserMiddleware implements MiddlewareInterface
      * @param Request $request
      * @param Handler $handler
      * @return Response
-     * @throws \Exception
+     * @throws Exception
      */
     public function process(Request $request, Handler $handler): Response
     {

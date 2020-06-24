@@ -7,28 +7,17 @@ namespace Peak\Config;
 use Peak\Blueprint\Config\ConfigFactory;
 use Peak\Blueprint\Config\Config as ConfigBlueprint;
 use Psr\SimpleCache\CacheInterface;
+use Psr\SimpleCache\InvalidArgumentException;
 
 class ConfigCacheFactory implements ConfigFactory
 {
-    /**
-     * @var string
-     */
-    private $cacheId;
+    private string $cacheId;
 
-    /**
-     * @var integer
-     */
-    private $ttl;
+    private int $ttl;
 
-    /**
-     * @var ConfigFactory
-     */
-    private $configFactory;
+    private ConfigFactory $configFactory;
 
-    /**
-     * @var CacheInterface
-     */
-    private $configCache;
+    private CacheInterface $configCache;
 
     /**
      * ConfigCacheFactory constructor.
@@ -53,7 +42,7 @@ class ConfigCacheFactory implements ConfigFactory
     /**
      * @param array $resources
      * @return ConfigBlueprint
-     * @throws \Psr\SimpleCache\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function loadResources(array $resources): ConfigBlueprint
     {
@@ -64,7 +53,7 @@ class ConfigCacheFactory implements ConfigFactory
      * @param array $resources
      * @param ConfigBlueprint $customConfig
      * @return ConfigBlueprint
-     * @throws \Psr\SimpleCache\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function loadResourcesWith(array $resources, ConfigBlueprint $customConfig): ConfigBlueprint
     {
@@ -76,7 +65,7 @@ class ConfigCacheFactory implements ConfigFactory
      * @param array $resources
      * @param ConfigBlueprint|null $customConfig
      * @return ConfigBlueprint
-     * @throws \Psr\SimpleCache\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     protected function load(string $cacheId, array $resources, ConfigBlueprint $customConfig = null): ConfigBlueprint
     {

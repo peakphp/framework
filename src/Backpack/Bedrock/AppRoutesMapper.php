@@ -57,7 +57,8 @@ class AppRoutesMapper
         }
 
         //reorder routes by path
-        array_multisort (array_column($routes, 'path'), SORT_ASC, $routes);
+        $array = array_column($routes, 'path');
+        array_multisort ($array, SORT_ASC, $routes);
         return $routes;
     }
 }

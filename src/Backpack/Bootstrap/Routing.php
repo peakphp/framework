@@ -4,27 +4,18 @@ declare(strict_types=1);
 
 namespace Peak\Backpack\Bootstrap;
 
+use Exception;
 use Peak\Bedrock\Http\Application;
 use Peak\Blueprint\Common\Bootable;
-
 use function is_array;
 
 class Routing implements Bootable
 {
-    /**
-     * @var Application
-     */
-    private $app;
+    private Application $app;
 
-    /**
-     * @var string
-     */
-    private $routesPropName;
+    private string $routesPropName;
 
-    /**
-     * @var string
-     */
-    private $routesPathPrefixPropName;
+    private string $routesPathPrefixPropName;
 
     /**
      * Routing constructor.
@@ -44,7 +35,7 @@ class Routing implements Bootable
 
     /**
      * Look for routes to register in application properties
-     * @throws \Exception
+     * @throws Exception
      */
     public function boot()
     {
@@ -57,7 +48,7 @@ class Routing implements Bootable
         $propRoutes = $this->app->getProp($this->routesPropName, []);
 
         if (!is_array($propRoutes)) {
-            throw new \Exception('Routes definitions must be an array!');
+            throw new Exception('Routes definitions must be an array!');
         }
 
         foreach ($this->app->getProp($this->routesPropName, []) as $route) {
@@ -74,16 +65,16 @@ class Routing implements Bootable
 
     /**
      * @param mixed $route
-     * @throws \Exception
+     * @throws Exception
      */
     private function validate($route)
     {
         if (!is_array($route)) {
-            throw new \Exception('Route definition must be an array!');
+            throw new Exception('Route definition must be an array!');
         } elseif (!isset($route['path'])) {
-            throw new \Exception('Route definition must have a path!');
+            throw new Exception('Route definition must have a path!');
         } elseif (!isset($route['stack'])) {
-            throw new \Exception('Route definition must have a stack!');
+            throw new Exception('Route definition must have a stack!');
         }
     }
 }

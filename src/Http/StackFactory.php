@@ -8,10 +8,7 @@ use Peak\Blueprint\Common\ResourceResolver;
 
 class StackFactory
 {
-    /**
-     * @var ResourceResolver
-     */
-    private $handlerResolver;
+    private ResourceResolver $handlerResolver;
 
     /**
      * StackFactory constructor.
@@ -31,7 +28,6 @@ class StackFactory
     public function create(array $handlers, ResourceResolver $handlerResolver = null)
     {
         $handlerResolver = $handlerResolver ?? $this->handlerResolver;
-        $stack = new Stack($handlers, $handlerResolver);
-        return $stack;
+        return new Stack($handlers, $handlerResolver);
     }
 }

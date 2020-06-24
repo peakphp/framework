@@ -5,22 +5,16 @@ declare(strict_types=1);
 namespace Peak\Config\Stream;
 
 use Peak\Blueprint\Config\Stream;
+use Peak\Config\Exception\NoFileHandlersException;
 use Peak\Config\FilesHandlers;
-
 use function pathinfo;
 use function strtolower;
 
 class FileStream implements Stream
 {
-    /**
-     * @var FilesHandlers
-     */
-    protected $handlers;
+    protected FilesHandlers $handlers;
 
-    /**
-     * @var string
-     */
-    protected $file;
+    protected string $file;
 
     /**
      * FileStream constructor.
@@ -36,7 +30,7 @@ class FileStream implements Stream
 
     /**
      * @return array
-     * @throws \Peak\Config\Exception\NoFileHandlersException
+     * @throws NoFileHandlersException
      */
     public function get(): array
     {

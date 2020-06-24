@@ -2,7 +2,7 @@
 
 This package help you to create:
  - HTTP Application compatible PSR-7, PSR-11 and PSR-15.
- - CLI application compatible PSR-11 (with symfony/console).
+ - CLI application compatible PSR-11 (requires symfony/console and symfony/process).
 
 ### Installation
 

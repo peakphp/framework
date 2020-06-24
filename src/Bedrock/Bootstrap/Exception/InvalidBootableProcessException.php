@@ -11,11 +11,6 @@ class InvalidBootableProcessException extends \Exception
      */
     private $process;
 
-    /**
-     * InvalidBootableProcessException constructor.
-     *
-     * @param mixed $process
-     */
     public function __construct($process)
     {
         parent::__construct('Invalid bootable process');

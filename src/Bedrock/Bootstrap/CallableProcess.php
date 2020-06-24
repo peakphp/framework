@@ -9,23 +9,16 @@ use Peak\Blueprint\Common\Bootable;
 class CallableProcess implements Bootable
 {
     /**
-     * @var callable
+     * @var callable 
      */
     private $callable;
 
-    /**
-     * CallableProcess constructor.
-     * @param callable $callable
-     */
-    public function __construct(callable $callable)
+    public function __construct(Callable $callable)
     {
         $this->callable = $callable;
     }
 
-    /**
-     * @return mixed|void
-     */
-    public function boot()
+    public function boot(): void
     {
         $fn = $this->callable;
         $fn();

@@ -8,10 +8,7 @@ use Peak\Blueprint\Http\Stack;
 
 class StackEndedWithoutResponseException extends \LogicException
 {
-    /**
-     * @var Stack
-     */
-    private $stack;
+    private Stack $stack;
 
     /**
      * StackEndedWithoutResponseException constructor.

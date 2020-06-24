@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Peak\Di;
 
+use Exception;
+use InvalidArgumentException;
 use Peak\Di\Exception\AmbiguousResolutionException;
-use Peak\Di\Exception\InterfaceNotFoundException;
 use Peak\Di\Exception\ClassDefinitionNotFoundException;
-use \Exception;
-use \InvalidArgumentException;
-
+use Peak\Di\Exception\InterfaceNotFoundException;
+use ReflectionException;
 use function array_key_exists;
 use function count;
 use function interface_exists;
@@ -17,23 +17,11 @@ use function is_array;
 
 class ClassResolver
 {
-    /**
-     * ClassInspector
-     * @var \Peak\Di\ClassInspector
-     */
-    protected $inspector;
+    protected ClassInspector $inspector;
 
-    /**
-     * Interface resolver
-     * @var \Peak\Di\InterfaceResolver
-     */
-    protected $iresolver;
+    protected InterfaceResolver $iresolver;
 
-    /**
-     * Explicit resolver
-     * @var \Peak\Di\ExplicitResolver
-     */
-    protected $explicit;
+    protected ExplicitResolver $explicit;
 
     /**
      * Constructor
@@ -56,7 +44,7 @@ class ClassResolver
      * @throws AmbiguousResolutionException
      * @throws ClassDefinitionNotFoundException
      * @throws InterfaceNotFoundException
-     * @throws \ReflectionException
+     * @throws ReflectionException
      */
     public function resolve($class, Container $container, array $args = [], $explicit = null)
     {

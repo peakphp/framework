@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Peak\Di;
 
-use \ReflectionClass;
+use ReflectionClass;
+use ReflectionException;
 
 class ClassInstantiator
 {
@@ -14,7 +15,7 @@ class ClassInstantiator
      * @param string $class
      * @param array $args
      * @return object
-     * @throws \ReflectionException
+     * @throws ReflectionException
      */
     public function instantiate(string $class, array $args = [])
     {

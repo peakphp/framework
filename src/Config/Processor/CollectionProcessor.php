@@ -10,16 +10,15 @@ use Peak\Config\Exception\ProcessorTypeException;
 
 class CollectionProcessor implements ResourceProcessor
 {
-
     /**
-     * @param Collection $data
+     * @param mixed $data
+     * @return array
      * @throws ProcessorTypeException
      */
     public function process($data): array
     {
         if (!$data instanceof Collection) {
             throw new ProcessorTypeException(__CLASS__, Collection::class, $data);
-            //throw new ProcessorException(__CLASS__.' expects data to be an instance of Collection. '.gettype($data).' given.');
         }
 
         return $data->toArray();

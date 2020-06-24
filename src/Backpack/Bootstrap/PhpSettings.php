@@ -4,22 +4,16 @@ declare(strict_types=1);
 
 namespace Peak\Backpack\Bootstrap;
 
-use Peak\Blueprint\Common\Bootable;
+use Exception;
 use Peak\Blueprint\Bedrock\Application;
+use Peak\Blueprint\Common\Bootable;
 use Peak\Common\PhpIni;
-use \Exception;
 
 class PhpSettings implements Bootable
 {
-    /**
-     * @var Application
-     */
-    private $app;
+    private Application $app;
 
-    /**
-     * @var string
-     */
-    private $phpPropName;
+    private string $phpPropName;
 
     /**
      * PhpSettings constructor.

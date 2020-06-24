@@ -15,13 +15,13 @@
     }
   ],
   "require": {
-    "php": ">=7.2",
-    "peak/http": "^4.0",
-    "peak/collection": "^4.0"
+    "php": ">=7.4",
+    "peak/http": "^5.0",
+    "peak/collection": "^5.0"
   },
   "suggest": {
-    "symfony/console": "Required to use Peak\\Bedrock\\Cli\\Application (^4.3).",
-    "symfony/process": "Required to use Peak\\Bedrock\\Cli\\Application (^4.3)."
+    "symfony/console": "Required to use Peak\\Bedrock\\Cli\\Application (^5.1).",
+    "symfony/process": "Required to use Peak\\Bedrock\\Cli\\Application (^5.1)."
   },
   "autoload": {
     "psr-4": {
@@ -30,7 +30,7 @@
   },
   "extra": {
     "branch-alias": {
-      "dev-master": "4.0-dev"
+      "dev-master": "5.0-dev"
     }
   },
   "minimum-stability": "dev",

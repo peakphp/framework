@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace Peak\Backpack\Bootstrap;
 
+use Exception;
 use Peak\Blueprint\Bedrock\Application;
 use Peak\Blueprint\Common\Bootable;
-use \Exception;
-
 use function defined;
 use function php_sapi_name;
 use function session_name;
@@ -18,15 +17,9 @@ use function session_status;
 
 class Session implements Bootable
 {
-    /**
-     * @var Application
-     */
-    private $app;
+    private Application $app;
 
-    /**
-     * @var string
-     */
-    private $sessionPropName;
+    private string $sessionPropName;
 
     /**
      * Session constructor.
@@ -39,7 +32,6 @@ class Session implements Bootable
         $this->sessionPropName = $sessionPropName;
     }
     /**
-     * Setup and start session from app props
      * @throws Exception
      */
     public function boot()

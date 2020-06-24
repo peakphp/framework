@@ -7,7 +7,6 @@ namespace Peak\Config\Processor;
 use Peak\Blueprint\Common\ResourceProcessor;
 use Peak\Common\Traits\ArrayMergeRecursiveDistinct;
 use Peak\Config\Exception\ProcessorException;
-
 use function error_get_last;
 use function parse_ini_string;
 use function stripos;
@@ -19,10 +18,7 @@ class IniProcessor implements ResourceProcessor
 {
     use ArrayMergeRecursiveDistinct;
 
-    /**
-     * @var array
-     */
-    private $content;
+    private array $content;
 
     /**
      * @param mixed $data

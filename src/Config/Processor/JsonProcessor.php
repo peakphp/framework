@@ -6,7 +6,6 @@ namespace Peak\Config\Processor;
 
 use Peak\Blueprint\Common\ResourceProcessor;
 use Peak\Config\Exception\ProcessorException;
-
 use function json_decode;
 use function json_last_error;
 use function json_last_error_msg;

@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace Peak\Di;
 
-use \Closure;
-
+use Closure;
 use function array_key_exists;
 use function is_array;
 use function is_object;

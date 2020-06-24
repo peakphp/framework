@@ -4,25 +4,21 @@ declare(strict_types=1);
 
 namespace Peak\Http\Request;
 
+use Peak\Blueprint\Common\ResourceResolver;
+use Peak\Blueprint\Http\Stack;
 use Peak\Http\Middleware\CallableMiddleware;
 use Peak\Http\Request\Exception\HandlerNotFoundException;
 use Peak\Http\Request\Exception\UnresolvableHandlerException;
-use Peak\Blueprint\Common\ResourceResolver;
-use Peak\Blueprint\Http\Stack;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-
 use function class_exists;
 use function is_callable;
 use function is_string;
 
 class HandlerResolver implements ResourceResolver
 {
-    /**
-     * @var ContainerInterface|null
-     */
-    protected $container;
+    protected ?ContainerInterface $container;
 
     /**
      * HandlerResolver constructor.

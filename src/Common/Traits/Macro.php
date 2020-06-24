@@ -2,18 +2,14 @@
 
 namespace Peak\Common\Traits;
 
-use \Closure;
-use \RuntimeException;
-
+use Closure;
+use RuntimeException;
 use function call_user_func_array;
 use function get_class;
 
 trait Macro
 {
-    /**
-     * @var array
-     */
-    private $macros = [];
+    private array $macros = [];
 
     /**
      * @param string $name

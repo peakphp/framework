@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Peak\Di\Exception;
 
+use Exception;
 use Psr\Container\ContainerExceptionInterface;
-use \Exception;
 
 class InvalidDefinitionException extends Exception implements ContainerExceptionInterface
 {

@@ -4,23 +4,18 @@ declare(strict_types=1);
 
 namespace Peak\Collection;
 
-use Peak\Blueprint\Collection\Dictionary;
-use JsonSerializable;
-use Exception;
 use ArrayIterator;
-
+use Exception;
+use JsonSerializable;
+use Peak\Blueprint\Collection\Dictionary;
 use function array_key_exists;
 use function count;
-use function json_encode;
 use function serialize;
 use function unserialize;
 
 class PropertiesBag implements Dictionary, JsonSerializable
 {
-    /**
-     * @var array
-     */
-    protected $properties = [];
+    protected array $properties = [];
 
     /**
      * Constructor.
@@ -147,7 +142,7 @@ class PropertiesBag implements Dictionary, JsonSerializable
     /**
      * @return int
      */
-    public function count()
+    public function count(): int
     {
         return count($this->properties);
     }
@@ -155,7 +150,7 @@ class PropertiesBag implements Dictionary, JsonSerializable
     /**
      * @return ArrayIterator
      */
-    public function getIterator()
+    public function getIterator(): ArrayIterator
     {
         return new ArrayIterator($this->properties);
     }
@@ -163,7 +158,7 @@ class PropertiesBag implements Dictionary, JsonSerializable
     /**
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         return $this->properties;
     }
@@ -171,7 +166,7 @@ class PropertiesBag implements Dictionary, JsonSerializable
     /**
      * @return string
      */
-    public function serialize()
+    public function serialize(): string
     {
         return serialize($this->properties);
     }
@@ -179,7 +174,7 @@ class PropertiesBag implements Dictionary, JsonSerializable
     /**
      * @param string $data
      */
-    public function unserialize($data)
+    public function unserialize($data): void
     {
         $this->properties = unserialize($data);
     }
@@ -187,7 +182,7 @@ class PropertiesBag implements Dictionary, JsonSerializable
     /**
      * @return array|mixed
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return $this->properties;
     }

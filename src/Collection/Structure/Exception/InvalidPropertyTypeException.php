@@ -4,30 +4,18 @@ declare(strict_types=1);
 
 namespace Peak\Collection\Structure\Exception;
 
-use function implode;
 use function get_class;
+use function implode;
 
 class InvalidPropertyTypeException extends \Exception
 {
-    /**
-     * @var string
-     */
-    private $class;
+    private string $class;
 
-    /**
-     * @var string
-     */
-    private $propertyName;
+    private string $propertyName;
 
-    /**
-     * @var array
-     */
-    private $typesExpected;
+    private array $typesExpected;
 
-    /**
-     * @var string
-     */
-    private $typeReceived;
+    private string $typeReceived;
 
     /**
      * InvalidPropertyTypeException constructor.

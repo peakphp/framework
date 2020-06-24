@@ -4,15 +4,14 @@ declare(strict_types=1);
 
 namespace Peak\Http;
 
+use Peak\Blueprint\Common\ResourceResolver;
 use Peak\Http\Exception\EmptyStackException;
 use Peak\Http\Exception\StackEndedWithoutResponseException;
 use Peak\Http\Request\Exception\InvalidHandlerException;
-use Peak\Blueprint\Common\ResourceResolver;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-
 use function current;
 use function is_callable;
 use function is_object;
@@ -21,25 +20,16 @@ use function reset;
 
 class Stack implements \Peak\Blueprint\Http\Stack
 {
-    /**
-     * @var array
-     */
-    private $handlers;
+    private array $handlers;
 
     /**
      * @var mixed
      */
     private $nextHandler;
 
-    /**
-     * @var ResourceResolver
-     */
-    private $handlerResolver;
+    private ResourceResolver $handlerResolver;
 
-    /**
-     * @var \Peak\Blueprint\Http\Stack
-     */
-    private $parentStack = null;
+    private ?\Peak\Blueprint\Http\Stack $parentStack = null;
 
     /**
      * Stack constructor.

@@ -8,10 +8,7 @@ use Peak\Blueprint\Common\Arrayable;
 
 class RouteArgs implements \ArrayAccess, Arrayable
 {
-    /**
-     * @var array
-     */
-    private $args;
+    private array $args;
 
     /**
      * RouteArgs constructor.

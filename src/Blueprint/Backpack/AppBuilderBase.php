@@ -6,7 +6,6 @@ namespace Peak\Blueprint\Backpack;
 
 use Closure;
 use Peak\Blueprint\Bedrock\Kernel;
-use Peak\Blueprint\Common\ResourceResolver;
 use Psr\Container\ContainerInterface;
 
 interface AppBuilderBase

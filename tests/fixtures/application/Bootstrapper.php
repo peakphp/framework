@@ -8,7 +8,7 @@ class Bootstrapper extends AbstractBootstrapper
     public $i = 0;
     public $j = 0;
 
-    protected $processes = [
+    protected array $processes = [
         BootstrapProcess::class
     ];
 

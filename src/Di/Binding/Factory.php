@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace Peak\Di\Binding;
 
+use Exception;
 use Peak\Di\Container;
-
-use function is_null;
 
 class Factory extends AbstractBinding
 {
@@ -28,16 +27,11 @@ class Factory extends AbstractBinding
      * @param array $args
      * @param callable|null $explicit
      * @return mixed|null
-     * @throws \Exception
+     * @throws Exception
      */
     public function resolve(Container $container, array $args = [], $explicit = null)
     {
-        $definition = $this->definition;
-
-        if (!is_null($explicit) && !empty($explicit)) {
-            $definition = $explicit;
-        }
-
+        $definition = (!empty($explicit)) ? $explicit : $this->definition;
         return $definition($container, $args);
     }
 }

@@ -5,32 +5,19 @@ declare(strict_types=1);
 namespace Peak\Common\Chrono;
 
 use Peak\Common\Traits\MicroTime;
-
 use function count;
 
 class Chrono
 {
     use MicroTime;
 
-    /**
-     * @var string
-     */
-    private $name;
+    private string $name;
 
-    /**
-     * @var float
-     */
-    private $start;
+    private float $start;
 
-    /**
-     * @var float|null
-     */
-    private $end = null;
+    private ?float $end = null;
 
-    /**
-     * @var array<Step>
-     */
-    private $steps = [];
+    private array $steps = [];
 
     /**
      * Chrono constructor.

@@ -6,7 +6,6 @@ namespace Peak\Config\Processor;
 
 use Peak\Blueprint\Common\ResourceProcessor;
 use Peak\Config\Exception\ProcessorException;
-
 use function error_get_last;
 use function parse_ini_string;
 

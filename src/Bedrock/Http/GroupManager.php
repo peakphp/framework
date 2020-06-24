@@ -6,20 +6,11 @@ namespace Peak\Bedrock\Http;
 
 class GroupManager
 {
-    /**
-     * @var int
-     */
-    private $startedGroups = 0;
+    private int $startedGroups = 0;
 
-    /**
-     * @var string
-     */
-    private $currentPathPrefix = '';
+    private string $currentPathPrefix = '';
 
-    /**
-     * @var array
-     */
-    private $handlers = [];
+    private array $handlers = [];
 
     /**
      * @param string $path
@@ -91,6 +82,9 @@ class GroupManager
         return $this->startedGroups;
     }
 
+    /**
+     * @return bool
+     */
     public function currentlyInAGroup(): bool
     {
         return ($this->startedGroups > 0);

@@ -6,17 +6,12 @@ namespace Peak\Di;
 
 use Peak\Di\Exception\AmbiguousResolutionException;
 use Peak\Di\Exception\InterfaceNotFoundException;
-
 use function array_key_exists;
 use function is_array;
 
 class InterfaceResolver
 {
-
-    /**
-     * @var BindingResolver
-     */
-    private $bindingResolver;
+    private BindingResolver $bindingResolver;
 
     /**
      * InterfaceResolver constructor.

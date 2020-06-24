@@ -5,22 +5,15 @@ declare(strict_types=1);
 namespace Peak\Config;
 
 use Peak\Blueprint\Common\ResourceLoader;
-use Peak\Config\Exception\NoFileHandlersException;
 use Peak\Blueprint\Common\ResourceProcessor;
-
+use Peak\Config\Exception\NoFileHandlersException;
 use function array_key_exists;
 
 class FilesHandlers
 {
-    /**
-     * @var array
-     */
-    protected $handlers = [];
+    protected array $handlers = [];
 
-    /**
-     * @var array
-     */
-    protected $defaultHandlers = [
+    protected array $defaultHandlers = [
         'php' => [
             'loader' => \Peak\Config\Loader\PhpLoader::class,
             'processor' => \Peak\Config\Processor\ArrayProcessor::class
@@ -54,7 +47,6 @@ class FilesHandlers
             'processor' => \Peak\Config\Processor\EnvProcessor::class
         ],
     ];
-
 
     /**
      * FilesHandlers constructor.

@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace Peak\Collection;
 
+use Exception;
 use Peak\Blueprint\Collection\Collection;
-use \Exception;
-
 use function array_merge;
 use function is_array;
 use function mb_strlen;
@@ -14,20 +13,11 @@ use function substr;
 
 class CollectionFlattener
 {
-    /**
-     * @var Collection
-     */
-    protected $collection;
+    protected Collection $collection;
 
-    /**
-     * @var array
-     */
-    protected $search = [];
+    protected array $search = [];
 
-    /**
-     * @var string
-     */
-    protected $separator = '.';
+    protected string $separator = '.';
 
     /**
      * Constructor

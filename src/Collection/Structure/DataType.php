@@ -17,10 +17,7 @@ class DataType
     const UNKNOWN = 'unknown type';
     const ANY = 'any';
 
-    /**
-     * @var array
-     */
-    private $types;
+    private array $types;
 
     /**
      * @var mixed
@@ -30,7 +27,7 @@ class DataType
     /**
      * DataType constructor.
      * @param array $types
-     * @param string $default
+     * @param mixed $default
      */
     public function __construct(array $types, $default = null)
     {

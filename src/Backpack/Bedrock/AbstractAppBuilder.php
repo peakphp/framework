@@ -4,55 +4,31 @@ declare(strict_types=1);
 
 namespace Peak\Backpack\Bedrock;
 
+use Closure;
+use Exception;
 use Peak\Blueprint\Backpack\AppBuilderBase;
 use Peak\Blueprint\Bedrock\Kernel;
 use Peak\Blueprint\Collection\Dictionary;
 use Peak\Collection\DotNotationCollection;
 use Psr\Container\ContainerInterface;
-use Closure;
-use Exception;
-
 use function gettype;
 use function is_array;
 
 abstract class AbstractAppBuilder implements AppBuilderBase
 {
-    /**
-     * @var string|null
-     */
-    protected $env;
+    protected ?string $env = null;
 
-    /**
-     * @var ContainerInterface|null
-     */
-    protected $container;
+    protected ?ContainerInterface $container = null;
 
-    /**
-     * @var Kernel|null
-     */
-    protected $kernel;
+    protected ?Kernel $kernel = null;
 
-    /**
-     * @var Dictionary|null
-     */
-    protected $props;
+    protected ?Dictionary $props = null;
 
-    /**
-     * Application class
-     * @var string|null
-     */
-    protected $appClass;
+    protected ?string $appClass = null;
 
-    /**
-     * Kernel class
-     * @var string|null
-     */
-    protected $kernelClass;
+    protected ?string $kernelClass = null;
 
-    /**
-     * @var Closure|null
-     */
-    protected $afterBuild;
+    protected ?Closure $afterBuild = null;
 
     /**
      * @param string $env

@@ -9,8 +9,7 @@ use Peak\Di\Binding\Prototype;
 use Peak\Di\Binding\Singleton;
 use Peak\Di\Exception\ClassDefinitionNotFoundException;
 use Psr\Container\ContainerInterface;
-use Psr\Container\NotFoundExceptionInterface;
-
+use ReflectionException;
 use function array_search;
 use function call_user_func_array;
 use function class_implements;
@@ -19,53 +18,21 @@ use function is_array;
 
 class Container implements ContainerInterface
 {
-    /**
-     * Container object instances collection
-     * @var array
-     */
-    protected $instances = [];
+    protected array $instances = [];
 
-    /**
-     * Classes namespace alias
-     * @var array
-     */
-    protected $aliases = [];
+    protected array $aliases = [];
 
-    /**
-     * Container object interfaces collection
-     * @var array
-     */
-    protected $interfaces = [];
+    protected array $interfaces = [];
 
-    /**
-     * Class instance creator
-     * @var \Peak\Di\ClassInstantiator
-     */
-    protected $instantiator;
+    protected ClassInstantiator $instantiator;
 
-    /**
-     * Container object instances collection
-     * @var \Peak\Di\ClassResolver
-     */
-    protected $resolver;
+    protected ClassResolver $resolver;
 
-    /**
-     * Class definitions resolver
-     * @var BindingResolver
-     */
-    protected $binding_resolver;
+    protected BindingResolver $binding_resolver;
 
-    /**
-     * Allow container to resolve automatically for your object needed
-     * @var bool
-     */
-    protected $auto_wiring = true;
+    protected bool $auto_wiring = true;
 
-    /**
-     * Container configuration definitions
-     * @var array
-     */
-    protected $definitions = [];
+    protected array $definitions = [];
 
     /**
      * Constructor
@@ -90,7 +57,7 @@ class Container implements ContainerInterface
      * @throws ClassDefinitionNotFoundException
      * @throws Exception\AmbiguousResolutionException
      * @throws Exception\InterfaceNotFoundException
-     * @throws \ReflectionException
+     * @throws ReflectionException
      */
     public function create(string $class, $args = [], $explicit = null)
     {
@@ -124,7 +91,7 @@ class Container implements ContainerInterface
      * @throws ClassDefinitionNotFoundException
      * @throws Exception\AmbiguousResolutionException
      * @throws Exception\InterfaceNotFoundException
-     * @throws \ReflectionException
+     * @throws ReflectionException
      */
     public function call(array $callback, array $args = [], $explicit = null)
     {
@@ -144,7 +111,7 @@ class Container implements ContainerInterface
      * @throws ClassDefinitionNotFoundException
      * @throws Exception\AmbiguousResolutionException
      * @throws Exception\InterfaceNotFoundException
-     * @throws \ReflectionException
+     * @throws ReflectionException
      */
     public function createAndStore(string $class, array $args = [], $explicit = null)
     {
@@ -190,7 +157,7 @@ class Container implements ContainerInterface
      * @throws ClassDefinitionNotFoundException
      * @throws Exception\AmbiguousResolutionException
      * @throws Exception\InterfaceNotFoundException
-     * @throws \ReflectionException
+     * @throws ReflectionException
      */
     public function get($id)
     {

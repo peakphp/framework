@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace Peak\Blueprint\Bedrock;
 
+use Symfony\Component\Console\Application as ConsoleApplication;
+
 interface CliApplication extends Application
 {
     /**
-     * @return \Symfony\Component\Console\Application
+     * @return ConsoleApplication
      */
-    public function console(): \Symfony\Component\Console\Application;
+    public function console(): ConsoleApplication;
 
     /**
      * @param mixed $command

@@ -8,9 +8,12 @@ use Peak\Di\ArrayDefinition;
 use Peak\Di\ClassInstantiator;
 use Peak\Di\ClassResolver;
 use Peak\Di\Container;
+use Peak\Di\Exception\AmbiguousResolutionException;
+use Peak\Di\Exception\ClassDefinitionNotFoundException;
 use Peak\Di\Exception\InfiniteLoopResolutionException;
+use Peak\Di\Exception\InterfaceNotFoundException;
 use Peak\Di\Exception\InvalidDefinitionException;
-
+use ReflectionException;
 use function is_array;
 use function is_callable;
 use function is_null;
@@ -24,25 +27,13 @@ class Singleton extends AbstractBinding
      */
     private $storedInstance = null;
 
-    /**
-     * @var ClassInstantiator
-     */
-    private $instantiator;
+    private ClassInstantiator $instantiator;
 
-    /**
-     * @var ArrayDefinition
-     */
-    private $arrayDefinition;
+    private ArrayDefinition $arrayDefinition;
 
-    /**
-     * @var ClassResolver
-     */
-    private $classResolver;
+    private ClassResolver $classResolver;
 
-    /**
-     * @var int
-     */
-    private $n = 0;
+    private int $n = 0;
 
     /**
      * Constructor
@@ -65,10 +56,10 @@ class Singleton extends AbstractBinding
      * @return mixed|object|null
      * @throws InfiniteLoopResolutionException
      * @throws InvalidDefinitionException
-     * @throws \Peak\Di\Exception\AmbiguousResolutionException
-     * @throws \Peak\Di\Exception\ClassDefinitionNotFoundException
-     * @throws \Peak\Di\Exception\InterfaceNotFoundException
-     * @throws \ReflectionException
+     * @throws AmbiguousResolutionException
+     * @throws ClassDefinitionNotFoundException
+     * @throws InterfaceNotFoundException
+     * @throws ReflectionException
      */
     public function resolve(Container $container, array $args = [], $explicit = null)
     {

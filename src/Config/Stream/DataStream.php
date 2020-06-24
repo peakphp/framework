@@ -14,10 +14,7 @@ class DataStream implements Stream
      */
     private $data;
 
-    /**
-     * @var ResourceProcessor
-     */
-    private $processor;
+    private ResourceProcessor $processor;
 
     /**
      * DataStream constructor.
