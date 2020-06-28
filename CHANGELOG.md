@@ -1,6 +1,6 @@
-VERSION 4.3.0
+VERSION 4.2.4
 -------------
-Release date: ?
+Release date: 2020-06-28
 
  - removed exception throwing in AbstractApplication::getProp() and hasProp()
 
